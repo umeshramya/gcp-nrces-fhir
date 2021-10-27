@@ -29,7 +29,7 @@ const healthcare = google.healthcare({
 
 
 
-export default class GcpFhir{
+export default class GcpFhirCRUD{
   
 async  createFhirResource(body:any, resourceType:string):Promise<any> {
   try {
