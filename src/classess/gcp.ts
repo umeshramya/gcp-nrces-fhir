@@ -35,15 +35,31 @@ export default class GcpFhirCRUD {
     headers: { 'Content-Type': 'application/fhir+json' },
   });
 
-
+  private parent: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
 
   async createFhirResource(body: any, resourceType: string) {
 
     try {
-      const parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
-      const request = { parent, type: resourceType, requestBody: body };
+      const request = { parent: this.parent, type: resourceType, requestBody: body };
       const resource: any = await this.healthcare.projects.locations.datasets.fhirStores.fhir.create(request)
+      return resource.data
+    } catch (error) {
+      console.log(error)
+    }
 
+  }
+
+
+
+
+  async deleteFhirResource(resourceId: string, resourceType: string) {
+
+    try {
+      const name = `${this.parent}/fhir/${resourceType}/${resourceId}`
+      const request = { name };
+      const resource: any = await this.healthcare.projects.locations.datasets.fhirStores.fhir..read(
+        request
+      );
 
       return resource.data
     } catch (error) {
