@@ -1,0 +1,32 @@
+{
+  "name": "gcp-nrces-fhir",
+  "version": "1.0.0+e2dd5f1d",
+  "description": "Google cloud healthcare api Nrces Fhir imlimenataion",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "tsc && yalc publish && cd test &&  yalc add gcp-nrces-fhir && yalc update gcp-nrces-fhir && node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umeshramya/gcp-nrces-fhir.git"
+  },
+  "keywords": [
+    "india",
+    "fhir",
+    "nrces",
+    "fhir"
+  ],
+  "author": "Dr Umesh R Bilagi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umeshramya/gcp-nrces-fhir/issues"
+  },
+  "homepage": "https://github.com/umeshramya/gcp-nrces-fhir#readme",
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "@googleapis/healthcare": "^3.2.0"
+  },
+  "yalcSig": "e2dd5f1ddd571678963b3373d1f8d8d0"
+}

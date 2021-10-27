@@ -1,61 +1,67 @@
 
-interface config{
-    name:string
+interface config {
+  name: string
+  age: string
+  gender: string
+  healthNumber: string
+  mobile: string
+  dob: string
+  MRN: string
 }
-const PatientResource = (options:config)=>{
+const PatientResource = (options: config) => {
 
-    
-const body ={
-    "resourceType" : "Patient",
+
+  const body = {
+    "resourceType": "Patient",
     // "id" : "example-01",
-    "meta" : {
-      "versionId" : "1",
-      "lastUpdated" : "2020-07-09T14:58:58.181+05:30",
-      "profile" : [
+    "meta": {
+      "versionId": "1",
+      "lastUpdated": "2020-07-09T14:58:58.181+05:30",
+      "profile": [
         "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Patient"
       ]
     },
-    "text" : {
-      "status" : "generated",
-      "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">Patient name - ABC, Age- 41 year,Gender- Male</div>"
+    "text": {
+      "status": "generated",
+      "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">Patient name - ${options.name}, Age- ${options.age},Gender- ${options.gender}</div>`
     },
-    "identifier" : [
+    "identifier": [
       {
-        "type" : {
-          "coding" : [
+        "type": {
+          "coding": [
             {
-              "system" : "http://terminology.hl7.org/CodeSystem/v2-0203",
-              "code" : "MR",
-              "display" : "Medical record number",
-    
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "MR",
+              "display": `${options.MRN}`,
+
             }
           ]
         },
-        "system" : "https://healthid.ndhm.gov.in",
-        "value" : "22-7225-4829-5255"
+        "system": "https://healthid.ndhm.gov.in",
+        "value": `${options.healthNumber}`
       }
-  
-  
+
+
     ],
-    "name" : [
+    "name": [
       {
-        "text" : "ABC"
+        "text": `${options.name}`
       }
     ],
-    "telecom" : [
+    "telecom": [
       {
-        "system" : "phone",
-        "value" : "+919818512600",
-        "use" : "home"
+        "system": "phone",
+        "value": `${options.mobile}`,
+        "use": "home"
       }
     ],
-    "gender" : "male",
-    "birthDate" : "1981-01-12"
+    "gender": `${options.gender}`,
+    "birthDate": `${options.dob}`
   }
 
-return body;
+  return body;
 
 }
 
 
-export {PatientResource }
+export { PatientResource }
