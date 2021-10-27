@@ -1,0 +1,50 @@
+
+interface config{
+    name:string
+}
+const PractitionerResource = (options:config)=>{
+
+    
+ const body = {
+    "resourceType" : "Practitioner",
+    // "id" : "example-01",
+    "meta" : {
+      "versionId" : "1",
+      "lastUpdated" : "2019-05-29T14:58:58.181+05:30",
+      "profile" : [
+        "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Practitioner"
+      ]
+    },
+    "text" : {
+      "status" : "generated",
+      "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">Dr. DEF, MD (Medicine)</div>"
+    },
+    "identifier" : [
+      {
+        "type" : {
+          "coding" : [
+            {
+              "system" : "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code" : "MD",
+              "display" : "Medical License number"
+            }
+          ]
+        },
+        "system" : "https://doctor.ndhm.gov.in",
+        "value" : "21-1521-3828-3227"
+      }
+    ],
+    "name" : [
+      {
+        "text" : "Dr. DEF"
+      }
+    ]
+  }
+  
+
+return body;
+
+}
+
+
+export {PractitionerResource }
