@@ -24,5 +24,11 @@
   "homepage": "https://github.com/umeshramya/gcp-nrces-fhir#readme",
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "dependencies": {
+    "@googleapis/healthcare": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6"
+  }
 }
