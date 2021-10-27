@@ -37,14 +37,54 @@ class GcpFhirCRUD {
             }),
             headers: { 'Content-Type': 'application/fhir+json' },
         });
+        this.parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
     }
     createFhirResource(body, resourceType) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
-                const request = { parent, type: resourceType, requestBody: body };
+                const request = { parent: this.parent, type: resourceType, requestBody: body };
                 const resource = yield this.healthcare.projects.locations.datasets.fhirStores.fhir.create(request);
                 return resource.data;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    deleteFhirResource(resourceId, resourceType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
+                const request = { name };
+                const resource = yield this.healthcare.projects.locations.datasets.fhirStores.fhir.delete(request);
+                return resource;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    getFhirResource(resourceId, resourceType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
+                const request = { name };
+                const resource = yield this.healthcare.projects.locations.datasets.fhirStores.fhir.read(request);
+                return resource.data;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    updateFhirResource(updateOptions, resourceId, resourceType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
+                // const name = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir/${resourceType}/${resourceId}`;
+                const request = { name, requestBody: updateOptions };
+                const resource = yield this.healthcare.projects.locations.datasets.fhirStores.fhir.update(request);
+                return resource;
             }
             catch (error) {
                 console.log(error);
