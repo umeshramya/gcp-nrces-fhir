@@ -1,5 +1,8 @@
 interface config {
     name: string;
+    qualification: string;
+    medicalLicenseNumber: string;
+    ndhmProfessionalId: string;
 }
 declare const PractitionerResource: (options: config) => {
     resourceType: string;

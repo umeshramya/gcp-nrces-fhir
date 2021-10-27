@@ -42,10 +42,8 @@ class GcpFhirCRUD {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
-                // const parent = `projects/psychic-city-328609/locations/asia-south1/datasets/dataset1/fhirStores/fhir_store`
                 const request = { parent, type: resourceType, requestBody: body };
                 const resource = yield this.healthcare.projects.locations.datasets.fhirStores.fhir.create(request);
-                // return JSON.parse(JSON.stringify(resource))
                 return resource.data;
             }
             catch (error) {

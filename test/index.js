@@ -12,11 +12,22 @@ const patient = PatientResource({
 
 })
 
+const Practitioner = PractitionerResource({
+    "name": "DR Umesh R Bilagi",
+    "qualification": "MD DM cardiology",
+    "medicalLicenseNumber": "KMC 35167",
+    "ndhmProfessionalId": ""
+})
+
 const create = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
-    const res = await gcpFhirCRUD.createFhirResource(patient, "Patient")
+    // const res = await gcpFhirCRUD.createFhirResource(patient, "Patient")
+    // console.log(res.identifier[0].type)
 
-    console.log(res.identifier[0].type)
+    const res = await gcpFhirCRUD.createFhirResource(Practitioner, "Practitioner")
+    console.log(res)
 }
+
+
 
 create()

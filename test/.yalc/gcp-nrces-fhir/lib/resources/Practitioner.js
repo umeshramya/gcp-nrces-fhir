@@ -14,7 +14,7 @@ const PractitionerResource = (options) => {
         },
         "text": {
             "status": "generated",
-            "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Dr. DEF, MD (Medicine)</div>"
+            "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">${options.name}, ${options.qualification})</div>`
         },
         "identifier": [
             {
@@ -23,17 +23,17 @@ const PractitionerResource = (options) => {
                         {
                             "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
                             "code": "MD",
-                            "display": "Medical License number"
+                            "display": `${options.medicalLicenseNumber}`
                         }
                     ]
                 },
                 "system": "https://doctor.ndhm.gov.in",
-                "value": "21-1521-3828-3227"
+                "value": `${options.ndhmProfessionalId}`
             }
         ],
         "name": [
             {
-                "text": "Dr. DEF"
+                "text": `${options.name}`
             }
         ]
     };

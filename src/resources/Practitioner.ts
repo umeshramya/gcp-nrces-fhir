@@ -1,50 +1,53 @@
 
-interface config{
-    name:string
+interface config {
+  name: string
+  qualification: string
+  medicalLicenseNumber: string
+  ndhmProfessionalId: string
 }
-const PractitionerResource = (options:config)=>{
+const PractitionerResource = (options: config) => {
 
-    
- const body = {
-    "resourceType" : "Practitioner",
+
+  const body = {
+    "resourceType": "Practitioner",
     // "id" : "example-01",
-    "meta" : {
-      "versionId" : "1",
-      "lastUpdated" : "2019-05-29T14:58:58.181+05:30",
-      "profile" : [
+    "meta": {
+      "versionId": "1",
+      "lastUpdated": "2019-05-29T14:58:58.181+05:30",
+      "profile": [
         "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Practitioner"
       ]
     },
-    "text" : {
-      "status" : "generated",
-      "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">Dr. DEF, MD (Medicine)</div>"
+    "text": {
+      "status": "generated",
+      "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">${options.name}, ${options.qualification})</div>`
     },
-    "identifier" : [
+    "identifier": [
       {
-        "type" : {
-          "coding" : [
+        "type": {
+          "coding": [
             {
-              "system" : "http://terminology.hl7.org/CodeSystem/v2-0203",
-              "code" : "MD",
-              "display" : "Medical License number"
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "MD",
+              "display": `${options.medicalLicenseNumber}`
             }
           ]
         },
-        "system" : "https://doctor.ndhm.gov.in",
-        "value" : "21-1521-3828-3227"
+        "system": "https://doctor.ndhm.gov.in",
+        "value": `${options.ndhmProfessionalId}`
       }
     ],
-    "name" : [
+    "name": [
       {
-        "text" : "Dr. DEF"
+        "text": `${options.name}`
       }
     ]
   }
-  
 
-return body;
+
+  return body;
 
 }
 
 
-export {PractitionerResource }
+export { PractitionerResource }
