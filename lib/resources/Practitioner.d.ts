@@ -1,4 +1,5 @@
 interface config {
+    id?: string;
     name: string;
     qualification: string;
     medicalLicenseNumber: string;
@@ -6,6 +7,7 @@ interface config {
 }
 declare const PractitionerResource: (options: config) => {
     resourceType: string;
+    id: string;
     meta: {
         versionId: string;
         lastUpdated: string;

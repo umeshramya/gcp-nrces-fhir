@@ -1,5 +1,6 @@
 
 interface config {
+  id?:string
   name: string
   qualification: string
   medicalLicenseNumber: string
@@ -10,7 +11,7 @@ const PractitionerResource = (options: config) => {
 
   const body = {
     "resourceType": "Practitioner",
-    // "id" : "example-01",
+    "id" : `${options.id}`,
     "meta": {
       "versionId": "1",
       "lastUpdated": "2019-05-29T14:58:58.181+05:30",

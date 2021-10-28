@@ -1,4 +1,5 @@
 interface config {
+    id?: string;
     name: string;
     age: string;
     gender: string;
@@ -9,6 +10,7 @@ interface config {
 }
 declare const PatientResource: (options: config) => {
     resourceType: string;
+    id: string;
     meta: {
         versionId: string;
         lastUpdated: string;
