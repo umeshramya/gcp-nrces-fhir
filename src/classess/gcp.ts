@@ -42,7 +42,7 @@ export default class GcpFhirCRUD {
     try {
       const request = { parent: this.parent, type: resourceType, requestBody: body };
       const resource: any = await this.healthcare.projects.locations.datasets.fhirStores.fhir.create(request)
-      return resource.data
+      return resource
     } catch (error) {
       console.log(error)
     }
@@ -78,7 +78,7 @@ export default class GcpFhirCRUD {
         request
       );
 
-      return resource.data
+      return resource
     } catch (error) {
       console.log(error)
     }
