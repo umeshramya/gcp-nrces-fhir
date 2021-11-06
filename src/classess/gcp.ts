@@ -19,6 +19,12 @@ const projectId = process.env.GCP_FHIR_projectId
 const datasetId = process.env.GCP_FHIR_datasetId
 const fhirStoreId = process.env.GCP_FHIR_fhirStoreId
 
+const resourceTypeArray = [
+  "Patient", "Practitioner", "Organization", "Encounter"
+] as const
+
+type resourceType = typeof resourceTypeArray[number]
+
 
 
 
@@ -37,7 +43,7 @@ export default class GcpFhirCRUD {
 
   private parent: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
 
-  async createFhirResource(body: any, resourceType: string) {
+  async createFhirResource(body: any, resourceType: resourceType) {
 
     try {
       const request = { parent: this.parent, type: resourceType, requestBody: body };
@@ -52,7 +58,7 @@ export default class GcpFhirCRUD {
 
 
 
-  async deleteFhirResource(resourceId: string, resourceType: string) {
+  async deleteFhirResource(resourceId: string, resourceType: resourceType) {
 
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`
@@ -69,7 +75,7 @@ export default class GcpFhirCRUD {
   }
 
 
-  async getFhirResource(resourceId: string, resourceType: string) {
+  async getFhirResource(resourceId: string, resourceType: resourceType) {
 
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`
@@ -86,13 +92,13 @@ export default class GcpFhirCRUD {
   }
 
 
-  async updateFhirResource (updateOptions:any ,resourceId: string, resourceType: string) {
+  async updateFhirResource(updateOptions: any, resourceId: string, resourceType: resourceType) {
 
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`
       // const name = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir/${resourceType}/${resourceId}`;
-    
-      const request = { name , requestBody: updateOptions};
+
+      const request = { name, requestBody: updateOptions };
       const resource: any = await this.healthcare.projects.locations.datasets.fhirStores.fhir.update(
         request
       );

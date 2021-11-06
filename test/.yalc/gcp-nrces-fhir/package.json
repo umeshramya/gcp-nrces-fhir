@@ -1,6 +1,6 @@
 {
   "name": "gcp-nrces-fhir",
-  "version": "1.0.3+10618212",
+  "version": "1.0.4+7644a874",
   "description": "Google cloud healthcare api Nrces Fhir imlimenataion",
   "main": "lib/index.js",
   "scripts": {
@@ -28,5 +28,5 @@
   "dependencies": {
     "@googleapis/healthcare": "^3.2.0"
   },
-  "yalcSig": "1061821298f49f6f0d4320f0acdd6a35"
+  "yalcSig": "7644a874a9565c56e7d91f6571ada2aa"
 }
