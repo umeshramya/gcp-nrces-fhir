@@ -1,6 +1,6 @@
 
 interface config {
-  id?:string
+  id?: string
   name: string
   age: string
   gender: string
@@ -14,7 +14,7 @@ const PatientResource = (options: config) => {
 
   const body = {
     "resourceType": "Patient",
-    "id" : `${options.id}`,
+    "id": `${options.id}`,
     "meta": {
       "versionId": "1",
       "lastUpdated": "2020-07-09T14:58:58.181+05:30",

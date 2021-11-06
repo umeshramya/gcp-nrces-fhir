@@ -22,28 +22,32 @@ const Practitioner = PractitionerResource({
 const create = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(patient, "Patient")
-    // console.log(res.identifier[0].type)
-
-    // const res = await gcpFhirCRUD.createFhirResource(Practitioner, "Practitioner")
-    // console.log(res)
-
-    // const res = await gcpFhirCRUD.getFhirResource("e6f1d2f4-d164-4549-a74d-01683cbc09c6", "Practitioner")
-    // const pract = PractitionerResource({
-    //     "id" : "e6f1d2f4-d164-4549-a74d-01683cbc09c6",
-    //     "name": "DR Umesh R Bilagi",
-    //     "qualification": "MBBS MD DM cardiology",
-    //     "medicalLicenseNumber": "KMC 35167",
-    //     "ndhmProfessionalId": "12234"
-    //     })
-    // const res = await gcpFhirCRUD.updateFhirResource(pract, "e6f1d2f4-d164-4549-a74d-01683cbc09c6", "Practitioner")
 
     console.log(res)
 }
 
+// const getdata = async () => {
+//     const gcpFhirCRUD = new GcpFhirCRUD()
+//     const res = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient").then(res => res
+//     return res
+// }
+
+const getdata = async () => {
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient")
+
+    console.log(res.data)
+}
 
 
-create()
+getdata();
 
+
+
+// create()
+
+
+// 8c2f7c57-cfba-417c-a574-36c6e76d29c5
 
 
 
