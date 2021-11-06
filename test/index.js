@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, PatientResource, PractitionerResource } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
 
 const patient = PatientResource({
     "age": "52 years",
@@ -40,7 +40,26 @@ const getdata = async () => {
 }
 
 
-getdata();
+const enCounter = EncounterResource({
+    "class": { "code": "IMP", "display": "in-patient" },
+    "dischargeDisposition": { "code": "home", "display": "home" },
+    "endDate": "2021-11-06T15:32:26.605+05:30",
+    "startDate": "2021-11-03T15:32:26.605+05:30",
+    "identifier": new Date().getTime().toString(),
+    "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+    "text": "discherged Home",
+    "status": "finished"
+})
+
+const createEncounter = async () => {
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.createFhirResource(enCounter, "Encounter")
+    console.log(res)
+}
+
+createEncounter()
+
+// getdata();
 
 
 
@@ -51,22 +70,14 @@ getdata();
 
 
 
-// {
-//     id: 'e6f1d2f4-d164-4549-a74d-01683cbc09c6',
-//     identifier: [
-//       { system: 'https://doctor.ndhm.gov.in', type: [Object], value: '' }
-//     ],
-//     meta: {
-//       lastUpdated: '2021-10-27T14:24:39.192327+00:00',
-//       profile: [
-//         'https://nrces.in/ndhm/fhir/r4/StructureDefinition/Practitioner'
-//       ],
-//       versionId: 'MTYzNTM0NDY3OTE5MjMyNzAwMA'
-//     },
-//     name: [ { text: 'DR Umesh R Bilagi' } ],
-//     resourceType: 'Practitioner',
-//     text: {
-//       div: '<div xmlns="http://www.w3.org/1999/xhtml">DR Umesh R Bilagi, MD DM cardiology)</div>',
-//       status: 'generated'
-//     }
-//   }
+
+
+
+
+
+// {"resourceType":"Encounter","meta":{"lastUpdated":"2020-07-09T14:58:58.181+05:30","profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter"]},"text":{"status":"generated","div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\"> Admitted to Cardiac Unit,UVW Hospital between June 28 and July 
+// 9 2020</div>"},"identifier":[{"system":"https://ndhm.in","value":"S100"}],"status":"finished","class":{"system":"http://terminology.hl7.org/CodeSystem/v3-ActCode","code":"IMP","display":"inpatient encounter"},"subject":{"reference":"Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5"},"period":{"start":"2020-04-20T15:32:26.605+05:30","end":"2020-05-01T15:32:26.605+05:30"},"hospitalization":{"dischargeDisposition":{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/discharge-disposition","code":"home","display":"Home"}],"text":"Discharged to Home Care"}}}'
+
+
+
+// {"resourceType":"Encounter","meta":{"lastUpdated":"2020-07-09T14:58:58.181+05:30","profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter"]},"text":{"status":"generated","div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\">{discherged Home </div>"},"identifier":[{"system":"https://ndhm.in","value":"1636210865014"}],"status":"finished","class":{"system":"http://terminology.hl7.org/CodeSystem/v3-ActCode","code":"IMP","display":"in-patient"},"subject":{"reference":"Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5}"},"period":{"start":"2021-11-03T15:32:26.605+05:30","end":"2021-11-06T15:32:26.605+05:30"},"hospitalization":{"dischargeDisposition":{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/discharge-disposition","code":"home","display":"home"}],"text":"Discharged to Home Care"}}}
