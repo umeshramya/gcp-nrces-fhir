@@ -1,0 +1,510 @@
+{
+  "ImplementationGuide/ndhm.in": {
+    "errors": 0,
+    "warnings": 1
+  },
+  "Observation/lab-example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/finding-example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-03": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-04": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-05": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-06": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-07": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-08": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-09": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-10": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-11": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-12": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-13": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-14": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-15": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-16": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-17": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-18": {
+    "errors": 3,
+    "warnings": 0
+  },
+  "Observation/example-19": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-20": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-21": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-22": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-23": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-24": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-25": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-26": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-27": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-28": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-29": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-30": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-31": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-32": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-33": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-34": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Observation/example-35": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Observation/example-36": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Procedure/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Bundle/DiagnosticReport-Imaging-DCM-example-01": {
+    "errors": 0,
+    "warnings": 2
+  },
+  "Bundle/DiagnosticReport-Imaging-Media-example-02": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "Bundle/DiagnosticReport-Lab-example-03": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "Bundle/DischargeSummary-example-04": {
+    "errors": 0,
+    "warnings": 1
+  },
+  "Bundle/OPConsultNote-example-05": {
+    "errors": 0,
+    "warnings": 1
+  },
+  "Bundle/Prescription-example-06": {
+    "errors": 0,
+    "warnings": 1
+  },
+  "Bundle/ImmunizationRecord-example-07": {
+    "errors": 4,
+    "warnings": 0
+  },
+  "Bundle/HealthDocumentRecord-example-01": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "Bundle/WellnessRecord-example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Condition/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Organization/example-01": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "Encounter/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "DiagnosticReport/Lab-example-01": {
+    "errors": 7,
+    "warnings": 0
+  },
+  "DiagnosticReport/ImagingDCM-example-02": {
+    "errors": 6,
+    "warnings": 0
+  },
+  "DiagnosticReport/ImagingMedia-example-03": {
+    "errors": 5,
+    "warnings": 0
+  },
+  "Patient/example-01": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "MedicationRequest/example-01": {
+    "errors": 3,
+    "warnings": 1
+  },
+  "Practitioner/example-01": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "DocumentReference/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "AllergyIntolerance/example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "CarePlan/example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Appointment/example-01": {
+    "errors": 3,
+    "warnings": 0
+  },
+  "Binary/example-01": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "Media/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "ImagingStudy/example-01": {
+    "errors": 2,
+    "warnings": 2
+  },
+  "ServiceRequest/example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "Specimen/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "Immunization/example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "ImmunizationRecommendation/example-01": {
+    "errors": 3,
+    "warnings": 0
+  },
+  "PractitionerRole/example-01": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "FamilyMemberHistory/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "MedicationStatement/example-01": {
+    "errors": 1,
+    "warnings": 0
+  },
+  "StructureDefinition/Appointment": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/PractitionerRole": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/AllergyIntolerance": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Practitioner": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Encounter": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Patient": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Procedure": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/DocumentReference": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/CarePlan": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Organization": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Condition": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/MedicationRequest": {
+    "errors": 2,
+    "warnings": 0
+  },
+  "StructureDefinition/MedicationStatement": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Observation": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ObservationVitalSigns": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ObservationLifestyle": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ObservationWomenHealth": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ObservationGeneralAssessment": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ObservationPhysicalActivity": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ObservationBodyMeasurement": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/WellnessRecord": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/OPConsultRecord": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Binary": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/DiagnosticReportImaging": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/DiagnosticReportLab": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/DiagnosticReportRecord": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/DischargeSummaryRecord": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/DocumentBundle": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/FamilyMemberHistory": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ImagingStudy": {
+    "errors": 0,
+    "warnings": 4
+  },
+  "StructureDefinition/Media": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Immunization": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ImmunizationRecommendation": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ImmunizationRecord": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/PrescriptionRecord": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/HealthDocumentRecord": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/ServiceRequest": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "StructureDefinition/Specimen": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-diagnostic-report-type": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-diagnosis-use": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-practitioner-role": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-route-of-administration": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-specimen-types": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-medicine-codes": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-vaccine-codes": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-lifestyle": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-women-health": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-general-assessment": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-physical-activity": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-body-measurement": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-vital-signs": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-alcohol-drinking-status": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-tobacco-smoking-status": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-tobacco-chewing-status": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-mental-status": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-diet-type": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ValueSet/ndhm-general-well-being": {
+    "errors": 0,
+    "warnings": 0
+  }
+}

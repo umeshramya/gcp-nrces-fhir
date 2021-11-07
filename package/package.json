@@ -1,0 +1,23 @@
+{
+  "name": "ndhm.in",
+  "version": "2.0.1",
+  "tools-version": 3,
+  "type": "fhir.ig",
+  "date": "20211103101459",
+  "license": "CC0-1.0",
+  "canonical": "https://nrces.in/ndhm/fhir/r4",
+  "notForPublication": true,
+  "url": "file://C:\\FHIR_ImplementationGuide\\ImplGuide\\ig\\output",
+  "title": "FHIR Implementation Guide for ABDM",
+  "fhirVersions": [
+    "4.0.1"
+  ],
+  "dependencies": {
+    "hl7.fhir.r4.core": "4.0.1"
+  },
+  "author": "National Resource Center for EHR Standards",
+  "directories": {
+    "lib": "package",
+    "example": "example"
+  }
+}

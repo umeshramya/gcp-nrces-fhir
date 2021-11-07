@@ -1,0 +1,68 @@
+{
+    "resourceType": "Appointment",
+    "id": "example-01",
+    "meta": {
+        "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Appointment"
+        ]
+    },
+    "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Follow up for further consultation</div>"
+    },
+    "status": "booked",
+    "serviceCategory": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "408443003",
+                    "display": "General medical practice"
+                }
+            ]
+        }
+    ],
+    "serviceType": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "11429006",
+                    "display": "Consultation"
+                }
+            ]
+        }
+    ],
+    "appointmentType": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "185389009",
+                "display": "Follow-up visit"
+            }
+        ]
+    },
+    "reasonReference": [
+        {
+            "reference": "Condition/1"
+        }
+    ],
+    "description": "Discussion on the results of your recent Lab Test and further consultation",
+    "start": "2020-07-12T09:00:00Z",
+    "end": "2020-07-12T09:30:00Z",
+    "created": "2020-07-09T14:58:58.181+05:30",
+    "participant": [
+        {
+            "actor": {
+                "reference": "Patient/1"
+            },
+            "status": "accepted"
+        },
+        {
+            "actor": {
+                "reference": "Practitioner/1"
+            },
+            "status": "accepted"
+        }
+    ]
+}
