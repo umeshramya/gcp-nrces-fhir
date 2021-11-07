@@ -2,7 +2,6 @@
 interface config {
   id?: string
   name: string
-  age: string
   gender: string
   healthNumber: string
   mobile: string
@@ -24,7 +23,7 @@ const PatientResource = (options: config) => {
     },
     "text": {
       "status": "generated",
-      "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">Patient name - ${options.name}, Age- ${options.age},Gender- ${options.gender}</div>`
+      "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">Patient name - ${options.name},Gender- ${options.gender}</div>`
     },
     "identifier": [
       {

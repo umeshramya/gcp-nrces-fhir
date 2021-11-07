@@ -2,7 +2,6 @@ require('dotenv').config("env")
 const { GcpFhirCRUD, PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
 
 const patient = PatientResource({
-    "age": "52 years",
     "name": "UMESH R BILAGI",
     "gender": "Male",
     "mobile": "9343403620",
@@ -22,9 +21,9 @@ const Practitioner = PractitionerResource({
 const create = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(patient, "Patient")
-
     console.log(res)
 }
+create()
 
 // const getdata = async () => {
 //     const gcpFhirCRUD = new GcpFhirCRUD()
@@ -32,32 +31,32 @@ const create = async () => {
 //     return res
 // }
 
-const getdata = async () => {
-    const gcpFhirCRUD = new GcpFhirCRUD();
-    const res = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient")
+// const getdata = async () => {
+//     const gcpFhirCRUD = new GcpFhirCRUD();
+//     const res = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient")
 
-    console.log(res.data)
-}
+//     console.log(res.data)
+// }
 
 
-const enCounter = EncounterResource({
-    "class": { "code": "IMP", "display": "in-patient" },
-    "dischargeDisposition": { "code": "home", "display": "home" },
-    "endDate": "2021-11-06T15:32:26.605+05:30",
-    "startDate": "2021-11-03T15:32:26.605+05:30",
-    "identifier": new Date().getTime().toString(),
-    "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
-    "text": "discherged Home",
-    "status": "finished"
-})
+// const enCounter = EncounterResource({
+//     "class": { "code": "IMP", "display": "in-patient" },
+//     "dischargeDisposition": { "code": "home", "display": "home" },
+//     "endDate": "2021-11-06T15:32:26.605+05:30",
+//     "startDate": "2021-11-03T15:32:26.605+05:30",
+//     "identifier": new Date().getTime().toString(),
+//     "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+//     "text": "discherged Home",
+//     "status": "finished"
+// })
 
-const createEncounter = async () => {
-    const gcpFhirCRUD = new GcpFhirCRUD();
-    const res = await gcpFhirCRUD.createFhirResource(enCounter, "Encounter")
-    console.log(res)
-}
+// const createEncounter = async () => {
+//     const gcpFhirCRUD = new GcpFhirCRUD();
+//     const res = await gcpFhirCRUD.createFhirResource(enCounter, "Encounter")
+//     console.log(res)
+// }
 
-createEncounter()
+// createEncounter()
 
 // getdata();
 

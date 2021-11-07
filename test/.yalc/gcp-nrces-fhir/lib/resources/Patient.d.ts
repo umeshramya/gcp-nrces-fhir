@@ -1,7 +1,6 @@
 interface config {
     id?: string;
     name: string;
-    age: string;
     gender: string;
     healthNumber: string;
     mobile: string;
