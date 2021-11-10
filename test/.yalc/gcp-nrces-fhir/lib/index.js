@@ -3,9 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.GcpFhirCRUD = void 0;
+exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSerach = exports.GcpFhirCRUD = void 0;
 const gcp_1 = __importDefault(require("./classess/gcp"));
 exports.GcpFhirCRUD = gcp_1.default;
+const gspSearch_1 = __importDefault(require("./classess/gspSearch"));
+exports.GcpFhirSerach = gspSearch_1.default;
 const Patient_1 = require("./resources/Patient");
 Object.defineProperty(exports, "PatientResource", { enumerable: true, get: function () { return Patient_1.PatientResource; } });
 const Practitioner_1 = require("./resources/Practitioner");
@@ -17,4 +19,6 @@ Object.defineProperty(exports, "EncounterResource", { enumerable: true, get: fun
 Object.defineProperty(exports, "EncounterHospitalizationDischargeDispositionArray", { enumerable: true, get: function () { return Encounter_1.EncounterHospitalizationDischargeDispositionArray; } });
 Object.defineProperty(exports, "EncounterStatusArray", { enumerable: true, get: function () { return Encounter_1.EncounterStatusArray; } });
 Object.defineProperty(exports, "EncounterClassArray", { enumerable: true, get: function () { return Encounter_1.EncounterClassArray; } });
+const config_1 = require("./config");
+Object.defineProperty(exports, "resourceTypeArray", { enumerable: true, get: function () { return config_1.resourceTypeArray; } });
 //# sourceMappingURL=index.js.map

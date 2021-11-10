@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "gcp-nrces-fhir": {
-      "signature": "24e7c2ee32b5d2ce44335bb28aad0170",
+      "signature": "b8ca8c9525ef871b9b3c856b71b8d3c5",
       "file": true
     }
   }

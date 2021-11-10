@@ -1,23 +1,23 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, OrganizationResource , PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSerach, OrganizationResource, PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
-    "email" : "jjhhubli@gmail.com",
-    "name" : "JJH",
-    "ndhmFacilityNumber" : "JJH_123",
-    "phone" : "08362260624",
-    "providerNumber" : "123"
+    "email": "jjhhubli@gmail.com",
+    "name": "JJH",
+    "ndhmFacilityNumber": "JJH_123",
+    "phone": "08362260624",
+    "providerNumber": "123"
 })
 
 
-const createOrganization = async ()=>{
+const createOrganization = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(organization, "Organization")
     console.log(res)
 }
 
 // createOrganization()
-id="a15a0e31-3b72-4d48-bae8-c3000c97786f"
+id = "a15a0e31-3b72-4d48-bae8-c3000c97786f"
 
 const patient = PatientResource({
     "name": "UMESH R BILAGI",
@@ -26,7 +26,7 @@ const patient = PatientResource({
     "healthNumber": "23-3457-234",
     "dob": "1969-09-29",
     "MRN": "2345",
-    "organizationId" : "a15a0e31-3b72-4d48-bae8-c3000c97786f"
+    "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f"
 
 })
 
@@ -42,7 +42,7 @@ const Practitioner = PractitionerResource({
     "qualification": "MD DM cardiology",
     "medicalLicenseNumber": "KMC 35167",
     "ndhmProfessionalId": "",
-    "organizationId" : "a15a0e31-3b72-4d48-bae8-c3000c97786f"
+    "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f"
 })
 
 const createPractinioner = async () => {
@@ -51,9 +51,15 @@ const createPractinioner = async () => {
     console.log(res)
 }
 
-createPractinioner()
+// createPractinioner()
 
+const search = async () => {
+    const gcpFhirSearch = new GcpFhirSerach()
+    const res = await gcpFhirSearch.searchFhirResourcesPost("Patient")
+    console.log(res)
+}
 
+search()
 
 
 

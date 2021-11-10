@@ -1,5 +1,4 @@
-declare const resourceTypeArray: readonly ["Patient", "Practitioner", "Organization", "Encounter"];
-declare type resourceType = typeof resourceTypeArray[number];
+import { resourceType } from "../config";
 export default class GcpFhirCRUD {
     private healthcare;
     private parent;
@@ -8,5 +7,4 @@ export default class GcpFhirCRUD {
     getFhirResource(resourceId: string, resourceType: resourceType): Promise<any>;
     updateFhirResource(updateOptions: any, resourceId: string, resourceType: resourceType): Promise<any>;
 }
-export {};
 //# sourceMappingURL=gcp.d.ts.map
