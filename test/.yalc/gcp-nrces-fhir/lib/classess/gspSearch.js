@@ -23,20 +23,16 @@ class GcpFhirSearch {
             auth: new google.auth.GoogleAuth({
                 scopes: ['https://www.googleapis.com/auth/cloud-platform'],
                 "credentials": config_1.credentials,
-            })
+            }),
         });
-        this.url = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir`;
+        this.parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
     }
-    searchFhirResourcesPost(resourceType) {
+    searchFhirResourcesGet(resourceType, ..._args) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const parent = this.url;
-                const request = { parent, resourceType };
+                const request = { parent: this.parent, resourceType: resourceType, _args };
                 const response = yield this.healthcare.projects.locations.datasets.fhirStores.fhir.search(request);
-                const resources = response.data.entry;
-                console.log(`Resources found: ${resources.length}`);
-                console.log(JSON.stringify(resources, null, 2));
-                return resources;
+                return response;
             }
             catch (error) {
                 console.log(error);

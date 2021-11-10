@@ -15,28 +15,28 @@ export default class GcpFhirSearch {
         auth: new google.auth.GoogleAuth({
             scopes: ['https://www.googleapis.com/auth/cloud-platform'],
             "credentials": credentials,
-        })
+            
+        }),
     });
 
 
 
-    private parent: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir`;
+    private parent: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
 
-    async searchFhirResourcesGet(resourceType: resourceType) {
+    async searchFhirResourcesGet(resourceType: resourceType, ..._args:any) {
         try {
+          
+            const request = { parent: this.parent, resourceType  : resourceType, _args};
 
-            const request = { parent: this.parent, resourceType };
 
             const response =
                 await this.healthcare.projects.locations.datasets.fhirStores.fhir.search(
                     request
                 );
 
-            const resources = response.data.entry;
-            console.log(`Resources found: ${resources.length}`);
-            console.log(JSON.stringify(resources, null, 2));
 
-            return resources
+
+            return response
 
         } catch (error) {
             console.log(error)
