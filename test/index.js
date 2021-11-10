@@ -1,5 +1,23 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, OrganizationResource , PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
+
+const organization = OrganizationResource({
+    "email" : "jjhhubli@gmail.com",
+    "name" : "JJH",
+    "ndhmFacilityNumber" : "JJH_123",
+    "phone" : "08362260624",
+    "providerNumber" : "123"
+})
+
+
+const createOrganization = async ()=>{
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.createFhirResource(organization, "Organization")
+    console.log(res)
+}
+
+// createOrganization()
+id="a15a0e31-3b72-4d48-bae8-c3000c97786f"
 
 const patient = PatientResource({
     "name": "UMESH R BILAGI",
@@ -7,23 +25,38 @@ const patient = PatientResource({
     "mobile": "9343403620",
     "healthNumber": "23-3457-234",
     "dob": "1969-09-29",
-    "MRN": "2345"
+    "MRN": "2345",
+    "organizationId" : "a15a0e31-3b72-4d48-bae8-c3000c97786f"
 
 })
+
+const createPatient = async () => {
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.createFhirResource(patient, "Patient")
+    console.log(res)
+}
+// createPatient()
 
 const Practitioner = PractitionerResource({
     "name": "DR Umesh R Bilagi",
     "qualification": "MD DM cardiology",
     "medicalLicenseNumber": "KMC 35167",
-    "ndhmProfessionalId": ""
+    "ndhmProfessionalId": "",
+    "organizationId" : "a15a0e31-3b72-4d48-bae8-c3000c97786f"
 })
 
-const create = async () => {
+const createPractinioner = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
-    const res = await gcpFhirCRUD.createFhirResource(patient, "Patient")
+    const res = await gcpFhirCRUD.createFhirResource(Practitioner, "Practitioner")
     console.log(res)
 }
-create()
+
+createPractinioner()
+
+
+
+
+
 
 // const getdata = async () => {
 //     const gcpFhirCRUD = new GcpFhirCRUD()

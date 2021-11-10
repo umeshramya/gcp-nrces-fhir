@@ -35,7 +35,10 @@ const PractitionerResource = (options) => {
             {
                 "text": `${options.name}`
             }
-        ]
+        ],
+        "managingOrganization": {
+            "reference": `Organization/${options.organizationId}`
+        }
     };
     return body;
 };

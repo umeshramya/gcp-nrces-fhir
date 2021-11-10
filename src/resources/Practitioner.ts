@@ -5,6 +5,7 @@ interface config {
   qualification: string
   medicalLicenseNumber: string
   ndhmProfessionalId: string
+
 }
 const PractitionerResource = (options: config) => {
 

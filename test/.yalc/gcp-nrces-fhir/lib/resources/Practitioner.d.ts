@@ -4,6 +4,7 @@ interface config {
     qualification: string;
     medicalLicenseNumber: string;
     ndhmProfessionalId: string;
+    organizationId: string;
 }
 declare const PractitionerResource: (options: config) => {
     resourceType: string;
@@ -31,6 +32,9 @@ declare const PractitionerResource: (options: config) => {
     name: {
         text: string;
     }[];
+    managingOrganization: {
+        reference: string;
+    };
 };
 export { PractitionerResource };
 //# sourceMappingURL=Practitioner.d.ts.map

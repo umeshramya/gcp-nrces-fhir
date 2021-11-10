@@ -7,6 +7,7 @@ interface config {
   mobile: string
   dob: string
   MRN: string
+  organizationId: string
 }
 const PatientResource = (options: config) => {
 
@@ -56,7 +57,10 @@ const PatientResource = (options: config) => {
       }
     ],
     "gender": `${options.gender}`,
-    "birthDate": `${options.dob}`
+    "birthDate": `${options.dob}`,
+    "managingOrganization" : {
+      "reference": `Organization/${options.organizationId}`
+    }
   }
 
   return body;

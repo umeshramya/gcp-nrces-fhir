@@ -6,6 +6,7 @@ interface config {
     mobile: string;
     dob: string;
     MRN: string;
+    organizationId: string;
 }
 declare const PatientResource: (options: config) => {
     resourceType: string;
@@ -40,6 +41,9 @@ declare const PatientResource: (options: config) => {
     }[];
     gender: string;
     birthDate: string;
+    managingOrganization: {
+        reference: string;
+    };
 };
 export { PatientResource };
 //# sourceMappingURL=Patient.d.ts.map
