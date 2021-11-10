@@ -20,12 +20,12 @@ export default class GcpFhirSearch {
 
 
 
-    private url: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir`;
+    private parent: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir`;
 
-    async searchFhirResourcesPost(resourceType: resourceType) {
+    async searchFhirResourcesGet(resourceType: resourceType) {
         try {
-            const parent = this.url
-            const request = { parent, resourceType };
+
+            const request = { parent: this.parent, resourceType };
 
             const response =
                 await this.healthcare.projects.locations.datasets.fhirStores.fhir.search(
