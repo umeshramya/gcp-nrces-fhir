@@ -27,10 +27,14 @@ class GcpFhirSearch {
         });
         this.parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
     }
-    searchFhirResourcesGet(resourceType, ..._args) {
+    searchFhirResourcesGet(resourceType, args) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const request = { parent: this.parent, resourceType: resourceType, _args };
+                let request = { parent: this.parent, resourceType: resourceType };
+                args === null || args === void 0 ? void 0 : args.forEach(el => {
+                    request[el.key] = el.value;
+                });
+                console.log(request);
                 const response = yield this.healthcare.projects.locations.datasets.fhirStores.fhir.search(request);
                 return response;
             }

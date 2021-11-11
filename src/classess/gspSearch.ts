@@ -8,6 +8,10 @@ const projectId = process.env.GCP_FHIR_projectId
 const datasetId = process.env.GCP_FHIR_datasetId
 const fhirStoreId = process.env.GCP_FHIR_fhirStoreId
 
+interface LooseObject {
+    [key: string]: any
+}
+
 export default class GcpFhirSearch {
 
     private healthcare = google.healthcare({
@@ -15,7 +19,7 @@ export default class GcpFhirSearch {
         auth: new google.auth.GoogleAuth({
             scopes: ['https://www.googleapis.com/auth/cloud-platform'],
             "credentials": credentials,
-            
+
         }),
     });
 
@@ -23,15 +27,18 @@ export default class GcpFhirSearch {
 
     private parent: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
 
-    async searchFhirResourcesGet(resourceType: resourceType, ..._args:any) {
+    async searchFhirResourcesGet(resourceType: resourceType, args: { key: string; value: any }[]) {
         try {
-          
-            const request = { parent: this.parent, resourceType  : resourceType, _args};
+            let request: LooseObject = { parent: this.parent, resourceType: resourceType };
 
+            args?.forEach(el => {
+                request[el.key] = el.value
+            })
 
+            console.log(request)
             const response =
                 await this.healthcare.projects.locations.datasets.fhirStores.fhir.search(
-                    request
+                    request as any
                 );
 
 
