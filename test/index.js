@@ -55,8 +55,8 @@ const createPractinioner = async () => {
 
 const search = async () => {
     const gcpFhirSearch = new GcpFhirSearch()
-    const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "name", "value": "umesh" }])
-    console.log(res)
+    const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{"key" : "subject", "value" : "Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5"}])
+    console.log(res.data.entry)
 }
 
 search()
