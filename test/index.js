@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSerach, OrganizationResource, PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -51,15 +51,15 @@ const createPractinioner = async () => {
     console.log(res)
 }
 
-createPractinioner()
+// createPractinioner()
 
 const search = async () => {
-    const gcpFhirSearch = new GcpFhirSerach()
+    const gcpFhirSearch = new GcpFhirSearch()
     const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "name", "value": "umesh" }])
     console.log(res)
 }
 
-// search()
+search()
 
 
 

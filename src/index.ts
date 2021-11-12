@@ -1,5 +1,5 @@
 import GcpFhirCRUD from "./classess/gcp"
-import GcpFhirSerach from "./classess/gspSearch"
+import GcpFhirSearch from "./classess/gcpSearch"
 import { PatientResource } from "./resources/Patient"
 import { PractitionerResource } from "./resources/Practitioner"
 import { OrganizationResource } from "./resources/Organization"
@@ -8,7 +8,7 @@ import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDispo
 import { resourceType, resourceTypeArray } from "./config"
 
 
-export { GcpFhirCRUD, GcpFhirSerach, resourceTypeArray }
+export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray }
 export type { resourceType }
 
 export { PatientResource, PractitionerResource, OrganizationResource }

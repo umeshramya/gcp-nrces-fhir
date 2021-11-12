@@ -3,11 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSerach = exports.GcpFhirCRUD = void 0;
+exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSearch = exports.GcpFhirCRUD = void 0;
 const gcp_1 = __importDefault(require("./classess/gcp"));
 exports.GcpFhirCRUD = gcp_1.default;
-const gspSearch_1 = __importDefault(require("./classess/gspSearch"));
-exports.GcpFhirSerach = gspSearch_1.default;
+const gcpSearch_1 = __importDefault(require("./classess/gcpSearch"));
+exports.GcpFhirSearch = gcpSearch_1.default;
 const Patient_1 = require("./resources/Patient");
 Object.defineProperty(exports, "PatientResource", { enumerable: true, get: function () { return Patient_1.PatientResource; } });
 const Practitioner_1 = require("./resources/Practitioner");
