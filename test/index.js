@@ -51,15 +51,15 @@ const createPractinioner = async () => {
     console.log(res)
 }
 
-// createPractinioner()
+createPractinioner()
 
 const search = async () => {
     const gcpFhirSearch = new GcpFhirSerach()
-    const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "name", "value": "Ramya" }])
+    const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "name", "value": "umesh" }])
     console.log(res)
 }
 
-search()
+// search()
 
 
 
