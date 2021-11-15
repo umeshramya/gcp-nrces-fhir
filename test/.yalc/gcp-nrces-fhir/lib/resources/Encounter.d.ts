@@ -68,6 +68,7 @@ declare type EncounterStatus = typeof EncounterStatusArray[number];
 declare type EncounterClass = typeof EncounterClassArray[number];
 declare type EncounterHospitalizationDischargeDisposition = typeof EncounterHospitalizationDischargeDispositionArray[number];
 interface ENCOUNTER {
+    id?: string;
     text: string;
     status: EncounterStatus;
     identifier: string;
@@ -79,6 +80,7 @@ interface ENCOUNTER {
 }
 declare const EncounterResource: (options: ENCOUNTER) => {
     resourceType: string;
+    id: string | undefined;
     meta: {
         lastUpdated: string;
         profile: string[];

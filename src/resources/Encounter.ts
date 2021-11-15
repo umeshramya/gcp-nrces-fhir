@@ -32,6 +32,7 @@ type EncounterHospitalizationDischargeDisposition = typeof EncounterHospitalizat
 
 
 interface ENCOUNTER {
+  id?:string
   text: string
   status: EncounterStatus
   identifier: string
@@ -47,7 +48,7 @@ const EncounterResource = (options: ENCOUNTER) => {
 
   const body = {
     "resourceType": "Encounter",
-    // "id": "example-01",
+    "id": options.id,
     "meta": {
       "lastUpdated": "2020-07-09T14:58:58.181+05:30",
       "profile": [
