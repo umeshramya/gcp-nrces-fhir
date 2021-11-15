@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -59,7 +59,11 @@ const search = async () => {
     console.log(res.data.entry)
 }
 
-search()
+// search()
+
+console.log(EncounterStatusArray.map(el=>{
+    return el
+}))
 
 
 
