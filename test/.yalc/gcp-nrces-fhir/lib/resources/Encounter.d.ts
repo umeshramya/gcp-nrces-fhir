@@ -67,7 +67,7 @@ declare const EncounterHospitalizationDischargeDispositionArray: readonly [{
 declare type EncounterStatus = typeof EncounterStatusArray[number];
 declare type EncounterClass = typeof EncounterClassArray[number];
 declare type EncounterHospitalizationDischargeDisposition = typeof EncounterHospitalizationDischargeDispositionArray[number];
-interface Config {
+interface ENCOUNTER {
     text: string;
     status: EncounterStatus;
     identifier: string;
@@ -77,7 +77,7 @@ interface Config {
     endDate: string;
     dischargeDisposition: EncounterHospitalizationDischargeDisposition;
 }
-declare const EncounterResource: (options: Config) => {
+declare const EncounterResource: (options: ENCOUNTER) => {
     resourceType: string;
     meta: {
         lastUpdated: string;
@@ -115,6 +115,6 @@ declare const EncounterResource: (options: Config) => {
         };
     };
 };
-export { EncounterResource, EncounterHospitalizationDischargeDispositionArray, EncounterStatusArray, EncounterClassArray };
+export { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDispositionArray, EncounterStatusArray, EncounterClassArray };
 export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition };
 //# sourceMappingURL=Encounter.d.ts.map

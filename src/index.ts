@@ -1,5 +1,5 @@
 import GcpFhirCRUD from "./classess/gcp"
-import GcpFhirSerach from "./classess/gspSearch"
+import GcpFhirSearch from "./classess/gcpSearch"
 import { PATIENT, PatientResource } from "./resources/Patient"
 import { PRACTITIONER, PractitionerResource } from "./resources/Practitioner"
 import { ORGANIZATION, OrganizationResource } from "./resources/Organization"
