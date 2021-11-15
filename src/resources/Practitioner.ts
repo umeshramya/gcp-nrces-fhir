@@ -1,18 +1,18 @@
 
-interface config {
-  id?:string
+interface PRACTITIONER {
+  id?: string
   name: string
   qualification: string
   medicalLicenseNumber: string
   ndhmProfessionalId: string
 
 }
-const PractitionerResource = (options: config) => {
+const PractitionerResource = (options: PRACTITIONER) => {
 
 
   const body = {
     "resourceType": "Practitioner",
-    "id" : `${options.id}`,
+    "id": `${options.id}`,
     "meta": {
       "versionId": "1",
       "lastUpdated": "2019-05-29T14:58:58.181+05:30",
@@ -52,4 +52,4 @@ const PractitionerResource = (options: config) => {
 }
 
 
-export { PractitionerResource }
+export { PRACTITIONER, PractitionerResource }

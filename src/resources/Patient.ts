@@ -1,5 +1,5 @@
 
-interface config {
+interface PATIENT {
   id?: string
   name: string
   gender: string
@@ -9,7 +9,7 @@ interface config {
   MRN: string
   organizationId: string
 }
-const PatientResource = (options: config) => {
+const PatientResource = (options: PATIENT) => {
 
 
   const body = {
@@ -58,7 +58,7 @@ const PatientResource = (options: config) => {
     ],
     "gender": `${options.gender}`,
     "birthDate": `${options.dob}`,
-    "managingOrganization" : {
+    "managingOrganization": {
       "reference": `Organization/${options.organizationId}`
     }
   }
@@ -68,4 +68,4 @@ const PatientResource = (options: config) => {
 }
 
 
-export { PatientResource }
+export { PATIENT, PatientResource }

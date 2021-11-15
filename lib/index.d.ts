@@ -8,7 +8,7 @@ import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDispo
 import { resourceType, resourceTypeArray } from "./config";
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray };
 export type { resourceType };
-export { PatientResource, PractitionerResource, OrganizationResource };
-export { EncounterResource, EncounterHospitalizationDischargeDispositionArray, EncounterStatusArray, EncounterClassArray };
+export { PATIENT, ORGANIZATION, PRACTITIONER, PatientResource, PractitionerResource, OrganizationResource };
+export { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDispositionArray, EncounterStatusArray, EncounterClassArray };
 export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition };
 //# sourceMappingURL=index.d.ts.map

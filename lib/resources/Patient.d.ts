@@ -1,4 +1,4 @@
-interface config {
+interface PATIENT {
     id?: string;
     name: string;
     gender: string;
@@ -8,7 +8,7 @@ interface config {
     MRN: string;
     organizationId: string;
 }
-declare const PatientResource: (options: config) => {
+declare const PatientResource: (options: PATIENT) => {
     resourceType: string;
     id: string;
     meta: {
@@ -45,5 +45,5 @@ declare const PatientResource: (options: config) => {
         reference: string;
     };
 };
-export { PatientResource };
+export { PATIENT, PatientResource };
 //# sourceMappingURL=Patient.d.ts.map

@@ -1,4 +1,4 @@
-interface Config {
+interface ORGANIZATION {
     id?: string;
     name: string;
     phone: string;
@@ -6,7 +6,7 @@ interface Config {
     providerNumber?: string;
     ndhmFacilityNumber?: string;
 }
-declare const OrganizationResource: (options: Config) => {
+declare const OrganizationResource: (options: ORGANIZATION) => {
     resourceType: string;
     id: string;
     meta: {
@@ -34,5 +34,5 @@ declare const OrganizationResource: (options: Config) => {
         use: string;
     }[];
 };
-export { OrganizationResource };
+export { ORGANIZATION, OrganizationResource };
 //# sourceMappingURL=Organization.d.ts.map
