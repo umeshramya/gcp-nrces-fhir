@@ -55,23 +55,25 @@ const createPractinioner = async () => {
 
 const search = async () => {
     const gcpFhirSearch = new GcpFhirSearch()
-    const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{"key" : "subject", "value" : "Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5"}])
+    const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{"key" : "subject", "value" : "Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5"},
+    {"key" : "status", "value" : "cancelled,finished"}
+])
     console.log(res.data.entry)
 }
 
-// search()
+search()
 
-console.log(EncounterStatusArray.map(el=>{
-    return el
-}))
+// console.log(EncounterStatusArray.map(el=>{
+//     return el
+// }))
 
 
 
 
 // const getdata = async () => {
-//     const gcpFhirCRUD = new GcpFhirCRUD()
+//     const gcpFhirCRUD = new GcpFhirCRUD(,)
 //     const res = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient").then(res => res
-//     return res
+//     return res,
 // }
 
 // const getdata = async () => {

@@ -29,7 +29,8 @@ export default class GcpFhirSearch {
 
     async searchFhirResourcesGet(resourceType: resourceType, args: { key: string; value: any }[]) {
         try {
-            let request: LooseObject = { parent: this.parent, resourceType: resourceType };
+          
+            let request: LooseObject = { parent:this.parent, resourceType: resourceType };
 
             args?.forEach(el => {
                 request[el.key] = el.value
