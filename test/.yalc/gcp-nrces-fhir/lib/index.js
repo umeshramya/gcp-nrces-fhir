@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSearch = exports.GcpFhirCRUD = void 0;
+exports.Condition = exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSearch = exports.GcpFhirCRUD = void 0;
 const gcp_1 = __importDefault(require("./classess/gcp"));
 exports.GcpFhirCRUD = gcp_1.default;
 const gcpSearch_1 = __importDefault(require("./classess/gcpSearch"));
@@ -21,4 +21,6 @@ Object.defineProperty(exports, "EncounterStatusArray", { enumerable: true, get: 
 Object.defineProperty(exports, "EncounterClassArray", { enumerable: true, get: function () { return Encounter_1.EncounterClassArray; } });
 const config_1 = require("./config");
 Object.defineProperty(exports, "resourceTypeArray", { enumerable: true, get: function () { return config_1.resourceTypeArray; } });
+const condition_1 = require("./resources/observations/condition");
+Object.defineProperty(exports, "Condition", { enumerable: true, get: function () { return condition_1.Condition; } });
 //# sourceMappingURL=index.js.map
