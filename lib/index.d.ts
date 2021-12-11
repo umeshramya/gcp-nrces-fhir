@@ -7,10 +7,12 @@ import { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDisposit
 import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition } from "./resources/Encounter";
 import { resourceType, resourceTypeArray } from "./config";
 import { Condition, CONDITION } from "./resources/observations/Condition";
+import { Procedure, PROCEDURE } from "./resources/observations/Procedure";
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray };
 export type { resourceType };
 export { PATIENT, ORGANIZATION, PRACTITIONER, PatientResource, PractitionerResource, OrganizationResource };
 export { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDispositionArray, EncounterStatusArray, EncounterClassArray };
 export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition };
 export { CONDITION, Condition };
+export { Procedure, PROCEDURE };
 //# sourceMappingURL=index.d.ts.map

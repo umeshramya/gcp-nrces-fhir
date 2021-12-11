@@ -4,12 +4,12 @@ import {CodeDisplay} from "../../config/index"
 export const procedureStatusArray= ["preparation" , "in-progress" , "not-done" , "on-hold" , "stopped" , "completed" , "entered-in-error" , "unknown"] as const
 export type procedureStatus = typeof procedureStatusArray[number]
 
-interface PROCEDURE{
+export interface PROCEDURE{
   id?:string;
   status : procedureStatus;
   text:string;
   procedure:CodeDisplay[]
-  complication?:CodeDisplay
+  complication?:CodeDisplay[]
   patientID :string;
   procedureDate :string;
 

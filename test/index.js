@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -61,7 +61,7 @@ const search = async () => {
     console.log(res.data.entry)
 }
 
-search()
+// search()
 
 // console.log(EncounterStatusArray.map(el=>{
 //     return el
@@ -110,18 +110,28 @@ search()
 // create()
 
 
-// 8c2f7c57-cfba-417c-a574-36c6e76d29c5
+// procedure
+
+const procedure = new Procedure()
+const createProceure = async ()=>{
+        const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.createFhirResource(procedure.getFHIR({
+        "patientID" : "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "procedure" : [{"display" : "Coronary stenting"}],
+        "procedureDate" : "2021-11-03T15:32:26.605+05:30",
+        "status" : "in-progress",
+        "text" : "Coronary stenting",
+        "complication" : [{"display" : "bleeding"}]
+    }), "Procedure")
+
+
+    console.log(res)
+}
+
+createProceure()
 
 
 
 
 
 
-
-
-// {"resourceType":"Encounter","meta":{"lastUpdated":"2020-07-09T14:58:58.181+05:30","profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter"]},"text":{"status":"generated","div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\"> Admitted to Cardiac Unit,UVW Hospital between June 28 and July 
-// 9 2020</div>"},"identifier":[{"system":"https://ndhm.in","value":"S100"}],"status":"finished","class":{"system":"http://terminology.hl7.org/CodeSystem/v3-ActCode","code":"IMP","display":"inpatient encounter"},"subject":{"reference":"Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5"},"period":{"start":"2020-04-20T15:32:26.605+05:30","end":"2020-05-01T15:32:26.605+05:30"},"hospitalization":{"dischargeDisposition":{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/discharge-disposition","code":"home","display":"Home"}],"text":"Discharged to Home Care"}}}'
-
-
-
-// {"resourceType":"Encounter","meta":{"lastUpdated":"2020-07-09T14:58:58.181+05:30","profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter"]},"text":{"status":"generated","div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\">{discherged Home </div>"},"identifier":[{"system":"https://ndhm.in","value":"1636210865014"}],"status":"finished","class":{"system":"http://terminology.hl7.org/CodeSystem/v3-ActCode","code":"IMP","display":"in-patient"},"subject":{"reference":"Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5}"},"period":{"start":"2021-11-03T15:32:26.605+05:30","end":"2021-11-06T15:32:26.605+05:30"},"hospitalization":{"dischargeDisposition":{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/discharge-disposition","code":"home","display":"home"}],"text":"Discharged to Home Care"}}}

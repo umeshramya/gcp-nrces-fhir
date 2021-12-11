@@ -1,9 +1,9 @@
 import { RseourceMaster } from "../../Interfaces/index";
+import { CodeDisplay } from "../../config";
 export interface CONDITION {
     id?: string;
     text: string;
-    snoemedCode?: string;
-    snowmedDisplay?: string;
+    condtion: CodeDisplay[];
     patientId: string;
 }
 export declare class Condition implements RseourceMaster {

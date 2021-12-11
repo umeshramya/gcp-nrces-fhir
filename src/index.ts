@@ -8,6 +8,7 @@ import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDispo
 import { resourceType, resourceTypeArray } from "./config"
 
 import { Condition, CONDITION } from "./resources/observations/Condition"
+import {Procedure, PROCEDURE} from "./resources/observations/Procedure"
 
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray }
@@ -19,3 +20,4 @@ export { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDisposit
 export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition }
 
 export { CONDITION, Condition }
+export {Procedure, PROCEDURE}

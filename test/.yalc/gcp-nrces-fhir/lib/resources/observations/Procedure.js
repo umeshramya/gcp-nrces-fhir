@@ -32,7 +32,7 @@ class Procedure {
     convertFhirToObject(options) {
         let ret = {
             status: options.status,
-            text: options.text.div,
+            text: options.code.text,
             procedure: options.code.coding,
             patientID: `${options.subject.reference}`.substring(7),
             procedureDate: options.performedDateTime,

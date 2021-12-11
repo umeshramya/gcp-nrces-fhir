@@ -2,12 +2,12 @@ import { RseourceMaster } from "../../Interfaces/index";
 import { CodeDisplay } from "../../config/index";
 export declare const procedureStatusArray: readonly ["preparation", "in-progress", "not-done", "on-hold", "stopped", "completed", "entered-in-error", "unknown"];
 export declare type procedureStatus = typeof procedureStatusArray[number];
-interface PROCEDURE {
+export interface PROCEDURE {
     id?: string;
     status: procedureStatus;
     text: string;
     procedure: CodeDisplay[];
-    complication?: CodeDisplay;
+    complication?: CodeDisplay[];
     patientID: string;
     procedureDate: string;
 }
@@ -22,7 +22,7 @@ export declare class Procedure implements RseourceMaster {
             status: string;
             div: string;
         };
-        status: "in-progress" | "entered-in-error" | "unknown" | "completed" | "preparation" | "not-done" | "on-hold" | "stopped";
+        status: "in-progress" | "entered-in-error" | "unknown" | "preparation" | "not-done" | "on-hold" | "stopped" | "completed";
         code: {
             coding: CodeDisplay[];
             text: string;
@@ -32,10 +32,9 @@ export declare class Procedure implements RseourceMaster {
         };
         performedDateTime: string;
         complication: {
-            coding: CodeDisplay | undefined;
+            coding: CodeDisplay[] | undefined;
         }[];
     };
     convertFhirToObject(options: any): PROCEDURE;
 }
-export {};
 //# sourceMappingURL=Procedure.d.ts.map
