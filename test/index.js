@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure , Condition} = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -147,8 +147,44 @@ const res = await gcpFhirCRUD.getFhirResource(id, "Procedure")
 
 }
 
-getProcedure()
+// getProcedure()
 
+
+
+// Condtion
+
+const condition = new Condition()
+const createCondition = async()=>{
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.createFhirResource(condition.getFHIR({
+        "condtion" : [{"display" : "Chest Pain", "system" : "http://snomed.info/sct"}],
+        "patientId" : "8c2f7c57-cfba-417c-a574-36c6e76d29c5", 
+        "text" : "Chest Pain for Evaluvation"
+    }),"Condition")
+
+
+    // 80cde551-455e-4e7d-8190-02296903aebf
+
+    console.log(res)
+}
+
+// createCondition()
+
+
+const getCondtiopn = async() =>{
+const id = "80cde551-455e-4e7d-8190-02296903aebf"
+const gcpFhirCRUD = new GcpFhirCRUD();
+const res = await gcpFhirCRUD.getFhirResource(id, "Condition")
+ const data = res.data
+
+ const obj = condition.convertFhirToObject(data)
+
+ console.log(obj)
+
+}
+
+
+getCondtiopn()
 
 
 
