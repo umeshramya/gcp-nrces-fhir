@@ -34,7 +34,7 @@ class Procedure {
             status: options.status,
             text: options.code.text,
             procedure: options.code.coding,
-            patientID: `${options.subject.reference}`.substring(7),
+            patientID: `${options.subject.reference}`.substring(8),
             procedureDate: options.performedDateTime,
             id: options.id,
             complication: options.complication[0].coding

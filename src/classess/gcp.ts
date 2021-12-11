@@ -23,11 +23,6 @@ const datasetId = process.env.GCP_FHIR_datasetId
 const fhirStoreId = process.env.GCP_FHIR_fhirStoreId
 
 
-
-
-
-
-
 export default class GcpFhirCRUD {
 
 

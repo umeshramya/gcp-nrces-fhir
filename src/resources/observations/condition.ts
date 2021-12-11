@@ -38,7 +38,7 @@ export class Condition implements RseourceMaster{
   convertFhirToObject(options: any): CONDITION {
     let ret:CONDITION={
       "id" : options.id,
-      "patientId" :`${options.subject.reference}`.substring(7),
+      "patientId" :`${options.subject.reference}`.substring(8),
       "condtion" : options.code.coding,
       "text" : options.code.text,
     }

@@ -117,20 +117,37 @@ const createProceure = async ()=>{
         const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(procedure.getFHIR({
         "patientID" : "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
-        "procedure" : [{"display" : "Coronary stenting"}],
+        "procedure" : [{"display" : "Coronary stenting", "system" : "http://snomed.info/sct"}],
         "procedureDate" : "2021-11-03T15:32:26.605+05:30",
         "status" : "in-progress",
         "text" : "Coronary stenting",
-        "complication" : [{"display" : "bleeding"}]
+        "complication" : [{"display" : "bleeding",  "system" : "http://snomed.info/sct"}],
     }), "Procedure")
 
+
+    // 
 
     console.log(res)
 }
 
-createProceure()
 
 
+// createProceure()
+
+
+const getProcedure = async()=>{
+ let id="87555651-bb59-4d3b-8cc5-b5e73cf2599c";
+ const gcpFhirCRUD = new GcpFhirCRUD();
+const res = await gcpFhirCRUD.getFhirResource(id, "Procedure")
+ const data = res.data
+
+ const obj = procedure.convertFhirToObject(data)
+
+ console.log(obj)
+
+}
+
+getProcedure()
 
 
 
