@@ -6,7 +6,7 @@ import { ORGANIZATION, OrganizationResource } from "./resources/Organization";
 import { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDispositionArray, EncounterStatusArray, EncounterClassArray } from "./resources/Encounter";
 import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition } from "./resources/Encounter";
 import { resourceType, resourceTypeArray } from "./config";
-import { Condition, CONDITION } from "./resources/observations/condition";
+import { Condition, CONDITION } from "./resources/observations/Condition";
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray };
 export type { resourceType };
 export { PATIENT, ORGANIZATION, PRACTITIONER, PatientResource, PractitionerResource, OrganizationResource };

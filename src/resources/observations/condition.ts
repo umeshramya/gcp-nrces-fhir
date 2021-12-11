@@ -1,6 +1,7 @@
 import {RseourceMaster} from "../../Interfaces/index"
 
 export interface CONDITION {
+  id?:string
   text:string;
   snoemedCode?:string;
   snowmedDisplay?:string;
@@ -12,7 +13,7 @@ export class Condition implements RseourceMaster{
 
   const body = {
     "resourceType": "Condition",
-    "id": "example-01",
+    "id": options.id || undefined,
     "meta": {
       "profile": [
         "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Condition"
@@ -42,7 +43,8 @@ export class Condition implements RseourceMaster{
   }
   convertFhirToObject(options: any): CONDITION {
     let ret:CONDITION={
-      "patientId" :`${options.subject.reference}`.substr(7),
+      "id" : options.id,
+      "patientId" :`${options.subject.reference}`.substring(7),
       "snoemedCode" :options.code.coding[0].code,
       "text" : options.text,
       "snowmedDisplay" : options.code.coding[0].display

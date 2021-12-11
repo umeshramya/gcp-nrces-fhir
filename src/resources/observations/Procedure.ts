@@ -1,51 +1,65 @@
 import {RseourceMaster} from "../../Interfaces/index"
+import {CodeDisplay} from "../../config/index"
+
+export const procedureStatusArray= ["preparation" , "in-progress" , "not-done" , "on-hold" , "stopped" , "completed" , "entered-in-error" , "unknown"] as const
+export type procedureStatus = typeof procedureStatusArray[number]
 
 interface PROCEDURE{
+  id?:string;
+  status : procedureStatus;
+  text:string;
+  procedure:CodeDisplay[]
+  complication?:CodeDisplay
+  patientID :string;
+  procedureDate :string;
+
 
 }
 export class Procedure  implements RseourceMaster{
     getFHIR(options: PROCEDURE) {
-        throw new Error("Method not implemented.");
+              
+      const body = {
+        resourceType: "Procedure",
+        id: options.id || undefined ,
+        meta: {
+          profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Procedure"],
+        },
+        text: {
+          status: "generated",
+          div: options.text,
+        },
+        status: options.status,
+        code: {
+          coding: options.procedure,
+          text: options.text,
+        },
+        subject: { reference: `Patient/${options.patientID}` },
+        performedDateTime: options.procedureDate,
+        complication: [
+          {
+            coding: options.complication,
+          },
+        ],
+      };
+
+      return body;
+
     }
     convertFhirToObject(options: any):PROCEDURE {
-        throw new Error("Method not implemented.");
+
+      let ret:PROCEDURE ={
+        status: options.status,
+        text: options.text.div,
+        procedure: options.code.coding,
+        patientID: `${options.subject.reference}`.substring(7),
+        procedureDate: options.performedDateTime,
+        id : options.id,
+        complication:options.complication[0].coding
+      }
+
+      return ret;
+        
     }
 
 
 }
-
-const body = {
-  resourceType: "Procedure",
-  id: "example-01",
-  meta: {
-    profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Procedure"],
-  },
-  text: {
-    status: "generated",
-    div: '<div xmlns="http://www.w3.org/1999/xhtml">Placement of stent in coronary artery</div>',
-  },
-  status: "completed",
-  code: {
-    coding: [
-      {
-        system: "http://snomed.info/sct",
-        code: "36969009",
-        display: "Placement of stent in coronary artery",
-      },
-    ],
-    text: "Placement of stent in coronary artery",
-  },
-  subject: { reference: "Patient/1" },
-  performedDateTime: "2019-05-12",
-  complication: [
-    {
-      coding: [
-        {
-          system: "http://snomed.info/sct",
-          code: "131148009",
-          display: "Bleeding",
-        },
-      ],
-    },
-  ],
-};

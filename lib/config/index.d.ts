@@ -10,8 +10,13 @@ declare const credentials: {
     auth_provider_x509_cert_url: string | undefined;
     client_x509_cert_url: string | undefined;
 };
-declare const resourceTypeArray: readonly ["Patient", "Practitioner", "Organization", "Encounter"];
+declare const resourceTypeArray: readonly ["Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure"];
 declare type resourceType = typeof resourceTypeArray[number];
+export interface CodeDisplay {
+    code?: string;
+    display: string;
+    system: "http://snomed.info/sct";
+}
 export { credentials, resourceTypeArray };
 export type { resourceType };
 //# sourceMappingURL=index.d.ts.map

@@ -7,7 +7,7 @@ import { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDisposit
 import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition } from "./resources/Encounter"
 import { resourceType, resourceTypeArray } from "./config"
 
-import { Condition, CONDITION } from "./resources/observations/condition"
+import { Condition, CONDITION } from "./resources/observations/Condition"
 
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray }

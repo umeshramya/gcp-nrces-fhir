@@ -1,8 +1,6 @@
-interface RseourceMaster {
-    getFHIR(options: any): any;
-    convertFhirToObject(options: any): any;
-}
+import { RseourceMaster } from "../../Interfaces/index";
 export interface CONDITION {
+    id?: string;
     text: string;
     snoemedCode?: string;
     snowmedDisplay?: string;
@@ -12,5 +10,4 @@ export declare class Condition implements RseourceMaster {
     getFHIR(options: CONDITION): any;
     convertFhirToObject(options: any): CONDITION;
 }
-export {};
-//# sourceMappingURL=condition.d.ts.map
+//# sourceMappingURL=Condition.d.ts.map

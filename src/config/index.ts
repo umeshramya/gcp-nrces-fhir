@@ -13,10 +13,14 @@ const credentials = {
 
 
 const resourceTypeArray = [
-    "Patient", "Practitioner", "Organization", "Encounter"
+    "Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure"
 ] as const
 
 type resourceType = typeof resourceTypeArray[number]
+
+export interface CodeDisplay{
+    code ?: string; display:string; system: "http://snomed.info/sct";
+}
 export { credentials, resourceTypeArray }
 
 export type { resourceType }

@@ -5,7 +5,7 @@ class Condition {
     getFHIR(options) {
         const body = {
             "resourceType": "Condition",
-            "id": "example-01",
+            "id": options.id || undefined,
             "meta": {
                 "profile": [
                     "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Condition"
@@ -33,7 +33,8 @@ class Condition {
     }
     convertFhirToObject(options) {
         let ret = {
-            "patientId": `${options.subject.reference}`.substr(7),
+            "id": options.id,
+            "patientId": `${options.subject.reference}`.substring(7),
             "snoemedCode": options.code.coding[0].code,
             "text": options.text,
             "snowmedDisplay": options.code.coding[0].display
@@ -42,4 +43,4 @@ class Condition {
     }
 }
 exports.Condition = Condition;
-//# sourceMappingURL=condition.js.map
+//# sourceMappingURL=Condition.js.map
