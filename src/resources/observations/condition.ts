@@ -1,7 +1,4 @@
-interface RseourceMaster{
-  getFHIR(options:any):any;
-  convertFhirToObject(options:any):any
-}
+import {RseourceMaster} from "../../Interfaces/index"
 
 export interface CONDITION {
   text:string;
