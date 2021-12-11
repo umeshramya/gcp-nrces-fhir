@@ -1,10 +1,10 @@
 import {RseourceMaster} from "../../Interfaces/index"
+import { CodeDisplay } from "../../config";
 
 export interface CONDITION {
   id?:string
   text:string;
-  snoemedCode?:string;
-  snowmedDisplay?:string;
+  condtion:CodeDisplay[];
   patientId:string;
 }
 
@@ -24,13 +24,7 @@ export class Condition implements RseourceMaster{
       "div": options.text
     },
     "code": {
-      "coding": [
-        {
-          "system": "http://snomed.info/sct",
-          "code": options.snoemedCode,
-          "display": options.snowmedDisplay
-        }
-      ],
+      "coding":options.condtion,
       "text": options.text
     },
     "subject": {
@@ -45,9 +39,8 @@ export class Condition implements RseourceMaster{
     let ret:CONDITION={
       "id" : options.id,
       "patientId" :`${options.subject.reference}`.substring(7),
-      "snoemedCode" :options.code.coding[0].code,
-      "text" : options.text,
-      "snowmedDisplay" : options.code.coding[0].display
+      "condtion" : options.code.coding,
+      "text" : options.code.text,
     }
 
     return ret
