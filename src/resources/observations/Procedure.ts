@@ -46,7 +46,6 @@ export class Procedure  implements RseourceMaster{
 
     }
     convertFhirToObject(options: any):PROCEDURE {
-
       let ret:PROCEDURE ={
         status: options.status,
         text: options.code.text,
