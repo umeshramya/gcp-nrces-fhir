@@ -1,4 +1,4 @@
-import { RseourceMaster } from "../../Interfaces/index";
+import { ResourceMaster } from "../../Interfaces/index";
 import { CodeDisplay } from "../../config";
 export interface CONDITION {
     id?: string;
@@ -6,7 +6,7 @@ export interface CONDITION {
     condtion: CodeDisplay[];
     patientId: string;
 }
-export declare class Condition implements RseourceMaster {
+export declare class Condition implements ResourceMaster {
     getFHIR(options: CONDITION): any;
     convertFhirToObject(options: any): CONDITION;
 }

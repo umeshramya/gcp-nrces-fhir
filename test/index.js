@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance,  Appointment } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -225,4 +225,32 @@ const getAllergyIntolerance = async () => {
     console.log(ret)
 }
 
-getAllergyIntolerance()
+// getAllergyIntolerance()
+
+
+// Appointment
+const appointment = new Appointment();
+const createAppointment = async()=>{
+    const body = appointment.getFHIR({
+        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
+        "practitionerStatus" : "accepted",
+        "patientStatus" : "accepted",
+        "reasonReferenceConditionId" : "80cde551-455e-4e7d-8190-02296903aebf",
+        "serviceCategory" : [{"display" : "Consultation", "system" : "http://snomed.info/sct"}],
+        "serviceType" :[{"display" : "Consulataion", "system" : "http://snomed.info/sct"}],
+        "appointmentType" : [{"display" : "consulaltion" , "system" : "http://snomed.info/sct"}],
+        "status" : "booked",
+        "text" : "Apponiment",
+        "startDate" : new Date().toISOString(),
+        "endDate" : new Date().toISOString(),
+        "createdDate" : new Date().toISOString()
+    })
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res= await gcpFhirCRUD.createFhirResource(body, "Appointment")
+    // cd33d0e1-62b3-4589-95bf-bb75b498ae88
+    console.log(res)
+}
+
+
+createAppointment()

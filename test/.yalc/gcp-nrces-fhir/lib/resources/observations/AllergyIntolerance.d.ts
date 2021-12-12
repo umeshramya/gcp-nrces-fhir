@@ -1,4 +1,4 @@
-import { RseourceMaster } from "../../Interfaces";
+import { ResourceMaster } from "../../Interfaces";
 import { CodeDisplay } from "../../config/index";
 export declare const clinicalStatusArray: readonly ["active", "inactive", "resolved"];
 declare type clinicalStatus = typeof clinicalStatusArray[number];
@@ -17,7 +17,7 @@ export interface ALLERGY_INTOLERANCE {
         text: string;
     }[];
 }
-export declare class AllergyIntolerance implements RseourceMaster {
+export declare class AllergyIntolerance implements ResourceMaster {
     getFHIR(options: ALLERGY_INTOLERANCE): any;
     convertFhirToObject(options: any): ALLERGY_INTOLERANCE;
 }

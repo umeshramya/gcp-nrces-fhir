@@ -1,4 +1,4 @@
-import { RseourceMaster } from "../../Interfaces/index";
+import { ResourceMaster } from "../../Interfaces/index";
 import { CodeDisplay } from "../../config/index";
 export declare const procedureStatusArray: readonly ["preparation", "in-progress", "not-done", "on-hold", "stopped", "completed", "entered-in-error", "unknown"];
 export declare type procedureStatus = typeof procedureStatusArray[number];
@@ -11,7 +11,7 @@ export interface PROCEDURE {
     patientID: string;
     procedureDate: string;
 }
-export declare class Procedure implements RseourceMaster {
+export declare class Procedure implements ResourceMaster {
     getFHIR(options: PROCEDURE): {
         resourceType: string;
         id: string | undefined;

@@ -15,7 +15,7 @@ const credentials = {
 };
 exports.credentials = credentials;
 const resourceTypeArray = [
-    "Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure", "AllergyIntolerance"
+    "Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure", "AllergyIntolerance", "Appointment"
 ];
 exports.resourceTypeArray = resourceTypeArray;
 //# sourceMappingURL=index.js.map
