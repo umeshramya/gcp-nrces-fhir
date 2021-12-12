@@ -25,7 +25,7 @@ export interface ALLERGY_INTOLERANCE {
 }
 
 export class AllergyIntolerance implements RseourceMaster {
-  getFHIR(options: ALLERGY_INTOLERANCE) {
+  getFHIR(options: ALLERGY_INTOLERANCE): any {
     const body = {
       resourceType: "AllergyIntolerance",
       id: options.id || undefined,
@@ -67,8 +67,22 @@ export class AllergyIntolerance implements RseourceMaster {
       recorder: { reference: `Practitioner/${options.practitionerId}` },
       note: options.note,
     };
+
+    return body
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options: any): ALLERGY_INTOLERANCE {
+
+    let ret: ALLERGY_INTOLERANCE = {
+      clinicalStatus: options.clinicalStatus.coding[0].code,
+      verificationStatus: options.verificationStatus.coding[0].code,
+      allergyIntolerance: options.code.coding,
+      text: options.code.text,
+      patientId: `${options.patient.reference}`.substring(8),
+      date: options.recordedDate,
+      practitionerId: `${options.recorder.reference}`.substring(13),
+      note: options.note,
+      id: options.id
+    }
+    return ret;
   }
 }

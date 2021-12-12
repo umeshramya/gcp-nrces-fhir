@@ -18,8 +18,8 @@ export interface ALLERGY_INTOLERANCE {
     }[];
 }
 export declare class AllergyIntolerance implements RseourceMaster {
-    getFHIR(options: ALLERGY_INTOLERANCE): void;
-    convertFhirToObject(options: any): void;
+    getFHIR(options: ALLERGY_INTOLERANCE): any;
+    convertFhirToObject(options: any): ALLERGY_INTOLERANCE;
 }
 export {};
 //# sourceMappingURL=AllergyIntolerance.d.ts.map

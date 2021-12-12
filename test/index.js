@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch , OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure , Condition} = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -55,9 +55,9 @@ const createPractinioner = async () => {
 
 const search = async () => {
     const gcpFhirSearch = new GcpFhirSearch()
-    const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{"key" : "subject", "value" : "Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5"},
-    {"key" : "status", "value" : "cancelled,finished"}
-])
+    const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{ "key": "subject", "value": "Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5" },
+    { "key": "status", "value": "cancelled,finished" }
+    ])
     console.log(res.data.entry)
 }
 
@@ -113,15 +113,15 @@ const search = async () => {
 // procedure
 
 const procedure = new Procedure()
-const createProceure = async ()=>{
-        const gcpFhirCRUD = new GcpFhirCRUD();
+const createProceure = async () => {
+    const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(procedure.getFHIR({
-        "patientID" : "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
-        "procedure" : [{"display" : "Coronary stenting", "system" : "http://snomed.info/sct"}],
-        "procedureDate" : "2021-11-03T15:32:26.605+05:30",
-        "status" : "in-progress",
-        "text" : "Coronary stenting",
-        "complication" : [{"display" : "bleeding",  "system" : "http://snomed.info/sct"}],
+        "patientID": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "procedure": [{ "display": "Coronary stenting", "system": "http://snomed.info/sct" }],
+        "procedureDate": "2021-11-03T15:32:26.605+05:30",
+        "status": "in-progress",
+        "text": "Coronary stenting",
+        "complication": [{ "display": "bleeding", "system": "http://snomed.info/sct" }],
     }), "Procedure")
 
 
@@ -135,15 +135,15 @@ const createProceure = async ()=>{
 // createProceure()
 
 
-const getProcedure = async()=>{
- let id="87555651-bb59-4d3b-8cc5-b5e73cf2599c";
- const gcpFhirCRUD = new GcpFhirCRUD();
-const res = await gcpFhirCRUD.getFhirResource(id, "Procedure")
- const data = res.data
+const getProcedure = async () => {
+    let id = "87555651-bb59-4d3b-8cc5-b5e73cf2599c";
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.getFhirResource(id, "Procedure")
+    const data = res.data
 
- const obj = procedure.convertFhirToObject(data)
+    const obj = procedure.convertFhirToObject(data)
 
- console.log(obj)
+    console.log(obj)
 
 }
 
@@ -154,13 +154,13 @@ const res = await gcpFhirCRUD.getFhirResource(id, "Procedure")
 // Condtion
 
 const condition = new Condition()
-const createCondition = async()=>{
+const createCondition = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(condition.getFHIR({
-        "condtion" : [{"display" : "Chest Pain", "system" : "http://snomed.info/sct"}],
-        "patientId" : "8c2f7c57-cfba-417c-a574-36c6e76d29c5", 
-        "text" : "Chest Pain for Evaluvation"
-    }),"Condition")
+        "condtion": [{ "display": "Chest Pain", "system": "http://snomed.info/sct" }],
+        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "text": "Chest Pain for Evaluvation"
+    }), "Condition")
 
 
     // 80cde551-455e-4e7d-8190-02296903aebf
@@ -171,20 +171,58 @@ const createCondition = async()=>{
 // createCondition()
 
 
-const getCondtiopn = async() =>{
-const id = "80cde551-455e-4e7d-8190-02296903aebf"
-const gcpFhirCRUD = new GcpFhirCRUD();
-const res = await gcpFhirCRUD.getFhirResource(id, "Condition")
- const data = res.data
+const getCondtiopn = async () => {
+    const id = "80cde551-455e-4e7d-8190-02296903aebf"
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.getFhirResource(id, "Condition")
+    const data = res.data
 
- const obj = condition.convertFhirToObject(data)
+    const obj = condition.convertFhirToObject(data)
 
- console.log(obj)
+    console.log(obj)
 
 }
 
 
-getCondtiopn()
+// getCondtiopn()
+
+// AllergyIntolrence
+
+const allergyIntolerance = new AllergyIntolerance()
+
+const createAllergyIntolerance = async () => {
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const body = allergyIntolerance.getFHIR({
+        "allergyIntolerance": [{ "display": "Asprin" }],
+        "clinicalStatus": "active",
+        "verificationStatus": "unconfirmed",
+        "date": new Date().toISOString(),
+        "note": [{ "text": "patient developed rash" }],
+        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
+        "text": "Allergic to Asprin"
+    })
+
+    const res = await gcpFhirCRUD.createFhirResource(body, "AllergyIntolerance")
 
 
+    // e7f1d6ad-34e7-41d5-b1f5-ba45024be438
 
+    console.log(res)
+}
+
+// createAllergyIntolerance()
+
+
+const getAllergyIntolerance = async () => {
+    const id = "e7f1d6ad-34e7-41d5-b1f5-ba45024be438"
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.getFhirResource(id, "AllergyIntolerance")
+    // console.log(res)
+    const data = res.data;
+
+    const ret = allergyIntolerance.convertFhirToObject(data)
+    console.log(ret)
+}
+
+getAllergyIntolerance()
