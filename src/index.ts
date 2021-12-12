@@ -7,10 +7,10 @@ import { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDisposit
 import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition } from "./resources/Encounter"
 import { resourceType, resourceTypeArray } from "./config"
 
-import { Condition, CONDITION } from "./resources/observations/Condition"
+import { Condition, CONDITION } from "./resources/observations/Ccondition"
 import {Procedure, PROCEDURE} from "./resources/observations/Procedure"
 import {clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance} from "./resources/observations/AllergyIntolerance"
-
+import {APPOINTMENT, Appointment, AppointmentStatusArray , ActorStatusArray} from "./resources/observations/Appointment"
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray }
 export type { resourceType }
@@ -23,3 +23,4 @@ export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischarge
 export { CONDITION, Condition }
 export {Procedure, PROCEDURE}
 export {clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance}
+export {APPOINTMENT, Appointment, AppointmentStatusArray , ActorStatusArray}
