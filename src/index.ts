@@ -9,6 +9,7 @@ import { resourceType, resourceTypeArray } from "./config"
 
 import { Condition, CONDITION } from "./resources/observations/Condition"
 import {Procedure, PROCEDURE} from "./resources/observations/Procedure"
+import {clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance} from "./resources/observations/AllergyIntolerance"
 
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray }
@@ -21,3 +22,4 @@ export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischarge
 
 export { CONDITION, Condition }
 export {Procedure, PROCEDURE}
+export {clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance}
