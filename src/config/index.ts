@@ -19,7 +19,7 @@ const resourceTypeArray = [
 type resourceType = typeof resourceTypeArray[number]
 
 export interface CodeDisplay{
-    code ?: string; display:string; system: "http://snomed.info/sct";
+    code ?: string; display:string; system: "http://snomed.info/sct" | string
 }
 export { credentials, resourceTypeArray }
 
