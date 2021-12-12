@@ -1,4 +1,4 @@
-import { RseourceMaster } from "../../Interfaces";
+import { ResourceMaster } from "../../Interfaces";
 import { CodeDisplay } from "../../config/index";
 
 export const clinicalStatusArray = ["active", "inactive", "resolved"] as const;
@@ -24,7 +24,7 @@ export interface ALLERGY_INTOLERANCE {
   note: { text: string }[];
 }
 
-export class AllergyIntolerance implements RseourceMaster {
+export class AllergyIntolerance implements ResourceMaster {
   getFHIR(options: ALLERGY_INTOLERANCE): any {
     const body = {
       resourceType: "AllergyIntolerance",

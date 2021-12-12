@@ -1,4 +1,4 @@
-import {RseourceMaster} from "../../Interfaces/index"
+import {ResourceMaster} from "../../Interfaces/index"
 import {CodeDisplay} from "../../config/index"
 
 export const procedureStatusArray= ["preparation" , "in-progress" , "not-done" , "on-hold" , "stopped" , "completed" , "entered-in-error" , "unknown"] as const
@@ -15,7 +15,7 @@ export interface PROCEDURE{
 
 
 }
-export class Procedure  implements RseourceMaster{
+export class Procedure  implements ResourceMaster{
     getFHIR(options: PROCEDURE) {
               
       const body = {
