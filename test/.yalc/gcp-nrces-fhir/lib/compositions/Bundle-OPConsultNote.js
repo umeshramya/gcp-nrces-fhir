@@ -22,7 +22,7 @@ class OPConsultationNote {
             },
             "identifier": {
                 "system": "http://hip.in",
-                "value": uuid_1.v4()
+                "value": (0, uuid_1.v4)()
             },
             "type": "document",
             "timestamp": date,
@@ -64,7 +64,7 @@ class OPConsultationNote {
                 },
                 "identifier": {
                     "system": "https://ndhm.in/phr",
-                    "value": uuid_1.v4()
+                    "value": (0, uuid_1.v4)()
                 },
                 "status": "final",
                 "type": {

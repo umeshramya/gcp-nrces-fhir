@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Procedure = exports.Condition = exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSearch = exports.GcpFhirCRUD = void 0;
+exports.AllergyIntolerance = exports.verificationStatusArray = exports.clinicalStatusArray = exports.Procedure = exports.Condition = exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSearch = exports.GcpFhirCRUD = void 0;
 const gcp_1 = __importDefault(require("./classess/gcp"));
 exports.GcpFhirCRUD = gcp_1.default;
 const gcpSearch_1 = __importDefault(require("./classess/gcpSearch"));
@@ -25,4 +25,8 @@ const Condition_1 = require("./resources/observations/Condition");
 Object.defineProperty(exports, "Condition", { enumerable: true, get: function () { return Condition_1.Condition; } });
 const Procedure_1 = require("./resources/observations/Procedure");
 Object.defineProperty(exports, "Procedure", { enumerable: true, get: function () { return Procedure_1.Procedure; } });
+const AllergyIntolerance_1 = require("./resources/observations/AllergyIntolerance");
+Object.defineProperty(exports, "clinicalStatusArray", { enumerable: true, get: function () { return AllergyIntolerance_1.clinicalStatusArray; } });
+Object.defineProperty(exports, "verificationStatusArray", { enumerable: true, get: function () { return AllergyIntolerance_1.verificationStatusArray; } });
+Object.defineProperty(exports, "AllergyIntolerance", { enumerable: true, get: function () { return AllergyIntolerance_1.AllergyIntolerance; } });
 //# sourceMappingURL=index.js.map

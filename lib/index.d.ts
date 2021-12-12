@@ -8,6 +8,7 @@ import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDispo
 import { resourceType, resourceTypeArray } from "./config";
 import { Condition, CONDITION } from "./resources/observations/Condition";
 import { Procedure, PROCEDURE } from "./resources/observations/Procedure";
+import { clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance } from "./resources/observations/AllergyIntolerance";
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray };
 export type { resourceType };
 export { PATIENT, ORGANIZATION, PRACTITIONER, PatientResource, PractitionerResource, OrganizationResource };
@@ -15,4 +16,5 @@ export { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDisposit
 export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition };
 export { CONDITION, Condition };
 export { Procedure, PROCEDURE };
+export { clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance };
 //# sourceMappingURL=index.d.ts.map

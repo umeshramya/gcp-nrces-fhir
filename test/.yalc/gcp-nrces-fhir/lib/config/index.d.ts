@@ -15,7 +15,7 @@ declare type resourceType = typeof resourceTypeArray[number];
 export interface CodeDisplay {
     code?: string;
     display: string;
-    system: "http://snomed.info/sct";
+    system: "http://snomed.info/sct" | string;
 }
 export { credentials, resourceTypeArray };
 export type { resourceType };
