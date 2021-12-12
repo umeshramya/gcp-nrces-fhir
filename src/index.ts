@@ -7,7 +7,7 @@ import { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDisposit
 import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition } from "./resources/Encounter"
 import { resourceType, resourceTypeArray } from "./config"
 
-import { Condition, CONDITION } from "./resources/observations/Ccondition"
+import { Condition, CONDITION } from "./resources/observations/Condition"
 import {Procedure, PROCEDURE} from "./resources/observations/Procedure"
 import {clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance} from "./resources/observations/AllergyIntolerance"
 import {APPOINTMENT, Appointment, AppointmentStatusArray , ActorStatusArray} from "./resources/observations/Appointment"
