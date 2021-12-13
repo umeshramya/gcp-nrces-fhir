@@ -11,7 +11,7 @@ import { Condition, CONDITION } from "./resources/observations/Condition"
 import {Procedure, PROCEDURE} from "./resources/observations/Procedure"
 import {clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance} from "./resources/observations/AllergyIntolerance"
 import {APPOINTMENT, Appointment, AppointmentStatusArray , ActorStatusArray} from "./resources/observations/Appointment"
-
+import {DOCUMENT_BUNDLE, DocumentBundle} from "./resources/DocumentBundle"
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray }
 export type { resourceType }
 
@@ -24,3 +24,4 @@ export { CONDITION, Condition }
 export {Procedure, PROCEDURE}
 export {clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance}
 export {APPOINTMENT, Appointment, AppointmentStatusArray , ActorStatusArray}
+export {DOCUMENT_BUNDLE, DocumentBundle}

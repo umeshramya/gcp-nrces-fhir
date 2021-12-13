@@ -2,46 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = require("uuid");
 class OPConsultationNote {
-    constructor(date) {
-        this.resource = {
-            "resourceType": "Bundle",
-            "id": "OPConsultNote-example-05",
-            "meta": {
-                "versionId": "1",
-                "lastUpdated": "2020-07-09T15:32:26.605+05:30",
-                "profile": [
-                    "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DocumentBundle"
-                ],
-                "security": [
-                    {
-                        "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
-                        "code": "V",
-                        "display": "very restricted"
-                    }
-                ]
-            },
-            "identifier": {
-                "system": "http://hip.in",
-                "value": uuid_1.v4()
-            },
-            "type": "document",
-            "timestamp": date,
-            "entry": [],
-            "signature": {
-                "type": [
-                    {
-                        "system": "urn:iso-astm:E1762-95:2013",
-                        "code": "1.2.840.10065.1.12.1.1",
-                        "display": "Author's Signature"
-                    }
-                ],
-                "when": "2020-07-09T07:42:33+10:00",
-                "who": {
-                    "reference": "Practitioner/1"
-                },
-                "sigFormat": "image/jpeg",
-                "data": ""
-            }
+    setDocumentBundle(gcpFhirId, resource) {
+        this.documentBundle = {
+            "fullUrl": `Bundle/${gcpFhirId}`,
+            "resource": resource
         };
     }
     setComposition() {

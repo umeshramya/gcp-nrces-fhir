@@ -1,5 +1,5 @@
 export default class OPConsultationNote {
-    private resource;
+    private documentBundle;
     private composition;
     private practitioner;
     private organization;
@@ -14,7 +14,7 @@ export default class OPConsultationNote {
     private medicationStatement;
     private medicationRequest;
     private documentReference;
-    constructor(date: string);
+    setDocumentBundle(gcpFhirId: string, resource: any): void;
     setComposition(): void;
     setPractitioner(gcpFhirId: string, resource: any): void;
     setOrganization(gcpFhirId: string, resource: any): void;
