@@ -23,7 +23,7 @@ export interface APPOINTMENT {
 }
 export declare class Appointment implements ResourceMaster {
     getFHIR(options: APPOINTMENT): any;
-    convertFhirToObject(options: any): void;
+    convertFhirToObject(options: any): APPOINTMENT;
 }
 export {};
 //# sourceMappingURL=Appointment.d.ts.map

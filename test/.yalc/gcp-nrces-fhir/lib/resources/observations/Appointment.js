@@ -58,7 +58,24 @@ class Appointment {
         return body;
     }
     convertFhirToObject(options) {
-        throw new Error("Method not implemented.");
+        let ret = {
+            status: options.status,
+            patientId: `${options.participant[0].actor.reference}`.substring(8),
+            practitionerId: `${options.participant[1].actor.reference}`.substring(13),
+            text: options.text,
+            serviceCategory: options.serviceCategory,
+            serviceType: options.serviceType,
+            appointmentType: options.appointmentType,
+            reasonReferenceConditionId: `${options.reasonReference.reference}`.substring(8),
+            createdDate: options.created,
+            startDate: options.start,
+            endDate: options.end,
+            description: options.description,
+            patientStatus: options.participant[0].status,
+            practitionerStatus: options.participant[0].status,
+            id: options.id
+        };
+        return ret;
     }
 }
 exports.Appointment = Appointment;
