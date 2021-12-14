@@ -13,7 +13,7 @@ const credentials = {
 
 
 const resourceTypeArray = [
-    "Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure", "AllergyIntolerance", "Appointment"
+    "Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure", "AllergyIntolerance", "Appointment", "Bundle"
 ] as const
 
 type resourceType = typeof resourceTypeArray[number]

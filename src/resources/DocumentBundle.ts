@@ -6,8 +6,9 @@ export interface DOCUMENT_BUNDLE {
   date: string;
   id?: string;
   practitionerId: string;
-  signJpegbase64: string;
-  identifier: string;
+  signJpegbase64?: string;
+  identifier?: string;
+  entry : any [];
 }
 
 export class DocumentBundle implements ResourceMaster {
@@ -35,7 +36,7 @@ export class DocumentBundle implements ResourceMaster {
       },
       type: "document",
       timestamp: options.date,
-      entry: [],
+      entry: options.entry,
 
       signature: {
         type: [

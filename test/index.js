@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -267,4 +267,29 @@ const getAppontment = async () => {
 }
 
 
-getAppontment();
+// getAppontment();
+
+
+// DocumentBundle
+const  documentBundle= new DocumentBundle()
+
+const createDocumentBumdle = async()=>{
+    const body = documentBundle.getFHIR({
+        "date" : new Date().toISOString(),
+        "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
+        "signJpegbase64" : "",
+        "entry" : []
+
+    })
+
+
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.createFhirResource(body, "Bundle")
+    console.log(res)
+
+    // d563a017-2ee7-4af8-a36d-77f19987745e
+
+}
+
+
+createDocumentBumdle()

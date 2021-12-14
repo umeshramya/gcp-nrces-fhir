@@ -27,7 +27,7 @@ class DocumentBundle {
             },
             type: "document",
             timestamp: options.date,
-            entry: [],
+            entry: options.entry,
             signature: {
                 type: [
                     {
