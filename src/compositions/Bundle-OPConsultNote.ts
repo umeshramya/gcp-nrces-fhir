@@ -426,3 +426,150 @@ const full= [
 
 
 ]
+
+
+
+
+                
+const section =[
+    {
+        "title": "Chief complaints",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "422843007",
+                    "display": "Chief complaint section"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "Condition/1"
+            }
+        ]
+    },
+    {
+        "title": "Allergies",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "722446000",
+                    "display": "Allergy record"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "AllergyIntolerance/1"
+            }
+        ]
+    },
+    {
+        "title": "Medical History",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "371529009",
+                    "display": "History and physical report"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "Condition/2"
+            }
+        ]
+    },
+    {
+        "title": "Investigation Advice",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "721963009",
+                    "display": "Order document"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "ServiceRequest/1"
+            }
+        ]
+    },
+    {
+        "title": "Medications",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "721912009",
+                    "display": "Medication summary document"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "MedicationStatement/1"
+            },
+            {
+                "reference": "MedicationRequest/1"
+            }
+        ]
+    },
+    {
+        "title": "Procedure",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "371525003",
+                    "display": "Clinical procedure report"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "Procedure/1"
+            }
+        ]
+    },
+    {
+        "title": "Follow Up",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "736271009",
+                    "display": "Outpatient care plan"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "Appointment/1"
+            }
+        ]
+    },
+    {
+        "title": "Document Reference",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "371530004",
+                    "display": "Clinical consultation report"
+                }
+            ]
+        },
+        "entry": [
+            {
+                "reference": "DocumentReference/1"
+            }
+        ]
+    }
+]
+
