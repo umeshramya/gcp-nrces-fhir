@@ -57,8 +57,18 @@ export class DocumentBundle implements ResourceMaster {
 
     return body
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options:any):DOCUMENT_BUNDLE {
+    let ret:DOCUMENT_BUNDLE={
+      date: options.timestamp,
+      practitionerId: `${options.signature.who.reference}`.substring(13),
+      entry: options.entry,
+      id:options.id,
+      identifier :options.identifier.value,
+      signJpegbase64 : options.signature.data
+    }
+    return ret
   }
+
+ 
 }
 

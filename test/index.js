@@ -292,4 +292,15 @@ const createDocumentBumdle = async()=>{
 }
 
 
-createDocumentBumdle()
+// createDocumentBumdle()
+
+const getDocumentBundle = async ()=>{
+    const  id = "d563a017-2ee7-4af8-a36d-77f19987745e"
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await  gcpFhirCRUD.getFhirResource(id, "Bundle");
+    const data = documentBundle.convertFhirToObject(res.data);
+    console.log(data)
+
+}
+
+getDocumentBundle();

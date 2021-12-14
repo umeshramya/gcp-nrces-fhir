@@ -9,6 +9,6 @@ export interface DOCUMENT_BUNDLE {
 }
 export declare class DocumentBundle implements ResourceMaster {
     getFHIR(options: DOCUMENT_BUNDLE): any;
-    convertFhirToObject(options: any): void;
+    convertFhirToObject(options: any): DOCUMENT_BUNDLE;
 }
 //# sourceMappingURL=DocumentBundle.d.ts.map
