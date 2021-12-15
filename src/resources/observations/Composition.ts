@@ -1,6 +1,9 @@
 import { ResourceMaster } from "../../Interfaces"
 import { v4 as uuidv4 } from 'uuid'
 import { ENCOUNTER } from "../Encounter"
+import { PATIENT } from "../Patient"
+import { PRACTITIONER } from "../Practitioner"
+import { ORGANIZATION } from "../Organization"
 
 export const compositionTypeArrey = [
     {
@@ -27,21 +30,13 @@ type compositionStatus = typeof compositionStatusArrey[number]
 export interface COMPOSITOIN {
     id?: string;
     identifier?: string;
-    patientId: string;
-    patientName: string;
+    patient:PATIENT;
     encounter: ENCOUNTER;
     date: string;
-    practitionerId: string;
-    practitionerName: string;
-    organizationId: string;
-    organizationName: string
+    practitioner: PRACTITIONER;
+    organization: ORGANIZATION;
     status: compositionStatus;
     type: compositionType;
-    patientBirthDate?: string;
-    patientPhone?: string;
-    patientGender?: string;
-    patientHealthId?: string
-
 }
 export class Composition implements ResourceMaster {
     getFHIR(options: COMPOSITOIN) {
@@ -58,7 +53,7 @@ export class Composition implements ResourceMaster {
             "language": "en-IN",
             "text": {
                 "status": "generated",
-                "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"><h4>Narrative with Details</h4><p>This is a OP Consult Note for Patient ${options.patientName}.  ${options.patientHealthId}; ph: ${options.patientPhone}; gender: ${options.patientGender}; birthDate: ${options.patientBirthDate}</p></div>`
+                "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"><h4>Narrative with Details</h4><p>This is a OP Consult Note for Patient ${options.patient.name}.  ${options.patient.healthNumber}; ph: ${options.patient.mobile}; gender: ${options.patient.gender}; birthDate: ${options.patient.dob}</p></div>`
             },
             "identifier": {
                 "system": "https://ndhm.in/phr",
@@ -76,8 +71,8 @@ export class Composition implements ResourceMaster {
                 "text": options.type.text
             },
             "subject": {
-                "reference": `Patient/${options.patientId}`,
-                "display": options.patientName
+                "reference": `Patient/${options.patient.id}`,
+                "display": options.patient.name
             },
             "encounter": {
                 "reference": `Encounter/${options.encounter.id}`
@@ -85,14 +80,14 @@ export class Composition implements ResourceMaster {
             "date": options.date,
             "author": [
                 {
-                    "reference": `Practitioner/${options.practitionerId}`,
-                    "display": options.practitionerName
+                    "reference": `Practitioner/${options.practitioner.id}`,
+                    "display": options.practitioner.name
                 }
             ],
             "title": options.type.type,
             "custodian": {
-                "reference": `Organization/${options.organizationId}`,
-                "display": options.organizationName
+                "reference": `Organization/${options.organization.id}`,
+                "display": options.organization.name
             },
 
 
