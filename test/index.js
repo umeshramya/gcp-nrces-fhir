@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -84,22 +84,22 @@ const search = async () => {
 // }
 
 
-// const enCounter = EncounterResource({
-//     "class": { "code": "IMP", "display": "in-patient" },
-//     "dischargeDisposition": { "code": "home", "display": "home" },
-//     "endDate": "2021-11-06T15:32:26.605+05:30",
-//     "startDate": "2021-11-03T15:32:26.605+05:30",
-//     "identifier": new Date().getTime().toString(),
-//     "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
-//     "text": "discherged Home",
-//     "status": "finished"
-// })
+const enCounter = EncounterResource({
+    "class": { "code": "IMP", "display": "in-patient" },
+    "dischargeDisposition": { "code": "home", "display": "home" },
+    "endDate": new Date().toISOString(),
+    "startDate": new Date().toISOString(),
+    "identifier": new Date().getTime().toString(),
+    "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+    "text": "discherged Home",
+    "status": "finished"
+})
 
-// const createEncounter = async () => {
-//     const gcpFhirCRUD = new GcpFhirCRUD();
-//     const res = await gcpFhirCRUD.createFhirResource(enCounter, "Encounter")
-//     console.log(res)
-// }
+const createEncounter = async () => {
+    const gcpFhirCRUD = new GcpFhirCRUD();
+    const res = await gcpFhirCRUD.createFhirResource(enCounter, "Encounter")
+    console.log(res)
+}
 
 // createEncounter()
 
@@ -271,14 +271,14 @@ const getAppontment = async () => {
 
 
 // DocumentBundle
-const  documentBundle= new DocumentBundle()
+const documentBundle = new DocumentBundle()
 
-const createDocumentBumdle = async()=>{
+const createDocumentBumdle = async () => {
     const body = documentBundle.getFHIR({
-        "date" : new Date().toISOString(),
+        "date": new Date().toISOString(),
         "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
-        "signJpegbase64" : "",
-        "entry" : []
+        "signJpegbase64": "",
+        "entry": []
 
     })
 
@@ -294,13 +294,42 @@ const createDocumentBumdle = async()=>{
 
 // createDocumentBumdle()
 
-const getDocumentBundle = async ()=>{
-    const  id = "d563a017-2ee7-4af8-a36d-77f19987745e"
+const getDocumentBundle = async () => {
+    const id = "d563a017-2ee7-4af8-a36d-77f19987745e"
     const gcpFhirCRUD = new GcpFhirCRUD();
-    const res = await  gcpFhirCRUD.getFhirResource(id, "Bundle");
+    const res = await gcpFhirCRUD.getFhirResource(id, "Bundle");
     const data = documentBundle.convertFhirToObject(res.data);
     console.log(data)
 
 }
 
-getDocumentBundle();
+// getDocumentBundle();
+
+
+// Composition
+const composition = new Composition()
+
+const createComposition = async () => {
+    const body = composition.getFHIR({
+        "date": new Date().toISOString(),
+        "encounterId": "f5a387db-f093-4885-a86f-107377e14c86",
+        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
+        "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f",
+        "status": "final",
+        "type": { "type": "OPConsultRecord", "code": "371530004", "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord", "text": "Clinical consultation report" },
+        "patientName": "Mr patil",
+        "organizationName": "JJH",
+        "practitionerName": "DR James Bond"
+
+    })
+
+    // console.log(body)
+
+    const res = await new GcpFhirCRUD().createFhirResource(body, "Composition")
+
+    console.log(res);
+}
+
+
+createComposition()

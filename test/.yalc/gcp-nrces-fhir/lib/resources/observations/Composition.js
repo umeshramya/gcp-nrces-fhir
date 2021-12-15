@@ -1,45 +1,24 @@
-import { ResourceMaster } from "../../Interfaces"
-import { v4 as uuidv4 } from 'uuid'
-
-export const compositionTypeArrey = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Composition = exports.compositionStatusArrey = exports.compositionTypeArrey = void 0;
+const uuid_1 = require("uuid");
+exports.compositionTypeArrey = [
     {
         type: "OPConsultRecord",
         url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord",
         code: "371530004",
         text: "Clinical consultation report"
     },
-
     {
         type: "DischargeSummaryRecord",
         url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord",
         code: "373942005",
         text: "Discharge summary"
     },
-
-] as const
-
-type compositionType = typeof compositionTypeArrey[number]
-export const compositionStatusArrey = ["preliminary", "final", "amended", "entered-in-error"] as const
-type compositionStatus = typeof compositionStatusArrey[number]
-
-
-export interface COMPOSITOIN {
-    id?: string;
-    identifier?: string;
-    patientId: string;
-    patientName: string;
-    encounterId: string;
-    date: string;
-    practitionerId: string
-    practitionerName: string
-    organizationId: string;
-    organizationName: string
-    status: compositionStatus
-    type: compositionType
-
-}
-export class Composition implements ResourceMaster {
-    getFHIR(options: COMPOSITOIN) {
+];
+exports.compositionStatusArrey = ["preliminary", "final", "amended", "entered-in-error"];
+class Composition {
+    getFHIR(options) {
         const body = {
             "resourceType": "Composition",
             "id": options.id || undefined,
@@ -57,7 +36,7 @@ export class Composition implements ResourceMaster {
             },
             "identifier": {
                 "system": "https://ndhm.in/phr",
-                "value": options.identifier || uuidv4()
+                "value": options.identifier || uuid_1.v4()
             },
             "status": options.status,
             "type": {
@@ -89,20 +68,12 @@ export class Composition implements ResourceMaster {
                 "reference": `Organization/${options.organizationId}`,
                 "display": options.organizationName
             },
-
-
-        }
-
+        };
         return body;
     }
-    convertFhirToObject(options: any) {
-        throw new Error("Method not implemented.")
+    convertFhirToObject(options) {
+        throw new Error("Method not implemented.");
     }
-
 }
-
-
-
-
-
-
+exports.Composition = Composition;
+//# sourceMappingURL=Composition.js.map
