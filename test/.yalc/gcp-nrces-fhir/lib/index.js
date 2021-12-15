@@ -3,13 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Composition = exports.compositionStatusArrey = exports.DocumentBundle = exports.ActorStatusArray = exports.AppointmentStatusArray = exports.Appointment = exports.AllergyIntolerance = exports.verificationStatusArray = exports.clinicalStatusArray = exports.Procedure = exports.Condition = exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSearch = exports.GcpFhirCRUD = void 0;
+exports.Composition = exports.compositionStatusArrey = exports.DocumentBundle = exports.ActorStatusArray = exports.AppointmentStatusArray = exports.Appointment = exports.AllergyIntolerance = exports.verificationStatusArray = exports.clinicalStatusArray = exports.Procedure = exports.Condition = exports.EncounterClassArray = exports.EncounterStatusArray = exports.EncounterHospitalizationDischargeDispositionArray = exports.EncounterResource = exports.OrganizationResource = exports.PractitionerResource = exports.Patient = exports.PatientResource = exports.resourceTypeArray = exports.GcpFhirSearch = exports.GcpFhirCRUD = void 0;
 const gcp_1 = __importDefault(require("./classess/gcp"));
 exports.GcpFhirCRUD = gcp_1.default;
 const gcpSearch_1 = __importDefault(require("./classess/gcpSearch"));
 exports.GcpFhirSearch = gcpSearch_1.default;
 const Patient_1 = require("./resources/Patient");
 Object.defineProperty(exports, "PatientResource", { enumerable: true, get: function () { return Patient_1.PatientResource; } });
+Object.defineProperty(exports, "Patient", { enumerable: true, get: function () { return Patient_1.Patient; } });
 const Practitioner_1 = require("./resources/Practitioner");
 Object.defineProperty(exports, "PractitionerResource", { enumerable: true, get: function () { return Practitioner_1.PractitionerResource; } });
 const Organization_1 = require("./resources/Organization");

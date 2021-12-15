@@ -1,5 +1,6 @@
 import { ResourceMaster } from "../../Interfaces"
 import { v4 as uuidv4 } from 'uuid'
+import { ENCOUNTER } from "../Encounter"
 
 export const compositionTypeArrey = [
     {
@@ -28,14 +29,18 @@ export interface COMPOSITOIN {
     identifier?: string;
     patientId: string;
     patientName: string;
-    encounterId: string;
+    encounter: ENCOUNTER;
     date: string;
-    practitionerId: string
-    practitionerName: string
+    practitionerId: string;
+    practitionerName: string;
     organizationId: string;
     organizationName: string
-    status: compositionStatus
-    type: compositionType
+    status: compositionStatus;
+    type: compositionType;
+    patientBirthDate?: string;
+    patientPhone?: string;
+    patientGender?: string;
+    patientHealthId?: string
 
 }
 export class Composition implements ResourceMaster {
@@ -53,7 +58,7 @@ export class Composition implements ResourceMaster {
             "language": "en-IN",
             "text": {
                 "status": "generated",
-                "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"><h4>Narrative with Details</h4><p>This is a OP Consult Note for Patient ABC. Generated Summary: id: 1; Medical Record Number = 1234 (System : {https://healthid.ndhm.gov.in}); active; ABC ; ph: +919818512600(HOME); gender: male; birthDate: 1981-01-12</p></div>"
+                "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"><h4>Narrative with Details</h4><p>This is a OP Consult Note for Patient ${options.patientName}.  ${options.patientHealthId}; ph: ${options.patientPhone}; gender: ${options.patientGender}; birthDate: ${options.patientBirthDate}</p></div>`
             },
             "identifier": {
                 "system": "https://ndhm.in/phr",
@@ -75,7 +80,7 @@ export class Composition implements ResourceMaster {
                 "display": options.patientName
             },
             "encounter": {
-                "reference": `Encounter/${options.encounterId}`
+                "reference": `Encounter/${options.encounter.id}`
             },
             "date": options.date,
             "author": [

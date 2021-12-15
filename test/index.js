@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition } = require("gcp-nrces-fhir")
 
 const organization = OrganizationResource({
     "email": "jjhhubli@gmail.com",
@@ -17,25 +17,38 @@ const createOrganization = async () => {
 }
 
 // createOrganization()
-id = "a15a0e31-3b72-4d48-bae8-c3000c97786f"
-
-const patient = PatientResource({
-    "name": "UMESH R BILAGI",
-    "gender": "Male",
-    "mobile": "9343403620",
-    "healthNumber": "23-3457-234",
-    "dob": "1969-09-29",
-    "MRN": "2345",
-    "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f"
-
-})
+const patient = new Patient();
 
 const createPatient = async () => {
-    const gcpFhirCRUD = new GcpFhirCRUD();
-    const res = await gcpFhirCRUD.createFhirResource(patient, "Patient")
+    const body = patient.getFHIR({
+        "name": "UMESH R BILAGI",
+        "gender": "Male",
+        "mobile": "9343403620",
+        "healthNumber": "23-3457-234",
+        "dob": "1969-09-29",
+        "MRN": "2345",
+        "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f"
+    })
+
+    const res = await new GcpFhirCRUD().createFhirResource(body, "Patient")
     console.log(res)
+    // b7665b47-2356-493f-bae4-4710f16eeb7b
 }
+
 // createPatient()
+
+const getPatient = async () => {
+    const id = "b7665b47-2356-493f-bae4-4710f16eeb7b";
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Patient");
+
+    const body = patient.convertFhirToObject(res.data);
+    console.log(body)
+}
+
+
+getPatient();
+
+
 
 const Practitioner = PractitionerResource({
     "name": "DR Umesh R Bilagi",
@@ -332,4 +345,4 @@ const createComposition = async () => {
 }
 
 
-createComposition()
+// createComposition()

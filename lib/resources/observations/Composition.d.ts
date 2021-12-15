@@ -1,4 +1,5 @@
 import { ResourceMaster } from "../../Interfaces";
+import { ENCOUNTER } from "../Encounter";
 export declare const compositionTypeArrey: readonly [{
     readonly type: "OPConsultRecord";
     readonly url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord";
@@ -18,7 +19,7 @@ export interface COMPOSITOIN {
     identifier?: string;
     patientId: string;
     patientName: string;
-    encounterId: string;
+    encounter: ENCOUNTER;
     date: string;
     practitionerId: string;
     practitionerName: string;
@@ -26,6 +27,10 @@ export interface COMPOSITOIN {
     organizationName: string;
     status: compositionStatus;
     type: compositionType;
+    patientBirthDate?: string;
+    patientPhone?: string;
+    patientGender?: string;
+    patientHealthId?: string;
 }
 export declare class Composition implements ResourceMaster {
     getFHIR(options: COMPOSITOIN): {
