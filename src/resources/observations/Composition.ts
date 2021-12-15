@@ -1,6 +1,24 @@
 import { ResourceMaster } from "../../Interfaces"
 import { v4 as uuidv4 } from 'uuid'
 
+export const compositionTypeArrey = [
+    {type : "OPConsultRecord",
+    url : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord",
+    code : "371530004",
+    text :  "Clinical consultation report"},
+
+    {type : "DischargeSummaryRecord",
+    url : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord",
+    code : "373942005",
+    text :  "Discharge summary"},
+
+] as const
+
+type compositionType = typeof compositionTypeArrey[number]
+export const compositionStatusArrey = ["preliminary" , "final" , "amended" , "entered-in-error"] as const
+type compositionStatus = typeof compositionStatusArrey[number]
+
+
 export interface COMPOSITOIN {
     id?: string;
     identifier?: string;
@@ -12,6 +30,8 @@ export interface COMPOSITOIN {
     practitionerName: string
     organizationId: string;
     organizationName: string
+    status : compositionStatus
+    type : compositionType
 
 }
 export class Composition implements ResourceMaster {
@@ -23,7 +43,7 @@ export class Composition implements ResourceMaster {
                 "versionId": "1",
                 "lastUpdated": new Date().toISOString(),
                 "profile": [
-                    "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord"
+                    options.type.url
                 ]
             },
             "language": "en-IN",
@@ -33,18 +53,18 @@ export class Composition implements ResourceMaster {
             },
             "identifier": {
                 "system": "https://ndhm.in/phr",
-                "value": options.identifier || undefined
+                "value": options.identifier || uuidv4()
             },
-            "status": "final",
+            "status": options.status,
             "type": {
                 "coding": [
                     {
                         "system": "http://snomed.info/sct",
-                        "code": "371530004",
-                        "display": "Clinical consultation report"
+                        "code": options.type.code,
+                        "display": options.type.text
                     }
                 ],
-                "text": "Clinical Consultation report"
+                "text": options.type.text
             },
             "subject": {
                 "reference": `Patient/${options.patientId}`,
@@ -60,7 +80,7 @@ export class Composition implements ResourceMaster {
                     "display": options.practitionerName
                 }
             ],
-            "title": "Consultation Report",
+            "title":options.type.type,
             "custodian": {
                 "reference": `Organization/${options.organizationId}`,
                 "display": options.organizationName
