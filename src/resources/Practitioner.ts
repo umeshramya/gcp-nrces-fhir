@@ -13,10 +13,10 @@ export class Practitioner implements ResourceMaster{
   getFHIR(options: PRACTITIONER) {
     const body = {
       "resourceType": "Practitioner",
-      "id": `${options.id}`,
+      "id": options.id,
       "meta": {
         "versionId": "1",
-        "lastUpdated": new Date().toDateString(),
+        "lastUpdated": new Date().toISOString(),
         "profile": [
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Practitioner"
         ]
@@ -32,12 +32,12 @@ export class Practitioner implements ResourceMaster{
               {
                 "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
                 "code": "MD",
-                "display": `${options.medicalLicenseNumber}`
+                "display": options.medicalLicenseNumber
               }
             ]
           },
           "system": "https://doctor.ndhm.gov.in",
-          "value": `${options.ndhmProfessionalId}`
+          "value": options.ndhmProfessionalId
         }
       ],
       "name": [

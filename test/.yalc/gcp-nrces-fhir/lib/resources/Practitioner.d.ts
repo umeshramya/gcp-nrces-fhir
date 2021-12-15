@@ -9,7 +9,7 @@ export interface PRACTITIONER {
 export declare class Practitioner implements ResourceMaster {
     getFHIR(options: PRACTITIONER): {
         resourceType: string;
-        id: string;
+        id: string | undefined;
         meta: {
             versionId: string;
             lastUpdated: string;
@@ -43,7 +43,7 @@ export declare class Practitioner implements ResourceMaster {
  */
 export declare const PractitionerResource: (options: PRACTITIONER) => {
     resourceType: string;
-    id: string;
+    id: string | undefined;
     meta: {
         versionId: string;
         lastUpdated: string;
