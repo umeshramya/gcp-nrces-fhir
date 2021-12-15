@@ -1,4 +1,6 @@
-interface ORGANIZATION {
+import { ResourceMaster } from "../Interfaces"
+
+export interface ORGANIZATION {
   id?: string
   name: string
   phone: string
@@ -8,8 +10,10 @@ interface ORGANIZATION {
 
 }
 
-const OrganizationResource = (options: ORGANIZATION) => {
 
+export class Organization implements ResourceMaster{
+  getFHIR(options: ORGANIZATION) {
+    
   const body = {
     "resourceType": "Organization",
     "id": `${options.id}`,
@@ -53,8 +57,32 @@ const OrganizationResource = (options: ORGANIZATION) => {
   }
 
   return body
+  }
+  convertFhirToObject(options: any):ORGANIZATION{
+    const ret:ORGANIZATION={
+      name: options.name,
+      phone: options.telecom[0].value,
+      email: options.telecom[1].value,
+      id :options.id,
+      ndhmFacilityNumber: options.identifier[0].value,
+      providerNumber : options.identifier[0].type.coding[0].display
+    }
+
+    return ret
+  }
+  
+}
+
+
+/**
+ * @deprecated
+ * @param options 
+ * @returns 
+ */
+export const OrganizationResource = (options: ORGANIZATION) => {
+  const body = new Organization().getFHIR(options);
+  return body
 
 }
 
 
-export { ORGANIZATION, OrganizationResource }

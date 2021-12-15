@@ -1,5 +1,5 @@
 import { ResourceMaster } from "../Interfaces";
-interface PATIENT {
+export interface PATIENT {
     id?: string;
     name: string;
     gender: string;
@@ -54,7 +54,7 @@ export declare class Patient implements ResourceMaster {
  * @param options
  * @returns
  */
-declare const PatientResource: (options: PATIENT) => {
+export declare const PatientResource: (options: PATIENT) => {
     resourceType: string;
     id: string;
     meta: {
@@ -91,5 +91,4 @@ declare const PatientResource: (options: PATIENT) => {
         reference: string;
     };
 };
-export { PATIENT, PatientResource };
 //# sourceMappingURL=Patient.d.ts.map

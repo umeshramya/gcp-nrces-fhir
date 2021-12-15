@@ -32,7 +32,7 @@ class Composition {
             "language": "en-IN",
             "text": {
                 "status": "generated",
-                "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"><h4>Narrative with Details</h4><p>This is a OP Consult Note for Patient ${options.patientName}.  ${options.patientHealthId}; ph: ${options.patientPhone}; gender: ${options.patientGender}; birthDate: ${options.patientBirthDate}</p></div>`
+                "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"><h4>Narrative with Details</h4><p>This is a OP Consult Note for Patient ${options.patient.name}.  ${options.patient.healthNumber}; ph: ${options.patient.mobile}; gender: ${options.patient.gender}; birthDate: ${options.patient.dob}</p></div>`
             },
             "identifier": {
                 "system": "https://ndhm.in/phr",
@@ -50,8 +50,8 @@ class Composition {
                 "text": options.type.text
             },
             "subject": {
-                "reference": `Patient/${options.patientId}`,
-                "display": options.patientName
+                "reference": `Patient/${options.patient.id}`,
+                "display": options.patient.name
             },
             "encounter": {
                 "reference": `Encounter/${options.encounter.id}`
@@ -59,14 +59,14 @@ class Composition {
             "date": options.date,
             "author": [
                 {
-                    "reference": `Practitioner/${options.practitionerId}`,
-                    "display": options.practitionerName
+                    "reference": `Practitioner/${options.practitioner.id}`,
+                    "display": options.practitioner.name
                 }
             ],
             "title": options.type.type,
             "custodian": {
-                "reference": `Organization/${options.organizationId}`,
-                "display": options.organizationName
+                "reference": `Organization/${options.organization.id}`,
+                "display": options.organization.name
             },
         };
         return body;
