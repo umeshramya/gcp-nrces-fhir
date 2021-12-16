@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { COMPOSITOIN, DocumentBundle, DOCUMENT_BUNDLE, GcpFhirCRUD } from "..";
+import { COMPOSITOIN, DocumentBundle, DOCUMENT_BUNDLE, GcpFhirCRUD, resourceType } from "..";
 
 interface SECTION {
   chiefComplints: any;
@@ -21,9 +21,18 @@ interface NON_SECTION {
   documentReference: any
 }
 
+
+
 export class OPConsultationNote {
 
   private _section: any[]=[];
+  private _bundleEntry: any[] = [];
+
+
+  public get bundleEntry(): any {
+    return this._bundleEntry;
+  }
+
 
   public get section(): any[] {
     return this._section;
@@ -31,11 +40,13 @@ export class OPConsultationNote {
 
   private nonSection!: any[]
 
-  async createBundle(_bundle: DOCUMENT_BUNDLE, _comoosition: COMPOSITOIN) {
-    const gcpFhirCrud = new GcpFhirCRUD();
-    const bundle = await new DocumentBundle().getFHIR(_bundle);
+  createBundleEntry(options:{resourceType:resourceType, gcpFhirId:string, resource:any}):any{
+    const entry = {
+      fullUrl: `${options.resourceType}/${options.gcpFhirId}`,
+      resource: options.resource,
+    };
+    return entry
   }
-
 
   setNonSection(option: NON_SECTION) {
 
@@ -44,6 +55,13 @@ export class OPConsultationNote {
   setSection(options: Partial<SECTION>) {
 
     if (options.chiefComplints) {
+
+      this._bundleEntry.push(this.createBundleEntry({
+        "gcpFhirId" : options.chiefComplints.id,
+        "resource" : options.chiefComplints,
+        "resourceType" : "Condition"
+      }))
+
       this._section.push({
         title: "Chief complaints",
         code: {
@@ -61,9 +79,15 @@ export class OPConsultationNote {
           },
         ],
       });
+      
     }
 
     if (options.allergyIntolerance) {
+      this._bundleEntry.push(this.createBundleEntry({
+        "resourceType" : "AllergyIntolerance",
+        "gcpFhirId" : options.allergyIntolerance.id,
+        "resource" : options.allergyIntolerance
+      }))
       this._section.push({
         title: "Allergies",
         code: {
@@ -84,6 +108,11 @@ export class OPConsultationNote {
     }
 
     if (options.medicalHistroy) {
+      this._bundleEntry.push(this.createBundleEntry({
+        "resource" : options.medicalHistroy,
+        "resourceType" : "Condition",
+        "gcpFhirId": options.medicalHistroy.id
+      }))
       this._section.push({
         title: "Medical History",
         code: {
