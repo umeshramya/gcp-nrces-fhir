@@ -1,8 +1,8 @@
 import { ResourceMaster } from "../../Interfaces";
 import { CodeDisplay } from "../../config/index";
 
-export const clinicalStatusArray = ["active", "inactive", "resolved"] as const;
-type clinicalStatus = typeof clinicalStatusArray[number];
+export const allergyStatusArray = ["active", "inactive", "resolved"] as const;
+type allergyStatus = typeof allergyStatusArray[number];
 
 export const verificationStatusArray = [
   "unconfirmed",
@@ -14,7 +14,7 @@ type verificationStatus = typeof verificationStatusArray[number];
 
 export interface ALLERGY_INTOLERANCE {
   id?: string;
-  clinicalStatus: clinicalStatus;
+  clinicalStatus: allergyStatus;
   verificationStatus: verificationStatus;
   allergyIntolerance: CodeDisplay[];
   text: string;

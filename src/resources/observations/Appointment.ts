@@ -5,8 +5,8 @@ export const AppointmentStatusArray = ["proposed", "pending", "booked", "arrived
 
 type AppointmentStatus = typeof AppointmentStatusArray[number]
 
-export const ActorStatusArray = ["accepted", "declined", "tentative", "needs-action"] as const
-type ActorStatus = typeof ActorStatusArray[number]
+export const AppointmentActorStatusArray = ["accepted", "declined", "tentative", "needs-action"] as const
+type AppointmentActorStatus = typeof AppointmentActorStatusArray[number]
 
 export interface APPOINTMENT {
   id?: string;
@@ -22,8 +22,8 @@ export interface APPOINTMENT {
   startDate: string;
   endDate: string
   description: string
-  patientStatus: ActorStatus
-  practitionerStatus: ActorStatus
+  patientStatus: AppointmentActorStatus
+  practitionerStatus: AppointmentActorStatus
 }
 
 export class Appointment implements ResourceMaster {
