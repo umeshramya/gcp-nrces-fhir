@@ -23,7 +23,7 @@ interface NON_SECTION {
 
 export class OPConsultationNote {
 
-  private _section!: any[];
+  private _section: any[]=[];
 
   public get section(): any[] {
     return this._section;
@@ -42,7 +42,7 @@ export class OPConsultationNote {
   }
 
   setSection(options: Partial<SECTION>) {
-    this._section = [];
+
     if (options.chiefComplints) {
       this._section.push({
         title: "Chief complaints",

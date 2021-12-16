@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPConsultationNote = void 0;
 const __1 = require("..");
 class OPConsultationNote {
+    constructor() {
+        this._section = [];
+    }
     get section() {
         return this._section;
     }

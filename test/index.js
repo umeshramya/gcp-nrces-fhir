@@ -386,13 +386,13 @@ const setSection = async () => {
     opConsulatation.setSection({ "procedure": res.data })
 
     res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
-    console.log(res)
-    // opConsulatation.setSection({ "appointment": res.data })
+    // console.log(res)
+    opConsulatation.setSection({ "appointment": res.data })
 
 
-    // opConsulatation.section.map(el => {
-    //     console.log(el)
-    // })
+    opConsulatation.section.map(el => {
+        console.log(el)
+    })
 
 }
 
