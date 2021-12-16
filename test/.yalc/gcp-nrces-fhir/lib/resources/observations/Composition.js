@@ -68,6 +68,7 @@ class Composition {
                 "reference": `Organization/${options.organization.id}`,
                 "display": options.organization.name
             },
+            "section": options.section
         };
         return body;
     }

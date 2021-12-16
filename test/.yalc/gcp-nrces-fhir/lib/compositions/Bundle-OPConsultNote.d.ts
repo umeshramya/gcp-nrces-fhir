@@ -1,43 +1,29 @@
-export default class OPConsultationNote {
-    private documentBundle;
-    private composition;
-    private practitioner;
-    private organization;
-    private patient;
-    private encounter;
-    private allergyIntolerance;
-    private appointment;
-    private chiefComplaints;
-    private medicalHistory;
-    private procedure;
-    private serviceRequest;
-    private medicationStatement;
-    private medicationRequest;
-    private documentReference;
-    setDocumentBundle(gcpFhirId: string, resource: any): void;
-    setComposition(): void;
-    setPractitioner(gcpFhirId: string, resource: any): void;
-    setOrganization(gcpFhirId: string, resource: any): void;
-    setPatient(gcpFhirId: string, resource: any): void;
-    setEncounter(gcpFhirId: string, resource: any): void;
-    setAllergyIntolerance(gcpFhirId: string, resource: any): void;
-    setAppointment(gcpFhirId: string, resource: any): void;
-    /**
-    * mapped to Condition1
-    * @param gcpFhirId
-    * @param resource
-    */
-    setChiefComplaints(gcpFhirId: string, resource: any): void;
-    /**
-    * mapped to Condition2
-    * @param gcpFhirId
-    * @param resource
-    */
-    setMedicalHistory(gcpFhirId: string, resource: any): void;
-    setProcedure(gcpFhirId: string, resource: any): void;
-    setServiceRequest(gcpFhirId: string, resource: any): void;
-    setMedicationStatement(gcpFhirId: string, resource: any): void;
-    setMedicationRequest(gcpFhirId: string, resource: any): void;
-    setdocumentReference(gcpFhirId: string, resource: any): void;
+import { COMPOSITOIN, DOCUMENT_BUNDLE } from "..";
+interface SECTION {
+    chiefComplints: any;
+    allergyIntolerance: any;
+    medicalHistroy: any;
+    serviceRequest: any;
+    medicationStatement: any;
+    medicationRequest: any;
+    procedure: any;
+    appointment: any;
+    documentReference: any;
 }
+interface NON_SECTION {
+    patient: any;
+    composition: any;
+    practitioner: any;
+    encounter: any;
+    documentReference: any;
+}
+export declare class OPConsultationNote {
+    private _section;
+    get section(): any[];
+    private nonSection;
+    createBundle(_bundle: DOCUMENT_BUNDLE, _comoosition: COMPOSITOIN): Promise<void>;
+    setNonSection(option: NON_SECTION): void;
+    setSection(options: Partial<SECTION>): void;
+}
+export {};
 //# sourceMappingURL=Bundle-OPConsultNote.d.ts.map

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Appointment = exports.ActorStatusArray = exports.AppointmentStatusArray = void 0;
+exports.Appointment = exports.AppointmentActorStatusArray = exports.AppointmentStatusArray = void 0;
 exports.AppointmentStatusArray = ["proposed", "pending", "booked", "arrived", "fulfilled", "cancelled", "noshow", "entered-in-error", "checked-in", "waitlist"];
-exports.ActorStatusArray = ["accepted", "declined", "tentative", "needs-action"];
+exports.AppointmentActorStatusArray = ["accepted", "declined", "tentative", "needs-action"];
 class Appointment {
     getFHIR(options) {
         const body = {

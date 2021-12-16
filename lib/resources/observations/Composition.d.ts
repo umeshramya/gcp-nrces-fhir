@@ -27,6 +27,7 @@ export interface COMPOSITOIN {
     organization: ORGANIZATION;
     status: compositionStatus;
     type: compositionType;
+    section: [];
 }
 export declare class Composition implements ResourceMaster {
     getFHIR(options: COMPOSITOIN): {
@@ -72,6 +73,7 @@ export declare class Composition implements ResourceMaster {
             reference: string;
             display: string;
         };
+        section: [];
     };
     convertFhirToObject(options: any): void;
 }

@@ -8,10 +8,11 @@ import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDispo
 import { resourceType, resourceTypeArray } from "./config";
 import { Condition, CONDITION } from "./resources/observations/Condition";
 import { Procedure, PROCEDURE } from "./resources/observations/Procedure";
-import { clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance } from "./resources/observations/AllergyIntolerance";
-import { APPOINTMENT, Appointment, AppointmentStatusArray, ActorStatusArray } from "./resources/observations/Appointment";
+import { allergyStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance } from "./resources/observations/AllergyIntolerance";
+import { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatusArray } from "./resources/observations/Appointment";
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/observations/Composition";
+import { OPConsultationNote } from "./compositions/Bundle-OPConsultNote";
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray };
 export type { resourceType };
 export { PATIENT, PatientResource, Patient };
@@ -21,8 +22,9 @@ export { ENCOUNTER, EncounterResource, EncounterHospitalizationDischargeDisposit
 export type { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition };
 export { CONDITION, Condition };
 export { Procedure, PROCEDURE };
-export { clinicalStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance };
-export { APPOINTMENT, Appointment, AppointmentStatusArray, ActorStatusArray };
+export { allergyStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance };
+export { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatusArray };
 export { DOCUMENT_BUNDLE, DocumentBundle };
 export { compositionStatusArrey, COMPOSITOIN, Composition };
+export { OPConsultationNote };
 //# sourceMappingURL=index.d.ts.map

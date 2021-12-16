@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, OPConsultationNote } = require("gcp-nrces-fhir")
 
 
 
@@ -22,9 +22,9 @@ const createOrganization = async () => {
 
 // createOrganization()
 
-const getOrganization = async()=>{
-    const id ="137f8f40-4ac6-49f2-9438-f64d72b17568"
-    const res =await  new GcpFhirCRUD().getFhirResource(id, "Organization");
+const getOrganization = async () => {
+    const id = "137f8f40-4ac6-49f2-9438-f64d72b17568"
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Organization");
     const data = organization.convertFhirToObject(res.data)
     console.log(data)
 }
@@ -85,14 +85,14 @@ const createPractinioner = async () => {
 // createPractinioner()
 
 
-const getPractinioner = async ()=>{
-    const  id = "ae9653c6-8745-4bb0-b792-6d6c494ba84e"
+const getPractinioner = async () => {
+    const id = "ae9653c6-8745-4bb0-b792-6d6c494ba84e"
     const res = await new GcpFhirCRUD().getFhirResource(id, "Practitioner")
     const body = practitioner.convertFhirToObject(res.data)
     console.log(body)
 }
 
-getPractinioner()
+// getPractinioner()
 
 const search = async () => {
     const gcpFhirSearch = new GcpFhirSearch()
@@ -374,3 +374,26 @@ const createComposition = async () => {
 
 
 // createComposition()
+
+
+const opConsulatation = new OPConsultationNote()
+const setSection = async () => {
+    const ProcedureId = "87555651-bb59-4d3b-8cc5-b5e73cf2599c"
+    const AppointmentId = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
+    const gcpFhirCrud = new GcpFhirCRUD()
+
+    let res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
+    opConsulatation.setSection({ "procedure": res.data })
+
+    res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
+    console.log(res)
+    // opConsulatation.setSection({ "appointment": res.data })
+
+
+    // opConsulatation.section.map(el => {
+    //     console.log(el)
+    // })
+
+}
+
+setSection()

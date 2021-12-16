@@ -2,8 +2,8 @@ import { CodeDisplay } from "../../config";
 import { ResourceMaster } from "../../Interfaces";
 export declare const AppointmentStatusArray: readonly ["proposed", "pending", "booked", "arrived", "fulfilled", "cancelled", "noshow", "entered-in-error", "checked-in", "waitlist"];
 declare type AppointmentStatus = typeof AppointmentStatusArray[number];
-export declare const ActorStatusArray: readonly ["accepted", "declined", "tentative", "needs-action"];
-declare type ActorStatus = typeof ActorStatusArray[number];
+export declare const AppointmentActorStatusArray: readonly ["accepted", "declined", "tentative", "needs-action"];
+declare type AppointmentActorStatus = typeof AppointmentActorStatusArray[number];
 export interface APPOINTMENT {
     id?: string;
     status: AppointmentStatus;
@@ -18,8 +18,8 @@ export interface APPOINTMENT {
     startDate: string;
     endDate: string;
     description: string;
-    patientStatus: ActorStatus;
-    practitionerStatus: ActorStatus;
+    patientStatus: AppointmentActorStatus;
+    practitionerStatus: AppointmentActorStatus;
 }
 export declare class Appointment implements ResourceMaster {
     getFHIR(options: APPOINTMENT): any;
