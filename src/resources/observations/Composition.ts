@@ -37,6 +37,7 @@ export interface COMPOSITOIN {
     organization: ORGANIZATION;
     status: compositionStatus;
     type: compositionType;
+    section:[]
 }
 export class Composition implements ResourceMaster {
     getFHIR(options: COMPOSITOIN) {
@@ -89,6 +90,7 @@ export class Composition implements ResourceMaster {
                 "reference": `Organization/${options.organization.id}`,
                 "display": options.organization.name
             },
+            "section" : options.section
 
 
         }
