@@ -1,5 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import { COMPOSITOIN, DocumentBundle, DOCUMENT_BUNDLE, GcpFhirCRUD, resourceType } from "..";
+import {
+  COMPOSITOIN,
+  DocumentBundle,
+  DOCUMENT_BUNDLE,
+  GcpFhirCRUD,
+  resourceType,
+} from "..";
 
 interface SECTION {
   chiefComplints: any;
@@ -16,53 +22,63 @@ interface SECTION {
 interface NON_SECTION {
   patient: any;
   composition: any;
-  practitioner: any
+  practitioner: any;
   encounter: any;
-  documentReference: any
+  documentReference: any;
 }
 
-
-
 export class OPConsultationNote {
+  private nonSection!: any[];
 
-  private _section: any[]=[];
+  private _section: any[] = [];
   private _bundleEntry: any[] = [];
-
-
-  public get bundleEntry(): any {
-    return this._bundleEntry;
-  }
-
 
   public get section(): any[] {
     return this._section;
   }
+  public set section(value: any[]) {
+    this._section = value;
+  }
 
-  private nonSection!: any[]
+  public get bundleEntry(): any[] {
+    return this._bundleEntry;
+  }
+  public set bundleEntry(value: any[]) {
+    this._bundleEntry = value;
+  }
 
-  createBundleEntry(options:{resourceType:resourceType, gcpFhirId:string, resource:any}):any{
+  createBundleEntry(options: {
+    resourceType: resourceType;
+    gcpFhirId: string;
+    resource: any;
+  }): any {
     const entry = {
       fullUrl: `${options.resourceType}/${options.gcpFhirId}`,
       resource: options.resource,
     };
-    return entry
+    return entry;
   }
 
-  setNonSection(option: NON_SECTION) {
+  setNonSection(option: NON_SECTION) {}
 
-  }
+  setEntries(options: Partial<SECTION>) {
+    let sectionBody:any
+    let index:number
 
-  setSection(options: Partial<SECTION>) {
-
+    // "Chief complaints"
     if (options.chiefComplints) {
+      this._bundleEntry.push(
+        this.createBundleEntry({
+          gcpFhirId: options.chiefComplints.id,
+          resource: options.chiefComplints,
+          resourceType: "Condition",
+        })
+      );
 
-      this._bundleEntry.push(this.createBundleEntry({
-        "gcpFhirId" : options.chiefComplints.id,
-        "resource" : options.chiefComplints,
-        "resourceType" : "Condition"
-      }))
-
-      this._section.push({
+      index = this._section.findIndex(
+        (el) => el.title == "Chief complaints"
+      );
+      sectionBody = {
         title: "Chief complaints",
         code: {
           coding: [
@@ -78,16 +94,24 @@ export class OPConsultationNote {
             reference: `Condition/${options.chiefComplints.id}`,
           },
         ],
-      });
-      
+      };
+      if (index < 0) {
+        this._section.push(sectionBody);
+      } else {
+        this.section[index] = sectionBody;
+      }
     }
 
+
+    // "Allergies"
     if (options.allergyIntolerance) {
-      this._bundleEntry.push(this.createBundleEntry({
-        "resourceType" : "AllergyIntolerance",
-        "gcpFhirId" : options.allergyIntolerance.id,
-        "resource" : options.allergyIntolerance
-      }))
+      this._bundleEntry.push(
+        this.createBundleEntry({
+          resourceType: "AllergyIntolerance",
+          gcpFhirId: options.allergyIntolerance.id,
+          resource: options.allergyIntolerance,
+        })
+      );
       this._section.push({
         title: "Allergies",
         code: {
@@ -107,12 +131,16 @@ export class OPConsultationNote {
       });
     }
 
+
+    // "Medical History"
     if (options.medicalHistroy) {
-      this._bundleEntry.push(this.createBundleEntry({
-        "resource" : options.medicalHistroy,
-        "resourceType" : "Condition",
-        "gcpFhirId": options.medicalHistroy.id
-      }))
+      this._bundleEntry.push(
+        this.createBundleEntry({
+          resource: options.medicalHistroy,
+          resourceType: "Condition",
+          gcpFhirId: options.medicalHistroy.id,
+        })
+      );
       this._section.push({
         title: "Medical History",
         code: {
@@ -132,6 +160,8 @@ export class OPConsultationNote {
       });
     }
 
+
+    // "Order document"
     if (options.serviceRequest) {
       this._section.push({
         title: "Investigation Advice",
@@ -152,6 +182,8 @@ export class OPConsultationNote {
       });
     }
 
+
+    //  "Medications"
     if (options.medicationStatement && options.medicationRequest) {
       this._section.push({
         title: "Medications",
@@ -175,6 +207,8 @@ export class OPConsultationNote {
       });
     }
 
+
+    // "Procedure"
     if (options.procedure) {
       this._section.push({
         title: "Procedure",
@@ -195,6 +229,7 @@ export class OPConsultationNote {
       });
     }
 
+    // "Follow Up"
     if (options.appointment) {
       this._section.push({
         title: "Follow Up",
@@ -215,6 +250,8 @@ export class OPConsultationNote {
       });
     }
 
+
+    // "Document Reference"
     if (options.documentReference) {
       this._section.push({
         title: "Document Reference",
@@ -236,9 +273,6 @@ export class OPConsultationNote {
     }
   }
 }
-
-
-
 
 // private documentBundle: any;
 // private composition: any;
@@ -461,8 +495,6 @@ export class OPConsultationNote {
 //   };
 // }
 
-
-
 // setPractitioner(gcpFhirId: string, resource: any) {
 //   this.practitioner = {
 //     fullUrl: `Practitioner/${gcpFhirId}`,
@@ -567,8 +599,6 @@ export class OPConsultationNote {
 //     resource: resource,
 //   };
 // }
-
-
 
 // ======================================================================
 // this.section =[
