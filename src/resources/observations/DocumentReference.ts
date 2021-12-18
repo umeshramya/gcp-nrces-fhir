@@ -15,6 +15,7 @@ export interface DOCUMENT_REFERENCE {
   status: DocumentStatus;
   docStatus: DocumentDocStatus;
   patient: PATIENT
+  patientId: string
   pdf: string
   code: CodeDisplay[]
   title: string
@@ -41,7 +42,7 @@ export class DocumentReference implements ResourceMaster {
         coding: options.code,
         text: options.title,
       },
-      subject: { reference: `Patient/${options.patient.id}` },
+      subject: { reference: `Patient/${options.patientId}` },
       content: [
         {
           attachment: {
