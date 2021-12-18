@@ -36,7 +36,7 @@ class Composition {
             },
             "identifier": {
                 "system": "https://ndhm.in/phr",
-                "value": options.identifier || uuid_1.v4()
+                "value": options.identifier || (0, uuid_1.v4)()
             },
             "status": options.status,
             "type": {

@@ -10,7 +10,7 @@ declare const credentials: {
     auth_provider_x509_cert_url: string | undefined;
     client_x509_cert_url: string | undefined;
 };
-declare const resourceTypeArray: readonly ["Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure", "AllergyIntolerance", "Appointment", "Bundle", "Composition"];
+declare const resourceTypeArray: readonly ["Patient", "Practitioner", "Organization", "Encounter", "Condition", "Procedure", "AllergyIntolerance", "Appointment", "Bundle", "Composition", "ServiceRequest", "MedicationStatement", "MedicationRequest", "DocumentReference"];
 declare type resourceType = typeof resourceTypeArray[number];
 export interface CodeDisplay {
     code?: string;

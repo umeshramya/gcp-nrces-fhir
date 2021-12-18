@@ -23,7 +23,7 @@ class DocumentBundle {
             },
             identifier: {
                 system: "http://hip.in",
-                value: options.identifier || uuid_1.v4(),
+                value: options.identifier || (0, uuid_1.v4)(),
             },
             type: "document",
             timestamp: options.date,

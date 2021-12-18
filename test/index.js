@@ -383,16 +383,20 @@ const setSection = async () => {
     const gcpFhirCrud = new GcpFhirCRUD()
 
     let res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
-    opConsulatation.setSection({ "procedure": res.data })
+    opConsulatation.setEntries({ "procedure": res.data })
 
     res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
     // console.log(res)
-    opConsulatation.setSection({ "appointment": res.data })
+    opConsulatation.setEntries({ "appointment": res.data })
+    opConsulatation.setEntries({ "appointment": res.data })
 
 
     opConsulatation.section.map(el => {
         console.log(el)
     })
+
+
+    opConsulatation.bundleEntry.map(el=>console.log(el))
 
 }
 
