@@ -309,21 +309,7 @@ export class OPConsultationNote {
   }
 }
 
-// private documentBundle: any;
-// private composition: any;
-// private practitioner: any;
-// private organization: any;
-// private patient: any;
-// private encounter: any;
-// private allergyIntolerance: any;
-// private appointment: any;
-// private chiefComplaints: any;
-// private medicalHistory: any;
-// private procedure: any;
-// private serviceRequest: any;
-// private medicationStatement: any;
-// private medicationRequest: any;
-// private documentReference: any;
+
 
 // setDocumentBundle(gcpFhirId: string, resource: any) {
 //   this.documentBundle = {
@@ -530,110 +516,6 @@ export class OPConsultationNote {
 //   };
 // }
 
-// setPractitioner(gcpFhirId: string, resource: any) {
-//   this.practitioner = {
-//     fullUrl: `Practitioner/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setOrganization(gcpFhirId: string, resource: any) {
-//   this.organization = {
-//     fullUrl: `organization/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setPatient(gcpFhirId: string, resource: any) {
-//   this.patient = {
-//     fullUrl: `Patient/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setEncounter(gcpFhirId: string, resource: any) {
-//   this.encounter = {
-//     fullUrl: `Encounter/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setAllergyIntolerance(gcpFhirId: string, resource: any) {
-//   this.allergyIntolerance = {
-//     fullUrl: `AllergyIntolerance/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setAppointment(gcpFhirId: string, resource: any) {
-//   this.appointment = {
-//     fullUrl: `Appointment/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// /**
-//  * mapped to Condition1
-//  * @param gcpFhirId
-//  * @param resource
-//  */
-// setChiefComplaints(gcpFhirId: string, resource: any) {
-//   // ,mapped to Condtion1
-//   this.chiefComplaints = {
-//     fullUrl: `Condition/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// /**
-//  * mapped to Condition2
-//  * @param gcpFhirId
-//  * @param resource
-//  */
-// setMedicalHistory(gcpFhirId: string, resource: any) {
-//   // ,mapped to Condtion2
-//   this.medicalHistory = {
-//     fullUrl: `Condition/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// // Procedure
-// setProcedure(gcpFhirId: string, resource: any) {
-//   this.procedure = {
-//     fullUrl: `Procedure/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// //
-// setServiceRequest(gcpFhirId: string, resource: any) {
-//   this.serviceRequest = {
-//     fullUrl: `ServiceRequest/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setMedicationStatement(gcpFhirId: string, resource: any) {
-//   this.medicationStatement = {
-//     fullUrl: `MedicationStatement/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setMedicationRequest(gcpFhirId: string, resource: any) {
-//   this.medicationRequest = {
-//     fullUrl: `MedicationRequest/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
-
-// setdocumentReference(gcpFhirId: string, resource: any) {
-//   this.documentReference = {
-//     fullUrl: `DocumentReference/${gcpFhirId}`,
-//     resource: resource,
-//   };
-// }
 
 // ======================================================================
 // this.section =[
