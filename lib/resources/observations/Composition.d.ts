@@ -1,7 +1,6 @@
 import { ResourceMaster } from "../../Interfaces";
 import { ENCOUNTER } from "../Encounter";
 import { PATIENT } from "../Patient";
-import { PRACTITIONER } from "../Practitioner";
 import { ORGANIZATION } from "../Organization";
 export declare const compositionTypeArrey: readonly [{
     readonly type: "OPConsultRecord";
@@ -14,17 +13,25 @@ export declare const compositionTypeArrey: readonly [{
     readonly code: "373942005";
     readonly text: "Discharge summary";
 }];
-declare type compositionType = typeof compositionTypeArrey[number];
+declare const onlyType: ("OPConsultRecord" | "DischargeSummaryRecord")[];
+declare type compositionType = typeof onlyType[number];
 export declare const compositionStatusArrey: readonly ["preliminary", "final", "amended", "entered-in-error"];
 declare type compositionStatus = typeof compositionStatusArrey[number];
+export interface compositionAuthor {
+    reference: `Practitioner/${string}`;
+    display: string;
+}
 export interface COMPOSITOIN {
     id?: string;
     identifier?: string;
     patient: PATIENT;
+    patientId: string;
     encounter: ENCOUNTER;
+    encounterId: string;
     date: string;
-    practitioner: PRACTITIONER;
+    author: compositionAuthor[];
     organization: ORGANIZATION;
+    organizationId: string;
     status: compositionStatus;
     type: compositionType;
     section: [];
@@ -64,10 +71,7 @@ export declare class Composition implements ResourceMaster {
             reference: string;
         };
         date: string;
-        author: {
-            reference: string;
-            display: string;
-        }[];
+        author: compositionAuthor[];
         title: "OPConsultRecord" | "DischargeSummaryRecord";
         custodian: {
             reference: string;
@@ -75,7 +79,7 @@ export declare class Composition implements ResourceMaster {
         };
         section: [];
     };
-    convertFhirToObject(options: any): void;
+    convertFhirToObject(options: any): Partial<COMPOSITOIN>;
 }
 export {};
 //# sourceMappingURL=Composition.d.ts.map

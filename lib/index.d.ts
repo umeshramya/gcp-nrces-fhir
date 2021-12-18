@@ -12,7 +12,8 @@ import { allergyStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, Aller
 import { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatusArray } from "./resources/observations/Appointment";
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/observations/Composition";
-import { OPConsultationNote } from "./compositions/Bundle-OPConsultNote";
+import { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey } from "./resources/observations/DocumentReference";
+import { OPConsultationNote } from "./compositions/Bundle";
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray };
 export type { resourceType };
 export { PATIENT, PatientResource, Patient };
@@ -26,5 +27,6 @@ export { allergyStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, Aller
 export { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatusArray };
 export { DOCUMENT_BUNDLE, DocumentBundle };
 export { compositionStatusArrey, COMPOSITOIN, Composition };
+export { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey };
 export { OPConsultationNote };
 //# sourceMappingURL=index.d.ts.map

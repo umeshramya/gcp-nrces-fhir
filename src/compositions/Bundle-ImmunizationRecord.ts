@@ -86,18 +86,6 @@ const body = {
         ],
       },
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     ,
     {
       fullUrl: "Practitioner/1",
@@ -206,6 +194,10 @@ const body = {
         birthDate: "1981-01-12",
       },
     },
+    
+    
+    
+    
     {
       fullUrl: "Immunization/1",
       resource: {
