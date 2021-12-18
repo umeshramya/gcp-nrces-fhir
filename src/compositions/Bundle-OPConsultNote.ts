@@ -47,37 +47,49 @@ export class OPConsultationNote {
     this._bundleEntry = value;
   }
 
-  createBundleEntry(options: {
+  private createBundleEntry(options: {
     resourceType: resourceType;
     gcpFhirId: string;
     resource: any;
-  }): any {
+  }) {
     const entry = {
       fullUrl: `${options.resourceType}/${options.gcpFhirId}`,
       resource: options.resource,
     };
-    return entry;
+    this.bundleEntry.push(entry)
+
   }
 
-  setNonSection(option: NON_SECTION) {}
+  private createSectionEntry(options: { section: any }) {
+    const index = this._section.findIndex(
+      (el) => el.title == options.section.title
+    )
+
+    if (index < 0) {
+      this._section.push(options.section);
+    } else {
+      this.section[index] = options.section;
+    }
+
+
+  }
+
+
 
   setEntries(options: Partial<SECTION>) {
-    let sectionBody:any
-    let index:number
+    let sectionBody: any
+    let index: number
 
     // "Chief complaints"
     if (options.chiefComplints) {
-      this._bundleEntry.push(
-        this.createBundleEntry({
-          gcpFhirId: options.chiefComplints.id,
-          resource: options.chiefComplints,
-          resourceType: "Condition",
-        })
-      );
 
-      index = this._section.findIndex(
-        (el) => el.title == "Chief complaints"
-      );
+      this.createBundleEntry({
+        gcpFhirId: options.chiefComplints.id,
+        resource: options.chiefComplints,
+        resourceType: "Condition",
+      })
+
+
       sectionBody = {
         title: "Chief complaints",
         code: {
@@ -95,24 +107,23 @@ export class OPConsultationNote {
           },
         ],
       };
-      if (index < 0) {
-        this._section.push(sectionBody);
-      } else {
-        this.section[index] = sectionBody;
-      }
+
+
+      this, this.createSectionEntry({ section: sectionBody })
+
     }
 
 
     // "Allergies"
     if (options.allergyIntolerance) {
-      this._bundleEntry.push(
-        this.createBundleEntry({
-          resourceType: "AllergyIntolerance",
-          gcpFhirId: options.allergyIntolerance.id,
-          resource: options.allergyIntolerance,
-        })
-      );
-      this._section.push({
+
+      this.createBundleEntry({
+        resourceType: "AllergyIntolerance",
+        gcpFhirId: options.allergyIntolerance.id,
+        resource: options.allergyIntolerance,
+      })
+
+      const sectionBody = {
         title: "Allergies",
         code: {
           coding: [
@@ -128,20 +139,21 @@ export class OPConsultationNote {
             reference: `AllergyIntolerance/${options.allergyIntolerance.id}`,
           },
         ],
-      });
+      }
+
+      this.createSectionEntry({ section: sectionBody })
     }
 
 
     // "Medical History"
     if (options.medicalHistroy) {
-      this._bundleEntry.push(
-        this.createBundleEntry({
-          resource: options.medicalHistroy,
-          resourceType: "Condition",
-          gcpFhirId: options.medicalHistroy.id,
-        })
-      );
-      this._section.push({
+
+      this.createBundleEntry({
+        resource: options.medicalHistroy,
+        resourceType: "Condition",
+        gcpFhirId: options.medicalHistroy.id,
+      });
+      const sectionBody = {
         title: "Medical History",
         code: {
           coding: [
@@ -157,13 +169,20 @@ export class OPConsultationNote {
             reference: `Condition/${options.medicalHistroy.id}`,
           },
         ],
-      });
+      };
+
+      this.createSectionEntry({ section: sectionBody })
     }
 
 
     // "Order document"
     if (options.serviceRequest) {
-      this._section.push({
+      this.createBundleEntry({
+        "resourceType": "ServiceRequest",
+        "gcpFhirId": options.serviceRequest.id,
+        "resource": options.serviceRequest
+      });
+      const sectionBody = {
         title: "Investigation Advice",
         code: {
           coding: [
@@ -179,13 +198,27 @@ export class OPConsultationNote {
             reference: `ServiceRequest/${options.serviceRequest.id}`,
           },
         ],
-      });
+      };
+      this.createSectionEntry({ section: sectionBody })
     }
 
 
     //  "Medications"
     if (options.medicationStatement && options.medicationRequest) {
-      this._section.push({
+
+      this.createBundleEntry({
+        "resourceType": "MedicationStatement",
+        "gcpFhirId": options.medicationStatement.id,
+        "resource": options.medicationStatement
+      })
+
+      this.createBundleEntry({
+        "gcpFhirId": options.medicationRequest.id,
+        "resource": options.medicationRequest,
+        "resourceType": "MedicationRequest"
+      })
+
+      const sectionBody = {
         title: "Medications",
         code: {
           coding: [
@@ -204,7 +237,9 @@ export class OPConsultationNote {
             reference: `MedicationRequest/${options.medicationRequest.id}`,
           },
         ],
-      });
+      };
+
+      this.createSectionEntry({ section: sectionBody })
     }
 
 
