@@ -14,7 +14,7 @@ import { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatu
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle"
 import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/observations/Composition"
 
-import { OPConsultationNote } from "./compositions/Bundle-OPConsultNote"
+import { OPConsultationNote } from "./compositions/Bundle"
 
 
 
