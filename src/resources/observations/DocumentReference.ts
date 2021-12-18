@@ -1,3 +1,4 @@
+import { CodeDisplay } from "../../config";
 import { ResourceMaster } from "../../Interfaces";
 
 export const documentStatusArrey = ["current", "superseded", "entered-in-error"
@@ -14,6 +15,8 @@ export interface DOCUMENT_REFERENCE {
   docStatus: DocumentDocStatus;
   patientId: string;
   pdf: string
+  code: CodeDisplay[]
+  title: string
 }
 
 
@@ -34,14 +37,8 @@ export class DocumentReference implements ResourceMaster {
       status: options.status,
       docStatus: options.docStatus,
       type: {
-        coding: [
-          {
-            system: "http://snomed.info/sct",
-            code: "4241000179101",
-            display: "Laboratory report",
-          },
-        ],
-        text: "Laboratory report",
+        coding: options.code,
+        text: options.title,
       },
       subject: { reference: `Patient/${options.patientId}` },
       content: [
@@ -50,7 +47,7 @@ export class DocumentReference implements ResourceMaster {
             contentType: "application/pdf",
             language: "en-IN",
             data: options.pdf,
-            title: "Laboratory report",
+            title: options.title,
             creation: new Date().toISOString(),
           },
         },
