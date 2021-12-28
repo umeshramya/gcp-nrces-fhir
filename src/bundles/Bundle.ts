@@ -27,7 +27,7 @@ interface NON_SECTION {
   documentReference: any;
 }
 
-export class OPConsultationNote {
+export class MakeDocumentBundle {
   private nonSection!: any[];
 
   private _section: any[] = [];

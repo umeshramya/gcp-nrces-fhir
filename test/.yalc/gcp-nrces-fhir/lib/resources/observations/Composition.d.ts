@@ -73,7 +73,17 @@ export declare class Composition implements ResourceMaster {
             reference: string;
             display: string;
         };
-        section: [];
+        section: {
+            title: "OPConsultRecord" | "DischargeSummaryRecord";
+            code: {
+                coding: {
+                    system: string;
+                    code: "371530004" | "373942005";
+                    display: "Clinical consultation report" | "Discharge summary";
+                }[];
+            };
+            entry: [];
+        }[];
     };
     convertFhirToObject(options: any): void;
 }

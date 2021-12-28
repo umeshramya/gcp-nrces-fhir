@@ -30,14 +30,14 @@ type compositionStatus = typeof compositionStatusArrey[number]
 export interface COMPOSITOIN {
     id?: string;
     identifier?: string;
-    patient:PATIENT;
+    patient: PATIENT;
     encounter: ENCOUNTER;
     date: string;
     practitioner: PRACTITIONER;
     organization: ORGANIZATION;
     status: compositionStatus;
     type: compositionType;
-    section:[]
+    section: []
 }
 export class Composition implements ResourceMaster {
     getFHIR(options: COMPOSITOIN) {
@@ -90,7 +90,22 @@ export class Composition implements ResourceMaster {
                 "reference": `Organization/${options.organization.id}`,
                 "display": options.organization.name
             },
-            "section" : options.section
+            "section": [
+                {
+                    "title": options.type.type,
+                    "code": {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": options.type.code,
+                                "display": options.type.text
+                            }
+                        ]
+                    },
+                    "entry": options.section
+                }
+            ]
+
 
 
         }

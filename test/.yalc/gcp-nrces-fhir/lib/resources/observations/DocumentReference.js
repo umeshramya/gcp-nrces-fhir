@@ -17,29 +17,23 @@ class DocumentReference {
             },
             text: {
                 status: "generated",
-                div: '<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Narrative with Details</b></p><p><b>id</b>: 1</p><p><b>status</b>: current</p><p><b>docStatus</b>: final</p><p><b>subject</b>: ABC</p><p><b>type</b>: Laboratory Report</p><p><b>content</b>: Dr. PQR</p></div>',
+                div: `<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Narrative with Details</b></p><p><b>id</b>: 1</p><p><b>status</b>: ${options.status}</p><p><b>docStatus</b>: ${options.docStatus}</p><p><b>subject</b>: ${options.patient.MRN} ${options.patient.name}</p><p><b>type</b>: ${options.title}</p><p><b>content</b>: Dr. PQR</p></div>`,
             },
             status: options.status,
             docStatus: options.docStatus,
             type: {
-                coding: [
-                    {
-                        system: "http://snomed.info/sct",
-                        code: "4241000179101",
-                        display: "Laboratory report",
-                    },
-                ],
-                text: "Laboratory report",
+                coding: options.code,
+                text: options.title,
             },
-            subject: { reference: "Patient/1" },
+            subject: { reference: `Patient/${options.patientId}` },
             content: [
                 {
                     attachment: {
                         contentType: "application/pdf",
                         language: "en-IN",
-                        data: "",
-                        title: "Laboratory report",
-                        creation: "2019-05-29T14:58:58.181+05:30",
+                        data: options.pdf,
+                        title: options.title,
+                        creation: new Date().toISOString(),
                     },
                 },
             ],

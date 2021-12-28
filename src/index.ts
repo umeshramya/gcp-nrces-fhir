@@ -15,7 +15,7 @@ import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle"
 import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/observations/Composition"
 import { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey } from "./resources/observations/DocumentReference"
 
-import { OPConsultationNote } from "./compositions/Bundle"
+import { MakeDocumentBundle } from "./bundles/Bundle"
 
 
 
@@ -38,4 +38,4 @@ export { compositionStatusArrey, COMPOSITOIN, Composition }
 export { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey }
 
 
-export { OPConsultationNote }
+export { MakeDocumentBundle }

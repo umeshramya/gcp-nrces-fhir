@@ -1,5 +1,5 @@
 require('dotenv').config("env")
-const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, OPConsultationNote } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MakeDocumentBundle } = require("gcp-nrces-fhir")
 
 
 
@@ -350,33 +350,53 @@ const getDocumentBundle = async () => {
 // Composition
 const composition = new Composition()
 
+// const createComposition = async () => {
+//     const body = composition.getFHIR({
+//         "date": new Date().toISOString(),
+//         "encounterId": "f5a387db-f093-4885-a86f-107377e14c86",
+//         "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+//         "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
+//         "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f",
+//         "status": "final",
+//         "type": { "type": "OPConsultRecord", "code": "371530004", "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord", "text": "Clinical consultation report" },
+//         "patientName": "Mr patil",
+//         "organizationName": "JJH",
+//         "practitionerName": "DR James Bond"
+
+//     })
+
+//     // console.log(body)
+
+//     const res = await new GcpFhirCRUD().createFhirResource(body, "Composition")
+
+//     console.log(res);
+// }
+
+
 const createComposition = async () => {
+    const gcpFhirCRUD = new GcpFhirCRUD()
+    const curEncounter = await gcpFhirCRUD.getFhirResource("f5a387db-f093-4885-a86f-107377e14c86", "Encounter")
+    const curPatinet = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient");
+    const curOrganizatio = await gcpFhirCRUD.getFhirResource("a15a0e31-3b72-4d48-bae8-c3000c97786f", "Organization")
+    const curPractinioer = await gcpFhirCRUD.getFhirResource("877f1236-63fd-4827-a3da-636a4f2c5739", "Practitioner")
+
     const body = composition.getFHIR({
         "date": new Date().toISOString(),
-        "encounterId": "f5a387db-f093-4885-a86f-107377e14c86",
-        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
-        "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
-        "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f",
+        "encounter": curEncounter.data,
+        "patient": curPatinet.data,
+        "organization": curOrganizatio.data,
+        "practitioner": curPractinioer.data,
         "status": "final",
         "type": { "type": "OPConsultRecord", "code": "371530004", "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord", "text": "Clinical consultation report" },
-        "patientName": "Mr patil",
-        "organizationName": "JJH",
-        "practitionerName": "DR James Bond"
-
     })
 
-    // console.log(body)
-
-    const res = await new GcpFhirCRUD().createFhirResource(body, "Composition")
-
-    console.log(res);
+    console.log(body)
 }
-
 
 // createComposition()
 
 
-const opConsulatation = new OPConsultationNote()
+const opConsulatation = new MakeDocumentBundle()
 const setSection = async () => {
     const ProcedureId = "87555651-bb59-4d3b-8cc5-b5e73cf2599c"
     const AppointmentId = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
@@ -391,12 +411,14 @@ const setSection = async () => {
     opConsulatation.setEntries({ "appointment": res.data })
 
 
+
     opConsulatation.section.map(el => {
         console.log(el)
+        console.log(el.code)
     })
 
 
-    opConsulatation.bundleEntry.map(el=>console.log(el))
+    // opConsulatation.bundleEntry.map(el => console.log(el))
 
 }
 
