@@ -387,13 +387,14 @@ const createComposition = async () => {
         "organization": curOrganizatio.data,
         "practitioner": curPractinioer.data,
         "status": "final",
-        "type": { "type": "OPConsultRecord", "code": "371530004", "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord", "text": "Clinical consultation report" },
+        "type": "OPConsultRecord"
+        // "type": { "type": "OPConsultRecord", "code": "371530004", "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord", "text": "Clinical consultation report" },
     })
 
     console.log(body)
 }
 
-// createComposition()
+createComposition()
 
 
 const opConsulatation = new MakeDocumentBundle()
@@ -422,4 +423,4 @@ const setSection = async () => {
 
 }
 
-setSection()
+// setSection()

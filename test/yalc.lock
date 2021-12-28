@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "gcp-nrces-fhir": {
+      "signature": "01991698066d28f00e3628724cc77ed9",
+      "file": true
+    }
+  }
+}
