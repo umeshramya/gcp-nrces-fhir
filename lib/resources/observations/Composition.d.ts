@@ -12,8 +12,13 @@ export declare const compositionTypeArrey: readonly [{
     readonly url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord";
     readonly code: "373942005";
     readonly text: "Discharge summary";
+}, {
+    readonly type: "ImmunizationRecord";
+    readonly url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ImmunizationRecord";
+    readonly code: "41000179103";
+    readonly text: "Immunization record";
 }];
-declare const onlyType: ("OPConsultRecord" | "DischargeSummaryRecord")[];
+declare const onlyType: ("OPConsultRecord" | "DischargeSummaryRecord" | "ImmunizationRecord")[];
 declare type compositionType = typeof onlyType[number];
 export declare const compositionStatusArrey: readonly ["preliminary", "final", "amended", "entered-in-error"];
 declare type compositionStatus = typeof compositionStatusArrey[number];
@@ -74,7 +79,7 @@ export declare class Composition implements ResourceMaster {
         };
         date: string;
         author: compositionAuthor[];
-        title: "OPConsultRecord" | "DischargeSummaryRecord";
+        title: "OPConsultRecord" | "DischargeSummaryRecord" | "ImmunizationRecord";
         custodian: {
             reference: string;
             display: string;
@@ -85,10 +90,10 @@ export declare class Composition implements ResourceMaster {
                 coding: {
                     system: string;
                     code: string;
-                    display: "OPConsultRecord" | "DischargeSummaryRecord";
+                    display: "OPConsultRecord" | "DischargeSummaryRecord" | "ImmunizationRecord";
                 }[];
             };
-            entry: [];
+            entry: [][];
         }[];
     };
     convertFhirToObject(options: any): Partial<COMPOSITOIN>;

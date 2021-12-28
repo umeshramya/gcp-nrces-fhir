@@ -21,6 +21,13 @@ export const compositionTypeArrey = [
         text: "Discharge summary"
     },
 
+    {
+        type: "ImmunizationRecord",
+        url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ImmunizationRecord",
+        code: "41000179103",
+        text: "Immunization record",
+    },
+
 ] as const
 
 const onlyType = compositionTypeArrey.map(el => el.type)
@@ -117,7 +124,7 @@ export class Composition implements ResourceMaster {
                             }
                         ]
                     },
-                    "entry": options.section
+                    "entry":[ options.section]
                 }
             ]
 

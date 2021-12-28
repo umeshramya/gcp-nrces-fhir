@@ -1,3 +1,5 @@
+import { ResourceMaster } from "../Interfaces"
+
 const EncounterStatusArray = ["planned", "arrived", "triaged", "in-progress", "onleave", "finished", "cancelled", "entered-in-error", "unknown"] as const
 const EncounterClassArray = [
   { code: "AMB", display: "ambulatory" },
@@ -44,6 +46,22 @@ interface ENCOUNTER {
 
 }
 
+export class Encounter implements ResourceMaster{
+  getFHIR(options: any) {
+    throw new Error("Method not implemented.")
+  }
+  convertFhirToObject(options: any) {
+    throw new Error("Method not implemented.")
+  }
+  
+}
+
+
+/**
+ * @deprecated
+ * @param options 
+ * @returns 
+ */
 const EncounterResource = (options: ENCOUNTER) => {
 
   const body = {

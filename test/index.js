@@ -375,23 +375,34 @@ const composition = new Composition()
 
 const createComposition = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD()
-    const curEncounter = await gcpFhirCRUD.getFhirResource("f5a387db-f093-4885-a86f-107377e14c86", "Encounter")
-    const curPatinet = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient");
+    const curEncounter =await gcpFhirCRUD.getFhirResource("f5a387db-f093-4885-a86f-107377e14c86", "Encounter")
+    let  curPatinet = await gcpFhirCRUD.getFhirResource("b7665b47-2356-493f-bae4-4710f16eeb7b", "Patient");
     const curOrganizatio = await gcpFhirCRUD.getFhirResource("a15a0e31-3b72-4d48-bae8-c3000c97786f", "Organization")
     const curPractinioer = await gcpFhirCRUD.getFhirResource("877f1236-63fd-4827-a3da-636a4f2c5739", "Practitioner")
+
+  
+
+    const pract = new Practitioner()
+    const practObj =   pract.convertFhirToObject(curPractinioer.data)
 
     const body = composition.getFHIR({
         "date": new Date().toISOString(),
         "encounter": curEncounter.data,
-        "patient": curPatinet.data,
-        "organization": curOrganizatio.data,
-        "practitioner": curPractinioer.data,
+        "patient": new Patient().convertFhirToObject(curPatinet.data),
+        "organization": new Organization().convertFhirToObject(curOrganizatio.data),
+        "author" : [{"reference" :`Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739`, "display" : practObj.name}],
         "status": "final",
-        "type": "OPConsultRecord"
+        "type": "ImmunizationRecord",
+        "section" : [],
+        "encounterId" : "f5a387db-f093-4885-a86f-107377e14c86",
+        "patientId" : "8c2f7c57-cfba-417c-a574-36c6e76d29c5", 
+        "organizationId" : "a15a0e31-3b72-4d48-bae8-c3000c97786f",
         // "type": { "type": "OPConsultRecord", "code": "371530004", "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord", "text": "Clinical consultation report" },
+        
     })
-
-    console.log(body)
+    // console.log(body)
+    const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
+    console.log(res)
 }
 
 createComposition()
@@ -415,7 +426,7 @@ const setSection = async () => {
 
     opConsulatation.section.map(el => {
         console.log(el)
-        console.log(el.code)
+       console.log(el.code)
     })
 
 

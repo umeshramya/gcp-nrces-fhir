@@ -36,6 +36,7 @@ export class DocumentBundle implements ResourceMaster {
       },
       type: "document",
       timestamp: options.date,
+      
       entry: options.entry,
 
       signature: {
