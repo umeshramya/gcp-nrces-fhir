@@ -1,4 +1,5 @@
 import { ResourceMaster } from "../Interfaces"
+import ResourceMain from "./ResourceMai"
 
 const EncounterStatusArray = ["planned", "arrived", "triaged", "in-progress", "onleave", "finished", "cancelled", "entered-in-error", "unknown"] as const
 const EncounterClassArray = [
@@ -46,7 +47,7 @@ interface ENCOUNTER {
 
 }
 
-export class Encounter implements ResourceMaster {
+export class Encounter extends ResourceMain implements ResourceMaster {
 
   getFHIR(options: ENCOUNTER) {
 
@@ -99,10 +100,7 @@ export class Encounter implements ResourceMaster {
     return body
   }
 
-  getDivText = (divtext: string) => {
-    const len = divtext.length;
-    return divtext.substring(42, len - 6)
-  }
+
 
   convertFhirToObject(options: any): ENCOUNTER {
     let ret: ENCOUNTER = {

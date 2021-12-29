@@ -170,7 +170,7 @@ const getEnconter =async ()=>{
     console.log(data)
 }
 
-getEnconter()
+// getEnconter()
 
 
 
@@ -326,15 +326,13 @@ const getAppontment = async () => {
     const id = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.getFhirResource(id, "Appointment")
-    // console.log(res)
     const data = res.data;
-    console.log(data)
     const ret = appointment.convertFhirToObject(data)
     console.log(ret)
 }
 
 
-// getAppontment();
+getAppontment();
 
 
 // DocumentBundle

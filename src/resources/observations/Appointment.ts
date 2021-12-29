@@ -1,5 +1,6 @@
 import { CodeDisplay } from "../../config";
 import { ResourceMaster } from "../../Interfaces";
+import ResourceMain from "../ResourceMai";
 
 export const AppointmentStatusArray = ["proposed", "pending", "booked", "arrived", "fulfilled", "cancelled", "noshow", "entered-in-error", "checked-in", "waitlist"] as const
 
@@ -26,7 +27,7 @@ export interface APPOINTMENT {
   practitionerStatus: AppointmentActorStatus
 }
 
-export class Appointment implements ResourceMaster {
+export class Appointment extends ResourceMain implements ResourceMaster {
   getFHIR(options: APPOINTMENT): any {
     const body = {
       resourceType: "Appointment",
@@ -83,15 +84,16 @@ export class Appointment implements ResourceMaster {
     return body
   }
   convertFhirToObject(options: any): APPOINTMENT {
+
     let ret: APPOINTMENT = {
       status: options.status,
-      patientId: `${options.participant[0].actor.reference}`.substring(8),
-      practitionerId: `${options.participant[1].actor.reference}`.substring(13),
-      text: options.text,
+      patientId: this.getIdFromReference({"ref" : options.participant[0].actor.reference, "resourceType" : "Patient"}),
+      practitionerId: this.getIdFromReference({"ref" : options.participant[1].actor.reference, "resourceType" : "Practitioner"}),
+      text: this.getDivText(options.text.div),
       serviceCategory: options.serviceCategory,
       serviceType: options.serviceType,
       appointmentType: options.appointmentType,
-      reasonReferenceConditionId: `${options.reasonReference.reference}`.substring(8),
+      reasonReferenceConditionId: this.getIdFromReference({"ref" : options.reasonReference[0].reference, "resourceType" : "Condition"}),
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,
@@ -100,6 +102,23 @@ export class Appointment implements ResourceMaster {
       practitionerStatus: options.participant[0].status,
       id: options.id
     }
+    // let ret: APPOINTMENT = {
+    //   status: options.status,
+    //   patientId: `${options.participant[0].actor.reference}`.substring(8),
+    //   practitionerId: `${options.participant[1].actor.reference}`.substring(13),
+    //   text: options.text,
+    //   serviceCategory: options.serviceCategory,
+    //   serviceType: options.serviceType,
+    //   appointmentType: options.appointmentType,
+    //   reasonReferenceConditionId: `${options.reasonReference.reference}`.substring(8),
+    //   createdDate: options.created,
+    //   startDate: options.start,
+    //   endDate: options.end,
+    //   description: options.description,
+    //   patientStatus: options.participant[0].status,
+    //   practitionerStatus: options.participant[0].status,
+    //   id: options.id
+    // }
 
     return ret;
   }
