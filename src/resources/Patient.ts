@@ -18,7 +18,7 @@ export class Patient implements ResourceMaster {
 
     const body = {
       "resourceType": "Patient",
-      "id": `${options.id}`,
+      "id": options.id || undefined,
       "meta": {
         "versionId": "1",
         "lastUpdated": new Date().toISOString(),

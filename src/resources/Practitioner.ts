@@ -9,11 +9,11 @@ export interface PRACTITIONER {
 
 }
 
-export class Practitioner implements ResourceMaster{
+export class Practitioner implements ResourceMaster {
   getFHIR(options: PRACTITIONER) {
     const body = {
       "resourceType": "Practitioner",
-      "id": options.id,
+      "id": options.id || undefined,
       "meta": {
         "versionId": "1",
         "lastUpdated": new Date().toISOString(),
@@ -46,16 +46,16 @@ export class Practitioner implements ResourceMaster{
         }
       ]
     }
-  
-  
+
+
     return body;
   }
-  convertFhirToObject(options: any):PRACTITIONER {
-    let ret:PRACTITIONER={
+  convertFhirToObject(options: any): PRACTITIONER {
+    let ret: PRACTITIONER = {
       name: options.name[0].text,
-      medicalLicenseNumber:  options.identifier[0].type.coding[0].display,
+      medicalLicenseNumber: options.identifier[0].type.coding[0].display,
       ndhmProfessionalId: options.identifier[0].value,
-      id:options.id
+      id: options.id
     }
     return ret;
   }
