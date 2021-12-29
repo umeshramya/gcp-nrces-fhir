@@ -101,7 +101,7 @@ export class Encounter implements ResourceMaster {
 
   getDivText = (divtext: string) => {
     const len = divtext.length;
-    return divtext.substring(43, len - 6)
+    return divtext.substring(42, len - 6)
   }
 
   convertFhirToObject(options: any): ENCOUNTER {
@@ -113,7 +113,7 @@ export class Encounter implements ResourceMaster {
       patientId: `${options.subject.reference}`.substring(8),
       startDate: options.period.start,
       endDate: options.period.end,
-      dischargeDisposition: { "code": options.hospitalization.dischargeDisposition.coding.code, "display": options.hospitalization.dischargeDisposition.coding.display },
+      dischargeDisposition: { "code": options.hospitalization.dischargeDisposition.coding[0].code, "display": options.hospitalization.dischargeDisposition.coding[0].display },
       id: options.id
 
     }

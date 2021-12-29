@@ -51,7 +51,7 @@ const createPatient = async () => {
 
 }
 
-createPatient()
+// createPatient()
 
 const getPatient = async () => {
     const id = "b7665b47-2356-493f-bae4-4710f16eeb7b";
@@ -80,7 +80,7 @@ const createPractinioner = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(body, "Practitioner")
     console.log(res)
-    // ae9653c6-8745-4bb0-b792-6d6c494ba84e
+    // 'ed05c338-7570-4159-a38d-4fe88fc9c761'
 }
 
 // createPractinioner()
@@ -138,15 +138,16 @@ const search = async () => {
 // })
 
 
-const encounter = new Encounter();
+
 const createEncounter = async () => {
+    const encounter = new Encounter();
     const body = encounter.getFHIR({
         "class": { "code": "IMP", "display": "in-patient" },
         "dischargeDisposition": { "code": "home", "display": "home" },
         "endDate": new Date().toISOString(),
         "startDate": new Date().toISOString(),
         "identifier": new Date().getTime().toString(),
-        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "patientId": 'e101abe6-11ae-403d-8c2e-a34f97ceccae',
         "text": "discherged Home",
         "status": "finished"
     })
@@ -154,11 +155,22 @@ const createEncounter = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(body, "Encounter")
     console.log(res)
+
+    // 'e2eaa172-20a0-42f1-83d0-de371dad3c74'
 }
 
 // createEncounter()
 
-// getdata();
+const getEnconter =async ()=>{
+    const encounter = new Encounter();
+    const id = 'e2eaa172-20a0-42f1-83d0-de371dad3c74';
+    const gcpFhirCRUD = new GcpFhirCRUD()
+    const res = await gcpFhirCRUD.getFhirResource(id, "Encounter")
+    const data =  encounter.convertFhirToObject(res.data)
+    console.log(data)
+}
+
+getEnconter()
 
 
 
