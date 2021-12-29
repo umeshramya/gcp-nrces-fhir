@@ -23,7 +23,7 @@ const createOrganization = async () => {
 // createOrganization()
 
 const getOrganization = async () => {
-    const id = "137f8f40-4ac6-49f2-9438-f64d72b17568"
+    const id = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const res = await new GcpFhirCRUD().getFhirResource(id, "Organization");
     const data = organization.convertFhirToObject(res.data)
     console.log(data)
@@ -87,7 +87,7 @@ const createPractinioner = async () => {
 
 
 const getPractinioner = async () => {
-    const id = "ae9653c6-8745-4bb0-b792-6d6c494ba84e"
+    const id = "ed05c338-7570-4159-a38d-4fe88fc9c761"
     const res = await new GcpFhirCRUD().getFhirResource(id, "Practitioner")
     const body = practitioner.convertFhirToObject(res.data)
     console.log(body)
@@ -97,7 +97,7 @@ const getPractinioner = async () => {
 
 const search = async () => {
     const gcpFhirSearch = new GcpFhirSearch()
-    const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{ "key": "subject", "value": "Patient/8c2f7c57-cfba-417c-a574-36c6e76d29c5" },
+    const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{ "key": "subject", "value": "Patient/e101abe6-11ae-403d-8c2e-a34f97ceccae" },
     { "key": "status", "value": "cancelled,finished" }
     ])
     console.log(res.data.entry)
@@ -114,13 +114,13 @@ const search = async () => {
 
 // const getdata = async () => {
 //     const gcpFhirCRUD = new GcpFhirCRUD(,)
-//     const res = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient").then(res => res
+//     const res = await gcpFhirCRUD.getFhirResource("e101abe6-11ae-403d-8c2e-a34f97ceccae", "Patient").then(res => res
 //     return res,
 // }
 
 // const getdata = async () => {
 //     const gcpFhirCRUD = new GcpFhirCRUD();
-//     const res = await gcpFhirCRUD.getFhirResource("8c2f7c57-cfba-417c-a574-36c6e76d29c5", "Patient")
+//     const res = await gcpFhirCRUD.getFhirResource("e101abe6-11ae-403d-8c2e-a34f97ceccae", "Patient")
 
 //     console.log(res.data)
 // }
@@ -132,7 +132,7 @@ const search = async () => {
 //     "endDate": new Date().toISOString(),
 //     "startDate": new Date().toISOString(),
 //     "identifier": new Date().getTime().toString(),
-//     "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+//     "patientId": "e101abe6-11ae-403d-8c2e-a34f97ceccae",
 //     "text": "discherged Home",
 //     "status": "finished"
 // })
@@ -183,7 +183,7 @@ const procedure = new Procedure()
 const createProceure = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(procedure.getFHIR({
-        "patientID": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "patientID": "e101abe6-11ae-403d-8c2e-a34f97ceccae",
         "procedure": [{ "display": "Coronary stenting", "system": "http://snomed.info/sct" }],
         "procedureDate": "2021-11-03T15:32:26.605+05:30",
         "status": "in-progress",
@@ -225,7 +225,7 @@ const createCondition = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(condition.getFHIR({
         "condtion": [{ "display": "Chest Pain", "system": "http://snomed.info/sct" }],
-        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "patientId": "e101abe6-11ae-403d-8c2e-a34f97ceccae",
         "text": "Chest Pain for Evaluvation"
     }), "Condition")
 
@@ -265,7 +265,7 @@ const createAllergyIntolerance = async () => {
         "verificationStatus": "unconfirmed",
         "date": new Date().toISOString(),
         "note": [{ "text": "patient developed rash" }],
-        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "patientId": "e101abe6-11ae-403d-8c2e-a34f97ceccae",
         "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
         "text": "Allergic to Asprin"
     })
@@ -299,7 +299,7 @@ const getAllergyIntolerance = async () => {
 const appointment = new Appointment();
 const createAppointment = async () => {
     const body = appointment.getFHIR({
-        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+        "patientId": "e101abe6-11ae-403d-8c2e-a34f97ceccae",
         "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
         "practitionerStatus": "accepted",
         "patientStatus": "accepted",
@@ -311,7 +311,8 @@ const createAppointment = async () => {
         "text": "Apponiment",
         "startDate": new Date().toISOString(),
         "endDate": new Date().toISOString(),
-        "createdDate": new Date().toISOString()
+        "createdDate": new Date().toISOString(),
+        "description" : "this is description appointment"
     })
     const gcpFhirCRUD = new GcpFhirCRUD();
     const res = await gcpFhirCRUD.createFhirResource(body, "Appointment")
@@ -332,7 +333,7 @@ const getAppontment = async () => {
 }
 
 
-getAppontment();
+// getAppontment();
 
 
 // DocumentBundle
@@ -378,7 +379,7 @@ const composition = new Composition()
 //     const body = composition.getFHIR({
 //         "date": new Date().toISOString(),
 //         "encounterId": "f5a387db-f093-4885-a86f-107377e14c86",
-//         "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
+//         "patientId": "e101abe6-11ae-403d-8c2e-a34f97ceccae",
 //         "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
 //         "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f",
 //         "status": "final",
@@ -399,12 +400,14 @@ const composition = new Composition()
 
 const createComposition = async () => {
     const gcpFhirCRUD = new GcpFhirCRUD()
-    const curEncounter = await gcpFhirCRUD.getFhirResource("f5a387db-f093-4885-a86f-107377e14c86", "Encounter")
-    let curPatinet = await gcpFhirCRUD.getFhirResource("b7665b47-2356-493f-bae4-4710f16eeb7b", "Patient");
-    const curOrganizatio = await gcpFhirCRUD.getFhirResource("a15a0e31-3b72-4d48-bae8-c3000c97786f", "Organization")
-    const curPractinioer = await gcpFhirCRUD.getFhirResource("877f1236-63fd-4827-a3da-636a4f2c5739", "Practitioner")
-
-
+    const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+    const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+    const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+    const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+    const curEncounter = await gcpFhirCRUD.getFhirResource(encounterId, "Encounter")
+    let curPatinet = await gcpFhirCRUD.getFhirResource(patientId, "Patient");
+    const curOrganizatio = await gcpFhirCRUD.getFhirResource(orgId, "Organization")
+    const curPractinioer = await gcpFhirCRUD.getFhirResource(practId, "Practitioner")
 
     const pract = new Practitioner()
     const practObj = pract.convertFhirToObject(curPractinioer.data)
@@ -418,18 +421,16 @@ const createComposition = async () => {
         "status": "final",
         "type": "ImmunizationRecord",
         "section": [],
-        "encounterId": "f5a387db-f093-4885-a86f-107377e14c86",
-        "patientId": "8c2f7c57-cfba-417c-a574-36c6e76d29c5",
-        "organizationId": "a15a0e31-3b72-4d48-bae8-c3000c97786f",
-        // "type": { "type": "OPConsultRecord", "code": "371530004", "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord", "text": "Clinical consultation report" },
-
+        "encounterId": encounterId,
+        "patientId": patientId,
+        "organizationId": orgId,
     })
     // console.log(body)
     const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
     console.log(res)
 }
 
-// createComposition()
+createComposition()
 
 
 const opConsulatation = new MakeDocumentBundle()
