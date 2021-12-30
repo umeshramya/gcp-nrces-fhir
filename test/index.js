@@ -273,7 +273,7 @@ const createAllergyIntolerance = async () => {
     const res = await gcpFhirCRUD.createFhirResource(body, "AllergyIntolerance")
 
 
-    // e7f1d6ad-34e7-41d5-b1f5-ba45024be438
+    // 689439d7-bfd1-436a-b8cb-43533698baad
 
     console.log(res)
 }
@@ -419,15 +419,16 @@ const createComposition = async () => {
         "organization": new Organization().convertFhirToObject(curOrganizatio.data),
         "author": [{ "reference": `Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739`, "display": practObj.name }],
         "status": "final",
-        "type": "ImmunizationRecord",
+        "type": "OPConsultRecord",
         "section": [],
         "encounterId": encounterId,
         "patientId": patientId,
         "organizationId": orgId,
+        "section" : (await setSection()).section
     })
-    // console.log(body)
-    const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
-    console.log(res)
+    console.dir( body)
+    // const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
+    // console.log(res)
 }
 
 createComposition()
@@ -437,22 +438,30 @@ const opConsulatation = new MakeDocumentBundle()
 const setSection = async () => {
     const ProcedureId = "87555651-bb59-4d3b-8cc5-b5e73cf2599c"
     const AppointmentId = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
+    const AllergyId = "689439d7-bfd1-436a-b8cb-43533698baad"
     const gcpFhirCrud = new GcpFhirCRUD()
 
-    let res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
-    opConsulatation.setEntries({ "procedure": res.data })
+    let res;
 
-    res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
-    // console.log(res)
-    opConsulatation.setEntries({ "appointment": res.data })
-    opConsulatation.setEntries({ "appointment": res.data })
+    res = await gcpFhirCrud.getFhirResource(AllergyId, "AllergyIntolerance")
+    opConsulatation.setEntries({ "allergyIntolerance": res.data })
+
+    // res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
+    // opConsulatation.setEntries({ "procedure": res.data })
+
+    // res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
+    // // console.log(res)
+    // opConsulatation.setEntries({ "appointment": res.data })
+    // opConsulatation.setEntries({ "appointment": res.data })
 
 
+    return opConsulatation
 
-    opConsulatation.section.map(el => {
-        console.log(el)
-        console.log(el.code)
-    })
+
+    // opConsulatation.section.map(el => {
+    //     console.log(el)
+    //     console.log(el.code)
+    // })
 
 
     // opConsulatation.bundleEntry.map(el => console.log(el))
@@ -460,3 +469,179 @@ const setSection = async () => {
 }
 
 // setSection()
+
+
+
+
+const testCom = async()=>{
+    const body = {
+        "resourceType": "Composition",
+        "id": undefined,
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p>Consultation note for Henry Levin the 7th</p>\n\t\t\t<p>Managed by Good Health Clinic</p>\n\t\t</div>"
+        },
+        "identifier": {
+          "system": "http://healthintersections.com.au/test",
+          "value": "1"
+        },
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "11488-4",
+              "display": "Consult note"
+            }
+          ]
+        },
+
+        // "category": [
+        //   {
+        //     "coding": [
+        //       {
+        //         "system": "http://loinc.org",
+        //         "code": "LP173421-1",
+        //         "display": "Report"
+        //       }
+        //     ]
+        //   }
+        // ],
+
+
+        "subject": {
+          "reference": "Patient/e101abe6-11ae-403d-8c2e-a34f97ceccae",
+          "display": "Henry Levin the 7th"
+        },
+        "encounter": {
+          "reference": "Encounter/e2eaa172-20a0-42f1-83d0-de371dad3c74"
+        },
+        "date": "2012-01-04T09:10:14Z",
+        "author": [
+          {
+            "reference": "Practitioner/xcda-author",
+            "display": "Harold Hippocrates, MD"
+          }
+        ],
+        "title": "Consultation Note",
+        "confidentiality": "N",
+        "attester": [
+          {
+            "mode": "legal",
+            "time": "2012-01-04T09:10:14Z",
+            "party": {
+              "reference": "Practitioner/xcda-author",
+              "display": "Harold Hippocrates, MD"
+            }
+          }
+        ],
+        "custodian": {
+          "reference": "Organization/2.16.840.1.113883.19.5",
+          "display": "Good Health Clinic"
+        },
+        "relatesTo": [
+          {
+            "code": "replaces",
+            "targetReference": {
+              "reference": "Composition/old-example"
+            }
+          },
+          {
+            "code": "appends",
+            "targetIdentifier": {
+              "system": "http://example.org/fhir/NamingSystem/document-ids",
+              "value": "ABC123"
+            }
+          }
+        ],
+        "event": [
+          {
+            "code": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                    "code": "HEALTHREC",
+                    "display": "health record"
+                  }
+                ]
+              }
+            ],
+            "period": {
+              "start": "2010-07-18",
+              "end": "2012-11-12"
+            },
+            "detail": [
+              {
+                "reference": "Observation/example"
+              }
+            ]
+          }
+        ],
+        "section": [
+          {
+            "title": "History of present illness",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "11348-0",
+                  "display": "History of past illness Narrative"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t\t<table>\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<b>Code</b>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<b>Date</b>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<b>Type</b>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<b>BodySite</b>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<b>Severity</b>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>Stroke</td>\n\t\t\t\t\t\t<td>2010-07-18</td>\n\t\t\t\t\t\t<td>Diagnosis</td>\n\t\t\t\t\t\t<td/>\n\t\t\t\t\t\t<td/>\n\t\t\t\t\t</tr>\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>Burnt Ear</td>\n\t\t\t\t\t\t<td>2012-05-24</td>\n\t\t\t\t\t\t<td>Diagnosis</td>\n\t\t\t\t\t\t<td>Left Ear</td>\n\t\t\t\t\t\t<td/>\n\t\t\t\t\t</tr>\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>Asthma</td>\n\t\t\t\t\t\t<td>2012-11-12</td>\n\t\t\t\t\t\t<td>Finding</td>\n\t\t\t\t\t\t<td/>\n\t\t\t\t\t\t<td>Mild</td>\n\t\t\t\t\t</tr>\n\t\t\t\t</table>\n\t\t\t</div>"
+            },
+            "mode": "snapshot",
+            "orderedBy": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/list-order",
+                  "code": "event-date",
+                  "display": "Sorted by Event Date"
+                }
+              ]
+            },
+            "entry": [
+              {
+                "reference": "Condition/stroke"
+              },
+              {
+                "reference": "Condition/example"
+              },
+              {
+                "reference": "Condition/example2"
+              }
+            ]
+          },
+          {
+            "title": "History of family member diseases",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "10157-6",
+                  "display": "History of family member diseases Narrative"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t\t<p>History of family member diseases - not available</p>\n\t\t\t</div>"
+            },
+            "mode": "snapshot",
+            "emptyReason": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/list-empty-reason",
+                  "code": "withheld",
+                  "display": "Information Withheld"
+                }
+              ]
+            }
+          }
+        ]
+      }
+}

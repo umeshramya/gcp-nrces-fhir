@@ -124,7 +124,7 @@ export class Composition implements ResourceMaster {
                             }
                         ]
                     },
-                    "entry":[ options.section]
+                    "entry": options.section
                 }
             ]
 
