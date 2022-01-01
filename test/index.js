@@ -384,13 +384,12 @@ const CreateMedicationRequest = async () => {
 
   const dosageInstruction = medicationRequest.createDosageInstrction({
     "method": [{ "display": "After Food", "system": "http://snomed.info/sct" }],
-    "route": { "display": "Oral", "system": "http://snomed.info/sct" },
+    "route": [{ "display": "Oral", "system": "http://snomed.info/sct" }],
     "text": "For 5 Days",
     "timing": "1-1-1",
     "additionalInstruction": [{ "display": "watch for skin erruption", "system": "http://snomed.info/sct" }]
   })
 
-  // console.log(dosageInstruction)
 
   const body = medicationRequest.getFHIR({
     "Practitioner": practionerObj,
@@ -413,7 +412,7 @@ const CreateMedicationRequest = async () => {
 }
 
 
-// CreateMedicationRequest();
+CreateMedicationRequest();
 
 // Composition
 const composition = new Composition()
@@ -543,6 +542,8 @@ const test = async () => {
     //     "reference" : "Condition/1"
     //   }
     // ],
+
+
     "dosageInstruction": [
       {
         "text": "One tablet at once",
@@ -584,6 +585,8 @@ const test = async () => {
         }
       }
     ]
+ 
+ 
   }
 
 
@@ -593,4 +596,4 @@ const test = async () => {
 
 }
 
-test()
+// test()
