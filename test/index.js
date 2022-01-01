@@ -402,12 +402,9 @@ const CreateMedicationRequest = async () => {
     "reasonCode": [{ "display": "LRTI", "system": "http://snomed.info/sct" }]
   })
 
-  // console.log(body)
-
-  // return
 
   const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
-  console.log(res)
+  console.log(res.data)
 
 }
 
@@ -460,7 +457,7 @@ const setSection = async () => {
   const ProcedureId = "87555651-bb59-4d3b-8cc5-b5e73cf2599c"
   const AppointmentId = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
   const AllergyId = "689439d7-bfd1-436a-b8cb-43533698baad"
-  const MedicationRequestId = 'dbd7eed5-a79d-4918-928a-9f8a2538e833'
+  const MedicationRequestId = 'f9ec977b-3339-4cab-8110-1045f8ffeafd'
   const gcpFhirCrud = new GcpFhirCRUD()
 
   let res;
@@ -471,6 +468,8 @@ const setSection = async () => {
   opConsulatation.setEntries({ "procedure": res.data })
   res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
   opConsulatation.setEntries({ "appointment": res.data })
+  res = await gcpFhirCrud.getFhirResource(MedicationRequestId, "MedicationRequest")
+  opConsulatation.setEntries({ "medicationRequest": res.data })
 
 
 
@@ -491,109 +490,3 @@ const setSection = async () => {
 
 
 
-const test = async () => {
-
-
-  const body = {
-    "resourceType": "MedicationRequest",
-    "id": undefined,
-    "meta": {
-      "profile": [
-        "https://nrces.in/ndhm/fhir/r4/StructureDefinition/MedicationRequest"
-      ]
-    },
-    "text": {
-      "status": "generated",
-      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-01</p><p><b>status</b>: active</p><p><b>intent</b>: order</p><p><b>subject</b>: ABC</p><p><b>requester</b>: Dr. DEF</p><p><b>reasonCode</b>: Traveller's Diarrhea</p><p><b>medication</b>: Azithromycin (as azithromycin dihydrate) 250 mg oral capsule</p><p><b>authoredOn</b>: 2020-07-09</p><p><b>dosageInstruction</b>: One tablet at once (With or after food)</p></div>"
-    },
-    "status": "active",
-    "intent": "order",
-    "medicationCodeableConcept": {
-      "coding": [
-        {
-          "system": "http://snomed.info/sct",
-          "code": "324252006",
-          "display": "Azithromycin (as azithromycin dihydrate) 250 mg oral capsule"
-        }
-      ]
-    },
-    "subject": {
-      "reference": "Patient/e101abe6-11ae-403d-8c2e-a34f97ceccae",
-      "display": "ABC"
-    },
-    "authoredOn": "2020-07-09",
-    "requester": {
-      "reference": "Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739",
-      "display": "Dr. DEF"
-    },
-    "reasonCode": [
-      {
-        "coding": [
-          {
-            "system": "http://snomed.info/sct",
-            "code": "11840006",
-            "display": "Traveler's diarrhea"
-          }
-        ]
-      }
-    ],
-    // "reasonReference" : [
-    //   {
-    //     "reference" : "Condition/1"
-    //   }
-    // ],
-
-
-    "dosageInstruction": [
-      {
-        "text": "One tablet at once",
-        "additionalInstruction": [
-          {
-            "coding": [
-              {
-                "system": "http://snomed.info/sct",
-                "code": "311504000",
-                "display": "With or after food"
-              }
-            ]
-          }
-        ],
-        "timing": {
-          "repeat": {
-            "frequency": 1,
-            "period": 1,
-            "periodUnit": "d"
-          }
-        },
-        "route": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "26643006",
-              "display": "Oral Route"
-            }
-          ]
-        },
-        "method": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "421521009",
-              "display": "Swallow"
-            }
-          ]
-        }
-      }
-    ]
- 
- 
-  }
-
-
-  const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
-
-  console.log(res)
-
-}
-
-// test()
