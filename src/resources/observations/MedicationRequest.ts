@@ -20,28 +20,18 @@ export interface MEDICATION_REQUEST {
     intent: MedicatioRequestIntent;
     medicationCodeableConcept: CodeDisplay[]
     reasonCode: CodeDisplay[]
-    dosageInstruction: {
-        text: string,
-        additionalInstruction?: [
-            {
-                coding: CodeDisplay[]
-            },
-        ],
-        timing: {
-            "code": {
-                "text": string;
-            }
-        },
-        route: {
-            coding: CodeDisplay[]
-        },
-        method: {
-            coding: CodeDisplay[]
-        },
-    }[]
+    dosageInstruction: any[]
 
 }
 
+
+export interface DOSAGE_INSTRUCTION {
+    text: string
+    additionalInstruction?: CodeDisplay[]
+    timing: string
+    route: CodeDisplay[]
+    method: CodeDisplay[]
+}
 export class MedicationRequest extends ResourceMain implements ResourceMaster {
     getFHIR(options: MEDICATION_REQUEST): any {
 
@@ -63,9 +53,9 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
             medicationCodeableConcept: {
                 coding: options.medicationCodeableConcept,
             },
-            subject: { reference: `Patient/${options.id}`, display: options.patient.name },
+            subject: { reference: `Patient/${options.patient.id}`, display: options.patient.name },
             authoredOn: options.date,
-            requester: { reference: `Practitioner/${options.id}`, display: `${options.Practitioner.name} ${options.Practitioner.qualification}` },
+            requester: { reference: `Practitioner/${options.Practitioner.id}`, display: `${options.Practitioner.name} ${options.Practitioner.qualification}` },
             reasonCode: [
                 {
                     coding: options.reasonCode
@@ -80,6 +70,32 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     }
     convertFhirToObject(options: any) {
         throw new Error("Method not implemented.");
+    }
+
+
+    createDosageInstrction(options: DOSAGE_INSTRUCTION): any {
+        const body = {
+            text: options.text,
+            additionalInstruction: [
+                {
+                    coding: options.additionalInstruction
+                },
+            ],
+            timing: {
+                "code": {
+                    "text": options.timing
+                }
+            },
+            route: {
+                coding: options.route
+            },
+            method: {
+                coding: options.method
+            },
+        }
+
+        return body;
+
     }
 
 }

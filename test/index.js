@@ -373,15 +373,25 @@ const getDocumentBundle = async () => {
 const CreateMedicationRequest = async () => {
   const gcpFhirCRUD = new GcpFhirCRUD()
   const practioner = await gcpFhirCRUD.getFhirResource("877f1236-63fd-4827-a3da-636a4f2c5739", "Practitioner");
+
   const practionerObj = new Practitioner().convertFhirToObject(practioner.data);
 
   const patient = await gcpFhirCRUD.getFhirResource("e101abe6-11ae-403d-8c2e-a34f97ceccae", "Patient")
   const patientObj = new Patient().convertFhirToObject(patient.data);
 
 
-
-
   const medicationRequest = new MedicationRequest()
+
+  const dosageInstruction = medicationRequest.createDosageInstrction({
+    "method": [{ "display": "After Food", "system": "http://snomed.info/sct" }],
+    "route": { "display": "Oral", "system": "http://snomed.info/sct" },
+    "text": "For 5 Days",
+    "timing": "1-1-1",
+    "additionalInstruction": [{ "display": "watch for skin erruption", "system": "http://snomed.info/sct" }]
+  })
+
+  // console.log(dosageInstruction)
+
   const body = medicationRequest.getFHIR({
     "Practitioner": practionerObj,
     "patient": patientObj,
@@ -389,27 +399,21 @@ const CreateMedicationRequest = async () => {
     "intent": "order",
     "status": "active",
     "medicationCodeableConcept": [{ "display": "Tab Pantop 40mg", "system": "http://snomed.info/sct" }],
-    "reasonCode": [{ "display": "LRTI", "system": "http://snomed.info/sct" }],
-    "dosageInstruction": [
-      {
-        "method": [{ "display": "After Food", "system": "http://snomed.info/sct" }],
-        "route": { "display": "Oral", "system": "http://snomed.info/sct" },
-        "text": "For 5 Days",
-        "timing": "1-1-1 ",
-
-      }
-    ],
+    "dosageInstruction": [dosageInstruction],
+    "reasonCode": [{ "display": "LRTI", "system": "http://snomed.info/sct" }]
   })
 
-  console.log(body)
+  // console.log(body)
 
-  // const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
-  // console.log(res)
+  // return
+
+  const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
+  console.log(res)
 
 }
 
 
-CreateMedicationRequest();
+// CreateMedicationRequest();
 
 // Composition
 const composition = new Composition()
@@ -427,6 +431,8 @@ const createComposition = async () => {
 
   const pract = new Practitioner()
   const practObj = pract.convertFhirToObject(curPractinioer.data)
+
+
 
   const body = composition.getFHIR({
     "date": new Date().toISOString(),
@@ -455,6 +461,7 @@ const setSection = async () => {
   const ProcedureId = "87555651-bb59-4d3b-8cc5-b5e73cf2599c"
   const AppointmentId = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
   const AllergyId = "689439d7-bfd1-436a-b8cb-43533698baad"
+  const MedicationRequestId = 'dbd7eed5-a79d-4918-928a-9f8a2538e833'
   const gcpFhirCrud = new GcpFhirCRUD()
 
   let res;
@@ -483,3 +490,107 @@ const setSection = async () => {
 
 // setSection()
 
+
+
+const test = async () => {
+
+
+  const body = {
+    "resourceType": "MedicationRequest",
+    "id": undefined,
+    "meta": {
+      "profile": [
+        "https://nrces.in/ndhm/fhir/r4/StructureDefinition/MedicationRequest"
+      ]
+    },
+    "text": {
+      "status": "generated",
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-01</p><p><b>status</b>: active</p><p><b>intent</b>: order</p><p><b>subject</b>: ABC</p><p><b>requester</b>: Dr. DEF</p><p><b>reasonCode</b>: Traveller's Diarrhea</p><p><b>medication</b>: Azithromycin (as azithromycin dihydrate) 250 mg oral capsule</p><p><b>authoredOn</b>: 2020-07-09</p><p><b>dosageInstruction</b>: One tablet at once (With or after food)</p></div>"
+    },
+    "status": "active",
+    "intent": "order",
+    "medicationCodeableConcept": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "324252006",
+          "display": "Azithromycin (as azithromycin dihydrate) 250 mg oral capsule"
+        }
+      ]
+    },
+    "subject": {
+      "reference": "Patient/e101abe6-11ae-403d-8c2e-a34f97ceccae",
+      "display": "ABC"
+    },
+    "authoredOn": "2020-07-09",
+    "requester": {
+      "reference": "Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739",
+      "display": "Dr. DEF"
+    },
+    "reasonCode": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "11840006",
+            "display": "Traveler's diarrhea"
+          }
+        ]
+      }
+    ],
+    // "reasonReference" : [
+    //   {
+    //     "reference" : "Condition/1"
+    //   }
+    // ],
+    "dosageInstruction": [
+      {
+        "text": "One tablet at once",
+        "additionalInstruction": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "311504000",
+                "display": "With or after food"
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "repeat": {
+            "frequency": 1,
+            "period": 1,
+            "periodUnit": "d"
+          }
+        },
+        "route": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "26643006",
+              "display": "Oral Route"
+            }
+          ]
+        },
+        "method": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "421521009",
+              "display": "Swallow"
+            }
+          ]
+        }
+      }
+    ]
+  }
+
+
+  const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
+
+  console.log(res)
+
+}
+
+test()
