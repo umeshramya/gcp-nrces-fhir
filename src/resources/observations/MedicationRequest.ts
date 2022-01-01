@@ -98,4 +98,17 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
 
     }
 
+
+    convertDosageInstructionToObject(option: any): DOSAGE_INSTRUCTION {
+        let ret: DOSAGE_INSTRUCTION = {
+            text: option.text,
+            additionalInstruction: option.additionalInstruction[0].coding,
+            timing: option.timing.code.text,
+            route: option.route.coding,
+            method: option.method.coding
+        }
+
+        return ret;
+    }
+
 }
