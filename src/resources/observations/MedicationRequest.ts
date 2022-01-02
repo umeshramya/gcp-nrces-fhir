@@ -21,6 +21,7 @@ export interface MEDICATION_REQUEST {
     medicationCodeableConcept: CodeDisplay[]
     reasonCode: CodeDisplay[]
     dosageInstruction: any[]
+    DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[]
 
 }
 
@@ -35,6 +36,17 @@ export interface DOSAGE_INSTRUCTION {
 export class MedicationRequest extends ResourceMain implements ResourceMaster {
     getFHIR(options: MEDICATION_REQUEST): any {
 
+
+        let medArray: string = ""
+
+        options.medicationCodeableConcept.forEach((el, i) => {
+
+            medArray += `<p>${el.display}  ${options.DOSAGE_INSTRUCTION![i].timing}  &nbsp ${options.DOSAGE_INSTRUCTION![i].text}    &nbsp ${options.DOSAGE_INSTRUCTION![i].method[0].display}  &nbsp ${options.DOSAGE_INSTRUCTION![i].route[0].display}</p>`
+
+        })
+
+
+
         const body = {
             resourceType: "MedicationRequest",
             id: options.id || undefined,
@@ -46,7 +58,7 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
             text: {
                 status: "generated",
                 div:
-                    `<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Narrative with Details</b></p><p><b>id</b>: </p><p><b>status</b>: ${options.status}</p><p><b>intent</b>: ${options.intent}</p><p><b>subject</b>:MRN :- ${options.patient.MRN} Name ${options.patient.name}</p><p><b>requester</b>: ${options.Practitioner.name} ${options.Practitioner.qualification}</p><p><b>reasonCode</b>: Traveller\'s Diarrhea</p><p><b>medication</b>: Azithromycin (as azithromycin dihydrate) 250 mg oral capsule</p><p><b>authoredOn</b>: 2020-07-09</p><p><b>dosageInstruction</b>: One tablet at once (With or after food)</p></div>`,
+                    `<div xmlns="http://www.w3.org/1999/xhtml">${medArray}</div>`,
             },
             status: "active",
             intent: "order",
@@ -61,7 +73,7 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
                     coding: options.reasonCode
                 },
             ],
-            // reasonReference: [{ reference: options.reasonReferenceCondtionId ? `Condition/${options.reasonReferenceCondtionId}` : undefined }],
+            reasonReference: [{ reference: options.reasonReferenceCondtionId ? `Condition/${options.reasonReferenceCondtionId}` : undefined }],
             dosageInstruction: options.dosageInstruction
         };
 

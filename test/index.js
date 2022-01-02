@@ -372,45 +372,65 @@ const getDocumentBundle = async () => {
 
 // getDocumentBundle();
 const CreateMedicationRequest = async () => {
-  const gcpFhirCRUD = new GcpFhirCRUD()
-  const practioner = await gcpFhirCRUD.getFhirResource("877f1236-63fd-4827-a3da-636a4f2c5739", "Practitioner");
-
-  const practionerObj = new Practitioner().convertFhirToObject(practioner.data);
-
-  const patient = await gcpFhirCRUD.getFhirResource("e101abe6-11ae-403d-8c2e-a34f97ceccae", "Patient")
-  const patientObj = new Patient().convertFhirToObject(patient.data);
+  try {
 
 
-  const medicationRequest = new MedicationRequest()
+    const gcpFhirCRUD = new GcpFhirCRUD()
+    const practioner = await gcpFhirCRUD.getFhirResource("877f1236-63fd-4827-a3da-636a4f2c5739", "Practitioner");
 
-  const dosageInstruction = medicationRequest.createDosageInstrction({
-    "method": [{ "display": "After Food", "system": "http://snomed.info/sct" }],
-    "route": [{ "display": "Oral", "system": "http://snomed.info/sct" }],
-    "text": "For 5 Days",
-    "timing": "1-1-1",
-    "additionalInstruction": [{ "display": "watch for skin erruption", "system": "http://snomed.info/sct" }]
-  })
+    const practionerObj = new Practitioner().convertFhirToObject(practioner.data);
+
+    const patient = await gcpFhirCRUD.getFhirResource("e101abe6-11ae-403d-8c2e-a34f97ceccae", "Patient")
+    const patientObj = new Patient().convertFhirToObject(patient.data);
 
 
-  const body = medicationRequest.getFHIR({
-    "Practitioner": practionerObj,
-    "patient": patientObj,
-    "date": new Date().toISOString(),
-    "intent": "order",
-    "status": "active",
-    "medicationCodeableConcept": [{ "display": "Tab Pantop 40mg", "system": "http://snomed.info/sct" }],
-    "dosageInstruction": [dosageInstruction],
-    "reasonCode": [{ "display": "LRTI", "system": "http://snomed.info/sct" }]
-  })
+    const medicationRequest = new MedicationRequest()
+    let dosageInstruction = new Array()
+    dosageInstruction.push(medicationRequest.createDosageInstrction({
+      "method": [{ "display": "After Food", "system": "http://snomed.info/sct" }],
+      "route": [{ "display": "Oral", "system": "http://snomed.info/sct" }],
+      "text": "For 5 Days",
+      "timing": "1-1-1",
+      "additionalInstruction": [{ "display": "watch for skin erruption", "system": "http://snomed.info/sct" }]
+    }))
+    let dosageObj = new Array()
+    dosageObj.push(medicationRequest.convertDosageInstructionToObject(dosageInstruction[0]));
+
+    dosageInstruction.push(medicationRequest.createDosageInstrction({
+      "method": [{ "display": "Before Food", "system": "http://snomed.info/sct" }],
+      "route": [{ "display": "Oral", "system": "http://snomed.info/sct" }],
+      "text": "For 15 Days",
+      "timing": "1-0-1",
+      "additionalInstruction": [{ "display": "watch for skin erruption", "system": "http://snomed.info/sct" }]
+    }))
+    dosageObj.push(medicationRequest.convertDosageInstructionToObject(dosageInstruction[1]))
 
 
-  const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
-  console.log(res.data)
+    const body = medicationRequest.getFHIR({
+      "Practitioner": practionerObj,
+      "patient": patientObj,
+      "date": new Date().toISOString(),
+      "intent": "order",
+      "status": "active",
+      "medicationCodeableConcept": [{ "display": "Tab Pantop 40mg", "system": "http://snomed.info/sct" }, { "display": "Tab DOLO 650mg", "system": "http://snomed.info/sct" }],
+      "dosageInstruction": dosageInstruction,
+      "reasonCode": [{ "display": "LRTI", "system": "http://snomed.info/sct" }],
+      "DOSAGE_INSTRUCTION": dosageObj
+
+    })
+
+
+    const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
+    console.log(res.data)
+
+  } catch (error) {
+    console.log(error)
+  }
 
 }
 
 
-// CreateMedicationRequest();
+CreateMedicationRequest();
 
 // Composition
 const composition = new Composition()
@@ -462,7 +482,7 @@ const createComposition = async () => {
 
 }
 
-createComposition()
+// createComposition()
 
 
 const opConsulatation = new MakeDocumentBundle()
