@@ -37,7 +37,7 @@ const body = {
         language: "en-IN",
         text: {
           status: "generated",
-          div: "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"><h4>Narrative with Details</h4><p>This is a Immunization record for Patient ABC. <b>Generated Narrative with Details</b></p><p><b>Patient Summary: </b><p>Id: 1; Patient Identifier = 22-7225-4829-5255 (System : {https://healthid.ndhm.gov.in}); active; ABC ; ph: +919818512600(HOME); gender: male; birthDate: 12-01-1981</p></p><p> <b>Immunization summary:</b><p><b>Id</b>: ImmunizationRecord-example-07</p><p><b>Identifier</b>: 645bb0c3-ff7e-4123-bef5-3852a4784813</p><p>Immunization 1:</p><p><p><b>VaccineCode</b>: COVID-19 antigen vaccine <span>(Details : (http://snomed.info/sct code '1119305005' = 'COVID-19 antigen vaccine')</span></p><p><b>Occurrence</b>: 21-02-2021</p><p><b>Primary Source</b>: true</p><p><b>Lot Number</b>: BSCD12344SS</p></p><p><b>Immunization Recommendation:</b> This is Immunization Recommendation for COVID-19 antigen vaccine to be taken on 22-03-2021. <p><b>Description:</b> Second sequence in protocol</p><p><b>Series:</b>Vaccination series 2</p><p><b>Dose number positive int:</b> 1</p><p><b>Date Criterion:</b>Date vaccine due <span>(Details : (http://loinc.org code '30980-7' = 'Date vaccine due') <b>Value:</b> 22-03-2021</span></p><p><b>Recommended Vaccine:</b> COVID-19 antigen vaccine <span>(Details : (http://snomed.info/sct code '1119305005' = 'COVID-19 antigen vaccine')</span></p><p><b>Forcast Status:</b> Due <span>(Details : (http://terminology.hl7.org/CodeSystem/immunization-recommendation-status code 'due' = 'Due')</span></p><p><b>Supporting Immunization:</b> Immunization/1</p></p></p></div>",
+          div: "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
         },
         identifier: {
           system: "https://ndhm.in/phr",
@@ -61,7 +61,7 @@ const body = {
         custodian: { reference: "Organization/1", display: "UVW Hospital" },
 
 
-        
+
         section: [
           {
             title: "Immunization record",
@@ -194,10 +194,10 @@ const body = {
         birthDate: "1981-01-12",
       },
     },
-    
-    
-    
-    
+
+
+
+
     {
       fullUrl: "Immunization/1",
       resource: {
