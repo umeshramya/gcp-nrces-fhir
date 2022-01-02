@@ -1,6 +1,6 @@
-import { CodeDisplay } from "../../config";
-import { ResourceMaster } from "../../Interfaces";
-import ResourceMain from "../ResourceMai";
+import { CodeDisplay } from "../config";
+import { ResourceMaster } from "../Interfaces";
+import ResourceMain from "./ResourceMai";
 
 export const AppointmentStatusArray = ["proposed", "pending", "booked", "arrived", "fulfilled", "cancelled", "noshow", "entered-in-error", "checked-in", "waitlist"] as const
 
@@ -87,13 +87,13 @@ export class Appointment extends ResourceMain implements ResourceMaster {
 
     let ret: APPOINTMENT = {
       status: options.status,
-      patientId: this.getIdFromReference({"ref" : options.participant[0].actor.reference, "resourceType" : "Patient"}),
-      practitionerId: this.getIdFromReference({"ref" : options.participant[1].actor.reference, "resourceType" : "Practitioner"}),
+      patientId: this.getIdFromReference({ "ref": options.participant[0].actor.reference, "resourceType": "Patient" }),
+      practitionerId: this.getIdFromReference({ "ref": options.participant[1].actor.reference, "resourceType": "Practitioner" }),
       text: this.getDivText(options.text.div),
       serviceCategory: options.serviceCategory,
       serviceType: options.serviceType,
       appointmentType: options.appointmentType,
-      reasonReferenceConditionId: this.getIdFromReference({"ref" : options.reasonReference[0].reference, "resourceType" : "Condition"}),
+      reasonReferenceConditionId: this.getIdFromReference({ "ref": options.reasonReference[0].reference, "resourceType": "Condition" }),
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,

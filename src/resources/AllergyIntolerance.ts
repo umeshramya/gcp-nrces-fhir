@@ -1,5 +1,5 @@
-import { ResourceMaster } from "../../Interfaces";
-import { CodeDisplay } from "../../config/index";
+import { ResourceMaster } from "../Interfaces";
+import { CodeDisplay } from "../config/index";
 
 export const allergyStatusArray = ["active", "inactive", "resolved"] as const;
 type allergyStatus = typeof allergyStatusArray[number];

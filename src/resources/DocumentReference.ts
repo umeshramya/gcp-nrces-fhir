@@ -1,6 +1,6 @@
-import { CodeDisplay } from "../../config";
-import { ResourceMaster } from "../../Interfaces";
-import { PATIENT } from "../Patient";
+import { CodeDisplay } from "../config";
+import { ResourceMaster } from "../Interfaces";
+import { PATIENT } from "./Patient";
 
 export const documentStatusArrey = ["current", "superseded", "entered-in-error"
 ] as const

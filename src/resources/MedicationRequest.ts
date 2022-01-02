@@ -1,8 +1,8 @@
-import { CodeDisplay } from "../../config";
-import { ResourceMaster } from "../../Interfaces";
-import { PATIENT } from "../Patient";
-import { PRACTITIONER } from "../Practitioner";
-import ResourceMain from "../ResourceMai";
+import { CodeDisplay } from "../config";
+import { ResourceMaster } from "../Interfaces";
+import { PATIENT } from "./Patient";
+import { PRACTITIONER } from "./Practitioner";
+import ResourceMain from "./ResourceMai";
 
 export const MedicatioRequestStatusArray = ["active", "on-hold", "cancelled", "completed", "entered-in-error", "stopped", "draft", "unknown"] as const
 type MedicatioRequestStatus = typeof MedicatioRequestStatusArray[number]

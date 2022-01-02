@@ -1,5 +1,5 @@
-import { ResourceMaster } from "../../Interfaces/index"
-import { CodeDisplay } from "../../config";
+import { ResourceMaster } from "../Interfaces/index"
+import { CodeDisplay } from "../config";
 
 export interface CONDITION {
   id?: string

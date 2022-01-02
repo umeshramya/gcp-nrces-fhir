@@ -7,15 +7,15 @@ import { ENCOUNTER, Encounter, EncounterResource, EncounterHospitalizationDischa
 import { EncounterClass, EncounterStatus, EncounterHospitalizationDischargeDisposition } from "./resources/Encounter"
 import { resourceType, resourceTypeArray } from "./config"
 
-import { Condition, CONDITION } from "./resources/observations/Condition"
-import { Procedure, PROCEDURE } from "./resources/observations/Procedure"
-import { allergyStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance } from "./resources/observations/AllergyIntolerance"
-import { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatusArray } from "./resources/observations/Appointment"
+import { Condition, CONDITION } from "./resources/Condition"
+import { Procedure, PROCEDURE } from "./resources/Procedure"
+import { allergyStatusArray, verificationStatusArray, ALLERGY_INTOLERANCE, AllergyIntolerance } from "./resources/AllergyIntolerance"
+import { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatusArray } from "./resources/Appointment"
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle"
-import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/observations/Composition"
-import { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey } from "./resources/observations/DocumentReference"
-import { MEDICATION_REQUEST, MedicatioRequestIntentArray, MedicatioRequestStatusArray, MedicationRequest } from "./resources/observations/MedicationRequest"
-import {MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArray} from "./resources/observations/MedicationStatement"
+import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/Composition"
+import { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey } from "./resources/DocumentReference"
+import { MEDICATION_REQUEST, MedicatioRequestIntentArray, MedicatioRequestStatusArray, MedicationRequest } from "./resources/MedicationRequest"
+import { MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArray } from "./resources/MedicationStatement"
 import { MakeDocumentBundle } from "./bundles/Bundle"
 
 
@@ -37,7 +37,7 @@ export { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatu
 export { DOCUMENT_BUNDLE, DocumentBundle }
 export { compositionStatusArrey, COMPOSITOIN, Composition }
 export { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey }
-export {MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArray}
+export { MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArray }
 export { MEDICATION_REQUEST, MedicatioRequestIntentArray, MedicatioRequestStatusArray, MedicationRequest };
 
 

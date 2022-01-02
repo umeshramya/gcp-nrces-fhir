@@ -1,8 +1,8 @@
-import { ResourceMaster } from "../../Interfaces"
+import { ResourceMaster } from "../Interfaces"
 import { v4 as uuidv4 } from 'uuid'
-import { ENCOUNTER } from "../Encounter"
-import { PATIENT } from "../Patient"
-import { ORGANIZATION } from "../Organization"
+import { ENCOUNTER } from "./Encounter"
+import { PATIENT } from "./Patient"
+import { ORGANIZATION } from "./Organization"
 
 
 
