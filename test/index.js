@@ -1,4 +1,5 @@
 require('dotenv').config("env")
+const v4 = require("uuid").v4
 const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MakeDocumentBundle, MedicationRequest } = require("gcp-nrces-fhir")
 
 
@@ -409,47 +410,59 @@ const CreateMedicationRequest = async () => {
 }
 
 
-CreateMedicationRequest();
+// CreateMedicationRequest();
 
 // Composition
 const composition = new Composition()
 
 const createComposition = async () => {
-  const gcpFhirCRUD = new GcpFhirCRUD()
-  const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
-  const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
-  const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
-  const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-  const curEncounter = await gcpFhirCRUD.getFhirResource(encounterId, "Encounter")
-  let curPatinet = await gcpFhirCRUD.getFhirResource(patientId, "Patient");
-  const curOrganizatio = await gcpFhirCRUD.getFhirResource(orgId, "Organization")
-  const curPractinioer = await gcpFhirCRUD.getFhirResource(practId, "Practitioner")
+  try {
+    const gcpFhirCRUD = new GcpFhirCRUD()
+    const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+    const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+    const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+    const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+    const curEncounter = await gcpFhirCRUD.getFhirResource(encounterId, "Encounter")
+    let curPatinet = await gcpFhirCRUD.getFhirResource(patientId, "Patient");
+    const curOrganizatio = await gcpFhirCRUD.getFhirResource(orgId, "Organization")
+    const curPractinioer = await gcpFhirCRUD.getFhirResource(practId, "Practitioner")
+    const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414"
 
-  const pract = new Practitioner()
-  const practObj = pract.convertFhirToObject(curPractinioer.data)
+    const pract = new Practitioner()
+    const practObj = pract.convertFhirToObject(curPractinioer.data)
 
 
 
-  const body = composition.getFHIR({
-    "date": new Date().toISOString(),
-    "encounter": curEncounter.data,
-    "patient": new Patient().convertFhirToObject(curPatinet.data),
-    "organization": new Organization().convertFhirToObject(curOrganizatio.data),
-    "author": [{ "reference": `Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739`, "display": practObj.name }],
-    "status": "final",
-    "type": "OPConsultRecord",
-    "section": [],
-    "encounterId": encounterId,
-    "patientId": patientId,
-    "organizationId": orgId,
-    "section": (await setSection()).section
-  })
+    const body = composition.getFHIR({
+      "date": new Date().toISOString(),
+      "encounter": curEncounter.data,
+      "patient": new Patient().convertFhirToObject(curPatinet.data),
+      "organization": new Organization().convertFhirToObject(curOrganizatio.data),
+      "author": [{ "reference": `Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739` }],
+      "status": "final",
+      "type": "PrescriptionRecord",
+      "section": [{
+        "reference": `MedicationRequest/${MedicationRequestId}`,
+        "type": "MedicationRequest"
+      }],
+      "encounterId": encounterId,
+      "patientId": patientId,
+      "organizationId": orgId,
+    })
+    // console.log(body)
+    // return
+    const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
+    console.log(res)
 
-  const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
-  console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+
+
+
 }
 
-// createComposition()
+createComposition()
 
 
 const opConsulatation = new MakeDocumentBundle()
@@ -462,12 +475,12 @@ const setSection = async () => {
 
   let res;
 
-  res = await gcpFhirCrud.getFhirResource(AllergyId, "AllergyIntolerance")
-  opConsulatation.setEntries({ "allergyIntolerance": res.data })
-  res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
-  opConsulatation.setEntries({ "procedure": res.data })
-  res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
-  opConsulatation.setEntries({ "appointment": res.data })
+  // res = await gcpFhirCrud.getFhirResource(AllergyId, "AllergyIntolerance")
+  // opConsulatation.setEntries({ "allergyIntolerance": res.data })
+  // res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
+  // opConsulatation.setEntries({ "procedure": res.data })
+  // res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
+  // opConsulatation.setEntries({ "appointment": res.data })
   res = await gcpFhirCrud.getFhirResource(MedicationRequestId, "MedicationRequest")
   opConsulatation.setEntries({ "medicationRequest": res.data })
 
@@ -490,3 +503,99 @@ const setSection = async () => {
 
 
 
+
+const test = async () => {
+  const gcpFhirCRUD = new GcpFhirCRUD()
+  const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+  const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+  const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+  const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+  const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414"
+  try {
+
+
+    const body = {
+      "resourceType": "Composition",
+      "id": undefined,
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": new Date().toISOString(),
+        "profile": [
+          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/PrescriptionRecord"
+        ]
+      },
+      "language": "en-IN",
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-IN\" lang=\"en-IN\"></div>"
+      },
+      "identifier": {
+        "system": "https://ndhm.in/phr",
+        "value": v4()
+      },
+      "status": "final",
+      "type": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "440545006",
+            "display": "Prescription record"
+          }
+        ],
+        "text": "Prescription record"
+      },
+      "subject": {
+        "reference": `Patient/${patientId}`
+      },
+      "encounter": {
+        "reference": `Encounter/${encounterId}`
+      },
+      "date": "2017-05-27T11:46:09+05:30",
+      "author": [
+        {
+          "reference": `Practitioner/${practId}`
+        }
+      ],
+      "custodian": {
+        "reference": `Organization/${orgId}`,
+        // "display": options.organization.name
+      },
+      "title": "Prescription record",
+      "section": [
+        {
+          "title": "Prescription record",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "440545006",
+                "display": "Prescription record"
+              }
+            ]
+          },
+          "entry": [
+            {
+              "reference": `MedicationRequest/${MedicationRequestId}`,
+              "type": "MedicationRequest"
+            },
+            // {
+            //   "reference" : "MedicationRequest/2",
+            //   "type" : "MedicationRequest"
+            // },
+            // {
+            //   "reference" : "Binary/1",
+            //   "type" : "Binary"
+            // }
+          ]
+        }
+      ]
+    }
+
+    const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// test()

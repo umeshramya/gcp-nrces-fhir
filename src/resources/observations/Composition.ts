@@ -9,6 +9,7 @@ import { ORGANIZATION } from "../Organization"
 export const compositionTypeArrey = [
     {
         type: "OPConsultRecord",
+        system: "http://snomed.info/sct",
         url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord",
         code: "371530004",
         text: "Clinical consultation report"
@@ -16,6 +17,7 @@ export const compositionTypeArrey = [
 
     {
         type: "DischargeSummaryRecord",
+        system: "http://snomed.info/sct",
         url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord",
         code: "373942005",
         text: "Discharge summary"
@@ -23,10 +25,18 @@ export const compositionTypeArrey = [
 
     {
         type: "ImmunizationRecord",
+        system: "http://snomed.info/sct",
         url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ImmunizationRecord",
         code: "41000179103",
         text: "Immunization record",
     },
+    {
+        type: "PrescriptionRecord",
+        system: "http://snomed.info/sct",
+        url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/PrescriptionRecord",
+        code: "440545006",
+        text: "Prescription record"
+    }
 
 ] as const
 
@@ -37,7 +47,7 @@ type compositionStatus = typeof compositionStatusArrey[number]
 
 export interface compositionAuthor {
     reference: `Practitioner/${string}`
-    display: string
+    // display: string
 }
 
 
@@ -59,6 +69,7 @@ export interface COMPOSITOIN {
 export class Composition implements ResourceMaster {
     private compType!: {
         type: string
+        system: "http://snomed.info/sct";
         url: string;
         code: string
         text: string
@@ -100,7 +111,7 @@ export class Composition implements ResourceMaster {
             },
             "subject": {
                 "reference": `Patient/${options.patientId}`,
-                "display": options.patient.name
+                // "display": options.patient.name
             },
             "encounter": {
                 "reference": `Encounter/${options.encounterId}`
@@ -110,7 +121,7 @@ export class Composition implements ResourceMaster {
             "title": options.type,
             "custodian": {
                 "reference": `Organization/${options.organizationId}`,
-                "display": options.organization.name
+                // "display": options.organization.name
             },
             "section": [
                 {
