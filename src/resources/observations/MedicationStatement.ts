@@ -1,6 +1,5 @@
 import { CodeDisplay } from "../../config";
 import { ResourceMaster } from "../../Interfaces";
-import { PATIENT } from "../Patient";
 import ResourceMain from "../ResourceMai";
 
 export const MedicationStatementStatusArray = ["active" , "completed" , "entered-in-error" , "intended" , "stopped" , "on-hold" , "unknown" , "not-taken"] as const
