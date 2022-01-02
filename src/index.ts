@@ -15,6 +15,7 @@ import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle"
 import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/observations/Composition"
 import { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey } from "./resources/observations/DocumentReference"
 import { MEDICATION_REQUEST, MedicatioRequestIntentArray, MedicatioRequestStatusArray, MedicationRequest } from "./resources/observations/MedicationRequest"
+import {MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArray} from "./resources/observations/MedicationStatement"
 import { MakeDocumentBundle } from "./bundles/Bundle"
 
 
@@ -36,7 +37,7 @@ export { APPOINTMENT, Appointment, AppointmentStatusArray, AppointmentActorStatu
 export { DOCUMENT_BUNDLE, DocumentBundle }
 export { compositionStatusArrey, COMPOSITOIN, Composition }
 export { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey }
-
+export {MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArray}
 export { MEDICATION_REQUEST, MedicatioRequestIntentArray, MedicatioRequestStatusArray, MedicationRequest };
 
 
