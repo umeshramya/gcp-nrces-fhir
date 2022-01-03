@@ -3,7 +3,6 @@ import { resourceType } from "..";
 export class PrescriptionBundle {
     private _entries:resourceType[]=[]
 
-
     create = async()=>{}
     update = async()=>{}
     delete = async()=>{}
