@@ -1,12 +1,9 @@
-export class PrescriptionBundle {
-    private _entries: string[] = []
+import { resourceType } from "..";
 
-    public get entries(): string[] {
-        return this._entries;
-    }
-    public set entries(value: string[]) {
-        this._entries = value;
-    }
+export class PrescriptionBundle {
+    private _entries:resourceType[]=[]
+
+
     create = async()=>{}
     update = async()=>{}
     delete = async()=>{}
