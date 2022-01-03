@@ -1,26 +1,21 @@
-import { resourceType } from "..";
-interface IDENTITY { patientId: string; practionerId: string; encounterId: string; organizationId: string; }
+import { Bundle, BundleInterface } from "./Bundle";
 
-export class PrescriptionBundle {
-  private _entries: resourceType[] = [];
-  protected get entries(): resourceType[] {
-    return this._entries;
-  }
-  protected set entries(value: resourceType[]) {
-    this._entries = value;
-  }
-  private _identity!: IDENTITY;
-  protected get identity(): IDENTITY {
-    return this._identity;
-  }
-  protected set identity(value: IDENTITY) {
-    this._identity = value;
+export class PrescriptionBundle extends Bundle implements BundleInterface {
+  constructor() {
+    super()
+    this.entries = ["MedicationRequest"]
   }
 
+  create() {
+    throw new Error("Method not implemented.");
+  }
+  update() {
+    throw new Error("Method not implemented.");
+  }
+  delete() {
+    throw new Error("Method not implemented.");
+  }
 
-  create = async () => { }
-  update = async () => { }
-  delete = async () => { }
 }
 
 const body = {
