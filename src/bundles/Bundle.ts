@@ -27,7 +27,7 @@ export class Bundle {
   public setPatient = async (id: string) => {
     let curClass = new Patient();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Patient")
-    this._patient = { "Obj": curClass.convertFhirToObject(res.body), "body": res.data }
+    this._patient = { "Obj": curClass.convertFhirToObject(res.data), "body": res.data }
   }
 
   private _encounter!: { Obj: ENCOUNTER; body: any; };
@@ -38,7 +38,7 @@ export class Bundle {
   public setEncounter = async (id: string) => {
     let curClass = new Encounter();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Encounter")
-    this._encounter = { "Obj": curClass.convertFhirToObject(res.body), "body": res.data }
+    this._encounter = { "Obj": curClass.convertFhirToObject(res.data), "body": res.data }
   }
 
   private _organization!: { Obj: ORGANIZATION; body: any; };
@@ -48,25 +48,22 @@ export class Bundle {
 
   public setOrganization = async (id: string) => {
     let curClass = new Organization();
-    const res = await new GcpFhirCRUD().getFhirResource(id, "Encounter")
-    this._organization = { "Obj": curClass.convertFhirToObject(res.body), "body": res.data }
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Organization")
+    this._organization = { "Obj": curClass.convertFhirToObject(res.data), "body": res.data }
   }
 
 
 
-  private _practioners!: { Obj: PRACTITIONER; body: any; }[];
+  private _practioners: { Obj: PRACTITIONER; body: any; }[] =[]
   public get practioners(): { Obj: PRACTITIONER; body: any; }[] {
     return this._practioners;
   }
 
   public setPractioner = async (id: string) => {
     let curClass = new Practitioner();
-    const res = await new GcpFhirCRUD().getFhirResource(id, "Encounter")
-    this._practioners.push({ "Obj": curClass.convertFhirToObject(res.body), "body": res.data })
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Practitioner")
+    this._practioners.push({ "Obj": curClass.convertFhirToObject(res.data), "body": res.data })
   }
-
-
-
 
 
 
