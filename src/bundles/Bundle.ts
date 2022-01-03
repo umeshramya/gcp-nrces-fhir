@@ -1,5 +1,5 @@
-import { Composition, resourceType } from "..";
-import { compositionType } from "../resources/Composition";
+import { Composition, GcpFhirCRUD, resourceType } from "..";
+import { compositionType, COMPOSITOIN } from "../resources/Composition";
 interface IDENTITY { patientId: string; practionerId: string; encounterId: string; organizationId: string; }
 
 export class Bundle {
@@ -26,12 +26,21 @@ export class Bundle {
   protected set identity(value: IDENTITY) {
     this._identity = value;
   }
+  
 
 
   // composition
-  private _composition = new Composition();
-  protected createComposition = async (): Promise<any> => {
-    this._composition.mapCompositionType(this._compositionType)
+  private _composition: any;
+  public get composition(): any {
+    return this._composition;
+  }
+
+  protected createComposition = async (compositionObj:COMPOSITOIN): Promise<any> => {
+    const comp = new Composition();
+    comp.mapCompositionType(this._compositionType)
+    const body = comp.getFHIR(compositionObj);
+    this._composition = await new GcpFhirCRUD().createFhirResource(body, "Composition")
+    
   }
 
 

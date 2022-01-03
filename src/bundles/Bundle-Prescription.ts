@@ -2,7 +2,7 @@ import { Bundle, BundleInterface } from "./Bundle";
 
 export class PrescriptionBundle extends Bundle implements BundleInterface {
   constructor() {
-    super()
+    super("PrescriptionRecord")
     this.entries = ["MedicationRequest"]
   }
 
