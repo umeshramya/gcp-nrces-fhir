@@ -10,13 +10,26 @@ export class Bundle {
 
 
   // _entries
-  private _entries: resourceType[] = [];
-  protected get entries(): resourceType[] {
+  private _entries!: { section: any; bundle: any; }[]=[]
+  public get entries(): { section: any; bundle: any; }[]{
     return this._entries;
   }
-  protected set entries(value: resourceType[]) {
-    this._entries = value;
+
+  setEntries(options:{resourceType:resourceType, resource:any; id:string}){
+    this._entries.push({
+      "section" :{
+        "reference": `${options.resourceType}/${options.id}`,
+        "type": options.resourceType
+      },
+
+      "bundle" :  {
+        fullUrl: "/1",
+        resource: options.resource
+      }
+    
+    })
   }
+
 
   // _indentity
   private _patient!: { Obj: PATIENT; body: any };
