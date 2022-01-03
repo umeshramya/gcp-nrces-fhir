@@ -1,3 +1,4 @@
+import { COMPOSITOIN } from "..";
 import { Bundle, BundleInterface } from "./Bundle";
 
 export class PrescriptionBundle extends Bundle implements BundleInterface {
@@ -6,8 +7,9 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
     this.entries = ["MedicationRequest"]
   }
 
-  create() {
-    throw new Error("Method not implemented.");
+  async create(options: { compositionObj: COMPOSITOIN }) {
+    await this.createComposition(options.compositionObj)
+    return this.composition;
   }
   update() {
     throw new Error("Method not implemented.");

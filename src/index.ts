@@ -16,7 +16,8 @@ import { compositionStatusArrey, COMPOSITOIN, Composition } from "./resources/Co
 import { DOCUMENT_REFERENCE, DocumentReference, documentDocStatusArrey, documentStatusArrey } from "./resources/DocumentReference"
 import { MEDICATION_REQUEST, MedicatioRequestIntentArray, MedicatioRequestStatusArray, MedicationRequest } from "./resources/MedicationRequest"
 import { MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArray } from "./resources/MedicationStatement"
-import { MakeDocumentBundle } from "./bundles/Bundle"
+import { Bundle } from "./bundles/Bundle"
+import { PrescriptionBundle } from "./bundles/Bundle-Prescription"
 
 
 
@@ -41,4 +42,5 @@ export { MEDICATION_STATEMENT, MedicationStatement, MedicationStatementStatusArr
 export { MEDICATION_REQUEST, MedicatioRequestIntentArray, MedicatioRequestStatusArray, MedicationRequest };
 
 
-export { MakeDocumentBundle }
+export { Bundle }
+export { PrescriptionBundle }

@@ -1,6 +1,6 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MakeDocumentBundle, MedicationRequest } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionBundle } = require("gcp-nrces-fhir")
 
 
 
@@ -430,7 +430,7 @@ const CreateMedicationRequest = async () => {
 }
 
 
-CreateMedicationRequest();
+// CreateMedicationRequest();
 
 // Composition
 const composition = new Composition()
@@ -485,43 +485,61 @@ const createComposition = async () => {
 // createComposition()
 
 
-const opConsulatation = new MakeDocumentBundle()
-const setSection = async () => {
-  const ProcedureId = "87555651-bb59-4d3b-8cc5-b5e73cf2599c"
-  const AppointmentId = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
-  const AllergyId = "689439d7-bfd1-436a-b8cb-43533698baad"
-  const MedicationRequestId = 'f9ec977b-3339-4cab-8110-1045f8ffeafd'
-  const gcpFhirCrud = new GcpFhirCRUD()
-
-  let res;
-
-  // res = await gcpFhirCrud.getFhirResource(AllergyId, "AllergyIntolerance")
-  // opConsulatation.setEntries({ "allergyIntolerance": res.data })
-  // res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
-  // opConsulatation.setEntries({ "procedure": res.data })
-  // res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
-  // opConsulatation.setEntries({ "appointment": res.data })
-  res = await gcpFhirCrud.getFhirResource(MedicationRequestId, "MedicationRequest")
-  opConsulatation.setEntries({ "medicationRequest": res.data })
 
 
 
-  return opConsulatation
+// const opConsulatation = new MakeDocumentBundle()
+// const setSection = async () => {
+//   const ProcedureId = "87555651-bb59-4d3b-8cc5-b5e73cf2599c"
+//   const AppointmentId = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
+//   const AllergyId = "689439d7-bfd1-436a-b8cb-43533698baad"
+//   const MedicationRequestId = 'f9ec977b-3339-4cab-8110-1045f8ffeafd'
+//   const gcpFhirCrud = new GcpFhirCRUD()
+
+//   let res;
+
+//   // res = await gcpFhirCrud.getFhirResource(AllergyId, "AllergyIntolerance")
+//   // opConsulatation.setEntries({ "allergyIntolerance": res.data })
+//   // res = await gcpFhirCrud.getFhirResource(ProcedureId, "Procedure")
+//   // opConsulatation.setEntries({ "procedure": res.data })
+//   // res = await gcpFhirCrud.getFhirResource(AppointmentId, "Appointment")
+//   // opConsulatation.setEntries({ "appointment": res.data })
+//   res = await gcpFhirCrud.getFhirResource(MedicationRequestId, "MedicationRequest")
+//   opConsulatation.setEntries({ "medicationRequest": res.data })
 
 
-  // opConsulatation.section.map(el => {
-  //     console.log(el)
-  //     console.log(el.code)
-  // })
+
+//   return opConsulatation
 
 
-  // opConsulatation.bundleEntry.map(el => console.log(el))
+//   // opConsulatation.section.map(el => {
+//   //     console.log(el)
+//   //     console.log(el.code)
+//   // })
+
+
+//   // opConsulatation.bundleEntry.map(el => console.log(el))
+
+// }
+
+// // setSection()
+
+
+
+const prescriptionDoc = async () => {
+  const gcpFhirCRUD = new GcpFhirCRUD()
+  const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+  const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+  const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+  const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+  const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414";
+
+  const prescription = new PrescriptionBundle();
+
+
+
 
 }
-
-// setSection()
-
-
 
 
 const test = async () => {

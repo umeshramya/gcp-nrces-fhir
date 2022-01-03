@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { ENCOUNTER } from "./Encounter"
 import { PATIENT } from "./Patient"
 import { ORGANIZATION } from "./Organization"
+import ResourceMain from "./ResourceMai"
 
 
 
@@ -66,7 +67,7 @@ export interface COMPOSITOIN {
     type: compositionType;
     section: []
 }
-export class Composition implements ResourceMaster {
+export class Composition extends ResourceMain implements ResourceMaster {
     private compType!: {
         type: string
         system: "http://snomed.info/sct";
@@ -148,12 +149,13 @@ export class Composition implements ResourceMaster {
     convertFhirToObject(options: any): Partial<COMPOSITOIN> {
         let ret: Partial<COMPOSITOIN> = {
             patient: undefined,
-            patientId: `${options.subject.reference}`.substring(8),
+            patientId: this.getIdFromReference({ "ref": options.subject.reference, "resourceType": "Patient" }),
             encounter: undefined,
-            encounterId: `${options.encounter.reference}`.substring(10),
+            encounterId: this.getIdFromReference({ "ref": options.encounter.reference, "resourceType": "Encounter" }),
             date: options.date,
             organization: undefined,
-            organizationId: `${options.custodian.reference}`.substring(13),
+            // organizationId: `${options.custodian.reference}`.substring(13),
+            organizationId: this.getIdFromReference({ "ref": options.custodian.reference, "resourceType": "Organization" }),
             status: options.status,
             type: options.title,
             section: options.section,
