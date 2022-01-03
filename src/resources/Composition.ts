@@ -41,7 +41,7 @@ export const compositionTypeArrey = [
 ] as const
 
 const onlyType = compositionTypeArrey.map(el => el.type)
-type compositionType = typeof onlyType[number]
+export type compositionType = typeof onlyType[number]
 export const compositionStatusArrey = ["preliminary", "final", "amended", "entered-in-error"] as const
 type compositionStatus = typeof compositionStatusArrey[number]
 
