@@ -18,12 +18,12 @@ type SectionEntries = {
   type: resourceType;
 }
 
-type BundleEntries={
+type BundleEntries = {
   fullUrl: string,
   resource: any,
 }
 import { compositionType, COMPOSITOIN } from "../resources/Composition";
-interface IDENTITY {}
+interface IDENTITY { }
 
 export class Bundle {
   private _compositionType: compositionType;
@@ -36,8 +36,8 @@ export class Bundle {
   public get sectionEntries(): SectionEntries[] {
     return this._sectionEntries;
   }
-  public setSectionEntries = (resourceType:resourceType, id:string)=>{
-    this._sectionEntries.push({"reference" : `${resourceType}/${id}`, "type" :resourceType })
+  public setSectionEntries = (resourceType: resourceType, id: string) => {
+    this._sectionEntries.push({ "reference": `${resourceType}/${id}`, "type": resourceType })
   }
 
 
@@ -45,8 +45,8 @@ export class Bundle {
   public get bundleEntries(): BundleEntries[] {
     return this._bundleEntries;
   }
-  public setBundleEntries=(resourceType:resourceType, id:string, resource:any)=>{
-   this._bundleEntries.push({"fullUrl" : `${resourceType}/${id}`, "resource" : resource})
+  public setBundleEntries = (resourceType: resourceType, id: string, resource: any) => {
+    this._bundleEntries.push({ "fullUrl": `${resourceType}/${id}`, "resource": resource })
   }
 
 
@@ -127,8 +127,8 @@ export class Bundle {
 
     this.setBundleEntries("Patient", this.patient.Obj.id || "", this.patient.body);
     this.setBundleEntries("Organization", this.organization.Obj.id || "", this.organization.body);
-    this.setBundleEntries("Encounter", this.encounter.Obj.id|| "", this.encounter.body)
-    this.practioners.forEach((el)=>{
+    this.setBundleEntries("Encounter", this.encounter.Obj.id || "", this.encounter.body)
+    this.practioners.forEach((el) => {
       this.setBundleEntries("Practitioner", el.Obj.id || "", el.body)
     })
   };

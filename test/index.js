@@ -52,7 +52,7 @@ const createPatient = async () => {
 
 }
 
-// createPatient()
+createPatient()
 
 const getPatient = async () => {
   const id = "b7665b47-2356-493f-bae4-4710f16eeb7b";
@@ -528,60 +528,62 @@ const createComposition = async () => {
 
 const prescriptionDoc = async () => {
   try {
-    
-  
-  const gcpFhirCRUD = new GcpFhirCRUD()
-  const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
-  const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
-  const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
-  const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-  const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414";
-
-  const prescription = new PrescriptionBundle();
-  await prescription.setEncounter(encounterId);
-  
-  await prescription.setPatient(patientId);
-
-  await prescription.setOrganization(orgId);
-  await prescription.setPractioner(practId);
 
 
-  
-  await prescription.create({
-    "compositionObj" : {
-      "author" : [{"reference": `Practitioner/${practId}`}],
-      "date" : new Date().toISOString(),
-      "encounter" : prescription.encounter.Obj,
-      "encounterId" : encounterId,
-      "patient" : prescription.patient.Obj,
-      "patientId" : patientId,
-      "organization" : prescription.practioners[0].Obj,
-      "organizationId" : orgId,
-      "type" : "PrescriptionRecord",
-      "status" : "final",
-      "section" : [
-        {
-          "reference": `MedicationRequest/${MedicationRequestId}`,
-          "type": "MedicationRequest"
-        }
-      ]
+    const gcpFhirCRUD = new GcpFhirCRUD()
+    const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+    const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+    const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+    const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+    const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414";
 
-    }
-  })
+    const prescription = new PrescriptionBundle();
+
+    await prescription.setEncounter(encounterId);
+    return;
+
+    await prescription.setPatient(patientId);
+
+    await prescription.setOrganization(orgId);
+    await prescription.setPractioner(practId);
+    const medicationRequest = await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest");
+
+    await prescription.create({
+      "compositionObj": {
+        "author": [{ "reference": `Practitioner/${practId}` }],
+        "date": new Date().toISOString(),
+        "encounter": prescription.encounter.Obj,
+        "encounterId": encounterId,
+        "patient": prescription.patient.Obj,
+        "patientId": patientId,
+        "organization": prescription.practioners[0].Obj,
+        "organizationId": orgId,
+        "type": "PrescriptionRecord",
+        "status": "final",
+        "section": []
+        // [
+        //   {
+        //     "reference": `MedicationRequest/${MedicationRequestId}`,
+        //     "type": "MedicationRequest"
+        //   }
+        // ]
+
+      }, medicationRequest
+    })
 
 
-  console.log(prescription.composition.data)
+    console.log(prescription.composition.data)
 
 
-} catch (error) {
-console.log(error)
+  } catch (error) {
+    console.log(error)
+  }
+
+
+
 }
 
-
-
-}
-
-prescriptionDoc();
+// prescriptionDoc();
 const test = async () => {
   const gcpFhirCRUD = new GcpFhirCRUD()
   const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"

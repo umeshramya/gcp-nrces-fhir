@@ -4,10 +4,14 @@ import { Bundle, BundleInterface } from "./Bundle";
 export class PrescriptionBundle extends Bundle implements BundleInterface {
   constructor() {
     super("PrescriptionRecord")
-    this.entries = ["MedicationRequest"]
   }
 
-  async create(options: { compositionObj: COMPOSITOIN }) {
+  async create(options: { compositionObj: COMPOSITOIN, medicationRequest: any }) {
+    this.setBundleEntries("MedicationRequest", options.medicationRequest.id, options.medicationRequest)
+    this.setSectionEntries("MedicationRequest", options.medicationRequest.id);
+
+    options.compositionObj.section = this.sectionEntries as any;
+
     await this.createComposition(options.compositionObj)
     return this.composition;
   }
