@@ -1,5 +1,7 @@
 import {
   Composition,
+  DocumentBundle,
+  DOCUMENT_BUNDLE,
   Encounter,
   ENCOUNTER,
   GcpFhirCRUD,
@@ -110,6 +112,7 @@ export class Bundle {
 
   // composition
   private _composition: any;
+
   public get composition(): any {
     return this._composition;
   }
@@ -132,6 +135,21 @@ export class Bundle {
       this.setBundleEntries("Practitioner", el.Obj.id || "", el.body)
     })
   };
+
+
+
+  // Bundle
+  private _bundle: any;
+  public get bundle(): any {
+    return this._bundle;
+  }
+  
+  protected createBundle = async(document:DOCUMENT_BUNDLE)=>{
+    document.entry=this.bundle;
+    const documentBundle = new DocumentBundle();
+    const body = documentBundle.getFHIR(document);
+    this._bundle = await new GcpFhirCRUD().createFhirResource(body, "Bundle")
+  }
 
 
 }

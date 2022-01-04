@@ -52,7 +52,7 @@ const createPatient = async () => {
 
 }
 
-createPatient()
+// createPatient()
 
 const getPatient = async () => {
   const id = "b7665b47-2356-493f-bae4-4710f16eeb7b";
@@ -540,14 +540,11 @@ const prescriptionDoc = async () => {
     const prescription = new PrescriptionBundle();
 
     await prescription.setEncounter(encounterId);
-    return;
-
     await prescription.setPatient(patientId);
-
     await prescription.setOrganization(orgId);
     await prescription.setPractioner(practId);
-    const medicationRequest = await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest");
-
+    const medicationRequest =(await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
+    
     await prescription.create({
       "compositionObj": {
         "author": [{ "reference": `Practitioner/${practId}` }],
@@ -561,18 +558,17 @@ const prescriptionDoc = async () => {
         "type": "PrescriptionRecord",
         "status": "final",
         "section": []
-        // [
-        //   {
-        //     "reference": `MedicationRequest/${MedicationRequestId}`,
-        //     "type": "MedicationRequest"
-        //   }
-        // ]
-
-      }, medicationRequest
+      }, "documentBundle" :{
+        "date" : new Date().toISOString(),
+        "entry" : [],
+        "practitionerId" : practId,
+        
+      }, "medicationRequest" : medicationRequest
     })
 
 
-    console.log(prescription.composition.data)
+    // console.log(prescription.composition.data.section[0].entry)
+    console.log(prescription.bundle.data);
 
 
   } catch (error) {
@@ -583,7 +579,7 @@ const prescriptionDoc = async () => {
 
 }
 
-// prescriptionDoc();
+prescriptionDoc();
 const test = async () => {
   const gcpFhirCRUD = new GcpFhirCRUD()
   const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"

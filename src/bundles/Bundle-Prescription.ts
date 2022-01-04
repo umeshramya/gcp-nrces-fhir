@@ -1,4 +1,4 @@
-import { COMPOSITOIN } from "..";
+import { COMPOSITOIN, DOCUMENT_BUNDLE } from "..";
 import { Bundle, BundleInterface } from "./Bundle";
 
 export class PrescriptionBundle extends Bundle implements BundleInterface {
@@ -6,15 +6,14 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
     super("PrescriptionRecord")
   }
 
-  async create(options: { compositionObj: COMPOSITOIN, medicationRequest: any }) {
+  async create(options: { compositionObj: COMPOSITOIN; documentBundle:DOCUMENT_BUNDLE; medicationRequest: any }) {
     this.setBundleEntries("MedicationRequest", options.medicationRequest.id, options.medicationRequest)
     this.setSectionEntries("MedicationRequest", options.medicationRequest.id);
-
     options.compositionObj.section = this.sectionEntries as any;
-
     await this.createComposition(options.compositionObj)
-    return this.composition;
+    await this.createBundle(options.documentBundle)
   }
+
   update() {
     throw new Error("Method not implemented.");
   }
