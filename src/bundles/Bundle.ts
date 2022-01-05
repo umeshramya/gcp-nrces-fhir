@@ -145,7 +145,8 @@ export class Bundle {
   }
   
   protected createBundle = async(document:DOCUMENT_BUNDLE)=>{
-    document.entry=this.bundle;
+    // document.entry=this.bundleEntries;
+    console.log(this.bundleEntries)
     const documentBundle = new DocumentBundle();
     const body = documentBundle.getFHIR(document);
     this._bundle = await new GcpFhirCRUD().createFhirResource(body, "Bundle")
