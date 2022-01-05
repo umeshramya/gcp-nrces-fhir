@@ -7,10 +7,21 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
   }
 
   async create(options: { compositionObj: COMPOSITOIN; documentBundle:DOCUMENT_BUNDLE; medicationRequest: any }) {
-    this.setBundleEntries("MedicationRequest", options.medicationRequest.id, options.medicationRequest)
+
     this.setSectionEntries("MedicationRequest", options.medicationRequest.id);
     options.compositionObj.section = this.sectionEntries as any;
-    await this.createComposition(options.compositionObj)
+     await this.createComposition(options.compositionObj)
+     this.setBundleEntries("MedicationRequest", options.medicationRequest.id, options.medicationRequest)
+    await this.createDocumentRefernce({
+       "patientId" : this.patient.Obj.id || "",
+       "patient" : this.patient.Obj,
+       "pdf" : "",
+       "status" : "current",
+       "title" : "Prescription",
+       "docStatus" : "final",
+       "code" : [{"display" : "Prescription", "system" : "http://snomed.info/sct"}]
+     })
+     this.setBundleEntries("DocumentReference", this.documentReference.data.id, this.documentReference.data)
     await this.createBundle(options.documentBundle)
   }
 

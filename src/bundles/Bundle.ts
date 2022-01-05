@@ -1,7 +1,10 @@
+import { Console } from "console";
 import {
   Composition,
   DocumentBundle,
+  DocumentReference,
   DOCUMENT_BUNDLE,
+  DOCUMENT_REFERENCE,
   Encounter,
   ENCOUNTER,
   GcpFhirCRUD,
@@ -127,13 +130,14 @@ export class Bundle {
       body,
       "Composition"
     );
-
+    this.setBundleEntries("Composition", this._composition.data.id, this.composition.data)
     this.setBundleEntries("Patient", this.patient.Obj.id || "", this.patient.body);
     this.setBundleEntries("Organization", this.organization.Obj.id || "", this.organization.body);
     this.setBundleEntries("Encounter", this.encounter.Obj.id || "", this.encounter.body)
     this.practioners.forEach((el) => {
       this.setBundleEntries("Practitioner", el.Obj.id || "", el.body)
     })
+    
   };
 
 
@@ -145,12 +149,25 @@ export class Bundle {
   }
   
   protected createBundle = async(document:DOCUMENT_BUNDLE)=>{
-    // document.entry=this.bundleEntries;
-    console.log(this.bundleEntries)
+    document.entry=this.bundleEntries;
     const documentBundle = new DocumentBundle();
     const body = documentBundle.getFHIR(document);
     this._bundle = await new GcpFhirCRUD().createFhirResource(body, "Bundle")
   }
+
+
+
+  // _documentReference
+  private _documentReference: any;
+  public get documentReference(): any {
+    return this._documentReference;
+  }
+
+  protected createDocumentRefernce =async(resource:DOCUMENT_REFERENCE)=>{
+    const docRef= new DocumentReference().getFHIR(resource);
+    this._documentReference = await new GcpFhirCRUD().createFhirResource(docRef, "DocumentReference")
+  }
+  
 
 
 }
