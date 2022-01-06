@@ -556,16 +556,17 @@ const prescriptionDoc = async () => {
         "organization": prescription.practioners[0].Obj,
         "organizationId": orgId,
         "type": "PrescriptionRecord",
-        "status": "final",
+        "status": "entered-in-error",
         "section": []
       }, "documentBundle" :{
         "date" : new Date().toISOString(),
         "entry" : [],
         "practitionerId" : practId,
+        "signedDate":new Date().toISOString(),
       }, 
       "medicationRequest" : medicationRequest,
       "papersize" : "A5", 
-      "headerbase64Image" : ""
+      // "headerbase64Image" : ""
     })
 
 

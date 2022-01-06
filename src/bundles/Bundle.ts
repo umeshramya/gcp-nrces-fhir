@@ -168,7 +168,7 @@ export class Bundle {
     resource:DOCUMENT_REFERENCE;
     html : string,
     papersize : string
-    headerbase64Image:string
+    headerbase64Image?:string
 
   }  )=>{
     

@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "@googleapis/healthcare": "^3.2.0",
-    "js-ts-report": "^2.0.1",
+    "js-ts-report": "^2.0.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

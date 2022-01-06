@@ -6,7 +6,7 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
     super("PrescriptionRecord")
   }
 
-         "papersize" : "a5"
+  // "papersize" : "a5"
   async create(options: {
      compositionObj: COMPOSITOIN; 
      documentBundle:DOCUMENT_BUNDLE; 
@@ -27,7 +27,7 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
            "pdf" : "",
            "status" : "current",
            "title" : "Prescription",
-           "docStatus" : "final",
+           "docStatus" : options.compositionObj.status,
            "code" : [{"display" : "Prescription", "system" : "http://snomed.info/sct"}]
          },
          "headerbase64Image" : options.headerbase64Image,

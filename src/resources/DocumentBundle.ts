@@ -9,6 +9,7 @@ export interface DOCUMENT_BUNDLE {
   signJpegbase64?: string;
   identifier?: string;
   entry : any [];
+  signedDate:string
 }
 
 export class DocumentBundle implements ResourceMaster {
@@ -47,7 +48,7 @@ export class DocumentBundle implements ResourceMaster {
             display: "Author's Signature",
           },
         ],
-        when: options.date,
+        when: options.signedDate,
         who: {
           reference: `Practitioner/${options.practitionerId}`,
         },
@@ -61,6 +62,7 @@ export class DocumentBundle implements ResourceMaster {
   convertFhirToObject(options:any):DOCUMENT_BUNDLE {
     let ret:DOCUMENT_BUNDLE={
       date: options.timestamp,
+      signedDate:options.signature.when,
       practitionerId: `${options.signature.who.reference}`.substring(13),
       entry: options.entry,
       id:options.id,
