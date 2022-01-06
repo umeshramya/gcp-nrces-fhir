@@ -562,8 +562,10 @@ const prescriptionDoc = async () => {
         "date" : new Date().toISOString(),
         "entry" : [],
         "practitionerId" : practId,
-        
-      }, "medicationRequest" : medicationRequest
+      }, 
+      "medicationRequest" : medicationRequest,
+      "papersize" : "A5", 
+      "headerbase64Image" : ""
     })
 
 

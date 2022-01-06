@@ -171,10 +171,15 @@ export class Bundle {
     headerbase64Image:string
 
   }  )=>{
-    const pdf = new CreatePdf();
-    pdf.create(options.html, {"paperSize" : options.papersize,
-    "headerbase64Image" :options.headerbase64Image
+    
+  const pdf = new CreatePdf();
+   const curPdf =await  pdf.create(options.html, {
+    "paperSize" : options.papersize,
+    "headerbase64Image" :options.headerbase64Image,
+    "base64" : true,
   })
+  console.log(curPdf)
+  options.resource.pdf=curPdf as string
 
     const docRef= new DocumentReference().getFHIR(options.resource);
     this._documentReference = await new GcpFhirCRUD().createFhirResource(docRef, "DocumentReference")

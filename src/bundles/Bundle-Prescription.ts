@@ -18,6 +18,8 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
     options.compositionObj.section = this.sectionEntries as any;
      await this.createComposition(options.compositionObj)
      this.setBundleEntries("MedicationRequest", options.medicationRequest.id, options.medicationRequest)
+
+     
     await this.createDocumentRefernce({
       "resource" : {
            "patientId" : this.patient.Obj.id || "",
@@ -29,11 +31,11 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
            "code" : [{"display" : "Prescription", "system" : "http://snomed.info/sct"}]
          },
          "headerbase64Image" : options.headerbase64Image,
-         "html" : this.composition.text.div,
+         "html" : this.composition.data.text.div,
          "papersize" : options.papersize
     })
       
-)
+
      this.setBundleEntries("DocumentReference", this.documentReference.data.id, this.documentReference.data)
     await this.createBundle(options.documentBundle)
   }
