@@ -6,21 +6,34 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
     super("PrescriptionRecord")
   }
 
-  async create(options: { compositionObj: COMPOSITOIN; documentBundle:DOCUMENT_BUNDLE; medicationRequest: any }) {
+         "papersize" : "a5"
+  async create(options: {
+     compositionObj: COMPOSITOIN; 
+     documentBundle:DOCUMENT_BUNDLE; 
+     medicationRequest: any,
+     papersize:string, 
+     headerbase64Image : string}) {
 
     this.setSectionEntries("MedicationRequest", options.medicationRequest.id);
     options.compositionObj.section = this.sectionEntries as any;
      await this.createComposition(options.compositionObj)
      this.setBundleEntries("MedicationRequest", options.medicationRequest.id, options.medicationRequest)
     await this.createDocumentRefernce({
-       "patientId" : this.patient.Obj.id || "",
-       "patient" : this.patient.Obj,
-       "pdf" : "",
-       "status" : "current",
-       "title" : "Prescription",
-       "docStatus" : "final",
-       "code" : [{"display" : "Prescription", "system" : "http://snomed.info/sct"}]
-     })
+      "resource" : {
+           "patientId" : this.patient.Obj.id || "",
+           "patient" : this.patient.Obj,
+           "pdf" : "",
+           "status" : "current",
+           "title" : "Prescription",
+           "docStatus" : "final",
+           "code" : [{"display" : "Prescription", "system" : "http://snomed.info/sct"}]
+         },
+         "headerbase64Image" : options.headerbase64Image,
+         "html" : this.composition.text.div,
+         "papersize" : options.papersize
+    })
+      
+)
      this.setBundleEntries("DocumentReference", this.documentReference.data.id, this.documentReference.data)
     await this.createBundle(options.documentBundle)
   }

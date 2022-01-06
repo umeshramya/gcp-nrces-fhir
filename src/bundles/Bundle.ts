@@ -1,4 +1,5 @@
-import { Console } from "console";
+import {CreatePdf} from "js-ts-report"
+import { stringify } from "querystring";
 import {
   Composition,
   DocumentBundle,
@@ -163,8 +164,19 @@ export class Bundle {
     return this._documentReference;
   }
 
-  protected createDocumentRefernce =async(resource:DOCUMENT_REFERENCE)=>{
-    const docRef= new DocumentReference().getFHIR(resource);
+  protected createDocumentRefernce =async(options:{
+    resource:DOCUMENT_REFERENCE;
+    html : string,
+    papersize : string
+    headerbase64Image:string
+
+  }  )=>{
+    const pdf = new CreatePdf();
+    pdf.create(options.html, {"paperSize" : options.papersize,
+    "headerbase64Image" :options.headerbase64Image
+  })
+
+    const docRef= new DocumentReference().getFHIR(options.resource);
     this._documentReference = await new GcpFhirCRUD().createFhirResource(docRef, "DocumentReference")
   }
   
