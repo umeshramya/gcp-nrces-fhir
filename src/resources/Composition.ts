@@ -66,6 +66,7 @@ export interface COMPOSITOIN {
     organizationId: string;
     status: compositionStatus;
     type: compositionType;
+    documentDatahtml?:string
     section: []
 }
 export class Composition extends ResourceMain implements ResourceMaster {
@@ -94,7 +95,14 @@ export class Composition extends ResourceMain implements ResourceMaster {
             "language": "en-IN",
             "text": {
                 "status": "generated",
-                "div": `<div xmlns="http://www.w3.org/1999/xhtml"><h4>Narrative with Details</h4><p>This is a OP Consult Note for Patient ${options.patient.name}.  ${options.patient.healthNumber}; ph: ${options.patient.mobile}; gender: ${options.patient.gender}; Age: ${new Age().dobToAge(new Date(options.patient.dob))}</p></div>`
+                "div": `<div xmlns="http://www.w3.org/1999/xhtml"><p>
+                <div>Date:-${ new Date(options.date).toDateString()}</div>
+                <div>Patient:- ${options.patient.name}.  ${options.patient.healthNumber}</div>
+                <div>MRN:- ${options.patient.MRN}</div>
+                <div>gender/Age: ${options.patient.gender}/${new Age().dobToAge(new Date(options.patient.dob))} ph: ${options.patient.mobile}; </div>
+                <hr/>
+                <div>${options.documentDatahtml}</div>
+                </div>`
             },
             "identifier": {
                 "system": "https://ndhm.in/phr",
