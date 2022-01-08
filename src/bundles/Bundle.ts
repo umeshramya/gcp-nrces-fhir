@@ -169,6 +169,8 @@ export class Bundle {
     html : string,
     papersize : string
     headerbase64Image?:string
+    qrCode?:string,
+    esign ?: {imageBase64 : string, nameLine1 : string, nameLine2? : string} 
 
   }  )=>{
     
@@ -177,6 +179,8 @@ export class Bundle {
     "paperSize" : options.papersize,
     "headerbase64Image" :options.headerbase64Image,
     "base64" : true,
+    "qrcode" : options.qrCode,
+    "esign" :options.esign ?  {"image" : options.esign?.imageBase64, "nameLine1" : options.esign?.nameLine1, "nameLine2" : options.esign?.nameLine2 || undefined} : undefined
   })
   console.log(curPdf)
   options.resource.pdf=curPdf as string
