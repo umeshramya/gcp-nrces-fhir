@@ -555,7 +555,7 @@ const updateprescriptionDoc = async () => {
     const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
     const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-    const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414";
+    const MedicationRequestId = "82c9b381-afbe-4137-ac76-2e6b5039d507";
 
     const prescription = new PrescriptionBundle();
 
