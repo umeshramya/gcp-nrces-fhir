@@ -169,7 +169,7 @@ export class Bundle {
     "qrcode" : options.qrCode,
     "esign" :options.esign ?  {"image" : options.esign?.imageBase64, "nameLine1" : options.esign?.nameLine1, "nameLine2" : options.esign?.nameLine2 || undefined} : undefined
   })
-  console.log(curPdf)
+ 
   options.resource.pdf=curPdf as string
 
     const docRef= new DocumentReference().getFHIR(options.resource);
@@ -177,9 +177,59 @@ export class Bundle {
   }
 
 
+/**
+ * This updates the document refernce
+ * @param options 
+ */
+  protected updateDocumentRefernce=async(options:{
+    resource:DOCUMENT_REFERENCE;
+    html : string,
+    papersize : string
+    headerbase64Image?:string
+    qrCode?:string,
+    esign ?: {imageBase64 : string, nameLine1 : string, nameLine2? : string} 
 
+  })=>{
+
+    const pdf = new CreatePdf();
+    const curPdf =await  pdf.create(options.html, {
+     "paperSize" : options.papersize,
+     "headerbase64Image" :options.headerbase64Image,
+     "base64" : true,
+     "qrcode" : options.qrCode,
+     "esign" :options.esign ?  {"image" : options.esign?.imageBase64, "nameLine1" : options.esign?.nameLine1, "nameLine2" : options.esign?.nameLine2 || undefined} : undefined
+   })
   
+   options.resource.pdf=curPdf as string
+ 
+     const docRef= new DocumentReference().getFHIR(options.resource);
+     this._documentReference = await new GcpFhirCRUD().updateFhirResource(docRef, options.resource.id || "" ,"DocumentReference")
+
+  }
+
+  /**
+   * returns document reference
+   * @param id string
+   * @returns resource documentreference
+   */
+  protected getDocumentRefernce = async(id:string):Promise<any>=>{
+    return await new GcpFhirCRUD().getFhirResource(id, "DocumentReference")
+  }
+  /**
+   * delete doumentreference
+   * @param id string
+   * @returns 
+   */
+  protected deleteDocumentRefernce = async(id:string):Promise<any>=>{
+    return await new GcpFhirCRUD().deleteFhirResource(id, "DocumentReference")
+  }
+
+
   // Bundle
+  private _bundle: any;
+  protected get bundle(): any {
+    return this._bundle;
+  }
   /**
    * Creats new Bundle
    * @param document 
@@ -188,7 +238,7 @@ export class Bundle {
     document.entry=this.bundleEntries;
     const documentBundle = new DocumentBundle();
     const body = documentBundle.getFHIR(document);
-    await new GcpFhirCRUD().createFhirResource(body, "Bundle")
+    this._bundle = await new GcpFhirCRUD().createFhirResource(body, "Bundle")
   }
 
 
