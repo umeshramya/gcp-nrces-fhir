@@ -1,4 +1,4 @@
-import {CreatePdf} from "js-ts-report"
+import { CreatePdf } from "js-ts-report";
 import {
   Composition,
   DocumentBundle,
@@ -17,18 +17,16 @@ import {
   resourceType,
 } from "..";
 
-
 type SectionEntries = {
   reference: string;
   type: resourceType;
-}
+};
 
 type BundleEntries = {
-  fullUrl: string,
-  resource: any,
-}
+  fullUrl: string;
+  resource: any;
+};
 import { compositionType, COMPOSITOIN } from "../resources/Composition";
-
 
 export class Bundle {
   private _compositionType: compositionType;
@@ -41,20 +39,32 @@ export class Bundle {
   public get sectionEntries(): SectionEntries[] {
     return this._sectionEntries;
   }
-  public setSectionEntries = (resourceType: resourceType, id: string) => {
-    this._sectionEntries.push({ "reference": `${resourceType}/${id}`, "type": resourceType })
-  }
+  // public setSectionEntries = (resourceType: resourceType, id: string) => {
+  //   this._sectionEntries.push({
+  //     reference: `${resourceType}/${id}`,
+  //     type: resourceType,
+  //   });
+  // };
 
+
+  public setSectionEntries = (section:any) => {
+    this._sectionEntries.push(section);
+  };
 
   private _bundleEntries: BundleEntries[] = [];
   public get bundleEntries(): BundleEntries[] {
     return this._bundleEntries;
   }
-  public setBundleEntries = (resourceType: resourceType, id: string, resource: any) => {
-    this._bundleEntries.push({ "fullUrl": `${resourceType}/${id}`, "resource": resource })
-  }
-
-
+  public setBundleEntries = (
+    resourceType: resourceType,
+    id: string,
+    resource: any
+  ) => {
+    this._bundleEntries.push({
+      fullUrl: `${resourceType}/${id}`,
+      resource: resource,
+    });
+  };
 
   // _indentity
   private _patient!: { Obj: PATIENT; body: any };
@@ -122,15 +132,14 @@ export class Bundle {
   /**
    * clears both section etries and also bundle entries
    */
-  protected clearEntries =()=>{
-    this._sectionEntries=[];
-    this._bundleEntries=[];
-  }
+  protected clearEntries = () => {
+    this._sectionEntries = [];
+    this._bundleEntries = [];
+  };
 
   protected createComposition = async (
     compositionObj: COMPOSITOIN
   ): Promise<any> => {
-
     const comp = new Composition();
     comp.mapCompositionType(this._compositionType);
     const body = comp.getFHIR(compositionObj);
@@ -138,20 +147,88 @@ export class Bundle {
       body,
       "Composition"
     );
-    this.setBundleEntries("Composition", this._composition.data.id, this.composition.data)
-    this.setBundleEntries("Patient", this.patient.Obj.id || "", this.patient.body);
-    this.setBundleEntries("Organization", this.organization.Obj.id || "", this.organization.body);
-    this.setBundleEntries("Encounter", this.encounter.Obj.id || "", this.encounter.body)
+    this.setBundleEntries(
+      "Composition",
+      this._composition.data.id,
+      this.composition.data
+    );
+    this.setBundleEntries(
+      "Patient",
+      this.patient.Obj.id || "",
+      this.patient.body
+    );
+    this.setBundleEntries(
+      "Organization",
+      this.organization.Obj.id || "",
+      this.organization.body
+    );
+    this.setBundleEntries(
+      "Encounter",
+      this.encounter.Obj.id || "",
+      this.encounter.body
+    );
     this.practioners.forEach((el) => {
-      this.setBundleEntries("Practitioner", el.Obj.id || "", el.body)
-    })
-    
+      this.setBundleEntries("Practitioner", el.Obj.id || "", el.body);
+    });
   };
 
+  /**
+   * Updates composition by id
+   * @param compositionObj : COMPOSITOIN
+   */
+  protected updateComposition = async (
+    compositionObj: COMPOSITOIN
+  ): Promise<any> => {
+    const comp = new Composition();
+    comp.mapCompositionType(this._compositionType);
+    const body = comp.getFHIR(compositionObj);
+    this._composition = await new GcpFhirCRUD().updateFhirResource(
+      body,
+      compositionObj.id || "",
+      "Composition"
+    );
+    this.setBundleEntries(
+      "Composition",
+      this._composition.data.id,
+      this.composition.data
+    );
+    this.setBundleEntries(
+      "Patient",
+      this.patient.Obj.id || "",
+      this.patient.body
+    );
+    this.setBundleEntries(
+      "Organization",
+      this.organization.Obj.id || "",
+      this.organization.body
+    );
+    this.setBundleEntries(
+      "Encounter",
+      this.encounter.Obj.id || "",
+      this.encounter.body
+    );
+    this.practioners.forEach((el) => {
+      this.setBundleEntries("Practitioner", el.Obj.id || "", el.body);
+    });
+  };
 
+  /**
+   * returns composition
+   * @param id string
+   * @returns resource documentreference
+   */
+  protected getComposition = async (id: string): Promise<any> => {
+    return await new GcpFhirCRUD().getFhirResource(id, "Composition");
+  };
 
-
-
+  /**
+   * delete Composition
+   * @param id string
+   * @returns
+   */
+  protected deleteComposition = async (id: string): Promise<any> => {
+    return await new GcpFhirCRUD().deleteFhirResource(id, "Composition");
+  };
 
   // _documentReference
   private _documentReference: any;
@@ -159,79 +236,91 @@ export class Bundle {
     return this._documentReference;
   }
 
-  protected createDocumentRefernce =async(options:{
-    resource:DOCUMENT_REFERENCE;
-    html : string,
-    papersize : string
-    headerbase64Image?:string
-    qrCode?:string,
-    esign ?: {imageBase64 : string, nameLine1 : string, nameLine2? : string} 
-
-  }  )=>{
-    
-  const pdf = new CreatePdf();
-   const curPdf =await  pdf.create(options.html, {
-    "paperSize" : options.papersize,
-    "headerbase64Image" :options.headerbase64Image,
-    "base64" : true,
-    "qrcode" : options.qrCode,
-    "esign" :options.esign ?  {"image" : options.esign?.imageBase64, "nameLine1" : options.esign?.nameLine1, "nameLine2" : options.esign?.nameLine2 || undefined} : undefined
-  })
- 
-  options.resource.pdf=curPdf as string
-
-    const docRef= new DocumentReference().getFHIR(options.resource);
-    this._documentReference = await new GcpFhirCRUD().createFhirResource(docRef, "DocumentReference")
-  }
-
-
-/**
- * This updates the document refernce
- * @param options 
- */
-  protected updateDocumentRefernce=async(options:{
-    resource:DOCUMENT_REFERENCE;
-    html : string,
-    papersize : string
-    headerbase64Image?:string
-    qrCode?:string,
-    esign ?: {imageBase64 : string, nameLine1 : string, nameLine2? : string} 
-
-  })=>{
-
+  protected createDocumentRefernce = async (options: {
+    resource: DOCUMENT_REFERENCE;
+    html: string;
+    papersize: string;
+    headerbase64Image?: string;
+    qrCode?: string;
+    esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
+  }) => {
     const pdf = new CreatePdf();
-    const curPdf =await  pdf.create(options.html, {
-     "paperSize" : options.papersize,
-     "headerbase64Image" :options.headerbase64Image,
-     "base64" : true,
-     "qrcode" : options.qrCode,
-     "esign" :options.esign ?  {"image" : options.esign?.imageBase64, "nameLine1" : options.esign?.nameLine1, "nameLine2" : options.esign?.nameLine2 || undefined} : undefined
-   })
-  
-   options.resource.pdf=curPdf as string
- 
-     const docRef= new DocumentReference().getFHIR(options.resource);
-     this._documentReference = await new GcpFhirCRUD().updateFhirResource(docRef, options.resource.id || "" ,"DocumentReference")
+    const curPdf = await pdf.create(options.html, {
+      paperSize: options.papersize,
+      headerbase64Image: options.headerbase64Image,
+      base64: true,
+      qrcode: options.qrCode,
+      esign: options.esign
+        ? {
+            image: options.esign?.imageBase64,
+            nameLine1: options.esign?.nameLine1,
+            nameLine2: options.esign?.nameLine2 || undefined,
+          }
+        : undefined,
+    });
 
-  }
+    options.resource.pdf = curPdf as string;
+
+    const docRef = new DocumentReference().getFHIR(options.resource);
+    this._documentReference = await new GcpFhirCRUD().createFhirResource(
+      docRef,
+      "DocumentReference"
+    );
+  };
+
+  /**
+   * This updates the document refernce
+   * @param options
+   */
+  protected updateDocumentRefernce = async (options: {
+    resource: DOCUMENT_REFERENCE;
+    html: string;
+    papersize: string;
+    headerbase64Image?: string;
+    qrCode?: string;
+    esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
+  }) => {
+    const pdf = new CreatePdf();
+    const curPdf = await pdf.create(options.html, {
+      paperSize: options.papersize,
+      headerbase64Image: options.headerbase64Image,
+      base64: true,
+      qrcode: options.qrCode,
+      esign: options.esign
+        ? {
+            image: options.esign?.imageBase64,
+            nameLine1: options.esign?.nameLine1,
+            nameLine2: options.esign?.nameLine2 || undefined,
+          }
+        : undefined,
+    });
+
+    options.resource.pdf = curPdf as string;
+
+    const docRef = new DocumentReference().getFHIR(options.resource);
+    this._documentReference = await new GcpFhirCRUD().updateFhirResource(
+      docRef,
+      options.resource.id || "",
+      "DocumentReference"
+    );
+  };
 
   /**
    * returns document reference
    * @param id string
    * @returns resource documentreference
    */
-  protected getDocumentRefernce = async(id:string):Promise<any>=>{
-    return await new GcpFhirCRUD().getFhirResource(id, "DocumentReference")
-  }
+  protected getDocumentRefernce = async (id: string): Promise<any> => {
+    return await new GcpFhirCRUD().getFhirResource(id, "DocumentReference");
+  };
   /**
    * delete doumentreference
    * @param id string
-   * @returns 
+   * @returns
    */
-  protected deleteDocumentRefernce = async(id:string):Promise<any>=>{
-    return await new GcpFhirCRUD().deleteFhirResource(id, "DocumentReference")
-  }
-
+  protected deleteDocumentRefernce = async (id: string): Promise<any> => {
+    return await new GcpFhirCRUD().deleteFhirResource(id, "DocumentReference");
+  };
 
   // Bundle
   private _bundle: any;
@@ -240,43 +329,50 @@ export class Bundle {
   }
   /**
    * Creats new Bundle
-   * @param document 
+   * @param document
    */
-  protected createBundle = async(document:DOCUMENT_BUNDLE)=>{
-    document.entry=this.bundleEntries;
+  protected createBundle = async (document: DOCUMENT_BUNDLE) => {
+    document.entry = this.bundleEntries;
     const documentBundle = new DocumentBundle();
     const body = documentBundle.getFHIR(document);
-    this._bundle = await new GcpFhirCRUD().createFhirResource(body, "Bundle")
-  }
+    this._bundle = await new GcpFhirCRUD().createFhirResource(body, "Bundle");
+  };
 
+  /**
+   * Creats new Bundle
+   * @param document
+   */
+  protected updateBundle = async (document: DOCUMENT_BUNDLE) => {
+    document.entry = this.bundleEntries;
+    const documentBundle = new DocumentBundle();
+    const body = documentBundle.getFHIR(document);
+    this._bundle = await new GcpFhirCRUD().updateFhirResource(
+      body,
+      document.id || "",
+      "Bundle"
+    );
+  };
 
-/**
- * This gets the document bundle by id
- * @param id id of bundle
- * @returns resource
- */
-  async get(id:string):Promise<any>{
+  /**
+   * This gets the document bundle by id
+   * @param id id of bundle
+   * @returns resource
+   */
+  async get(id: string): Promise<any> {
     return await new GcpFhirCRUD().getFhirResource(id, "Bundle");
   }
 
-
   /**
    * This deletes the document bundle
-   * @param id id of 
-   * @returns 
+   * @param id id of
+   * @returns
    */
-  async delete(id:string):Promise<any>{
-   return await new GcpFhirCRUD().deleteFhirResource(id, "Bundle");
+  async delete(id: string): Promise<any> {
+    return await new GcpFhirCRUD().deleteFhirResource(id, "Bundle");
   }
-  
-
-
 }
-
-
 
 export interface BundleInterface {
   create(options: any): any;
-  update(options:any): any;
+  update(options: any): any;
 }
-
