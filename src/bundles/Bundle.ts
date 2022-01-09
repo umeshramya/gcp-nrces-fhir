@@ -119,10 +119,18 @@ export class Bundle {
   public get composition(): any {
     return this._composition;
   }
+  /**
+   * clears both section etries and also bundle entries
+   */
+  protected clearEntries =()=>{
+    this._sectionEntries=[];
+    this._bundleEntries=[];
+  }
 
   protected createComposition = async (
     compositionObj: COMPOSITOIN
   ): Promise<any> => {
+
     const comp = new Composition();
     comp.mapCompositionType(this._compositionType);
     const body = comp.getFHIR(compositionObj);

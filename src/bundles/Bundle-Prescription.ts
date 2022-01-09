@@ -22,7 +22,7 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
 
     
     }) {
-
+    this.clearEntries();
     this.setSectionEntries("MedicationRequest", options.medicationRequest.id);
     options.compositionObj.documentDatahtml= options.medicationRequest.text.div
     options.compositionObj.section = this.sectionEntries as any;
