@@ -5,6 +5,10 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
   constructor() {
     super("PrescriptionRecord")
   }
+  update(options: any) {
+    throw new Error("Method not implemented.");
+  }
+
 
   // "papersize" : "a5"
   async create(options: {
@@ -41,7 +45,6 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
          "papersize" : options.papersize,
          "qrCode" : options.qrCode ? options.qrCode : undefined,
          "esign" : options.esign ? options.esign : undefined
-
     })
       
 
@@ -49,11 +52,6 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
     await this.createBundle(options.documentBundle)
   }
 
-  update() {
-    throw new Error("Method not implemented.");
-  }
-  delete() {
-    throw new Error("Method not implemented.");
-  }
+ 
 
 }

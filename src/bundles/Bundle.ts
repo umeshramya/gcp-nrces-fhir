@@ -1,5 +1,4 @@
 import {CreatePdf} from "js-ts-report"
-import { stringify } from "querystring";
 import {
   Composition,
   DocumentBundle,
@@ -29,7 +28,7 @@ type BundleEntries = {
   resource: any,
 }
 import { compositionType, COMPOSITOIN } from "../resources/Composition";
-interface IDENTITY { }
+
 
 export class Bundle {
   private _compositionType: compositionType;
@@ -143,18 +142,6 @@ export class Bundle {
 
 
 
-  // Bundle
-  private _bundle: any;
-  public get bundle(): any {
-    return this._bundle;
-  }
-  
-  protected createBundle = async(document:DOCUMENT_BUNDLE)=>{
-    document.entry=this.bundleEntries;
-    const documentBundle = new DocumentBundle();
-    const body = documentBundle.getFHIR(document);
-    this._bundle = await new GcpFhirCRUD().createFhirResource(body, "Bundle")
-  }
 
 
 
@@ -188,14 +175,50 @@ export class Bundle {
     const docRef= new DocumentReference().getFHIR(options.resource);
     this._documentReference = await new GcpFhirCRUD().createFhirResource(docRef, "DocumentReference")
   }
+
+
+
+  
+  // Bundle
+  /**
+   * Creats new Bundle
+   * @param document 
+   */
+  protected createBundle = async(document:DOCUMENT_BUNDLE)=>{
+    document.entry=this.bundleEntries;
+    const documentBundle = new DocumentBundle();
+    const body = documentBundle.getFHIR(document);
+    await new GcpFhirCRUD().createFhirResource(body, "Bundle")
+  }
+
+
+/**
+ * This gets the document bundle by id
+ * @param id id of bundle
+ * @returns resource
+ */
+  async get(id:string):Promise<any>{
+    return await new GcpFhirCRUD().getFhirResource(id, "Bundle");
+  }
+
+
+  /**
+   * This deletes the document bundle
+   * @param id id of 
+   * @returns 
+   */
+  async delete(id:string):Promise<any>{
+   return await new GcpFhirCRUD().deleteFhirResource(id, "Bundle");
+  }
   
 
 
 }
 
+
+
 export interface BundleInterface {
   create(options: any): any;
-  update(): any;
-  delete(): any;
+  update(options:any): any;
 }
 
