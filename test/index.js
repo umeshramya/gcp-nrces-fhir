@@ -531,7 +531,7 @@ const prescriptionDoc = async () => {
     })
 
 
-    // console.log(prescription.composition.data.section[0].entry)
+    // fc47c7c5-f68e-499a-a4c9-5dec967b035d
     console.log(prescription.bundle.data);
 
 
@@ -542,7 +542,69 @@ const prescriptionDoc = async () => {
 
 
 }
-prescriptionDoc()
+// prescriptionDoc()
+
+
+
+const updateprescriptionDoc = async () => {
+  try {
+
+
+    const gcpFhirCRUD = new GcpFhirCRUD()
+    const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+    const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+    const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+    const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+    const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414";
+
+    const prescription = new PrescriptionBundle();
+
+    await prescription.setEncounter(encounterId);
+    await prescription.setPatient(patientId);
+    await prescription.setOrganization(orgId);
+    await prescription.setPractioner(practId);
+    const medicationRequest =(await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
+    
+    await prescription.update({
+      "bundleId" : "fc47c7c5-f68e-499a-a4c9-5dec967b035d",
+      "compositionObj": {
+        "author": [{ "reference": `Practitioner/${practId}` }],
+        "date": new Date().toISOString(),
+        "encounter": prescription.encounter.Obj,
+        "encounterId": encounterId,
+        "patient": prescription.patient.Obj,
+        "patientId": patientId,
+        "organization": prescription.practioners[0].Obj,
+        "organizationId": orgId,
+        "type": "PrescriptionRecord",
+        "status": "entered-in-error",
+        "section": []
+      }, "documentBundle" :{
+        "date" : new Date().toISOString(),
+        "entry" : [],
+        "practitionerId" : practId,
+        "signedDate":new Date().toISOString(),
+      }, 
+      "medicationRequest" : medicationRequest,
+      "papersize" : "A5", 
+      // "headerbase64Image" : ""
+    })
+
+
+    // fc47c7c5-f68e-499a-a4c9-5dec967b035d
+    console.log(prescription.bundle.data);
+
+
+  } catch (error) {
+    console.log(error)
+  }
+
+
+
+}
+
+updateprescriptionDoc()
+
 
 
 
