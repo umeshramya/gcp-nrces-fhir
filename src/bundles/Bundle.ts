@@ -46,8 +46,7 @@ export class Bundle {
   //   });
   // };
 
-
-  public setSectionEntries = (section:any) => {
+  public setSectionEntries = (section: any) => {
     this._sectionEntries.push(section);
   };
 
@@ -238,28 +237,28 @@ export class Bundle {
 
   protected createDocumentRefernce = async (options: {
     resource: DOCUMENT_REFERENCE;
-    html: string;
-    papersize: string;
-    headerbase64Image?: string;
-    qrCode?: string;
-    esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
+    // html: string;
+    // papersize: string;
+    // headerbase64Image?: string;
+    // qrCode?: string;
+    // esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
   }) => {
-    const pdf = new CreatePdf();
-    const curPdf = await pdf.create(options.html, {
-      paperSize: options.papersize,
-      headerbase64Image: options.headerbase64Image,
-      base64: true,
-      qrcode: options.qrCode,
-      esign: options.esign
-        ? {
-            image: options.esign?.imageBase64,
-            nameLine1: options.esign?.nameLine1,
-            nameLine2: options.esign?.nameLine2 || undefined,
-          }
-        : undefined,
-    });
+    // const pdf = new CreatePdf();
+    // const curPdf = await pdf.create(options.html, {
+    //   paperSize: options.papersize,
+    //   headerbase64Image: options.headerbase64Image,
+    //   base64: true,
+    //   qrcode: options.qrCode,
+    //   esign: options.esign
+    //     ? {
+    //         image: options.esign?.imageBase64,
+    //         nameLine1: options.esign?.nameLine1,
+    //         nameLine2: options.esign?.nameLine2 || undefined,
+    //       }
+    //     : undefined,
+    // });
 
-    options.resource.pdf = curPdf as string;
+    // options.resource.pdf = curPdf as string;
 
     const docRef = new DocumentReference().getFHIR(options.resource);
     this._documentReference = await new GcpFhirCRUD().createFhirResource(
@@ -274,28 +273,28 @@ export class Bundle {
    */
   protected updateDocumentRefernce = async (options: {
     resource: DOCUMENT_REFERENCE;
-    html: string;
-    papersize: string;
-    headerbase64Image?: string;
-    qrCode?: string;
-    esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
+    // html: string;
+    // papersize: string;
+    // headerbase64Image?: string;
+    // qrCode?: string;
+    // esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
   }) => {
-    const pdf = new CreatePdf();
-    const curPdf = await pdf.create(options.html, {
-      paperSize: options.papersize,
-      headerbase64Image: options.headerbase64Image,
-      base64: true,
-      qrcode: options.qrCode,
-      esign: options.esign
-        ? {
-            image: options.esign?.imageBase64,
-            nameLine1: options.esign?.nameLine1,
-            nameLine2: options.esign?.nameLine2 || undefined,
-          }
-        : undefined,
-    });
+    // const pdf = new CreatePdf();
+    // const curPdf = await pdf.create(options.html, {
+    //   paperSize: options.papersize,
+    //   headerbase64Image: options.headerbase64Image,
+    //   base64: true,
+    //   qrcode: options.qrCode,
+    //   esign: options.esign
+    //     ? {
+    //         image: options.esign?.imageBase64,
+    //         nameLine1: options.esign?.nameLine1,
+    //         nameLine2: options.esign?.nameLine2 || undefined,
+    //       }
+    //     : undefined,
+    // });
 
-    options.resource.pdf = curPdf as string;
+    // options.resource.pdf = curPdf as string;
 
     const docRef = new DocumentReference().getFHIR(options.resource);
     this._documentReference = await new GcpFhirCRUD().updateFhirResource(
@@ -369,6 +368,52 @@ export class Bundle {
    */
   async delete(id: string): Promise<any> {
     return await new GcpFhirCRUD().deleteFhirResource(id, "Bundle");
+  }
+
+  /**
+   *This return pdf in base64 string or buffer
+   * @param gcpFhirId fhir id of bundle
+   */
+  async getBundlePdf(options: {
+    gcpFhirId: string;
+    papersize: any;
+    headerbase64Image: string;
+    base64: boolean;
+    qrcode: string;
+    esign: { imageBase64: any; nameLine1: any; nameLine2: any };
+  }): Promise<string | Buffer> {
+    const gcpfhirCrud = new GcpFhirCRUD();
+    const resource = (
+      await gcpfhirCrud.getFhirResource(options.gcpFhirId, "Bundle")
+    ).data;
+    // write code for extracting text from composition
+    const compositionResource = resource.data.entry.filter(
+      (el: any) => el.resource.resourceType == "Composition"
+    )[0].resource.id;
+
+    const composition: COMPOSITOIN = new Composition().convertFhirToObject(
+      compositionResource
+    ) as COMPOSITOIN;
+    const html = composition.documentDatahtml || "";
+
+    // write code create pdf from the text;
+
+    const pdf = new CreatePdf();
+    const curPdf = await pdf.create(html, {
+      paperSize: options.papersize,
+      headerbase64Image: options.headerbase64Image,
+      base64: options.base64,
+      qrcode: options.qrcode,
+      esign: options.esign
+        ? {
+            image: options.esign?.imageBase64,
+            nameLine1: options.esign?.nameLine1,
+            nameLine2: options.esign?.nameLine2 || "",
+          }
+        : undefined,
+    });
+
+    return curPdf;
   }
 }
 
