@@ -554,7 +554,7 @@ const getPrescriptionDoc = async () => {
     // "headerbase64Image" : "",
     "papersize": "a5",
     "qrcode": `https://wwww.nicehms.com/api/bundle/${id}`,
-    // "esign" : {""}
+    // "esignbase64" : 
   })
 
   console.log(pdf)
