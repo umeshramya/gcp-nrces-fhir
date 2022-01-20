@@ -339,7 +339,7 @@ export class Bundle {
     base64: boolean;
     qrcode: string;
     esignbase64?: string
-  }): Promise<string | Buffer> {
+  }): Promise<any> {
     const gcpfhirCrud = new GcpFhirCRUD();
     const resource = (
       await gcpfhirCrud.getFhirResource(options.gcpFhirId, "Bundle")
@@ -379,7 +379,7 @@ export class Bundle {
         
     });
 
-    return curPdf;
+    return {bundle: resource, pdf : curPdf};
   }
 }
 
