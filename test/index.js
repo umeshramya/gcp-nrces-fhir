@@ -548,8 +548,10 @@ const getPrescriptionDoc = async () => {
   // id = "fc47c7c5-f68e-499a-a4c9-5dec967b035d";
   id = "a861037d-8b0b-4b4b-9bf7-574e89b94c49"
   const prescriptionBundle = new PrescriptionBundle();
+  const bundle =await prescriptionBundle.get(id)
+
   const pdf = await prescriptionBundle.getBundlePdf({
-    "gcpFhirId": id,
+    "bundle" : bundle,
     "base64": true,
     // "headerbase64Image" : "",
     "papersize": "a5",

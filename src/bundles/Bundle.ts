@@ -333,19 +333,14 @@ export class Bundle {
    * @param gcpFhirId fhir id of bundle
    */
   async getBundlePdf(options: {
-    gcpFhirId: string;
+    bundle:any
     papersize: any;
     headerbase64Image?: string;
     base64: boolean;
     qrcode: string;
     esignbase64?: string
-  }): Promise<any> {
-    const gcpfhirCrud = new GcpFhirCRUD();
-    const resource = (
-      await gcpfhirCrud.getFhirResource(options.gcpFhirId, "Bundle")
-
-    )
-
+  }): Promise<string | Buffer> {
+    const resource = options.bundle
     const  practitioner = resource.data.entry.filter(
       (el: any) => el.resource.resourceType == "Practitioner"
     )[0].resource
@@ -360,11 +355,7 @@ export class Bundle {
       sign = options.esignbase64 || emptySign;
     }
     const html = composition.text.div
-
-
-
     // write code create pdf from the text;
-
     const pdf = new CreatePdf();
     const curPdf = await pdf.create(html, {
       paperSize: options.papersize,
@@ -379,7 +370,7 @@ export class Bundle {
         
     });
 
-    return {bundle: resource, pdf : curPdf};
+    return curPdf
   }
 }
 
