@@ -413,7 +413,6 @@ const CreateMedicationRequest = async () => {
       "intent": "order",
       "status": "active",
       "medicationCodeableConcept": [{ "display": "Tab Pantop 40mg", "system": "http://snomed.info/sct" }, { "display": "Tab DOLO 650mg", "system": "http://snomed.info/sct" }],
-      "dosageInstruction": dosageInstruction,
       "reasonCode": [{ "display": "LRTI", "system": "http://snomed.info/sct" }],
       "DOSAGE_INSTRUCTION": dosageObj
 
@@ -430,7 +429,7 @@ const CreateMedicationRequest = async () => {
 }
 
 
-// CreateMedicationRequest();
+CreateMedicationRequest();
 
 // Composition
 const composition = new Composition()
@@ -560,7 +559,7 @@ const getPrescriptionDoc = async () => {
   console.log(pdf)
 }
 
-getPrescriptionDoc()
+// getPrescriptionDoc()
 
 
 

@@ -20,7 +20,7 @@ export interface MEDICATION_REQUEST {
     intent: MedicatioRequestIntent;
     medicationCodeableConcept: CodeDisplay[]
     reasonCode: CodeDisplay[]
-    dosageInstruction: any[]
+    // dosageInstruction: any[]
     DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[]
 
 }
@@ -36,14 +36,29 @@ export interface DOSAGE_INSTRUCTION {
 export class MedicationRequest extends ResourceMain implements ResourceMaster {
     getFHIR(options: MEDICATION_REQUEST): any {
 
+        const dosageInstruction = options.DOSAGE_INSTRUCTION ? options.DOSAGE_INSTRUCTION.map(el => {
+            return this.createDosageInstrction(el)
+        }) : []
 
-        let medArray: string = ""
+
+
+        let medArray: string =
+            `<table><tr><th>Medcine</th><th>Frequency</th><th>Duration</th><th>Instructions</th><th>Route</th></tr>`
+
+        // options.medicationCodeableConcept.forEach((el, i) => {
+
+        //     medArray += `<p>${el.display}  ${options.DOSAGE_INSTRUCTION![i].timing}  &nbsp ${options.DOSAGE_INSTRUCTION![i].text}    &nbsp ${options.DOSAGE_INSTRUCTION![i].method[0].display}  &nbsp ${options.DOSAGE_INSTRUCTION![i].route[0].display}</p>`
+
+        // })
+
 
         options.medicationCodeableConcept.forEach((el, i) => {
-
-            medArray += `<p>${el.display}  ${options.DOSAGE_INSTRUCTION![i].timing}  &nbsp ${options.DOSAGE_INSTRUCTION![i].text}    &nbsp ${options.DOSAGE_INSTRUCTION![i].method[0].display}  &nbsp ${options.DOSAGE_INSTRUCTION![i].route[0].display}</p>`
+            medArray +=
+                `<tr><td>${el.display}</td><td>${options.DOSAGE_INSTRUCTION![i].timing}</td> <td>${options.DOSAGE_INSTRUCTION![i].text}</td><td>${options.DOSAGE_INSTRUCTION![i].method[0].display}</td><td>${options.DOSAGE_INSTRUCTION![i].route[0].display}</td></tr>`
 
         })
+
+        medArray += `</table>`
 
 
 
@@ -74,7 +89,7 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
                 },
             ],
             reasonReference: [{ reference: options.reasonReferenceCondtionId ? `Condition/${options.reasonReferenceCondtionId}` : undefined }],
-            dosageInstruction: options.dosageInstruction
+            dosageInstruction: dosageInstruction
         };
 
         return body
