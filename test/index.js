@@ -429,7 +429,7 @@ const CreateMedicationRequest = async () => {
 }
 
 
-CreateMedicationRequest();
+// CreateMedicationRequest();
 
 // Composition
 const composition = new Composition()
@@ -545,7 +545,8 @@ const prescriptionDoc = async () => {
 // prescriptionDoc()
 
 const getPrescriptionDoc = async () => {
-  id = "fc47c7c5-f68e-499a-a4c9-5dec967b035d";
+  // id = "fc47c7c5-f68e-499a-a4c9-5dec967b035d";
+  id = "a861037d-8b0b-4b4b-9bf7-574e89b94c49"
   const prescriptionBundle = new PrescriptionBundle();
   const pdf = await prescriptionBundle.getBundlePdf({
     "gcpFhirId": id,
@@ -559,7 +560,7 @@ const getPrescriptionDoc = async () => {
   console.log(pdf)
 }
 
-// getPrescriptionDoc()
+getPrescriptionDoc()
 
 
 
