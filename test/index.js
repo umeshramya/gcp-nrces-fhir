@@ -504,8 +504,8 @@ const prescriptionDoc = async () => {
     await prescription.setPatient(patientId);
     await prescription.setOrganization(orgId);
     await prescription.setPractioner(practId);
-    const medicationRequest =(await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
-    
+    const medicationRequest = (await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
+
     await prescription.create({
       "compositionObj": {
         "author": [{ "reference": `Practitioner/${practId}` }],
@@ -519,15 +519,16 @@ const prescriptionDoc = async () => {
         "type": "PrescriptionRecord",
         "status": "entered-in-error",
         "section": []
-      }, "documentBundle" :{
-        "date" : new Date().toISOString(),
-        "entry" : [],
-        "practitionerId" : practId,
-        "signedDate":new Date().toISOString(),
-      }, 
-      "medicationRequest" : medicationRequest,
-      "papersize" : "A5", 
-      // "headerbase64Image" : ""
+      }, "documentBundle": {
+        "date": new Date().toISOString(),
+        "entry": [],
+        "practitionerId": practId,
+        "signedDate": new Date().toISOString(),
+      },
+      "medicationRequest": medicationRequest,
+
+      // "papersize" : "A5", 
+      // // "headerbase64Image" : ""
     })
 
 
@@ -543,6 +544,23 @@ const prescriptionDoc = async () => {
 
 }
 // prescriptionDoc()
+
+const getPrescriptionDoc = async () => {
+  id = "fc47c7c5-f68e-499a-a4c9-5dec967b035d";
+  const prescriptionBundle = new PrescriptionBundle();
+  const pdf = await prescriptionBundle.getBundlePdf({
+    "gcpFhirId": id,
+    "base64": true,
+    // "headerbase64Image" : "",
+    "papersize": "a5",
+    "qrcode": `https://wwww.nicehms.com/api/bundle/${id}`,
+    // "esign" : {""}
+  })
+
+  console.log(pdf)
+}
+
+getPrescriptionDoc()
 
 
 
@@ -563,10 +581,10 @@ const updateprescriptionDoc = async () => {
     await prescription.setPatient(patientId);
     await prescription.setOrganization(orgId);
     await prescription.setPractioner(practId);
-    const medicationRequest =(await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
-    
+    const medicationRequest = (await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
+
     await prescription.update({
-      "bundleId" : "fc47c7c5-f68e-499a-a4c9-5dec967b035d",
+      "bundleId": "fc47c7c5-f68e-499a-a4c9-5dec967b035d",
       "compositionObj": {
         "author": [{ "reference": `Practitioner/${practId}` }],
         "date": new Date().toISOString(),
@@ -579,14 +597,14 @@ const updateprescriptionDoc = async () => {
         "type": "PrescriptionRecord",
         "status": "entered-in-error",
         "section": []
-      }, "documentBundle" :{
-        "date" : new Date().toISOString(),
-        "entry" : [],
-        "practitionerId" : practId,
-        "signedDate":new Date().toISOString(),
-      }, 
-      "medicationRequest" : medicationRequest,
-      "papersize" : "A5", 
+      }, "documentBundle": {
+        "date": new Date().toISOString(),
+        "entry": [],
+        "practitionerId": practId,
+        "signedDate": new Date().toISOString(),
+      },
+      "medicationRequest": medicationRequest,
+      "papersize": "A5",
       // "headerbase64Image" : ""
     })
 
@@ -603,7 +621,7 @@ const updateprescriptionDoc = async () => {
 
 }
 
-updateprescriptionDoc()
+// updateprescriptionDoc()
 
 
 

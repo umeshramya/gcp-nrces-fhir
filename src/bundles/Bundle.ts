@@ -1,3 +1,4 @@
+import { Buffer } from "buffer";
 import { CreatePdf } from "js-ts-report";
 import {
   Composition,
@@ -237,29 +238,7 @@ export class Bundle {
 
   protected createDocumentRefernce = async (options: {
     resource: DOCUMENT_REFERENCE;
-    // html: string;
-    // papersize: string;
-    // headerbase64Image?: string;
-    // qrCode?: string;
-    // esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
   }) => {
-    // const pdf = new CreatePdf();
-    // const curPdf = await pdf.create(options.html, {
-    //   paperSize: options.papersize,
-    //   headerbase64Image: options.headerbase64Image,
-    //   base64: true,
-    //   qrcode: options.qrCode,
-    //   esign: options.esign
-    //     ? {
-    //         image: options.esign?.imageBase64,
-    //         nameLine1: options.esign?.nameLine1,
-    //         nameLine2: options.esign?.nameLine2 || undefined,
-    //       }
-    //     : undefined,
-    // });
-
-    // options.resource.pdf = curPdf as string;
-
     const docRef = new DocumentReference().getFHIR(options.resource);
     this._documentReference = await new GcpFhirCRUD().createFhirResource(
       docRef,
@@ -273,28 +252,7 @@ export class Bundle {
    */
   protected updateDocumentRefernce = async (options: {
     resource: DOCUMENT_REFERENCE;
-    // html: string;
-    // papersize: string;
-    // headerbase64Image?: string;
-    // qrCode?: string;
-    // esign?: { imageBase64: string; nameLine1: string; nameLine2?: string };
   }) => {
-    // const pdf = new CreatePdf();
-    // const curPdf = await pdf.create(options.html, {
-    //   paperSize: options.papersize,
-    //   headerbase64Image: options.headerbase64Image,
-    //   base64: true,
-    //   qrcode: options.qrCode,
-    //   esign: options.esign
-    //     ? {
-    //         image: options.esign?.imageBase64,
-    //         nameLine1: options.esign?.nameLine1,
-    //         nameLine2: options.esign?.nameLine2 || undefined,
-    //       }
-    //     : undefined,
-    // });
-
-    // options.resource.pdf = curPdf as string;
 
     const docRef = new DocumentReference().getFHIR(options.resource);
     this._documentReference = await new GcpFhirCRUD().updateFhirResource(
@@ -385,16 +343,13 @@ export class Bundle {
     const gcpfhirCrud = new GcpFhirCRUD();
     const resource = (
       await gcpfhirCrud.getFhirResource(options.gcpFhirId, "Bundle")
-    ).data;
-    // write code for extracting text from composition
-    const compositionResource = resource.data.entry.filter(
-      (el: any) => el.resource.resourceType == "Composition"
-    )[0].resource.id;
+    )
 
-    const composition: COMPOSITOIN = new Composition().convertFhirToObject(
-      compositionResource
-    ) as COMPOSITOIN;
-    const html = composition.documentDatahtml || "";
+    // write code for extracting text from composition
+    const html = resource.data.entry.filter(
+      (el: any) => el.resource.resourceType == "Composition"
+    )[0].resource.text.div
+    console.log(html)
 
     // write code create pdf from the text;
 
@@ -406,10 +361,10 @@ export class Bundle {
       qrcode: options.qrcode,
       esign: options.esign
         ? {
-            image: options.esign?.imageBase64,
-            nameLine1: options.esign?.nameLine1,
-            nameLine2: options.esign?.nameLine2 || "",
-          }
+          image: options.esign?.imageBase64,
+          nameLine1: options.esign?.nameLine1,
+          nameLine2: options.esign?.nameLine2 || "",
+        }
         : undefined,
     });
 
