@@ -531,7 +531,7 @@ const prescriptionDoc = async () => {
     })
 
 
-    // c68fc5ee-b96a-4e61-adcc-f8bf5de22955
+    //800116f1-3c8d-4548-9820-e94dd582872e
     console.log(prescription.bundle.data);
 
 
@@ -546,7 +546,7 @@ const prescriptionDoc = async () => {
 
 const getPrescriptionDoc = async () => {
 
-  id = "c68fc5ee-b96a-4e61-adcc-f8bf5de22955"
+  id = "c6384c32-1e69-40d0-acfd-d6a946aa60e8"
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
   

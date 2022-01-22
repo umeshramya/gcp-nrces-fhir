@@ -95,11 +95,20 @@ export class Composition extends ResourceMain implements ResourceMaster {
             "language": "en-IN",
             "text": {
                 "status": "generated",
-                "div": `<div xmlns="http://www.w3.org/1999/xhtml"><p>
-                <div>Date:-${ new Date(options.date).toDateString()}</div>
-                <div>Patient:- ${options.patient.name}.  ${options.patient.healthNumber}</div>
-                <div>MRN:- ${options.patient.MRN}</div>
-                <div>gender/Age: ${options.patient.gender}/${new Age().dobToAge(new Date(options.patient.dob))} ph: ${options.patient.mobile}; </div>
+                "div": `<div xmlns="http://www.w3.org/1999/xhtml">
+                <div style="text-align:right">Date:-${ new Date(options.date).toDateString()}</div>
+                <div style="text-align:right">Docurment Status :${options.status}</div>
+                <table style ="width:9900px">
+                    <tr>
+                        <td >
+                        <div>Patient:- ${options.patient.name}.  ${options.patient.healthNumber}</div>
+                        <div>MRN:- ${options.patient.MRN}</div>
+                        <div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(new Date(options.patient.dob))} ph: ${options.patient.mobile}; 
+                        </td>
+                    <tr>
+                </table>
+                
+                </div>
                 <hr/>
                 <div>${options.documentDatahtml}</div>
                 </div>`
