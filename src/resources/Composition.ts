@@ -82,6 +82,16 @@ export class Composition extends ResourceMain implements ResourceMaster {
     this.compType = compositionTypeArrey.filter((comp) => comp.type == type)[0];
   }
   getFHIR(options: COMPOSITOIN) {
+    const getpatientdetails = () => {
+      return ` <div>Patient:- ${options.patient.name}.  ${
+        options.patient.healthNumber
+      }</div>
+                <div>MRN:- ${options.patient.MRN}</div>
+                <div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
+        new Date(options.patient.dob)
+      )} ph: ${options.patient.mobile}</div>`;
+    };
+
     this.mapCompositionType(options.type);
     const body = {
       resourceType: "Composition",
@@ -104,27 +114,19 @@ export class Composition extends ResourceMain implements ResourceMaster {
                 <div style="text-align:right;font-size:9px;">Docurment Type :${
                   options.type
                 }</div>
-                <table style="width:9950px;">
+
+                
+                <table style="width:9950px">
                     <tr>
-                        <td >
-                        <div>Patient:- ${options.patient.name}.  ${
-          options.patient.healthNumber
-        }</div>
-                        <div>MRN:- ${options.patient.MRN}</div>
-                        <div>Gender/Age: ${
-                          options.patient.gender
-                        }/${new Age().dobToAge(
-          new Date(options.patient.dob)
-        )} ph: ${options.patient.mobile} 
-                        </div>
-                        </td>
-                        <td>
-                            ${options.type}
-                        </td>
-                    <tr>
+                      <td style="width:50%">
+                        ${getpatientdetails()}
+                      </td>
+                      <td style="width:50%">
+                        ${options.type}
+                      </td>
+                    </tr>
                 </table>
                 
-                </div>
                 <hr/>
                 <div>${options.documentDatahtml}</div>
                 </div>`,

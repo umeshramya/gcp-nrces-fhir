@@ -495,7 +495,7 @@ const prescriptionDoc = async () => {
     const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
     const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-    const MedicationRequestId = "4e9a3b1c-2c25-4206-8ea6-7b795659ce0e";
+    const MedicationRequestId = "73b51197-7469-4d11-ae5d-268583ea47b6";
 
     const prescription = new PrescriptionBundle();
 
@@ -531,7 +531,7 @@ const prescriptionDoc = async () => {
     })
 
 
-    //99055527-03ec-40c5-9343-90af3cb60dad
+    //d5dc3b16-8bc8-4ee5-a8d9-60d159787d98
     console.log(prescription.bundle.data);
 
 
@@ -546,7 +546,7 @@ const prescriptionDoc = async () => {
 
 const getPrescriptionDoc = async () => {
 
-  id = "99055527-03ec-40c5-9343-90af3cb60dad"
+  id = "4e198f3e-dfc6-4e12-b704-c2a3fe15b707"
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
   
@@ -576,7 +576,7 @@ const updateprescriptionDoc = async () => {
     const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
     const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-    const MedicationRequestId = "4e9a3b1c-2c25-4206-8ea6-7b795659ce0e";
+    const MedicationRequestId = "73b51197-7469-4d11-ae5d-268583ea47b6";
 
     const prescription = new PrescriptionBundle();
 
