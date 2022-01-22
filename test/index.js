@@ -417,7 +417,7 @@ const CreateMedicationRequest = async () => {
       "DOSAGE_INSTRUCTION": dosageObj
 
     })
-
+// 4e9a3b1c-2c25-4206-8ea6-7b795659ce0e
 
     const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
     console.log(res.data)
@@ -445,7 +445,7 @@ const createComposition = async () => {
     let curPatinet = await gcpFhirCRUD.getFhirResource(patientId, "Patient");
     const curOrganizatio = await gcpFhirCRUD.getFhirResource(orgId, "Organization")
     const curPractinioer = await gcpFhirCRUD.getFhirResource(practId, "Practitioner")
-    const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414"
+    const MedicationRequestId = "4e9a3b1c-2c25-4206-8ea6-7b795659ce0e"
 
     const pract = new Practitioner()
     const practObj = pract.convertFhirToObject(curPractinioer.data)
@@ -495,7 +495,7 @@ const prescriptionDoc = async () => {
     const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
     const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-    const MedicationRequestId = "28f0c102-ca22-45ec-a6e9-c396f57d6716";
+    const MedicationRequestId = "4e9a3b1c-2c25-4206-8ea6-7b795659ce0e";
 
     const prescription = new PrescriptionBundle();
 
@@ -531,7 +531,7 @@ const prescriptionDoc = async () => {
     })
 
 
-    //800116f1-3c8d-4548-9820-e94dd582872e
+    //99055527-03ec-40c5-9343-90af3cb60dad
     console.log(prescription.bundle.data);
 
 
@@ -546,7 +546,7 @@ const prescriptionDoc = async () => {
 
 const getPrescriptionDoc = async () => {
 
-  id = "c6384c32-1e69-40d0-acfd-d6a946aa60e8"
+  id = "99055527-03ec-40c5-9343-90af3cb60dad"
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
   
@@ -576,7 +576,7 @@ const updateprescriptionDoc = async () => {
     const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
     const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-    const MedicationRequestId = "82c9b381-afbe-4137-ac76-2e6b5039d507";
+    const MedicationRequestId = "4e9a3b1c-2c25-4206-8ea6-7b795659ce0e";
 
     const prescription = new PrescriptionBundle();
 

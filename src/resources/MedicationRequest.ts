@@ -57,7 +57,7 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
         })
       : [];
 
-    let medArray: string = `<table style="width: 100%;"><tr><th>Medcine</th><th>Frequency</th><th>Duration</th><th>Instructions</th><th>Route</th></tr>`;
+    let medArray: string = `<table style="width:9950px;"><tr><th>Medcine</th><th>Frequency</th><th>Duration</th><th>Instructions</th><th>Route</th></tr>`;
     options.medicationCodeableConcept.forEach((el, i) => {
       medArray += `<tr><td>${el.display}</td><td>${
         options.DOSAGE_INSTRUCTION![i].timing
