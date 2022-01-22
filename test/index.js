@@ -495,7 +495,7 @@ const prescriptionDoc = async () => {
     const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
     const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-    const MedicationRequestId = "d5a2ec9f-50da-4700-8c46-b48cff292414";
+    const MedicationRequestId = "28f0c102-ca22-45ec-a6e9-c396f57d6716";
 
     const prescription = new PrescriptionBundle();
 
@@ -531,7 +531,7 @@ const prescriptionDoc = async () => {
     })
 
 
-    // fc47c7c5-f68e-499a-a4c9-5dec967b035d
+    // c68fc5ee-b96a-4e61-adcc-f8bf5de22955
     console.log(prescription.bundle.data);
 
 
@@ -545,16 +545,17 @@ const prescriptionDoc = async () => {
 // prescriptionDoc()
 
 const getPrescriptionDoc = async () => {
-  // id = "fc47c7c5-f68e-499a-a4c9-5dec967b035d";
-  id = "a861037d-8b0b-4b4b-9bf7-574e89b94c49"
+
+  id = "c68fc5ee-b96a-4e61-adcc-f8bf5de22955"
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
+  
 
   const pdf = await prescriptionBundle.getBundlePdf({
     "bundle" : bundle,
     "base64": true,
     // "headerbase64Image" : "",
-    "papersize": "a5",
+    "papersize": "a4",
     "qrcode": `https://wwww.nicehms.com/api/bundle/${id}`,
     // "esignbase64" : 
   })
