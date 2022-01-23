@@ -547,11 +547,12 @@ const prescriptionDoc = async () => {
 
 const getPrescriptionDoc = async () => {
 
-  id = await prescriptionDoc()
-  console.log(id)
+  let id = await prescriptionDoc()
+  // console.log(id)
+  // let id= "8428c89c-3f2f-484b-8a77-6c6a2592236a"
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
-  
+  console.log(bundle.data.entry.filter(el=>el.resource.resourceType=="Composition")[0].resource.text.div)
 
   const pdf = await prescriptionBundle.getBundlePdf({
     "bundle" : bundle,
