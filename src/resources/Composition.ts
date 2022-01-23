@@ -105,31 +105,24 @@ export class Composition extends ResourceMain implements ResourceMaster {
       text: {
         status: "generated",
         div: `<div xmlns="http://www.w3.org/1999/xhtml">
-                <div style="text-align:right">Date:-${new Date(
-                  options.date
-                ).toDateString()}</div>
-                <div style="text-align:right;font-size:9px;">Docurment Status :${
-                  options.status
-                }</div>
-                <div style="text-align:right;font-size:9px;">Docurment Type :${
-                  options.type
-                }</div>
-
-                
-                <table style="width:9950px">
-                    <tr>
-                      <td style="width:50%;">
-                        ${getpatientdetails()}
-                      </td>
-                      <td style="width:50%;">
-                        ${options.type}
-                      </td>
-                    </tr>
-                </table>
-                
-                <hr/>
-                <div>${options.documentDatahtml}</div>
-                </div>`,
+        <div style="text-align: right">
+          Date:-${new Date(options.date).toDateString()}
+        </div>
+        <div style="text-align: right; font-size: 9px">
+          Docurment Status :${options.status}
+        </div>
+        <div style="text-align: right; font-size: 9px">
+          Docurment Type :${options.type}
+        </div>
+        <table>
+          <tr>
+            <td>${getpatientdetails()}</td>
+            <td>${options.type}</td>
+          </tr>
+        </table>
+        <hr />
+        <div>${options.documentDatahtml}</div>
+      </div>`,
       },
       identifier: {
         system: "https://ndhm.in/phr",

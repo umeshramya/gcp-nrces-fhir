@@ -1,4 +1,19 @@
 <div xmlns="http://www.w3.org/1999/xhtml">
-    <p>Tab Pantop 40mg 1-1-1 &nbsp For 5 Days &nbsp After Food &nbsp Oral</p>
-    <p>Tab DOLO 650mg 1-0-1 &nbsp For 15 Days &nbsp Before Food &nbsp Oral</p>
+  <div style="text-align: right">
+    Date:-${new Date( options.date ).toDateString()}
+  </div>
+  <div style="text-align: right; font-size: 9px">
+    Docurment Status :${ options.status }
+  </div>
+  <div style="text-align: right; font-size: 9px">
+    Docurment Type :${ options.type }
+  </div>
+  <table style="width: 9950px">
+    <tr>
+      <td style="width: 50%">${getpatientdetails()}</td>
+      <td style="width: 50%">${ options.type }</td>
+    </tr>
+  </table>
+  <hr />
+  <div>${options.documentDatahtml}</div>
 </div>

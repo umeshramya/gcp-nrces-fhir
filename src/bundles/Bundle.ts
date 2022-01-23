@@ -356,19 +356,22 @@ export class Bundle {
       sign = options.esignbase64 || emptySign;
     }
     const html = composition.text.div;
+
     // write code create pdf from the text;
     const pdf = new CreatePdf();
-    const curPdf = await pdf.create(html, {
-      paperSize: options.papersize,
-      headerbase64Image: options.headerbase64Image,
-      base64: options.base64,
-      qrcode: options.qrcode,
-      esign: {
-        image: sign || emptySign,
-        nameLine1: `${practitionerObj.name} ${practitionerObj.qualification}`,
-        nameLine2: practitionerObj.medicalLicenseNumber || "",
-      },
-    });
+    const curPdf = await pdf
+      .create(html, {
+        paperSize: options.papersize,
+        headerbase64Image: options.headerbase64Image,
+        base64: options.base64,
+        qrcode: options.qrcode,
+        esign: {
+          image: sign || emptySign,
+          nameLine1: `${practitionerObj.name} ${practitionerObj.qualification}`,
+          nameLine2: practitionerObj.medicalLicenseNumber || "",
+        },
+      })
+      .then((data) => data);
 
     return curPdf;
   }
