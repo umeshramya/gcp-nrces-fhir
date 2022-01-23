@@ -420,7 +420,8 @@ const CreateMedicationRequest = async () => {
 // 4e9a3b1c-2c25-4206-8ea6-7b795659ce0e
 
     const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
-    console.log(res.data)
+    // console.log(res.data)
+    return res.data.id
 
   } catch (error) {
     console.log(error)
@@ -489,13 +490,12 @@ const createComposition = async () => {
 const prescriptionDoc = async () => {
   try {
 
-
     const gcpFhirCRUD = new GcpFhirCRUD()
     const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
     const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
     const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
     const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
-    const MedicationRequestId = "73b51197-7469-4d11-ae5d-268583ea47b6";
+    const MedicationRequestId = await CreateMedicationRequest();
 
     const prescription = new PrescriptionBundle();
 
@@ -532,7 +532,8 @@ const prescriptionDoc = async () => {
 
 
     //d5dc3b16-8bc8-4ee5-a8d9-60d159787d98
-    console.log(prescription.bundle.data);
+    // console.log(prescription.bundle.data);
+    return prescription.bundle.data.id
 
 
   } catch (error) {
@@ -546,7 +547,7 @@ const prescriptionDoc = async () => {
 
 const getPrescriptionDoc = async () => {
 
-  id = "4e198f3e-dfc6-4e12-b704-c2a3fe15b707"
+  id = await prescriptionDoc()
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
   
