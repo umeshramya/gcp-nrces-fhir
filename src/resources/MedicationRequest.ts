@@ -57,7 +57,8 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
         })
       : [];
 
-    let medArray: string = `<table><tr>
+    let medArray: string = `<table data-pdfmake="{'widths':['20%','20%','20%', '20%', '20%']}">
+    <tr>
     <th>Medcine</th>
     <th>Frequency</th>
     <th>Duration</th>
