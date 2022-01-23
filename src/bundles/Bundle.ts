@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { CreatePdf } from "js-ts-report";
+
 import {
   Composition,
   DocumentBundle,
@@ -331,49 +331,61 @@ export class Bundle {
    *This return pdf in base64 string or buffer
    * @param gcpFhirId fhir id of bundle
    */
-  async getBundlePdf(options: {
-    bundle: any;
-    papersize: any;
-    headerbase64Image?: string;
-    base64: boolean;
-    qrcode: string;
-    esignbase64?: string;
-  }): Promise<string | Buffer> {
-    const resource = options.bundle;
-    const practitioner = resource.data.entry.filter(
-      (el: any) => el.resource.resourceType == "Practitioner"
-    )[0].resource;
+  // async getBundlePdf(options: {
+  //   bundle: any;
+  //   papersize: any;
+  //   headerbase64Image?: string;
+  //   base64: boolean;
+  //   qrcode: string;
+  //   esignbase64?: string;
+  // }): Promise<string | Buffer> {
+  //   const resource = options.bundle;
+  //   const practitioner = resource.data.entry.filter(
+  //     (el: any) => el.resource.resourceType == "Practitioner"
+  //   )[0].resource;
 
-    const practitionerObj = new Practitioner().convertFhirToObject(
-      practitioner
-    );
-    // write code for extracting text from composition
-    const composition = resource.data.entry.filter(
+  //   const practitionerObj = new Practitioner().convertFhirToObject(
+  //     practitioner
+  //   );
+  //   // write code for extracting text from composition
+  //   const composition = resource.data.entry.filter(
+  //     (el: any) => el.resource.resourceType == "Composition"
+  //   )[0].resource;
+  //   let sign!: string;
+  //   if (composition.status === "final") {
+  //     sign = options.esignbase64 || emptySign;
+  //   }
+  //   const html = composition.text.div;
+
+  //   // write code create pdf from the text;
+  //   const pdf = new CreatePdf();
+  //   const curPdf = await pdf
+  //     .create(html, {
+  //       paperSize: options.papersize,
+  //       headerbase64Image: options.headerbase64Image,
+  //       base64: options.base64,
+  //       qrcode: options.qrcode,
+  //       esign: {
+  //         image: sign || emptySign,
+  //         nameLine1: `${practitionerObj.name} ${practitionerObj.qualification}`,
+  //         nameLine2: practitionerObj.medicalLicenseNumber || "",
+  //       },
+  //     })
+  //     .then((data) => data);
+
+  //   return curPdf;
+  // }
+
+  /**
+   *
+   * @param bundle return the html of bundle
+   */
+  getBundleHtml(bundle: any): string {
+    const composition = bundle.data.entry.filter(
       (el: any) => el.resource.resourceType == "Composition"
     )[0].resource;
-    let sign!: string;
-    if (composition.status === "final") {
-      sign = options.esignbase64 || emptySign;
-    }
-    const html = composition.text.div;
 
-    // write code create pdf from the text;
-    const pdf = new CreatePdf();
-    const curPdf = await pdf
-      .create(html, {
-        paperSize: options.papersize,
-        headerbase64Image: options.headerbase64Image,
-        base64: options.base64,
-        qrcode: options.qrcode,
-        esign: {
-          image: sign || emptySign,
-          nameLine1: `${practitionerObj.name} ${practitionerObj.qualification}`,
-          nameLine2: practitionerObj.medicalLicenseNumber || "",
-        },
-      })
-      .then((data) => data);
-
-    return curPdf;
+    return composition.text.div;
   }
 }
 
