@@ -548,6 +548,7 @@ const prescriptionDoc = async () => {
 const getPrescriptionDoc = async () => {
 
   id = await prescriptionDoc()
+  console.log(id)
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
   

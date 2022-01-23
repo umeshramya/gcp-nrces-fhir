@@ -118,10 +118,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
                 
                 <table style="width:9950px">
                     <tr>
-                      <td style="width:50%;">
+                      <td>
                         ${getpatientdetails()}
                       </td>
-                      <td style="width:50%;">
+                      <td>
                         ${options.type}
                       </td>
                     </tr>
