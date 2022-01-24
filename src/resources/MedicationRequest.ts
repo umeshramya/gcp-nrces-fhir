@@ -30,15 +30,15 @@ type MedicatioRequestIntent = typeof MedicatioRequestIntentArray[number];
 
 export interface MEDICATION_REQUEST {
   id?: string;
-  patient: PATIENT;
-  Practitioner: PRACTITIONER;
+  patient:Partial <PATIENT>;
+  Practitioner:Partial <PRACTITIONER>;
   date: string;
   reasonReferenceCondtionId?: string;
   status: MedicatioRequestStatus;
   intent: MedicatioRequestIntent;
   medicationCodeableConcept: CodeDisplay[];
   reasonCode: CodeDisplay[];
-  // dosageInstruction: any[]
+  
   DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[];
 }
 
@@ -118,8 +118,23 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
 
     return body;
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options: any):MEDICATION_REQUEST {
+    let ret:MEDICATION_REQUEST={
+      patient: {"id" : this.getIdFromReference({"ref" : options.subject.reference, "resourceType" : "Patient"}), "name" : options.subject.display},
+      Practitioner: {"id" : this.getIdFromReference({"ref" : options.requester.reference, "resourceType" : "Patient"}), "name" : options.requester.display},
+      date: options.authoredOn,
+      status: options.status,
+      intent: options.intent,
+      medicationCodeableConcept: [],
+      DOSAGE_INSTRUCTION : options.dosageInstruction.map((el:any)=>{
+        return(
+          this.convertDosageInstructionToObject(el)
+        )
+      }),
+      reasonCode: options.reasonCode,
+      id:options.id
+    }
+    return ret;
   }
 
   createDosageInstrction(options: DOSAGE_INSTRUCTION): any {
@@ -158,3 +173,7 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     return ret;
   }
 }
+function el(el: any, arg1: (any: any) => DOSAGE_INSTRUCTION): DOSAGE_INSTRUCTION[] | undefined {
+  throw new Error("Function not implemented.");
+}
+
