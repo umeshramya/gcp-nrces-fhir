@@ -420,7 +420,9 @@ const CreateMedicationRequest = async () => {
 // 4e9a3b1c-2c25-4206-8ea6-7b795659ce0e
 
     const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
-    // console.log(res.data)
+   const obj =  medicationRequest.convertFhirToObject(res.data)
+
+   console.log(obj)
     return res.data.id
 
   } catch (error) {
@@ -430,7 +432,10 @@ const CreateMedicationRequest = async () => {
 }
 
 
-// CreateMedicationRequest();
+CreateMedicationRequest();
+
+
+
 
 // Composition
 const composition = new Composition()
@@ -566,7 +571,7 @@ const getPrescriptionDoc = async () => {
   console.log(pdf)
 }
 
-getPrescriptionDoc()
+// getPrescriptionDoc()
 
 
 

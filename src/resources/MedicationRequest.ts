@@ -30,15 +30,15 @@ type MedicatioRequestIntent = typeof MedicatioRequestIntentArray[number];
 
 export interface MEDICATION_REQUEST {
   id?: string;
-  patient:Partial <PATIENT>;
-  Practitioner:Partial <PRACTITIONER>;
+  patient: Partial<PATIENT>;
+  Practitioner: Partial<PRACTITIONER>;
   date: string;
   reasonReferenceCondtionId?: string;
   status: MedicatioRequestStatus;
   intent: MedicatioRequestIntent;
   medicationCodeableConcept: CodeDisplay[];
   reasonCode: CodeDisplay[];
-  
+
   DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[];
 }
 
@@ -118,22 +118,32 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
 
     return body;
   }
-  convertFhirToObject(options: any):MEDICATION_REQUEST {
-    let ret:MEDICATION_REQUEST={
-      patient: {"id" : this.getIdFromReference({"ref" : options.subject.reference, "resourceType" : "Patient"}), "name" : options.subject.display},
-      Practitioner: {"id" : this.getIdFromReference({"ref" : options.requester.reference, "resourceType" : "Patient"}), "name" : options.requester.display},
+  convertFhirToObject(options: any): MEDICATION_REQUEST {
+    let ret: MEDICATION_REQUEST = {
+      patient: {
+        id: this.getIdFromReference({
+          ref: options.subject.reference,
+          resourceType: "Patient",
+        }),
+        name: options.subject.display,
+      },
+      Practitioner: {
+        id: this.getIdFromReference({
+          ref: options.requester.reference,
+          resourceType: "Practitioner",
+        }),
+        name: options.requester.display,
+      },
       date: options.authoredOn,
       status: options.status,
       intent: options.intent,
-      medicationCodeableConcept: [],
-      DOSAGE_INSTRUCTION : options.dosageInstruction.map((el:any)=>{
-        return(
-          this.convertDosageInstructionToObject(el)
-        )
+      medicationCodeableConcept: options.medicationCodeableConcept.coding,
+      DOSAGE_INSTRUCTION: options.dosageInstruction.map((el: any) => {
+        return this.convertDosageInstructionToObject(el);
       }),
       reasonCode: options.reasonCode,
-      id:options.id
-    }
+      id: options.id,
+    };
     return ret;
   }
 
@@ -173,7 +183,9 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     return ret;
   }
 }
-function el(el: any, arg1: (any: any) => DOSAGE_INSTRUCTION): DOSAGE_INSTRUCTION[] | undefined {
+function el(
+  el: any,
+  arg1: (any: any) => DOSAGE_INSTRUCTION
+): DOSAGE_INSTRUCTION[] | undefined {
   throw new Error("Function not implemented.");
 }
-
