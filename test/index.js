@@ -432,7 +432,7 @@ const CreateMedicationRequest = async () => {
 }
 
 
-CreateMedicationRequest();
+
 
 
 
@@ -487,6 +487,8 @@ const createComposition = async () => {
 
 }
 
+
+console.log(new Composition().statusArray(), new Composition().typeArray())
 // createComposition()
 
 

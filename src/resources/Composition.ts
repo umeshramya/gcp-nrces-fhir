@@ -41,7 +41,7 @@ export const compositionTypeArrey = [
 
 const onlyType = compositionTypeArrey.map((el) => el.type);
 export type compositionType = typeof onlyType[number];
-export const compositionStatusArrey = [
+const compositionStatusArrey = [
   "preliminary",
   "final",
   "amended",
@@ -199,5 +199,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
       author: options.author,
     };
     return ret;
+  }
+
+  statusArray(): compositionStatus[] {
+    return compositionStatusArrey.map((el) => el);
+  }
+
+  typeArray(): compositionType[] {
+    return onlyType.map((el) => el);
   }
 }
