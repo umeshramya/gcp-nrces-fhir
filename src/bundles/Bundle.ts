@@ -182,6 +182,7 @@ export class Bundle {
   ): Promise<any> => {
     const comp = new Composition();
     comp.mapCompositionType(this._compositionType);
+
     const body = comp.getFHIR(compositionObj);
     this._composition = await new GcpFhirCRUD().updateFhirResource(
       body,
@@ -211,6 +212,8 @@ export class Bundle {
     this.practioners.forEach((el) => {
       this.setBundleEntries("Practitioner", el.Obj.id || "", el.body);
     });
+
+
   };
 
   /**

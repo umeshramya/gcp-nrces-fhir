@@ -108,11 +108,7 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
         docStatus: options.compositionObj.status,
         code: [{ display: "Prescription", system: "http://snomed.info/sct" }],
       },
-      // headerbase64Image: options.headerbase64Image,
-      // html: this.composition.data.text.div,
-      // papersize: options.papersize,
-      // qrCode: options.qrCode ? options.qrCode : undefined,
-      // esign: options.esign ? options.esign : undefined,
+
     });
 
     this.setBundleEntries(

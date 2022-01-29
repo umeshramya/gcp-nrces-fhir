@@ -417,12 +417,12 @@ const CreateMedicationRequest = async () => {
       "DOSAGE_INSTRUCTION": dosageObj
 
     })
-// 4e9a3b1c-2c25-4206-8ea6-7b795659ce0e
+    // 4e9a3b1c-2c25-4206-8ea6-7b795659ce0e
 
     const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
-   const obj =  medicationRequest.convertFhirToObject(res.data)
+    const obj = medicationRequest.convertFhirToObject(res.data)
 
-   console.log(obj)
+    console.log(obj)
     return res.data.id
 
   } catch (error) {
@@ -488,7 +488,6 @@ const createComposition = async () => {
 }
 
 
-console.log(new Composition().statusArray(), new Composition().typeArray())
 // createComposition()
 
 
@@ -514,13 +513,13 @@ const prescriptionDoc = async () => {
 
     await prescription.create({
       "compositionObj": {
-        "author": [{ "reference": `Practitioner/${practId}` }],
+        "author": [{ "reference": `Practitioner/${practId}`, "display": "Dr Umesh R Bilagi" }],
         "date": new Date().toISOString(),
         "encounter": prescription.encounter.Obj,
         "encounterId": encounterId,
         "patient": prescription.patient.Obj,
         "patientId": patientId,
-        "organization": prescription.practioners[0].Obj,
+        "organization": prescription.organization.Obj,
         "organizationId": orgId,
         "type": "PrescriptionRecord",
         "status": "entered-in-error",
@@ -558,11 +557,11 @@ const getPrescriptionDoc = async () => {
   // console.log(id)
   // let id= "8428c89c-3f2f-484b-8a77-6c6a2592236a"
   const prescriptionBundle = new PrescriptionBundle();
-  const bundle =await prescriptionBundle.get(id)
-  console.log(bundle.data.entry.filter(el=>el.resource.resourceType=="Composition")[0].resource.text.div)
+  const bundle = await prescriptionBundle.get(id)
+  console.log(bundle.data.entry.filter(el => el.resource.resourceType == "Composition")[0].resource.text.div)
 
   const pdf = await prescriptionBundle.getBundlePdf({
-    "bundle" : bundle,
+    "bundle": bundle,
     "base64": true,
     // "headerbase64Image" : "",
     "papersize": "a4",
@@ -573,7 +572,7 @@ const getPrescriptionDoc = async () => {
   console.log(pdf)
 }
 
-// getPrescriptionDoc()
+getPrescriptionDoc()
 
 
 
