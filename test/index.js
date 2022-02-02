@@ -102,9 +102,19 @@ const search = async () => {
   { "key": "status", "value": "cancelled,finished" }
   ])
   console.log(res.data.entry)
+
 }
 
 // search()
+
+const searchsimple = async () => {
+  const gcpFhirSearch = new GcpFhirSearch()
+  // const res = await gcpFhirSearch.searchFhirResourcesGet("Bundle", [{"key" : "data.entry[0].subject" , "value" : "ca4ba5b2-e6f5-4e5d-a982-57f63cedf666" }])
+  const res = await gcpFhirSearch.search("Encounter" , `_include:subject:ca4ba5b2-e6f5-4e5d-a982-57f63cedf666`)
+  console.log(res)
+}
+
+// searchsimple()
 
 // console.log(EncounterStatusArray.map(el=>{
 //     return el
