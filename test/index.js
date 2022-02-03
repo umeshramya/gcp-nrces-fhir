@@ -110,17 +110,17 @@ const search = async () => {
 const searchsimple = async () => {
   const gcpFhirSearch = new GcpFhirSearch()
   // const res = await gcpFhirSearch.searchFhirResourcesGet("Bundle", [{"key" : "data.entry[0].subject" , "value" : "ca4ba5b2-e6f5-4e5d-a982-57f63cedf666" }])
-      // id: 'e101abe6-11ae-403d-8c2e-a34f97ceccae',
-    // name: 'UMESH R BILAGI'
-
-    // compositionid =bc35215c-f7c5-4dd5-86ce-987262ade71c
-  const res = await gcpFhirSearch.search("Encounter" , `_revinclude=Encounter:subject:Patient=ca4ba5b2-e6f5-4e5d-a982-57f63cedf666`)
+  // id: 'e101abe6-11ae-403d-8c2e-a34f97ceccae',
+  // name: 'UMESH R BILAGI'
+  // bundleid=96b9dd5b-beaa-438f-a74d-cab816a05309
+  // compositionid =bc35215c-f7c5-4dd5-86ce-987262ade71c
+  const res = await gcpFhirSearch.search("Bundle", `Composition=bc35215c-f7c5-4dd5-86ce-987262ade71c`)
   // const res = await gcpFhirSearch.search("Composition" , `subject=Patient/ca4ba5b2-e6f5-4e5d-a982-57f63cedf666`)
-  // console.log(res.data)
-  res.data.entry.map(el=>{
-  //  console.log( el.resource.entry[0].resource.subject)
-  console.log(el)
-  })
+  console.log(res.data.entry)
+  // res.data.entry.map(el => {
+  //   //  console.log( el.resource.entry[0].resource.subject)
+  //   console.log(el)
+  // })
 }
 
 searchsimple()
