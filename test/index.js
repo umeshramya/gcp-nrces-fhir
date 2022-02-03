@@ -110,11 +110,20 @@ const search = async () => {
 const searchsimple = async () => {
   const gcpFhirSearch = new GcpFhirSearch()
   // const res = await gcpFhirSearch.searchFhirResourcesGet("Bundle", [{"key" : "data.entry[0].subject" , "value" : "ca4ba5b2-e6f5-4e5d-a982-57f63cedf666" }])
-  const res = await gcpFhirSearch.search("Encounter" , `_include:subject:ca4ba5b2-e6f5-4e5d-a982-57f63cedf666`)
-  console.log(res)
+      // id: 'e101abe6-11ae-403d-8c2e-a34f97ceccae',
+    // name: 'UMESH R BILAGI'
+
+    // compositionid =bc35215c-f7c5-4dd5-86ce-987262ade71c
+  const res = await gcpFhirSearch.search("Patient" , `_id=ca4ba5b2-e6f5-4e5d-a982-57f63cedf666&_include=Composition:Patient`)
+  // const res = await gcpFhirSearch.search("Composition" , `subject=Patient/ca4ba5b2-e6f5-4e5d-a982-57f63cedf666`)
+  console.log(res.data.entry)
+//   res.data.entry.map(el=>{
+//    console.log( el.resource.entry[0].resource.subject)
+//   // console.log(el)
+//   })
 }
 
-// searchsimple()
+searchsimple()
 
 // console.log(EncounterStatusArray.map(el=>{
 //     return el
@@ -582,7 +591,7 @@ const getPrescriptionDoc = async () => {
   console.log(pdf)
 }
 
-getPrescriptionDoc()
+// getPrescriptionDoc()
 
 
 
