@@ -114,12 +114,13 @@ const searchsimple = async () => {
   // name: 'UMESH R BILAGI'
   // bundleid=96b9dd5b-beaa-438f-a74d-cab816a05309
   // compositionid =bc35215c-f7c5-4dd5-86ce-987262ade71c
-  const res = await gcpFhirSearch.search("Bundle", `Composition=bc35215c-f7c5-4dd5-86ce-987262ade71c`)
+  // 'MedicationRequest/496912d9-6846-43ac-a63e-e27841af167d',
+  const res = await gcpFhirSearch.search("Composition", `_id=bc35215c-f7c5-4dd5-86ce-987262ade71c&_include=MedicationRequest`)
   // const res = await gcpFhirSearch.search("Composition" , `subject=Patient/ca4ba5b2-e6f5-4e5d-a982-57f63cedf666`)
   console.log(res.data.entry)
   // res.data.entry.map(el => {
-  //   //  console.log( el.resource.entry[0].resource.subject)
-  //   console.log(el)
+  //   console.log(el.resource.author)
+  //   // console.log(el)
   // })
 }
 
