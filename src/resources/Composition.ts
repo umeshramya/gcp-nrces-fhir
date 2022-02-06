@@ -221,6 +221,11 @@ export class Composition extends ResourceMain implements ResourceMaster {
     return onlyType.map((el) => el);
   }
 
+  /**
+   * this function return the all resources of copistion namely Patient, Author/Practioner, Encounter and entries in section
+   * @param id composition id
+   * @returns
+   */
   getWithIncludes = async (id: string) => {
     const gcpFhirSearch = new GcpFhirSearch();
     const res = await gcpFhirSearch.search(
@@ -230,6 +235,11 @@ export class Composition extends ResourceMain implements ResourceMaster {
     return res;
   };
 
+  /**
+   * This function returns all the compositions of patient
+   * @param id of patient
+   * @returns
+   */
   getCompositionsByPatient = async (id: string) => {
     const gcpFhirSearch = new GcpFhirSearch();
     const res = await gcpFhirSearch.search(
