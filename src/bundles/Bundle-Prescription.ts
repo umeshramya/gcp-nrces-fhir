@@ -91,7 +91,9 @@ export class PrescriptionBundle extends Bundle implements BundleInterface {
     options.compositionObj.documentDatahtml =
       options.medicationRequest.text.div;
     options.compositionObj.section = this.sectionEntries as any;
+
     await this.createComposition(options.compositionObj);
+    
     this.setBundleEntries(
       "MedicationRequest",
       options.medicationRequest.id,
