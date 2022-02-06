@@ -1,6 +1,6 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionBundle } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionBundle, PrescriptionRecord } = require("gcp-nrces-fhir")
 
 
 
@@ -666,6 +666,43 @@ const updateprescriptionDoc = async () => {
 
 // updateprescriptionDoc()
 
+const prescriptionRecord = async()=>{
+  
+  const gcpFhirCRUD = new GcpFhirCRUD()
+  const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+  const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+  const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+  const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+  const MedicationRequestId = await CreateMedicationRequest();
+
+  const prescription = new PrescriptionBundle();
+
+  await prescription.setEncounter(encounterId);
+  await prescription.setPatient(patientId);
+  await prescription.setOrganization(orgId);
+  await prescription.setPractioner(practId);
+  const medicationRequest = (await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
+
+  const res =await new PrescriptionRecord().create({
+    "compositionObj": {
+      "author": [{ "reference": `Practitioner/${practId}`, "display": "Dr Umesh R Bilagi" }],
+      "date": new Date().toISOString(),
+      "encounter": prescription.encounter.Obj,
+      "encounterId": encounterId,
+      "patient": prescription.patient.Obj,
+      "patientId": patientId,
+      "organization": prescription.organization.Obj,
+      "organizationId": orgId,
+      "type": "PrescriptionRecord",
+      "status": "entered-in-error",
+      "section": []
+    },
+    "medicationRequest": medicationRequest,
+  })
+
+  console.log(res)
+
+}
 
 
-
+prescriptionRecord();

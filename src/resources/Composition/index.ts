@@ -1,11 +1,11 @@
-import { ResourceMaster } from "../Interfaces";
+import { ResourceMaster } from "../../Interfaces";
 import { v4 as uuidv4 } from "uuid";
-import { ENCOUNTER } from "./Encounter";
-import { PATIENT } from "./Patient";
-import { ORGANIZATION } from "./Organization";
-import ResourceMain from "./ResourceMai";
+import { ENCOUNTER } from "../Encounter";
+import { PATIENT } from "../Patient";
+import { ORGANIZATION } from "../Organization";
+import ResourceMain from "../ResourceMai";
 import { Age } from "date-age";
-import { GcpFhirSearch } from "..";
+import { GcpFhirSearch } from "../..";
 
 export const compositionTypeArrey = [
   {
@@ -69,7 +69,7 @@ export interface COMPOSITOIN {
   status: compositionStatus;
   type: compositionType;
   documentDatahtml?: string;
-  section: [];
+  section:any[];
 }
 export class Composition extends ResourceMain implements ResourceMaster {
   private compType!: {

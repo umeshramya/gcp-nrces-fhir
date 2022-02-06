@@ -42,6 +42,7 @@ import {
 } from "./resources/Appointment";
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { COMPOSITOIN, Composition } from "./resources/Composition";
+import {PrescriptionRecord} from "./resources/Composition/PrescriptionRecord"
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -98,6 +99,7 @@ export {
 };
 export { DOCUMENT_BUNDLE, DocumentBundle };
 export { COMPOSITOIN, Composition };
+export {PrescriptionRecord}
 export {
   DOCUMENT_REFERENCE,
   DocumentReference,
