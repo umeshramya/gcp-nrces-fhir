@@ -123,8 +123,12 @@ const searchsimple = async () => {
   // const  res =await gcpFhirSearch.search("Composition" ,`_id=43213a09-d546-4e44-8759-4a6ce4fa2087&_revinclude=Bundle:composition`)
 
   // const res = await gcpFhirSearch.search("Composition", `_id=43213a09-d546-4e44-8759-4a6ce4fa2087&_include=Composition:author&_include=Composition:entry`)
-  const res = await new Composition().getWithIncludes(`43213a09-d546-4e44-8759-4a6ce4fa2087`)
-  console.log(res.data.entry)
+  // const res = await new Composition().getWithIncludes(`43213a09-d546-4e44-8759-4a6ce4fa2087`)
+  const res = await new Composition().getCompositionsByPatient(`e101abe6-11ae-403d-8c2e-a34f97ceccae`)
+  // console.log(res.data.entry)
+    res.data.entry.map(el=>{
+    console.log(el.resource.subject)
+    })
   // res.data.entry.map(el => {
   //   console.log(el.resource.author)
   //   // console.log(el)

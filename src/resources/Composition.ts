@@ -225,7 +225,16 @@ export class Composition extends ResourceMain implements ResourceMaster {
     const gcpFhirSearch = new GcpFhirSearch();
     const res = await gcpFhirSearch.search(
       "Composition",
-      `_id=${id}&_include=Composition:patient&_include=Composition:author&_include=Composition:author&_include=Composition:organization&_include=Composition:entry`
+      `_id=${id}&_include=Composition:patient&_include=Composition:author&_include=Composition:author&_include=Composition:encounter&_include=Composition:entry`
+    );
+    return res;
+  };
+
+  getCompositionsByPatient = async (id: string) => {
+    const gcpFhirSearch = new GcpFhirSearch();
+    const res = await gcpFhirSearch.search(
+      "Patient",
+      `_id=${id}&_revinclude=Composition:patient`
     );
     return res;
   };
