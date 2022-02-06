@@ -114,15 +114,16 @@ const searchsimple = async () => {
   // name: 'UMESH R BILAGI'
   // Patient = e101abe6-11ae-403d-8c2e-a34f97ceccae
   // bundleid=96b9dd5b-beaa-438f-a74d-cab816a05309
-  // compositionid =bc35215c-f7c5-4dd5-86ce-987262ade71c
+  // compositionid =43213a09-d546-4e44-8759-4a6ce4fa2087
   // 'MedicationRequest/496912d9-6846-43ac-a63e-e27841af167d',
   // const res = await gcpFhirSearch.search("Patient", `_id=ca4ba5b2-e6f5-4e5d-a982-57f63cedf666&_revinclude=Composition:patient`)
   // const res = await gcpFhirSearch.search("Encounter", `_id=e2eaa172-20a0-42f1-83d0-de371dad3c74&_include=Encounter:patient`)
 
 
+  // const  res =await gcpFhirSearch.search("Composition" ,`_id=43213a09-d546-4e44-8759-4a6ce4fa2087&_revinclude=Bundle:composition`)
 
-  const res = await gcpFhirSearch.search("Composition", `_id=43213a09-d546-4e44-8759-4a6ce4fa2087&_include=Composition:author&_include=Composition:entry`)
-
+  // const res = await gcpFhirSearch.search("Composition", `_id=43213a09-d546-4e44-8759-4a6ce4fa2087&_include=Composition:author&_include=Composition:entry`)
+  const res = await new Composition().getWithIncludes(`43213a09-d546-4e44-8759-4a6ce4fa2087`)
   console.log(res.data.entry)
   // res.data.entry.map(el => {
   //   console.log(el.resource.author)
