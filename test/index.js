@@ -471,6 +471,7 @@ const CreateMedicationRequest = async () => {
 // Composition
 const composition = new Composition()
 
+
 const createComposition = async () => {
   try {
     const gcpFhirCRUD = new GcpFhirCRUD()
@@ -718,6 +719,8 @@ const prescriptionRecordUpdate = async () => {
   const MedicationRequestId = await CreateMedicationRequest();
 
   const prescription = new PrescriptionRecord();
+
+
 
   await prescription.setEncounter(encounterId);
   await prescription.setPatient(patientId);

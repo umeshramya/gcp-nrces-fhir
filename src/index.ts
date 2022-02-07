@@ -41,7 +41,7 @@ import {
   AppointmentActorStatusArray,
 } from "./resources/Appointment";
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
-import { COMPOSITOIN, Composition } from "./resources/Composition";
+import { COMPOSITOIN, Composition } from "./resources/Composition/index";
 import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import {
   DOCUMENT_REFERENCE,
