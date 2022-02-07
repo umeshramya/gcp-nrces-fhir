@@ -42,7 +42,7 @@ import {
 } from "./resources/Appointment";
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { COMPOSITOIN, Composition } from "./resources/Composition";
-import {PrescriptionRecord} from "./resources/Composition/PrescriptionRecord"
+import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -60,8 +60,6 @@ import {
   MedicationStatement,
   MedicationStatementStatusArray,
 } from "./resources/MedicationStatement";
-import { Bundle } from "./bundles/Bundle";
-import { PrescriptionBundle } from "./bundles/Bundle-Prescription";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray };
 export type { resourceType };
@@ -99,7 +97,7 @@ export {
 };
 export { DOCUMENT_BUNDLE, DocumentBundle };
 export { COMPOSITOIN, Composition };
-export {PrescriptionRecord}
+export { PrescriptionRecord };
 export {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -117,6 +115,3 @@ export {
   MedicatioRequestStatusArray,
   MedicationRequest,
 };
-
-export { Bundle };
-export { PrescriptionBundle };

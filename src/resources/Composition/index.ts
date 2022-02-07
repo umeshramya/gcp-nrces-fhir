@@ -1,11 +1,12 @@
 import { ResourceMaster } from "../../Interfaces";
 import { v4 as uuidv4 } from "uuid";
-import { ENCOUNTER } from "../Encounter";
-import { PATIENT } from "../Patient";
-import { ORGANIZATION } from "../Organization";
+import { Encounter, ENCOUNTER } from "../Encounter";
+import { Patient, PATIENT } from "../Patient";
+import { Organization, ORGANIZATION } from "../Organization";
 import ResourceMain from "../ResourceMai";
 import { Age } from "date-age";
-import { GcpFhirSearch } from "../..";
+import { GcpFhirCRUD, GcpFhirSearch } from "../..";
+import { Practitioner, PRACTITIONER } from "../Practitioner";
 
 export const compositionTypeArrey = [
   {
@@ -69,7 +70,7 @@ export interface COMPOSITOIN {
   status: compositionStatus;
   type: compositionType;
   documentDatahtml?: string;
-  section:any[];
+  section: any[];
 }
 export class Composition extends ResourceMain implements ResourceMaster {
   private compType!: {
@@ -82,6 +83,49 @@ export class Composition extends ResourceMain implements ResourceMaster {
   public mapCompositionType(type: compositionType) {
     this.compType = compositionTypeArrey.filter((comp) => comp.type == type)[0];
   }
+
+  private _patient!: PATIENT;
+  public get patient(): PATIENT {
+    return this._patient;
+  }
+
+  private _organization!: ORGANIZATION;
+  public get organization(): ORGANIZATION {
+    return this._organization;
+  }
+
+  private _practitioner: PRACTITIONER[] = [];
+  public get practitioner(): PRACTITIONER[] {
+    return this._practitioner;
+  }
+
+  private _encounter!: ENCOUNTER;
+  public get encounter(): ENCOUNTER {
+    return this._encounter;
+  }
+
+  public setEncounter = async (id: string) => {
+    let curClass = new Encounter();
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Encounter");
+    this._encounter = curClass.convertFhirToObject(curClass);
+  };
+
+  async setPatient(id: string) {
+    let curClass = new Patient();
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Patient");
+    this._patient = curClass.convertFhirToObject(curClass);
+  }
+  async setOrganization(id: string) {
+    let curClass = new Organization();
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Organization");
+    this._organization = curClass.convertFhirToObject(curClass);
+  }
+  async setPractioner(id: string) {
+    let curClass = new Practitioner();
+    const res = await new GcpFhirCRUD().getFhirResource(id, "Practitioner");
+    this._practitioner.push(curClass.convertFhirToObject(res));
+  }
+
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
       return `<div>Patient:- ${options.patient.name}.  ${

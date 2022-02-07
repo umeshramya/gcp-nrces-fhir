@@ -1,6 +1,6 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionBundle, PrescriptionRecord } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord } = require("gcp-nrces-fhir")
 
 
 
@@ -675,12 +675,12 @@ const prescriptionRecord = async()=>{
   const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
   const MedicationRequestId = await CreateMedicationRequest();
 
-  const prescription = new PrescriptionBundle();
+  // const prescription = new PrescriptionBundle();
 
-  await prescription.setEncounter(encounterId);
-  await prescription.setPatient(patientId);
-  await prescription.setOrganization(orgId);
-  await prescription.setPractioner(practId);
+  // await prescription.setEncounter(encounterId);
+  // await prescription.setPatient(patientId);
+  // await prescription.setOrganization(orgId);
+  // await prescription.setPractioner(practId);
   const medicationRequest = (await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
 
   const res =await new PrescriptionRecord().create({
