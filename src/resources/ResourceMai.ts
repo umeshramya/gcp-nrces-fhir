@@ -6,7 +6,7 @@ export default class ResourceMain {
     return divtext.substring(42, len - 6)
   }
 
-  protected getIdFromReference = (options: { ref: string, resourceType: resourceType }) => {
+  public getIdFromReference = (options: { ref: string, resourceType: resourceType }) => {
     return `${options.ref}`.substring(options.resourceType.length + 1)
   }
 
