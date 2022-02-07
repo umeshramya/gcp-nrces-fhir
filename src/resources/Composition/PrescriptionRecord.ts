@@ -24,7 +24,8 @@ export class PrescriptionRecord extends Composition {
     compositionObj: COMPOSITOIN;
     medicationRequest: any;
   }) => {
-    if (options.compositionObj.id) {
+
+    if (!options.compositionObj.id) {
       throw (new Error().message = "id of composition is required");
     }
     options.compositionObj.section.push({
@@ -34,11 +35,12 @@ export class PrescriptionRecord extends Composition {
     options.compositionObj.documentDatahtml =
       options.medicationRequest.text.div;
     const body = this.getFHIR(options.compositionObj);
+
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.updateFhirResource(
       body,
-      options.compositionObj.id || "",
-      options.medicationRequest
+      options.compositionObj.id || "", "Composition"
+
     );
     return res;
   };

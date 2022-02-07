@@ -126,16 +126,16 @@ const searchsimple = async () => {
   // const res = await new Composition().getWithIncludes(`43213a09-d546-4e44-8759-4a6ce4fa2087`)
   const res = await new Composition().getCompositionsByPatient(`e101abe6-11ae-403d-8c2e-a34f97ceccae`)
   // console.log(res.data.entry)
-    res.data.entry.map(el=>{
+  res.data.entry.map(el => {
     console.log(el.resource.subject)
-    })
+  })
   // res.data.entry.map(el => {
   //   console.log(el.resource.author)
   //   // console.log(el)
   // })
 }
 
-searchsimple()
+// searchsimple()
 
 // console.log(EncounterStatusArray.map(el=>{
 //     return el
@@ -453,7 +453,7 @@ const CreateMedicationRequest = async () => {
     const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
     const obj = medicationRequest.convertFhirToObject(res.data)
 
-    console.log(obj)
+    // console.log(obj)
     return res.data.id
 
   } catch (error) {
@@ -505,8 +505,8 @@ const createComposition = async () => {
       "patientId": patientId,
       "organizationId": orgId,
     })
-    // console.log(body)
-    // return
+    console.log(body)
+    return
     const res = await gcpFhirCRUD.createFhirResource(body, "Composition")
     console.log(res)
 
@@ -666,8 +666,8 @@ const updateprescriptionDoc = async () => {
 
 // updateprescriptionDoc()
 
-const prescriptionRecord = async()=>{
-  
+const prescriptionRecord = async () => {
+
   const gcpFhirCRUD = new GcpFhirCRUD()
   const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
   const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
@@ -675,23 +675,24 @@ const prescriptionRecord = async()=>{
   const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
   const MedicationRequestId = await CreateMedicationRequest();
 
-  // const prescription = new PrescriptionBundle();
+  const prescription = new PrescriptionRecord();
 
-  // await prescription.setEncounter(encounterId);
-  // await prescription.setPatient(patientId);
-  // await prescription.setOrganization(orgId);
-  // await prescription.setPractioner(practId);
+  await prescription.setEncounter(encounterId);
+  await prescription.setPatient(patientId);
+  await prescription.setOrganization(orgId);
+  await prescription.setPractitioner(practId);
+
   const medicationRequest = (await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
 
-  const res =await new PrescriptionRecord().create({
+  const res = await prescription.create({
     "compositionObj": {
-      "author": [{ "reference": `Practitioner/${practId}`, "display": "Dr Umesh R Bilagi" }],
+      "author": prescription.practitioner,
       "date": new Date().toISOString(),
-      "encounter": prescription.encounter.Obj,
+      "encounter": prescription.encounter,
       "encounterId": encounterId,
-      "patient": prescription.patient.Obj,
+      "patient": prescription.patient,
       "patientId": patientId,
-      "organization": prescription.organization.Obj,
+      "organization": prescription.organization,
       "organizationId": orgId,
       "type": "PrescriptionRecord",
       "status": "entered-in-error",
@@ -705,4 +706,47 @@ const prescriptionRecord = async()=>{
 }
 
 
-prescriptionRecord();
+// prescriptionRecord();
+
+const prescriptionRecordUpdate = async () => {
+
+  const gcpFhirCRUD = new GcpFhirCRUD()
+  const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+  const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+  const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+  const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+  const MedicationRequestId = await CreateMedicationRequest();
+
+  const prescription = new PrescriptionRecord();
+
+  await prescription.setEncounter(encounterId);
+  await prescription.setPatient(patientId);
+  await prescription.setOrganization(orgId);
+  await prescription.setPractitioner(practId);
+
+  const medicationRequest = (await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
+
+  const res = await prescription.update({
+    "compositionObj": {
+      "author": prescription.practitioner,
+      "date": new Date().toISOString(),
+      "encounter": prescription.encounter,
+      "encounterId": encounterId,
+      "patient": prescription.patient,
+      "patientId": patientId,
+      "organization": prescription.organization,
+      "organizationId": orgId,
+      "type": "PrescriptionRecord",
+      "status": "entered-in-error",
+      "section": [],
+      "id": "4c0ba1f1-c7ad-430b-8f23-7d7bf3833855"
+    },
+    "medicationRequest": medicationRequest,
+  })
+
+  console.log(res)
+
+}
+
+prescriptionRecordUpdate()
+

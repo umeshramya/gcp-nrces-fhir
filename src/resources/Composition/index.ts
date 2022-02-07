@@ -94,8 +94,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
     return this._organization;
   }
 
-  private _practitioner: PRACTITIONER[] = [];
-  public get practitioner(): PRACTITIONER[] {
+  private _practitioner: any = [];
+  public get practitioner(): any {
     return this._practitioner;
   }
 
@@ -107,36 +107,35 @@ export class Composition extends ResourceMain implements ResourceMaster {
   public setEncounter = async (id: string) => {
     let curClass = new Encounter();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Encounter");
-    this._encounter = curClass.convertFhirToObject(curClass);
+    this._encounter = curClass.convertFhirToObject(res.data);
   };
 
   async setPatient(id: string) {
     let curClass = new Patient();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Patient");
-    this._patient = curClass.convertFhirToObject(curClass);
+    this._patient = curClass.convertFhirToObject(res.data);
   }
   async setOrganization(id: string) {
     let curClass = new Organization();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Organization");
-    this._organization = curClass.convertFhirToObject(curClass);
+    this._organization = curClass.convertFhirToObject(res.data);
   }
-  async setPractioner(id: string) {
+  async setPractitioner(id: string) {
     let curClass = new Practitioner();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Practitioner");
-    this._practitioner.push(curClass.convertFhirToObject(res));
+    this._practitioner.push({ reference: 'Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739' });
   }
 
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
-      return `<div>Patient:- ${options.patient.name}.  ${
-        options.patient.healthNumber
-          ? `Health Id ${options.patient.healthNumber}`
-          : ""
-      }</div>
+      return `<div>Patient:- ${options.patient.name}.  ${options.patient.healthNumber
+        ? `Health Id ${options.patient.healthNumber}`
+        : ""
+        }</div>
                 <div>MRN:- ${options.patient.MRN}</div>
                 <div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
-        new Date(options.patient.dob)
-      )} ph: ${options.patient.mobile}</div>`;
+          new Date(options.patient.dob)
+        )} ph: ${options.patient.mobile}</div>`;
     };
 
     this.mapCompositionType(options.type);
@@ -166,12 +165,12 @@ export class Composition extends ResourceMain implements ResourceMaster {
             <td>${getpatientdetails()}</td>
             <td>
                     ${options.author.map((el, i) => {
-                      if (i > 0) {
-                        return `<div>${el.display}</div>`;
-                      } else {
-                        return `<div><b>Signed By :- ${el.display}</b></div>`;
-                      }
-                    })} 
+          if (i > 0) {
+            return `<div>${el.display}</div>`;
+          } else {
+            return `<div><b>Signed By :- ${el.display}</b></div>`;
+          }
+        })} 
   
             </td>
           </tr>
