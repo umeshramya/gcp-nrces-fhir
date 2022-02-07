@@ -702,12 +702,12 @@ const prescriptionRecord = async () => {
     "medicationRequest": medicationRequest,
   })
 
-  console.log(res)
+  console.log(res.data.author)
 
 }
 
 
-// prescriptionRecord();
+prescriptionRecord();
 
 const prescriptionRecordUpdate = async () => {
 
@@ -751,5 +751,5 @@ const prescriptionRecordUpdate = async () => {
 
 }
 
-prescriptionRecordUpdate()
+// prescriptionRecordUpdate()
 

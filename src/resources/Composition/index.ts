@@ -104,7 +104,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     return this._encounter;
   }
 
-  public setEncounter = async (id: string) => {
+  async setEncounter (id: string) {
     let curClass = new Encounter();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Encounter");
     this._encounter = curClass.convertFhirToObject(res.data);
@@ -123,7 +123,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
   async setPractitioner(id: string) {
     let curClass = new Practitioner();
     const res = await new GcpFhirCRUD().getFhirResource(id, "Practitioner");
-    this._practitioner.push({ reference: 'Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739' });
+    
+    this._practitioner.push({ reference: 'Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739', display :  curClass.convertFhirToObject(res.data).name});
   }
 
   getFHIR(options: COMPOSITOIN) {
