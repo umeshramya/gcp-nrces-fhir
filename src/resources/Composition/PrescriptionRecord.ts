@@ -1,9 +1,9 @@
-import { Composition, COMPOSITOIN } from ".";
+import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 import { DocumentReference } from "../DocumentReference";
 import { MEDICATION_REQUEST } from "../MedicationRequest";
 
-export class PrescriptionRecord extends Composition {
+export class PrescriptionRecord extends Composition implements Records {
   create = async (options: {
     compositionObj: COMPOSITOIN;
     medicationRequest: any;
@@ -24,7 +24,6 @@ export class PrescriptionRecord extends Composition {
     compositionObj: COMPOSITOIN;
     medicationRequest: any;
   }) => {
-
     if (!options.compositionObj.id) {
       throw (new Error().message = "id of composition is required");
     }
@@ -39,8 +38,8 @@ export class PrescriptionRecord extends Composition {
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.updateFhirResource(
       body,
-      options.compositionObj.id || "", "Composition"
-
+      options.compositionObj.id || "",
+      "Composition"
     );
     return res;
   };
