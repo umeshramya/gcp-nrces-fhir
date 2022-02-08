@@ -1,6 +1,7 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord } = require("gcp-nrces-fhir")
+const { cpSync } = require('fs')
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord , OPConsultRecord} = require("gcp-nrces-fhir")
 
 
 
@@ -707,7 +708,7 @@ const prescriptionRecord = async () => {
 }
 
 
-prescriptionRecord();
+// prescriptionRecord();
 
 const prescriptionRecordUpdate = async () => {
 
@@ -753,3 +754,61 @@ const prescriptionRecordUpdate = async () => {
 
 // prescriptionRecordUpdate()
 
+
+const chiefComplaints = async()=>{
+  const condition = new Condition();
+  const body =  condition.getFHIR({
+    "condtion" : [{"display" : "Abdomin Pain", "system" : "http://snomed.info/sct"}],
+    "patientId" : "e101abe6-11ae-403d-8c2e-a34f97ceccae",
+    "text" : "<div>Pain abdomen left hypochondric region </div>",
+    "title" : "Chief Complints",
+  })
+
+  const res = await new GcpFhirCRUD().createFhirResource(body, "Condition")
+  console.log(res)
+  // '6bf71daa-7ca5-4014-a9fc-62bc9f1a1ec8'
+}
+
+// chiefComplaints()
+
+const OPConsulation =async()=>{
+  const gcpFhirCRUD = new GcpFhirCRUD()
+  const encounterId = "e2eaa172-20a0-42f1-83d0-de371dad3c74"
+  const patientId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+  const orgId = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+  const practId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+  const MedicationRequestId = await CreateMedicationRequest();
+  const chiefComplaintsId = '6bf71daa-7ca5-4014-a9fc-62bc9f1a1ec8'
+
+  const opConsultation = new OPConsultRecord()
+
+  await opConsultation.setEncounter(encounterId);
+  await opConsultation.setPatient(patientId);
+  await opConsultation.setOrganization(orgId);
+  await opConsultation.setPractitioner(practId);
+
+  const medicationRequest = (await gcpFhirCRUD.getFhirResource(MedicationRequestId, "MedicationRequest")).data;
+  const chiefComplaints = (await gcpFhirCRUD.getFhirResource(chiefComplaintsId, "Condition")).data
+
+ const res = await opConsultation.create({
+    "composition" :  {
+      "author": opConsultation.practitioner,
+      "date": new Date().toISOString(),
+      "encounter": opConsultation.encounter,
+      "encounterId": encounterId,
+      "patient": opConsultation.patient,
+      "patientId": patientId,
+      "organization": opConsultation.organization,
+      "organizationId": orgId,
+      "type": "OPConsultRecord",
+      "status": "final",
+      "section": []
+    },
+    "chiefComplinats" : chiefComplaints,
+    "medicationRequest" : medicationRequest
+  })
+
+  console.log(res)
+}
+
+OPConsulation()

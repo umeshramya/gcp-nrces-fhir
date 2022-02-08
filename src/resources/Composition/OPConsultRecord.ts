@@ -1,4 +1,5 @@
 import { Composition, COMPOSITOIN, Records } from ".";
+import GcpFhirCRUD from "../../classess/gcp";
 
 export class OPConsultRecord extends Composition implements Records {
   create = async (options: {
@@ -12,6 +13,8 @@ export class OPConsultRecord extends Composition implements Records {
     procedure?: any;
     followUp?: any;
   }) => {
+    options.composition.section = []
+
     options.composition.section.push({
       title: "Chief complaints",
       code: {
@@ -29,7 +32,9 @@ export class OPConsultRecord extends Composition implements Records {
         },
       ],
     });
-    options.composition.documentDatahtml = options.chiefComplinats.text.div;
+    options.composition.documentDatahtml =  `<h4>Chief complaints<h4> ${options.chiefComplinats.text.div}`;
+
+
 
     if (options.allergies) {
       options.composition.section.push({
@@ -51,7 +56,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + options.allergies.text.div;
+        options.composition.documentDatahtml + `<h4>Allergies<h4> ${options.allergies.text.div}`;
     }
 
     if (options.medicalHistory) {
@@ -74,7 +79,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + options.medicalHistory.text.div;
+        options.composition.documentDatahtml + `<h4>Medical History</h4> ${options.medicalHistory.text.div}`;
     }
 
     if (options.investigationAdvice) {
@@ -97,7 +102,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        options.investigationAdvice.text.div;
+        `<h4>Investigation Advice</h4> ${options.investigationAdvice.text.div}`;
     }
 
     if (options.medicationRequest || options.medicationRequest) {
@@ -113,7 +118,7 @@ export class OPConsultRecord extends Composition implements Records {
       }
       if (options.medicationRequest) {
         entry.push({
-          reference: `MedicationStatement/${options.medicationRequest.id}`,
+          reference: `MedicationRequest/${options.medicationRequest.id}`,
         });
         options.composition.documentDatahtml =
           options.composition.documentDatahtml +
@@ -179,6 +184,17 @@ export class OPConsultRecord extends Composition implements Records {
       options.composition.documentDatahtml =
         options.composition.documentDatahtml + options.followUp.text.div;
     }
+    
+
+    const body = this.getFHIR(options.composition);
+    body.section = options.composition.section
+
+    // console.log(body.section)
+    // return
+
+    const gcpFhirCrud = new GcpFhirCRUD();
+    const res = await gcpFhirCrud.createFhirResource(body, "Composition");
+    return res;
   };
   update = async (options: { composition: COMPOSITOIN }) => {};
 }

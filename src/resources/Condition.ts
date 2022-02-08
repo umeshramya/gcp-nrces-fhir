@@ -4,6 +4,7 @@ import { CodeDisplay } from "../config";
 export interface CONDITION {
   id?: string
   text: string;
+  title:string;
   condtion: CodeDisplay[];
   patientId: string;
 }
@@ -25,7 +26,7 @@ export class Condition implements ResourceMaster {
       },
       "code": {
         "coding": options.condtion,
-        "text": options.text
+        "text": options.title
       },
       "subject": {
         "reference": `Patient/${options.patientId}`
@@ -41,17 +42,12 @@ export class Condition implements ResourceMaster {
       "id": options.id,
       "patientId": `${options.subject.reference}`.substring(8),
       "condtion": options.code.coding,
-      "text": options.code.text,
+      "text": options.text.div,
+      "title" : options.code.text
+
     }
 
     return ret
   }
-
-
-
-
-
-
-
 
 }
