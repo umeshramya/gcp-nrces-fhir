@@ -6,6 +6,9 @@ export class OPConsultRecord extends Composition implements Records {
     chiefComplinats: any;
     allergies?: any;
     medicalHistory?: any;
+    investigationAdvice?: any;
+    medicationStatement?: any;
+    medicationRequest?: any;
   }) => {
     options.composition.section.push({
       title: "Chief complaints",
@@ -70,6 +73,57 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml + options.medicalHistory.text.div;
+    }
+
+    if (options.investigationAdvice) {
+      options.composition.section.push({
+        title: "Investigation Advice",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "721963009",
+              display: "Order document",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `ServiceRequest/${options.investigationAdvice.id}`,
+          },
+        ],
+      });
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        options.investigationAdvice.text.div;
+    }
+
+    if (options.medicationRequest || options.medicationRequest) {
+      let entry = [];
+      if (options.medicationRequest) {
+        entry.push({
+          reference: `MedicationStatement/${options.medicationRequest.id}`,
+        });
+      }
+      if (options.medicationStatement) {
+        entry.push({
+          reference: `MedicationStatement/${options.medicationStatement.id}`,
+        });
+      }
+
+      options.composition.section.push({
+        title: "Medications",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "721912009",
+              display: "Medication summary document",
+            },
+          ],
+        },
+        entry: entry,
+      });
     }
   };
   update = async (options: { composition: COMPOSITOIN }) => {};
