@@ -9,6 +9,8 @@ export class OPConsultRecord extends Composition implements Records {
     investigationAdvice?: any;
     medicationStatement?: any;
     medicationRequest?: any;
+    procedure?: any;
+    followUp?: any;
   }) => {
     options.composition.section.push({
       title: "Chief complaints",
@@ -100,15 +102,22 @@ export class OPConsultRecord extends Composition implements Records {
 
     if (options.medicationRequest || options.medicationRequest) {
       let entry = [];
-      if (options.medicationRequest) {
-        entry.push({
-          reference: `MedicationStatement/${options.medicationRequest.id}`,
-        });
-      }
       if (options.medicationStatement) {
         entry.push({
           reference: `MedicationStatement/${options.medicationStatement.id}`,
         });
+
+        options.composition.documentDatahtml =
+          options.composition.documentDatahtml +
+          options.medicationStatement.text.div;
+      }
+      if (options.medicationRequest) {
+        entry.push({
+          reference: `MedicationStatement/${options.medicationRequest.id}`,
+        });
+        options.composition.documentDatahtml =
+          options.composition.documentDatahtml +
+          options.medicationRequest.text.div;
       }
 
       options.composition.section.push({
@@ -124,6 +133,51 @@ export class OPConsultRecord extends Composition implements Records {
         },
         entry: entry,
       });
+    }
+
+    if (options.procedure) {
+      options.composition.section.push({
+        title: "Procedure",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "371525003",
+              display: "Clinical procedure report",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Procedure/${options.procedure}`,
+          },
+        ],
+      });
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml + options.procedure.text.div;
+    }
+
+    if (options.followUp) {
+      options.composition.section.push({
+        title: "Follow Up",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "736271009",
+              display: "Outpatient care plan",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Appointment/${options.followUp.id}`,
+          },
+        ],
+      });
+
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml + options.followUp.text.div;
     }
   };
   update = async (options: { composition: COMPOSITOIN }) => {};
