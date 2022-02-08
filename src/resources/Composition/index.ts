@@ -299,6 +299,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   };
 
   getPdf = async (options: {
+    html: string;
     composition: COMPOSITOIN;
     base64: boolean;
     signBase64: string;
@@ -309,23 +310,20 @@ export class Composition extends ResourceMain implements ResourceMaster {
     headerbase64Image?: string;
   }): Promise<string | Buffer> => {
     const pdf = new CreatePdf();
-    const retPdf = await pdf.create(
-      options.composition.documentDatahtml || "",
-      {
-        base64: options.base64,
-        esign: {
-          image:
-            options.composition.status == "final"
-              ? options.signBase64
-              : emptySign,
-          nameLine1: options.nameLine1,
-          nameLine2: options.nameLine2 || "",
-        },
-        qrcode: options.qrCode,
-        paperSize: options.paperSize,
-        headerbase64Image: options.headerbase64Image,
-      }
-    );
+    const retPdf = await pdf.create(options.html, {
+      base64: options.base64,
+      esign: {
+        image:
+          options.composition.status == "final"
+            ? options.signBase64
+            : emptySign,
+        nameLine1: options.nameLine1,
+        nameLine2: options.nameLine2 || "",
+      },
+      qrcode: options.qrCode,
+      paperSize: options.paperSize,
+      headerbase64Image: options.headerbase64Image,
+    });
 
     return retPdf;
   };
