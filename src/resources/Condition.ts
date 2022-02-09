@@ -1,5 +1,6 @@
 import { ResourceMaster } from "../Interfaces/index"
 import { CodeDisplay } from "../config";
+import ResourceMain from "./ResourceMai";
 
 export interface CONDITION {
   id?: string
@@ -9,7 +10,7 @@ export interface CONDITION {
   patientId: string;
 }
 
-export class Condition implements ResourceMaster {
+export class Condition extends  ResourceMain implements ResourceMaster {
   getFHIR(options: CONDITION): any {
 
     const body = {
