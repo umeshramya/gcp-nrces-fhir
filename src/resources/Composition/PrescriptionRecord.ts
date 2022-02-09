@@ -5,40 +5,40 @@ import { MEDICATION_REQUEST } from "../MedicationRequest";
 
 export class PrescriptionRecord extends Composition implements Records {
   create = async (options: {
-    compositionObj: COMPOSITOIN;
+    composition: COMPOSITOIN;
     medicationRequest: any;
   }) => {
-    options.compositionObj.section.push({
+    options.composition.section.push({
       reference: `MedicationRequest/${options.medicationRequest.id}`,
       type: "MedicationRequest",
     });
-    options.compositionObj.documentDatahtml =
+    options.composition.documentDatahtml =
       options.medicationRequest.text.div;
-    const body = this.getFHIR(options.compositionObj);
+    const body = this.getFHIR(options.composition);
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
   };
 
   update = async (options: {
-    compositionObj: COMPOSITOIN;
+    composition: COMPOSITOIN;
     medicationRequest: any;
   }) => {
-    if (!options.compositionObj.id) {
+    if (!options.composition.id) {
       throw (new Error().message = "id of composition is required");
     }
-    options.compositionObj.section.push({
+    options.composition.section.push({
       reference: `MedicationRequest/${options.medicationRequest.id}`,
       type: "MedicationRequest",
     });
-    options.compositionObj.documentDatahtml =
+    options.composition.documentDatahtml =
       options.medicationRequest.text.div;
-    const body = this.getFHIR(options.compositionObj);
+    const body = this.getFHIR(options.composition);
 
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.updateFhirResource(
       body,
-      options.compositionObj.id || "",
+      options.composition.id || "",
       "Composition"
     );
     return res;
