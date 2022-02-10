@@ -30,6 +30,14 @@ export interface ALLERGY_INTOLERANCE {
 
 export class AllergyIntolerance implements ResourceMaster {
   getFHIR(options: ALLERGY_INTOLERANCE): any {
+    const getAllergy = (): string => {
+      let ret = "";
+      if (options.text) {
+        ret = `<div>${options.text} clinical status:${options.clinicalStatus} verification status: ${options.verificationStatus}</div>`;
+        ret = `${ret} <div>${options.note}</div>`;
+      }
+      return ret;
+    };
     const body = {
       resourceType: "AllergyIntolerance",
       id: options.id || undefined,
@@ -40,7 +48,7 @@ export class AllergyIntolerance implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: options.text,
+        div: getAllergy(),
       },
       clinicalStatus: {
         coding: [
