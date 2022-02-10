@@ -29,8 +29,8 @@ import { resourceType, resourceTypeArray } from "./config";
 import { Condition, CONDITION } from "./resources/Condition";
 import { Procedure, PROCEDURE } from "./resources/Procedure";
 import {
-  allergyStatusArray,
-  verificationStatusArray,
+  allergyClinicalStatusArray,
+  allergyVerificationStatusArray,
   ALLERGY_INTOLERANCE,
   AllergyIntolerance,
 } from "./resources/AllergyIntolerance";
@@ -43,7 +43,7 @@ import {
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { COMPOSITOIN, Composition } from "./resources/Composition/index";
 import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
-import {OPConsultRecord} from "./resources/Composition/OPConsultRecord"
+import { OPConsultRecord } from "./resources/Composition/OPConsultRecord";
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -85,8 +85,8 @@ export type {
 export { CONDITION, Condition };
 export { Procedure, PROCEDURE };
 export {
-  allergyStatusArray,
-  verificationStatusArray,
+  allergyClinicalStatusArray as allergyStatusArray,
+  allergyVerificationStatusArray as verificationStatusArray,
   ALLERGY_INTOLERANCE,
   AllergyIntolerance,
 };
@@ -99,7 +99,7 @@ export {
 export { DOCUMENT_BUNDLE, DocumentBundle };
 export { COMPOSITOIN, Composition };
 export { PrescriptionRecord };
-export {OPConsultRecord} ;
+export { OPConsultRecord };
 export {
   DOCUMENT_REFERENCE,
   DocumentReference,
