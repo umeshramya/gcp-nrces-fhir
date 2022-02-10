@@ -1,21 +1,25 @@
 import { ResourceMaster } from "../Interfaces";
 import { CodeDisplay } from "../config/index";
 
-export const allergyStatusArray = ["active", "inactive", "resolved"] as const;
-type allergyStatus = typeof allergyStatusArray[number];
+export const allergyClinicalStatusArray = [
+  "active",
+  "inactive",
+  "resolved",
+] as const;
+type AllergyClinicalStatus = typeof allergyClinicalStatusArray[number];
 
-export const verificationStatusArray = [
+export const allergyVerificationStatusArray = [
   "unconfirmed",
   "confirmed",
   "refuted",
   "entered-in-error",
 ] as const;
-type verificationStatus = typeof verificationStatusArray[number];
+type AllergyVerificationStatus = typeof allergyVerificationStatusArray[number];
 
 export interface ALLERGY_INTOLERANCE {
   id?: string;
-  clinicalStatus: allergyStatus;
-  verificationStatus: verificationStatus;
+  clinicalStatus: AllergyClinicalStatus;
+  verificationStatus: AllergyVerificationStatus;
   allergyIntolerance: CodeDisplay[];
   text: string;
   patientId: string;
@@ -68,10 +72,9 @@ export class AllergyIntolerance implements ResourceMaster {
       note: options.note,
     };
 
-    return body
+    return body;
   }
   convertFhirToObject(options: any): ALLERGY_INTOLERANCE {
-
     let ret: ALLERGY_INTOLERANCE = {
       clinicalStatus: options.clinicalStatus.coding[0].code,
       verificationStatus: options.verificationStatus.coding[0].code,
@@ -81,8 +84,16 @@ export class AllergyIntolerance implements ResourceMaster {
       date: options.recordedDate,
       practitionerId: `${options.recorder.reference}`.substring(13),
       note: options.note,
-      id: options.id
-    }
+      id: options.id,
+    };
     return ret;
   }
+
+  getClinicalStatusArray = (): AllergyClinicalStatus[] => {
+    return allergyClinicalStatusArray.map((el) => el);
+  };
+
+  getVerificationStatus = (): AllergyVerificationStatus[] => {
+    return allergyVerificationStatusArray.map((el) => el);
+  };
 }
