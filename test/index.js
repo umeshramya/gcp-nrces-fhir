@@ -334,6 +334,7 @@ const appointment = new Appointment();
 const createAppointment = async () => {
   const patinetId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
   const practitionerId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+  const reseonReferenceCondtionId = "80cde551-455e-4e7d-8190-02296903aebf"
 
 
 
@@ -342,6 +343,10 @@ const createAppointment = async () => {
   const patient = new ResourceFactory("Patient").convertFhirToObject(res.data)
   res = await gcpFhirCRUD.getFhirResource(practitionerId, "Practitioner")
   const practitioner = new ResourceFactory("Practitioner").convertFhirToObject(res.data)
+  res = await gcpFhirCRUD.getFhirResource(reseonReferenceCondtionId, "Condition")
+  const condtion = new ResourceFactory("Condition").convertFhirToObject(res.data)
+
+
 
 
   const body = appointment.getFHIR({
@@ -349,7 +354,7 @@ const createAppointment = async () => {
     "practitioner": practitioner,
     "practitionerStatus": "accepted",
     "patientStatus": "accepted",
-    "reasonReferenceConditionId": "80cde551-455e-4e7d-8190-02296903aebf",
+    "reasonReferenceConditionId": condition,
     "serviceCategory": [{ "display": "Consultation", "system": "http://snomed.info/sct" }],
     "serviceType": [{ "display": "Consulataion", "system": "http://snomed.info/sct" }],
     "appointmentType": [{ "display": "consulaltion", "system": "http://snomed.info/sct" }],
@@ -361,13 +366,13 @@ const createAppointment = async () => {
     "description": "this is description appointment"
   })
   const gcpFhirCRUD = new GcpFhirCRUD();
-  const res = await gcpFhirCRUD.createFhirResource(body, "Appointment")
+  const resource = await gcpFhirCRUD.createFhirResource(body, "Appointment")
   // cd33d0e1-62b3-4589-95bf-bb75b498ae88
-  console.log(res)
+  console.log(resource)
 }
 
 
-// createAppointment()
+createAppointment()
 
 const getAppontment = async () => {
   const id = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
