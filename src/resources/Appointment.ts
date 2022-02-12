@@ -34,7 +34,7 @@ export interface APPOINTMENT {
   serviceCategory: CodeDisplay[];
   serviceType: CodeDisplay[];
   appointmentType: CodeDisplay[];
-  reasonReferenceCondition: CONDITION;
+  reasonReferenceCondition?: CONDITION;
   createdDate: string;
   startDate: string;
   endDate: string;

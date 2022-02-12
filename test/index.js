@@ -332,13 +332,11 @@ const getAllergyIntolerance = async () => {
 const appointment = new Appointment();
 
 const createAppointment = async () => {
+  const gcpFhirCRUD = new GcpFhirCRUD();
   const patinetId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
   const practitionerId = "877f1236-63fd-4827-a3da-636a4f2c5739"
   const reseonReferenceCondtionId = "80cde551-455e-4e7d-8190-02296903aebf"
 
-
-
-  const resourcefactrpty = new Ressource
   let res = await gcpFhirCRUD.getFhirResource(patinetId, "Patient")
   const patient = new ResourceFactory("Patient").convertFhirToObject(res.data)
   res = await gcpFhirCRUD.getFhirResource(practitionerId, "Practitioner")
@@ -348,13 +346,12 @@ const createAppointment = async () => {
 
 
 
-
   const body = appointment.getFHIR({
     "patient": patient,
     "practitioner": practitioner,
     "practitionerStatus": "accepted",
     "patientStatus": "accepted",
-    "reasonReferenceConditionId": condition,
+    // "reasonReferenceConditionId": condition,
     "serviceCategory": [{ "display": "Consultation", "system": "http://snomed.info/sct" }],
     "serviceType": [{ "display": "Consulataion", "system": "http://snomed.info/sct" }],
     "appointmentType": [{ "display": "consulaltion", "system": "http://snomed.info/sct" }],
@@ -365,7 +362,7 @@ const createAppointment = async () => {
     "createdDate": new Date().toISOString(),
     "description": "this is description appointment"
   })
-  const gcpFhirCRUD = new GcpFhirCRUD();
+
   const resource = await gcpFhirCRUD.createFhirResource(body, "Appointment")
   // cd33d0e1-62b3-4589-95bf-bb75b498ae88
   console.log(resource)
