@@ -1,7 +1,7 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
 const { cpSync } = require('fs')
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory } = require("gcp-nrces-fhir")
 
 
 
@@ -330,10 +330,23 @@ const getAllergyIntolerance = async () => {
 
 // Appointment
 const appointment = new Appointment();
+
 const createAppointment = async () => {
+  const patinetId = "e101abe6-11ae-403d-8c2e-a34f97ceccae"
+  const practitionerId = "877f1236-63fd-4827-a3da-636a4f2c5739"
+
+
+
+  const resourcefactrpty = new Ressource
+  let res = await gcpFhirCRUD.getFhirResource(patinetId, "Patient")
+  const patient = new ResourceFactory("Patient").convertFhirToObject(res.data)
+  res = await gcpFhirCRUD.getFhirResource(practitionerId, "Practitioner")
+  const practitioner = new ResourceFactory("Practitioner").convertFhirToObject(res.data)
+
+
   const body = appointment.getFHIR({
-    "patientId": "e101abe6-11ae-403d-8c2e-a34f97ceccae",
-    "practitionerId": "877f1236-63fd-4827-a3da-636a4f2c5739",
+    "patient": patient,
+    "practitioner": practitioner,
     "practitionerStatus": "accepted",
     "patientStatus": "accepted",
     "reasonReferenceConditionId": "80cde551-455e-4e7d-8190-02296903aebf",
@@ -819,4 +832,4 @@ const comOPD = async () => {
   console.log(res.data.entry)
 }
 
-comOPD();
+// comOPD();

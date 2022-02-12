@@ -1,4 +1,4 @@
-import { Condition, GcpFhirCRUD, Patient, Practitioner } from "..";
+import { CONDITION, Condition, GcpFhirCRUD, PATIENT, Patient, PRACTITIONER, Practitioner } from "..";
 import { CodeDisplay } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
@@ -29,13 +29,12 @@ type AppointmentActorStatus = typeof AppointmentActorStatusArray[number];
 export interface APPOINTMENT {
   id?: string;
   status: AppointmentStatus;
-  patientId: string;
-  practitionerId: string;
-  // text: string;
+  patient: PATIENT;
+  practitioner: PRACTITIONER;
   serviceCategory: CodeDisplay[];
   serviceType: CodeDisplay[];
   appointmentType: CodeDisplay[];
-  reasonReferenceConditionId: string;
+  reasonReferenceCondition: CONDITION;
   createdDate: string;
   startDate: string;
   endDate: string;
@@ -45,23 +44,11 @@ export interface APPOINTMENT {
 }
 
 export class Appointment extends ResourceMain implements ResourceMaster {
-  async getFHIR(options: APPOINTMENT): Promise<any> {
-    const getText = async (): Promise<string> => {
-      const gcpFhirCrud = new GcpFhirCRUD();
-      let res = await gcpFhirCrud.getFhirResource(options.patientId, "Patient");
-      const patient = new Patient().convertFhirToObject(res.data);
-
-      res = await gcpFhirCrud.getFhirResource(
-        options.practitionerId,
-        "Practitioner"
-      );
-      const practitioner = new Practitioner().convertFhirToObject(res.data);
-
-      res = await gcpFhirCrud.getFhirResource(
-        options.reasonReferenceConditionId,
-        "Condition"
-      );
-      const condtion = new Condition().convertFhirToObject(res.data);
+  getFHIR(options: APPOINTMENT): any {
+    const getText = (): any => {
+      const patient = options.patient
+      const practitioner = options.practitioner
+      const condtion = options.reasonReferenceCondition
 
       let ret = `Appointment status ${options.status}`;
       ret = `${ret} <div> ${patient.name} (${options.patientStatus}) </div>`;
@@ -80,7 +67,7 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       ret = `${ret} <div>${options.description}</div>`;
       return ret;
     };
-    const body = {
+    let body = {
       resourceType: "Appointment",
       id: options.id || undefined,
       meta: {
@@ -90,7 +77,7 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: `<div xmlns="http://www.w3.org/1999/xhtml">${await getText()}</div>`,
+        div: `<div xmlns="http://www.w3.org/1999/xhtml">${getText()}</div>`,
       },
       status: options.status,
       serviceCategory: [
@@ -106,11 +93,11 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       appointmentType: {
         coding: options.appointmentType,
       },
-      reasonReference: [
+      reasonReference: options.reasonReferenceCondition ? [
         {
-          reference: `Condition/${options.reasonReferenceConditionId}`,
+          reference: `Condition/${options.reasonReferenceCondition}`,
         },
-      ],
+      ] : undefined,
       description: options.description,
       start: options.startDate,
       end: options.endDate,
@@ -118,39 +105,47 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       participant: [
         {
           actor: {
-            reference: `Patient/${options.patientId}`,
+            reference: `Patient/${options.patient.id}`,
           },
           status: options.patientStatus,
         },
         {
           actor: {
-            reference: `Practitioner/${options.practitionerId}`,
+            reference: `Practitioner/${options.practitioner.id}`,
           },
           status: options.practitionerStatus,
         },
       ],
     };
 
+
+
     return body;
   }
   convertFhirToObject(options: any): APPOINTMENT {
     let ret: APPOINTMENT = {
       status: options.status,
-      patientId: this.getIdFromReference({
-        ref: options.participant[0].actor.reference,
-        resourceType: "Patient",
-      }),
-      practitionerId: this.getIdFromReference({
-        ref: options.participant[1].actor.reference,
-        resourceType: "Practitioner",
-      }),
+      patient: {
+        id: this.getIdFromReference({
+          ref: options.participant[0].actor.reference,
+          resourceType: "Patient",
+        })
+      } as any,
+      practitioner: {
+        id: this.getIdFromReference({
+          ref: options.participant[1].actor.reference,
+          resourceType: "Practitioner",
+        })
+      } as any,
       serviceCategory: options.serviceCategory,
       serviceType: options.serviceType,
       appointmentType: options.appointmentType,
-      reasonReferenceConditionId: this.getIdFromReference({
-        ref: options.reasonReference[0].reference,
-        resourceType: "Condition",
-      }),
+      reasonReferenceCondition: {
+        id: this.getIdFromReference({
+          ref: options.reasonReference[0].reference,
+          resourceType: "Condition",
+        })
+      } as any,
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,
@@ -159,23 +154,7 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       practitionerStatus: options.participant[0].status,
       id: options.id,
     };
-    // let ret: APPOINTMENT = {
-    //   status: options.status,
-    //   patientId: `${options.participant[0].actor.reference}`.substring(8),
-    //   practitionerId: `${options.participant[1].actor.reference}`.substring(13),
-    //   text: options.text,
-    //   serviceCategory: options.serviceCategory,
-    //   serviceType: options.serviceType,
-    //   appointmentType: options.appointmentType,
-    //   reasonReferenceConditionId: `${options.reasonReference.reference}`.substring(8),
-    //   createdDate: options.created,
-    //   startDate: options.start,
-    //   endDate: options.end,
-    //   description: options.description,
-    //   patientStatus: options.participant[0].status,
-    //   practitionerStatus: options.participant[0].status,
-    //   id: options.id
-    // }
+
 
     return ret;
   }
