@@ -24,8 +24,18 @@ export interface SERVICE_REQUEST {
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
     getFHIR(options: SERVICE_REQUEST): any {
         const getText = (): string => {
-            let ret = ""
+            let services = ""
+            if (options.services.length > 0) {
+                options.services.forEach(el => {
+                    services = `${services}, ${el.display}`
+                })
+            }
 
+            let ret = services
+
+            // let ret = `<div>Following service/services requested by ${options.practitioner} to ${options.patient.name} with MRN ${options.patient.MRN} on ${new Date().toDateString()}</div>`
+            // ret = `${ret} <div>${services}</div>`
+            // ret = `${ret} <div>Order Status ${options.status}, Order Intent ${options.intent}</div>`
             return ret
         }
         const body = {
@@ -46,7 +56,8 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
                 "coding": options.services
             },
             "subject": {
-                "reference": `Patient/${options.patient.id}`
+                "reference": `Patient/${options.patient.id}`,
+                "display": options.patient.name
             },
             "occurrenceDateTime": options.date,
             "requester": {
