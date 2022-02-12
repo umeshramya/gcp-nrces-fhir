@@ -1,6 +1,6 @@
 import GcpFhirCRUD from "./classess/gcp";
 import GcpFhirSearch from "./classess/gcpSearch";
-import ResourceFactory from "./classess/ResourceFactory"
+import ResourceFactory from "./classess/ResourceFactory";
 import { PATIENT, PatientResource, Patient } from "./resources/Patient";
 import {
   PRACTITIONER,
@@ -63,6 +63,8 @@ import {
   MedicationStatementStatusArray,
 } from "./resources/MedicationStatement";
 
+import { ServiceRequest, SERVICE_REQUEST } from "./resources/ServiceRequest";
+
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export type { resourceType };
 export { PATIENT, PatientResource, Patient };
@@ -118,3 +120,4 @@ export {
   MedicatioRequestStatusArray,
   MedicationRequest,
 };
+export { ServiceRequest, SERVICE_REQUEST };

@@ -84,18 +84,29 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
 
     return body;
   }
-  convertFhirToObject(options: any):SERVICE_REQUEST {
-   let ret:SERVICE_REQUEST={
-       status: options.status,
-       intent: options.intent,
-       services: options.code.coding,
-       patient: {"id" : this.getIdFromReference({"ref" : options.subject.reference, "resourceType"}), "name" : options.subject.display} as any,
-       practitioner: {"id" : this.getIdFromReference({"ref" : options.requester.reference, "resourceType" : "Practitioner"}), "name" : options.requester.display} as any,
-       date: options.occurrenceDateTime,
-       "id" : options.id,
-       
-   }
-   return ret;
+  convertFhirToObject(options: any): SERVICE_REQUEST {
+    let ret: SERVICE_REQUEST = {
+      status: options.status,
+      intent: options.intent,
+      services: options.code.coding,
+      patient: {
+        id: this.getIdFromReference({
+          ref: options.subject.reference,
+          resourceType: "Patient",
+        }),
+        name: options.subject.display,
+      } as any,
+      practitioner: {
+        id: this.getIdFromReference({
+          ref: options.requester.reference,
+          resourceType: "Practitioner",
+        }),
+        name: options.requester.display,
+      } as any,
+      date: options.occurrenceDateTime,
+      id: options.id,
+    };
+    return ret;
   }
   statusArray = (): ServiceRequestStatus[] => {
     return ServiceRequestStatusArray.map((el) => el);
