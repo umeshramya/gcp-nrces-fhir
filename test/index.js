@@ -103,8 +103,10 @@ const search = async () => {
   // { "key": "status", "value": "cancelled,finished" }
   // ])
 
-  const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{"key" : "Identifier", value : "38"}])
-  console.log(res.data.entry.map(el=>{
+  // const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "identifier[0].type.coding[0].display", value: "38" }])
+  const res = await gcpFhirSearch.search("Patient", `identifier=http://terminology.hl7.org/CodeSystem/v2-0203|MR')`)
+  console.log(res.data)
+  console.log(res.data.entry.map(el => {
     return el.resource.identifier;
   }))
 
