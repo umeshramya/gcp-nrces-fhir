@@ -99,14 +99,18 @@ const getPractinioner = async () => {
 
 const search = async () => {
   const gcpFhirSearch = new GcpFhirSearch()
-  const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{ "key": "subject", "value": "Patient/e101abe6-11ae-403d-8c2e-a34f97ceccae" },
-  { "key": "status", "value": "cancelled,finished" }
-  ])
-  console.log(res.data.entry)
+  // const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{ "key": "subject", "value": "Patient/e101abe6-11ae-403d-8c2e-a34f97ceccae" },
+  // { "key": "status", "value": "cancelled,finished" }
+  // ])
+
+  const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{"key" : "Identifier", value : "38"}])
+  console.log(res.data.entry.map(el=>{
+    return el.resource.identifier;
+  }))
 
 }
 
-// search()
+search()
 
 const searchsimple = async () => {
   const gcpFhirSearch = new GcpFhirSearch()
@@ -369,7 +373,7 @@ const createAppointment = async () => {
 }
 
 
-createAppointment()
+// createAppointment()
 
 const getAppontment = async () => {
   const id = "cd33d0e1-62b3-4589-95bf-bb75b498ae88"
