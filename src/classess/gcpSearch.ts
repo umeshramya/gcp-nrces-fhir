@@ -1,26 +1,43 @@
 // import google from "@googleapis/healthcare";
 const google = require("@googleapis/healthcare");
-import { credentials, resourceType } from "../config";
+import { credentials, resourceType, databasePath } from "../config";
 
-const cloudRegion = process.env.GCP_FHIR_cloudRegion;
-const projectId = process.env.GCP_FHIR_projectId;
-const datasetId = process.env.GCP_FHIR_datasetId;
-const fhirStoreId = process.env.GCP_FHIR_fhirStoreId;
+// const cloudRegion = process.env.GCP_FHIR_cloudRegion;
+// const projectId = process.env.GCP_FHIR_projectId;
+// const datasetId = process.env.GCP_FHIR_datasetId;
+// const fhirStoreId = process.env.GCP_FHIR_fhirStoreId;
 
 interface LooseObject {
   [key: string]: any;
 }
 
 export default class GcpFhirSearch {
+  private Credentials!: typeof credentials;
+  private DatabasePath!: typeof databasePath;
+
+  constructor(
+    _Credentials?: typeof credentials,
+    _DatabasePath?: typeof databasePath
+  ) {
+    _Credentials
+      ? (this.Credentials = _Credentials)
+      : (this.Credentials = credentials);
+    _DatabasePath
+      ? (this.DatabasePath = _DatabasePath)
+      : (this.DatabasePath = databasePath);
+
+    this.parent = `projects/${this.DatabasePath.projectId}/locations/${this.DatabasePath.cloudRegion}/datasets/${this.DatabasePath.datasetId}/fhirStores/${this.DatabasePath.fhirStoreId}`;
+  }
+
   private healthcare = google.healthcare({
     version: "v1",
     auth: new google.auth.GoogleAuth({
       scopes: ["https://www.googleapis.com/auth/cloud-platform"],
-      credentials: credentials,
+      credentials: this.Credentials || credentials,
     }),
   });
 
-  private parent: string = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
+  private parent: string = "";
 
   async searchFhirResourcesGet(
     resourceType: resourceType,
