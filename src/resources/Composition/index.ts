@@ -53,7 +53,7 @@ const compositionStatusArrey = [
 type compositionStatus = typeof compositionStatusArrey[number];
 
 export interface compositionAuthor {
-  reference: `Practitioner/${string}`;
+  reference: string;
   display: string;
 }
 
@@ -126,7 +126,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     const res = await new GcpFhirCRUD().getFhirResource(id, "Practitioner");
 
     this._practitioner.push({
-      reference: "Practitioner/877f1236-63fd-4827-a3da-636a4f2c5739",
+      reference: `Practitioner/${res.data.id}}`,
       display: curClass.convertFhirToObject(res.data).name,
     });
   }
@@ -185,7 +185,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
           </tr>
         </table>
         <hr />
-        <div>${options.documentDatahtml}</div>
+        <div>${options.documentDatahtml}</div
       </div>`,
       },
       identifier: {
