@@ -19,8 +19,19 @@ const resourceTypeArray = [
 type resourceType = typeof resourceTypeArray[number]
 
 export interface CodeDisplay {
-    code?: string; display: string; system: "http://snomed.info/sct"
+    code?: string; display: string; system: "http://snomed.info/sct" | string
+
 }
+
+export interface coding {
+    system?: string
+    version?: string, // Version of the system - if relevant
+    code?: string, // Symbol in syntax defined by the system
+    display?: string, // Representation defined by the system
+    userSelected?: boolean // If this coding was chosen directly by the user
+}
+
+
 export { credentials, resourceTypeArray }
 
 export type { resourceType }

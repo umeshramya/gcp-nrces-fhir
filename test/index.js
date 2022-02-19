@@ -37,12 +37,12 @@ const patient = new Patient();
 
 const createPatient = async () => {
   const body = patient.getFHIR({
-    "name": "UMESH R BILAGI",
+    "name": "UMESH R BILAGI New",
     "gender": "Male",
     "mobile": "9343403620",
     "healthNumber": "23-3457-234",
     "dob": "1969-09-29",
-    "MRN": "2345",
+    "MRN": "4000",
     "organizationId": '87166aa1-c5a6-468b-92e9-7b1628b77957'
   })
 
@@ -104,8 +104,10 @@ const search = async () => {
   // ])
 
   // const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "identifier[0].type.coding[0].display", value: "38" }])
-  const res = await gcpFhirSearch.search("Patient", `identifier=http://terminology.hl7.org/CodeSystem/v2-0203|MR')=38`)
-  console.log(res.data)
+  // const res = await gcpFhirSearch.search("Patient", `identifier=https://healthid.ndhm.gov.in|23-3457-234`)
+  const res = await gcpFhirSearch.search("Patient", `identifier=https://www.nicehms.com|4000`)
+  // const res = await gcpFhirSearch.search("Patient", `gender=male`)
+  // console.log(res)
   console.log(res.data.entry.map(el => {
     return el.resource.identifier;
   }))

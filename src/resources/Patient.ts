@@ -1,3 +1,4 @@
+import { coding } from "../config";
 import { ResourceMaster } from "../Interfaces";
 
 export interface PATIENT {
@@ -11,10 +12,60 @@ export interface PATIENT {
   organizationId: string
 }
 
+interface CODEABLE_CONCEPT {
+  coding: coding[], // Code defined by a terminology system
+  text?: string // Plain text representation of the concept
+}
+interface PERIOD {
+  start: string,
+  end: string
+}
+
+interface IDENTTIFIER {
+
+  use?: "usual" | "official" | "temp" | "secondary" | "old",
+  type?: CODEABLE_CONCEPT, // Description of identifier
+  system?: string, // The namespace for the identifier value
+  value?: string, // The value that is unique
+  period?: { Period: PERIOD }, // Time period when id is/was valid for use
+  assigner?: { Reference: `Organization/` | string } // Organization that issued id (may be just text)
+
+}
+
 
 
 export class Patient implements ResourceMaster {
   getFHIR(options: PATIENT) {
+
+    const identifiers: IDENTTIFIER[] = [
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "MR",
+              "display": "Medical record number"
+            }
+          ]
+        },
+        "system": "https://healthid.ndhm.gov.in",
+        "value": `${options.healthNumber}`
+      },
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "MR",
+              "display": "Medical record number"
+            }
+          ]
+        },
+        "system": "https://www.nicehms.com",
+        "value": `${options.MRN}`
+      }
+    ]
+
 
     const body = {
       "resourceType": "Patient",
@@ -30,24 +81,25 @@ export class Patient implements ResourceMaster {
         "status": "generated",
         "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">Patient name - ${options.name},Gender- ${options.gender}</div>`
       },
-      "identifier": [
-        {
-          "type": {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-                "code": "MR",
-                "display": `${options.MRN}`,
-
-              }
-            ]
-          },
-          "system": "https://healthid.ndhm.gov.in",
-          "value": `${options.healthNumber}`
-        }
+      "identifier": identifiers
+      // {
+      //   "type": {
+      //     "coding": [
+      //       {
+      //         "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+      //         "code": "MR",
+      //         "display": `Medical Record Number`,
 
 
-      ],
+      //       }
+      //     ]
+      //   },
+      //   "system": "https://healthid.ndhm.gov.in",
+      //   "value": `${options.healthNumber}`
+      // }
+
+
+      ,
       "name": [
         {
           "text": `${options.name}`
