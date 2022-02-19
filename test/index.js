@@ -68,7 +68,7 @@ const getPatient = async () => {
 }
 
 
-getPatient();
+// getPatient();
 
 
 
@@ -109,16 +109,18 @@ const search = async () => {
 
   // const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "identifier[0].type.coding[0].display", value: "38" }])
   // const res = await gcpFhirSearch.search("Patient", `identifier=https://healthid.ndhm.gov.in|23-3457-234`)
-  const res = await gcpFhirSearch.search("Patient", `identifier=https://www.nicehms.com|4000`)
+  const res = await gcpFhirSearch.search("Patient", `identifier=https://www.nicehms.com|4000&phone=9343403620`)
+  // const res = await gcpFhirSearch.search("Patient", `phone=9343403621`)
+  // const res = await gcpFhirSearch.search("Patient", `gender=female`)
   // const res = await gcpFhirSearch.search("Patient", `gender=male`)
-  // console.log(res.data)
-  console.log(res.data.entry.map(el => {
-    return el.resource.id
-  }))
+  console.log(res.data)
+  // console.log(res.data.entry.map(el => {
+  //   return el.resource.name
+  // }))
 
 }
 
-// search()
+search()
 
 const searchsimple = async () => {
   const gcpFhirSearch = new GcpFhirSearch()
