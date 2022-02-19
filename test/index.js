@@ -42,7 +42,7 @@ const createPatient = async () => {
     "mobile": "9343403620",
     "healthNumber": "23-3457-234",
     "dob": "1969-09-29",
-    "MRN": "4000",
+    "MRN": "5002",
     "organizationId": '87166aa1-c5a6-468b-92e9-7b1628b77957'
   })
 
@@ -109,11 +109,14 @@ const search = async () => {
 
   // const res = await gcpFhirSearch.searchFhirResourcesGet("Patient", [{ "key": "identifier[0].type.coding[0].display", value: "38" }])
   // const res = await gcpFhirSearch.search("Patient", `identifier=https://healthid.ndhm.gov.in|23-3457-234`)
-  const res = await gcpFhirSearch.search("Patient", `identifier=https://www.nicehms.com|4000&phone=9343403620`)
+  const res = await gcpFhirSearch.search("Patient", `identifier=https://www.nicehms.com|5002&phone=9343403620&_revinclude=Encounter:patient`)
+  
   // const res = await gcpFhirSearch.search("Patient", `phone=9343403621`)
   // const res = await gcpFhirSearch.search("Patient", `gender=female`)
   // const res = await gcpFhirSearch.search("Patient", `gender=male`)
-  console.log(res.data)
+  console.log(res.data.entry.map(el=>{
+    return el.resource
+  }))
   // console.log(res.data.entry.map(el => {
   //   return el.resource.name
   // }))
@@ -194,7 +197,7 @@ const createEncounter = async () => {
     "endDate": new Date().toISOString(),
     "startDate": new Date().toISOString(),
     "identifier": new Date().getTime().toString(),
-    "patientId": 'e101abe6-11ae-403d-8c2e-a34f97ceccae',
+    "patientId": '05e7188b-dc93-4f9b-bfab-41b348ea140e',
     "text": "discherged Home",
     "status": "finished"
   })
