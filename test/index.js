@@ -49,14 +49,18 @@ const createPatient = async () => {
   const res = await new GcpFhirCRUD().createFhirResource(body, "Patient")
   console.log(res)
 
-  // 'e101abe6-11ae-403d-8c2e-a34f97ceccae'
+  // [
+  //   '11752440-b821-4173-9a69-ee585a0b281a',
+  //   '19232530-6024-40f7-9b15-7f62928d1428',
+  //   '9ed490b2-ef07-4da1-a0c0-fb3f3dd58c94' 
+  // ]
 
 }
 
 // createPatient()
 
 const getPatient = async () => {
-  const id = "b7665b47-2356-493f-bae4-4710f16eeb7b";
+  const id = '11752440-b821-4173-9a69-ee585a0b281a'
   const res = await new GcpFhirCRUD().getFhirResource(id, "Patient");
 
   const body = patient.convertFhirToObject(res.data);
@@ -64,7 +68,7 @@ const getPatient = async () => {
 }
 
 
-// getPatient();
+getPatient();
 
 
 
@@ -107,14 +111,14 @@ const search = async () => {
   // const res = await gcpFhirSearch.search("Patient", `identifier=https://healthid.ndhm.gov.in|23-3457-234`)
   const res = await gcpFhirSearch.search("Patient", `identifier=https://www.nicehms.com|4000`)
   // const res = await gcpFhirSearch.search("Patient", `gender=male`)
-  // console.log(res)
+  // console.log(res.data)
   console.log(res.data.entry.map(el => {
-    return el.resource.identifier;
+    return el.resource.id
   }))
 
 }
 
-search()
+// search()
 
 const searchsimple = async () => {
   const gcpFhirSearch = new GcpFhirSearch()

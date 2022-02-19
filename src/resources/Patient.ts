@@ -82,23 +82,6 @@ export class Patient implements ResourceMaster {
         "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">Patient name - ${options.name},Gender- ${options.gender}</div>`
       },
       "identifier": identifiers
-      // {
-      //   "type": {
-      //     "coding": [
-      //       {
-      //         "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-      //         "code": "MR",
-      //         "display": `Medical Record Number`,
-
-
-      //       }
-      //     ]
-      //   },
-      //   "system": "https://healthid.ndhm.gov.in",
-      //   "value": `${options.healthNumber}`
-      // }
-
-
       ,
       "name": [
         {
@@ -126,10 +109,10 @@ export class Patient implements ResourceMaster {
     let ret: PATIENT = {
       name: options.name[0].text,
       gender: options.gender,
-      healthNumber: options.identifier[0].value,
+      healthNumber: options.identifier.filter((el: any) => el.system == "https://healthid.ndhm.gov.in")[0].value,
       mobile: options.telecom[0].value,
       dob: options.birthDate,
-      MRN: options.identifier[0].type.coding[0].display,
+      MRN: options.identifier.filter((el: any) => el.system == "https://www.nicehms.com")[0].value,
       organizationId: `${options.managingOrganization.reference}`.substring(13),
       id: options.id
     }
