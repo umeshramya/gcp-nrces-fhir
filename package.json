@@ -1,6 +1,6 @@
 {
   "name": "gcp-nrces-fhir",
-  "version": "7.0.7",
+  "version": "8.0.0",
   "description": "Google cloud healthcare api Nrces Fhir imlimenataion",
   "main": "lib/index.js",
   "scripts": {

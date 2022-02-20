@@ -1,3 +1,5 @@
+import { credentials, databasePath } from "./config/index";
+
 import GcpFhirCRUD from "./classess/gcp";
 import GcpFhirSearch from "./classess/gcpSearch";
 import ResourceFactory from "./classess/ResourceFactory";
@@ -121,3 +123,11 @@ export {
   MedicationRequest,
 };
 export { ServiceRequest, SERVICE_REQUEST };
+
+type Credentials = typeof credentials;
+type DatabasePath = typeof databasePath;
+
+export interface GcpNrcesFhirType {
+  Credentials: Credentials;
+  DatabasePath: DatabasePath;
+}
