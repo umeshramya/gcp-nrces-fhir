@@ -68,7 +68,7 @@ const getPatient = async () => {
 }
 
 
-// getPatient();
+getPatient();
 
 
 
@@ -102,7 +102,28 @@ const getPractinioner = async () => {
 // getPractinioner()
 
 const search = async () => {
-  const gcpFhirSearch = new GcpFhirSearch()
+  const credetials = {
+  type : "service_account",
+  project_id: "psychic-city-328609",
+  private_key_id : "ee846f7190460c96d7a77258cfdc1b138813aa1a",
+  private_key : "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDHZ1TZSsS5Dpwt\nf4A164lKN1BfYCchj/WORPXmvKKWZ2TBg7SQgkoy5vBzD4ySzT4DodSzFzKdLg2h\nEMztviNfW687mRmdw6Vf8UgLXoVcL0O301fkDTFAflYLX/B5uxCtvj7lLJHxO4gp\nLKuPXFXU/vna6b3XeokEG9cI/KBtMt2cyVdWLanr1WE2bhdh5E3oH/IrMNyOBsao\nwjRenw/OtCJ1+fP+z+AZtvAjFSXJ3JGo9YY9nm/Wsnk6R84SXPg6WiWhyVGxlCK6\ndlHcGBOk9Ozan59eiDkRk6KE7PikCxZrS1nY9ReyE9T8lPKijlE587ArWWO4okVa\niyuVqO9nAgMBAAECggEAKKabqRqxhSqB01KxYAyu9ebV50OyZoizHjhXyxy8pp3Y\ncAz6FBXDq6Hh9gr+9PSLhnEI7CO4CUwYsjO7G2KOUoPd8u/wxXVbsvX84nh4BoWK\nMCERQ2gfGM9ImlQKMb7dlRX6O309GWkyBnbZWMYRp3T9mc/aCGIuKZzFV0stJ2WB\nFWTQFlnm3O2VWLGAVmQbiqwi64zcIwQHWmUfF2fbr908jySZ/HEHnAg6yBgMqW4/\ndvgydU7XDjABGOZ8JkurOPnMnzjwT8rKFkMeTdzukga2S1Q+e7SBjU+/oOzh4vQC\np43aQ1LnMyZ46h7zrK9tUpS2RelU7YW/ZC7SffOnAQKBgQD8BfbNaEJY7sroyMej\n21VTbFJkceBHPU1qFnsACq4ZIQdOQe6PWmg93JvqRwtwM+j2+7Yrq5P/9oBmmFv2\n9zKDzHCqPFHaNDgDYz9UIDdCgfPnFdRD/Z3Xvon7fcWLxaQ1FKgsOjP9RCcA0Upe\n99x0+wk8F4TiBe2CjCdnR7zdAQKBgQDKjNATs/7u3lE8dXOd3SNrcRHDzVeaJ+YC\nWAn055PSBO0O1ByxaOZwo61gu9dW/4BfSH79HOAYCpkAABOeEXH0HX46B0BF4KZm\n9p7Xn4P0YlXLR3PEJtRNRC6k0jPV6YvDVMTixifYBqxIqnv8viuA58L0tlKWvVZK\nHNcVbTgEZwKBgQDaFTMfRjP7jw+I5o1TLm4klVyqzJveKZ7+yVtAiv1ig2E2B/mu\nlPYVafyFe1rbih/y8ZgPLBcS7LTpkrgp+nj88gEgXrgZ0QwTamOXoZUP+TIc6pfX\nCfT3h0sRlCFItQtGX4yzUN5CMCJsI69uhJ+BnuW72UJE8Ao56JwEVGCLAQKBgA9S\nw9MZxOmRTBgE0rBYsHtKXIuxlzUEW7RFsMskUdyLntuGVH1fcD+JQm6VB19/iNis\nhV7ktldbRePoHZPRwgszx/7f2Y7vxeb4NWAeoz7zyYXNbAak4V7PD7BMbrt6Jaar\nXRHC5/TB3HrK2wJt6KCh5+/XczwQKt0EfYkTcC91AoGBAKXUmNp7pLreYdl/4KYk\nMNpMDb0tsQuY30+pH4pLKkB4DILwIUIPMrzK1he0XiWpDcSyjiNTcjs2dqw+lmQ/\nHQU+OyVVKB6XI9OxFC3pu6P0zGvh5MLfOOGvI3wtuTU/HSNiSz+ldrFqKlVDCC5G\nbDLzI45aXJqKGhYMqYxvkLM/\n-----END PRIVATE KEY-----\n",
+   client_email:"fhir-837@psychic-city-328609.iam.gserviceaccount.com",
+  client_id:"110676463377216897633",
+  auth_uri: "https://accounts.google.com/o/oauth2/auth",
+  token_uri:"https://oauth2.googleapis.com/token",
+  auth_provider_x509_cert_url:"https://www.googleapis.com/oauth2/v1/certs",
+  client_x509_cert_url:"https://www.googleapis.com/robot/v1/metadata/x509/fhir-837%40psychic-city-328609.iam.gserviceaccount.com"
+  }
+  const databasePath ={
+    cloudRegion:"asia-south1",
+    projectId:"psychic-city-328609",
+    datasetId:"dataset1",
+    fhirStoreId:"fhir_store",
+
+  }
+    const gcpFhirSearch = new GcpFhirSearch(credetials, databasePath)
+
+
   // const res = await gcpFhirSearch.searchFhirResourcesGet("Encounter", [{ "key": "subject", "value": "Patient/e101abe6-11ae-403d-8c2e-a34f97ceccae" },
   // { "key": "status", "value": "cancelled,finished" }
   // ])
@@ -123,7 +144,7 @@ const search = async () => {
 
 }
 
-search()
+// search()
 
 const searchsimple = async () => {
   const gcpFhirSearch = new GcpFhirSearch()

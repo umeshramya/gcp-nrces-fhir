@@ -23,6 +23,8 @@ const fhirStoreId = process.env.GCP_FHIR_fhirStoreId;
 export default class GcpFhirCRUD {
   private Credentials!: typeof credentials;
   private DatabasePath!: typeof databasePath;
+  private healthcare: any;
+  private parent: string;
 
   constructor(
     _Credentials?: typeof credentials,
@@ -36,19 +38,14 @@ export default class GcpFhirCRUD {
       : (this.DatabasePath = databasePath);
 
     this.parent = `projects/${this.DatabasePath.projectId}/locations/${this.DatabasePath.cloudRegion}/datasets/${this.DatabasePath.datasetId}/fhirStores/${this.DatabasePath.fhirStoreId}`;
+    this.healthcare = google.healthcare({
+      version: "v1",
+      auth: new google.auth.GoogleAuth({
+        scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+        credentials: this.Credentials || credentials,
+      }),
+    });
   }
-
-  private healthcare = google.healthcare({
-    version: "v1",
-    auth: new google.auth.GoogleAuth({
-      scopes: ["https://www.googleapis.com/auth/cloud-platform"],
-      credentials: this.Credentials || credentials,
-    }),
-    headers: { "Content-Type": "application/fhir+json" },
-  });
-
-  private parent: string = "";
-
   async createFhirResource(body: any, resourceType: resourceType) {
     try {
       const request = {
