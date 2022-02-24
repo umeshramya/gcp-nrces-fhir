@@ -292,7 +292,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
    * @param id of patient
    * @returns
    */
-  getCompositionsByPatient = async (id: string) => {
+  getCompositionsByPatient = async (id: string): Promise<any> => {
     const gcpFhirSearch = new GcpFhirSearch();
     const res = await gcpFhirSearch.search(
       "Patient",
