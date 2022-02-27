@@ -167,7 +167,6 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
         coding: options.method,
       },
     };
-
     return body;
   }
 
@@ -179,6 +178,10 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
       route: option.route.coding,
       method: option.method.coding,
     };
+
+    if (ret.additionalInstruction == undefined) {
+      delete ret.additionalInstruction;
+    }
 
     return ret;
   }
