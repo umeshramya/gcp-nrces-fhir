@@ -2,7 +2,7 @@ import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 interface Args {
   composition: COMPOSITOIN;
-  chiefComplinats: any;
+  chiefComplaints: any;
   allergies?: any;
   medicalHistory?: any;
   investigationAdvice?: any;
@@ -13,7 +13,7 @@ interface Args {
 }
 export class OPConsultRecord extends Composition implements Records {
   create = async (options: Args) => {
-    options.composition.section = []
+    options.composition.section = [];
 
     options.composition.section.push({
       title: "Chief complaints",
@@ -28,13 +28,11 @@ export class OPConsultRecord extends Composition implements Records {
       },
       entry: [
         {
-          reference: `Condition/${options.chiefComplinats.id}`,
+          reference: `Condition/${options.chiefComplaints.id}`,
         },
       ],
     });
-    options.composition.documentDatahtml = `<h4>Chief complaints<h4> ${options.chiefComplinats.text.div}`;
-
-
+    options.composition.documentDatahtml = `<h4>Chief complaints<h4> ${options.chiefComplaints.text.div}`;
 
     if (options.allergies) {
       options.composition.section.push({
@@ -56,7 +54,8 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Allergies<h4> ${options.allergies.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Allergies<h4> ${options.allergies.text.div}`;
     }
 
     if (options.medicalHistory) {
@@ -79,7 +78,8 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Medical History</h4> ${options.medicalHistory.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Medical History</h4> ${options.medicalHistory.text.div}`;
     }
 
     if (options.investigationAdvice) {
@@ -159,7 +159,8 @@ export class OPConsultRecord extends Composition implements Records {
         ],
       });
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Procedure</h4>${options.procedure.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Procedure</h4>${options.procedure.text.div}`;
     }
 
     if (options.followUp) {
@@ -182,9 +183,9 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Follow up</h4>${options.followUp.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Follow up</h4>${options.followUp.text.div}`;
     }
-
 
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
@@ -193,7 +194,7 @@ export class OPConsultRecord extends Composition implements Records {
     return res;
   };
   update = async (options: Args) => {
-    options.composition.section = []
+    options.composition.section = [];
 
     options.composition.section.push({
       title: "Chief complaints",
@@ -208,13 +209,11 @@ export class OPConsultRecord extends Composition implements Records {
       },
       entry: [
         {
-          reference: `Condition/${options.chiefComplinats.id}`,
+          reference: `Condition/${options.chiefComplaints.id}`,
         },
       ],
     });
-    options.composition.documentDatahtml = `<h4>Chief complaints<h4> ${options.chiefComplinats.text.div}`;
-
-
+    options.composition.documentDatahtml = `<h4>Chief complaints<h4> ${options.chiefComplaints.text.div}`;
 
     if (options.allergies) {
       options.composition.section.push({
@@ -236,7 +235,8 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Allergies<h4> ${options.allergies.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Allergies<h4> ${options.allergies.text.div}`;
     }
 
     if (options.medicalHistory) {
@@ -259,7 +259,8 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Medical History</h4> ${options.medicalHistory.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Medical History</h4> ${options.medicalHistory.text.div}`;
     }
 
     if (options.investigationAdvice) {
@@ -339,7 +340,8 @@ export class OPConsultRecord extends Composition implements Records {
         ],
       });
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Procedure</h4>${options.procedure.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Procedure</h4>${options.procedure.text.div}`;
     }
 
     if (options.followUp) {
@@ -362,14 +364,18 @@ export class OPConsultRecord extends Composition implements Records {
       });
 
       options.composition.documentDatahtml =
-        options.composition.documentDatahtml + `<h4>Follow up</h4>${options.followUp.text.div}`;
+        options.composition.documentDatahtml +
+        `<h4>Follow up</h4>${options.followUp.text.div}`;
     }
-
 
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
     const gcpFhirCrud = new GcpFhirCRUD();
-    const res = await gcpFhirCrud.updateFhirResource(body, options.composition.id || "", "Composition");
+    const res = await gcpFhirCrud.updateFhirResource(
+      body,
+      options.composition.id || "",
+      "Composition"
+    );
     return res;
   };
 }
