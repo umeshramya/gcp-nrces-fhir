@@ -32,7 +32,7 @@ export class OPConsultRecord extends Composition implements Records {
         },
       ],
     });
-    options.composition.documentDatahtml = `<h4>Chief complaints<h4> ${options.chiefComplaints.text.div}`;
+    options.composition.documentDatahtml = `<h4>Chief complaints</h4> ${options.chiefComplaints.text.div}`;
 
     if (options.allergies) {
       options.composition.section.push({
@@ -55,7 +55,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Allergies<h4> ${options.allergies.text.div}`;
+        `<h4>Allergies</h4> ${options.allergies.text.div}`;
     }
 
     if (options.medicalHistory) {
@@ -213,7 +213,7 @@ export class OPConsultRecord extends Composition implements Records {
         },
       ],
     });
-    options.composition.documentDatahtml = `<h4>Chief complaints<h4> ${options.chiefComplaints.text.div}`;
+    options.composition.documentDatahtml = `<h4>Chief Complaints</h4> ${options.chiefComplaints.text.div}`;
 
     if (options.allergies) {
       options.composition.section.push({
@@ -236,7 +236,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Allergies<h4> ${options.allergies.text.div}`;
+        `<h4>Allergies</h4> ${options.allergies.text.div}`;
     }
 
     if (options.medicalHistory) {
