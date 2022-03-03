@@ -37,7 +37,7 @@ export interface MEDICATION_REQUEST {
   status: MedicatioRequestStatus;
   intent: MedicatioRequestIntent;
   medicationCodeableConcept: CodeDisplay[];
-  reasonCode: CodeDisplay[];
+  reasonCode?: CodeDisplay[];
 
   DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[];
 }
@@ -141,7 +141,7 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
       DOSAGE_INSTRUCTION: options.dosageInstruction.map((el: any) => {
         return this.convertDosageInstructionToObject(el);
       }),
-      reasonCode: options.reasonCode,
+      reasonCode: options.reasonCode || undefined,
       id: options.id,
     };
     return ret;
@@ -186,9 +186,10 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     return ret;
   }
 }
-function el(
-  el: any,
-  arg1: (any: any) => DOSAGE_INSTRUCTION
-): DOSAGE_INSTRUCTION[] | undefined {
-  throw new Error("Function not implemented.");
-}
+
+// function el(
+//   el: any,
+//   arg1: (any: any) => DOSAGE_INSTRUCTION
+// ): DOSAGE_INSTRUCTION[] | undefined {
+//   throw new Error("Function not implemented.");
+// }
