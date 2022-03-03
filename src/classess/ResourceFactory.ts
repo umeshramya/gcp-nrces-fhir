@@ -14,6 +14,7 @@ import { Patient } from "../resources/Patient";
 import { Practitioner } from "../resources/Practitioner";
 import { Procedure } from "../resources/Procedure";
 import ResourceMain from "../resources/ResourceMai";
+import GcpFhirCRUD from "./gcp";
 
 export default class ResourceFactory extends ResourceMain implements ResourceMaster {
     private resourceType: resourceType
@@ -61,6 +62,27 @@ export default class ResourceFactory extends ResourceMain implements ResourceMas
     convertFhirToObject<T>(options: any): T {
         return this.resource.convertFhirToObject(options)
     }
+
+     /**
+     * This  methois create or updates the respources depending id property
+     * @param resource resource object 
+     * @param resourceType type off resource
+     * @returns the creeate or updated resource depending on id
+     */
+   static async  setResource<T>(resource:T, resourceType:resourceType):Promise<any>{
+    // check resource has id;
+    const gcpFhirCrud = new GcpFhirCRUD()
+    let ret:any;
+    // @ts-ignore
+    if(resource.id){
+        // @ts-ignore
+        ret = await gcpFhirCrud.updateFhirResource(resource, resource.id, resourceType)
+    }else{
+        ret = await gcpFhirCrud.createFhirResource(resource, resourceType)
+    }
+     return ret;
+   }
+
 
 }
 
