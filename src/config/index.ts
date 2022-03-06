@@ -51,6 +51,23 @@ export interface coding {
   userSelected?: boolean; // If this coding was chosen directly by the user
 }
 
+export interface CODEABLE_CONCEPT {
+  coding: coding[]; // Code defined by a terminology system
+  text?: string; // Plain text representation of the concept
+}
+interface PERIOD {
+  start: string;
+  end: string;
+}
+export interface IDENTTIFIER {
+  use?: "usual" | "official" | "temp" | "secondary" | "old";
+  type?: CODEABLE_CONCEPT; // Description of identifier
+  system?: string; // The namespace for the identifier value
+  value?: string; // The value that is unique
+  period?: { Period: PERIOD }; // Time period when id is/was valid for use
+  assigner?: { Reference: `Organization/` | string }; // Organization that issued id (may be just text)
+}
+
 export { credentials, resourceTypeArray, databasePath };
 
 export type { resourceType };

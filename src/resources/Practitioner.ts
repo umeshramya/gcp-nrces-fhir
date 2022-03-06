@@ -1,3 +1,4 @@
+import { IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 
 export interface PRACTITIONER {
@@ -6,10 +7,53 @@ export interface PRACTITIONER {
   qualification?: string;
   medicalLicenseNumber: string;
   ndhmProfessionalId: string;
+  providerNumber?: string;
 }
 
 export class Practitioner implements ResourceMaster {
   getFHIR(options: PRACTITIONER) {
+    const identifiers: IDENTTIFIER[] = [
+      {
+        type: {
+          coding: [
+            {
+              system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+              code: "MD",
+              display: "Medical License number",
+            },
+          ],
+        },
+        system: "https://doctor.ndhm.gov.in",
+        value: options.ndhmProfessionalId,
+      },
+      {
+        type: {
+          coding: [
+            {
+              system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+              code: "MD",
+              display: "Medical License number",
+            },
+          ],
+        },
+        system: "https://www.nmc.org.in/",
+        value: options.medicalLicenseNumber,
+      },
+      {
+        type: {
+          coding: [
+            {
+              system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+              code: "PRN",
+              display: "Provider number",
+            },
+          ],
+        },
+        system: "https://www.nicehms.com",
+        value: `${options.providerNumber}`,
+      },
+    ];
+
     const body = {
       resourceType: "Practitioner",
       id: options.id || undefined,
@@ -24,21 +68,22 @@ export class Practitioner implements ResourceMaster {
         status: "generated",
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${options.name}, ${options.qualification})</div>`,
       },
-      identifier: [
-        {
-          type: {
-            coding: [
-              {
-                system: "http://terminology.hl7.org/CodeSystem/v2-0203",
-                code: "MD",
-                display: options.medicalLicenseNumber,
-              },
-            ],
-          },
-          system: "https://doctor.ndhm.gov.in",
-          value: options.ndhmProfessionalId,
-        },
-      ],
+      identifier: identifiers,
+      // [
+      //   {
+      //     type: {
+      //       coding: [
+      //         {
+      //           system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+      //           code: "MD",
+      //           display: options.medicalLicenseNumber,
+      //         },
+      //       ],
+      //     },
+      //     system: "https://doctor.ndhm.gov.in",
+      //     value: options.ndhmProfessionalId,
+      //   },
+      // ],
       name: [
         {
           text: `${options.name} ${options.qualification || ""}`,
@@ -51,9 +96,16 @@ export class Practitioner implements ResourceMaster {
   convertFhirToObject(options: any): PRACTITIONER {
     let ret: PRACTITIONER = {
       name: options.name[0].text,
-      medicalLicenseNumber: options.identifier[0].type.coding[0].display,
-      ndhmProfessionalId: options.identifier[0].value,
+      medicalLicenseNumber: options.identifier.filter(
+        (el: any) => el.system == "https://www.nmc.org.in/"
+      )[0].value,
+      ndhmProfessionalId: options.identifier.filter(
+        (el: any) => el.system == "https://healthid.ndhm.gov.in"
+      )[0].value,
       id: options.id,
+      providerNumber: options.identifier.filter(
+        (el: any) => el.system == "https://www.nicehms.com"
+      )[0].value,
     };
     return ret;
   }
@@ -67,42 +119,4 @@ export class Practitioner implements ResourceMaster {
 export const PractitionerResource = (options: PRACTITIONER) => {
   const body = new Practitioner().getFHIR(options);
   return body;
-
-  // const body = {
-  //   "resourceType": "Practitioner",
-  //   "id": `${options.id}`,
-  //   "meta": {
-  //     "versionId": "1",
-  //     "lastUpdated": "2019-05-29T14:58:58.181+05:30",
-  //     "profile": [
-  //       "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Practitioner"
-  //     ]
-  //   },
-  //   "text": {
-  //     "status": "generated",
-  //     "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">${options.name}, ${options.qualification})</div>`
-  //   },
-  //   "identifier": [
-  //     {
-  //       "type": {
-  //         "coding": [
-  //           {
-  //             "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-  //             "code": "MD",
-  //             "display": `${options.medicalLicenseNumber}`
-  //           }
-  //         ]
-  //       },
-  //       "system": "https://doctor.ndhm.gov.in",
-  //       "value": `${options.ndhmProfessionalId}`
-  //     }
-  //   ],
-  //   "name": [
-  //     {
-  //       "text": `${options.name}`
-  //     }
-  //   ]
-  // }
-
-  // return body;
 };

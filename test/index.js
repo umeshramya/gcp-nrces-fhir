@@ -18,19 +18,19 @@ const createOrganization = async () => {
 
   const gcpFhirCRUD = new GcpFhirCRUD();
   const res = await gcpFhirCRUD.createFhirResource(body, "Organization")
-  console.log(res)
-  //  '87166aa1-c5a6-468b-92e9-7b1628b77957'
+  console.log(res.data)
+  //  '57d01804-7e13-4ca4-a5e1-25457fea2f32'
 }
 
 // createOrganization()
 
 const getOrganization = async () => {
-  const id = "87166aa1-c5a6-468b-92e9-7b1628b77957"
+  const id = "57d01804-7e13-4ca4-a5e1-25457fea2f32"
   const res = await new GcpFhirCRUD().getFhirResource(id, "Organization");
   const data = organization.convertFhirToObject(res.data)
   console.log(data)
 }
-// getOrganization();
+getOrganization();
 
 
 const patient = new Patient();
