@@ -113,4 +113,20 @@ export default class GcpFhirCRUD {
       console.log(error);
     }
   }
+
+
+  async excuteBundle(bundle: any) {
+
+    try {
+      const parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`
+      const request = { parent, requestBody: bundle };
+      const resource: any = await this.healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle(
+        request
+      );
+      return resource
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 }
