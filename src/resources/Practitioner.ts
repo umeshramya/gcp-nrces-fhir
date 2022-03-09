@@ -5,15 +5,16 @@ export interface PRACTITIONER {
   id?: string;
   name: string;
   qualification?: string;
-  medicalLicenseNumber: string;
-  ndhmProfessionalId: string;
+  medicalLicenseNumber?: string;
+  ndhmProfessionalId?: string;
   providerNumber?: string;
 }
 
 export class Practitioner implements ResourceMaster {
   getFHIR(options: PRACTITIONER) {
-    const identifiers: IDENTTIFIER[] = [
-      {
+    const identifiers: IDENTTIFIER[] = [];
+    if (options.ndhmProfessionalId) {
+      const id: IDENTTIFIER = {
         type: {
           coding: [
             {
@@ -25,8 +26,13 @@ export class Practitioner implements ResourceMaster {
         },
         system: "https://doctor.ndhm.gov.in",
         value: options.ndhmProfessionalId,
-      },
-      {
+      };
+
+      identifiers.push(id);
+    }
+
+    if (options.medicalLicenseNumber) {
+      const id: IDENTTIFIER = {
         type: {
           coding: [
             {
@@ -38,8 +44,12 @@ export class Practitioner implements ResourceMaster {
         },
         system: "https://www.nmc.org.in/",
         value: options.medicalLicenseNumber,
-      },
-      {
+      };
+      identifiers.push(id);
+    }
+
+    if (options.providerNumber) {
+      const id: IDENTTIFIER = {
         type: {
           coding: [
             {
@@ -51,8 +61,10 @@ export class Practitioner implements ResourceMaster {
         },
         system: "https://www.nicehms.com",
         value: `${options.providerNumber}`,
-      },
-    ];
+      };
+
+      identifiers.push(id);
+    }
 
     const body = {
       resourceType: "Practitioner",
@@ -66,7 +78,9 @@ export class Practitioner implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${options.name}, ${options.qualification})</div>`,
+        div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${options.name}, ${
+          options.qualification || ""
+        })</div>`,
       },
       identifier: identifiers,
       // [
@@ -93,6 +107,7 @@ export class Practitioner implements ResourceMaster {
 
     return body;
   }
+
   convertFhirToObject(options: any): PRACTITIONER {
     let ret: PRACTITIONER = {
       name: options.name[0].text,
