@@ -5,7 +5,6 @@ const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientReso
 
 
 
-
 const organization = new Organization()
 const createOrganization = async () => {
   const body = organization.getFHIR({
@@ -30,7 +29,7 @@ const getOrganization = async () => {
   const data = organization.convertFhirToObject(res.data)
   console.log(data)
 }
-getOrganization();
+// getOrganization();
 
 
 const patient = new Patient();
@@ -68,7 +67,7 @@ const getPatient = async () => {
 }
 
 
-getPatient();
+// getPatient();
 
 
 
@@ -876,79 +875,112 @@ const comOPD = async () => {
 
 
 const excuteBundle = async () => {
-  const bundle = {
-    "resourceType": "Bundle",
-    "id": "bundle-transaction",
-    "meta": {
-      "lastUpdated": "2018-03-11T11:22:16Z"
-    },
-    "type": "transaction",
-    "entry": [
-      {
-        "resource": {
-          "resourceType": "Patient",
-          "name": [
-            {
-              "family": "Smith",
-              "given": [
-                "Darcy"
-              ]
-            }
-          ],
-          "gender": "female",
-          "address": [
-            {
-              "line": [
-                "123 Main St."
-              ],
-              "city": "Anycity",
-              "state": "CA",
-              "postalCode": "12345"
-            }
-          ]
-        },
-        "request": {
-          "method": "POST",
-          "url": "Patient"
-        }
-      },
 
-      {
-        "resource": {
-          "resourceType": "Patient",
-          "name": [
-            {
-              "family": "Tom",
-              "given": [
-                "Darcyee"
-              ]
-            }
-          ],
-          "gender": "male",
-          "address": [
-            {
-              "line": [
-                "123 Main St."
-              ],
-              "city": "Anycity",
-              "state": "CA",
-              "postalCode": "12345"
-            }
-          ]
-        },
-        "request": {
-          "method": "POST",
-          "url": "Patient"
-        }
-      },
+  // const bundle = {
+  //   "resourceType": "Bundle",
+  //   "id": "bundle-transaction",
+  //   "meta": {
+  //     "lastUpdated": "2018-03-11T11:22:16Z"
+  //   },
+  //   "type": "transaction",
+  //   "entry": [
+  //     {
+  //       "resource": {
+  //         "resourceType": "Patient",
+  //         "name": [
+  //           {
+  //             "family": "Smith",
+  //             "given": [
+  //               "Darcy"
+  //             ]
+  //           }
+  //         ],
+  //         "gender": "female",
+  //         "address": [
+  //           {
+  //             "line": [
+  //               "123 Main St."
+  //             ],
+  //             "city": "Anycity",
+  //             "state": "CA",
+  //             "postalCode": "12345"
+  //           }
+  //         ]
+  //       },
+  //       "request": {
+  //         "method": "POST",
+  //         "url": "Patient"
+  //       }
+  //     },
 
-    ]
-  }
+  //     {
+  //       "resource": {
+  //         "resourceType": "Patient",
+  //         "name": [
+  //           {
+  //             "family": "Tom",
+  //             "given": [
+  //               "Darcyee"
+  //             ]
+  //           }
+  //         ],
+  //         "gender": "male",
+  //         "address": [
+  //           {
+  //             "line": [
+  //               "123 Main St."
+  //             ],
+  //             "city": "Anycity",
+  //             "state": "CA",
+  //             "postalCode": "12345"
+  //           }
+  //         ]
+  //       },
+  //       "request": {
+  //         "method": "POST",
+  //         "url": "Patient"
+  //       }
+  //     },
+
+  //   ]
+  // }
+
+  const curJson = require("./testData/organizationjson.json")
+
+
+const resources = curJson.map(el=>{
+  const curEl = new Organization().getFHIR({
+    "email"  : el.email,
+    "name" : el.orgName,
+    "ndhmFacilityNumber" : el.ndhmFaciltyId,
+    "phone" : el.tel,
+    "providerNumber" : el.id,
+  })
+
+  return {"resource": curEl,  "request": {
+    "method": "POST",
+    "url": "Organization"
+  }}
+
+})
+
+
+const bundle = {
+  "resourceType": "Bundle",
+  "id": "bundle-transaction",
+  "meta": {
+    "lastUpdated": new Date().toISOString()
+  },
+  "type": "transaction",
+  "entry": resources
+}
+
+
 
 
   const res = await new GcpFhirCRUD().excuteBundle(bundle)
 
-  console.log(res.data.entry)
+  console.log(res)
 }
 
 
