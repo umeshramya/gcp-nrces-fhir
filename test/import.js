@@ -150,3 +150,18 @@ const excutePatinet = async () => {
 
 
 // excutePatinet();
+
+
+const updateOrganization = async () => {
+  const res = await new GcpFhirSearch().search("Organization")
+  res.data.entry.forEach(el => {
+    const resource = el.resource
+    const org = new Organization().convertFhirToObject(resource)
+    console.log(org)
+
+  });
+
+
+}
+
+updateOrganization()
