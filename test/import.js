@@ -101,7 +101,7 @@ const excutePractinior = async () => {
 
 
 
-
+// select  patientDetails.id, patientDetails.firstName, patientDetails.middleName, patientDetails.dob, patientDetails.dor,  patientDetails.lastName, patientDetails.gender, patientDetails.mobile, patientDetails.orgId, organization.gcpFhirId  from patientDetails inner join organization on patientDetails.orgId = organization.id limit 10000
 
 const excutePatinet = async () => {
 
