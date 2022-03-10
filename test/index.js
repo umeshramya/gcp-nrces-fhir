@@ -29,7 +29,7 @@ const getOrganization = async () => {
   const data = organization.convertFhirToObject(res.data)
   console.log(data)
 }
-// getOrganization();
+getOrganization();
 
 
 const patient = new Patient();
