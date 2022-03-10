@@ -30,9 +30,9 @@ export class Patient implements ResourceMaster {
         },
         system: "https://healthid.ndhm.gov.in/health-number",
         value: `${options.healthNumber}`,
-      }
+      };
 
-      identifiers.push(id)
+      identifiers.push(id);
     }
 
     if (options.phrAddress) {
@@ -48,9 +48,9 @@ export class Patient implements ResourceMaster {
         },
         system: "https://healthid.ndhm.gov.in/phr-address",
         value: `${options.phrAddress}`,
-      }
+      };
 
-      identifiers.push(id)
+      identifiers.push(id);
     }
 
     if (options.MRN) {
@@ -66,8 +66,8 @@ export class Patient implements ResourceMaster {
         },
         system: "https://www.nicehms.com",
         value: `${options.MRN}`,
-      }
-      identifiers.push(id)
+      };
+      identifiers.push(id);
     }
 
     const body = {
@@ -108,9 +108,7 @@ export class Patient implements ResourceMaster {
     let ret: PATIENT = {
       name: options.name[0].text,
       gender: options.gender,
-      healthNumber: options.identifier.filter(
-        (el: any) => el.system == "https://healthid.ndhm.gov.in"
-      )[0].value,
+
       mobile: options.telecom[0].value,
       dob: options.birthDate,
       MRN: options.identifier.filter(
@@ -119,6 +117,18 @@ export class Patient implements ResourceMaster {
       organizationId: `${options.managingOrganization.reference}`.substring(13),
       id: options.id,
     };
+
+    if (options.healthNumber) {
+      ret.healthNumber = options.identifier.filter(
+        (el: any) => el.system == "https://healthid.ndhm.gov.in/health-number"
+      )[0].value;
+    }
+
+    if (options.phrAddress) {
+      ret.phrAddress = options.identifier.filter(
+        (el: any) => el.system == "https://healthid.ndhm.gov.in/phr-address"
+      )[0].value;
+    }
 
     return ret;
   }

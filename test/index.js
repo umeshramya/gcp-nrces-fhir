@@ -45,8 +45,7 @@ const createPatient = async () => {
     "organizationId": '87166aa1-c5a6-468b-92e9-7b1628b77957'
   })
 
-  console.log(body)
-  return
+
   const res = await new GcpFhirCRUD().createFhirResource(body, "Patient")
   console.log(res)
 

@@ -1,5 +1,6 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
+const console = require('console')
 const { cpSync } = require('fs')
 const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory } = require("gcp-nrces-fhir")
 
@@ -154,14 +155,58 @@ const excutePatinet = async () => {
 
 const updateOrganization = async () => {
   const res = await new GcpFhirSearch().search("Organization")
-  res.data.entry.forEach(el => {
+  let str1=" "
+  let str2=""
+  res.data.entry.forEach((el, i)=> {
     const resource = el.resource
-    const org = new Organization().convertFhirToObject(resource)
-    console.log(org)
+    const org = new Organization().convertFhirToObject(resource);
 
+
+    
+    str1 += `WHEN ${org.providerNumber} THEN "${org.id}" `
+    str2 += `${org.providerNumber}, `
+
+    
+  });
+
+  // let sql = `UPDATE organization set gcpFhirId = (CASE id WHEN 1 THEN 11123 END) WHERE id in(1)`
+  let sql = `UPDATE organization set gcpFhirId = (CASE id ${str1} END) WHERE id in(${str2})`
+  console.log(sql)
+}
+
+// updateOrganization()
+
+
+const updatePatient = async ()=>{
+  const res = await new GcpFhirSearch().searchFhirResourcesGet("Patient")
+  let str1=" "
+  let str2=""
+
+
+  // console.log(res.data.entry)
+  // return
+
+  let t =[]
+  t.length
+console.log(res.data.entry.length)
+
+return
+  res.data.entry.forEach((el, i)=> {
+    const resource = el.resource
+    const org = new Patient().convertFhirToObject(resource);
+    str1 += `WHEN ${org.MRN} THEN "${org.id}" `
+    str2 += `${org.MRN}, `
+    
   });
 
 
+
+  let sql = `UPDATE patientDetails set gcpFhirId = (CASE id ${str1} END) WHERE id in(${str2})`;
+
+console.log(sql)
+
 }
 
-updateOrganization()
+
+updatePatient()
+
