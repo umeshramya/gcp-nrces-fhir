@@ -5,43 +5,45 @@ const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientReso
 
 
 
-const ifNull = (val)=>{
-  if(val == "NULL"){
+const ifNull = (val) => {
+  if (val == "NULL") {
     return undefined
-  }else{
+  } else {
     return `${val}`
   }
 }
 
 const excuteOrganization = async () => {
 
-const curJson = require("./testData/organizationjson.json")
-const resources = curJson.map(el=>{
-  const curEl = new Organization().getFHIR({
-    "email"  : ifNull(el.email),
-    "name" : ifNull(el.orgName),
-    "ndhmFacilityNumber" :ifNull( el.ndhmFaciltyId),
-    "phone" : ifNull(el.tel),
-    "providerNumber" : ifNull(el.id),
+  const curJson = require("./testData/organizationjson.json")
+  const resources = curJson.map(el => {
+    const curEl = new Organization().getFHIR({
+      "email": ifNull(el.email),
+      "name": ifNull(el.orgName),
+      "ndhmFacilityNumber": ifNull(el.ndhmFaciltyId),
+      "phone": ifNull(el.tel),
+      "providerNumber": ifNull(el.id),
+    })
+
+    return {
+      "resource": curEl, "request": {
+        "method": "POST",
+        "url": "Organization"
+      }
+    }
+
   })
 
-  return {"resource": curEl,  "request": {
-    "method": "POST",
-    "url": "Organization"
-  }}
 
-})
-
-
-const bundle = {
-  "resourceType": "Bundle",
-  "id": "bundle-transaction",
-  "meta": {
-    "lastUpdated": new Date().toISOString()
-  },
-  "type": "transaction",
-  "entry": resources
-}
+  const bundle = {
+    "resourceType": "Bundle",
+    "id": "bundle-transaction",
+    "meta": {
+      "lastUpdated": new Date().toISOString()
+    },
+    "type": "transaction",
+    "entry": resources
+  }
 
 
 
@@ -57,25 +59,27 @@ const bundle = {
 
 
 const excutePractinior = async () => {
-  
-  const curJson = require("./testData/doctor.json")
-  const resources = curJson.map(el=>{
 
-  const curEl = new Practitioner().getFHIR({
-    "medicalLicenseNumber" : ifNull(el.registration),
-    "name" : ifNull(el.name),
-    "ndhmProfessionalId" : ifNull(el.ndhmProfessionalId),
-    "providerNumber" : el.id,
-    "qualification" : ifNull(el.qualification),
+  const curJson = require("./testData/doctor.json")
+  const resources = curJson.map(el => {
+
+    const curEl = new Practitioner().getFHIR({
+      "medicalLicenseNumber": ifNull(el.registration),
+      "name": ifNull(el.name),
+      "ndhmProfessionalId": ifNull(el.ndhmProfessionalId),
+      "providerNumber": el.id,
+      "qualification": ifNull(el.qualification),
     })
-  
-    return {"resource": curEl,  "request": {
-      "method": "POST",
-      "url": "Practitioner"
-    }}
-  
+
+    return {
+      "resource": curEl, "request": {
+        "method": "POST",
+        "url": "Practitioner"
+      }
+    }
+
   })
-  
+
   const bundle = {
     "resourceType": "Bundle",
     "id": "bundle-transaction",
@@ -83,13 +87,66 @@ const excutePractinior = async () => {
       "lastUpdated": new Date().toISOString()
     },
     "type": "transaction",
-    "entry": resources.map(el=>el)
+    "entry": resources.map(el => el)
   }
 
-    const res = await new GcpFhirCRUD().excuteBundle(bundle)
-  
-    console.log(res)
+  const res = await new GcpFhirCRUD().excuteBundle(bundle)
+
+  console.log(res)
+}
+
+
+// excutePractinior();
+
+
+
+
+
+
+const excutePatinet = async () => {
+
+  const curJson = require("./testData/Patient_1_to_1000.json")
+  const resources = curJson.map(el => {
+
+    const curEl = new Patient().getFHIR({
+      "MRN": ifNull(el.id),
+      "dob": `${el.dob.substring(6)}-${el.dob.substring(3, 5)}-${el.dob.substring(0, 2)}`,
+      "gender": ifNull(el.gender),
+      "mobile": ifNull(el.mobile),
+      "name": ifNull(`${el.firstName} ${el.middleName} ${el.lastName}`),
+      "organizationId": '87166aa1-c5a6-468b-92e9-7b1628b77957'
+
+    })
+
+    return {
+      "resource": curEl, "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    }
+
+  })
+
+
+
+
+  const bundle = {
+    "resourceType": "Bundle",
+    "id": "bundle-transaction",
+    "meta": {
+      "lastUpdated": new Date().toISOString()
+    },
+    "type": "transaction",
+    "entry": resources
   }
-  
-  
-  // excutePractinior();
+
+  // console.log(bundle)
+  // return
+
+  const res = await new GcpFhirCRUD().excuteBundle(bundle)
+
+  console.log(res)
+}
+
+
+// excutePatinet();

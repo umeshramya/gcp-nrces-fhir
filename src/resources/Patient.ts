@@ -5,7 +5,8 @@ export interface PATIENT {
   id?: string;
   name: string;
   gender: string;
-  healthNumber: string;
+  healthNumber?: string;
+  phrAddress?: string;
   mobile: string;
   dob: string;
   MRN: string;
@@ -14,8 +15,10 @@ export interface PATIENT {
 
 export class Patient implements ResourceMaster {
   getFHIR(options: PATIENT) {
-    const identifiers: IDENTTIFIER[] = [
-      {
+    const identifiers: IDENTTIFIER[] = [];
+
+    if (options.healthNumber) {
+      const id: IDENTTIFIER = {
         type: {
           coding: [
             {
@@ -25,10 +28,33 @@ export class Patient implements ResourceMaster {
             },
           ],
         },
-        system: "https://healthid.ndhm.gov.in",
+        system: "https://healthid.ndhm.gov.in/health-number",
         value: `${options.healthNumber}`,
-      },
-      {
+      }
+
+      identifiers.push(id)
+    }
+
+    if (options.phrAddress) {
+      const id: IDENTTIFIER = {
+        type: {
+          coding: [
+            {
+              system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+              code: "MR",
+              display: "Medical record number",
+            },
+          ],
+        },
+        system: "https://healthid.ndhm.gov.in/phr-address",
+        value: `${options.phrAddress}`,
+      }
+
+      identifiers.push(id)
+    }
+
+    if (options.MRN) {
+      const id: IDENTTIFIER = {
         type: {
           coding: [
             {
@@ -40,8 +66,9 @@ export class Patient implements ResourceMaster {
         },
         system: "https://www.nicehms.com",
         value: `${options.MRN}`,
-      },
-    ];
+      }
+      identifiers.push(id)
+    }
 
     const body = {
       resourceType: "Patient",
