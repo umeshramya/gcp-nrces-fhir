@@ -5,6 +5,15 @@ const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientReso
 
 
 
+const ifNull = (val)=>{
+  if(val == "NULL"){
+    return undefined
+  }else{
+    // return `${val}`
+    return val
+  }
+}
+
 const excuteOrganization = async () => {
 
 const curJson = require("./testData/organizationjson.json")
@@ -54,11 +63,11 @@ const excutePractinior = async () => {
   const resources = curJson.map(el=>{
 
   const curEl = new Practitioner().getFHIR({
-    "medicalLicenseNumber" : el.registration,
+    "medicalLicenseNumber" : ifNull(el.registration),
     "name" : el.name,
-    "ndhmProfessionalId" : el.ndhmProfessionalId,
+    "ndhmProfessionalId" : ifNull(el.ndhmProfessionalId),
     "providerNumber" : el.id,
-    "qualification" : el.qualification,
+    "qualification" : ifNull(el.qualification),
     })
   
     return {"resource": curEl,  "request": {
@@ -68,8 +77,9 @@ const excutePractinior = async () => {
   
   })
   
+  // console.log(resources[3].resource,resources[4].resource)
 
-  
+  // return
   const bundle = {
     "resourceType": "Bundle",
     "id": "bundle-transaction",
@@ -77,8 +87,14 @@ const excutePractinior = async () => {
       "lastUpdated": new Date().toISOString()
     },
     "type": "transaction",
-    "entry": [resources[0]]
+    // "entry" : [resources[3]]
+    "entry": resources.map((el, i)=>{
+      if(i < 5){
+        return el
+      }
+    })
   }
+  
   
 
     const res = await new GcpFhirCRUD().excuteBundle(bundle)
