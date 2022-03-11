@@ -178,26 +178,28 @@ const updateOrganization = async () => {
 
 
 const updatePatient = async ()=>{
-  const res = await new GcpFhirSearch().searchFhirResourcesGet("Patient")
+  
   let str1=" "
   let str2=""
 
 
-  // console.log(res.data.entry)
-  // return
 
-  let t =[]
-  t.length
-console.log(res.data.entry.length)
+const data = require("./testData/Patient1.json")
 
-return
-  res.data.entry.forEach((el, i)=> {
-    const resource = el.resource
-    const org = new Patient().convertFhirToObject(resource);
-    str1 += `WHEN ${org.MRN} THEN "${org.id}" `
-    str2 += `${org.MRN}, `
+
+
+  data.forEach(el=>{
+    let mrn
+    if(el.identifier){
+      mrn = el.identifier.filter(e=>e.system == "https://www.nicehms.com")[0]
+    }
+    if(mrn){
+      str2 +=  `${mrn.value}, `
+      str1 += `WHEN ${mrn.value} THEN "${el.id}" `
+    }
     
-  });
+
+  })
 
 
 
