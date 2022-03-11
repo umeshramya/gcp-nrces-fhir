@@ -78,6 +78,21 @@ export default class GcpFhirCRUD {
     }
   }
 
+  async deleteAllFhirResource(resourceType: resourceType) {
+    try {
+      const name = `${this.parent}/fhir/${resourceType}`;
+      const request = { name };
+      const resource: any =
+        await this.healthcare.projects.locations.datasets.fhirStores.fhir.delete(
+          request
+        );
+
+      return resource;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async getFhirResource(resourceId: string, resourceType: resourceType) {
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
