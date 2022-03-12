@@ -4,7 +4,7 @@ const console = require('console')
 const { cpSync } = require('fs')
 const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory } = require("gcp-nrces-fhir")
 
-
+// select  patientDetails.id, patientDetails.firstName, patientDetails.middleName, patientDetails.dob, patientDetails.dor,  patientDetails.lastName, patientDetails.gender, patientDetails.mobile, patientDetails.orgId, organization.gcpFhirId  from patientDetails inner join organization on patientDetails.orgId = organization.id limit 10000
 
 const ifNull = (val) => {
   if (val == "NULL") {
@@ -172,15 +172,40 @@ const excutePatinet = async () => {
 // excutePatinet();
 
 
-const updateOrganization = async () => {
-  const res = await new GcpFhirSearch().search("Organization")
+const updateDoctor = async () => {
+  const res = await new GcpFhirSearch().search("Practitioner")
   let str1 = " "
   let str2 = ""
+
+  res.data.entry.forEach((el, i) => {
+    const resource = el.resource
+    const org = new Practitioner().convertFhirToObject(resource);
+
+    str1 += `WHEN ${org.providerNumber} THEN "${org.id}" `
+    str2 += `${org.providerNumber}, `
+
+
+  });
+
+  // let sql = `UPDATE organization set gcpFhirId = (CASE id WHEN 1 THEN 11123 END) WHERE id in(1)`
+  let sql = `UPDATE organization set gcpFhirId = (CASE id ${str1} END) WHERE id in(${str2})`
+  console.log(sql)
+}
+
+updateDoctor()
+
+
+
+const updateOrganization = async () => {
+  const res = await new GcpFhirSearch().search()
+
+
+  let str1 = " "
+  let str2 = ""
+
   res.data.entry.forEach((el, i) => {
     const resource = el.resource
     const org = new Organization().convertFhirToObject(resource);
-
-
 
     str1 += `WHEN ${org.providerNumber} THEN "${org.id}" `
     str2 += `${org.providerNumber}, `

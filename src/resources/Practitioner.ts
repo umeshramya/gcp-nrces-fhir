@@ -111,17 +111,31 @@ export class Practitioner implements ResourceMaster {
   convertFhirToObject(options: any): PRACTITIONER {
     let ret: PRACTITIONER = {
       name: options.name[0].text,
-      medicalLicenseNumber: options.identifier.filter(
-        (el: any) => el.system == "https://www.nmc.org.in/"
-      )[0].value,
-      ndhmProfessionalId: options.identifier.filter(
-        (el: any) => el.system == "https://healthid.ndhm.gov.in"
-      )[0].value,
       id: options.id,
-      providerNumber: options.identifier.filter(
-        (el: any) => el.system == "https://www.nicehms.com"
-      )[0].value,
     };
+
+    const medicalLicenseNumber: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://www.nmc.org.in/"
+    );
+    if (medicalLicenseNumber.length > 0) {
+      ret.medicalLicenseNumber = medicalLicenseNumber[0].value;
+    }
+
+    const ndhmProfessionalId: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://healthid.ndhm.gov.in"
+    );
+
+    if (ndhmProfessionalId.length > 0) {
+      ret.ndhmProfessionalId = ndhmProfessionalId[0].value;
+    }
+
+    const providerNumber: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://www.nicehms.com"
+    );
+    if (providerNumber.length) {
+      ret.providerNumber = providerNumber[0].value;
+    }
+
     return ret;
   }
 }

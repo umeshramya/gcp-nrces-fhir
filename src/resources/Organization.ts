@@ -12,11 +12,7 @@ export interface ORGANIZATION {
 
 export class Organization implements ResourceMaster {
   getFHIR(options: ORGANIZATION) {
-    const identifiers: IDENTTIFIER[] = [
-
-
-    ];
-
+    const identifiers: IDENTTIFIER[] = [];
 
     if (options.ndhmFacilityNumber) {
       const id: IDENTTIFIER = {
@@ -31,9 +27,9 @@ export class Organization implements ResourceMaster {
         },
         system: "https://healthid.ndhm.gov.in",
         value: `${options.ndhmFacilityNumber}`,
-      }
+      };
 
-      identifiers.push(id)
+      identifiers.push(id);
     }
 
     if (options.providerNumber) {
@@ -49,8 +45,8 @@ export class Organization implements ResourceMaster {
         },
         system: "https://www.nicehms.com",
         value: `${options.providerNumber}`,
-      }
-      identifiers.push(id)
+      };
+      identifiers.push(id);
     }
 
     const body = {
@@ -105,13 +101,22 @@ export class Organization implements ResourceMaster {
       phone: options.telecom[0].value,
       email: options.telecom[1].value,
       id: options.id,
-      ndhmFacilityNumber: options.identifier.filter(
-        (el: any) => el.system == "https://healthid.ndhm.gov.in"
-      )[0].value,
-      providerNumber: options.identifier.filter(
-        (el: any) => el.system == "https://www.nicehms.com"
-      )[0].value,
     };
+
+    const ndhmFacilityNumber: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://healthid.ndhm.gov.in"
+    );
+    if (ndhmFacilityNumber.length > 0) {
+      ret.ndhmFacilityNumber = ndhmFacilityNumber[0].value;
+    }
+
+    const providerNumber: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://www.nicehms.com"
+    );
+
+    if (providerNumber.length > 0) {
+      ret.providerNumber = providerNumber[0].value;
+    }
 
     return ret;
   }
