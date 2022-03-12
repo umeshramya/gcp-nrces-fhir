@@ -13,7 +13,13 @@ export interface ORGANIZATION {
 export class Organization implements ResourceMaster {
   getFHIR(options: ORGANIZATION) {
     const identifiers: IDENTTIFIER[] = [
-      {
+
+
+    ];
+
+
+    if (options.ndhmFacilityNumber) {
+      const id: IDENTTIFIER = {
         type: {
           coding: [
             {
@@ -25,8 +31,13 @@ export class Organization implements ResourceMaster {
         },
         system: "https://healthid.ndhm.gov.in",
         value: `${options.ndhmFacilityNumber}`,
-      },
-      {
+      }
+
+      identifiers.push(id)
+    }
+
+    if (options.providerNumber) {
+      const id: IDENTTIFIER = {
         type: {
           coding: [
             {
@@ -38,8 +49,9 @@ export class Organization implements ResourceMaster {
         },
         system: "https://www.nicehms.com",
         value: `${options.providerNumber}`,
-      },
-    ];
+      }
+      identifiers.push(id)
+    }
 
     const body = {
       resourceType: "Organization",

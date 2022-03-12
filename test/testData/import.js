@@ -10,16 +10,26 @@ const ifNull = (val) => {
   if (val == "NULL") {
     return undefined
   } else {
-    cd
     return `${val}`
   }
 }
 
-const deleteOrg = async () => {
-  const del = await new GcpFhirCRUD().deleteAllFhirResource("Organization")
-}
+// const deleteOrg = async (index) => {
+//   console.log(index)
+//   if (index > 50) {
+//     return
+//   }
+//   const gcpFhirCrud = new GcpFhirCRUD()
+//   const get = await new GcpFhirSearch().search("Organization")
+//   const id = get.data.entry[0].resource.id
+//   const del = await gcpFhirCrud.deleteFhirResource(id, "Organization")
+//   console.log(del)
+//   index++;
+//   deleteOrg(index)
 
-deleteOrg()
+// }
+
+// deleteOrg(0)
 
 const excuteOrganization = async () => {
 
@@ -54,7 +64,7 @@ const excuteOrganization = async () => {
   }
 
 
-
+  // console.log(bundle.entry[0].resource)
 
   const res = await new GcpFhirCRUD().excuteBundle(bundle)
 
@@ -68,7 +78,7 @@ const excuteOrganization = async () => {
 
 const excutePractinior = async () => {
 
-  const curJson = require("./testData/doctor.json")
+  const curJson = require("./doctor.json")
   const resources = curJson.map(el => {
 
     const curEl = new Practitioner().getFHIR({
@@ -97,6 +107,8 @@ const excutePractinior = async () => {
     "type": "transaction",
     "entry": resources.map(el => el)
   }
+
+  // console.log(bundle.entry[0].resource)
 
   const res = await new GcpFhirCRUD().excuteBundle(bundle)
 
