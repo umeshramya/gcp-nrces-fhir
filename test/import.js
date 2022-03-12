@@ -113,7 +113,7 @@ const excutePatinet = async () => {
       "MRN": ifNull(el.id),
       "dob": `${el.dob.substring(6)}-${el.dob.substring(3, 5)}-${el.dob.substring(0, 2)}`,
       "gender": ifNull(el.gender),
-      "mobile": ifNull(el.mobile),
+      "mobile":  ifNull(el.mobile == "Not Mentioned"? "9999999999" : el.mobile),
       "name": ifNull(`${el.firstName} ${el.middleName} ${el.lastName}`),
       "organizationId": '87166aa1-c5a6-468b-92e9-7b1628b77957'
 
@@ -210,5 +210,19 @@ console.log(sql)
 }
 
 
-updatePatient()
+// updatePatient()
+
+
+
+const deletePatient = async(index)=>{
+  if(index > 4000){
+    return
+  }
+
+  const pat = await new GcpFhirSearch().search("Patient");
+  console.log(pat)
+}
+
+
+deletePatient(0)
 

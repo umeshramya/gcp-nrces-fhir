@@ -1,0 +1,1501 @@
+id,firstName,middleName,lastName,dob,gender,mobile,orgId,gcpFhirId
+41,Praveen,Shivaji,Gidde,1990-07-01,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+42,Pillps,Styandly,Pille,1942-02-01,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+43,Saraswathi,Parusuram,Uppar,1965-05-02,Female,9845293259,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+44,Mariyamma,Maruthi,Dodamani,1973-04-02,Female,9742358707,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+47,Yankamma,Hanumanthappa,Koravar,1963-02-01,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+48,Nikitha,Ashok,Bilagi,1991-07-08,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+49,Abdulrehaman,Umarsab,Jinganavar,1941-07-20,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+51,Shamson,mojes,Ballari,1991-06-02,Male,9980321316,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+52,Somanna,Chandrashekar,Roon,1973-01-03,Male,9980601366,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+53,Hajeebu,Mahabubsab,Nadaf,1973-02-06,Female,9945299292,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+54,Laxamavva,Siddappa,Kumbar,1993-05-04,Female,8494980238,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+55,Janathbee,Hasansab,Nadaf,1953-03-02,Female,9945982431,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+56,Mallikarjun,Chennbassappa,Kori,1969-07-14,Male,9844380811,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+58,KUMARGOUDA,MALLANGOUDA,PATIL,1965-07-04,Male,8970514510,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+59,PARIDHABEGAM,MALLIKSAB,MUKATGER,1960-07-04,Female,9902221066,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+60,RAMANNA,HANUMATHAPPA,UPPER,1964-07-04,Male,8722522513,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+61,Dyamavva,Hanumathappa,Kudalgi,1960-07-04,Female,9742838890,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+62,Gouramm,Kalappa,Badiger,1950-07-20,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+63,Vijaykumar,somanath,koliwad,1995-12-01,Male,8880016269,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+64,Mohamed-Ali,"Mohamad Ummar",Jangli,1985-07-11,Male,9845114768,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+65,Fakiresh,Virappa,chatani,1952-10-28,Male,8197665854,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+66,Fakireshwar,Veerappa,Chatni,1952-07-19,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+68,Allabaksh,Mardanasab,Bhogadi,1975-07-05,Male,9972601676,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+69,Golappa,Koterappa,Sajjan,1949-10-20,Male,9482171242,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+70,Tungawwa,Shripal,Navalur,1973-07-05,Female,9686459565,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+71,Jyothi,Basuraj,Kattimani,1994-07-05,Female,9483677144,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+72,Sangeeta,Manjunatha,Badigeri,1992-07-10,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+73,Annpuranna,Shimanna,Sasavihalli,1973-07-05,Female,8183040141,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+75,Arapitha,Vittal,Golli,2013-07-05,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+76,AbdulSattar,AbdulRehaman,Shekha,1950-07-21,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+78,Sangappa,S,Tevaramani,1961-07-18,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+79,Noorajan,Mohamad,Tadasad,1991-07-05,Female,9591094477,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+80,Kallappa,Hanumappa,Sasolli,1949-07-05,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+81,Jameel,Shabudin,Gamangatti,1989-03-03,Male,9738111970,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+82,Radha,Subash,Despande,1976-07-15,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+83,Premakumari,Medhavarao,Palur,1953-12-26,Female,9538788571,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+84,Vinayak,Havalappa,Morab,1992-10-17,Male,9483664672,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+86,Maktumasab,M,Kiledar,1991-07-12,Male,7353369916,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+87,Kashinath,Siddappa,Hotagikar,1943-07-24,Male,9986944563,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+88,Duragappa,Irappa,Poojari,1987-07-15,Male,9686150872,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+89,Nibamma,Shrikanthayya,Hiremath,1924-07-30,Female,8746928038,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+90,Puranima,Praveen,Hiremath,1992-07-13,Female,8746928038,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+91,Kadarasab,M,Nadaf,1963-07-21,Male,8792098764,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+92,Seema,"Dr Rajesab",Kavasur,1981-07-16,Female,8105452061,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+97,Abdulgani,R,Ulikatt,1958-07-23,Male,9036508051,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+98,Ambuji,Buddappa,Mokke,1960-07-22,Male,9980282891,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+99,Paramesh,Yamanappa,Hudedmani,1962-07-22,Male,9886706384,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+100,Prashant,Channabasavaraj,Dodmani,1996-07-13,Male,9663484764,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+101,Mamthaz,HusenKhan,Kaladagi,1953-07-24,Female,8553505218,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+103,Kusha,Yallappa,Chavadiker,1993-07-14,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+104,Hanamanth,Sunkappa,Gayakaawd,1988-07-15,Male,9632609339,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+105,Vijubai,Maruthi,Goli,1948-07-25,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+106,Chanavva,P,Shivashimpar,1968-07-20,Female,9945619142,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+107,Kalyanibai,Ragunath,Shetty,1933-07-29,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+108,Ravi,S,Panchali,1993-07-14,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+109,Pooj,Y,Katawa,1993-07-15,Female,9632127557,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+110,Rachappa,Tirakappa,Sotaknahal,1963-07-23,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+112,Priyanka,Vasanth,Karekar,1998-07-14,Female,9739460156,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+114,Sumitrbai,M,Bakale,1963-07-23,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+115,Gangavva,Basavaraj,Maradgi,1973-07-21,Female,9538670150,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+116,Imamsab,Bashasab,Sankadal,1992-07-16,Male,9448630826,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+117,Hanumavva,Nigaraddi,Itagi,1943-07-29,Female,9844853669,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+118,Fathima,Shek,Sanadi,1995-07-16,Female,9008982923,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+119,Raziya,Ramatulla,Khatnalli,1991-07-17,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+120,Iramma,Mariyappa,Ganger,1963-07-24,Female,9964676567,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+121,Noorjan,Abdulgani,Mudol,1963-07-24,Female,9986827830,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+122,Meenakshi,Mahadevgouda,Adur,1987-07-19,Female,9980839896,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+123,Bharamppa,Bassappa,Swadi,1955-07-27,Male,9972328852,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+124,Basavaraj,Mahadevappa,Angadi,1985-07-19,Male,9341882220,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+125,Yamanavva,Basavaraj,Madar,1997-07-16,Female,9663715724,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+126,Naveenchand,K,Lalaka,1934-07-21,Male,9242915561,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+127,Honnappa,Ramanna,Bevinamarad,1975-07-23,Male,9741573292,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+129,Shantha,Umapathi,Gadagi,1960-07-26,Female,8123012272,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+130,Janki,Narayan,Ambiga,1968-07-24,Female,9663452717,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+131,Sheshappa,Yallappa,Bojagar,1957-07-27,Male,9900839882,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+132,Shivangouda,G,Veerangoudar,1952-07-28,Male,9743248420,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+133,Gangamma,Basavaraj,Kansavi,1958-07-27,Female,9972989200,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+134,Allahuddin,P,Nadaf,1982-07-21,Male,9902755191,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+135,Muttu,Mallappa,Asundi,1978-07-22,Male,9916112306,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+136,Raziya,Davalsab,Nadaf,1985-07-20,Female,9008002180,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+137,Mega,Ulavappa,Katti,2004-07-15,Female,7259356155,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+138,Prabhu,S,HUbgar,1957-07-28,Male,9986407428,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+139,Shobha,G,Thashildhar,1979-07-23,Female,9916560679,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+140,Gangamma,Nallappa,Perur,1972-07-25,Female,9945842934,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+141,Praveen,Kondayya,Yanluri,1994-07-20,Male,8088381569,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+142,Irashadahamad,Ajjisab,Kalakoti,2005-07-17,Male,9900708931,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+143,Yallamma,Parasuam,Hakenavar,1933-08-04,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+145,Mehabubsab,Budesab,Gokavi,1955-07-30,Male,9964371676,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+146,Ravishenkar,Nagalingappa,Pattar,1964-07-27,Male,9686867020,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+147,Shivappa,Nigappa,Badiger,1963-07-28,Male,7353220277,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+148,Ashok,Gurashanthappa,Savanur,1984-07-22,Male,9035620719,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+149,Fakruddin,Abdulsab,Betageri,1965-07-27,Male,7204794627,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+150,Neelamma,Shenkrappa,Chakrasali,1968-07-26,Female,9035232664,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+151,Rashmi,B,Chavaragi,1990-07-21,Female,9342690039,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+152,Ashwini,Monesh,Pattar,1987-07-22,Female,9986169621,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+153,Channavva,Adiveppa,Chotappanavar,1983-07-24,Female,9164418425,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+154,Vinayak,S,Savasher,1953-07-31,Male,9036423725,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+155,Basangouda,S,Basangoudar,1948-08-01,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+156,Shanthamma,Jayarao,Billa,1938-08-01,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+157,Yallappa,Basappa,Harijan,1968-07-27,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+158,Sagar,Gopal,Gorpade,1996-07-20,Male,9686172156,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+159,Latha,M,Nolvi,1957-07-30,Female,9986814633,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+160,Gangamma,Veerpaksheppa,Ramanavar,1990-07-23,Female,9844707366,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+161,Shivakka,Chanbasappa,Shivashimpi,1955-08-01,Female,9686108537,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+162,Sahebbi,Allasab,Bani,1958-07-31,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+163,Shridevi,Basuraj,Neelanavar,1988-07-23,Female,9986752667,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+164,Basayya,Nandayy,Teguramath,1994-07-22,Male,9036383065,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+165,Greysi,Jayaraj,Kolahar,1954-08-01,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+166,Prakash,Manngalsigh,Alligarh,1997-07-21,Male,9720671955,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+167,Draksayani,K,Ballarimath,1978-07-27,Female,9481524764,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+168,Arayi,Parasuram,Bangalore,1985-07-25,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+169,Hemayya,Puttayya,Ballarimath,1961-08-01,Male,9731892223,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+170,Soumya,Janardhan,Iyengar,1986-07-26,Female,9611451834,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+171,K,N,Bimaradiyavar,1963-08-02,Male,9482551079,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+173,Rajanikanth,R,Hamani,1985-07-27,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+174,Ganeshappa,Nagappa,Sajjanshettar,1951-08-05,Male,9008456055,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+178,Hemaraddi,Govindraddi,Byahatti,1980-07-29,Male,9972141103,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+179,Akkamahadevi,Mohan,Pathar,1973-07-31,Female,9591119527,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+181,Mahatesh,Ramanna,Badiger,1951-08-06,Male,9916073387,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+182,Pushpavathi,Chenvassapa,Soppan,1948-08-06,Female,8762504294,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+183,Mohan,D,Pathar,1962-08-03,Male,9448435598,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+184,"Michal Johnson",Varprasad,Janjaraapur,1983-07-29,Male,9880563937,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+185,Laxmibai,Pandurangasa,Katare,1958-08-04,Female,9620461855,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+186,Neelappa,Fakirappa,Sarasur,1973-08-01,Male,9901172308,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+187,Abdulsab,B,Nagaral,1936-08-10,Male,9448560511,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+188,Ansuya,Ashok,Shilavanth,1963-08-04,Female,9242350568,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+189,Asha,Ashok,Khambale,1980-07-31,Female,9036058871,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+190,Rangarao,B,Mirji,1945-08-09,Male,9739463579,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+191,Anjali,R,Miraji,1955-08-07,Female,9886914228,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+192,Duragappa,S,Dummal,1960-08-05,Male,9620466261,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+193,Laxmi,Malikarjunappa,Kamar,2000-08-22,Female,9945082447,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+194,Husenabee,Divanasab,Nadaf,1963-08-05,Female,9902519733,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+195,Padmaraj,Sampatarao,S,1963-08-06,Male,9980787545,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+196,Kalavathi,B,Kanchagar,1970-08-04,Female,9611521549,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+197,Rekha,Yallappa,Bhujhapanavar,1973-08-03,Female,8105968238,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+198,Annadore,Muniswami,M,1970-08-04,Male,9880292741,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+201,Hanumathappa,M,Karadigodda,1996-07-28,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+202,Swetha,D,Kulkarani,1991-07-30,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+203,Arjun,Appaji,Rayabagakar,1953-08-08,Male,9743920234,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+204,Manjula,Basuvaraj,Golappnavar,1978-08-02,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+206,Fakiresh,Rayappa,Kurahatti,1989-07-31,Male,9964461643,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+207,Krishna,Parasuram,Kalal,1981-08-02,Male,8548920185,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+208,Nayana,Umesh,Sajjanar,1988-08-01,Female,9481313276,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+209,Bimappa,Basappa,Mudenavar,1945-08-12,Male,9538523817,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+210,Nandaraj,Laxmanrao,Bhambure,1973-08-05,Male,9902970290,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+211,Dyamavva,S,Kundagol,1958-08-09,Female,8453002842,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+212,Roopa,V,Pujari,1985-08-02,Female,8892853992,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+213,Parasuram,Dyamappa,Belageri,1969-08-06,Male,9341871781,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+214,Narayanappa,Bisanna,Raichur,1941-08-13,Male,9591389229,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+215,Shila,Siddaling,Kori,1976-08-05,Female,8748846755,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+216,Shobha,P,Kabade,1965-08-08,Female,9902222691,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+217,Makabulahamad,Sahebjan,Inamdhar,1940-08-14,Male,9880728820,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+218,Nigappa,Neelappa,Belavatagi,1957-08-11,Male,9448390583,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+219,Gayatri,Arun,Kokate,1974-08-07,Female,9535034293,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+220,Ramappa,Basappa,Holagannavar,1972-08-08,Male,9620907306,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+221,Basavaraj,Nigappa,Unakal,1982-08-06,Male,9900890320,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+222,Latha,Shankrappa,Chindi,1995-08-03,Female,8970426644,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+223,Mahadevappa,S,Mallari,1953-08-13,Male,9902519742,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+224,Mahesh,Basappa,Gudenkatti,1996-08-02,Male,9164063851,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+225,Savitrevva,Krishnappa,Shelavadi,1945-08-15,Female,8762142625,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+226,Mahamadowiz,Sayadahamad,Navalur,2010-07-30,Male,9902234157,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+227,Mudakappa,Kallappa,Jamakandi,1953-08-14,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+228,Kasappa,Vittal,Gadakar,1981-08-07,Male,9741667424,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+229,Katunbee,Babusab,Badrapur,1938-08-18,Female,9663712420,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+230,Shantavva,Gurashantappa,Savanur,1958-08-13,Female,935620719,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+231,Shravani,Srinivas,Baini,2004-08-01,Female,9844646494,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+232,Basamma,Yallappa,Honnapur,1953-08-14,Female,9964290183,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+233,Moulasab,Husensab,Hooli,1987-08-07,Male,8722904548,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+234,Honnakka,Krishanappa,Bangatti,1958-08-14,Female,9620077098,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+235,Hajaresab,Davalasab,Gajabiranavar,1968-08-11,Male,9902595303,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+236,Husna,Imaran,Khan,1989-08-07,Female,8123623373,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+239,Mohan,Maruti,Perur,1980-08-09,Male,9844098215,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+240,Gangawwa,Veerabadrappa,Balikai,1958-08-15,Female,9731617018,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+241,Rathana,Yallappa,Basapur,1969-08-12,Female,7899048544,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+242,Uttara,Vinod,Gujjar,1992-08-06,Female,8088714303,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+243,Roshanbee,Ibraimsab,Momin,1948-08-18,Female,7411191874,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+244,Laxmi,N,Aundkar,1956-08-16,Female,9986536478,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+246,Raju,Madusa,Kalburagi,1975-09-23,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+247,Raghavendra,K,Kathare,1980-08-10,Male,9739076966,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+248,Manjula,Veeranna,Nalawad,1977-08-11,Female,9343101120,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+249,Vinod,Chandrayya,Hiremath,1989-08-09,Male,9739460156,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+250,Sarojamma,V,Chigateri,1943-08-21,Female,"0836 2448059",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+251,Gouramma,Fakirappa,Walikar,1943-08-21,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+252,Fakiravva,Ningappa,Halagatti,1978-08-12,Female,8095603230,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+254,Rafiq,Mohamadali,Mulla,1978-08-12,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+255,Munasab,Mahamadanif,Javalli,1970-08-15,Male,9611594159,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+256,Bimavva,Mallappa,Satemanavar,1978-08-13,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+257,Narayanaswamy,Ramachari,Devangamatha,1953-08-20,Male,9008449100,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+259,Shobha,R,Kalahal,1978-08-14,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+260,Ragavendra,Fedanna,Guraguntte,1989-08-12,Male,9036038829,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+261,Shainza,Rusidah,Khazi,1983-08-14,Female,8970092387,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+262,Ashok,M,Bilagi,1957-08-20,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+264,Karunya,Davidaraja,Davidaraja,1996-08-11,Female,9980143747,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+265,Kamalavva,K,Mahendrakar,1963-08-20,Female,9945957182,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+266,Manjula,Jagadish,Kattamani,1989-08-13,Female,9886706384,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+267,Shaila,Gadgayya,Salimath,1960-08-20,Female,9844592901,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+269,AKASH,S,HIREMATH,2001-08-10,Male,7483064774,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+270,Anusha,Vishavanath,Kori,1992-08-12,Female,8971951983,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+271,Baburao,Basappa,Naragund,1949-08-23,Male,9448907407,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+272,Guramma,Basavaraj,Ullagaddi,1966-08-20,Female,9739632399,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+273,Anasavva,Yallapagouda,Goudar,1958-08-22,Female,8971647642,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+274,Gurachanayya,Karabasayya,Hiremath,1978-08-18,Male,9916098645,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+275,Vital,Chidanand,Pasalkar,1987-08-16,Male,9886920709,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+276,Rajiv,Niganagouda,Patil,1977-08-18,Male,9611629363,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+277,Hanumanth,Vishavanath,Dambal,1953-08-24,Male,9448148596,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+278,Akkaatai,Parappa,Hulloli,1968-08-20,Female,9008511449,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+279,Vishvanath,Yallappa,Patan,1984-08-17,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+280,Hanamanthappa,Adiveappa,Sangati,1976-08-19,Male,9620606371,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+281,Harish,Veerappa,Bilana,1973-08-20,Male,9008190986,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+282,Anusuya,Kalakappa,Sudi,1973-08-20,Female,9663967701,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+283,Radhabai,Daramanna,Dodamani,1968-08-21,Female,9035755990,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+287,Usha,R,Astagimath,1947-08-27,Female,9880954698,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+289,Shankru,Fakirappa,Dodamani,1975-08-20,Male,9980000654,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+293,Ramu,Gopal,Kambale,1978-08-20,Male,9620060908,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+294,Prabu,G,Meeshi,1979-08-20,Male,9449490178,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+295,Jainabee,Abdulgani,Jamadar,1955-08-26,Female,9902029559,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+296,Mastanwali,Shekshavali,Sayad,1953-08-26,Male,9036985884,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+297,Nagappa,Basappa,Teginamani,1967-08-23,Male,9164515821,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+298,Alamas,Sayad,Bedagavkar,2009-08-12,Female,9060606027,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+299,Shakira,Karimsab,Madarangi,1978-08-21,Female,8904151128,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+300,Hasina,M,Mullur,1968-08-23,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+301,Ragavendra,Mabaleshwar,Shetti,1987-08-19,Female,9731980716,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+302,Pramilabai,Madhavrao,Chipalakatti,1921-09-04,Female,9886843842,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+303,Sandeep,V,Jadav,1979-08-21,Male,8652892777,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+304,Bibiaesha,Inthyazahamad,Dharawad,2010-08-14,Female,9712182297,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+305,Asha,Basavantappa,Guruputra,1983-08-22,Female,9449357338,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+306,Thara,Daramappa,Pawar,1993-08-19,Female,8971174317,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+308,Rajendhar,B,Kamathar,1948-08-30,Male,9483121789,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+309,Renuka,Dharamajar,Benagi,1965-08-26,Female,9739111357,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+310,Siddappa,Laxmappa,Galappanavar,1937-09-03,Male,8884020949,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+311,Yallappagouda,H,Patil,1978-08-24,Male,9900677305,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+312,Achyut,A,Bilagi,1996-08-19,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+314,Gadagayya,G,Salimath,1949-08-31,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+315,Shilapa,Shivappa,Janganavar,1996-08-20,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+316,Vasanth,Venkatesh,Patil,1981-08-24,Male,9620703711,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+317,Veerabhadrappa,K,MatagudaliPatil,1953-08-31,Male,9901167468,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+318,Iradharaj,Salavaraj,Devanadar,1979-08-25,Male,988022580,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+319,Salamma,Safi,Mayasor,1983-08-25,Female,9945664602,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+321,Paravtemma,G,Giriyappagoudar,1948-09-03,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+322,Nagaraj,Rudrappa,Dodawad,1969-08-30,Male,9448123696,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+323,AkabarKhan,AbdulhamedKhan,Soor,1984-08-26,Male,9945903087,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+324,Anil,Rajakumar,Madiwal,1984-08-26,Male,9742870629,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+325,Durgabai,Laxmanasa,Ladaw,1938-09-07,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+326,Suresh,R,Kabade,1972-08-29,Male,932404509,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+327,Yesurathnam,S,A,1961-09-01,Male,9916286493,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+328,Monali,Prabakar,Godake,1998-08-24,Female,9663352961,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+331,Umadevi,Mahesh,Neelakanthamath,1968-08-31,Female,9448860698,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+332,Kastureavva,Hanumathappa,Havin,1957-09-03,Female,9449373250,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+333,Shankar,Balappa,Naregal,1981-08-28,Male,9686364299,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+334,Shemashadbegam,Abdulkarimsab,Vadageri,1960-09-03,Female,8722477180,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+335,Yamunna,Nimbaraj,Kolapur,1964-09-02,Female,7411438812,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+336,Gangbai,Yallappa,Kalal,1953-09-05,Female,9964417250,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+337,Manjula,Yallappa,Nadavinmani,1978-08-30,Female,8970834483,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+338,Suvarna,Rameshrav,Kulakarni,1966-09-02,Female,9980446485,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+339,Shantha,B,Sheth,1970-09-01,Female,9242848284,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+340,Vinaik,Ishavarayya,Patel,1983-08-29,Male,9620813015,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+341,Prashanth,Gopal,Datawad,1985-08-28,Male,9964322471,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+342,Bhagavan,Mothi,Suda,1942-09-09,Male,9008727440,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+343,Nagamma,Shankar,Raichur,1963-09-04,Female,9945768902,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+344,Latha,Anath,Joshi,1943-09-09,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+345,Arif,Abdulkadir,Topalagatti,1997-09-09,Male,9481724651,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+346,Jaisheela,C,Patil,1943-09-10,Female,94481200219,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+347,Haidarsab,Modinsab,Karimkan,1973-09-02,Male,9741660194,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+348,Girijavva,Mahadevappa,Hadimani,1948-09-08,Female,9591893363,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+349,Gurusiddappa,G,Eklaspur,1961-09-05,Male,9900140709,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+350,Shanwaz,Babusab,Kalagatagi,1990-08-29,Male,9980246551,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+351,Suresh,Rudrappa,Madiwalar,1984-08-30,Male,9741989453,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+352,Salama,Murtuza,Shek,1992-08-28,Female,9164491207,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+353,Shekarappa,P,Papanna,1968-09-04,Male,9902275409,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+354,Shankravva,Fakirappa,Pujar,1968-09-04,Female,9964916112,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+355,Anupama,Basavaraj,Shreshthi,1957-09-07,Female,9986708907,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+356,Allabaksh,Abdulgani,Kujageri,1958-09-07,Male,9008060757,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+357,Mahadevi,Kanakappa,Karadi,1981-09-01,Female,9945936838,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+358,Mantamma,Basavaraj,Hiremath,1973-09-04,Female,8867253564,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+359,Sameena,Rafiq,Malikbai,1997-08-29,Female,9741585365,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+360,Pramanthesh,Shivappa,Amashi,1941-09-12,Male,9844415366,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+361,Ratnavva,Nagappa,Neelnaikar,1967-09-07,Female,9164473013,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+362,Mallappa,Shivappa,Madar,1975-09-05,Male,9663248928,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+363,Malatesh,Hemaraddi,Banakar,1979-09-04,Male,8970737552,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+364,Prema,Gurusiddappa,Mudenavara,1989-09-01,Female,9945626879,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+365,Ishwar,C,Paragi,1981-09-03,Male,9880960002,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+366,Sharadha,Tammanna,Dodamani,1965-09-07,Female,9980294760,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+367,Arun,Shivappa,Yaragatti,1988-09-01,Male,9035942750,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+368,Dadhafir,M,Chilakawad,1993-09-01,Male,9741782838,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+369,Neelavva,Suresh,Ainapu,1985-09-03,Female,9916297390,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+370,Dathatreya,Pandurang,Jadav,1963-09-09,Male,9742486490,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+371,Hanamanthappa,Adiveppa,Sangati,1978-09-05,Male,9902094388,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+372,Ishwar,Laxman,Marathi,1976-09-05,Male,9482932174,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+373,V,M,Varaghese,1938-09-15,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+374,Kairunisa,Abdulgapur,Ainapur,1952-09-11,Female,9243285837,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+375,Babu,H,Hadimani,1966-09-08,Male,9743565116,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+376,Ratana,Manjunath,Mandi,1992-09-02,Male,9591292188,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+377,Shobha,B,Gotur,1981-09-05,Female,96861100674,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+378,Thirakangouda,B,Patil,1963-09-10,Male,9741431181,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+379,Suresh,R,Giri,1958-09-11,Male,9741881282,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+380,Ayamma,Mariyappa,Bhudihal,1956-09-11,Female,9880188746,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+381,Basuraj,Hanumathappa,Gulagnjji,1969-09-09,Male,9880855445,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+382,Sayadimam,M,Navalur,1946-09-15,Male,9448823476,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+383,Najiya,Aziramad,Tasildhar,1995-09-03,Female,9008064749,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+384,Sunadh,B,Neetur,1983-09-07,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+385,Jayapal,Parisappa,Shettar,1948-09-15,Male,9886315702,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+386,Vishnuvradhan,Ramesh,Koravar,2000-09-02,Male,9880134067,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+387,Ganpatisa,Madhusa,Solanki,1976-09-08,Male,8050498294,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+388,Danjayya,Ujjayya,Hiremath,2011-08-31,Male,9242230035,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+389,Malathesh,M,Harakatti,1983-09-07,Male,9060836046,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+390,Shanthadevi,Basuraj,Talwai,1940-09-14,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+391,Reshma,M,Laxmeswar,1977-09-08,Female,8123606563,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+392,Vidya,Govindsa,Meharwade,1995-09-05,Female,9591898650,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+396,Duragamma,Suresh,Gabbur,1983-09-08,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+397,Moulali,M,Mulla,1982-09-08,Male,9916169322,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+398,Paraveenpatim,Abdulkadar,Biraballi,1975-09-10,Female,9742260860,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+399,Yallappa,Basappa,Totad,1945-09-19,Male,9632654689,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+400,Renuka,Ramu,Koravar,1974-09-12,Female,9886642682,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+401,Renuka,M,Hotkar,1961-09-15,Female,9901131202,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+402,Veerbhadrappa,C,Hattiholli,1929-09-23,Male,9844592901,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+403,Tharamati,Jaganth,Manucharyya,1968-09-13,Female,9449361425,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+404,Mamathaze,Kapasab,Betageri,1973-09-12,Female,9591250835,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+405,Basuraj,Fakirappa,Bisagal,1977-09-11,Male,9972776779,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+406,Annasavva,Rudaragouda,Patil,1945-09-20,Female,9535567456,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+408,Ryavamm,Sangayya,Bhusanuramath,1933-09-23,Female,9900758974,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+409,Ganesh,Shivaputarappa,Koppad,1993-09-08,Male,8861113047,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+410,Renuka,Laxman,Madiwalar,1958-09-14,Female,9482987898,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+411,Mahabubee,Mahabusab,Savanur,1953-09-19,Female,9886870105,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+412,Ashwini,S,Benkanahalli,1992-09-09,Female,741191629,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+413,Saleema,S,Baroodwale,1958-09-18,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+414,Shenamuk,Bimappa,Wadar,1983-09-12,Male,9743891126,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+415,Savakka,Kalakappa,Abigeri,1948-09-20,Female,9945688508,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+416,Ragavendra,Babanna,Ambiger,1984-09-11,Male,9686150703,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+417,Maduri,Sadashiv,Sharbidre,2008-09-05,Female,9036178949,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+418,Shekilabanu,M,Patan,1982-09-13,Female,9845780594,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+419,Renuka,Manjunath,Ballari,1995-09-10,Female,8147378808,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+420,Mohamadabuzar,Gulambashir,Shaik,1960-09-18,Male,8951545506,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+421,Sarojamma,K,Raichur,1943-09-23,Female,9945768902,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+422,Muttuswami,Maradappa,M,1969-09-16,Male,7676094409,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+423,Sharanamma,Mudakappa,Hatti,1957-09-20,Female,9980952804,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+424,Shankrappa,Sanagappa,Hittanalli,1955-09-21,Male,9482963220,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+425,Ashok,Mahadevvappa,Hadapad,1976-09-15,Male,8105761458,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+427,IkabalKhan,KarimKhan,Harilahar,1955-09-22,Male,99012554254,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+428,Ramavva,Sanellappa,Gurannavar,1958-09-21,Female,9743702379,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+429,Parappa,Basappa,Tegginamani,1953-09-22,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+430,Imam,Karimsab,Attar,1986-09-14,Male,9743043989,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+431,Paravva,P,Hadapad,1979-09-16,Female,8105761458,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+435,Shanumgam,Peramalswamy,B,1955-09-22,Male,9481717985,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+436,Raju,Azrayya,Bandam,1990-09-13,Male,81236879361,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+437,Manjula,Y,Ullikashi,1968-09-18,Female,9449996195,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+438,Basavanevva,Fakirappa,Yelamaggad,1943-09-25,Female,9164512113,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+439,Thirakamma,Hanamanthappa,Aralikatti,1938-09-27,Female,9731683263,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+440,Sachinsingh,Guramaksingh,Tank,1978-09-17,Male,8861868683,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+441,Nikil,Kumar,Sadre,2012-09-08,Male,8867645873,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+443,Gursiddappa,Ramappa,Payannavar,1968-09-20,Female,9019717481,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+444,Ramanna,Kariyappa,Kaladgi,1958-09-23,Male,9743697621,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+445,Gani,Ajim,Patel,1983-09-18,Male,9731419030,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+446,Ismail,Imamasab,Talavai,1963-09-23,Male,9036358625,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+447,Narayan,R,Kammur,1973-09-20,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+448,Mrutyunjay,S,Gulannavar,1966-09-22,Male,8792971063,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+449,Savitravva,Fakkiragouda,Patil,1968-09-22,Female,9843280429,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+450,"Parida begam",M,Bukatageri,1973-09-21,Female,9964555221,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+451,Shenkarappa,Mannappa,Badiger,1918-10-06,Male,8151801793,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+452,Sudha,Gadigeppa,Doddamani,1994-09-17,Female,8711071450,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+453,Varadamma,Ramashwami,R,1948-09-28,Female,9036865154,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+454,Gangamma,Adiveppa,Sangatti,1933-10-02,Female,9902094388,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+455,Neelappa,R,Chavanavar,1952-09-28,Male,9036050333,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+456,Kasimbee,Mahabusab,Nadaf,1978-09-22,Female,8494865780,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+457,Manjunath,R,Chalawadi,1988-09-19,Male,9480746484,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+458,Allabakashe,Modinsab,Hongal,1968-09-24,Male,9448267925,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+459,Yellamma,R,Bajanthari,1992-09-18,Female,7676804536,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+460,Shakuntala,Balarama,Doddamani,1965-09-25,Female,9945480122,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+461,Neelamma,Tipanna,Ulligeri,1937-10-02,Female,9483664672,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+462,Paravati,Huccappa,Kalli,1976-09-23,Female,7259710805,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+463,Manjunath,R,Pawar,1988-09-20,Male,9844965941,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+464,"Mohammed Dr",F,Ansari,1957-09-28,Male,9844402149,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+465,Sharadamma,Parathappa,Donashi,1963-09-27,Female,9164302650,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+466,Manjunath,Maleshappa,Gundger,1985-09-21,Male,9632790889,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+467,Norajan,Ramesh,Kattimani,1987-09-23,Female,9945288526,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+469,MohamadSab,Husensab,Bhardawad,1953-10-01,Male,9141595595,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+470,Duragappa,Fakkirappa,Gabbur,1948-10-02,Male,729356984,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+471,Ashok,Hirajji,Mandalkar,1955-10-01,Male,81236441918,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+472,Mahadevappa,M,Pachangi,1976-09-25,Male,8088196397,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+473,Holeyappgouda,Siddangouda,Panigatti,1945-10-04,Male,8277101146,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+474,Mariyambee,Noshadamad,Bharatathkani,1993-09-22,Female,988613557,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+475,Janthabee,Lalasab,Mujavar,1958-10-01,Female,9686167361,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+476,Bhodappa,Timanna,Uppar,1968-09-28,Male,7760905737,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+480,Mabubee,D,Betageri,1958-10-02,Female,9972150122,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+481,Anitha,Santosh,Pawar,1978-09-27,Female,9986561973,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+482,Prashanth,Siddalingayya,Naragundmath,1989-09-24,Male,8792127988,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+483,Mahabubbasha,Kashimsab,H,1953-10-03,Male,9611724740,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+484,Kallavva,Shivappa,Huballi,1923-10-12,Female,8762586589,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+485,Abdulrazaq,N,Pantoji,1957-10-03,Male,9844461972,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+486,Shekbashira,Shekanwar,Shek,1960-10-02,Female,9743600341,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+487,Vidya,Kallappa,Malhari,1991-09-25,Female,9902519742,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+488,Siddappa,Fakirappa,Sasolli,2000-09-22,Male,8105610511,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+489,Roopa,Basavaneppa,Ganjihal,1982-09-27,Female,08362244402,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+490,Shobha,Shenkrappa,Hurakadli,1973-09-30,Female,9986801871,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+491,Bhagelaxmi,I,Hurakadli,1975-09-30,Female,9986801871,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+492,Tamanna,Thimanna,Elager,1955-10-05,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+493,Basavaraj,Shivappa,Marabad,1979-09-29,Male,9343809624,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+494,Yallappa,Giriyappa,Undi,1973-09-30,Male,9880654258,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+495,Sugunabai,Shantharam,Revankar,1937-10-09,Female,9481953085,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+496,Shobha,Basavaraj,Nadavinkeri,1990-09-27,Female,9945826913,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+497,Rajesri,Anil,Gudime,1957-10-05,Female,9448109911,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+498,Sandesh,Raguram,Pia,1993-09-26,Male,9448797462,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+499,Yallappa,Rayappa,Marabad,1975-10-01,Male,9886468293,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+500,Dayanand,Virpaxappa,Gabbur,1975-10-01,Male,9448844788,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+501,Sangeeta,A,Katwate,1979-09-30,Female,9741587372,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+502,Bibihalima,Jainulabdin,Avarangabad,1943-10-09,Female,9742843645,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+503,Sarvamangala,S,Hiremath,1943-10-09,Female,9902108835,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+505,Huchappa,S,Vadvadgi,1939-10-10,Male,9739698180,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+506,Bandavva,Shivaputra,Madli,1968-10-03,Female,9620050308,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+507,Sayedmahimod,S,Sayed,1948-10-09,Male,9845924141,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+508,Sharadha,Jaganath,Kotagunshi,1967-10-05,Female,9731035089,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+509,Vaibav,Laxman,Hanmasagar,2000-09-26,Male,9845246416,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+510,Suresh,Keshav,Divate,1969-10-04,Male,9972270371,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+511,Kanchana,Dattatray,Jadav,1968-10-04,Female,9742486490,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+512,Rukamani,B,Jamyal,1968-10-04,Female,8553104922,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+514,Nagaraj,Sanakappa,Balehosur,1968-10-04,Male,9731629413,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+515,Huligemma,Laxman,Banikatti,1975-10-03,Female,9964352055,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+516,Vani,Shenkrayya,Hiremath,1991-09-30,Female,9379067149,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+517,Abdulrehaman,Maktumashab,Kotamucige,1988-09-30,Male,7406935917,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+518,Yallamma,Paruttappa,Hadli,1975-10-05,Female,8050353027,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+519,Mahabubi,Bashahamad,Girinivale,1943-10-13,Female,8722855286,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+520,Dilshad,Rajesab,Chaparaband,1997-09-29,Female,8095477565,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+521,Shivashenkaragouda,C,Hiremath,1941-10-13,Male,8050348500,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+522,Tulashi,Sunil,Harapanahalli,1993-09-30,Female,9448861678,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+523,Sangeeta,Ranjithsing,Tank,1981-10-03,Female,7295426573,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+524,Shivappa,Marasappa,Kurabar,1943-10-14,Male,9945993675,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+525,Laxmi,Raju,Bendigeri,1986-10-03,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+526,Swapna,Raju,Karnam,1989-10-02,Female,7760967379,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+527,Pushapa,M,Nellur,1973-10-06,Female,8867240894,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+528,Heena,Afaraze,Shek,1994-10-01,Female,9731322526,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+529,Faridabee,M,Dakali,1975-10-07,Female,9880827765,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+530,Iranna,Basappa,Kubasad,1968-10-08,Male,9886009442,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+531,Ashok,Somanath,Malji,1962-10-10,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+532,Ramesh,U,Rajapurohith,1988-10-03,Male,9886209609,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+533,Fakiresh,Veerabadharappa,Nekar,1991-10-04,Male,9972491582,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+534,Deepa,Ramappa,Bagal,1981-10-07,Female,9880619390,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+536,Meharunisa,S,Kalburagi,1958-10-13,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+537,Abdulmajeed,P,Nadaf,1975-10-09,Male,9620609361,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+539,Neela,Gurappa,Kundagol,1958-10-14,Female,7795185235,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+540,Shinavva,Pandu,Lamani,1978-10-09,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+541,Prema,Iranna,Begur,1987-10-07,Female,8197724100,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+542,Ramappa,Y,Jogin,1970-10-11,Male,9686981366,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+543,Shantabai,Tanusa,Barad,1953-10-15,Female,9448114639,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+544,Pushpa,Nigappa,Gudaguntti,1985-10-07,Female,9632013982,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+545,Shashikala,Nagappa,Malladadh,1978-10-10,Female,9481287313,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+547,Fakiarappa,Fakirappa,Gabbur,1970-10-12,Male,7795676838,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+548,Neelappa,Hanumappa,Hirekurbar,1953-10-17,Male,8884488908,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+549,Maktumbi,M,Miraji,1983-10-10,Female,9964833783,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+550,Sunitha,Ashok,Bilagi,1966-10-14,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+551,Sharanappa,K,Byali,1955-09-11,Male,9448303115,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+552,Basamma,K,Byali,1933-10-22,Female,9448303115,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+553,Bhagappa,Somappa,Yadagiri,1947-10-19,Male,9972039777,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+554,Ismail,Ahamad,Shek,1972-10-12,Male,9343431122,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+555,Sayad,Molasab,Mulla,1973-10-13,Male,9663181562,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+556,Dathatrya,T,Kulakarni,1951-10-19,Male,9448328860,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+557,Soumya,Sripad,Joshi,1978-10-12,Female,9448385413,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+558,Umesh,Giriyappa,Halli,1971-10-14,Male,9972938931,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+559,Smita,Nagaraj,Baddi,2005-10-06,Female,9620564992,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+560,RameshKumar,Pokarchand,Jain,1967-10-16,Male,9447721870,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+561,Shardhabai,Sheshachal,Kulakarni,1951-10-20,Female,9880360749,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+562,Prabavathi,S,Goudar,1975-10-15,Female,9481565378,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+563,Shakuntala,Channabasyya,Shilavantamat,1951-08-04,Female,9916906727,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+564,Ramesh,Krishna,Hunagund,1974-10-15,Male,9980043018,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+565,Krishnan,Ganesen,Madrash,1964-06-01,Male,8904540256,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+566,Basappa,Veerappa,Maykar,1973-10-16,Male,9164828732,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+567,Govindaswami,K,-,1955-10-22,Male,8892110736,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+568,Kashavva,T,Kambali,1963-10-20,Female,9739354702,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+569,Zuberahamad,Gulambashir,Shek,1963-10-20,Male,8951545506,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+570,Nagaraj,Timanna,Kattimani,1973-10-17,Male,9900235980,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+571,Vijaylaxmi,Nigappa,Matti,1983-10-16,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+572,Ramanna,Sangappa,Karakanavar,1955-10-23,Male,8971058210,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+573,Sushila,S,Kolapure,1978-10-18,Female,9611002092,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+574,Shivanadgouda,B,Venkangoudar,1956-07-21,Male,8867382762,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+575,Meharunisa,Fatesab,Shekasandi,1938-10-28,Female,9342744591,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+576,Meenaz,M,Taragar,1976-10-18,Female,9620534855,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+577,Nusarathbanu,M,"R haydarabadh",1983-10-17,Female,9980207904,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+578,Akkamma,M,Huchanavar,1975-10-20,Female,9731805959,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+579,Shashikala,Muddangoudar,Chikkagoudar,1985-10-17,Female,9538204129,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+580,Ravindra,Sadashivappa,Hulkoti,1961-10-23,Male,9845225656,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+581,Dharamasa,Kashinatsa,Dongadi,1953-10-26,Male,9886360399,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+582,Ashwini,A,Deshepande,1962-10-24,Female,8867242442,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+583,Parathgouda,Chanangouda,Siddangouda,1977-10-20,Male,9986984835,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+584,Marathandappa,M,Mengunddi,1937-10-30,Female,9740667989,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+585,Uma,P,Belamakar,1969-10-16,Female,9986134099,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+586,Yellavva,H,Honakeri,1968-10-22,Female,8431149316,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+587,Padma,Parasuram,Koravar,1989-10-17,Female,9972325408,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+588,Basuraj,Hanumathappa,Hiravalli,2005-10-13,Male,8861110615,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+590,Krishnabai,Ramachandra,Soudatti,1946-10-29,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+592,Lokendrashing,Umashenkar,Choudri,1983-10-20,Male,9632635844,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+593,Padmavati,V,Dharawad,1964-05-01,Female,8496967612,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+594,Sudha,S,Huligoudar,1990-10-18,Female,7204809964,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+595,Mohammadyusef,Vasim,Kanakageri,2010-10-13,Male,9972482601,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+596,Madarsab,Hasanasab,Janginakopa,1981-10-20,Male,7760739863,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+597,Gadigevva,Basappa,Akalad,1985-10-20,Female,9481282208,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+598,Chennayya,Y,P,1955-10-29,Male,9060500060,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+599,Khadarasab,I,Savanoor,1985-10-21,Male,7795130557,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+600,Renavva,Marathandappa,Walikar,1958-10-28,Female,9741542397,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+601,Renuka,Vasappa,Hulannavar,1975-10-25,Female,9620750578,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+603,Thimaraddi,Adiveppa,Kalwad,1937-11-03,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+604,Ramesh,P,Jain,1967-10-27,Male,8050325699,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+605,Kavitha,Yallappa,Karigar,1986-10-22,Female,9902679067,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+606,Manjula,Anjan,Shetti,1991-10-21,Female,9036025333,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+607,Girijamma,Arjun,Patil,1981-10-24,Female,9972065605,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+608,Kallamma,Gullappa,Kopad,1933-11-05,Female,9620009761,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+609,Siddappa,Bharmappa,Kumbar,1974-10-26,Male,9980730675,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+610,Abdulrasid,Fakiraymad,Ballari,1960-10-29,Male,9880118746,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+612,Vasanthlaxmi,Shivappa,Golappanavar,1991-10-22,Female,9686438474,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+613,Parashuram,R,Katigar,1962-10-30,Male,8123684539,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+614,Mahamadrafiq,N,Kathali,1990-10-23,Male,9611264786,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+616,Dastgirsab,M,Shek,1950-11-02,Male,9632008187,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+617,Sripad,Keshav,Gondakar,1953-11-01,Male,9242350350,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+618,Shankragouda,K,Patil,1949-11-03,Male,9980774252,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+619,Fakirgouda,Hanamanthgouda,Policegoudar,1995-10-23,Male,9538810531,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+620,Raju,Timaraddy,Kalavad,1983-10-26,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+621,Jyothi,Shambuling,Kamar,1995-10-23,Female,9740597688,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+622,Kumar,Hanamanth,Navalur,1993-10-23,Male,9742167406,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+623,Rukameni,Ashok,Joshi,1997-10-23,Female,9972473617,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+624,Suresh,Yallappa,Mayanavar,1987-10-26,Male,9591954885,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+625,Mahesh,Chanabasangouda,Patil,1973-10-29,Male,9448120219,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+626,Yallavva,Ramanna,Bavali,1961-11-01,Female,9916171872,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+627,Parameshwarappa,L,Harthi,1961-11-01,Male,9449900302,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+628,Jalshikour,C,Thaq,1969-10-30,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+629,Nagappa,T,Nelavadi,1954-11-03,Male,9449631044,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+630,Shanawaz,Rahiamansha,Makandar,1993-10-24,Male,9845593433,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+631,Masabi,Dasgirsab,Bhagalkoti,1968-10-30,Female,9686043123,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+632,FarajanaBegum,Salim,Rafai,1987-10-26,Female,8762731966,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+633,Zafar,Rajesab,Handalgi,1993-10-25,Male,9686977258,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+634,Thayamma,D,Kudalagi,1989-10-26,Female,9880942295,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+635,Manjunath,Basavaneppa,Guddanavar,1981-10-29,Male,9980728928,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+636,Ganapathi,M,Bilagi,1973-10-31,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+637,Girija,Sangappa,Kamatagi,1964-11-02,Female,9611740760,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+638,Ravindra,Siddangouda,Jaivadagi,1972-10-31,Male,08362224205,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+639,Sharadhadevi,N,Amarshetti,1951-11-06,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+640,Manjunath,M,Sajjan,1982-10-29,Male,9880125966,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+641,Nigamma,Basavantappa,Madiwalar,1968-11-02,Female,9740298236,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+642,Kavitha,M,Teggihalli,1988-10-28,Female,9880699846,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+643,Gouri,Vilas,Badiger,1995-10-27,Female,9535982226,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+644,Radhabai,M,Salonke,1933-11-11,Female,9902390702,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+645,Kalapana,Mohankumar,Perur,1985-10-29,Female,9844098215,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+646,Sharifa,Zafar,Naragund,1969-11-03,Female,9740871993,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+647,Kanchana,Ramesh,Pile,1988-10-29,Female,997295909,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+648,Praveen,Basavaraj,Walmiki,1987-10-30,Male,9620151711,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+649,Yallavva,S,Kambli,1949-11-08,Female,9902519742,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+650,Purnima,Neelakantha,Indragi,1993-10-28,Female,9741846528,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+651,Sujatha,Girish,Iyatti,1991-10-29,Female,9483755210,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+652,Dattathaerayya,V,Veranekar,1968-11-04,Male,8861948728,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+654,Veemalajyoti,Jeevankumar,G,2012-10-24,Female,9494898618,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+655,Akkamahdevi,Gurunath,Vanki,1992-10-29,Female,9980194426,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+656,Khadarasab,Imamasab,Savanur,1985-10-31,Male,7760002570,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+657,"Mamahamd Irafan",Shabudin,Kazi,1963-11-06,Male,8050386465,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+658,Jeyabunisa,M,Kazi,1965-11-05,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+659,Hanumathi,S,Gokak,1975-11-03,Female,8147277323,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+660,Samina,Bisamila,Shek,1992-10-29,Female,9845445114,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+661,Anil,Laxman,Bhadami,1973-11-03,Male,9620352463,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+662,Laxmavva,Pedhana,Tagargunti,1939-11-12,Female,8139909121,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+663,Pushpa,B,Hithalmani,1968-11-04,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+664,Gangappa,Nagappa,Ballari,1965-11-05,Male,9686284478,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+665,Roopa,Basavaneppa,Ganjihal,1982-11-01,Female,"0836 2244402",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+666,Ganapathi,G,Shiralkar,1965-11-05,Male,9448144973,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+667,Shankarappa,F,Hittalamani,1956-11-07,Male,9901382955,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+669,Nishant,A,Bilagi,1995-03-10,Male,7411623735,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+670,Santosh,Basappa,Kurabar,1991-10-31,Male,8496363232,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+672,Ishwar,Ullavappa,Giranavar,1993-10-30,Male,8105463866,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+675,Irappa,Dekappa,Bandakundi,1955-11-09,Male,9448637186,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+677,Uma,Nagappa,Belligatti,1968-11-05,Female,9663012158,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+679,Hallavva,Shivappa,Kalli,2003-10-29,Female,9902519423,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+680,Manjunath,B,Badiger,1987-11-02,Male,9845260238,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+681,Dilashad,Rehamanakhan,Pathan,1961-11-08,Female,9743469288,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+682,Mahadevi,Irappa,Bhagodi,1996-10-30,Female,8495945661,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+683,Shrikanth,Shivappa,Hebbli,1974-11-05,Male,9980296195,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+684,Akash,Anand,Mulagund,2012-10-26,Male,9686589657,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+685,Shekunthala,Laxman,Bandanavar,1958-11-09,Female,9448354783,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+686,Shantawwa,N,Mesi,1958-11-09,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+687,Thanuja,Rajeappa,H,1995-11-01,Female,9008621917,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+688,Suresh,Ramappa,Arageri,1981-11-04,Male,9742838939,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+689,Katumbi,Abdulrajak,Bijapur,1963-11-09,Female,9972753364,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+690,Sangavva,Mahadevappa,Mallari,1958-11-10,Female,9902519742,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+691,Manjunath,Irappa,Devaramani,1991-11-02,Male,889226310,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+692,Jayamma,Yellappa,Pise,1943-11-16,Female,9945805808,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+693,Niramala,Christopher,M,1973-11-08,Female,9620413147,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+694,Gurusiddamma,Yugappa,Guddadamani,1973-11-08,Female,9742715867,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+695,Mahabobee,R,Nadaf,1975-11-09,Female,7760782876,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+696,Rohith,Davalappa,Shetawal,1999-11-03,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+697,Chandrakala,Krishana,Godekar,1998-11-03,Female,9632098858,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+698,Hazarathali,Mirasab,Banalli,1958-11-13,Male,9535159032,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+699,Basavaraj,C,Poojari,1963-11-12,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+700,Mailarappa,Siddappa,Hadapad,1966-11-12,Male,8884702868,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+701,Nagappa,Mallappa,Amarshetti,1933-11-20,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+702,Ganesh,Pundalik,Navee,2011-11-01,Female,9880369251,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+703,Deepak,Husenappa,Jadav,1984-11-07,Male,9900224113,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+704,Rajeshwari,R,Koravar,1978-11-10,Female,8147740916,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+705,Savitari,Sidalingappa,Hosur,1978-11-10,Female,9739133683,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+706,Niyaz,Jakir,Sayadali,2012-11-01,Male,8050367771,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+707,Anjuma,D,Betageri,1987-11-08,Female,9448565073,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+708,Madiyappa,Kallappa,Kambale,1966-11-14,Male,9731050680,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+709,Saramma,Maikal,D,1942-11-20,Female,9663070304,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+710,Yallappa,Shenkarappa,Jadar,1991-11-08,Male,8546965516,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+711,Arathi,Sathynarayanmurthy,Malagi,1969-11-13,Female,9986842052,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+712,Lobsang,-,Wamgchuk,1990-11-09,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+713,Geetha,Prakash,Naik,1971-11-14,Female,9632264606,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+715,Govindappa,A,Pujar,1940-11-22,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+716,Kotresh,Rudrappa,Kanchageri,1994-11-09,Male,8197570794,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+717,Umarajabhanu,R,Bhepari,1979-11-13,Female,9902798260,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+718,Roopa,Ravindra,Bhandavarkar,1967-11-16,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+719,Hanamanth,Narayan,Jadav,1976-11-14,Male,8105798173,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+720,Shweta,Noha,Jathan,2001-11-08,Female,8892479918,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+721,Nagarjun,Ramesh,Ballari,1995-11-10,Male,7411103096,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+722,Shivappa,Hanamappa,Ugalat,1953-11-21,Male,9886785746,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+723,Manjunath,Chandrashekar,Solanki,1966-11-18,Male,9845811071,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+725,Shekappa,S,Halabavi,1948-11-22,Male,9986878998,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+726,Yallamma,S,Kattimani,1966-11-18,Female,9886706384,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+727,Suma,P,Naik,1954-11-21,Female,8095009726,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+728,Arundathi,Nagesh,Daivdnya,1943-11-24,Female,9449188476,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+729,Muskan,Malikjan,Bhagawan,2001-11-09,Female,9902670353,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+730,Saroja,B,Gudagudi,1958-11-20,Female,9972605142,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+731,Saroja,Yallappa,Handral,1948-11-22,Female,9164954441,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+732,Fathima,A,Manjapuri,1987-11-13,Female,9964033077,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+733,Akhila,A,Bilagi,1995-11-11,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+736,Yamanappa,Basappa,Ravaji,1953-11-22,Male,99454990261,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+737,Mohan,Ragunathsa,Dhongadi,1975-11-17,Male,9902257050,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+738,Smita,V,Lalaka,1964-11-19,Female,9242915561,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+739,Shivappa,Fakirappa,Upanahal,1939-11-26,Male,8722586427,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+740,Laxmavva,Mallappa,Thiralapur,1953-11-22,Female,9731537197,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+741,Savitha,Gurashantappa,Gouri,1992-11-12,Female,9880620845,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+742,Dayanad,Gangappa,Honakeri,1992-11-12,Male,8147711131,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+743,Riyaz,Sulthansab,Pathan,1978-11-16,Male,9886309855,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+744,Bharathi,Mallikarjun,Badiger,1986-11-14,Female,7259276485,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+745,Geetha,Mahadevappa,Ingalalli,1974-11-17,Female,9986840756,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+746,Shivakumar,Siddappa,Badni,2000-11-10,Male,9611316169,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+747,Anasavva,Narayan,Amboji,1968-11-19,Female,9901172206,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+748,Roopa,N,Dodamani,1981-11-16,Female,9945081105,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+749,Channakeshav,S,Chikkamath,1983-11-16,Male,9164092447,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+750,Nadeem,Safiq,B,1989-11-14,Male,8881614322,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+751,Rajesri,S,Renake,1968-11-19,Female,9845616244,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+752,Banubi,Noorahamad,Dharawad,1973-11-18,Female,8861110265,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+753,Nilappa,M,Barki,1977-11-17,Male,9972051266,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+754,Mahibub,Husensab,Aminabavi,1983-11-16,Male,9379214292,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+755,Guranath,B,Karigar,1981-11-17,Male,9902519742,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+756,Paravatevva,Basavaneppa,Hosur,1953-11-24,Female,9141304591,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+757,Shivu,Ramesh,Ambiger,1996-11-14,Male,8970009936,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+758,Ganesh,Govindappa,Billana,1972-11-20,Male,9632511309,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+759,Paramma,Nagappa,Kapathanavar,1948-11-27,Female,7353109637,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+760,Prakash,Laxman,Kadam,1977-11-20,Male,9901130098,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+761,Renuka,Mallappa,Vittannavar,1970-11-22,Female,9620910481,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+762,Shankrappa,B,Thiralapur,1948-11-27,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+763,Kavana,Shanbuling,Lakundi,2010-11-12,Female,7353709802,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+764,Baramaraddi,Shivappa,Pujar,1965-11-23,Male,9449177046,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+765,Parasuram,M,Mangalaguda,1971-11-23,Male,9686224295,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+766,Gangavva,Basappa,Dodamani,1948-11-28,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+767,Sushila,S,Perur,1968-11-23,Female,9880949052,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+768,Babu,D,Bilana,1965-11-25,Male,7259507935,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+769,Nigangouada,Shivanagouda,Naganagoudar,1958-11-27,Male,9164385899,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+770,Kamalavva,Karigouda,Patil,1988-11-19,Female,9980712741,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+771,Mariyamma,Azaraiah,Siginam,1948-11-29,Female,9035048631,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+772,Madan,Bhadasaheb,Bharthi,1975-11-23,Male,9591022319,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+773,Sneha,S,Ambiger,1995-11-18,Female,9945860280,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+774,Savitri,Basavaraj,Murakal,1973-11-24,Female,9945865696,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+775,Lalita,Basavaneppa,Ganjigatti,1989-11-20,Female,998090821,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+776,Sayedmajid,Noorsab,Arshikeri,1955-11-29,Male,7795358254,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+777,Sukumar,Bennison,Yama,1970-11-25,Male,9611248019,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+778,Ramesh,B,Kedari,1967-11-26,Male,9538631712,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+779,Netravathi,Maruthi,Yarimani,1990-11-21,Female,97438020698,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+780,Neelappa,Dyamappa,Madar,1943-12-03,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+781,Chandrakant,Rajaram,Upprikar,1963-11-28,Male,9241034807,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+782,Nasarin,"Mamahad Saleem",Shirahatti,1982-11-24,Female,8123075552,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+783,Sulochana,B,Mahendrakar,1943-12-04,Female,9035274128,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+784,Mallappa,Rangappa,Sullikeri,1965-11-28,Male,7259708383,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+785,Abdulsab,Rajesab,Bhadari,1954-12-02,Male,9741255390,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+788,Ajay,Govindrao,Deshpande,1958-12-01,Male,9986770977,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+789,Mallesh,Mallappa,Kepannavar,1968-11-29,Male,8747033986,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+790,Fakiravva,Hanumappa,Kolageri,1948-12-04,Female,8747814196,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+791,Ramachandrao,Hanumathappa,Salonki,1943-12-06,Male,9480153648,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+792,Lalitha,Nagappa,Bhommanavar,1959-12-02,Female,9980541792,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+794,MALLIKAJAN,ABDULGAFAR,SHEK,1981-11-26,Male,9060984436,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+795,Basamma,Annadappa,Topalagatti,1975-11-28,Female,9620959090,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+796,Kasimasab,Rasul,Bakitagar,1975-11-29,Male,8884597655,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+798,Chandrashekar,Mallappa,Rajanahal,1975-11-29,Male,8105583453,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+799,Gajanan,Ashok,Khode,1981-11-27,Male,9986318292,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+800,Fakiravva,Gadigeppa,Benkal,1933-12-10,Female,9972950169,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+801,Irannagouda,Chandragouda,Haveri,1989-11-26,Female,9538268799,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+802,Shitavva,C,Rayannagoudar,1965-12-02,Female,9901462007,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+803,RENUKA,HANUMATH,RAVAJJI,1989-11-26,Female,9741539936,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+804,DRYAKASHANI,N,MATALADINI,1950-12-06,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+805,AISHWARYA,SHENKARAPPA,KIRESUR,2003-11-23,Female,7829094637,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+806,Satya,V,Koudar,1973-11-30,Male,9448798465,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+807,Devendarppa,Hanumath,Wasattar,1938-12-09,Male,9945453805,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+808,Sangeetha,D,Marakal,1994-11-25,Female,9141157168,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+809,Vijayalaxmi,Shenkarappa,Pattar,1973-11-30,Female,9611521591,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+810,Mariyappa,S,Doddamani,1937-12-09,Male,789448027,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+811,Mallappa,D,Maligawad,1971-12-01,Male,9945842846,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+812,"MD Sakir",M,Karanul,1996-11-25,Male,9945761740,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+813,Paul,B,Tatpati,1940-12-09,Male,8105611092,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+814,Ikabal,J,Avarngabad,1972-12-02,Male,7411153994,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+815,Maqtumsab,Husensab,Hashimanavar,1962-12-05,Male,9611410183,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+816,Meharunisa,Sadeek,Pattan,1985-11-29,Female,9663183310,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+817,Devappa,Nigappa,Echangi,1976-12-01,Male,7760431934,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+818,MUKTHA,CHANAPPA,KINNAL,1995-11-27,Female,7204645037,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+819,Amidahabanu,M,Tadakod,1968-12-03,Female,9035844823,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+820,Imran,M,Mulla,1995-11-27,Male,9945895196,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+821,Govind,Arjun,Haransikari,1988-12-01,Male,8861797231,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+822,Shoba,Krishna,Haransikari,1987-12-02,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+823,Iranna,Devindrappa,Sholaragoppa,1970-12-06,Male,9844211515,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+824,Khutiza,Davalsab,Nadaf,1961-12-09,Female,8867343670,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+825,Adarshe,R,Bulable,1991-12-02,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+826,Praveenkumar,M,B,1982-12-04,Male,9886995472,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+827,Dayanad,V,Lamani,1978-12-05,Male,9901623849,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+828,Sandya,S,Katti,1975-12-06,Female,9945200244,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+829,Dyamanna,P,Wasattar,1996-11-30,Male,8971930368,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+830,Sayedabasha,B,Naganur,1936-12-15,Male,9481737239,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+831,Vijaykumar,Munaswami,-,1962-12-10,Male,9480555523,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+832,Indarjith,G,Gayai,1976-12-06,Female,8050350282,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+833,Manjunath,D,Kumbar,1981-12-05,Male,9901462083,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+834,Neelamma,S,Appuji,1969-12-09,Female,9538076828,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+835,Chandramma,Chandrappa,Haranshikari,1994-12-04,Female,9686180145,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+836,Murthajbee,B,Nadaf,1969-12-10,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+837,Shankar,Chudamani,Amminabavi,1977-12-08,Male,988111988,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+838,Manjunath,Ramappa,Buddi,1986-12-06,Male,9620610649,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+839,Paravatevva,Neelakantappa,Noolvi,1955-12-15,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+840,Renuka,Ashok,Jadav,1991-12-06,Female,9880190952,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+841,Ratna,Nijagunappa,Kalage,1971-12-11,Female,9845891994,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+842,"Mahamad Rafiq",K,Mallur,1971-12-11,Male,9620444048,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+843,Sadiq,Mohamadthahir,Shirahatti,1989-12-06,Male,7204907757,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+844,Saroja,Ramakanth,Bekal,1973-12-12,Female,8105254794,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+845,Mantesh,C,Hosamani,1984-12-09,Male,8095898156,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+846,Kiran,Ramakrishna,Kalburgi,1967-12-14,Male,9342499798,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+847,Paravathi,Salavam,S,1974-12-13,Female,9481042554,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+848,Prema,Ramappa,Gani,1958-12-17,Female,9035924882,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+849,Veeramma,Gurashntayya,Hiremath,1931-12-24,Female,9902675922,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+850,Renuka,Dyamappa,Udakeri,1968-12-14,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+851,Kallappa,Basappa,Pujar,1953-12-18,Male,9945593243,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+852,Mamatha,Arjun,Mallapur,1971-12-14,Female,9901135612,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+853,Manjula,Subramanya,S,1986-12-10,Female,7411828106,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+854,Gursiddappa,Mudakappa,Hanchinal,1957-12-18,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+855,Davalsab,M,Kanavi,1948-12-20,Male,8747869305,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+856,Kusama,Rajeshekar,Garalpeth,1943-12-22,Female,9945143062,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+857,Dware,Muttu,Madrashi,1981-12-12,Male,9060362931,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+858,Rayappa,Dyamanna,Harijan,1978-12-13,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+859,Suresh,L,-,1986-12-12,Male,9480090070,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+860,Niramala,Mallappa,Siddapur,1980-12-13,Female,9740874033,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+861,Mrutunjai,Hemanna,Bhadami,1980-12-13,Male,9880765150,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+862,Vijayagouda,Basangouda,Patil,1992-12-11,Male,9738806066,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+863,Siddappa,Irapp,Thallalli,1976-12-16,Male,9481014236,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+864,Basavaraj,Irappa,Kongi,1961-12-20,Male,9343108063,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+865,Vimal,B,Kyarakatti,1968-12-18,Female,724672740,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+866,Ramalingappa,M,Totad,1959-12-21,Male,9480133391,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+867,Mrutunjeyy,S,Panchangamath,1937-12-28,Male,9731593453,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+868,Shekunthala,Shivarudarappa,Shilape,1978-12-19,Female,7411435624,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+869,Ravi,S,Beladdi,1971-12-21,Male,9060836046,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+870,Shenkar,Kumarappa,kongi,1934-12-30,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+871,Nizamuddin,N,Bijapur,1988-12-16,Male,9739779480,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+872,Hema,Prakash,Banadi,1975-12-20,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+873,Mahadevappa,Yallappa,Kalammanavar,1970-12-21,Male,8553318352,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+874,Shantavva,Basappa,Golar,1978-12-19,Female,9008071992,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+875,Jagadish,Yallappa,Gundagava,1990-12-17,Male,9844445099,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+876,Jayalani,Allabakashe,Shek,1998-12-15,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+877,Nikita,Mallappa,Perur,1995-12-16,Female,9945842934,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+878,Mehabubasab,A,Bangi,1914-01-05,Female,9844483000,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+879,Santosh,Laxmanrao,Ekbote,1973-12-21,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+880,AMINSAB,MAHAMADSAB,AGASAR,1968-12-22,Male,9740821472,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+881,SHARADHA,M,ATHANI,1961-12-24,Female,9844048125,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+882,Yallamma,S,Kalal,1994-12-17,Male,8722233087,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+883,Bibizheera,A,Mulla,1958-12-26,Female,9901214530,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+884,Prabhu,Shekappa,Patanshetti,1957-12-26,Male,9972267367,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+885,Raju,B,Ganjihall,1985-12-20,Male,7411422168,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+886,Nigamma,F,Patil,1968-12-24,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+887,Deepa,C,Kondikopa,1990-12-19,Female,9449861313,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+888,Fakirappa,H,Halagatti,1973-12-23,Male,9591395127,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+889,Premalatha,S,Koshti,1956-12-27,Female,9880367649,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+890,RAJESHWERI,V,AYNGOUDAR,1993-12-18,Female,9739724193,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+891,Rajeshwri,M,Ballari,1993-12-18,Female,9538195019,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+892,SUDHIR,NARAYAN,DAFEDAR,1970-12-24,Male,9845776294,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+893,Basuvaraj,M,Boyar,1968-12-25,Male,8152926331,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+894,Rayinbee,Kasimasab,Savanur,1955-12-29,Female,9902592187,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+895,Savitri,Pundlik,Kasunde,1953-12-30,Female,9482660402,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+896,Ramesh,Yamanappa,Patil,1992-12-20,Male,9902519591,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+897,Imamsab,Abdulsab,Ullagaddi,1941-01-02,Male,7259888193,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+898,Rudrappa,Mariyappa,Kampli,1963-12-28,Male,7406411621,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+899,Laxmibai,K,Kulakarni,1948-12-31,Female,9945663274,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+900,Jyothi,Andanayya,Matad,2002-12-18,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+901,Yashavant,Basavarajappa,B,2000-12-18,Male,7829381171,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+902,Vinay,Jinnappa,Hireholi,1993-12-21,Male,9901125901,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+903,Laxmibai,Fakirappa,Bugadi,1951-01-01,Female,9900677510,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+904,Riyan,Nasirahamad,Rojevale,2012-12-17,Male,8123874388,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+905,Suman,Vasudev,Kalagi,1942-01-04,Female,9448544030,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+906,Sattarkhan,Hasankhan,Pathan,1947-01-03,Male,9035048375,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+907,Mohan,Yallappa,Yaraguppi,1999-12-22,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+908,Basavaraj,Panduranga,Vastar,1988-12-24,Male,9945956524,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+909,Imambi,Ibramsab,Nalaband,1956-01-02,Female,7259159871,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+910,Ratna,Honnappa,Dodamani,1995-12-23,Female,8496997149,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+911,Sudeep,Naresh,Bhadurshing,2008-12-19,Male,7411481690,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+912,Rajesh,Anand,Madrashi,1972-12-29,Male,9663348036,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+913,Seetamma,Ramu,Bagalkoti,1968-12-30,Female,8139904382,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+914,Annapurana,Basavaraj,Buyar,1978-12-28,Female,8152926331,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+915,Ladbi,Firsab,Nadaf,1949-01-05,Female,9448641519,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+916,Dyamavva,Basappa,Meti,1966-01-01,Female,8748953120,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+917,Shankragouda,Mallangouda,Thimmanagodar,1962-01-02,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+918,Harish,Rangayya,Thiya,1971-12-31,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+919,Basavaraj,Guralingappa,Marewad,1954-01-05,Male,8722234815,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+920,Bhalavanth,Premaji,Poruhith,1986-12-28,Male,8105442008,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+921,Sujanamma,D,N,1952-01-06,Female,8050303216,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+922,Siddappa,H,Kodaddi,1959-01-04,Male,9620813479,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+923,Sana,A,Pantoji,2001-12-24,Female,9901434371,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+924,Manjunath,R,A,1975-01-01,Male,8277422064,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+925,Fakirappa,Ramanna,Talawar,1964-01-04,Male,9844193617,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+926,Prasanna,I,Shivashimpi,1977-12-31,Male,9481008859,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+927,Lalitha,Ramesh,Krishnapur,1976-01-01,Female,8147334613,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+929,Laxman,Dyamappa,Savaddi,2000-12-26,Male,8197002362,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+930,Ashok,Venkatreddy,Hosamani,1956-01-07,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+931,Mahadevappa,Yallappa,Halagatti,1979-01-02,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+932,Pushpa,Hemaraddi,Iraddi,1984-01-01,Female,9008863277,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+933,Reethu,G,Guddihal,1999-12-29,Female,9980878860,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+934,Kanchana,Ashok,Basava,1976-01-04,Female,9945092355,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+935,Gourish,K,Bilagi,1979-01-03,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+936,Deepa,Shridhar,Savanur,1981-01-02,Female,9844145621,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+937,Iranna,Nigappa,Doddanami,1949-01-10,Male,9844337177,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+938,Somavva,Bhimappa,Rajapur,1993-12-30,Female,8722370524,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+939,Deepak,Nabhi,Darawad,1991-12-31,Male,7795065477,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+940,Mahamadzuniyal,M,Savadhagar,2010-12-26,Male,9980962910,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+941,Manjunath,S,Dathawad,1990-01-01,Male,9972171634,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+942,Shekar,Y,Abajji,1973-01-05,Male,8105299670,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+943,Laxmibai,Govinda,Mahuli,1929-01-16,Female,9448126698,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+944,Shenkargouda,B,Kariyappagoudar,2008-12-27,Male,9972952742,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+945,Vijaykumar,Baleshwar,Ram,1988-01-03,Male,9538394035,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+946,Bhimavva,Suresh,Lingashetti,1982-01-04,Female,9243961598,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+947,Ratanavva,Nigappa,Halamani,1989-01-02,Female,9611096027,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+948,Deepa,Andani,Maddanimatta,1989-01-02,Female,9036277641,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+949,Meerambee,Kazesab,Kamadoli,1934-01-16,Female,7847979888,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+950,Siddappa,Anandapp,Muddol,1962-01-10,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+951,Indumathi,Satish,Ballari,2000-12-31,Female,9731115312,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+952,Tanuja,Ashokumar,p,1979-01-06,Female,2287650,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+953,Hanumatharay,F,Dannur,1949-01-13,Male,9741434763,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+954,Shenkaravva,Basappa,Badiger,1983-01-05,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+955,Shantamma,J,Mabbu,1969-01-08,Female,9448807158,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+956,Shenkrappa,Adiveppa,Sangati,1965-01-10,Male,9902094388,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+957,Gurappa,Malingappa,Somanakatti,1954-01-14,Male,9742998580,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+958,Fakira,Basavaraj,Gadag,1994-01-04,Male,9916918169,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+959,Shetevva,Hanamanthappa,Kalvaddar,1949-01-15,Female,9845603367,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+960,Shanamukagouda,R,Patil,1941-01-17,Male,8553581678,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+961,Prasad,Lazar,Dammu,1971-01-10,Male,9741792772,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+962,Basavva,S,Chikmath,1966-01-12,Female,9164092447,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+963,Shobha,Gopi,Jadav,1988-01-07,Female,7760212154,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+964,Neelamma,Surendrappa,Kubasad,1936-01-21,Female,9880453915,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+966,Duragamma,Duragappa,Gollar,1979-01-10,Female,9740909684,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+967,Jubedha,M,Nalaband,1956-01-16,Female,8123606563,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+968,Renuka,Anandappa,Mudol,1976-01-12,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+969,Sathyarao,N,Devid,1972-01-13,Male,8951208597,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+970,Pramod,Somappa,Kaparshetti,1998-01-06,Male,9945061434,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+971,Ashok,Yallappa,Balaganur,1976-01-12,Male,9591198176,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+972,Basavaraj,Mallappa,Mudol,1961-01-16,Male,9731094319,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+973,Suresh,Ramappa,Inapur,1974-01-13,Male,9916297390,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+974,Chandrkanth,K,Bhadranavar,1952-01-19,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+975,Meenakshi,C,Bhadrannavar,1960-01-17,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+976,Rajashekarya,R,Hiremath,1967-01-15,Male,7411759264,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+977,Shahid,Anwarali,Salmani,1992-01-09,Male,8088197073,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+978,Ramprakash,Malleshappa,Meshi,1997-01-08,Male,8050486364,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+979,Sharathchandra,L,Koshti,1949-01-20,Male,9880367649,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+980,Pandappa,Ramappa,Walamiki,1964-01-18,Male,8880028864,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+982,Isamyalsab,Husensab,Aynapuri,1927-01-29,Male,7795698658,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+983,Paravatevva,Bhimappa,Uppar,1947-01-24,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+984,Venkangouda,T,Araban,1949-01-23,Male,9739202863,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+985,Tahseen,"Sayad imaran",Madani,1990-01-13,Female,9741110786,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+986,Kamalabai,J,Bajantri,1949-01-23,Female,7899152402,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+987,Gangadhar,O,Igdur,1974-01-18,Male,9741331483,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+988,Farahana,S,Madani,1982-01-16,Female,9740307522,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+989,Mustaqahemad,Hajarathsab,Shaikh,1983-01-16,Male,9342787300,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+990,Sudhir,B,B,1967-01-20,Male,9448416085,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+991,Amadasab,P,Shekasandi,1954-01-23,Male,9845695460,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+992,MUBINA,H,PATTAN,1994-01-14,Female,8453539611,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+993,Pheku,_,Shing,1919-02-02,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+994,Vidya,Sunil,Habib,1979-01-18,Female,9620910371,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+995,Shripadgouda,G,Patil,1979-01-18,Male,9980434526,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+996,Renuka,Maleshappa,Roudihal,1999-01-13,Female,7760714817,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+998,Sharada,Mallapp,Bilagi,1950-01-26,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+999,Lalitha,Krishna,Bilagi,1955-01-25,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1000,Chandrshekar,M,Byalli,1983-01-18,Male,9845516159,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1001,Anita,P,M,1984-01-19,Female,9742443988,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1002,Tarabai,Appurao,Udppi,1941-01-29,Female,9880062361,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1003,Malabai,M,Ilakal,1959-01-25,Female,9972953050,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1004,Duragappa,Yallappa,Bhorath,1989-01-17,Male,9945332151,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1005,Rabiya,H,Madani,1964-01-24,Female,9980946429,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1006,Malikarajun,K,Gachinamath,1986-01-18,Male,7353133143,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1007,Neelakantapp,Veerapaksh,Dandin,1949-01-28,Male,9164931437,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1008,Reshama,Rajesab,Naikar,1986-01-19,Female,8497826732,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1009,Ashok,Shivarayappa,Shilavanth,1962-01-25,Male,9242350568,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1010,Paravva,Mallappa,Pujar,1934-02-02,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1011,Dadabai,Nanesab,Misrikoti,1947-01-30,Male,9845282023,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1012,Khalidaktar,Kashim,Mulla,1974-01-24,Male,9060072960,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1013,Laxmi,Suresh,Mudenur,1982-01-22,Female,9945626879,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1014,Yallaraddi,Hanamaraddi,Kencharaddi,1954-01-30,Male,9900734252,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1015,Halamma,Manjappa,Kotramma,1969-01-26,Female,9611125637,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1016,Gangappa,Bimappa,Mullur,1966-01-27,Male,9916230707,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1017,Gangamma,P,Yaligar,1928-02-07,Female,8971194527,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1018,Brunda,Kushappa,Meti,2002-01-19,Female,8197773931,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1019,Shahin,Abdulmunaf,Kaladgi,1996-01-21,Female,9620473249,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1020,Mahalaxmi,Manjunath,M,1994-01-21,Female,9343771222,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1021,Vijayakumar,Sannu,Mandavi,1988-01-23,Male,9845403199,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1022,Vijayamma,Chandru,Miriyal,1974-01-26,Female,9448807158,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1023,Ramanaik,S,S,1961-01-30,Male,9343765572,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1024,Raju,Ningappa,Nagarahalli,1989-01-23,Male,9060860028,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1025,"Muhamad  umar","Muhamada akbar",Patela,1986-01-24,Male,9986929851,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1026,Mahabubushab,Rayashab,Mogal,1950-02-02,Male,9901551883,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1027,Kashevva,N,Yaligar,1961-01-30,Female,8971194527,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1028,Ambubai,Pandurangasa,Pawar,1934-02-06,Female,9036060116,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1029,Chanamma,N,Ravajji,1989-01-24,Female,9164346397,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1030,Rukmeni,Shankarappa,Baratakeri,1959-02-01,Female,9845119155,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1031,Rangappa,Basappa,Tegginamani,1960-02-01,Male,8095934441,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1032,Rosani,Sham,Jadav,1996-01-23,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1033,Noorazanbegam,Nazeeramahad,Patwegar,1971-01-29,Female,9900853171,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1034,Basalingappa,Basappa,Idli,1979-01-27,Male,9448823368,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1035,Rukksana,Kashim,Mulla,1991-01-24,Female,9845520707,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1036,Venkatesh,Ramachandra,Kulkarni,1961-01-31,Male,8762662293,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1037,Mahadev,Gondiba,Lokande,1938-02-07,Male,9632463246,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1038,Manjula,S,Badiger,1993-01-25,Female,9900639128,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1039,Yallappa,Mudakappa,Talwar,1959-02-03,Male,8951792704,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1040,Shivalingappa,S,Poojar,1957-02-03,Male,9844064913,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1041,Basavva,M,Ajjannavar,1978-01-29,Female,9743822774,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1042,Manjunath,Basavaneppa,Metti,1992-01-26,Male,8861465137,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1043,Kavita,S,Badiger,1997-01-24,Female,9343801544,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1044,Ramangouda,S,Adappagoudar,1944-02-07,Male,9731335999,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1045,Kantevva,Shenkarappa,Kumbar,1944-02-08,Female,9901383135,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1046,Lingangouda,M,Hatti,1949-02-06,Male,8105463400,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1047,MohamadHaroon,Abdulsathar,Sathar,1978-01-30,Male,7411790299,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1048,Shekila,Nooramad,Makhandhar,1978-01-30,Female,7411716102,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1049,Salima,Allbakshe,Kamdolli,1974-01-31,Female,9964794613,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1050,Prema,Basappa,Kabar,1997-01-25,Female,8151884362,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1051,Indumati,S,Bandiwadekar,1930-02-08,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1052,Zaheer,Hazaresab,Byadageri,1979-01-30,Male,9611266538,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1053,Geetha,Ganapasa,Bhrauv,1969-02-02,Male,9740829981,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1054,Guramma,Gangadar,Helavar,1971-02-02,Female,9902672018,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1055,Shanthavva,Gangappa,Jadar,1954-02-06,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1056,Jsmin,Sham,Theetla,2004-01-25,Female,7760432603,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1057,AJITH,P,BIJAWAD,1998-01-26,Male,9902662525,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1058,Zahiada,M,Hawaldhar,1964-02-05,Female,8150957861,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1059,Fakiramma,Ningappa,Nalawaddi,1954-02-07,Female,9483461038,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1060,Rathanna,L,Gulalakeri,1975-02-02,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1061,Raosaheb,K,Panadare,1953-02-07,Male,8105767326,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1062,Laxman,K,Timmasandaram,1954-02-07,Male,9901923413,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1063,Neelamma,I,Karalannavar,1944-02-10,Female,9880901654,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1064,Rajashree,Gurushiddappa,Eklaspur,1966-02-04,Female,9900140709,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1065,Nazeeramad,Rajaksab,Nadaf,1982-01-31,Male,9591750198,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1066,Manjunath,N,Gondi,1980-02-01,Male,9480416880,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1067,Sarojini,S,Shettar,1955-02-08,Female,9483936591,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1068,Chanbasappa,R,Anigeri,1952-02-09,Male,9880066861,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1070,Venkatalaxmi,V,Yadaki,1948-02-10,Female,9900529299,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1071,Yallamma,Arjunsa,Bandage,1972-02-04,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1072,SOMASHEKAR,M,KATHANI,1962-02-06,Male,9449357078,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1073,TANAVEERKHAN,B,PATTAN,1991-01-30,Male,9739467865,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1074,Israel,Philip,P,1984-02-01,Male,9740019895,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1075,Ravi,M,Gare,1982-02-01,Male,9980600892,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1076,Mahadevappa,V,Danigond,1972-02-04,Male,8747935188,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1077,Sambhaji,Fakirappa,Jadav,1944-02-11,Male,9060495465,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1078,Manjunath,Parasuram,Ganachari,1981-02-02,Male,9901823782,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1079,Vekatsubayya,C,-,1947-02-11,Male,9742407703,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1080,Yallamma,S,Bajantri,1942-02-12,Female,9739066439,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1081,Hema,A,Hosamani,1962-02-07,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1082,Yallappa,Yamanappa,Hulakund,1970-02-05,Male,9845413367,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1086,Kalsang,Sonam,S,1980-02-04,Male,9902355817,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1087,Parveenakthar,Abdulkhadir,Azad,1944-02-13,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1088,Sharadha,Maruti,Karjgi,1958-02-10,Female,9739574855,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1089,Maruthi,Bimappa,Karjgi,1954-02-11,Male,9739574855,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1090,Hanamanthappa,Timanna,Dundshi,1952-02-13,Male,9164166639,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1091,Nagamma,Mallappa,Bajantri,1956-02-12,Female,9008636031,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1092,Mallamma,Parasaram,Mudebihal,1976-02-07,Female,9535701797,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1093,Ratnavva,Devendra,Pujar,1984-02-05,Female,9916119973,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1094,Nagamma,Yallappa,Kalal,1953-02-12,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1095,Shanthi,D,-,1961-02-10,Female,9036066951,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1096,Krishanaraddi,T,Kalawad,1967-02-10,Male,9019937719,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1097,Shilpa,Margeppa,Dodamani,1998-02-02,Female,8050781061,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1098,Ravindra,S,Angadi,1984-02-06,Male,9986742676,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1099,Mashabi,Allavali,Jahatger,1992-02-04,Female,9738813260,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1100,Mallikarjun,Anjanayya,Bijawad,1974-02-09,Male,9845387334,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1101,Ragavendra,Nagesh,Gudigar,1981-02-07,Male,8747914221,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1102,Vijayalaxmi,S,Upasi,1967-12-26,Female,9449809357,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1103,Shivaputrappa,Fakirappa,Shivabasappanavar,1968-02-11,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1104,Basavanevva,Fakirappa,Hosur,1944-02-18,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1105,Nigamma,Siddappa,Helavar,1946-02-17,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1106,Ragavendra,P,Malagimani,1988-02-07,Male,9663590501,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1107,Gopal,Tamanna,Chavan,1993-02-05,Male,9900853112,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1108,Shankar,Maruthi,Gadeppa,1974-02-11,Male,9731817559,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1109,Kashevva,Laxman,Mandal,1954-02-17,Female,8105398137,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1110,Ragavendar,Baburao,Sulakhe,1981-02-11,Male,9845619685,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1111,Suman,Siddarod,Rathan,1984-02-11,Female,9620720148,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1112,Ragavendra,H,C,1983-02-11,Male,9900038922,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1113,Shelaja,K,Itgi,1954-02-19,Female,9964848377,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1114,Kalappa,Shivappa,Pyati,1942-02-22,Male,9740235799,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1115,Dechen,Nyichang,-,1975-02-14,Female,8971240373,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1116,Sarangpane,V,Pilley,1922-02-28,Male,7259964140,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1117,Makabul,Husensab,Neelagar,1964-02-19,Male,9342901120,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1118,Nethra,Mahadev,Halagatti,1992-02-12,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1120,Mariyadas,Peddanna,Dhara,1980-02-15,Male,9611250429,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1121,Chandrakala,Irappa,Upper,1966-02-18,Female,9538768975,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1122,Santosh,B,Jaratarghar,1986-02-13,Male,9844828282,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1123,Mahamdgous,D,Nadaf,1982-02-14,Male,9448924772,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1124,Ashok,Shenkar,Pawase,1966-02-20,Male,9980436332,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1125,Basavaraj,Rudrappa,Rolli,1962-02-21,Male,9535733507,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1126,Anavarabash,"S mahomadashab",Shek,1959-02-22,Male,9886712578,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1127,Shahanaz,K,Shiralli,1961-02-21,Female,9448362772,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1128,Geeta,J,Shalgar,1961-02-21,Female,9620647930,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1129,K,M,Shiralli,1955-02-23,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1130,Pavitra,-,Harajan,1969-02-19,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1131,Vinayak,P,Koppar,1988-02-15,Male,9008961855,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1132,Manjunath,Shivappa,Shabanavar,1999-02-12,Male,9916574264,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1133,Mallamma,Mallappa,Sherewad,1909-03-07,Female,9900761844,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1134,Sharifsab,Kajahusen,Hanamapur,1979-02-19,Male,9902664861,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1135,Shivanand,R,Helavar,1986-02-17,Male,9902672018,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1136,Davalsab,Imamsab,Makthapur,1962-02-23,Male,9964825915,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1137,Venkatappa,Ramappa,Rasaler,1956-02-25,Male,9591157909,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1138,Veena,Suresh,Byadagi,1979-02-19,Female,9591664465,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1139,Shahidha,Bashirahamad,Laxmeshwar,1966-02-22,Female,7411071566,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1140,Saraswathi,Srikanth,Halli,1981-02-18,Female,9880384184,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1141,Sunil,Shivappa,Kalabavi,1996-02-15,Male,9740877949,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1142,Hira,Keshav,Hanamasagar,1959-02-25,Female,9739865962,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1143,Amar,Shanthinath,Daragaji,1994-02-17,Male,9036092571,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1144,Laxmi,Pandappa,Melageri,1998-02-16,Female,8105398137,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1145,Drakshayanamma,Nagappa,Thirakannvvar,1944-03-01,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1147,Leela,K,M,1974-02-22,Female,9845817348,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1148,Hanamanthappa,Nigappa,Pujar,1933-03-04,Male,9591318218,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1149,Gadagayya,S,Kulakarni,1959-02-27,Male,9731858150,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1150,Thippperama,-,B,1947-03-02,Female,9844972113,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1151,Hajaresab,F,Jatager,1949-03-01,Male,9686342036,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1152,Lalitha,Nagayya,Guddadmath,1994-02-18,Female,9902526757,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1153,Kallamma,F,Halamani,1954-03-01,Female,"91 64868693",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1154,Bhabajan,Budesab,Thashawali,1939-03-05,Male,9036606043,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1155,Umesh,Gurashanthappa,Navalagund,1984-02-22,Male,8904680544,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1156,Sam,J,Mabu,1989-02-20,Male,8951363486,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1157,Suresh,B,-,1960-02-28,Male,9945246889,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1158,Kaveri,Subas,Jalgar,1992-02-20,Female,9663744384,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1159,Suhas,Hanamantappa,Arasanahal,1994-02-20,Male,9632341317,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1160,Gayatri,Shivakumar,Patil,1965-02-27,Female,9480805868,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1161,Hanumathappa,S,S,1988-02-22,Male,7829381171,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1163,Devakka,Kariyappa,Patarad,1967-02-27,Female,9886540992,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1164,Manjunata,Yallappa,Agishimani,1979-02-25,Male,9448922863,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1165,Sharad,Poravachar,Alura,1958-03-02,Female,8050408425,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1167,Maktumshab,M,Sanadi,1949-03-05,Male,9535990681,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1169,Shivanaguod,Dyamanaguod,Patil,1972-02-28,Male,8152066676,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1170,Sriajjayyaswami,B,Shivayyanamath,1941-03-07,Male,9880322573,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1171,Imamhusain,Dashagirashab,Bavikatti,1969-03-01,Male,7760022824,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1172,Gopalakrisna,Narayanrao,Devanikar,1957-03-04,Male,9449742450,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1173,Madumati,Shiddaramayya,Muchagandimat,1973-02-28,Female,9902108837,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1174,Lalitha,Harish,Bailapattar,1982-02-26,Female,9740674620,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1175,Laxmiprashad,Krisna,Hooli,1984-02-26,Male,9986098554,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1176,Sharad,Srikanta,Hansbhvi,1934-03-10,Female,8971173535,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1177,Verapaxappa,K,Shillin,1973-02-28,Male,9448777936,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1178,Sushalamma,Tippanna,Badiger,1954-03-06,Female,9844185382,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1179,Vivekarao,"Venkoba rao","Venkateswar nilay",1989-02-25,Male,9945129890,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1180,Gangamma,H,Dalabanjan,1966-03-03,Female,9844457148,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1181,Geeta,Kiran,Hipparagi,1987-02-26,Female,9945982443,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1182,Mardhanbee,G,Nertti,1939-03-11,Female,9743585073,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1186,Kallamma,A,Haliyal,1932-03-12,Female,8050811322,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1187,Armugam,S,K,1946-03-09,Male,8123675781,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1188,Basavanevva,Shenkarappa,Bhagodi,1972-03-03,Female,9916847068,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1189,Chaitra,K,Gugari,1987-02-28,Female,9902678755,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1190,Keerthi,S,Aralli,1997-02-25,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1191,Kotaresh,B,Gogari,1952-03-08,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1192,Ratnavva,Siddappa,Gudi,1979-03-02,Female,7259465568,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1193,N,B,Kondagol,1926-03-15,Female,9731665628,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1194,Narendra,Narashi,Momaya,1954-03-08,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1195,Chetna,Narendra,Momaya,1964-03-05,Female,7411811149,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1196,Vishwanath,M,Bakale,1986-03-01,Male,9611510994,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1197,Shantha,Pradeep,Keliputti,1967-03-07,Female,9611985623,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1198,Devendra,Prathap,Machare,1967-03-07,Male,8088241222,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1199,Siddappa,S,Shirol,1947-03-13,Male,8762588951,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1200,Ansuya,Y,Mulakipatil,1949-03-12,Female,9980434526,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1201,Yallappagouda,R,Mulakipatil,1939-03-15,Male,9980434526,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1202,Javed,Abdulkarim,Bijapur,1982-03-04,Male,7899862552,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1203,Veerabadra,B,Aswalekar,1960-03-10,Male,9632192966,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1204,Nagavva,Basappa,Yaranahal,1969-03-08,Female,8151044219,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1205,Iranna,Lokappa,Keeliputti,1956-03-11,Male,8904769155,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1206,Ratna,Iranna,Keeliputti,1964-03-09,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1207,Savetri,Nagendrash,Walvekar,1974-03-08,Female,9731805179,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1208,Sundramma,Vasanthrov,Swarna,1954-03-13,Female,9972275961,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1209,Navashad,F,Karamadi,1981-03-06,Male,9945627862,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1210,Neelavva,Yallappa,Bajantri,1976-03-08,Female,9663346450,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1211,Venkappa,L,Badrapur,1949-03-15,Male,8147845776,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1212,Parasuram,Mahadeva,Kalal,1962-03-12,Male,9742186285,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1213,Praveen,Basappa,Nadha,1989-03-05,Male,9686096111,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1214,Sathish,Ranganath,Bhadami,1989-03-05,Male,8123475480,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1215,Subashini,Shingaraya,Matekuntha,1979-03-09,Female,9341135059,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1216,Najma,Gafar,Mulagund,1979-03-09,Female,9686028172,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1217,Rajeshwari,Iranna,Ilager,1994-03-06,Female,9035652222,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1218,Shantha,Basavaraj,Chappalagavi,1956-03-15,Female,9738572923,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1219,Geetha,Mallaya,Shinkenamath,1996-03-05,Female,8277047056,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1220,Deepaksing,Gushising,G,1989-03-07,Male,8792718086,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1221,Rajesab,Husensab,Hanchinal,1952-03-16,Male,8277658458,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1222,Yallappa,G,Walikar,2002-03-05,Male,9844721680,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1223,Meharunish,Mehabub,Nadaf,1991-03-08,Female,9901389028,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1224,Shekappa,Chennaverappa,Soratur,1954-03-18,Male,9620890225,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1225,Parwati,Siddappa,Inchal,1966-03-15,Female,8861587088,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1226,Bibiatika,A,Jangali,1989-02-10,Female,8884850255,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1227,Mahadevappa,Basappa,Kamdoli,1944-02-22,Male,8971053384,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1228,Vijayalaxmi,Sanjay,Katavakar,1982-02-12,Female,9591624384,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1229,Basavaraj,Ningappa,Benni,1960-02-18,Male,8495039578,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1230,Chandraguod,Mariguod,Patil,1949-02-20,Male,8105461619,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1231,Badarinat,Rachappa,Pattar,1969-02-15,Male,8722661567,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1232,Malik,Pirashab,Bhagavan,2002-02-07,Male,7676604111,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1233,Savita,Yallappa,Kuralageri,1988-02-11,Female,8722901090,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1234,Pundalik,Yallappa,Gokak,1965-02-16,Male,9945869497,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1235,Renuka,Ramesh,Katti,1976-02-15,Female,9741433809,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1236,Shivappa,Fakirappa,Julapi,1952-02-21,Male,8151801911,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1237,Asham,"Muhamad guosh",Meesrikoti,1984-02-13,Male,8971525483,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1238,Shobha,Sunil,Chavan,1974-02-16,Female,7204860290,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1239,Yasmia,"Serif sab",Makhandhar,1990-02-12,Female,9945983931,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1240,Anuradha,Annappa,Navalir,1974-02-16,Female,8123642656,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1241,Parasuram,Yankappa,Paste,1965-02-18,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1242,Ashok,H,Binal,1959-02-21,Male,9341338969,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1243,Shahanaz,Kasimasab,Hottur,1978-02-16,Female,9620088371,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1244,Vishal,Basappa,Puttannavar,1995-02-12,Male,9535341328,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1245,Luvina,Das,S,1960-02-22,Female,9663348084,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1246,Nigavva,Fakirappa,Hallagatti,1986-02-15,Female,8861618598,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1247,Shidalingappa,Mahadevappa,Asundi,1960-02-22,Male,8197528485,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1248,Shamala,Ramesh,Javali,1969-03-19,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1249,Munafasab,AbdulKhadar,Jamadhar,1956-02-23,Male,9731373365,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1250,Venkatesh,N,Hangall,1968-02-20,Male,9632615659,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1251,Fathahmad,Ibarahim,Bepari,1936-02-28,Male,9740598929,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1252,Ravi,Narasappa,Dombar,1974-02-19,Male,9480433964,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1253,Bibijan,A,Chavadri,1944-02-27,Female,9008797024,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1254,Sabiyabegam,Abdulgani,Maniq,1968-02-22,Female,9886186426,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1255,Chandrashekar,Gurasiddappa,Horakeri,1974-02-20,Male,9886034601,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1256,Shivanadaswami,Gurusangamesh,Hiremath,1966-02-22,Male,9902251076,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1257,Ratnavva,Hanamappa,Notagar,1989-02-16,Female,8105925608,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1258,Krishamurthy,Parthasarathi,Chikkerur,1937-03-29,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1259,Mallarov,R,Kulakarni,1941-03-01,Male,9986513428,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1260,Laxmavva,Hanamantappa,Rangannavar,1939-03-02,Female,8453773829,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1261,Shankrappa,Ramappa,Mutagi,1972-02-22,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1262,Laxmi,Gangadar,Hanamashagarsettar,1989-02-17,Female,8694090867,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1263,Nirmala,Kalmesh,Patel,1992-02-17,Female,9620091488,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1264,Gurapadappa,Nigappa,Ichanangi,1983-02-19,Male,9900677251,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1265,Parasuram,Yallappa,Gadad,1956-02-26,Male,8150884554,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1266,Shekar,J,-,1965-03-23,Male,9448757594,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1267,Rajendrakumar,Nagendrasa,Irakal,1963-02-25,Male,9901993022,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1268,Zafarkhan,A,Shivalli,1971-02-23,Male,9845050557,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1269,Aravind,Bandurov,Mirji,1962-02-25,Male,9449085727,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1270,Shakunthala,Manjunath,Gudageri,1974-02-22,Female,9742100554,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1271,Muttu,Veeranna,Gangavathi,1989-02-19,Male,9740773298,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1272,Shivu,Itappa,Nadagaddi,1984-02-21,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1273,Shivabasavva,Sangappa,Vadakannavar,1974-02-24,Female,9743655850,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1274,Savaka,Shekappa,Angadi,1959-02-28,Female,9620153120,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1275,Hema,Suresh,Vajaranal,1984-02-23,Female,8431961544,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1276,Veerappa,Mallappa,Hugar,1939-03-07,Male,9916668652,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1277,Shankrasa,R,Magajikondi,1944-03-05,Male,9972324161,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1278,Basavaraj,Madiyappa,Aramani,1965-03-01,Male,9901775073,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1279,Fakirappa,Basappa,Hadimani,1974-02-27,Male,9480647646,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1280,Paravathibai,C,Desapande,1944-03-06,Female,9900527298,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1281,Shivappa,S,Marab,1989-02-23,Male,9902358543,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1282,Samuyal,M,Mobbu,1988-02-25,Male,8050101446,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1283,Sangeeta,Bimappa,Lamani,1987-02-25,Female,9663664330,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1284,Basavaraj,H,Gulaganji,1970-03-01,Male,7899874053,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1285,Dyamavva,Basappa,Hulagur,1939-03-10,Female,7795707938,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1286,Neelavva,G,Hanchinamani,1988-02-26,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1287,Shaila,M,Pishe,1965-03-03,Female,9964259709,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1288,Sushila,S,Kattagi,1969-03-02,Female,8861436582,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1289,Veerapp,S,Hebbali,1988-02-26,Male,9980678867,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1290,Archana,Neetin,Kambale,1986-02-27,Female,9880887591,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1291,Sangeetha,Ramesh,Halagundi,1984-02-29,Female,9916161533,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1292,Karnandappa,Basappa,Yami,1939-03-12,Male,9731048688,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1293,ReKha,M,Kori,1972-03-31,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1294,Karabasappa,B,Sankananavar,1944-03-10,Male,9741566150,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1295,Santamma,K,Sankananavar,1954-03-08,Female,9741566150,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1296,Ramazansab,G,Lodhi,1955-03-08,Male,9036013339,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1297,Yallavva,Siddappa,Walamiki,1976-03-03,Male,9036655123,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1298,Veena,R,Gudihal,1989-02-28,Female,8971950190,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1299,Yallappa,Hanumathappa,Chikade,1972-03-04,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1300,Fakiresh,B,Radiyavar,1965-03-06,Male,9902718098,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1301,Mallamma,P,Kalkeri,1946-03-11,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1302,Parashamal,M,Shotar,1986-03-01,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1303,Siddappa,B,Jalikatti,1966-03-06,Male,9964678004,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1304,Duragappa,S,Dumaladh,1959-03-09,Male,9620466261,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1305,Sangappa,S,Avardh,1972-03-06,Male,9945490129,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1306,Latha,Manjunath,Poojar,1988-03-02,Female,9035546949,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1307,Mahadevi,Parasangoudar,Patil,1979-03-05,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1308,Abdul,I,Sheraf,1977-03-05,Male,9945169534,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1309,Imamasab,Mahabusab,Nalabndh,1990-03-02,Male,7259361562,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1310,Gundushetti,"Krishnappa shetti",Shetti,1960-03-09,Male,9901437465,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1311,"Salman babu",I,Jungu,1988-03-02,Male,9590336748,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1312,Danajeya,Shrinivas,S,1992-03-01,Male,9164721806,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1313,Prashanth,Neelakantasa,Ladwa,1990-03-03,Male,9986052720,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1314,Manjula,Kallappa,Malakari,1976-03-06,Female,9742537068,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1315,Renuka,Mahadev,Siddapur,1974-03-08,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1316,Kastori,Shankrappa,Bengeri,1984-03-06,Female,7760931881,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1317,Manjunath,Sadashiv,Harijan,1984-03-07,Male,9686046845,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1318,R,Chandrashekar,R,1979-03-09,Male,9449115917,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1319,Susmitha,Rahul,Puranik,1994-03-05,Female,7411821095,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1320,Halalamma,Hanamanthappa,Kadakol,1986-03-08,Female,7899365095,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1321,Ramnat,Dodappa,Jartargar,1970-03-12,Male,9343400721,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1322,Mayur,Kallappa,Dhupad,1985-03-08,Male,9945144925,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1323,Renakappa,Kashimappa,Keloor,1974-03-12,Male,9845517216,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1324,Jabina,Guosusab,Dadivale,1994-03-07,Male,9945124653,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1325,Paramesh,Siddanagouda,Negalur,1969-03-13,Male,9535127731,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1326,Shila,"N agappa",Doddamani,1991-03-09,Female,9900485420,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1327,Basavva,Shivangouda,Narasangoudar,1986-03-11,Female,8971016665,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1329,Abishek,S,N,2004-03-06,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1330,Fatima,Mamadasab,Yadusabanavar,1986-03-11,Female,9742448696,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1331,"Mamd rafik",Rajesab,Yallapur,1975-03-14,Male,9632881602,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1332,Siddavva,Nigappa,Doddamani,1979-03-13,Female,9731917707,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1333,Minakshi,R,K,1988-03-10,Female,9620812868,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1334,Madukar,P,Moses,1948-03-21,Male,9886288437,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1335,Maharudarachry,S,Kaddalaskar,1974-03-15,Male,9449645946,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1336,Premavathi,Prabakar,Sapare,1951-03-21,Female,9480750522,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1337,Siddalingayya,C,Hiremath,1981-03-13,Male,8197755565,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1338,shenaje,Shanu,Kalagi,1993-03-11,Female,9945481648,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1339,Asema,S,Savanoor,1995-03-12,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1340,Laxmidevi,Subarao,Desai,1973-03-17,Female,9481950605,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1341,Sahadev,M,Pachange,1969-03-18,Male,9980426817,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1342,Sheminbanu,M,Kannki,1962-03-20,Female,8050899743,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1343,Huchappa,B,Hublli,1944-03-25,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1344,Netravathi,M,Badiger,1981-03-16,Female,9945869706,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1345,Tippanna,G,Tonsheal,1954-03-23,Male,9663229961,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1346,Dyamanna,D,Boodannavar,1949-03-24,Male,9448301463,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1348,Benjaman,C,Pilli,1969-03-20,Male,8197119467,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1349,Mala,Manjunath,Bandari,1986-03-16,Female,9663135957,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1350,Manjunath,Hanumathappa,Amadla,1990-03-15,Male,9036506525,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1351,Siddavva,Karbasappa,Avaradhi,1959-03-24,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1352,Padmavathi,R,Hanumathgoudar,1957-03-24,Female,9740962829,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1353,Reyanbanu,Hasansab,Kudawad,1998-03-14,Female,9164386498,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1354,Devakka,Nigappa,Hakhari,1979-03-19,Female,8861269801,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1355,Vishavanath,Tukaram,Devkate,1989-03-17,Male,9741528636,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1356,Nithaji,Ganpathravo,Jadav,1952-03-26,Male,9743312115,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1357,Mahadevappa,Basappa,Hippargi,1986-03-19,Male,9591474226,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1358,Hanamanth,C,Dodamani,1983-03-21,Male,9880927182,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1359,Shivakumar,Rudraya,Gudyapanamath,1997-03-17,Male,9611472018,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1360,Ambasa,Tulajansa,Pawar,1972-03-23,Male,9916238433,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1361,Hirehanamavva,Hanamanthappa,Honasagar,1949-03-30,Female,9663841680,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1362,G,Chandru,Naidu,1967-03-26,Male,8453731571,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1363,Molali,Mohamadsab,Hulagur,1989-03-21,Male,8150959034,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1364,Basavaraj,Rudrappa,Panigatti,1969-03-26,Male,9972491582,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1365,Bhabajan,Mahabubsab,Kanchigar,1991-03-21,Male,9686197651,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1366,Shantha,Hanamanth,Kale,1974-03-27,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1368,"Mohamed Inayathyllah","Md Kuudratullah",Khan,1960-04-27,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1369,Yashavanth,Chandrakanth,Chavan,1976-03-26,Male,8867183536,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1370,Girijavva,Chandrashekar,Marabad,1968-03-29,Female,8197954192,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1371,Anusha,Siddappa,Mallari,2009-03-19,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1372,Allabakshe,Mahabubasab,Sherewad,1989-03-24,Male,7760426310,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1373,Shantamma,C,Ghanti,1945-04-05,Female,9620409790,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1374,Laxmi,Basalingappa,Abbigeri,1995-03-24,Female,7411233160,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1375,Hamza,B,Lalamiya,2001-03-22,Male,9686327026,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1376,Vinayak,Manjappa,Kondli,1994-03-25,Male,9481251611,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1377,Narayanrao,Laxmanrao,Kalakeri,1959-05-02,Male,8904119062,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1378,Laxmi,Ramappa,Hombal,1998-04-22,Female,9632129130,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1379,Chandrashekar,D,Mayannavar,1943-05-06,Male,9880925436,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1380,Vinod,S,Sadhor,1990-04-24,Male,9481308971,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1381,Suma,Suryaprakash,-,1953-05-04,Female,9742155775,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1383,Imamahusen,M,Attar,1989-04-24,Male,9844569786,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1384,Jayakumari,Rajashekar,M,1966-04-30,Female,980133051,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1385,Rajesab,Subahansab,Sayadhapur,1929-05-11,Male,9731814768,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1386,Sharadha,H,Patil,1980-04-28,Female,8277657306,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1387,Guravva,Hanumathapp,Bevur,1979-04-29,Female,9538134132,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1388,Ranjita,Pradeep,Kale,1996-04-25,Female,9980964221,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1390,Maratheppa,Hanamanathappa,Pujar,1934-05-11,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1391,Maruteappa,H,Pujar,1934-05-11,Male,9535405196,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1392,Modhin,-,Byahatti,1985-04-28,Male,7899989333,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1393,Yallappa,Topanna,Hosakatti,1978-04-30,Male,9972284729,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1394,Kriashanappa,H,Hebasur,1958-05-06,Male,9902106577,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1395,Paravatevva,Basavaneteappa,Gonal,1954-05-07,Female,9845707553,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1396,Shamsunisha,U,Sayad,1931-05-13,Female,9141250756,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1397,Arjun,Mallappa,Chavan,1981-05-01,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1398,Basavva,Mallanagouda,Neelappagodar,1969-05-04,Female,8892903114,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1399,Vinayak,Tukaram,Attimarad,1990-04-29,Male,9739381540,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1400,Gyanub,Ishavarappa,Motenavar,1987-04-30,Male,8553557712,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1401,Uma,Basavaneppa,Walavi,1996-04-28,Female,8105661626,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1402,Vijayandra,V,Gudi,1952-05-09,Male,9916730753,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1403,Chandsab,Rajesab,Hanchinal,1980-05-02,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1404,Fiza,Mohamadiliza,Makandhar,2009-04-25,Female,9980255676,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1405,Mahesh,Kalappa,Chenni,1972-05-05,Male,9449013266,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1406,Abdulgani,Abdulkarim,Ballari,1932-05-16,Male,9036284028,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1407,Chandrashekar,Fakirappa,Kalyanshettar,1939-05-15,Male,9164670507,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1408,Gouravva,M,Gadekar,1964-05-08,Female,8971426458,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1409,Mallappa,Irappa,Tegur,1944-05-13,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1410,Mayalarappa,A,Birannavar,1964-05-08,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1411,Arif,Mohamadrafiq,Nadaf,1987-05-04,Female,9482683848,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1412,Najerahamad,Nabisab,Patwegar,1963-05-10,Male,9900853171,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1413,Suvarnabai,Shivajiravo,Mukashi,1954-05-13,Female,9900677308,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1414,Fakiramma,Yallappa,Sasolli,1959-05-12,Female,8971122252,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1415,Bashirabegam,Ishamahilsab,Kanakiya,1956-05-12,Female,9845692370,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1416,Shivanand,Malakajeppa,Udnur,1951-05-14,Male,9035920830,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1417,Vishalakshi,Keshava,Hanchinamaniu,1990-05-04,Female,9535335935,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1418,Ashok,Husen,Jadav,1986-05-07,Male,9880190952,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1419,Sulochana,B,Harakuni,1954-05-15,Female,9538982185,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1420,Venkatrao,D,Mokashi,1952-05-15,Male,8970100970,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1421,Suprith,M,Mudavi,2012-04-30,Male,9591297779,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1422,Sharadha,Basavaraj,Angadi,1972-05-10,Female,9448831510,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1424,Vishnu,B,Kakade,1948-05-17,Male,9449355600,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1425,Basavva,S,Guranahalli,1988-05-08,Female,8495086373,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1426,Netra,M,Hiremath,1991-05-08,Female,8711070861,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1427,Yousuff,S,Sayad,1952-05-19,Male,9902221209,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1429,Manjunth,-,Yaramasal,1986-05-12,Male,9738680895,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1430,R,S,RATAN,1967-05-17,Male,9019696151,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1431,Vijay,Basavaneppa,Kademani,1990-05-11,Male,9844488897,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1432,Laxmi,Mahesh,Sunkad,1981-05-13,Female,9980541792,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1433,Ansuya,V,Dindawar,1976-05-14,Female,7259347152,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1434,Hireayakka,N,Mavannur,1949-05-21,Female,9964252771,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1435,Gurupadappa,S,Kolli,1938-05-24,Male,9019770883,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1436,Nagamma,A,A,1949-05-21,Female,7433351773,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1438,Arokianadhan,Arokiaswamy,-,1954-05-21,Male,9241106317,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1439,Adavayyswamy,P,Kobihalamath,1956-05-20,Male,8722460886,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1440,Sadika,I,Pantoji,1979-05-16,Female,7353349663,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1441,Madevi,Hanamanth,Piraganavar,1974-05-17,Female,9731642070,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1442,Sridar,Venkatesh,Kulakarni,1975-05-17,Male,8884947670,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1443,Roopa,Irappa,Hosamani,1989-05-13,Female,8183021585,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1444,Nataraju,Magaliswami,Vaddarbovi,1949-05-24,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1445,Thilaksing,Kirapansing,Taq,1989-05-14,Male,9880994428,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1446,Mariyanbee,Imamsab,Agasar,1932-05-29,Female,9008811340,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1447,Mahamdsidiq,Rafiq,Bepari,2010-05-10,Male,9342663361,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1448,Sarafraj,Abdulrehaman,Sarkavas,1982-05-17,Male,9945306032,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1449,Umesh,Fakirappa,Dodamani,1965-05-21,Male,9036748636,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1450,Shahin,Dadafir,Thashildhar,1993-05-14,Female,9916966481,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1451,Shashikala,Basavaraj,Hiregouder,1974-05-19,Female,8951277395,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1452,Veerapaksha,Yallappa,Varad,1963-05-23,Male,9008922676,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1453,Devamma,Siddappa,Totakar,1944-05-27,Female,9482118316,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1454,Prakash,H,Pawar,1979-05-19,Male,9972340429,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1455,Duragappa,Duragappa,Hunagund,1962-05-23,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1456,Raju,Malingappa,M,1989-05-17,Male,8970848241,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1457,Naveen,Balchandra,Pujari,1993-05-16,Male,8050180881,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1458,Shital,Vasanth,Bitri,1992-05-16,Male,7411078962,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1459,Mahadevappa,Bimappa,Padamannavar,1939-05-31,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1460,Srinivaslu,Pullaiha,Jakki,1975-05-22,Male,9986814459,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1461,Kamaladevi,Ramanand,Prasad,1969-05-24,Female,8150079682,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1462,Sathiraov,Kariyappa,Byahatti,1964-05-25,Female,9483340803,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1463,Mahadevi,A,Kobihalmath,1960-05-26,Female,8722460886,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1464,Hajaresab,Salahuddin,Mulla,1966-05-25,Male,9945433285,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1465,Basappa,D,Gurannavar,1960-05-26,Male,9986941690,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1466,Gadageppa,Gurushanthappa,Galammnavvar,1962-05-27,Male,7259244472,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1467,Salama,D,Mulla,1980-12-12,Female,9945895196,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1468,Chandralekha,Basavaraj,Honnalli,1966-05-26,Female,9980270743,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1469,Radhabai,Hanumathrao,Basuthakar,1946-06-01,Female,8147564920,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1470,Susavva,Basavanthappa,Navalli,1941-06-02,Female,8553529220,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1471,Parawathi,G,Ambi,1944-06-01,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1472,Girijamma,Shantaveerayya,Hiremath,1966-05-27,Female,9880336650,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1473,Tippubai,L,Meharwade,1936-06-04,Female,9986847060,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1474,Babajan,Mulasab,Suranagi,1969-05-27,Female,8722557895,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1475,Ganpati,D,Kuradekar,1939-06-04,Male,9964329114,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1476,Lalitha,M,Mugali,1955-05-31,Female,9886674775,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1477,Sheranappa,Y,Mali,1989-05-23,Male,9901525955,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1478,Kamalamma,S,Jadav,1939-06-05,Female,9742232143,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1479,Chandrahshekar,Gurubassappa,Davanagere,1968-12-01,Male,944819168,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1480,Mahabub,S,Devaramani,1971-05-28,Male,9972482108,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1481,Zubeda,Nabisab,Chittargi,1949-06-02,Female,9901551801,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1482,Salauddin,M,Sunkwale,1985-05-24,Male,9731113533,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1483,Namadev,N,Mancharkar,1958-06-01,Male,9880292582,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1484,Lalitha,M,Hiremath,1979-05-27,Female,9448854916,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1485,Vijayndra,G,Atgur,1948-06-04,Male,9448360780,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1486,Rajiya,Allabakshe,Lakshmeswar,1951-06-04,Female,9916615010,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1488,Nigabasappa,Muddiyappa,Nandi,1959-06-02,Male,9964870260,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1489,Lalasab,L,Malanganavar,1979-05-28,Male,9620573787,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1490,Nagaveni,Venkatesh,Timasamudra,1980-05-27,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1491,Mamadhusen,Badesab,Shek,1986-05-27,Male,9902222146,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1492,Fakirappa,Basappa,Talwar,1964-06-01,Male,7353720352,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1493,Lalitha,R,Harakuni,1950-06-05,Female,9449949593,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1495,Vinayak,S,Habib,1993-05-26,Male,8867774544,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1496,Shantha,G,Hanchinmani,1987-05-29,Female,9164825564,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1497,Surekha,Suresh,Shikre,1987-05-29,Female,90362640,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1498,Devendra,Basavantappa,Teradal,1972-06-01,Male,7353730058,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1499,Gouramma,Shivappa,Kamadoli,1959-06-05,Female,9731348285,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1500,Sudha,Prakash,Patil,1964-06-03,Female,7760931919,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1501,Kiran,Ramakrishna,Kalaburgi,1968-06-03,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1502,Sandyarani,G,Narasapur,1985-05-31,Female,9663181893,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1503,Ibrahimsab,Hasansab,Shek,1967-06-05,Male,9886760598,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1504,Ganesh,Hanamantappa,Anvekar,1987-05-31,Male,9972952716,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1505,Nigappa,Ramachandra,Kusugal,1988-05-30,Male,7795707938,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1506,Shivanandgouda,V,Venkanagoudar,1956-06-07,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1507,Shitalkumar,Dhanykumar,Upadhye,1970-06-05,Male,7760984834,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1508,Dyamappa,Nigappa,Gurannavar,1927-06-16,Male,7829498652,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1510,Fakiresh,Rayappa,Kurahatti,1989-06-01,Male,996446143,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1511,Aslam,Abdulgani,Teenmekar,1977-06-04,Male,8892664433,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1512,Nazbunisa,Rasulsab,Pardewale,1951-06-12,Female,9902666273,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1513,Shantharam,A,Divate,1937-06-15,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1514,Umarsab,Mohamadhusen,Siddi,1974-06-07,Male,9482553252,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1515,Nageshswamy,O,Hiremnath,1976-06-07,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1516,Iranna,Kumarappa,Shanawad,1986-06-05,Male,9742494671,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1517,Yallappa,Gurapadapp,Belavalad,1962-06-11,Male,9741257481,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1518,Sadashiva,Annappa,Amaragol,1962-06-11,Male,7795222134,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1519,Heena,Moulasab,Sagar,1996-06-02,Female,9972299924,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1520,Neelavva,Sangappa,Hanchinal,1969-06-09,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1521,Mahabubsab,Modinsab,Sandgod,1988-06-05,Male,9916086305,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1522,Rangamma,Basappa,Madiwalar,1954-06-14,Female,9964592493,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1523,Imambi,Husensab,Nadaf,1942-06-17,Female,8277048118,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1524,Rudragouda,M,-,1950-06-15,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1525,Gururaj,G,Sindagi,1974-06-10,Male,9538574066,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1526,Roopali,Atul,Pawar,1982-06-08,Female,9035656565,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1527,Atul,Adhiakrao,Patil,1983-06-08,Male,74116565656,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1528,Nusratbee,N,Pachapur,1944-06-17,Female,9538424449,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1529,Nanda,Krishnaraddi,Kalawad,1993-06-05,Female,9902403475,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1530,Paravati,Parappa,Sangannavar,1915-06-26,Female,7026243346,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1531,Babusab,J,Banikoppa,1954-06-16,Male,9986810922,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1532,Akkamma,Siddappa,Tharalgatta,1989-06-07,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1533,Manjunathrao,Vasudev,Rao,1974-06-11,Male,9880863393,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1534,Deepa,Basappa,Devasur,1996-06-05,Female,9663368387,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1535,Renuka,Nagappa,Vanalli,1979-06-11,Female,9620260366,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1536,Neela,Santosh,Kambale,1992-06-07,Female,8884513110,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1537,Abdulshatarsab,Abdulkarimsab,Ganjennavar,1944-06-19,Male,9880457047,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1538,Iravva,Huleappa,Gadag,1958-06-16,Female,9980182929,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1539,Iravva,Shivarayappa,Kapali,1964-06-14,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1540,Sureshkumar,Ruliaram,S,1985-06-09,Male,9416934158,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1541,Manjunath,Parasuram,Jadav,1989-06-09,Male,8747818552,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1542,Rajeabee,Imamasab,Kuratakotti,1946-06-20,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1543,"Elajibath rani",Murali,G,1985-06-10,Female,9535994181,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1544,Yashodha,Basuaraj,Huralikoppi,1981-06-12,Female,08304296091,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1545,Anjana,P,Kokatnur,1977-06-13,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1546,Rudarayya,G,Hiremath,1979-06-13,Male,9972417418,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1547,Banuthai,Shrinivas,Dikashit,1956-06-18,Female,9663090204,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1548,Laxman,Krishnasa,Meharawade,1959-06-19,Male,8050174885,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1549,Subhas,K,Gornkol,1975-06-15,Male,9620706913,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1550,Shanti,G,Kadiwalar,1979-06-14,Female,7795348979,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1551,Dyavappa,H,Singammanavar,1939-06-24,Male,7259427137,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1552,Naseema,Ibarahimsab,Gadag,1974-06-15,Female,8711935204,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1553,Renuka,Nagappa,Nagarahalli,1974-06-15,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1554,Shantavva,H,Yalagannavar,1982-06-13,Female,7411028148,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1555,Mamadhagouse,A,Bannur,1972-06-15,Female,9901129372,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1556,Mahadevi,Venkatesh,Uppar,1970-06-16,Female,8792799929,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1557,Shobha,Basppa,Hanchinamani,1994-06-10,Male,9845710385,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1558,"Faridha begam",Norahusen,Hasen,1969-06-17,Female,9845731612,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1559,"Zareena begam",A,Bandar,1959-06-20,Female,9448415877,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1560,Mamataze,Kadharbasha,Aduni,1974-06-17,Female,8861436322,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1561,Shivaraj,H,Kurabar,1989-06-13,Male,9739610415,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1562,Paravva,Basappa,Doddamani,1964-06-19,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1563,Basamma,V,Kalaguddi,1938-06-27,Female,9035046709,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1564,Gyanappa,Laxmappa,Chalwadi,1949-06-24,Male,7795487624,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1565,Vijaylaxmi,Jaganath,Kademani,1989-06-14,Female,8971519700,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1566,Sarojini,S,Shinde,1953-06-24,Female,9449662915,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1567,Sheshikala,B,Hiregoudar,1974-06-19,Female,8951277395,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1568,Kaveri,S,Thalavar,1989-06-15,Female,9341997732,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1569,Ranganagouda,B,Patil,1964-06-23,Male,9945870328,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1570,Sayadli,K,Shek,1986-06-18,Male,8497875856,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1571,MOHORAFIQ,N,DAMBAL,1985-06-18,Male,8867215792,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1572,Sheshikala,V,Tegginamani,1969-06-22,Female,9740963019,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1573,Rudrayya,M,Chikamath,1962-06-24,Male,9916185407,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1574,Sherathkumar,K,Tabiba,1964-06-23,Male,9880961521,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1575,Rekha,Ningappa,Chalawadi,1988-06-17,Female,9845369326,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1576,Prasad,M,Perur,1978-06-21,Male,9448236474,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1577,KIRATHANA,M,MADARAS,2003-06-15,Female,8884321266,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1578,LAXMIBAI,S,TAMBE,1934-07-02,Female,9880503955,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1579,Sugrabai,N,Sinde,1959-06-27,Female,8951398716,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1580,Amrenbanu,Babajan,Kuralgeri,1990-06-19,Female,9060519091,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1581,Murathi,Kannappa,Yarur,1969-06-24,Male,9880446974,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1582,Ashok,Shivappa,Sherewad,1964-06-25,Male,9741234015,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1583,RAJU,NARAYAN,KALAL,1979-06-22,Male,8904525498,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1584,Dodabassappa,D,-,1940-07-01,Male,9035982873,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1585,Iramma,T,Kolli,1936-07-03,Female,9743443350,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1586,Renuka,Iswar,Arenavar,1974-06-24,Female,8892273928,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1587,Mukundrao,R,Haliyal,1950-06-30,Male,8050402874,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1588,Mohan,G,Shet,1951-06-30,Male,9886790181,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1589,Patima,Abdulkhadar,Jangale,1959-06-29,Female,8123648657,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1590,Vishnu,Timanna,Ganjigatti,1971-06-26,Male,8722958682,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1591,Shobha,Chanabasavaraj,Dodamani,1978-06-24,Female,8431922251,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1592,Geetha,Vasanta,Mokashi,1956-06-30,Female,9986469717,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1593,Sanganabasappa,Shivappa,Angadi,1964-06-29,Male,9620179182,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1594,Neekitha,V,Bijawad,1995-06-22,Female,7406750010,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1595,Shekarappa,Gadigeppa,Hondadakatti,1985-06-25,Male,9008618225,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1596,Ramachandra,J,Mayannavar,1948-07-04,Male,973100871,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1597,Shivanagouda,Basangouda,Thiralapur,1947-07-06,Male,9743321440,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1598,Hanamantappa,Mahadevappa,Matti,1969-06-30,Male,8861188314,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1599,Nagesh,K,Dasari,1972-06-29,Male,8861993219,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1600,Suvarna,Rudrappa,Bikannavar,1962-07-02,Female,9964626368,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1601,Jayashri,Deepak,Jadav,1988-06-25,Female,9900224113,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1602,Gangadar,M,Metagudda,1958-07-04,Male,9986536004,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1603,Siddavva,Nagappa,Savshi,1969-07-01,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1604,Surendranath,M,Jorapur,1956-07-04,Male,7204549503,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1605,Rudragouda,B,Agashimani,1949-07-07,Male,9731589948,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1606,Anil,Laxman,Malkari,1978-06-30,Male,9538811942,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1607,Yamuna,Venkatesh,Uppar,1995-06-28,Female,8553818273,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1608,Bibaisha,Althaf,Momin,1988-06-29,Female,9986832083,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1609,Yallappa,V,Yallakkanavar,1959-07-07,Male,9611728561,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1610,Radha,Nagesh,Lalge,1965-07-05,Female,9916812498,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1611,Nagaraj,Parasappa,Huballi,1976-07-02,Male,8951379805,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1612,Govinda,Hanamantha,Nargel,1934-07-13,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1613,Bimavva,Giriyappa,Undi,1934-07-14,Female,9880654258,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1614,Ashabi,Madarsab,Juldumanihar,1952-07-09,Female,7411122776,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1615,Gunduraov,Narshingraov,Marati,1964-07-06,Male,9449512112,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1616,Asha,Babanna,Bevinakatti,1964-07-06,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1617,Kamalabai,Jivaji,Belakar,1956-07-08,Female,9740418270,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1618,Basavaraj,Neelakantappa,Mudengudi,1949-07-11,Male,9900075225,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1619,Mahabubsab,Mohamadgousab,Mulla,1939-07-14,Male,9480750687,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1620,Ashok,Virapakshagouda,Patil,1982-07-03,Male,9945058979,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1621,Mohamadrafiq,Rajesab,Badiger,1985-07-02,Male,9880040779,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1622,Mangayalaxmi,A,Dimarayan,1979-07-04,Female,9880292741,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1623,Pundalik,Ramappa,Hanamapur,1950-07-12,Male,9900484485,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1624,Hanamantappa,Rachappa,Walmiki,1966-07-08,Male,9731322392,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1625,Sumitra,Mahadevappa,Mudol,1974-07-06,Female,9902390665,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1626,Mallanagouda,G,Kalled,1949-07-12,Male,9535955087,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1627,Basavaraj,Shivalingayya,Salimath,1980-07-04,Male,8884614089,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1628,Kanakappa,Kanakappa,Bilana,1969-07-08,Male,990665873,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1629,Savita,Gadigayya,Hiremath,1989-07-03,Female,9743985441,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1630,Basavaraj,Gurasiddappa,Yadachi,1952-07-12,Male,8123886551,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1631,Hanamantappa,Ajareppa,A,1956-07-11,Male,9448985258,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1632,Naveen,Shakappa,Jagadalli,1994-07-03,Male,9845595153,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1633,Srinivas,J,Raibagi,1944-07-15,Male,9731323308,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1634,Krushidhabanu,Yashinkhan,Girani,1972-07-08,Male,9035594169,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1635,Purnima,Basappa,Ambiger,1986-07-05,Female,8867998867,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1636,Mallappa,Birappa,Kerikar,1956-07-12,Male,9663108314,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1637,Saraswathi,Chandru,Satpathi,1962-07-11,Female,9448317151,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1638,Madavi,Hanamanta,Dambal,1969-07-11,Female,9448148596,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1639,Iranna,Gurashantappa,Kumbar,1979-07-09,Male,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1640,Renuka,Anand,Teradal,1986-07-07,Female,8748923937,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1641,Roopa,Hanumathappa,Sullad,1994-07-05,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1642,Rathana,M,Patil,1989-07-06,Female,9743497725,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1643,Amith,Ashok,Navalur,1990-07-06,Male,9632193793,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1644,Arun,V,Shigli,1988-07-07,Male,9886557755,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1645,Rehman,A,Mangalor,1970-07-12,Male,9880995552,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1646,Vadirajachar,B,Purohit,1936-07-20,Male,9449123526,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1647,Shobha,Nagesh,Kori,1989-07-08,Female,735352612,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1648,Shridevi,G,Surakoda,1990-07-08,Female,"Not Mentioned",1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc
+1649,Basavva,Tippanna,Ranchagi,1962-07-15,Female,9731817336,1,8fd02596-0afc-47c2-ae48-50dcceb3d0dc

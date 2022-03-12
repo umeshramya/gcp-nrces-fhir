@@ -15,17 +15,531 @@ const ifNull = (val) => {
 }
 
 // const deleteOrg = async (index) => {
-//   console.log(index)
-//   if (index > 50) {
+
+//   if (index > 9) {
 //     return
 //   }
 //   const gcpFhirCrud = new GcpFhirCRUD()
-//   const get = await new GcpFhirSearch().search("Organization")
-//   const id = get.data.entry[0].resource.id
-//   const del = await gcpFhirCrud.deleteFhirResource(id, "Organization")
-//   console.log(del)
+//   const get = await new GcpFhirSearch().search("Patient")
+
+//   p=0;
+//   let id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+  
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   p=p+1
+//   id = get.data.entry[p].resource.id
+//   console.log(id)
+//   await gcpFhirCrud.deleteFhirResource(id, "Patient")
+
+//   console.log(p)
+  
 //   index++;
 //   deleteOrg(index)
+//   console.log("done")
 
 // }
 
@@ -125,17 +639,19 @@ const excutePractinior = async () => {
 
 const excutePatinet = async () => {
 
-  const curJson = require("./testData/Patient_1_to_1000.json")
+  const curJson = require("./patient _5.json")
+
+  console.log(curJson.length)
   const resources = curJson.map(el => {
 
     const curEl = new Patient().getFHIR({
       "MRN": ifNull(el.id),
       "dob": `${el.dob.substring(6)}-${el.dob.substring(3, 5)}-${el.dob.substring(0, 2)}`,
+      // "dob" : el.dob,
       "gender": ifNull(el.gender),
-      "mobile": ifNull(el.mobile),
+      "mobile": ifNull(el.mobile == "Not Mentioned" ? "9999999999" : el.mobile),
       "name": ifNull(`${el.firstName} ${el.middleName} ${el.lastName}`),
-      "organizationId": '87166aa1-c5a6-468b-92e9-7b1628b77957'
-
+      "organizationId": el.gcpFhirId
     })
 
     return {
@@ -148,7 +664,8 @@ const excutePatinet = async () => {
   })
 
 
-
+// console.log(resources[50].resource)
+// return
 
   const bundle = {
     "resourceType": "Bundle",
@@ -191,7 +708,7 @@ const updateDoctor = async () => {
   console.log(sql)
 }
 
-updateDoctor()
+// updateDoctor()
 
 
 

@@ -9,7 +9,7 @@ export interface PATIENT {
   phrAddress?: string;
   mobile: string;
   dob: string;
-  MRN: string;
+  MRN?: string;
   organizationId: string;
 }
 
@@ -111,23 +111,32 @@ export class Patient implements ResourceMaster {
 
       mobile: options.telecom[0].value,
       dob: options.birthDate,
-      MRN: options.identifier.filter(
-        (el: any) => el.system == "https://www.nicehms.com"
-      )[0].value,
       organizationId: `${options.managingOrganization.reference}`.substring(13),
       id: options.id,
     };
 
-    if (options.healthNumber) {
-      ret.healthNumber = options.identifier.filter(
-        (el: any) => el.system == "https://healthid.ndhm.gov.in/health-number"
-      )[0].value;
+    const mrn: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://www.nicehms.com"
+    );
+
+    if (mrn.length > 0) {
+      ret.MRN = mrn[0].value;
     }
 
-    if (options.phrAddress) {
-      ret.phrAddress = options.identifier.filter(
-        (el: any) => el.system == "https://healthid.ndhm.gov.in/phr-address"
-      )[0].value;
+    const healthNumber: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://healthid.ndhm.gov.in/health-number"
+    );
+
+    if (healthNumber.length > 0) {
+      ret.healthNumber = healthNumber[0].value;
+    }
+
+    const phrAddress: any[] = options.identifier.filter(
+      (el: any) => el.system == "https://healthid.ndhm.gov.in/phr-address"
+    );
+
+    if (phrAddress.length > 0) {
+      ret.phrAddress = phrAddress[0].value;
     }
 
     return ret;
