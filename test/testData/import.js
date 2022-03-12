@@ -187,8 +187,7 @@ const updateDoctor = async () => {
 
   });
 
-  // let sql = `UPDATE organization set gcpFhirId = (CASE id WHEN 1 THEN 11123 END) WHERE id in(1)`
-  let sql = `UPDATE organization set gcpFhirId = (CASE id ${str1} END) WHERE id in(${str2})`
+  let sql = `UPDATE doctorDetails set gcpFhirId = (CASE id ${str1} END) WHERE id in(${str2})`
   console.log(sql)
 }
 
