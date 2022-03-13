@@ -744,7 +744,7 @@ const updatePatient = async () => {
 
 
 
-  const data = require("./testData/Patient1.json")
+  const data = require("./data/Patient.json")
 
 
 
@@ -764,11 +764,13 @@ const updatePatient = async () => {
 
 
   let sql = `UPDATE patientDetails set gcpFhirId = (CASE id ${str1} END) WHERE id in(${str2})`;
+  const fs = require("fs")
+  fs.writeFileSync("patadata", sql, "utf-8")
 
-  console.log(sql)
+
 
 }
 
 
-// updatePatient()
+updatePatient()
 
