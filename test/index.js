@@ -57,7 +57,7 @@ const createPatient = async () => {
 
 }
 
-createPatient()
+// createPatient()
 
 const getPatient = async () => {
   const id = '11752440-b821-4173-9a69-ee585a0b281a'
@@ -234,14 +234,14 @@ const createEncounter = async () => {
 
 const getEnconter = async () => {
   const encounter = new Encounter();
-  const id = 'e2eaa172-20a0-42f1-83d0-de371dad3c74';
+  const id = '7f889790-db13-4f7b-93ea-f5d3166e412d';
   const gcpFhirCRUD = new GcpFhirCRUD()
   const res = await gcpFhirCRUD.getFhirResource(id, "Encounter")
   const data = encounter.convertFhirToObject(res.data)
   console.log(data)
 }
 
-// getEnconter()
+getEnconter()
 
 
 

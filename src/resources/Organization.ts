@@ -63,21 +63,6 @@ export class Organization implements ResourceMaster {
       },
 
       identifier: identifiers,
-      //  [
-      //   {
-      //     type: {
-      //       coding: [
-      //         {
-      //           system: "http://terminology.hl7.org/CodeSystem/v2-0203",
-      //           code: "PRN",
-      //           display: `${options.providerNumber}`,
-      //         },
-      //       ],
-      //     },
-      //     system: "https://facility.ndhm.gov.in",
-      //     value: `${options.ndhmFacilityNumber}`,
-      //   },
-      // ],
       name: `${options.name}`,
       telecom: [
         {
@@ -102,20 +87,21 @@ export class Organization implements ResourceMaster {
       email: options.telecom[1].value,
       id: options.id,
     };
+    if (options.identifier) {
+      const ndhmFacilityNumber: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://healthid.ndhm.gov.in"
+      );
+      if (ndhmFacilityNumber.length > 0) {
+        ret.ndhmFacilityNumber = ndhmFacilityNumber[0].value;
+      }
 
-    const ndhmFacilityNumber: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://healthid.ndhm.gov.in"
-    );
-    if (ndhmFacilityNumber.length > 0) {
-      ret.ndhmFacilityNumber = ndhmFacilityNumber[0].value;
-    }
+      const providerNumber: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://www.nicehms.com"
+      );
 
-    const providerNumber: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://www.nicehms.com"
-    );
-
-    if (providerNumber.length > 0) {
-      ret.providerNumber = providerNumber[0].value;
+      if (providerNumber.length > 0) {
+        ret.providerNumber = providerNumber[0].value;
+      }
     }
 
     return ret;

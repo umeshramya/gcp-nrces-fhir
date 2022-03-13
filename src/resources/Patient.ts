@@ -115,28 +115,30 @@ export class Patient implements ResourceMaster {
       id: options.id,
     };
 
-    const mrn: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://www.nicehms.com"
-    );
+    if (options.identifier) {
+      const mrn: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://www.nicehms.com"
+      );
 
-    if (mrn.length > 0) {
-      ret.MRN = mrn[0].value;
-    }
+      if (mrn.length > 0) {
+        ret.MRN = mrn[0].value;
+      }
 
-    const healthNumber: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://healthid.ndhm.gov.in/health-number"
-    );
+      const healthNumber: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://healthid.ndhm.gov.in/health-number"
+      );
 
-    if (healthNumber.length > 0) {
-      ret.healthNumber = healthNumber[0].value;
-    }
+      if (healthNumber.length > 0) {
+        ret.healthNumber = healthNumber[0].value;
+      }
 
-    const phrAddress: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://healthid.ndhm.gov.in/phr-address"
-    );
+      const phrAddress: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://healthid.ndhm.gov.in/phr-address"
+      );
 
-    if (phrAddress.length > 0) {
-      ret.phrAddress = phrAddress[0].value;
+      if (phrAddress.length > 0) {
+        ret.phrAddress = phrAddress[0].value;
+      }
     }
 
     return ret;

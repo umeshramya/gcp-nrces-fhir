@@ -93,12 +93,6 @@ export class Encounter extends ResourceMain implements ResourceMaster {
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${options.text} </div>`,
       },
       identifier: identifiers,
-      // [
-      //   {
-      //     system: "https://ndhm.in",
-      //     value: options.careContext,
-      //   },
-      // ],
       status: options.status,
       class: {
         system: "http://terminology.hl7.org/CodeSystem/v3-ActCode",
@@ -145,12 +139,14 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       id: options.id,
     };
 
-    const careContext: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://ndhm.in"
-    );
+    if (options.identifier) {
+      const careContext: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://ndhm.in"
+      );
 
-    if (careContext.length > 0) {
-      ret.careContext = careContext[0].value;
+      if (careContext.length > 0) {
+        ret.careContext = careContext[0].value;
+      }
     }
 
     return ret;

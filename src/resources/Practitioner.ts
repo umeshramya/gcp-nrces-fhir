@@ -113,27 +113,28 @@ export class Practitioner implements ResourceMaster {
       name: options.name[0].text,
       id: options.id,
     };
+    if (options.identifier) {
+      const medicalLicenseNumber: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://www.nmc.org.in/"
+      );
+      if (medicalLicenseNumber.length > 0) {
+        ret.medicalLicenseNumber = medicalLicenseNumber[0].value;
+      }
 
-    const medicalLicenseNumber: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://www.nmc.org.in/"
-    );
-    if (medicalLicenseNumber.length > 0) {
-      ret.medicalLicenseNumber = medicalLicenseNumber[0].value;
-    }
+      const ndhmProfessionalId: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://healthid.ndhm.gov.in"
+      );
 
-    const ndhmProfessionalId: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://healthid.ndhm.gov.in"
-    );
+      if (ndhmProfessionalId.length > 0) {
+        ret.ndhmProfessionalId = ndhmProfessionalId[0].value;
+      }
 
-    if (ndhmProfessionalId.length > 0) {
-      ret.ndhmProfessionalId = ndhmProfessionalId[0].value;
-    }
-
-    const providerNumber: any[] = options.identifier.filter(
-      (el: any) => el.system == "https://www.nicehms.com"
-    );
-    if (providerNumber.length) {
-      ret.providerNumber = providerNumber[0].value;
+      const providerNumber: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://www.nicehms.com"
+      );
+      if (providerNumber.length) {
+        ret.providerNumber = providerNumber[0].value;
+      }
     }
 
     return ret;
