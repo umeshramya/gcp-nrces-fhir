@@ -11,7 +11,7 @@ import { CreatePdf } from "js-ts-report";
 
 export const compositionTypeArrey = [
   {
-    type: "OPConsultRecord",
+    type: "OPConsultation",
     system: "http://snomed.info/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord",
     code: "371530004",
@@ -19,7 +19,7 @@ export const compositionTypeArrey = [
   },
 
   {
-    type: "DischargeSummaryRecord",
+    type: "DischargeSummary",
     system: "http://snomed.info/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord",
     code: "373942005",
@@ -34,11 +34,18 @@ export const compositionTypeArrey = [
     text: "Immunization record",
   },
   {
-    type: "PrescriptionRecord",
+    type: "Prescription",
     system: "http://snomed.info/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/PrescriptionRecord",
     code: "440545006",
     text: "Prescription record",
+  },
+  {
+    type: "DiagnosticReport",
+    system: "http://snomed.info/sct",
+    url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportRecord",
+    code: "721981007",
+    text: "Diagnostic studies report",
   },
 ] as const;
 
