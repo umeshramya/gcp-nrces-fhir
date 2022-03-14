@@ -60,15 +60,15 @@ const createPatient = async () => {
 // createPatient()
 
 const getPatient = async () => {
-  const id = '11752440-b821-4173-9a69-ee585a0b281a'
+  const id = '00ce344c-244e-4162-ad99-8c52726f6fe1'
   const res = await new GcpFhirCRUD().getFhirResource(id, "Patient");
-
+  console.log(res.data)
   const body = patient.convertFhirToObject(res.data);
   console.log(body)
 }
 
 
-// getPatient();
+getPatient();
 
 
 
