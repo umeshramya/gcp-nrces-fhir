@@ -68,7 +68,7 @@ const getPatient = async () => {
 }
 
 
-getPatient();
+// getPatient();
 
 
 
@@ -163,18 +163,32 @@ const searchsimple = async () => {
 
   // const res = await gcpFhirSearch.search("Composition", `_id=43213a09-d546-4e44-8759-4a6ce4fa2087&_include=Composition:author&_include=Composition:entry`)
   // const res = await new Composition().getWithIncludes(`43213a09-d546-4e44-8759-4a6ce4fa2087`)
-  const res = await new Composition().getCompositionsByPatient(`e101abe6-11ae-403d-8c2e-a34f97ceccae`)
-  // console.log(res.data.entry)
-  res.data.entry.map(el => {
-    console.log(el.resource.subject)
-  })
+  // const res = await new Composition().getCompositionsByPatient(`e101abe6-11ae-403d-8c2e-a34f97ceccae`)
+  // // console.log(res.data.entry)
+  // res.data.entry.map(el => {
+  //   console.log(el.resource.subject)
+  // })
   // res.data.entry.map(el => {
   //   console.log(el.resource.author)
   //   // console.log(el)
   // })
+  let patinetId = "41"
+  let mobile = "9343403620"
+  const fhirRes = await gcpFhirSearch.search(
+    "Patient",
+    // `identifier=https://www.nicehms.com|${patinetId}&phone:contain=${mobile}&_revinclude=Encounter:patient`
+    // `phone:contain=${mobile}`
+    `name=UMESH RAMACHANDRA BILAGI`
+  );
+
+  // name: [ { text: 'UMESH RAMACHANDRA BILAGI' } ],
+  // resourceType: 'Patient',
+  // telecom: [ { system: 'phone', use: 'mobile', value: '9343403620' } ],
+  console.log(fhirRes.data.entry[0].resource)
+
 }
 
-// searchsimple()
+searchsimple()
 
 // console.log(EncounterStatusArray.map(el=>{
 //     return el
@@ -241,7 +255,7 @@ const getEnconter = async () => {
   console.log(data)
 }
 
-getEnconter()
+// getEnconter()
 
 
 
