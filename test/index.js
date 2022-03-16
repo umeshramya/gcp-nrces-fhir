@@ -176,15 +176,14 @@ const searchsimple = async () => {
   let mobile = "9343403620"
   const fhirRes = await gcpFhirSearch.search(
     "Patient",
-    // `identifier=https://www.nicehms.com|${patinetId}&phone:contain=${mobile}&_revinclude=Encounter:patient`
-    // `phone:contain=${mobile}`
-    `name=UMESH RAMACHANDRA BILAGI`
+    `identifier=https://www.nicehms.com|${patinetId}&phone=${mobile}&_revinclude=Encounter:patient`
+
   );
 
   // name: [ { text: 'UMESH RAMACHANDRA BILAGI' } ],
   // resourceType: 'Patient',
   // telecom: [ { system: 'phone', use: 'mobile', value: '9343403620' } ],
-  console.log(fhirRes.data.entry[0].resource)
+  console.log(fhirRes.data.entry)
 
 }
 
