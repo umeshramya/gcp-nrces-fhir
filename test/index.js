@@ -60,7 +60,7 @@ const createPatient = async () => {
 // createPatient()
 
 const getPatient = async () => {
-  const id = '00ce344c-244e-4162-ad99-8c52726f6fe1'
+  const id = "00ce344c-244e-4162-ad99-8c52726f6fe1"
   const res = await new GcpFhirCRUD().getFhirResource(id, "Patient");
   console.log(res.data)
   const body = patient.convertFhirToObject(res.data);
@@ -172,12 +172,17 @@ const searchsimple = async () => {
   //   console.log(el.resource.author)
   //   // console.log(el)
   // })
-  let patinetId = "41"
+  let patinetId = "37"
+  let id="00ce344c-244e-4162-ad99-8c52726f6fe1"
   let mobile = "9343403620"
+  // const fhirRes = await gcpFhirSearch.search(
+  //   "Patient",
+  //   `_id=${id}&_revinclude=Encounter:patient`
+
+  // );
   const fhirRes = await gcpFhirSearch.search(
     "Patient",
     `identifier=https://www.nicehms.com|${patinetId}&phone=${mobile}&_revinclude=Encounter:patient`
-
   );
 
   // name: [ { text: 'UMESH RAMACHANDRA BILAGI' } ],
