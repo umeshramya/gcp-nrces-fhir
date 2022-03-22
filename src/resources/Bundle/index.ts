@@ -2,7 +2,7 @@ import ResourceFactory from "../../classess/ResourceFactory";
 import { COMPOSITOIN } from "../Composition";
 import GcpFhirCrud from "../../classess/gcp";
 import ResourceMain from "../ResourceMai";
-import { BINARY } from "../Binary";
+import { Binary, BINARY } from "../Binary";
 
 export class BundelMain extends ResourceMain {
   async getentries(composition: any, pdfData: string) {
@@ -57,7 +57,7 @@ export class BundelMain extends ResourceMain {
       },
       {
         fullUrl: "Binary/1",
-        resource: new ResourceFactory("Binary").getFHIR<BINARY>({
+        resource: new Binary().getFHIR({
           id: "1",
           data: pdfData,
         }),

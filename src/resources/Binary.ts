@@ -17,6 +17,7 @@ export class Binary extends ResourceMain implements ResourceMaster {
       contentType: "application/pdf",
       data: options.data,
     };
+    return body;
   }
   convertFhirToObject(options: any): BINARY {
     let ret: BINARY = {
