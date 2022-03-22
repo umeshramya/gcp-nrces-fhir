@@ -4,7 +4,7 @@ import { IDENTTIFIER, resourceType } from "../../config";
 import GcpFhirCrud from "../../classess/gcp";
 import { BundelMain } from ".";
 
-export class PrescriptionBundle extends ResourceMain implements ResourceMaster {
+export class PrescriptionBundle extends BundelMain implements ResourceMaster {
   async getFHIR(options: {
     id?: string;
     identifier?: IDENTTIFIER;

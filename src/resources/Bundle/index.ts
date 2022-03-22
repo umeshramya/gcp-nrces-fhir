@@ -1,8 +1,9 @@
 import ResourceFactory from "../../classess/ResourceFactory";
-import { COMPOSITOIN } from "../Composition";
+import { COMPOSITOIN, emptySign } from "../Composition";
 import GcpFhirCrud from "../../classess/gcp";
 import ResourceMain from "../ResourceMai";
 import { Binary, BINARY } from "../Binary";
+import { CreatePdf } from "js-ts-report";
 
 export class BundelMain extends ResourceMain {
   async getentries(
@@ -72,5 +73,19 @@ export class BundelMain extends ResourceMain {
     });
 
     return { entry, compositionObj };
+  }
+
+  async getpdf(options: { html: string; qrCode: string }): Promise<string> {
+    let pdf = new CreatePdf();
+    const ret = await pdf.create(options.html, {
+      base64: true,
+      paperSize: "A4",
+      qrcode: options.qrCode,
+      esign: {
+        image: emptySign,
+        nameLine1: "Scan QR code to get full document",
+      },
+    });
+    return ret as any;
   }
 }

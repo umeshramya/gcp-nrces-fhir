@@ -911,23 +911,21 @@ const getBundle = async()=>{
     const composition= new Composition()
     const compositionObj = composition.convertFhirToObject(compositionResource.data)
 
-    console.log(compositionObj)
-    
-    const html =compositionResource.data.text.div
-    const pdf = await composition.getPdf({
-      "html" : html,
-      "base64" : false,
-      "paperSize" : "a4",
-      "composition" : compositionObj,
-      "nameLine1" : "dr Umesh R Bilagi",
-      "signBase64" : emptySign,
-      "qrCode" : ""
-      
+ 
+    const html =`${compositionResource.data.text.div}`.trim()
+    const pdf =await new PrescriptionBundle().getpdf({
+      html: html,
+      "qrCode" : `https://psychic-city-328609.el.r.appspot.com/api/${compositionObj.id}?bundletype=Prescription`
     })
+
+    console.log(pdf)
+    return
   
-    const bundle =await new PrescriptionBundle().getFHIR({"composition" : compositionResource.data , "pdfData" : "pdf"})
+    const bundle =await new PrescriptionBundle().getFHIR({"composition" : compositionResource.data , "pdfData" : pdf})
   
-    console.log(bundle)
+
+
+    console.log(bundle.entry)
   } catch (error) {
    console.log(error) 
   }
