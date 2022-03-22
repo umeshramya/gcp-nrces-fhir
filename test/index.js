@@ -2,6 +2,7 @@ require('dotenv').config("env")
 const v4 = require("uuid").v4
 const { cpSync } = require('fs')
 const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory, PrescriptionBundle } = require("gcp-nrces-fhir")
+const { emptySign } = require('gcp-nrces-fhir/lib/resources/Composition')
 
 
 
@@ -898,17 +899,39 @@ const getCompositoon=async()=>{
   id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
   const res =await  new GcpFhirCRUD().getFhirResource(id, "Composition");
   const obj = new ResourceFactory("Composition").convertFhirToObject(res.data);
-  console.log(obj)
+  console.log(obj.section[0].entry)
 }
 
 // getCompositoon()
 
 const getBundle = async()=>{
-  id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
-  const composition = await  new GcpFhirCRUD().getFhirResource(id, "Composition");
-  const bundle =await new PrescriptionBundle().getFHIR({"composition" : composition.data})
+  try {
+    id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
+    const compositionResource = await  new GcpFhirCRUD().getFhirResource(id, "Composition");
+    const composition= new Composition()
+    const compositionObj = composition.convertFhirToObject(compositionResource.data)
 
-  console.log(bundle)
+    console.log(compositionObj)
+    
+    const html =compositionResource.data.text.div
+    const pdf = await composition.getPdf({
+      "html" : html,
+      "base64" : false,
+      "paperSize" : "a4",
+      "composition" : compositionObj,
+      "nameLine1" : "dr Umesh R Bilagi",
+      "signBase64" : emptySign,
+      "qrCode" : ""
+      
+    })
+  
+    const bundle =await new PrescriptionBundle().getFHIR({"composition" : compositionResource.data , "pdfData" : "pdf"})
+  
+    console.log(bundle)
+  } catch (error) {
+   console.log(error) 
+  }
+
 }
 
 

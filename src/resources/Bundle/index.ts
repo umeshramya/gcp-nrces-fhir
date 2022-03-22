@@ -5,7 +5,10 @@ import ResourceMain from "../ResourceMai";
 import { Binary, BINARY } from "../Binary";
 
 export class BundelMain extends ResourceMain {
-  async getentries(composition: any, pdfData: string) {
+  async getentries(
+    composition: any,
+    pdfData: string
+  ): Promise<{ entry: any[]; compositionObj: COMPOSITOIN }> {
     const compositionObj = new ResourceFactory(
       "Composition"
     ).convertFhirToObject<COMPOSITOIN>(composition);
@@ -68,6 +71,6 @@ export class BundelMain extends ResourceMain {
       entry.push(el);
     });
 
-    return entry;
+    return { entry, compositionObj };
   }
 }

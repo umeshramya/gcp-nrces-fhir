@@ -81,7 +81,6 @@ export default class ResourceFactory
     let ret: any;
     // @ts-ignore
     if (resource.id) {
-      // @ts-ignore
       ret = await gcpFhirCrud.updateFhirResource(
         resource,
         // @ts-ignore
