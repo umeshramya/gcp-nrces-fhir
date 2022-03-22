@@ -11,7 +11,8 @@ import { MedicationRequest } from "../resources/MedicationRequest";
 import { MedicationStatement } from "../resources/MedicationStatement";
 import { Organization } from "../resources/Organization";
 import { Patient } from "../resources/Patient";
-import { Practitioner } from "../resources/Practitioner";
+import { Practitioner } from "../resources/Practitioner";\
+import { Binary } from "../resources/Binary";
 import { Procedure } from "../resources/Procedure";
 import ResourceMain from "../resources/ResourceMai";
 import GcpFhirCRUD from "./gcp";
@@ -51,6 +52,8 @@ export default class ResourceFactory extends ResourceMain implements ResourceMas
             this.resource = new MedicationRequest()
         } else if (this.resourceType === "MedicationStatement") {
             this.resource = new MedicationStatement()
+        }else if(this.resourceType ="Binary"){
+            this.resource = new Binary()
         }
 
     }

@@ -67,6 +67,8 @@ import {
 
 import { ServiceRequest, SERVICE_REQUEST } from "./resources/ServiceRequest";
 
+import { PrescriptionBundle } from "./resources/Bundle/Prescription";
+
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export type { resourceType };
 export { PATIENT, PatientResource, Patient };
@@ -131,3 +133,5 @@ export interface GcpNrcesFhirType {
   Credentials: Credentials;
   DatabasePath: DatabasePath;
 }
+
+export { PrescriptionBundle };

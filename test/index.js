@@ -1,7 +1,7 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
 const { cpSync } = require('fs')
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory, PrescriptionBundle } = require("gcp-nrces-fhir")
 
 
 
@@ -192,7 +192,7 @@ const searchsimple = async () => {
 
 }
 
-searchsimple()
+// searchsimple()
 
 // console.log(EncounterStatusArray.map(el=>{
 //     return el
@@ -892,3 +892,24 @@ const comOPD = async () => {
 
 // comOPD();
 
+
+
+const getCompositoon=async()=>{
+  id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
+  const res =await  new GcpFhirCRUD().getFhirResource(id, "Composition");
+  const obj = new ResourceFactory("Composition").convertFhirToObject(res.data);
+  console.log(obj)
+}
+
+// getCompositoon()
+
+const getBundle = async()=>{
+  id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
+  const composition = await  new GcpFhirCRUD().getFhirResource(id, "Composition");
+  const bundle =await new PrescriptionBundle().getFHIR({"composition" : composition.data})
+
+  console.log(bundle)
+}
+
+
+getBundle()
