@@ -919,7 +919,7 @@ const getBundle = async()=>{
     })
 
     console.log(pdf)
-    return
+    
   
     const bundle =await new PrescriptionBundle().getFHIR({"composition" : compositionResource.data , "pdfData" : pdf})
   
