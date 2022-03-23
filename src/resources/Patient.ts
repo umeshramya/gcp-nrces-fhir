@@ -3,6 +3,7 @@ import { ResourceMaster } from "../Interfaces";
 
 export interface PATIENT {
   id?: string;
+  internalId?: string;
   name: string;
   gender: string;
   healthNumber?: string;
@@ -16,6 +17,23 @@ export interface PATIENT {
 export class Patient implements ResourceMaster {
   getFHIR(options: PATIENT) {
     const identifiers: IDENTTIFIER[] = [];
+    if (options.internalId) {
+      const id: IDENTTIFIER = {
+        type: {
+          coding: [
+            {
+              system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+              code: "MR",
+              display: "Medical record number",
+            },
+          ],
+        },
+        system: "https://www.nicehms.com/internalid",
+        value: `${options.internalId}`,
+      };
+
+      identifiers.push(id);
+    }
 
     if (options.healthNumber) {
       const id: IDENTTIFIER = {
@@ -122,6 +140,14 @@ export class Patient implements ResourceMaster {
 
       if (mrn.length > 0) {
         ret.MRN = mrn[0].value;
+      }
+
+      const internalId: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://www.nicehms.com/internalid"
+      );
+
+      if (internalId.length > 0) {
+        ret.internalId = internalId[0].value;
       }
 
       const healthNumber: any[] = options.identifier.filter(
