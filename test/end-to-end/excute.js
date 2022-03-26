@@ -1,7 +1,7 @@
 const { setMedicationRequest } = require("./medication")
 const { callFunction, resources } = require("./index");
 const { setCondition } = require("./condion");
-const { PrescriptionRecord, GcpFhirCRUD } = require("gcp-nrces-fhir");
+const { PrescriptionRecord, GcpFhirCRUD, Composition } = require("gcp-nrces-fhir");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 class excute {
@@ -34,7 +34,7 @@ class excute {
         const prescription = new PrescriptionRecord();
         const res = await prescription.create({
             "composition" : {
-                "author" : [resources.practioner],
+                "author" : [{"display" : resources.practioner.name, "reference" : `Practitioner/${resources.practioner.id}`}],
                 "date" : new Date().toISOString(),
                 "encounter" : resources.encounter,
                 "encounterId" : resources.encounter.id,
@@ -52,6 +52,8 @@ class excute {
 
         // console.log(res.data)
     }
+
+
 
 }
 
