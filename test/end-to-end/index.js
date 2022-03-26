@@ -6,12 +6,12 @@ const { emptySign } = require('gcp-nrces-fhir/lib/resources/Composition');
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 const resourceIds = {
-    organizarionId : null,
-    patientId : null,
+    organizarionId: null,
+    patientId: null,
     practionerId: null,
-    encounterId:null,
-    conditonId:null,
-    medicationsRequestId:null
+    encounterId: null,
+    conditonId: null,
+    medicationsRequestId: null
 };
 
 /**
@@ -32,8 +32,8 @@ const setOrganization = async () => {
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Organization");
     const data = organization.convertFhirToObject(res.data)
     //   console.log(data)
-  resourceIds.organizarionId=data.id;
-  
+    resourceIds.organizarionId = data.id;
+
 }
 
 /**
@@ -51,7 +51,7 @@ const setPatient = async () => {
         "dob": "1969-09-29",
         "MRN": "5002",
         "organizationId": resourceIds.organizarionId,
-        "internalId" : "156141",
+        "internalId": "156141",
     })
 
     let res = await gcpFhirCRUD.createFhirResource(body, "Patient")
@@ -80,19 +80,43 @@ const setPractinioner = async () => {
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Practitioner");
     const data = practitioner.convertFhirToObject(res.data)
     //   console.log(data);
-    resourceIds.practionerId= data.id
+    resourceIds.practionerId = data.id
 
 }
 
-const callFunction =async()=>{
+
+const setEncounter = async () => {
+    const encounter = new Encounter();
+    const body = encounter.getFHIR({
+        "class": { "code": "IMP", "display": "in-patient" },
+        "dischargeDisposition": { "code": "home", "display": "home" },
+        "endDate": new Date().toISOString(),
+        "startDate": new Date().toISOString(),
+        "identifier": new Date().getTime().toString(),
+        "patientId": resourceIds.patientId,
+        "text": "discherged Home",
+        "status": "finished"
+    })
+
+    let res = await gcpFhirCRUD.createFhirResource(body, "Encounter");
+    res = await gcpFhirCRUD.getFhirResource(res.data.id, "Encounter");
+    const data = encounter.convertFhirToObject(res.data);
+    resourceIds.encounterId = data.id;
+    console.log(data)
+}
+
+
+
+const callFunction = async () => {
     await setOrganization();
     await setPatient();
     await setPractinioner();
+    await setEncounter();
     console.log(resourceIds);
 }
 
-callFunction();
 
 
-module.exports = { callFunction, resourceIds};
+
+module.exports = { callFunction, resourceIds };
 
