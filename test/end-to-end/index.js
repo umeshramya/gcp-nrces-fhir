@@ -14,8 +14,12 @@ const resourceIds = {
     medicationsRequestId:null
 };
 
-
-const createOrganization = async () => {
+/**
+ * creates orgatniztion,
+ * gets it convert it to object 
+ * assign to resourceIds
+ */
+const setOrganization = async () => {
     const organization = new Organization()
     const body = organization.getFHIR({
         "email": "jjhhubli@gmail.com",
@@ -32,8 +36,12 @@ const createOrganization = async () => {
   
 }
 
-
-const createPatient = async () => {
+/**
+ * creates Patient,
+ * gets it convert it to object 
+ * assign to resourceIds
+ */
+const setPatient = async () => {
     const patient = new Patient();
     const body = patient.getFHIR({
         "name": "UMESH R BILAGI New",
@@ -54,8 +62,12 @@ const createPatient = async () => {
 
 }
 
-
-const createPractinioner = async () => {
+/**
+ * creates Practioner,
+ * gets it convert it to object 
+ * assign to resourceIds
+ */
+const setPractinioner = async () => {
     const practitioner = new Practitioner()
     const body = practitioner.getFHIR({
         "medicalLicenseNumber": "KMC 35167",
@@ -73,9 +85,9 @@ const createPractinioner = async () => {
 }
 
 const callFunction =async()=>{
-    await createOrganization();
-    await createPatient();
-    await createPractinioner();
+    await setOrganization();
+    await setPatient();
+    await setPractinioner();
     console.log(resourceIds);
 }
 
