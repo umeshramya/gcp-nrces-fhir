@@ -110,7 +110,6 @@ const callFunction = async () => {
     await setPatient();
     await setPractinioner();
     await setEncounter();
-    console.log(resources);
 }
 
 

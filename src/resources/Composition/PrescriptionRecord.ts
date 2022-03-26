@@ -35,7 +35,10 @@ export class PrescriptionRecord extends Composition implements Records {
       type: "MedicationRequest",
     });
     options.composition.documentDatahtml = options.medicationRequest.text.div;
+
     const body = this.getFHIR(options.composition);
+    console.log(body.section[0].entry);
+    return;
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
