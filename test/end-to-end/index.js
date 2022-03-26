@@ -22,11 +22,68 @@ const createOrganization = async () => {
     "ndhmFacilityNumber": "JJH_123",
     "phone": "08362260624",
     "providerNumber": "123",
+  });
+  let res = await gcpFhirCRUD.createFhirResource(body, "Organization")
+   res = await gcpFhirCRUD.getFhirResource(res.data.id, "Organization");
+  const data = organization.convertFhirToObject(res.data)
+//   console.log(data)
+  resourceIds.organizarionId=data.id;
+  
+}
+
+
+
+
+const createPatient = async () => {
+    const patient = new Patient();
+  const body = patient.getFHIR({
+    "name": "UMESH R BILAGI New",
+    "gender": "Male",
+    "mobile": "9343403620",
+    "healthNumber": "23-3457-234",
+    "dob": "1969-09-29",
+    "MRN": "5002",
+    "organizationId": resourceIds.organizarionId,
+    "internalId" : "156141",
   })
 
-  const res = await gcpFhirCRUD.createFhirResource(body, "Organization")
-  console.log(res.data)
+  let res = await gcpFhirCRUD.createFhirResource(body, "Patient")
+  res = await gcpFhirCRUD.getFhirResource(res.data.id, "Patient");
+  const data = patient.convertFhirToObject(res.data);
+//   console.log(data);
+  resourceIds.patientId = data.id;
 
 }
 
-createOrganization();
+
+
+const createPractinioner = async () => {
+    const practitioner = new Practitioner()
+  const body = practitioner.getFHIR({
+    "medicalLicenseNumber": "KMC 35167",
+    "name": "Dr Umesh R Bilagi",
+    "ndhmProfessionalId": "123456",
+    "qualification": "MD DM Cardiology"
+  })
+
+  let res = await gcpFhirCRUD.createFhirResource(body, "Practitioner")
+  res = await gcpFhirCRUD.getFhirResource(res.data.id, "Practitioner");
+  const data = practitioner.convertFhirToObject(res.data)
+//   console.log(data);
+  resourceIds.practionerId= data.id
+
+}
+
+
+const callFunction =async()=>{
+    await createOrganization();
+    await createPatient();
+    await createPractinioner();
+    console.log(resourceIds);
+}
+
+callFunction()
+
+
+module.exports = { callFunction, resourceIds}
+
