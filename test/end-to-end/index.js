@@ -5,13 +5,13 @@ const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientReso
 const { emptySign } = require('gcp-nrces-fhir/lib/resources/Composition');
 const gcpFhirCRUD = new GcpFhirCRUD();
 
-const resourceIds = {
-    organizarionId: null,
-    patientId: null,
-    practionerId: null,
-    encounterId: null,
-    conditonId: null,
-    medicationsRequestId: null
+const resources = {
+    organizarion: null,
+    patient: null,
+    practioner: null,
+    encounter: null,
+    conditon: null,
+    medicationsRequest: null
 };
 
 /**
@@ -30,9 +30,9 @@ const setOrganization = async () => {
     });
     let res = await gcpFhirCRUD.createFhirResource(body, "Organization")
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Organization");
-    const data = organization.convertFhirToObject(res.data)
-    //   console.log(data)
-    resourceIds.organizarionId = data.id;
+    resources.organizarion = organization.convertFhirToObject(res.data)
+
+
 
 }
 
@@ -50,15 +50,15 @@ const setPatient = async () => {
         "healthNumber": "23-3457-234",
         "dob": "1969-09-29",
         "MRN": "5002",
-        "organizationId": resourceIds.organizarionId,
+        "organizationId": resources.organizarion.id,
         "internalId": "156141",
     })
 
     let res = await gcpFhirCRUD.createFhirResource(body, "Patient")
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Patient");
-    const data = patient.convertFhirToObject(res.data);
-    //   console.log(data);
-    resourceIds.patientId = data.id;
+    resources.patient = patient.convertFhirToObject(res.data);
+
+
 
 }
 
@@ -78,9 +78,8 @@ const setPractinioner = async () => {
 
     let res = await gcpFhirCRUD.createFhirResource(body, "Practitioner")
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Practitioner");
-    const data = practitioner.convertFhirToObject(res.data)
-    //   console.log(data);
-    resourceIds.practionerId = data.id
+    resources.practioner = practitioner.convertFhirToObject(res.data)
+
 
 }
 
@@ -93,16 +92,15 @@ const setEncounter = async () => {
         "endDate": new Date().toISOString(),
         "startDate": new Date().toISOString(),
         "identifier": new Date().getTime().toString(),
-        "patientId": resourceIds.patientId,
+        "patientId": resources.patient.id,
         "text": "discherged Home",
         "status": "finished"
     })
 
     let res = await gcpFhirCRUD.createFhirResource(body, "Encounter");
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Encounter");
-    const data = encounter.convertFhirToObject(res.data);
-    resourceIds.encounterId = data.id;
-    console.log(data)
+    resources.encounter = encounter.convertFhirToObject(res.data);
+
 }
 
 
@@ -112,11 +110,11 @@ const callFunction = async () => {
     await setPatient();
     await setPractinioner();
     await setEncounter();
-    console.log(resourceIds);
+    console.log(resources);
 }
 
 
 
 
-module.exports = { callFunction, resourceIds };
+module.exports = { callFunction, resources };
 
