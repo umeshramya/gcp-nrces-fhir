@@ -9,42 +9,21 @@ export class PrescriptionRecord extends Composition implements Records {
     medicationRequest: any;
     diagnosis?: any;
   }) => {
-    // if (options.diagnosis) {
-    //   options.composition.section.push(
-    //     //   {
-    //     //   title: "Diagnosis",
-    //     //   code: {
-    //     //     coding: [
-    //     //       {
-    //     //         system: "http://snomed.info/sct",
-    //     //         code: "422843007",
-    //     //         display: "Diagnosis",
-    //     //       },
-    //     //     ],
-    //     //   },
-    //     //   entry: [
-    //     //     {
-    //     //       reference: `Condition/${options.diagnosis.id}`,
-    //     //     },
-    //     //   ],
-    //     // }
-    //     {
-    //       reference: `Condition/${options.diagnosis.id}`,
-    //       type: "Condition",
-    //     }
-    //   );
-    //   options.composition.documentDatahtml = `${options.diagnosis.text.div}`;
-    // }
+    if (options.diagnosis) {
+      options.composition.section.push({
+        reference: `Condition/${options.diagnosis.id}`,
+        type: "Condition",
+      });
+      options.composition.documentDatahtml = `${options.diagnosis.text.div}`;
+    }
 
     options.composition.section.push({
       reference: `MedicationRequest/${options.medicationRequest.id}`,
       type: "MedicationRequest",
     });
-    options.composition.documentDatahtml = options.medicationRequest.text.div;
+    options.composition.documentDatahtml += options.medicationRequest.text.div;
 
     const body = this.getFHIR(options.composition);
-    // console.log(body);
-    // // return;
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
@@ -61,23 +40,10 @@ export class PrescriptionRecord extends Composition implements Records {
 
     if (options.diagnosis) {
       options.composition.section.push({
-        title: "Diagnosis",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "422843007",
-              display: "Diagnosis",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `Condition/${options.diagnosis.id}`,
-          },
-        ],
+        reference: `Condition/${options.diagnosis.id}`,
+        type: "Condition",
       });
-      options.composition.documentDatahtml = `${options.diagnosis.text.div}`;
+      options.composition.documentDatahtml += `${options.diagnosis.text.div}`;
     }
     options.composition.section.push({
       reference: `MedicationRequest/${options.medicationRequest.id}`,
