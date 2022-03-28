@@ -1,1 +1,46 @@
-{"resourceType":"Observation","id":"finding-example-01","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Observation"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: finding-example-01</p><p><b>status</b>: final</p><p><b>code</b>: Respiratory rate <span>(Details : SNOMED CT code '780834008' = 'Respiratory rate normal', given as 'Respiratory rate normal')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 18 breaths/minute<span> (Details: UCUM code /min = '/min')</span></p><h3>ReferenceRanges</h3><table><tr><td>-</td><td><b>Low</b></td></tr><tr><td>*</td><td>12 breaths/minute<span> (Details: UCUM code /min = '/min')</span></td></tr><tr><td>-</td><td><b>High</b></td></tr><tr><td>*</td><td>20 breaths/minute<span> (Details: UCUM code /min = '/min')</span></td></tr></table></div>"},"status":"final","code":{"coding":[{"system":"http://snomed.info/sct","code":"20716004","display":"Respiratory rate normal"}],"text":"Respiratory rate normal"},"subject":{"reference":"Patient/1"},"performer":[{"reference":"Practitioner/1"}],"valueQuantity":{"value":18,"unit":"breaths/minute","system":"http://unitsofmeasure.org","code":"/min"},"referenceRange":[{"low":{"value":12,"unit":"breaths/minute","system":"http://unitsofmeasure.org","code":"/min"},"high":{"value":20,"unit":"breaths/minute","system":"http://unitsofmeasure.org","code":"/min"}}]}
+{
+  "resourceType": "Observation",
+  "id": "finding-example-01",
+  "meta": {
+    "profile": ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Observation"]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: finding-example-01</p><p><b>status</b>: final</p><p><b>code</b>: Respiratory rate <span>(Details : SNOMED CT code '780834008' = 'Respiratory rate normal', given as 'Respiratory rate normal')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 18 breaths/minute<span> (Details: UCUM code /min = '/min')</span></p><h3>ReferenceRanges</h3><table><tr><td>-</td><td><b>Low</b></td></tr><tr><td>*</td><td>12 breaths/minute<span> (Details: UCUM code /min = '/min')</span></td></tr><tr><td>-</td><td><b>High</b></td></tr><tr><td>*</td><td>20 breaths/minute<span> (Details: UCUM code /min = '/min')</span></td></tr></table></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "20716004",
+        "display": "Respiratory rate normal"
+      }
+    ],
+    "text": "Respiratory rate normal"
+  },
+  "subject": { "reference": "Patient/1" },
+  "performer": [{ "reference": "Practitioner/1" }],
+  "valueQuantity": {
+    "value": 18,
+    "unit": "breaths/minute",
+    "system": "http://unitsofmeasure.org",
+    "code": "/min"
+  },
+  "referenceRange": [
+    {
+      "low": {
+        "value": 12,
+        "unit": "breaths/minute",
+        "system": "http://unitsofmeasure.org",
+        "code": "/min"
+      },
+      "high": {
+        "value": 20,
+        "unit": "breaths/minute",
+        "system": "http://unitsofmeasure.org",
+        "code": "/min"
+      }
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { ResourceMaster } from "../Interfaces/index";
 import { CodeDisplay } from "../config/index";
+import ResourceMain from "./ResourceMai";
 
 export const procedureStatusArray = [
   "preparation",
@@ -22,7 +23,7 @@ export interface PROCEDURE {
   patientID: string;
   procedureDate: string;
 }
-export class Procedure implements ResourceMaster {
+export class Procedure extends ResourceMain implements ResourceMaster {
   getFHIR(options: PROCEDURE) {
     const getProcedure = (): string => {
       let ret = "";
