@@ -43,13 +43,13 @@ export class PrescriptionRecord extends Composition implements Records {
         reference: `Condition/${options.diagnosis.id}`,
         type: "Condition",
       });
-      options.composition.documentDatahtml += `${options.diagnosis.text.div}`;
+      options.composition.documentDatahtml = `${options.diagnosis.text.div}`;
     }
     options.composition.section.push({
       reference: `MedicationRequest/${options.medicationRequest.id}`,
       type: "MedicationRequest",
     });
-    options.composition.documentDatahtml = options.medicationRequest.text.div;
+    options.composition.documentDatahtml += options.medicationRequest.text.div;
     const body = this.getFHIR(options.composition);
 
     const gcpFhirCrud = new GcpFhirCRUD();
