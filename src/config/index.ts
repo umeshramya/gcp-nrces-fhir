@@ -57,7 +57,7 @@ export interface CODEABLE_CONCEPT {
   coding: coding[]; // Code defined by a terminology system
   text?: string; // Plain text representation of the concept
 }
-interface PERIOD {
+export interface PERIOD {
   start: string;
   end: string;
 }
