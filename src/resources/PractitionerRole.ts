@@ -1,8 +1,14 @@
-import { IDENTTIFIER, PERIOD } from "../config";
+import { CodeDisplay, IDENTTIFIER, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { ORGANIZATION } from "./Organization";
 import { PRACTITIONER } from "./Practitioner";
 import ResourceMain from "./ResourceMai";
+import { practionerRoles, practitionerRoleSpecialities } from "../config/practionerRole"
+import { type } from "os";
+
+type PractionerRoles = typeof practionerRoles[number]
+type PractitionerRoleSpecialities = typeof practitionerRoleSpecialities[number]
+
 
 export interface PRACTITIONER_ROLE {
   id?: string;
@@ -12,6 +18,10 @@ export interface PRACTITIONER_ROLE {
   period: PERIOD;
   practitioner: PRACTITIONER;
   organization: ORGANIZATION;
+  practionerRole: PractionerRoles[]
+  practitionerRoleSpecialities: PractitionerRoleSpecialities[]
+  mobile: string;
+  email: string;
 }
 export class PractitionerRole extends ResourceMain implements ResourceMaster {
   getFHIR(options: PRACTITIONER_ROLE) {
@@ -70,6 +80,24 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       });
     }
 
+    const code: CodeDisplay[] = options.practionerRole.map(el => {
+      let ret: CodeDisplay = {
+        "code": el.code,
+        "display": el.display,
+        "system": "http://snomed.info/sct"
+      }
+      return ret;
+    })
+
+    const speciality: CodeDisplay[] = options.practitionerRoleSpecialities.map(el => {
+      let ret: CodeDisplay = {
+        "code": el.code,
+        "display": el.display,
+        "system": "http://snomed.info/sct"
+      }
+      return ret;
+    })
+
     const body = {
       resourceType: "PractitionerRole",
       id: options.id,
@@ -94,35 +122,23 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       },
       code: [
         {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "85733003",
-              display: "General pathologist",
-            },
-          ],
+          coding: code
         },
       ],
       specialty: [
         {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "408443003",
-              display: "General medical practice",
-            },
-          ],
+          coding: speciality
         },
       ],
       telecom: [
         {
           system: "phone",
-          value: "(03) 5555 6473",
+          value: options.mobile,
           use: "work",
         },
         {
           system: "email",
-          value: "def.southern@example.org",
+          value: options.email,
           use: "work",
         },
       ],
@@ -155,4 +171,11 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
     throw new Error("Method not implemented.");
   }
   statusArray?: Function | undefined;
+
+  practionerRoles(): PractionerRoles[] {
+    return practionerRoles as any
+  }
+  practitionerRoleSpecialities(): PractitionerRoleSpecialities[] {
+    return practitionerRoleSpecialities as any
+  }
 }
