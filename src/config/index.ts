@@ -34,6 +34,7 @@ const resourceTypeArray = [
   "MedicationRequest",
   "DocumentReference",
   "Binary",
+  "PractitionerRole",
 ] as const;
 
 type resourceType = typeof resourceTypeArray[number];

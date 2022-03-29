@@ -1,7 +1,8 @@
 import { type } from "os";
 import { PATIENT, PRACTITIONER } from "..";
-import { CodeDisplay } from "../config";
+import { CodeDisplay, resourceType } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { ORGANIZATION } from "./Organization";
 import ResourceMain from "./ResourceMai";
 
 const ServiceRequestStatusArray = [
@@ -25,6 +26,12 @@ const ServiceRequestIntentArray = [
   "instance-order",
   "option",
 ] as const;
+
+interface requester {
+  resource: "Practitioner" | "Patient" | "Organization" | "PractitionerRole";
+  id: string;
+  display: string;
+}
 export type ServiceRequestIntent = typeof ServiceRequestIntentArray[number];
 
 export interface SERVICE_REQUEST {
@@ -33,7 +40,7 @@ export interface SERVICE_REQUEST {
   intent: ServiceRequestIntent;
   services: CodeDisplay[];
   patient: PATIENT;
-  practitioner: PRACTITIONER;
+  requester: requester;
   date: string;
 }
 
@@ -48,10 +55,6 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       }
 
       let ret = services;
-
-      // let ret = `<div>Following service/services requested by ${options.practitioner} to ${options.patient.name} with MRN ${options.patient.MRN} on ${new Date().toDateString()}</div>`
-      // ret = `${ret} <div>${services}</div>`
-      // ret = `${ret} <div>Order Status ${options.status}, Order Intent ${options.intent}</div>`
       return ret;
     };
     const body = {
@@ -77,14 +80,33 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       },
       occurrenceDateTime: options.date,
       requester: {
-        reference: `Practitioner/${options.practitioner.id}`,
-        display: options.practitioner.name,
+        reference: `${options.requester.resource}/${options.requester.id}`,
+        display: options.requester.display,
       },
     };
 
     return body;
   }
   convertFhirToObject(options: any): SERVICE_REQUEST {
+    const requester = (): requester => {
+      const resource = `${options.requester.reference}`.substring(
+        0,
+        `${options.requester.reference}`.indexOf("/")
+      ) as any;
+
+      const id = this.getIdFromReference({
+        ref: options.requester.reference,
+        resourceType: resource,
+      });
+
+      let ret: requester = {
+        display: options.requester.display,
+        id: id,
+        resource: resource,
+      };
+      return ret;
+    };
+
     let ret: SERVICE_REQUEST = {
       status: options.status,
       intent: options.intent,
@@ -96,13 +118,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         }),
         name: options.subject.display,
       } as any,
-      practitioner: {
-        id: this.getIdFromReference({
-          ref: options.requester.reference,
-          resourceType: "Practitioner",
-        }),
-        name: options.requester.display,
-      } as any,
+      requester: requester(),
       date: options.occurrenceDateTime,
       id: options.id,
     };
