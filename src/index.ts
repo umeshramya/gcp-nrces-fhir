@@ -9,6 +9,13 @@ import {
   PractitionerResource,
   Practitioner,
 } from "./resources/Practitioner";
+
+import {
+  PRACTITIONER_ROLE,
+  PractitionerRole,
+  NOT_AVAILABLE,
+  AVAILABLE_TIME,
+} from "./resources/PractitionerRole";
 import {
   ORGANIZATION,
   OrganizationResource,
@@ -74,6 +81,7 @@ export type { resourceType };
 export { PATIENT, PatientResource, Patient };
 export { ORGANIZATION, OrganizationResource, Organization };
 export { PRACTITIONER, PractitionerResource, Practitioner };
+export { PRACTITIONER_ROLE, PractitionerRole, NOT_AVAILABLE, AVAILABLE_TIME };
 
 export {
   ENCOUNTER,
