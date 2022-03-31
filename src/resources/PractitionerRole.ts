@@ -20,19 +20,27 @@ export interface AVAILABLE_TIME {
   availableEndTime: string;
 }
 
+export interface NOT_AVAILABLE {
+  description: string;
+  during: PERIOD;
+}
+
 export interface PRACTITIONER_ROLE {
   id?: string;
   ndhmFacilityId?: string;
   doctorId?: string;
   userId: string;
   period: PERIOD;
-  practitioner: PRACTITIONER;
-  organization: ORGANIZATION;
+  practitionerId: string;
+  practitionerName: string;
+  organizationId: string;
   practionerRole: PractionerRoles[];
   practitionerRoleSpecialities: PractitionerRoleSpecialities[];
   mobile: string;
   email: string;
-  availableTime: AVAILABLE_TIME[];
+  availableTime?: AVAILABLE_TIME[];
+  notAvailable?: NOT_AVAILABLE[];
+  availabilityExceptions: string;
 }
 
 export class PractitionerRole extends ResourceMain implements ResourceMaster {
@@ -128,11 +136,11 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       active: true,
       period: options.period,
       practitioner: {
-        reference: `Practitioner/${options.practitioner.id}`,
-        display: options.practitioner.name,
+        reference: `Practitioner/${options.practitionerId}`,
+        display: options.practitionerName,
       },
       organization: {
-        reference: `Organization/${options.organization.id}`,
+        reference: `Organization/${options.organizationId}`,
       },
       code: [
         {
@@ -157,21 +165,66 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
         },
       ],
       availableTime: options.availableTime,
-      notAvailable: [
-        {
-          description: "DEF will be on extended leave during Nov 2020",
-          during: {
-            start: "2020-11-01",
-            end: "2020-11-20",
-          },
-        },
-      ],
-      availabilityExceptions:
-        "Adam is generally unavailable on public holidays",
+      notAvailable: options.notAvailable,
+      availabilityExceptions: options.availabilityExceptions,
     };
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options: any): PRACTITIONER_ROLE {
+    const practionerRoles: PractionerRoles[] = options.practionerRole.map(
+      (el: CodeDisplay) => {
+        let ret: PractionerRoles = {
+          alias: "",
+          code: el.code as any,
+          display: el.display as any,
+        };
+        return ret;
+      }
+    );
+    const practitionerRoleSpecialities: PractitionerRoleSpecialities[] =
+      options.specialty.map((el: CodeDisplay) => {
+        let ret: PractitionerRoleSpecialities = {
+          alias: "",
+          code: el.code as any,
+          display: el.display as any,
+        };
+        return ret;
+      });
+    let ret: PRACTITIONER_ROLE = {
+      userId: options.telecom.filter(
+        (el: any) => el.type.coding[0].system == "http://www.nicehms.com/userId"
+      )[0].value,
+
+      ndhmFacilityId: options.telecom.filter(
+        (el: any) =>
+          el.type.coding[0].system == "http://www.ndhm.in/practitioners"
+      )[0].value,
+      doctorId: options.telecom.filter(
+        (el: any) =>
+          el.type.coding[0].system == "http://www.nicehms.com/doctorId"
+      )[0].value,
+      period: options.period,
+      practitionerId: this.getIdFromReference({
+        ref: options.practitioner.reference,
+        resourceType: "Practitioner",
+      }),
+      practitionerName: options.practitioner.display,
+      organizationId: this.getIdFromReference({
+        ref: options.organization.reference,
+        resourceType: "Organization",
+      }),
+      practionerRole: practionerRoles,
+      practitionerRoleSpecialities: practitionerRoleSpecialities,
+      mobile: options.telecom.filter(
+        (el: { system: string }) => el.system == "phone"
+      )[0].value,
+      email: options.telecom.filter(
+        (el: { system: string }) => el.system == "email"
+      )[0].value,
+      availabilityExceptions: options.availabilityExceptions,
+      availableTime: options.availableEndTime,
+      notAvailable: options.notAvailable,
+    };
+    return ret;
   }
   statusArray?: Function | undefined;
 
