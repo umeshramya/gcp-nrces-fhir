@@ -3,12 +3,22 @@ import { ResourceMaster } from "../Interfaces";
 import { ORGANIZATION } from "./Organization";
 import { PRACTITIONER } from "./Practitioner";
 import ResourceMain from "./ResourceMai";
-import { practionerRoles, practitionerRoleSpecialities } from "../config/practionerRole"
-import { type } from "os";
+import {
+  practionerRoles,
+  practitionerRoleSpecialities,
+  daysOfWeek,
+} from "../config/practionerRole";
 
-type PractionerRoles = typeof practionerRoles[number]
-type PractitionerRoleSpecialities = typeof practitionerRoleSpecialities[number]
+type PractionerRoles = typeof practionerRoles[number];
+type PractitionerRoleSpecialities = typeof practitionerRoleSpecialities[number];
+type DaysOfWeek = typeof daysOfWeek[number];
 
+export interface AVAILABLE_TIME {
+  daysOfWeek: DaysOfWeek[];
+  allDay?: boolean;
+  availableStartTime: string;
+  availableEndTime: string;
+}
 
 export interface PRACTITIONER_ROLE {
   id?: string;
@@ -18,11 +28,13 @@ export interface PRACTITIONER_ROLE {
   period: PERIOD;
   practitioner: PRACTITIONER;
   organization: ORGANIZATION;
-  practionerRole: PractionerRoles[]
-  practitionerRoleSpecialities: PractitionerRoleSpecialities[]
+  practionerRole: PractionerRoles[];
+  practitionerRoleSpecialities: PractitionerRoleSpecialities[];
   mobile: string;
   email: string;
+  availableTime: AVAILABLE_TIME[];
 }
+
 export class PractitionerRole extends ResourceMain implements ResourceMaster {
   getFHIR(options: PRACTITIONER_ROLE) {
     const getText = (): string => {
@@ -80,23 +92,25 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       });
     }
 
-    const code: CodeDisplay[] = options.practionerRole.map(el => {
+    const code: CodeDisplay[] = options.practionerRole.map((el) => {
       let ret: CodeDisplay = {
-        "code": el.code,
-        "display": el.display,
-        "system": "http://snomed.info/sct"
-      }
+        code: el.code,
+        display: el.display,
+        system: "http://snomed.info/sct",
+      };
       return ret;
-    })
+    });
 
-    const speciality: CodeDisplay[] = options.practitionerRoleSpecialities.map(el => {
-      let ret: CodeDisplay = {
-        "code": el.code,
-        "display": el.display,
-        "system": "http://snomed.info/sct"
+    const speciality: CodeDisplay[] = options.practitionerRoleSpecialities.map(
+      (el) => {
+        let ret: CodeDisplay = {
+          code: el.code,
+          display: el.display,
+          system: "http://snomed.info/sct",
+        };
+        return ret;
       }
-      return ret;
-    })
+    );
 
     const body = {
       resourceType: "PractitionerRole",
@@ -122,12 +136,12 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       },
       code: [
         {
-          coding: code
+          coding: code,
         },
       ],
       specialty: [
         {
-          coding: speciality
+          coding: speciality,
         },
       ],
       telecom: [
@@ -142,18 +156,7 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
           use: "work",
         },
       ],
-      availableTime: [
-        {
-          daysOfWeek: ["mon", "tue", "wed"],
-          availableStartTime: "09:00:00",
-          availableEndTime: "16:30:00",
-        },
-        {
-          daysOfWeek: ["thu", "fri"],
-          availableStartTime: "09:00:00",
-          availableEndTime: "12:00:00",
-        },
-      ],
+      availableTime: options.availableTime,
       notAvailable: [
         {
           description: "DEF will be on extended leave during Nov 2020",
@@ -173,9 +176,9 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
   statusArray?: Function | undefined;
 
   practionerRoles(): PractionerRoles[] {
-    return practionerRoles as any
+    return practionerRoles as any;
   }
   practitionerRoleSpecialities(): PractitionerRoleSpecialities[] {
-    return practitionerRoleSpecialities as any
+    return practitionerRoleSpecialities as any;
   }
 }
