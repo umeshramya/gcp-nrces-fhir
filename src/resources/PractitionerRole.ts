@@ -41,10 +41,11 @@ export interface PRACTITIONER_ROLE {
   availableTime?: AVAILABLE_TIME[];
   notAvailable?: NOT_AVAILABLE[];
   availabilityExceptions: string;
+  active: boolean;
 }
 
 export class PractitionerRole extends ResourceMain implements ResourceMaster {
-  getFHIR(options: PRACTITIONER_ROLE) {
+  getFHIR(options: PRACTITIONER_ROLE): any {
     const getText = (): string => {
       let ret: string = "";
 
@@ -133,7 +134,7 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
         div: `<div xmlns="http://www.w3.org/1999/xhtml">${getText()}</div>`,
       },
       identifier: identifiers,
-      active: true,
+      active: options.active,
       period: options.period,
       practitioner: {
         reference: `Practitioner/${options.practitionerId}`,
@@ -168,9 +169,11 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       notAvailable: options.notAvailable,
       availabilityExceptions: options.availabilityExceptions,
     };
+
+    return body;
   }
   convertFhirToObject(options: any): PRACTITIONER_ROLE {
-    const practionerRoles: PractionerRoles[] = options.practionerRole.map(
+    const practionerRoles: PractionerRoles[] = options.code[0].coding.map(
       (el: CodeDisplay) => {
         let ret: PractionerRoles = {
           alias: "",
@@ -181,7 +184,7 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       }
     );
     const practitionerRoleSpecialities: PractitionerRoleSpecialities[] =
-      options.specialty.map((el: CodeDisplay) => {
+      options.specialty[0].coding.map((el: CodeDisplay) => {
         let ret: PractitionerRoleSpecialities = {
           alias: "",
           code: el.code as any,
@@ -190,18 +193,8 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
         return ret;
       });
     let ret: PRACTITIONER_ROLE = {
-      userId: options.telecom.filter(
-        (el: any) => el.type.coding[0].system == "http://www.nicehms.com/userId"
-      )[0].value,
-
-      ndhmFacilityId: options.telecom.filter(
-        (el: any) =>
-          el.type.coding[0].system == "http://www.ndhm.in/practitioners"
-      )[0].value,
-      doctorId: options.telecom.filter(
-        (el: any) =>
-          el.type.coding[0].system == "http://www.nicehms.com/doctorId"
-      )[0].value,
+      active: options.active,
+      userId: this.getIdentifers("http://www.nicehms.com/userId", options),
       period: options.period,
       practitionerId: this.getIdFromReference({
         ref: options.practitioner.reference,
@@ -224,6 +217,14 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
       availableTime: options.availableEndTime,
       notAvailable: options.notAvailable,
     };
+
+    ret.ndhmFacilityId =
+      this.getIdentifers("http://www.ndhm.in/practitioners", options) ||
+      undefined;
+    ret.doctorId =
+      this.getIdentifers("http://www.nicehms.com/doctorId", options) ||
+      undefined;
+
     return ret;
   }
   statusArray?: Function | undefined;

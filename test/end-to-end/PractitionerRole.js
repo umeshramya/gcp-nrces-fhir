@@ -7,7 +7,8 @@ const { GcpFhirCRUD, GcpFhirSearch } = require("gcp-nrces-fhir");
 const gcpFhirCRUD = new GcpFhirCRUD();
 const { callFunction, resources } = require("./index");
 
-const setMedicationRequest = async () => {
+ const setPractiotionerRole = async () => {
+  
   const practitionerRole = new PractitionerRole();
   let body = practitionerRole.getFHIR({
     "availabilityExceptions" : "Not on Public holidays",
@@ -26,12 +27,21 @@ const setMedicationRequest = async () => {
       "availableEndTime" : "20:00:00",
     }
   ],
-  "notAvailable" : [{"description" : "Not end of this month", "during" : {"start" : "2022-04-01", "end" : "2022-04-15"} }],
+  "notAvailable" : [{"description" : "Not end of this month", "during" : {"start" :new Date().toISOString(), "end" : new Date().toISOString(),} }],
   "organizationId" : resources.organizarion.id,
   "practitionerId" : resources.practioner.id,
   "practitionerName" : resources.practioner.name,
   "practionerRole" : [{"code" : "106289002", "display" : "Cardiologist"}],
   "practitionerRoleSpecialities" : [{"code" : "394539006", "display" : "Cardiology"}],
-  "userId" : "1"
+  "userId" : "1",
+  "period" : {"start": new Date().toISOString(), "end" : new Date().toISOString()}
   })
+
+  const res =await gcpFhirCRUD.createFhirResource(body, "PractitionerRole");
+ let ret = practitionerRole.convertFhirToObject(res.data)
+ return ret
+
 };
+
+module.exports={setPractiotionerRole}
+
