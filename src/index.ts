@@ -83,6 +83,8 @@ export { ORGANIZATION, OrganizationResource, Organization };
 export { PRACTITIONER, PractitionerResource, Practitioner };
 export { PRACTITIONER_ROLE, PractitionerRole, NOT_AVAILABLE, AVAILABLE_TIME };
 
+import { Specimen, SPECIMEN } from "./resources/Specimen";
+
 export {
   ENCOUNTER,
   Encounter,
@@ -143,3 +145,5 @@ export interface GcpNrcesFhirType {
 }
 
 export { PrescriptionBundle };
+
+export { Specimen, SPECIMEN };

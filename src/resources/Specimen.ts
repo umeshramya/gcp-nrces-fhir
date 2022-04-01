@@ -1,5 +1,5 @@
 import { type } from "os";
-import { CodeDisplay } from "../config";
+import { CodeDisplay, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
 import ResourceMain from "./ResourceMai";
@@ -8,7 +8,7 @@ export interface SPECIMEN {
   id?: string;
   patientId: string;
   recivedDateTime: string;
-  collectedDateTime: string;
+  collection: { collectedDateTime: string; collectedPeriod?: PERIOD };
   /**
    * Specimen type blood serun , or plural fluid , HPR tissue etc
    * */
@@ -31,18 +31,19 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       },
       subject: { reference: `Patient/${options.patientId}` },
       receivedTime: options.recivedDateTime,
-      collection: { collectedDateTime: options.collectedDateTime },
+      collection: options.collection,
     };
   }
   convertFhirToObject(options: any) {
     let ret: SPECIMEN = {
       patientId: this.getIdFromReference({
-        "ref": options.subject.reference, "resourceType": "Patient"
+        ref: options.subject.reference,
+        resourceType: "Patient",
       }),
-      recivedDateTime: "",
-      collectedDateTime: "",
-      type: []
-    }
+      recivedDateTime: options.receivedTime,
+      collection: options.collection,
+      type: options.coding,
+    };
     return ret;
   }
   statusArray?: Function | undefined;

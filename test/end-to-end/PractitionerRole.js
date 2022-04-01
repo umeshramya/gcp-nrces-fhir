@@ -2,11 +2,12 @@ const { PractitionerRole } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
 const v4 = require("uuid").v4;
-const { cpSync } = require("fs");
-const { GcpFhirCRUD, GcpFhirSearch } = require("gcp-nrces-fhir");
-const gcpFhirCRUD = new GcpFhirCRUD();
-const { callFunction, resources } = require("./index");
 
+const { GcpFhirCRUD} = require("gcp-nrces-fhir");
+
+const { resources } = require("./index");
+
+const gcpFhirCRUD = new GcpFhirCRUD();
 const setPractiotionerRole = async () => {
 
   const practitionerRole = new PractitionerRole();

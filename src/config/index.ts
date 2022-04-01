@@ -35,6 +35,7 @@ const resourceTypeArray = [
   "DocumentReference",
   "Binary",
   "PractitionerRole",
+  "Specimen",
 ] as const;
 
 type resourceType = typeof resourceTypeArray[number];

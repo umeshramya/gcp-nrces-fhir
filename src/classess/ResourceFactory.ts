@@ -16,6 +16,8 @@ import { Binary } from "../resources/Binary";
 import { Procedure } from "../resources/Procedure";
 import ResourceMain from "../resources/ResourceMai";
 import GcpFhirCRUD from "./gcp";
+import { Specimen } from "../resources/Specimen";
+import { PractitionerRole } from "../resources/PractitionerRole";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -56,6 +58,10 @@ export default class ResourceFactory
       this.resource = new MedicationStatement();
     } else if ((this.resourceType = "Binary")) {
       this.resource = new Binary();
+    } else if ((this.resourceType = "Specimen")) {
+      this.resource = new Specimen();
+    } else if ((this.resourceType = "PractitionerRole")) {
+      this.resource = new PractitionerRole();
     }
   }
 
