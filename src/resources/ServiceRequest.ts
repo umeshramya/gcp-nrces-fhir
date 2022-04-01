@@ -43,7 +43,9 @@ const serviceRequestCategory = [
 ] as const;
 
 export type ServceRequestCategory = typeof serviceRequestCategory[number];
+const serviceRequestPriority = ["routine", "urgent", "asap", "stat"] as const;
 
+export type ServiceRequestPriority = typeof serviceRequestPriority[number];
 export interface SERVICE_REQUEST {
   id?: string;
   status: ServiceRequestStatus;
@@ -52,6 +54,8 @@ export interface SERVICE_REQUEST {
   patient: PATIENT;
   requester: requester;
   date: string;
+  priority: ServiceRequestPriority;
+  category: ServceRequestCategory;
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
@@ -75,6 +79,18 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ServiceRequest",
         ],
       },
+      priority: options.priority,
+      category: [
+        {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: options.category.code,
+              display: options.category.display,
+            },
+          ],
+        },
+      ],
       text: {
         status: options.status,
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
@@ -131,6 +147,8 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       requester: requester(),
       date: options.occurrenceDateTime,
       id: options.id,
+      priority: "routine",
+      category: undefined,
     };
     return ret;
   }
@@ -144,5 +162,8 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
 
   category = (): ServceRequestCategory[] => {
     return serviceRequestCategory.map((el) => el);
+  };
+  priority = (): ServiceRequestPriority[] => {
+    return serviceRequestPriority.map((el) => el);
   };
 }
