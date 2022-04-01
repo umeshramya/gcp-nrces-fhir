@@ -1,4 +1,3 @@
-import { type } from "os";
 import { PATIENT, PRACTITIONER } from "..";
 import { CodeDisplay, resourceType } from "../config";
 import { ResourceMaster } from "../Interfaces";
@@ -27,12 +26,23 @@ const ServiceRequestIntentArray = [
   "option",
 ] as const;
 
+export type ServiceRequestIntent = typeof ServiceRequestIntentArray[number];
+
 interface requester {
   resource: "Practitioner" | "Patient" | "Organization" | "PractitionerRole";
   id: string;
   display: string;
 }
-export type ServiceRequestIntent = typeof ServiceRequestIntentArray[number];
+
+const serviceRequestCategory = [
+  { code: "108252007", display: "Laboratory procedure" },
+  { code: "363679005", display: "Imaging" },
+  { code: "409063005", display: "Counselling" },
+  { code: "409073007", display: "Education" },
+  { code: "387713003", display: "Surgical procedure" },
+] as const;
+
+export type ServceRequestCategory = typeof serviceRequestCategory[number];
 
 export interface SERVICE_REQUEST {
   id?: string;
@@ -130,5 +140,9 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
 
   itentArray = (): ServiceRequestIntent[] => {
     return ServiceRequestIntentArray.map((el) => el);
+  };
+
+  category = (): ServceRequestCategory[] => {
+    return serviceRequestCategory.map((el) => el);
   };
 }
