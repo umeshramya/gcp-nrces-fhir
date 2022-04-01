@@ -214,7 +214,7 @@ export class PractitionerRole extends ResourceMain implements ResourceMaster {
         (el: { system: string }) => el.system == "email"
       )[0].value,
       availabilityExceptions: options.availabilityExceptions,
-      availableTime: options.availableEndTime,
+      availableTime: options.availableTime,
       notAvailable: options.notAvailable,
     };
 
