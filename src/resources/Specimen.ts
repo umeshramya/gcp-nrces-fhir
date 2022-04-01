@@ -6,7 +6,7 @@ import ResourceMain from "./ResourceMai";
 
 export interface SPECIMEN {
   id?: string;
-  patient: PATIENT;
+  patientId: string;
   recivedDateTime: string;
   collectedDateTime: string;
   /**
@@ -27,15 +27,23 @@ export class Specimen extends ResourceMain implements ResourceMaster {
         div: options.type[0].display,
       },
       type: {
-        coding: type,
+        coding: options.type,
       },
-      subject: { reference: `Patient/${options.patient.id}` },
+      subject: { reference: `Patient/${options.patientId}` },
       receivedTime: options.recivedDateTime,
       collection: { collectedDateTime: options.collectedDateTime },
     };
   }
   convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+    let ret: SPECIMEN = {
+      patientId: this.getIdFromReference({
+        "ref": options.subject.reference, "resourceType": "Patient"
+      }),
+      recivedDateTime: "",
+      collectedDateTime: "",
+      type: []
+    }
+    return ret;
   }
   statusArray?: Function | undefined;
 }
