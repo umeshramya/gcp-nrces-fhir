@@ -33,6 +33,7 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       receivedTime: options.recivedDateTime,
       collection: options.collection,
     };
+    return body;
   }
   convertFhirToObject(options: any) {
     let ret: SPECIMEN = {
@@ -42,7 +43,7 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       }),
       recivedDateTime: options.receivedTime,
       collection: options.collection,
-      type: options.coding,
+      type: options.type.coding,
     };
     return ret;
   }
