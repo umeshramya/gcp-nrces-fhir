@@ -23,3 +23,6 @@ const setSpecimen = async() => {
     return ret;
 
 }
+
+
+module.exports= {setSpecimen}
