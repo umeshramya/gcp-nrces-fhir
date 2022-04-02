@@ -6,6 +6,7 @@ const { PrescriptionRecord,OPConsultRecord, GcpFhirCRUD, PractitionerRole } = re
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
 const { setDiagnosticReport } = require("./DiagnosticReport");
+const {setMedia} = require("./Media")
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 class excute {
@@ -44,6 +45,13 @@ class excute {
         await callFunction();
         const res = await setServiceRequest();
         console.log(res);
+    }
+
+
+    media = async ()=>{
+        await callFunction();
+        const res = await setMedia()
+        console.log(res)
     }
 
     diagnosticReport = async()=>{
@@ -133,5 +141,6 @@ class excute {
 // new excute().serviceRequest()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
-new excute().diagnosticReport()
+new excute().media()
+// new excute().diagnosticReport()
 

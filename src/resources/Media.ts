@@ -60,7 +60,7 @@ export class Media extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: '<div xmlns="http://www.w3.org/1999/xhtml">HEAD and NECK CT DICOM imaging study</div>',
+        div: `<div xmlns="http://www.w3.org/1999/xhtml">${options.title}</div>`,
       },
       status: options.status,
       modality: {

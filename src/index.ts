@@ -79,6 +79,7 @@ import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
 } from "./resources/DiagnosticReport";
+import { Media, MEDIA } from "./resources/Media";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export type { resourceType };
@@ -152,3 +153,4 @@ export { PrescriptionBundle };
 
 export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
+export { Media, MEDIA };
