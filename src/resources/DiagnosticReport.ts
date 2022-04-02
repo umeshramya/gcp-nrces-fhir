@@ -14,6 +14,10 @@ interface Performer extends MULTI_RESOURCE {
   resource: "CareTeam" | "Organization" | "Practitioner" | "PractitionerRole";
 }
 
+interface ResultsInterpreter extends MULTI_RESOURCE {
+  resource: "CareTeam" | "Practitioner" | "Organization" | "PractitionerRole";
+}
+
 interface Basedon extends MULTI_RESOURCE {
   resource:
     | "CarePlan"
@@ -34,6 +38,9 @@ export interface DIAGNOSTIC_REPORT {
   conclusion: string;
   conclusionCode: CodeDisplay[];
   status: DiagnosticReportStatus;
+  /**
+   * Name of the test or group of tests like lipid panel, CBC RFT LFT
+   */
   code: CodeDisplay[];
   base64Data?: string;
   specimenId?: string[];
@@ -41,6 +48,7 @@ export interface DIAGNOSTIC_REPORT {
   performer: Performer[];
   basedOn: Basedon[];
   subject: Subject;
+  resultsInterpreter: ResultsInterpreter[];
 }
 
 export class DiagnosticReport extends ResourceMain implements ResourceMaster {
@@ -87,7 +95,9 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       performer: options.performer.map((el) => {
         return { reference: `${el.resource}/${el.id}`, display: el.display };
       }),
-      resultsInterpreter: [{ reference: "Practitioner/1", display: "Dr. DEF" }],
+      resultsInterpreter: options.resultsInterpreter.map((el) => {
+        return { reference: `${el.resource}/${el.id}`, display: el.display };
+      }),
       conclusion: options.conclusion,
       conclusionCode: [
         {
