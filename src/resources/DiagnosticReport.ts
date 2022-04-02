@@ -33,7 +33,7 @@ interface Subject extends MULTI_RESOURCE {
 
 export interface DIAGNOSTIC_REPORT {
   id?: string;
-  medialink: string;
+  mediaId: string[];
   issuedDate: string;
   /**
    * conclusoin drawn from full diagnositic report
@@ -115,7 +115,9 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           coding: options.conclusionCode,
         },
       ],
-      media: [{ link: { reference: options.medialink } }],
+      media: options.mediaId.map((el) => {
+        return { link: { reference: `Media/${el}` } };
+      }),
       presentedForm: [
         {
           contentType: "application/pdf",

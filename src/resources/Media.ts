@@ -1,6 +1,18 @@
 import { type } from "os";
+import { CodeDisplay, MULTI_RESOURCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
+
+interface Subject extends MULTI_RESOURCE {
+  resource:
+    | "Group"
+    | "Device"
+    | "Location"
+    | "Patient"
+    | "Specimen"
+    | "Practitioner"
+    | "PractitionerRole";
+}
 
 const mediaStatusArray = [
   "preparation",
@@ -13,9 +25,29 @@ const mediaStatusArray = [
   "unknown",
 ] as const;
 type MediaStatus = typeof mediaStatusArray[number];
+const mediaMimeType = [
+  "image/jpeg",
+  "image/png",
+  "image/bmp",
+  "audio/mpeg",
+  "video/mp4",
+  "video/mpeg",
+] as const;
+type MediaMimeType = typeof mediaMimeType[number];
+
 export interface MEDIA {
   id?: string;
   status: MediaStatus;
+  subject: Subject;
+  createdDate: string;
+  bodySite: CodeDisplay[];
+  /**
+   * device used to get  image like Ct scan camery etc
+   */
+  modality: CodeDisplay[];
+  mimeType: MediaMimeType;
+  title: string;
+  base64Data: string;
 }
 
 export class Media extends ResourceMain implements ResourceMaster {
@@ -32,31 +64,21 @@ export class Media extends ResourceMain implements ResourceMaster {
       },
       status: options.status,
       modality: {
-        coding: [
-          {
-            system: "http://snomed.info/sct",
-            code: "429858000",
-            display: "CT of head and neck",
-          },
-        ],
+        coding: options.modality,
       },
-      subject: { reference: "Patient/1" },
-      createdDateTime: "2020-07-10",
+      subject: {
+        reference: `${options.subject.resource}/${options.subject.id}`,
+      },
+      createdDateTime: options.createdDate,
       bodySite: {
-        coding: [
-          {
-            system: "http://snomed.info/sct",
-            code: "774007",
-            display: "Structure of head and/or neck",
-          },
-        ],
+        coding: options.bodySite,
       },
       content: {
-        contentType: "image/jpeg",
+        contentType: options.mimeType,
         language: "en-IN",
-        data: "",
-        title: "Computed tomography (CT) of head and neck",
-        creation: "2020-07-09T11:46:09+05:30",
+        data: options.base64Data,
+        title: options.title,
+        creation: options.createdDate,
       },
     };
 
@@ -67,5 +89,9 @@ export class Media extends ResourceMain implements ResourceMaster {
   }
   statusArray(): MediaStatus[] {
     return mediaStatusArray.map((el) => el);
+  }
+
+  mimeTypeArray(): MediaMimeType[] {
+    return mediaMimeType.map((el) => el);
   }
 }
