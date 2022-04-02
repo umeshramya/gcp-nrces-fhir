@@ -30,7 +30,7 @@ const setServiceRequest=async()=>{
     console.log(body.code)
     
     const res =await gcpFhirCRUD.createFhirResource(body, "ServiceRequest");
-    const ret = serviceRequest.convertFhirToObject(res.body)
+    const ret = serviceRequest.convertFhirToObject(res.data)
     return ret;
 }
 
