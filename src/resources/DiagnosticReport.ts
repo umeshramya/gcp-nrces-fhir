@@ -64,9 +64,6 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       "resultsInterpreter": [
         { "reference": "Practitioner/1", "display": "Dr. DEF" }
       ],
-
-
-
       "conclusion": options.conclusion,
       "conclusionCode": [
         {
