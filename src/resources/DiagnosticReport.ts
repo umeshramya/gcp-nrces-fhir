@@ -15,6 +15,9 @@ export interface DIAGNOSTIC_REPORT {
   status: DiagnosticReportStatus
   code: CodeDisplay[]
   base64Data?: string
+  specimenId?: string[];
+  observationResultid?: string[]
+
 }
 
 export class DiagnosticReport extends ResourceMain implements ResourceMaster {
@@ -28,7 +31,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
     }
 
     const identifiers: IDENTTIFIER[] = []
-    const body = {
+    const body: any = {
       "resourceType": "DiagnosticReport",
       "id": options.id || undefined,
       "meta": {
@@ -61,9 +64,9 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       "resultsInterpreter": [
         { "reference": "Practitioner/1", "display": "Dr. DEF" }
       ],
-      "media": options.mediaId ? options.mediaId?.map(el => {
-        return { "link": { "reference": `Media/${el}` } }
-      }) : undefined,
+
+
+
       "conclusion": options.conclusion,
       "conclusionCode": [
         {
@@ -79,6 +82,24 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         }
       ]
     }
+
+    if (options.mediaId) {
+      body.media = options.mediaId?.map(el => {
+        return { "link": { "reference": `Media/${el}` } }
+      })
+    }
+
+    if (options.specimenId) {
+      body.specimen = options.specimenId.map((el) => {
+        return { "reference": `Specimen/${el}` }
+      })
+    }
+    if (options.observationResultid) {
+      body.result = options.observationResultid.map(el => {
+        return { "reference": `Observation/${el}` }
+      })
+    }
+
     return body
   }
   convertFhirToObject(options: any) {
