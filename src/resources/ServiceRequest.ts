@@ -83,19 +83,19 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         ],
       },
       priority: options.priority,
-      // category: [
-      //   {
-      //     coding: [
-      //       {
-      //         system: "http://snomed.info/sct",
-      //         code: options.category.code,
-      //         display: options.category.display,
-      //       },
-      //     ],
-      //   },
-      // ],
+      category: [
+        {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: options.category.code,
+              display: options.category.display,
+            },
+          ],
+        },
+      ],
       text: {
-        status: options.status,
+        status: "generated",
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
       },
       status: options.status,
@@ -112,12 +112,12 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
       },
-      // performer: [
-      //   {
-      //     reference: `${options.performer[0].resource}/${options.performer[0].id}`,
-      //     display: options.performer[0].display,
-      //   },
-      // ],
+      performer: [
+        {
+          reference: `${options.performer[0].resource}/${options.performer[0].id}`,
+          display: options.performer[0].display,
+        },
+      ],
     };
 
     return body;
