@@ -40,7 +40,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       },
       "text": {
         "status": "generated",
-        "div": `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`
+        "div": getText()
       },
       "identifier": identifiers,
       "basedOn": [{ "reference": "ServiceRequest/1" }],
