@@ -74,7 +74,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         {
           "contentType": "application/pdf",
           "language": "en-IN",
-          "data": options.base64Data,
+          "data": options.base64Data || "",
           "title": "Report"
         }
       ]
