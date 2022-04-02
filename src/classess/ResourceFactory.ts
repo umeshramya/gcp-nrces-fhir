@@ -19,10 +19,10 @@ import GcpFhirCRUD from "./gcp";
 import { Specimen } from "../resources/Specimen";
 import { PractitionerRole } from "../resources/PractitionerRole";
 
+
 export default class ResourceFactory
   extends ResourceMain
-  implements ResourceMaster
-{
+  implements ResourceMaster {
   private resourceType: resourceType;
   private resource: any;
 
