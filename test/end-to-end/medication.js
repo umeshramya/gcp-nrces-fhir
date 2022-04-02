@@ -45,6 +45,7 @@ const setMedicationRequest = async () => {
 
 
         const res = await new GcpFhirCRUD().createFhirResource(body, "MedicationRequest");
+       
         const obj = medicationRequest.convertFhirToObject(res.data)
 
         resources.medicationsRequest = obj

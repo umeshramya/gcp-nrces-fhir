@@ -33,15 +33,25 @@ interface Subject extends MULTI_RESOURCE {
 
 export interface DIAGNOSTIC_REPORT {
   id?: string;
-  mediaId?: string[];
+  medialink: string;
   issuedDate: string;
+  /**
+   * conclusoin drawn from full diagnositic report
+   */
   conclusion: string;
+  /**
+   * conclusoin drawn from full diagnositic report
+   */
   conclusionCode: CodeDisplay[];
   status: DiagnosticReportStatus;
   /**
    * Name of the test or group of tests like lipid panel, CBC RFT LFT
    */
   code: CodeDisplay[];
+  /**
+   * Hematlogy, biochemestry, micrbiology, radilogy
+   */
+  category: CodeDisplay[];
   base64Data?: string;
   specimenId?: string[];
   observationResultid?: string[];
@@ -74,18 +84,19 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         status: "generated",
         div: getText(),
       },
-      identifier: identifiers,
+      // identifier: identifiers.length > 0 ? identifiers : undefined,
       basedOn: options.basedOn.map((el) => {
         return { reference: `${el.resource}/${el.id}` };
       }),
       status: options.status,
       category: [
         {
-          coding: options.conclusionCode,
+          coding: options.category,
         },
       ],
       code: {
         coding: options.code,
+        text: options.code[0].display,
       },
       subject: {
         reference: `${options.subject.resource}/${options.subject.id}`,
@@ -104,6 +115,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           coding: options.conclusionCode,
         },
       ],
+      media: [{ link: { reference: options.medialink } }],
       presentedForm: [
         {
           contentType: "application/pdf",
@@ -113,12 +125,6 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         },
       ],
     };
-
-    if (options.mediaId) {
-      body.media = options.mediaId?.map((el) => {
-        return { link: { reference: `Media/${el}` } };
-      });
-    }
 
     if (options.specimenId) {
       body.specimen = options.specimenId.map((el) => {

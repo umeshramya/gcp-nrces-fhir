@@ -26,8 +26,6 @@ const setServiceRequest=async()=>{
         "date" :new Date().toISOString(),
         "services" : [{"display" : "Echocardiography", "system" : "http://snomed.info/sct"}]
     })
-    console.log(body);
-    console.log(body.code)
     
     const res =await gcpFhirCRUD.createFhirResource(body, "ServiceRequest");
     const ret = serviceRequest.convertFhirToObject(res.data)
