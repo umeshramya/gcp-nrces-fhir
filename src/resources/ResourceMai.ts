@@ -1,4 +1,5 @@
 import { resourceType } from "..";
+import { MULTI_RESOURCE } from "../config";
 
 export default class ResourceMain {
   /**
@@ -38,6 +39,33 @@ export default class ResourceMain {
     if (mrn.length > 0) {
       ret = mrn[0].value;
     }
+    return ret;
+  };
+
+  /**
+   * This is when more than one type resource is under reference
+   * @param multiResource
+   * @returns
+   */
+  public getFromMultResource = (multiResource: {
+    reference: string;
+    display: string;
+  }): MULTI_RESOURCE => {
+    const resource = `${multiResource.reference}`.substring(
+      0,
+      `${multiResource.reference}`.indexOf("/")
+    ) as any;
+
+    const id = this.getIdFromReference({
+      ref: multiResource.reference,
+      resourceType: resource,
+    });
+
+    let ret: MULTI_RESOURCE = {
+      display: multiResource.display,
+      id: id,
+      resource: resource,
+    };
     return ret;
   };
 }

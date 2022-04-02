@@ -1,110 +1,132 @@
-
-import { CodeDisplay, IDENTTIFIER } from "../config";
+import { CodeDisplay, IDENTTIFIER, MULTI_RESOURCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
-const diagnosticReportStatus = ["registered", "partial", "preliminary", "final"] as const
-export type DiagnosticReportStatus = typeof diagnosticReportStatus[number]
+const diagnosticReportStatus = [
+  "registered",
+  "partial",
+  "preliminary",
+  "final",
+] as const;
+export type DiagnosticReportStatus = typeof diagnosticReportStatus[number];
+
+interface Performer extends MULTI_RESOURCE {
+  resource: "CareTeam" | "Organization" | "Practitioner" | "PractitionerRole";
+}
+
+interface Basedon extends MULTI_RESOURCE {
+  resource:
+    | "CarePlan"
+    | "ImmunizationRecommendation"
+    | "NutritionOrder"
+    | "MedicationRequest"
+    | "ServiceRequest";
+}
+
+interface Subject extends MULTI_RESOURCE {
+  resource: "Group" | "Device" | "Location" | "Patient";
+}
 
 export interface DIAGNOSTIC_REPORT {
   id?: string;
-  mediaId?: string[]
+  mediaId?: string[];
   issuedDate: string;
-  conclusion: string
-  conclusionCode: CodeDisplay[]
-  status: DiagnosticReportStatus
-  code: CodeDisplay[]
-  base64Data?: string
+  conclusion: string;
+  conclusionCode: CodeDisplay[];
+  status: DiagnosticReportStatus;
+  code: CodeDisplay[];
+  base64Data?: string;
   specimenId?: string[];
-  observationResultid?: string[]
-
+  observationResultid?: string[];
+  performer: Performer[];
+  basedOn: Basedon[];
+  subject: Subject;
 }
 
 export class DiagnosticReport extends ResourceMain implements ResourceMaster {
   getFHIR(options: DIAGNOSTIC_REPORT) {
-
     const getText = (): string => {
-      let ret: string = ""
+      let ret: string = "";
 
-      return ret
+      return ret;
+    };
 
-    }
-
-    const identifiers: IDENTTIFIER[] = []
+    const identifiers: IDENTTIFIER[] = [];
     const body: any = {
-      "resourceType": "DiagnosticReport",
-      "id": options.id || undefined,
-      "meta": {
-        "versionId": "1",
-        "lastUpdated": "2020-07-09T15:32:26.605+05:30",
-        "profile": [
-          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportImaging"
-        ]
+      resourceType: "DiagnosticReport",
+      id: options.id || undefined,
+      meta: {
+        versionId: "1",
+        lastUpdated: "2020-07-09T15:32:26.605+05:30",
+        profile: [
+          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportImaging",
+        ],
       },
-      "text": {
-        "status": "generated",
-        "div": getText()
+      text: {
+        status: "generated",
+        div: getText(),
       },
-      "identifier": identifiers,
-      "basedOn": [{ "reference": "ServiceRequest/1" }],
-      "status": options.status,
-      "category": [
+      identifier: identifiers,
+      basedOn: options.basedOn.map((el) => {
+        return { reference: `${el.resource}/${el.id}` };
+      }),
+      status: options.status,
+      category: [
         {
-          "coding": options.conclusionCode
-        }
+          coding: options.conclusionCode,
+        },
       ],
-      "code": {
-        "coding": options.code
+      code: {
+        coding: options.code,
       },
-      "subject": { "reference": "Patient/1", "display": "ABC" },
-      "issued": options.issuedDate,
-      "performer": [
-        { "reference": "Organization/1", "display": "XYZ Lab Pvt.Ltd." }
-      ],
-      "resultsInterpreter": [
-        { "reference": "Practitioner/1", "display": "Dr. DEF" }
-      ],
-      "conclusion": options.conclusion,
-      "conclusionCode": [
+      subject: {
+        reference: `${options.subject.resource}/${options.subject.id}`,
+        display: options.subject.display,
+      },
+      issued: options.issuedDate,
+      performer: options.performer.map((el) => {
+        return { reference: `${el.resource}/${el.id}`, display: el.display };
+      }),
+      resultsInterpreter: [{ reference: "Practitioner/1", display: "Dr. DEF" }],
+      conclusion: options.conclusion,
+      conclusionCode: [
         {
-          "coding": options.conclusionCode
-        }
+          coding: options.conclusionCode,
+        },
       ],
-      "presentedForm": [
+      presentedForm: [
         {
-          "contentType": "application/pdf",
-          "language": "en-IN",
-          "data": options.base64Data || "",
-          "title": "Report"
-        }
-      ]
-    }
+          contentType: "application/pdf",
+          language: "en-IN",
+          data: options.base64Data || "",
+          title: "Report",
+        },
+      ],
+    };
 
     if (options.mediaId) {
-      body.media = options.mediaId?.map(el => {
-        return { "link": { "reference": `Media/${el}` } }
-      })
+      body.media = options.mediaId?.map((el) => {
+        return { link: { reference: `Media/${el}` } };
+      });
     }
 
     if (options.specimenId) {
       body.specimen = options.specimenId.map((el) => {
-        return { "reference": `Specimen/${el}` }
-      })
+        return { reference: `Specimen/${el}` };
+      });
     }
     if (options.observationResultid) {
-      body.result = options.observationResultid.map(el => {
-        return { "reference": `Observation/${el}` }
-      })
+      body.result = options.observationResultid.map((el) => {
+        return { reference: `Observation/${el}` };
+      });
     }
 
-    return body
+    return body;
   }
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");
   }
   statusArray(): DiagnosticReportStatus[] {
-    return diagnosticReportStatus.map(el => el)
+    return diagnosticReportStatus.map((el) => el);
   }
-
 }
-

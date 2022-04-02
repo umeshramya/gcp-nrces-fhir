@@ -19,10 +19,10 @@ import GcpFhirCRUD from "./gcp";
 import { Specimen } from "../resources/Specimen";
 import { PractitionerRole } from "../resources/PractitionerRole";
 
-
 export default class ResourceFactory
   extends ResourceMain
-  implements ResourceMaster {
+  implements ResourceMaster
+{
   private resourceType: resourceType;
   private resource: any;
 
@@ -62,6 +62,10 @@ export default class ResourceFactory
       this.resource = new Specimen();
     } else if ((this.resourceType = "PractitionerRole")) {
       this.resource = new PractitionerRole();
+    } else {
+      const errMessage = `Not Implimented resourceType ${this.resourceType}`;
+      console.log(errMessage);
+      throw (new Error().message = errMessage);
     }
   }
 

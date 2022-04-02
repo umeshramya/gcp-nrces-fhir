@@ -38,7 +38,14 @@ const resourceTypeArray = [
   "Specimen",
   "DiagnosticReport",
   "Observation",
-  "Media"
+  "Media",
+  "CareTeam",
+  "CarePlan",
+  "ImmunizationRecommendation",
+  "NutritionOrder",
+  "Group",
+  "Device",
+  "Location",
 ] as const;
 
 type resourceType = typeof resourceTypeArray[number];
@@ -77,3 +84,9 @@ export interface IDENTTIFIER {
 export { credentials, resourceTypeArray, databasePath };
 
 export type { resourceType };
+
+export interface MULTI_RESOURCE {
+  resource: resourceType;
+  id: string;
+  display: string;
+}
