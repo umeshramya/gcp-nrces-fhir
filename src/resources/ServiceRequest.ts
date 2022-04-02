@@ -33,6 +33,7 @@ interface requester {
   id: string;
   display: string;
 }
+interface performer extends requester {}
 
 const serviceRequestCategory = [
   { code: "108252007", display: "Laboratory procedure" },
@@ -51,8 +52,10 @@ export interface SERVICE_REQUEST {
   status: ServiceRequestStatus;
   intent: ServiceRequestIntent;
   services: CodeDisplay[];
-  patient: PATIENT;
+  patientId: string;
+  patientName: string;
   requester: requester;
+  performer: performer;
   date: string;
   priority: ServiceRequestPriority;
   category: ServceRequestCategory;
@@ -101,13 +104,17 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         coding: options.services,
       },
       subject: {
-        reference: `Patient/${options.patient.id}`,
-        display: options.patient.name,
+        reference: `Patient/${options.patientId}`,
+        display: options.patientName,
       },
       occurrenceDateTime: options.date,
       requester: {
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
+      },
+      performer: {
+        reference: `${options.performer.resource}/${options.performer.id}`,
+        display: options.performer.display,
       },
     };
 
@@ -133,22 +140,43 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       return ret;
     };
 
+    const performer = (): performer => {
+      const resource = `${options.performer.reference}`.substring(
+        0,
+        `${options.performer.reference}`.indexOf("/")
+      ) as any;
+
+      const id = this.getIdFromReference({
+        ref: options.requester.reference,
+        resourceType: resource,
+      });
+
+      let ret: performer = {
+        display: options.performer.display,
+        id: id,
+        resource: resource,
+      };
+      return ret;
+    };
+
     let ret: SERVICE_REQUEST = {
       status: options.status,
       intent: options.intent,
       services: options.code.coding,
-      patient: {
-        id: this.getIdFromReference({
-          ref: options.subject.reference,
-          resourceType: "Patient",
-        }),
-        name: options.subject.display,
-      } as any,
+      patientId: this.getIdFromReference({
+        ref: options.subject.reference,
+        resourceType: "Patient",
+      }),
+      patientName: options.subject.display,
       requester: requester(),
+      performer: performer(),
       date: options.occurrenceDateTime,
       id: options.id,
-      priority: "routine",
-      category: undefined,
+      priority: options.priority,
+      category: {
+        code: options.category[0].coding[0].code,
+        display: options.category[0].coding[0].display,
+      },
     };
     return ret;
   }
