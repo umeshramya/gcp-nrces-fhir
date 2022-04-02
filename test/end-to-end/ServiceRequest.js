@@ -15,8 +15,21 @@ const setServiceRequest=async()=>{
         "category" : {"code" : "108252007", "display" : "Laboratory procedure"},
         "intent" : "order",
         "date" : new Date().toDateString(),
-        "" : resources.patient.id,
-
-
+        "patientId" : resources.patient.id,
+        "patientName" : resources.patient.name,
+        "priority" :"routine",
+        "requester" : {"display" : resources.patient.name, "id" : resources.patient.id, "resource" : "Patient"},
+        "performer" :[ {"display" : resources.practioner.name, "id" : resources.practioner.id, "resource" : "Practitioner"}],
+        "patientId" : resources.patient.id,
+        "patientName" : resources.patient.name,
+        "status" : "draft",
+        "date" :new Date().toISOString(),
+        "services" : [{"display" : "Echocardiography", "system" : ""}]
     })
+    console.log(body);
+    const res =await gcpFhirCRUD.createFhirResource(body, "ServiceRequest");
+    const ret = serviceRequest.convertFhirToObject(res.body)
+    return ret;
 }
+
+module.exports={setServiceRequest}

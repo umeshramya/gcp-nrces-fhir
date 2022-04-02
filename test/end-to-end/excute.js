@@ -4,6 +4,7 @@ const { setCondition } = require("./condion");
 const {setPractiotionerRole} = require("./PractitionerRole")
 const { PrescriptionRecord,OPConsultRecord, GcpFhirCRUD, PractitionerRole } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
+const { setServiceRequest } = require("./ServiceRequest");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 class excute {
@@ -35,6 +36,13 @@ class excute {
        const data = await setPractiotionerRole()
        console.log(data)
 
+    }
+
+
+    serviceRequest = async ()=>{
+        await callFunction();
+        const res = await setServiceRequest();
+        console.log(res);
     }
 
     precsriptinComposition = async()=>{
@@ -111,7 +119,8 @@ class excute {
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
-new excute().specimen()
+// new excute().specimen()
+new excute().serviceRequest()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 

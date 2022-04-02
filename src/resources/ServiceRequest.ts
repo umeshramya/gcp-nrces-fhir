@@ -55,7 +55,7 @@ export interface SERVICE_REQUEST {
   patientId: string;
   patientName: string;
   requester: requester;
-  performer: performer;
+  performer: performer[];
   date: string;
   priority: ServiceRequestPriority;
   category: ServceRequestCategory;
@@ -83,17 +83,17 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         ],
       },
       priority: options.priority,
-      category: [
-        {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: options.category.code,
-              display: options.category.display,
-            },
-          ],
-        },
-      ],
+      // category: [
+      //   {
+      //     coding: [
+      //       {
+      //         system: "http://snomed.info/sct",
+      //         code: options.category.code,
+      //         display: options.category.display,
+      //       },
+      //     ],
+      //   },
+      // ],
       text: {
         status: options.status,
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
@@ -112,10 +112,12 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
       },
-      performer: {
-        reference: `${options.performer.resource}/${options.performer.id}`,
-        display: options.performer.display,
-      },
+      // performer: [
+      //   {
+      //     reference: `${options.performer[0].resource}/${options.performer[0].id}`,
+      //     display: options.performer[0].display,
+      //   },
+      // ],
     };
 
     return body;
@@ -140,10 +142,10 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       return ret;
     };
 
-    const performer = (): performer => {
-      const resource = `${options.performer.reference}`.substring(
+    const performer = (): performer[] => {
+      const resource = `${options.performer[0].reference}`.substring(
         0,
-        `${options.performer.reference}`.indexOf("/")
+        `${options.performer[0].reference}`.indexOf("/")
       ) as any;
 
       const id = this.getIdFromReference({
@@ -151,11 +153,13 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         resourceType: resource,
       });
 
-      let ret: performer = {
-        display: options.performer.display,
-        id: id,
-        resource: resource,
-      };
+      let ret: performer[] = [
+        {
+          display: options.performer[0].display,
+          id: id,
+          resource: resource,
+        },
+      ];
       return ret;
     };
 
