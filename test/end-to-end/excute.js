@@ -56,10 +56,9 @@ class excute {
 
     diagnosticReport = async()=>{
      await callFunction()
-    resources.serviceRequest=   await setServiceRequest();
-
-    const res = await setDiagnosticReport();
-    console.log(res)
+        resources.serviceRequest=   await setServiceRequest();
+        const res = await setDiagnosticReport();
+        console.log(res)
 
     }
 

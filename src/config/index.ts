@@ -88,5 +88,5 @@ export type { resourceType };
 export interface MULTI_RESOURCE {
   resource: resourceType;
   id: string;
-  display: string;
+  display?: string;
 }

@@ -17,18 +17,21 @@ const setMedia = async () => {
 
   const media = new Media();
   const body = media.getFHIR({
-      "base64Data" : undefined,
+      "base64Data" : "",
       "bodySite" : [{"display" : "Heart", "system" : ""}],
       "createdDate" : new Date().toISOString(),
-      "mimeType" : undefined,
+      "mimeType" : "image/jpeg",
       "modality" : [{"display" : "ECHO", "system" : ""}],
       "status" : "not-done",
       "subject" : {"resource" : "Patient", "id" : resources.patient.id, "display" : resources.patient.name},
       "title" : "Inian Flag",
     
   })
-  const res = gcpFhirCRUD.createFhirResource(body, "Media");
-  return res
+
+  const res =await gcpFhirCRUD.createFhirResource(body, "Media");
+  const ret  = media.convertFhirToObject(res.data)
+  return ret
+
 };
 
 

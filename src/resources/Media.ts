@@ -84,8 +84,19 @@ export class Media extends ResourceMain implements ResourceMaster {
 
     return body;
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options: any): MEDIA {
+    let ret: MEDIA = {
+      status: options.status,
+      subject: this.getFromMultResource(options.subject) as any,
+      createdDate: options.createdDateTime,
+      bodySite: options.bodySite.coding,
+      modality: options.modality.coding,
+      mimeType: options.content.contentType,
+      title: options.content.title,
+      base64Data: options.content.data,
+    };
+
+    return ret;
   }
   statusArray(): MediaStatus[] {
     return mediaStatusArray.map((el) => el);

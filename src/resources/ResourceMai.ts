@@ -49,7 +49,7 @@ export default class ResourceMain {
    */
   public getFromMultResource = (multiResource: {
     reference: string;
-    display: string;
+    display?: string;
   }): MULTI_RESOURCE => {
     const resource = `${multiResource.reference}`.substring(
       0,
@@ -62,10 +62,13 @@ export default class ResourceMain {
     });
 
     let ret: MULTI_RESOURCE = {
-      display: multiResource.display,
       id: id,
       resource: resource,
     };
+
+    if (ret.display) {
+      ret.display = multiResource.display;
+    }
     return ret;
   };
 }
