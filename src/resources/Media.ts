@@ -94,6 +94,7 @@ export class Media extends ResourceMain implements ResourceMaster {
       mimeType: options.content.contentType,
       title: options.content.title,
       base64Data: options.content.data,
+      id: options.id,
     };
 
     return ret;

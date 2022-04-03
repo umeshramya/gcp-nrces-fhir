@@ -12,7 +12,9 @@ const resources = {
     encounter: null,
     conditon: null,
     medicationsRequest: null,
-    serviceRequest : null
+    serviceRequest : null,
+    media:null
+
 };
 
 /**

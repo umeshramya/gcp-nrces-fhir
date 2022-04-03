@@ -63,83 +63,85 @@ export interface DIAGNOSTIC_REPORT {
 
 export class DiagnosticReport extends ResourceMain implements ResourceMaster {
   getFHIR(options: DIAGNOSTIC_REPORT) {
-    const getText = (): string => {
-      let ret: string = "";
-
-      return ret;
-    };
-
-    const identifiers: IDENTTIFIER[] = [];
-    const body: any = {
-      resourceType: "DiagnosticReport",
-      id: options.id || undefined,
-      meta: {
-        versionId: "1",
-        lastUpdated: "2020-07-09T15:32:26.605+05:30",
-        profile: [
-          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportImaging",
+    try {
+      const getText = (): string => {
+        let ret: string = "";
+        return ret;
+      };
+      const identifiers: IDENTTIFIER[] = [];
+      const body: any = {
+        resourceType: "DiagnosticReport",
+        id: options.id || undefined,
+        meta: {
+          versionId: "1",
+          lastUpdated: "2020-07-09T15:32:26.605+05:30",
+          profile: [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportImaging",
+          ],
+        },
+        text: {
+          status: "generated",
+          div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
+        },
+        // identifier: identifiers.length > 0 ? identifiers : undefined,
+        basedOn: options.basedOn.map((el) => {
+          return { reference: `${el.resource}/${el.id}` };
+        }),
+        status: options.status,
+        category: [
+          {
+            coding: options.category,
+          },
         ],
-      },
-      text: {
-        status: "generated",
-        div: getText(),
-      },
-      // identifier: identifiers.length > 0 ? identifiers : undefined,
-      basedOn: options.basedOn.map((el) => {
-        return { reference: `${el.resource}/${el.id}` };
-      }),
-      status: options.status,
-      category: [
-        {
-          coding: options.category,
+        code: {
+          coding: options.code,
+          // text: options.code[0].display,
         },
-      ],
-      code: {
-        coding: options.code,
-        text: options.code[0].display,
-      },
-      subject: {
-        reference: `${options.subject.resource}/${options.subject.id}`,
-        display: options.subject.display,
-      },
-      issued: options.issuedDate,
-      performer: options.performer.map((el) => {
-        return { reference: `${el.resource}/${el.id}`, display: el.display };
-      }),
-      resultsInterpreter: options.resultsInterpreter.map((el) => {
-        return { reference: `${el.resource}/${el.id}`, display: el.display };
-      }),
-      conclusion: options.conclusion,
-      conclusionCode: [
-        {
-          coding: options.conclusionCode,
+        subject: {
+          reference: `${options.subject.resource}/${options.subject.id}`,
+          display: options.subject.display,
         },
-      ],
-      media: options.mediaId.map((el) => {
-        return { link: { reference: `Media/${el}` } };
-      }),
-      presentedForm: [
-        {
-          contentType: "application/pdf",
-          language: "en-IN",
-          data: options.base64Data || "",
-          title: "Report",
-        },
-      ],
-    };
+        issued: options.issuedDate,
+        performer: options.performer.map((el) => {
+          return { reference: `${el.resource}/${el.id}`, display: el.display };
+        }),
+        resultsInterpreter: options.resultsInterpreter.map((el) => {
+          return { reference: `${el.resource}/${el.id}`, display: el.display };
+        }),
+        conclusion: options.conclusion,
+        conclusionCode: [
+          {
+            coding: options.conclusionCode,
+          },
+        ],
+        media: options.mediaId.map((el) => {
+          return { link: { reference: `Media/${el}` } };
+        }),
+        presentedForm: [
+          {
+            contentType: "application/pdf",
+            language: "en-IN",
+            data: options.base64Data || "",
+            title: "Report",
+          },
+        ],
+      };
 
-    if (options.specimenId) {
-      body.specimen = options.specimenId.map((el) => {
-        return { reference: `Specimen/${el}` };
-      });
-    }
-    if (options.observationResultid) {
-      body.result = options.observationResultid.map((el) => {
-        return { reference: `Observation/${el}` };
-      });
-    }
+      if (options.specimenId) {
+        body.specimen = options.specimenId.map((el) => {
+          return { reference: `Specimen/${el}` };
+        });
+      }
+      if (options.observationResultid) {
+        body.result = options.observationResultid.map((el) => {
+          return { reference: `Observation/${el}` };
+        });
+      }
 
-    return body;
+      return body;
+    } catch (error) {
+      console.log(error);
+    }
   }
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");

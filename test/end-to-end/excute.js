@@ -57,6 +57,7 @@ class excute {
     diagnosticReport = async()=>{
      await callFunction()
         resources.serviceRequest=   await setServiceRequest();
+        resources.media = await setMedia()
         const res = await setDiagnosticReport();
         console.log(res)
 
@@ -140,6 +141,6 @@ class excute {
 // new excute().serviceRequest()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
-new excute().media()
-// new excute().diagnosticReport()
+// new excute().media()
+new excute().diagnosticReport()
 

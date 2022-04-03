@@ -1,3 +1,4 @@
+const console = require("console");
 const { ServiceRequest, DiagnosticReport } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
@@ -14,20 +15,36 @@ const setDiagnosticReport = async ()=>{
         const diagnosticReport = new DiagnosticReport();
         const body = diagnosticReport.getFHIR({
             "basedOn" : [{"resource" : "ServiceRequest", "id" : resources.serviceRequest.id }],
-            "code" : [{"display" : "Echocardiography", "system": "http://snomed.info/sct"}],
-            "category" : [{"display" : "Cardiology", "system": "http://snomed.info/sct"}],
+            "code" : [      {
+                "system" : "http://loinc.org",
+                // "code" : "82692-5",
+                "display" : "CT Head and Neck WO contrast"
+              }],
+            "category" : [{
+                "system" : "http://snomed.info/sct",
+                // "code" : "310128004",
+                "display" : "Computerized tomography service"
+              }],
             "conclusion" : "<p>No RWMA<P></p>LVEF 55%</p>",
-            "conclusionCode" : [{"display" : "<p>No RWMA<P></p>LVEF 55%</p>", "system": "http://snomed.info/sct"}],
+            "conclusionCode" : [        {
+                "system" : "http://snomed.info/sct",
+                // "code" : "188340000",
+                "display" : "Malignant tumor of craniopharyngeal duct"
+              }],
             "issuedDate" : new Date().toISOString(),
             "performer" : [{"resource" : "Practitioner" , "id": resources.practioner.id, "display" : resources.practioner.name}],
             "resultsInterpreter" : [{"resource" : "Practitioner", "id" : resources.practioner.id, "display" : resources.practioner.name}],
             "status" : "final",
             "subject" : {"resource" : "Patient", "id" : resources.patient.id, "display" : resources.patient.name},
-            "medialink" : "https:/www.nicehms.com"
+            "mediaId" : [resources.media.id]
         })
     
-        console.log(body)
-        
+        // console.log(body)
+        // console.log(body.media)
+        // console.log(body.category)
+        // console.log(body.conclusionCode)
+        // console.log(body.basedOn)
+        // return
         const res = await gcpFhirCRUD.createFhirResource(body, "DiagnosticReport")
         return res;
     } catch (error) {
