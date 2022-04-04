@@ -39,7 +39,8 @@ const setDiagnosticReport = async ()=>{
                   "system" : "http://snomed.info/sct",
                   "code" : "188340000",
                   "display" : "Malignant tumor of craniopharyngeal duct"
-                }]
+                }],
+                "text" : "<p>No RWMA<P></p>LVEF 55%</p>"
               }
             ],
             "issuedDate" : new Date().toISOString(),
