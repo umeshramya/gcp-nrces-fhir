@@ -47,7 +47,7 @@ export interface DIAGNOSTIC_REPORT {
   /**
    * conclusoin drawn from full diagnositic report
    */
-  conclusionCode: CODEABLE_CONCEPT[];
+  conclusionCode?: CODEABLE_CONCEPT[];
   status: DiagnosticReportStatus;
   /**
    * Name of the test or group of tests like lipid panel, CBC RFT LFT
@@ -56,7 +56,7 @@ export interface DIAGNOSTIC_REPORT {
   /**
    * Hematlogy, biochemestry, micrbiology, radilogy
    */
-  category: CODEABLE_CONCEPT[];
+  category?: CODEABLE_CONCEPT[];
   base64Data?: string;
   specimenId?: string[];
   observationResultid?: string[];
@@ -88,17 +88,10 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           status: "generated",
           div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
         },
-        // identifier: identifiers.length > 0 ? identifiers : undefined,
         basedOn: options.basedOn.map((el) => {
           return { reference: `${el.resource}/${el.id}` };
         }),
         status: options.status,
-        category: options.category,
-        // [
-        //   {
-        //     coding: options.category,
-        //   },
-        // ],
         code: options.code,
         subject: {
           reference: `${options.subject.resource}/${options.subject.id}`,
@@ -112,7 +105,6 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           return { reference: `${el.resource}/${el.id}`, display: el.display };
         }),
         conclusion: options.conclusion,
-        conclusionCode: options.conclusionCode,
         media: options.mediaId.map((el) => {
           return { link: { reference: `Media/${el}` } };
         }),
@@ -125,6 +117,13 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           },
         ],
       };
+      if (options.category) {
+        body.category = options.category;
+      }
+
+      if (options.conclusionCode) {
+        body.conclusionCode = options.conclusionCode;
+      }
 
       if (options.specimenId) {
         body.specimen = options.specimenId.map((el) => {
@@ -143,7 +142,42 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
     }
   }
   convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+    let ret: DIAGNOSTIC_REPORT = {
+      mediaId: options.media.map((el: { link: { reference: any } }) => {
+        return this.getIdFromReference({
+          ref: el.link.reference,
+          resourceType: "Media",
+        });
+      }),
+      issuedDate: options.issued,
+      conclusion: options.conclusion,
+      status: "registered",
+      code: options.code,
+
+      performer: options.performer.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      ),
+      basedOn: options.basedOn.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      ),
+      subject: this.getFromMultResource(options.subject) as any,
+      resultsInterpreter: options.resultsInterpreter.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      ),
+    };
+    if (options.conclusionCode) {
+      ret.conclusionCode = options.conclusionCode;
+    }
+    if (options.category) {
+      ret.category = options.category;
+    }
+    return ret;
   }
   statusArray(): DiagnosticReportStatus[] {
     return diagnosticReportStatus.map((el) => el);

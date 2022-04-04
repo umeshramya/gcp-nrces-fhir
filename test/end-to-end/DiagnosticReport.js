@@ -23,26 +23,26 @@ const setDiagnosticReport = async ()=>{
               }],
               "text" : "CT Head and Neck WO contrast"
             },
-            "category" :[
-              {
-                "coding" :  [{
-                  "system" : "http://snomed.info/sct",
-                  "code" : "310128004",
-                  "display" : "Computerized tomography service"
-                }]
-              }
-            ],
+            // "category" :[
+            //   {
+            //     "coding" :  [{
+            //       "system" : "http://snomed.info/sct",
+            //       "code" : "310128004",
+            //       "display" : "Computerized tomography service"
+            //     }]
+            //   }
+            // ],
             "conclusion" : "<p>No RWMA<P></p>LVEF 55%</p>",
-            "conclusionCode" : [
-              {
-                "coding" :[        {
-                  "system" : "http://snomed.info/sct",
-                  "code" : "188340000",
-                  "display" : "Malignant tumor of craniopharyngeal duct"
-                }],
-                "text" : "<p>No RWMA<P></p>LVEF 55%</p>"
-              }
-            ],
+            // "conclusionCode" : [
+            //   {
+            //     "coding" :[        {
+            //       "system" : "http://snomed.info/sct",
+            //       "code" : "188340000",
+            //       "display" : "Malignant tumor of craniopharyngeal duct"
+            //     }],
+            //     "text" : "<p>No RWMA<P></p>LVEF 55%</p>"
+            //   }
+            // ],
             "issuedDate" : new Date().toISOString(),
             "performer" : [{"resource" : "Practitioner" , "id": resources.practioner.id, "display" : resources.practioner.name}],
             "resultsInterpreter" : [{"resource" : "Practitioner", "id" : resources.practioner.id, "display" : resources.practioner.name}],
@@ -58,7 +58,8 @@ const setDiagnosticReport = async ()=>{
         // console.log(body.basedOn)
         // return
         const res = await gcpFhirCRUD.createFhirResource(body, "DiagnosticReport")
-        return res;
+        const ret = diagnosticReport.convertFhirToObject(res.data);
+        return ret;
     } catch (error) {
         console.log(error.response)
         
