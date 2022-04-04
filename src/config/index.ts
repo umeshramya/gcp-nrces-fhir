@@ -56,11 +56,11 @@ export interface CodeDisplay {
   system: "http://snomed.info/sct" | string;
 }
 
-export interface coding {
-  system?: string;
+export interface coding extends CodeDisplay {
+  // system?: string;
   version?: string; // Version of the system - if relevant
-  code?: string; // Symbol in syntax defined by the system
-  display?: string; // Representation defined by the system
+  // code?: string; // Symbol in syntax defined by the system
+  // display?: string; // Representation defined by the system
   userSelected?: boolean; // If this coding was chosen directly by the user
 }
 
