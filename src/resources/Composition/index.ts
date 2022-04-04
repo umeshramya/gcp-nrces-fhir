@@ -8,6 +8,7 @@ import { Age } from "date-age";
 import { GcpFhirCRUD, GcpFhirSearch } from "../..";
 import { Practitioner, PRACTITIONER } from "../Practitioner";
 import { CreatePdf } from "js-ts-report";
+import { resourceType } from "../../config";
 
 export const compositionTypeArrey = [
   {
@@ -111,6 +112,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
   public get encounter(): ENCOUNTER {
     return this._encounter;
   }
+  /**
+   * This is for diagnostic reporting enity requesting the services
+   */
+  private requeter: string = "";
 
   async setEncounter(id: string) {
     let curClass = new Encounter();
@@ -138,6 +143,23 @@ export class Composition extends ResourceMain implements ResourceMaster {
     });
   }
 
+  /**
+   * service requested by could be patient , organization, patient him or herself
+   * this is applicable diagnostic report
+   */
+  settRequester = (options: {
+    reesource: resourceType;
+    display: string;
+  }): string => {
+    let ret: string = "";
+    if (options.reesource == "Patient") {
+      ret = "<div>Self</div>";
+    } else {
+      ret = `<div>${options.display}</div>`;
+    }
+    return ret;
+  };
+
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
       return `<div>Patient:- ${options.patient.name}.  ${
@@ -150,7 +172,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
         new Date(options.patient.dob)
       )} ph: ${options.patient.mobile}</div>`;
     };
-
+    /**
+     * This is for doctors who authored the document or who interpreted the results
+     * @returns
+     */
     const getDoctors = () => {
       let str: string = "";
       options.author.forEach((el, i) => {
@@ -190,6 +215,15 @@ export class Composition extends ResourceMain implements ResourceMaster {
             <td>${getpatientdetails()}</td>
             <td>${getDoctors()}</td>
           </tr>
+          ${
+            this.requeter == ""
+              ? ""
+              : `<tr>
+            <td>Requested By : ${this.requeter}</td>
+            <td></td>
+          </tr>`
+          }
+
         </table>
         <hr />
         <div>${options.documentDatahtml}</div

@@ -1,7 +1,5 @@
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
-import { DocumentReference } from "../DocumentReference";
-import { MEDICATION_REQUEST } from "../MedicationRequest";
 
 export class PrescriptionRecord extends Composition implements Records {
   create = async (options: {
