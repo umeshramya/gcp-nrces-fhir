@@ -23,17 +23,25 @@ const setDiagnosticReport = async ()=>{
               }],
               "text" : "CT Head and Neck WO contrast"
             },
-            "category" : [{
-                "system" : "http://snomed.info/sct",
-                // "code" : "310128004",
-                "display" : "Computerized tomography service"
-              }],
+            "category" :[
+              {
+                "coding" :  [{
+                  "system" : "http://snomed.info/sct",
+                  "code" : "310128004",
+                  "display" : "Computerized tomography service"
+                }]
+              }
+            ],
             "conclusion" : "<p>No RWMA<P></p>LVEF 55%</p>",
-            "conclusionCode" : [        {
-                "system" : "http://snomed.info/sct",
-                // "code" : "188340000",
-                "display" : "Malignant tumor of craniopharyngeal duct"
-              }],
+            "conclusionCode" : [
+              {
+                "coding" :[        {
+                  "system" : "http://snomed.info/sct",
+                  "code" : "188340000",
+                  "display" : "Malignant tumor of craniopharyngeal duct"
+                }]
+              }
+            ],
             "issuedDate" : new Date().toISOString(),
             "performer" : [{"resource" : "Practitioner" , "id": resources.practioner.id, "display" : resources.practioner.name}],
             "resultsInterpreter" : [{"resource" : "Practitioner", "id" : resources.practioner.id, "display" : resources.practioner.name}],

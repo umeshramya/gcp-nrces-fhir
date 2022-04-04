@@ -47,7 +47,7 @@ export interface DIAGNOSTIC_REPORT {
   /**
    * conclusoin drawn from full diagnositic report
    */
-  conclusionCode: CodeDisplay[];
+  conclusionCode: CODEABLE_CONCEPT[];
   status: DiagnosticReportStatus;
   /**
    * Name of the test or group of tests like lipid panel, CBC RFT LFT
@@ -56,7 +56,7 @@ export interface DIAGNOSTIC_REPORT {
   /**
    * Hematlogy, biochemestry, micrbiology, radilogy
    */
-  category: CodeDisplay[];
+  category: CODEABLE_CONCEPT[];
   base64Data?: string;
   specimenId?: string[];
   observationResultid?: string[];
@@ -93,16 +93,13 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           return { reference: `${el.resource}/${el.id}` };
         }),
         status: options.status,
-        category: [
-          {
-            coding: options.category,
-          },
-        ],
+        category: options.category,
+        // [
+        //   {
+        //     coding: options.category,
+        //   },
+        // ],
         code: options.code,
-        // {
-        //   coding: options.code,
-        //   // text: options.code[0].display,
-        // },
         subject: {
           reference: `${options.subject.resource}/${options.subject.id}`,
           display: options.subject.display,
@@ -115,11 +112,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           return { reference: `${el.resource}/${el.id}`, display: el.display };
         }),
         conclusion: options.conclusion,
-        conclusionCode: [
-          {
-            coding: options.conclusionCode,
-          },
-        ],
+        conclusionCode: options.conclusionCode,
         media: options.mediaId.map((el) => {
           return { link: { reference: `Media/${el}` } };
         }),
