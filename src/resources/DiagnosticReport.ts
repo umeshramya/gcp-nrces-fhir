@@ -70,7 +70,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
   getFHIR(options: DIAGNOSTIC_REPORT) {
     try {
       const getText = (): string => {
-        let ret: string = "";
+        let ret: string = options.conclusion;
         return ret;
       };
       const identifiers: IDENTTIFIER[] = [];
