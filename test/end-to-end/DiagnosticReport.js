@@ -15,11 +15,14 @@ const setDiagnosticReport = async ()=>{
         const diagnosticReport = new DiagnosticReport();
         const body = diagnosticReport.getFHIR({
             "basedOn" : [{"resource" : "ServiceRequest", "id" : resources.serviceRequest.id }],
-            "code" : [      {
+            "code" : {
+              "coding" : [      {
                 "system" : "http://loinc.org",
-                // "code" : "82692-5",
+                "code" : "82692-5",
                 "display" : "CT Head and Neck WO contrast"
               }],
+              "text" : "CT Head and Neck WO contrast"
+            },
             "category" : [{
                 "system" : "http://snomed.info/sct",
                 // "code" : "310128004",

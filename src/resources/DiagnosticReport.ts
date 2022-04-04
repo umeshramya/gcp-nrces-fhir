@@ -1,4 +1,9 @@
-import { CodeDisplay, IDENTTIFIER, MULTI_RESOURCE } from "../config";
+import {
+  CODEABLE_CONCEPT,
+  CodeDisplay,
+  IDENTTIFIER,
+  MULTI_RESOURCE,
+} from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -47,7 +52,7 @@ export interface DIAGNOSTIC_REPORT {
   /**
    * Name of the test or group of tests like lipid panel, CBC RFT LFT
    */
-  code: CodeDisplay[];
+  code: CODEABLE_CONCEPT;
   /**
    * Hematlogy, biochemestry, micrbiology, radilogy
    */
@@ -93,10 +98,11 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
             coding: options.category,
           },
         ],
-        code: {
-          coding: options.code,
-          // text: options.code[0].display,
-        },
+        code: options.code,
+        // {
+        //   coding: options.code,
+        //   // text: options.code[0].display,
+        // },
         subject: {
           reference: `${options.subject.resource}/${options.subject.id}`,
           display: options.subject.display,
