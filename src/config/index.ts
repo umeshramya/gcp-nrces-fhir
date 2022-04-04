@@ -53,7 +53,7 @@ type resourceType = typeof resourceTypeArray[number];
 export interface CodeDisplay {
   code?: string;
   display: string;
-  system: "http://snomed.info/sct" | string;
+  system?: "http://snomed.info/sct" | string;
 }
 
 export interface coding extends CodeDisplay {
