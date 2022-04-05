@@ -102,7 +102,9 @@ export class Composition extends ResourceMain implements ResourceMaster {
   public get organization(): ORGANIZATION {
     return this._organization;
   }
-
+/**
+ * This are persons who interpt the result in care of diagnostic report and in care of the others these who treat patinets
+ */
   private _practitioner: any = [];
   public get practitioner(): any {
     return this._practitioner;
@@ -116,6 +118,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
    * This is for diagnostic reporting enity requesting the services
    */
   private requeter: string = "";
+  private performer: string= "";
 
   async setEncounter(id: string) {
     let curClass = new Encounter();
@@ -147,19 +150,31 @@ export class Composition extends ResourceMain implements ResourceMaster {
    * service requested by could be patient , organization, patient him or herself
    * this is applicable diagnostic report
    */
-  settRequester = (options: {
+  setRequester = (options: {
     reesource: resourceType;
     display: string;
-  }): string => {
-    let ret: string = "";
+  }): void => {
+   
     if (options.reesource == "Patient") {
-      ret = "<div>Self</div>";
+      this.requeter = "<div>Self</div>";
     } else {
-      ret = `<div>${options.display}</div>`;
+      this.requeter = `<div>${options.display}</div>`;
     }
-    return ret;
+    
   };
 
+  setPerformer = (options: {
+    reesource: resourceType;
+    display: string;
+  }): void => {
+    
+    if (options.reesource == "Patient") {
+      this.performer = "<div>Self</div>";
+    } else {
+      this.performer = `<div>${options.display}</div>`;
+    }
+  
+  };
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
       return `<div>Patient:- ${options.patient.name}.  ${
@@ -213,14 +228,21 @@ export class Composition extends ResourceMain implements ResourceMaster {
         <table data-pdfmake="{'widths':['60%','40%']}">
           <tr>
             <td>${getpatientdetails()}</td>
-            <td>${getDoctors()}</td>
+            <td>${getDoctors()}
+                ${
+                  this.performer ?
+                  `<div>Performed By :${this.performer}</div>` : ""
+                }
+            </td>
           </tr>
           ${
             this.requeter == ""
               ? ""
               : `<tr>
             <td>Requested By : ${this.requeter}</td>
-            <td></td>
+            <td>
+              Internal Id :
+            </td>
           </tr>`
           }
 
