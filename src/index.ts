@@ -54,6 +54,7 @@ import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { COMPOSITOIN, Composition } from "./resources/Composition/index";
 import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import { OPConsultRecord } from "./resources/Composition/OPConsultRecord";
+import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportComp"
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -122,6 +123,7 @@ export { DOCUMENT_BUNDLE, DocumentBundle };
 export { COMPOSITOIN, Composition };
 export { PrescriptionRecord };
 export { OPConsultRecord };
+export { DiagnosticReportComp }
 export {
   DOCUMENT_REFERENCE,
   DocumentReference,
