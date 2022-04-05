@@ -6,7 +6,7 @@ interface args{
   diagnosticReport:any;
   requester:any;
   performer?:any;
-  media:any
+  media:[]
 }
 
 export class DiagnosticReportComp extends Composition implements Records {
@@ -17,8 +17,11 @@ export class DiagnosticReportComp extends Composition implements Records {
     }
     this.setPerformer(options.performer)
 
-    
-
+    options.composition.section.push({
+      reference: `DiagnosticReport/${options.diagnosticReport.id}`,
+      type: "DiagnosticReport",
+    });
+    options.composition.documentDatahtml += options.diagnosticReport.text.div;
   };
   update = async (options: {}) => {};
 }
