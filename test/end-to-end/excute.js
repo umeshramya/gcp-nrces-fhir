@@ -133,10 +133,11 @@ class excute {
         resources.serviceRequest = await setServiceRequest();
         resources.media = await setMedia()
         const res = await setDiagnosticReport();
+
         const gcpFhirCRUD = new GcpFhirCRUD();
-        const diag = (await gcpFhirCRUD().getFhirResource(res.id, "DiagnosticReport")).data
-        const media = (await gcpFhirCRUD().getFhirResource(resources.media.id, "Media")).data
-        const serviceRequest = (await gcpFhirCRUD().getFhirResource(resources.serviceRequest.id, "Servicerequest")).data
+        const diag = (await gcpFhirCRUD.getFhirResource(res.id, "DiagnosticReport")).data;
+        const media = (await gcpFhirCRUD.getFhirResource(resources.media.id, "Media")).data;
+        const serviceRequest = (await gcpFhirCRUD.getFhirResource(resources.serviceRequest.id, "ServiceRequest")).data;
         const diagnosticReport = new DiagnosticReportComp();
         const data = await diagnosticReport.create({
             "composition": {

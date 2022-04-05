@@ -25,11 +25,11 @@ interface ResultsInterpreter extends MULTI_RESOURCE {
 
 interface Basedon extends MULTI_RESOURCE {
   resource:
-    | "CarePlan"
-    | "ImmunizationRecommendation"
-    | "NutritionOrder"
-    | "MedicationRequest"
-    | "ServiceRequest";
+  | "CarePlan"
+  | "ImmunizationRecommendation"
+  | "NutritionOrder"
+  | "MedicationRequest"
+  | "ServiceRequest";
 }
 
 interface Subject extends MULTI_RESOURCE {
@@ -143,6 +143,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
   }
   convertFhirToObject(options: any) {
     let ret: DIAGNOSTIC_REPORT = {
+      "id": options.id,
       mediaId: options.media.map((el: { link: { reference: any } }) => {
         return this.getIdFromReference({
           ref: el.link.reference,
