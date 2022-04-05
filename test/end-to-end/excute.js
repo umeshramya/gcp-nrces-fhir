@@ -141,7 +141,7 @@ class excute {
         const diagnosticReport = new DiagnosticReportComp();
         const data = await diagnosticReport.create({
             "composition": {
-                "author": [resources.practioner],
+                "author": [{ "display": resources.practioner.name, "reference": `Practitioner/${resources.practioner.id}` }],
                 "date": new Date().toISOString(),
                 "encounter": resources.encounter,
                 "encounterId": resources.encounter.id,
@@ -151,7 +151,7 @@ class excute {
                 "patientId": resources.patient.id,
                 "section": [],
                 "status": "final",
-                "type": "DiagnosticReport"
+                "type": "Prescription"
             },
             "diagnosticReport": diag,
             "media": [media],
