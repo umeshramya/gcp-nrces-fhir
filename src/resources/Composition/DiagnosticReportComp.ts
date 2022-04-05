@@ -12,12 +12,11 @@ interface args {
 
 export class DiagnosticReportComp extends Composition implements Records {
   create = async (options: args) => {
-    ``
-    this.setRequester(options.requester)
-    if (options.performer) {
-      this.setPerformer(options.performer)
-    }
-    this.setPerformer(options.performer)
+    // this.setRequester(options.requester)
+    // if (options.performer) {
+    //   this.setPerformer(options.performer)
+    // }
+    // this.setPerformer(options.performer)
 
     options.composition.section.push({
       reference: `DiagnosticReport/${options.diagnosticReport.id}`,
@@ -29,7 +28,8 @@ export class DiagnosticReportComp extends Composition implements Records {
     const body = this.getFHIR(options.composition);
 
     body.section = options.composition.section;
-
+    console.log(body)
+    return
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
