@@ -151,7 +151,7 @@ class excute {
                 "patientId": resources.patient.id,
                 "section": [],
                 "status": "final",
-                "type": "Prescription"
+                "type": "DiagnosticReport"
             },
             "diagnosticReport": diag,
             "media": [media],

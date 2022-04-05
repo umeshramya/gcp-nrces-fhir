@@ -177,6 +177,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   };
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
+ 
       return `<div>Patient:- ${options.patient.name}.  ${
         options.patient.healthNumber
           ? `Health Id ${options.patient.healthNumber}`
@@ -235,15 +236,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
                 }
             </td>
           </tr>
+
           ${
-            this.requeter == ""
-              ? ""
-              : `<tr>
-            <td>Requested By : ${this.requeter}</td>
-            <td>
-              Internal Id :
-            </td>
-          </tr>`
+            this.requeter || options.patient.internalId ?
+            `<tr>
+            <td>${this.requeter ? `Requested By : ${this.requeter}` : ""}</td>
+            <td>${options.patient.internalId ? `Internal Id : ${options.patient.internalId }` : ""}</td>
+            </tr>` : ""
           }
 
         </table>

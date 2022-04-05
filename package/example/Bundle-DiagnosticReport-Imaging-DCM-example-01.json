@@ -24,6 +24,8 @@
     "entry": [
         {
             "fullUrl": "Composition/1",
+
+            
             "resource": {
                 "resourceType": "Composition",
                 "id": "1",
@@ -89,6 +91,8 @@
                     }
                 ]
             }
+
+
         },
         {
             "fullUrl": "Patient/1",
