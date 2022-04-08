@@ -1,9 +1,5 @@
-const ar = [
-    {url:"123", "res" : {"name" : "Umesh", "age" : "52"}},
-    {url:"124", "res" : {"name" : "Umesh", "age" : "52"}},
-    {url:"125", "res" : {"name" : "Umesh", "age" : "52"}},
-    {url:"126", "res" : {"name" : "Umesh", "age" : "52"}},
-]
+const cities = ["hubli", "Dharawad", "Belguam", "Bijapur", "Davanageri"];
 
 
-console.log(ar.join(","))
+const str = cities.reduce((pr, cu)=> pr += cu)
+console.log(str);

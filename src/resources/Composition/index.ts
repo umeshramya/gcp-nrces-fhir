@@ -226,7 +226,9 @@ export class Composition extends ResourceMain implements ResourceMaster {
             <td>${getDoctors()}
                 ${
                   this.performer ?
-                  `<div>Performed By :${this.performer}</div>` : ""
+                  `<div>Performed By :${
+                    this.performer.reduce((pr, cu)=> pr += `${cu}<\br>`)
+                  }</div>` : ""
                 }
             </td>
           </tr>

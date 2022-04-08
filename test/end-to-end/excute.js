@@ -136,8 +136,11 @@ class excute {
 
         const gcpFhirCRUD = new GcpFhirCRUD();
         const diag = (await gcpFhirCRUD.getFhirResource(res.id, "DiagnosticReport")).data;
+
         const media = (await gcpFhirCRUD.getFhirResource(resources.media.id, "Media")).data;
         const serviceRequest = (await gcpFhirCRUD.getFhirResource(resources.serviceRequest.id, "ServiceRequest")).data;
+        // console.log(serviceRequest)
+        // return
         const diagnosticReport = new DiagnosticReportComp();
         const data = await diagnosticReport.create({
             "composition": {
@@ -153,9 +156,9 @@ class excute {
                 "status": "final",
                 "type": "DiagnosticReport"
             },
-            "diagnosticReport": diag,
-            "media": [media],
-            "serviceRequest": serviceRequest
+            "diagnosticReport" : diag,
+            "media" : [media],
+            "serviceRequest" : serviceRequest
         })
 
         console.log(data)
