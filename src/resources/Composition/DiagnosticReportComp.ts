@@ -12,11 +12,6 @@ interface args {
 
 export class DiagnosticReportComp extends Composition implements Records {
   create = async (options: args) => {
-    // this.setRequester(options.requester)
-    // if (options.performer) {
-    //   this.setPerformer(options.performer)
-    // }
-    // this.setPerformer(options.performer)
     const serviceRequest = new ServiceRequest();
     const serviceRequestBody = serviceRequest.convertFhirToObject(serviceRequest)
     this.setRequester({
@@ -26,6 +21,12 @@ export class DiagnosticReportComp extends Composition implements Records {
 
     const diagnosticReport = new DiagnosticReport();
     const diagnosticReportObj = diagnosticReport.convertFhirToObject(diagnosticReport);
+    diagnosticReportObj.performer.forEach(el=>{
+      if(el.display){
+        this.setPerformer({"display" : el.display, "reesource" : el.resource})
+      }
+      
+    })
 
 
     options.composition.section.push(

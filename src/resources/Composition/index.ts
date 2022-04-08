@@ -118,7 +118,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
    * This is for diagnostic reporting enity requesting the services
    */
   private requeter: string = "";
-  private performer: string= "";
+  private performer: string[]= [];
 
   async setEncounter(id: string) {
     let curClass = new Encounter();
@@ -156,9 +156,9 @@ export class Composition extends ResourceMain implements ResourceMaster {
   }): void => {
    
     if (options.reesource == "Patient") {
-      this.requeter = "<div>Self</div>";
+      this.requeter="<div>Self</div>";
     } else {
-      this.requeter = `<div>${options.display}</div>`;
+      this.requeter=`<div>${options.display}</div>`;
     }
     
   };
@@ -167,13 +167,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     reesource: resourceType;
     display: string;
   }): void => {
-    
-    if (options.reesource == "Patient") {
-      this.performer = "<div>Self</div>";
-    } else {
-      this.performer = `<div>${options.display}</div>`;
-    }
-  
+    this.performer.push(options.display)  
   };
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
