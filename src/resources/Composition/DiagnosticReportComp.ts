@@ -27,7 +27,6 @@ export class DiagnosticReportComp extends Composition implements Records {
       "display": serviceRequestBody.requester.display
     })
 
-
     diagnosticReportObj.performer.forEach(el => {
       if (el.display) {
         this.setPerformer({ "display": el.display, "reesource": el.resource })

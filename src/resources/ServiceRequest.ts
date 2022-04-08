@@ -112,12 +112,19 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
       },
-      performer: [
-        {
-          reference: `${options.performer[0].resource}/${options.performer[0].id}`,
-          display: options.performer[0].display,
-        },
-      ],
+      performer: options.performer.map(el=>{
+        return {
+          reference: `${el.resource}/${el.id}`,
+          display: el.display,
+        }
+      }),
+      
+      // [
+      //   {
+      //     reference: `${options.performer[0].resource}/${options.performer[0].id}`,
+      //     display: options.performer[0].display,
+      //   },
+      // ],
     };
 
     return body;

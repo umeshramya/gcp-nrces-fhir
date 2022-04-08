@@ -25,8 +25,10 @@ const setServiceRequest = async () => {
         "status": "draft",
         "date": new Date().toISOString(),
         "services": [{ "display": "Echocardiography", "system": "http://snomed.info/sct" }],
-        // "performer": [{ "display": resources.practioner.name, "resource": "Practitioner" }]
+        "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id" : resources.practioner.id }]
     })
+
+
 
     const res = await gcpFhirCRUD.createFhirResource(body, "ServiceRequest");
 

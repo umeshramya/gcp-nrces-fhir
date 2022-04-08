@@ -223,6 +223,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
           <tr>
             <td>${getpatientdetails()}</td>
             <td>${getDoctors()}
+
                 ${this.performer.length > 0 ?
             `<div>Performed By :${this.performer.reduce((pr, cu) => pr += `${cu}<\br>`)
             }</div>` : ""

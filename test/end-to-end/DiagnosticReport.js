@@ -44,7 +44,7 @@ const setDiagnosticReport = async ()=>{
             //   }
             // ],
             "issuedDate" : new Date().toISOString(),
-            "performer" : [{"resource" : "Practitioner" , "id": resources.practioner.id, "display" : resources.practioner.name}],
+            "performer" : [{"resource" : "Practitioner", "id" : resources.practioner.id, "display" : "Mr Raju Desapande"}],
             "resultsInterpreter" : [{"resource" : "Practitioner", "id" : resources.practioner.id, "display" : resources.practioner.name}],
             "status" : "final",
             "subject" : {"resource" : "Patient", "id" : resources.patient.id, "display" : resources.patient.name},

@@ -6,7 +6,8 @@ const { PrescriptionRecord, OPConsultRecord, DiagnosticReportComp, GcpFhirCRUD, 
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
 const { setDiagnosticReport } = require("./DiagnosticReport");
-const { setMedia } = require("./Media")
+const { setMedia } = require("./Media");
+const { emptySign } = require("gcp-nrces-fhir/lib/resources/Composition");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 class excute {
@@ -160,7 +161,20 @@ class excute {
             "serviceRequest": serviceRequest
         })
 
-        console.log(data)
+        // console.log(data.data)
+        // return
+        const pdf =await diagnosticReport.getPdf({
+            "html" : data.data.text.div,
+            "base64" : true,
+            "nameLine1" : resources.practioner.name,
+            "paperSize" : "a4",
+            "qrCode" : "https://www.nicehms.com",
+            "signBase64" : emptySign,
+            "composition" : data.data
+        
+        })
+
+        console.log(pdf)
     }
 
 

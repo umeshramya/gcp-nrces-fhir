@@ -66,7 +66,7 @@ export default class ResourceMain {
       resource: resource,
     };
 
-    if (ret.display) {
+    if (multiResource.display) {
       ret.display = multiResource.display;
     }
     return ret;
