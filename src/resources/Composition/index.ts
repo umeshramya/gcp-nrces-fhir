@@ -102,9 +102,9 @@ export class Composition extends ResourceMain implements ResourceMaster {
   public get organization(): ORGANIZATION {
     return this._organization;
   }
-/**
- * This are persons who interpt the result in care of diagnostic report and in care of the others these who treat patinets
- */
+  /**
+   * This are persons who interpt the result in care of diagnostic report and in care of the others these who treat patinets
+   */
   private _practitioner: any = [];
   public get practitioner(): any {
     return this._practitioner;
@@ -118,7 +118,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
    * This is for diagnostic reporting enity requesting the services
    */
   private requeter: string = "";
-  private performer: string[]= [];
+  private performer: string[] = [];
 
   async setEncounter(id: string) {
     let curClass = new Encounter();
@@ -154,33 +154,32 @@ export class Composition extends ResourceMain implements ResourceMaster {
     reesource: resourceType;
     display: string;
   }): void => {
-   
+
     if (options.reesource == "Patient") {
-      this.requeter="<div>Self</div>";
+      this.requeter = "<div>Self</div>";
     } else {
-      this.requeter=`<div>${options.display}</div>`;
+      this.requeter = `<div>${options.display}</div>`;
     }
-    
+
   };
 
   setPerformer = (options: {
     reesource: resourceType;
     display: string;
   }): void => {
-    this.performer.push(options.display)  
+    this.performer.push(options.display)
   };
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
- 
-      return `<div>Patient:- ${options.patient.name}.  ${
-        options.patient.healthNumber
+
+      return `<div>Patient:- ${options.patient.name}.  ${options.patient.healthNumber
           ? `Health Id ${options.patient.healthNumber}`
           : ""
-      }</div>
+        }</div>
                 <div>MRN:- ${options.patient.MRN}</div>
                 <div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
-        new Date(options.patient.dob)
-      )} ph: ${options.patient.mobile}</div>`;
+          new Date(options.patient.dob)
+        )} ph: ${options.patient.mobile}</div>`;
     };
     /**
      * This is for doctors who authored the document or who interpreted the results
@@ -224,20 +223,17 @@ export class Composition extends ResourceMain implements ResourceMaster {
           <tr>
             <td>${getpatientdetails()}</td>
             <td>${getDoctors()}
-                ${
-                  this.performer ?
-                  `<div>Performed By :${
-                    this.performer.reduce((pr, cu)=> pr += `${cu}<\br>`)
-                  }</div>` : ""
-                }
+                ${this.performer.length > 0 ?
+            `<div>Performed By :${this.performer.reduce((pr, cu) => pr += `${cu}<\br>`)
+            }</div>` : ""
+          }
             </td>
           </tr>
 
-          ${
-            this.requeter || options.patient.internalId ?
+          ${this.requeter || options.patient.internalId ?
             `<tr>
             <td>${this.requeter ? `Requested By : ${this.requeter}` : ""}</td>
-            <td>${options.patient.internalId ? `Internal Id : ${options.patient.internalId }` : ""}</td>
+            <td>${options.patient.internalId ? `Internal Id : ${options.patient.internalId}` : ""}</td>
             </tr>` : ""
           }
 

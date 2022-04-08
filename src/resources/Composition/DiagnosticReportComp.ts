@@ -15,26 +15,25 @@ export class DiagnosticReportComp extends Composition implements Records {
 
 
     const serviceRequest = new ServiceRequest();
-    const serviceRequestBody = serviceRequest.convertFhirToObject(serviceRequest)
+    const serviceRequestBody = serviceRequest.convertFhirToObject(options.serviceRequest)
+
     const diagnosticReport = new DiagnosticReport();
-    const diagnosticReportObj = diagnosticReport.convertFhirToObject(diagnosticReport);
-
-    console.log(serviceRequestBody)
-    console.log(diagnosticReportObj)
-    return
-
-    // this.setRequester({
-    //   "reesource": serviceRequestBody.requester.resource,
-    //   "display": serviceRequestBody.requester.display
-    // })
+    const diagnosticReportObj = diagnosticReport.convertFhirToObject(options.diagnosticReport);
 
 
-    // diagnosticReportObj.performer.forEach(el=>{
-    //   if(el.display){
-    //     this.setPerformer({"display" : el.display, "reesource" : el.resource})
-    //   }
-      
-    // })
+
+    this.setRequester({
+      "reesource": serviceRequestBody.requester.resource,
+      "display": serviceRequestBody.requester.display
+    })
+
+
+    diagnosticReportObj.performer.forEach(el => {
+      if (el.display) {
+        this.setPerformer({ "display": el.display, "reesource": el.resource })
+      }
+
+    })
 
 
     options.composition.section.push(
