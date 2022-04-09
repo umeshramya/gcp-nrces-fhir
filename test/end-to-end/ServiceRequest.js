@@ -18,7 +18,7 @@ const setServiceRequest = async () => {
         "patientId": resources.patient.id,
         "patientName": resources.patient.name,
         "priority": "routine",
-        "requester": { "display": resources.patient.name, "id": resources.patient.id, "resource": "Patient" },
+        "requester": { "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" },
         "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
         "patientId": resources.patient.id,
         "patientName": resources.patient.name,

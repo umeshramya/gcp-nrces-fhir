@@ -154,32 +154,30 @@ export class Composition extends ResourceMain implements ResourceMaster {
     reesource: resourceType;
     display: string;
   }): void => {
-
     if (options.reesource == "Patient") {
-      this.requeter = "<div>Self</div>";
+      this.requeter = "Self";
     } else {
-      this.requeter = `<div>${options.display}</div>`;
+      this.requeter = `${options.display}`;
     }
-
   };
 
   setPerformer = (options: {
     reesource: resourceType;
     display: string;
   }): void => {
-    this.performer.push(options.display)
+    this.performer.push(options.display);
   };
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
-
-      return `<div>Patient:- ${options.patient.name}.  ${options.patient.healthNumber
+      return `<div>Patient:- ${options.patient.name}.  ${
+        options.patient.healthNumber
           ? `Health Id ${options.patient.healthNumber}`
           : ""
-        }</div>
+      }</div>
                 <div>MRN:- ${options.patient.MRN}</div>
                 <div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
-          new Date(options.patient.dob)
-        )} ph: ${options.patient.mobile}</div>`;
+        new Date(options.patient.dob)
+      )} ph: ${options.patient.mobile}</div>`;
     };
     /**
      * This is for doctors who authored the document or who interpreted the results
@@ -224,18 +222,27 @@ export class Composition extends ResourceMain implements ResourceMaster {
             <td>${getpatientdetails()}</td>
             <td>${getDoctors()}
 
-                ${this.performer.length > 0 ?
-            `<div>Performed By :${this.performer.reduce((pr, cu) => pr += `${cu}<\br>`)
-            }</div>` : ""
-          }
+                ${
+                  this.performer.length > 0
+                    ? `<div>Performed By :${this.performer.reduce(
+                        (pr, cu) => (pr += `${cu}<\br>`)
+                      )}</div>`
+                    : ""
+                }
             </td>
           </tr>
 
-          ${this.requeter || options.patient.internalId ?
-            `<tr>
+          ${
+            this.requeter || options.patient.internalId
+              ? `<tr>
             <td>${this.requeter ? `Requested By : ${this.requeter}` : ""}</td>
-            <td>${options.patient.internalId ? `Internal Id : ${options.patient.internalId}` : ""}</td>
-            </tr>` : ""
+            <td>${
+              options.patient.internalId
+                ? `Internal Id : ${options.patient.internalId}`
+                : ""
+            }</td>
+            </tr>`
+              : ""
           }
 
         </table>
