@@ -9,8 +9,9 @@ import {
   daysOfWeek,
 } from "../config/practionerRole";
 
-type PractionerRoles = typeof practionerRoles[number];
-type PractitionerRoleSpecialities = typeof practitionerRoleSpecialities[number];
+export type PractionerRoles = typeof practionerRoles[number];
+export type PractitionerRoleSpecialities =
+  typeof practitionerRoleSpecialities[number];
 type DaysOfWeek = typeof daysOfWeek[number];
 
 export interface AVAILABLE_TIME {
