@@ -1,5 +1,6 @@
 import { IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import ResourceMain from "./ResourceMai";
 
 export interface PRACTITIONER {
   id?: string;
@@ -8,9 +9,10 @@ export interface PRACTITIONER {
   medicalLicenseNumber?: string;
   ndhmProfessionalId?: string;
   providerNumber?: string;
+  orgnizationId: string;
 }
 
-export class Practitioner implements ResourceMaster {
+export class Practitioner extends ResourceMain implements ResourceMaster {
   getFHIR(options: PRACTITIONER) {
     const identifiers: IDENTTIFIER[] = [];
     if (options.ndhmProfessionalId) {
@@ -66,6 +68,20 @@ export class Practitioner implements ResourceMaster {
       identifiers.push(id);
     }
 
+    identifiers.push({
+      type: {
+        coding: [
+          {
+            system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+            code: "PRN",
+            display: "Provider number",
+          },
+        ],
+      },
+      system: "https://www.nicehms.com/organizationId",
+      value: `${options.orgnizationId}`,
+    });
+
     const body = {
       resourceType: "Practitioner",
       id: options.id || undefined,
@@ -83,21 +99,6 @@ export class Practitioner implements ResourceMaster {
         })</div>`,
       },
       identifier: identifiers,
-      // [
-      //   {
-      //     type: {
-      //       coding: [
-      //         {
-      //           system: "http://terminology.hl7.org/CodeSystem/v2-0203",
-      //           code: "MD",
-      //           display: options.medicalLicenseNumber,
-      //         },
-      //       ],
-      //     },
-      //     system: "https://doctor.ndhm.gov.in",
-      //     value: options.ndhmProfessionalId,
-      //   },
-      // ],
       name: [
         {
           text: `${options.name} ${options.qualification || ""}`,
@@ -112,6 +113,10 @@ export class Practitioner implements ResourceMaster {
     let ret: PRACTITIONER = {
       name: options.name[0].text,
       id: options.id,
+      orgnizationId: this.getIdentifers(
+        "https://www.nicehms.com/organizationId",
+        options
+      ),
     };
     if (options.identifier) {
       const medicalLicenseNumber: any[] = options.identifier.filter(

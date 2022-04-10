@@ -13,6 +13,12 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 class excute {
 
 
+    callFunction=async()=>{
+        await callFunction()
+        console.log(resources)
+    }
+
+
     /**
      * 
      */
@@ -80,8 +86,8 @@ class excute {
                 "date": new Date().toISOString(),
                 "encounter": resources.encounter,
                 "encounterId": resources.encounter.id,
-                "organization": resources.organizarion,
-                "organizationId": resources.organizarion.id,
+                "organization": resources.organization,
+                "organizationId": resources.organization.id,
                 "patient": resources.patient,
                 "patientId": resources.patient.id,
                 "section": [],
@@ -112,8 +118,8 @@ class excute {
                 "date": new Date().toISOString(),
                 "encounter": resources.encounter,
                 "encounterId": resources.encounter.id,
-                "organization": resources.organizarion,
-                "organizationId": resources.organizarion.id,
+                "organization": resources.organization,
+                "organizationId": resources.organization.id,
                 "patient": resources.patient,
                 "patientId": resources.patient.id,
                 "section": [],
@@ -148,8 +154,8 @@ class excute {
                 "date": new Date().toISOString(),
                 "encounter": resources.encounter,
                 "encounterId": resources.encounter.id,
-                "organization": resources.organizarion,
-                "organizationId": resources.organizarion.id,
+                "organization": resources.organization,
+                "organizationId": resources.organization.id,
                 "patient": resources.patient,
                 "patientId": resources.patient.id,
                 "section": [],
@@ -183,10 +189,10 @@ class excute {
 
 
 
-
+new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
-new excute().practionerRole()
+// new excute().practionerRole()
 // new excute().specimen()
 // new excute().serviceRequest()
 // new excute().precsriptinComposition();

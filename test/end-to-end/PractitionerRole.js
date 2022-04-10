@@ -30,7 +30,7 @@ const setPractiotionerRole = async () => {
     }
     ],
     "notAvailable": [{ "description": "Not end of this month", "during": { "start": new Date().toISOString(), "end": new Date().toISOString(), } }],
-    "organizationId": resources.organizarion.id,
+    "organizationId": resources.organization.id,
     "practitionerId": resources.practioner.id,
     "practitionerName": resources.practioner.name,
     "practionerRole": [{ "code": "106289002", "display": "Cardiologist" }],

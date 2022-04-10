@@ -6,7 +6,7 @@ const { emptySign } = require('gcp-nrces-fhir/lib/resources/Composition');
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 const resources = {
-    organizarion: null,
+    organization: null,
     patient: null,
     practioner: null,
     encounter: null,
@@ -33,7 +33,7 @@ const setOrganization = async () => {
     });
     let res = await gcpFhirCRUD.createFhirResource(body, "Organization")
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Organization");
-    resources.organizarion = organization.convertFhirToObject(res.data)
+    resources.organization = organization.convertFhirToObject(res.data)
 
 
 
@@ -53,7 +53,7 @@ const setPatient = async () => {
         "healthNumber": "23-3457-234",
         "dob": "1969-09-29",
         "MRN": "5002",
-        "organizationId": resources.organizarion.id,
+        "organizationId": resources.organization.id,
         "internalId": "156141",
     })
 
@@ -76,7 +76,8 @@ const setPractinioner = async () => {
         "medicalLicenseNumber": "KMC 35167",
         "name": "Dr Umesh R Bilagi",
         "ndhmProfessionalId": "123456",
-        "qualification": "MD DM Cardiology"
+        "qualification": "MD DM Cardiology",
+        "orgnizationId" :  resources.organization.id
     })
 
     let res = await gcpFhirCRUD.createFhirResource(body, "Practitioner")
