@@ -13,7 +13,7 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 class excute {
 
 
-    callFunction=async()=>{
+    callFunction = async () => {
         await callFunction()
         console.log(resources)
     }
@@ -169,18 +169,86 @@ class excute {
 
         // console.log(data.data)
         // return
-        const pdf =await diagnosticReport.getPdf({
-            "html" : data.data.text.div,
-            "base64" : true,
-            "nameLine1" : resources.practioner.name,
-            "paperSize" : "a4",
-            "qrCode" : "https://www.nicehms.com",
-            "signBase64" : emptySign,
-            "composition" : data.data
-        
+        const pdf = await diagnosticReport.getPdf({
+            "html": data.data.text.div,
+            "base64": true,
+            "nameLine1": resources.practioner.name,
+            "paperSize": "a4",
+            "qrCode": "https://www.nicehms.com",
+            "signBase64": emptySign,
+            "composition": data.data
+
         })
 
         console.log(pdf)
+    }
+
+    updateServiceRequest = async () => {
+        const body = {
+            "category": [
+                {
+                    "coding": [
+                        {
+                            "code": "108252007",
+                            "display": "Laboratory procedure",
+                            "system": "http://snomed.info/sct"
+                        }
+                    ]
+                }
+            ],
+            "code": {
+                "coding": [
+                    {
+                        "code": "58410-2",
+                        "display": "CBC Pnl Bld Auto",
+                        "system": "http://loinc.org"
+                    },
+                    {
+                        "code": "42176-8",
+                        "display": "1,3 beta glucan [Mass/volume] in Serum",
+                        "system": "http://loinc.org"
+                    }
+                ]
+            },
+            "id": "7e042174-c17f-4d5b-a1c0-71269d45e087",
+            "intent": "order",
+            "meta": {
+                "lastUpdated": "2022-04-23T14:15:16.261282+00:00",
+                "profile": [
+                    "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ServiceRequest"
+                ],
+                "versionId": "MTY1MDcyMzMxNjI2MTI4MjAwMA"
+            },
+            "occurrenceDateTime": "2022-04-23",
+            "performer": [
+                {
+                    "display": "Dr Nice Hms MS Orth",
+                    "reference": "Practitioner/42bbaf05-7863-493b-acf5-e85cf889cfe1"
+                },
+                {
+                    "display": "Dr Akash MD",
+                    "reference": "Practitioner/665b41f3-3cf1-477f-93fe-9333c522b0af"
+                }
+            ],
+            "priority": "routine",
+            "requester": {
+                "display": "Patient",
+                "reference": "Patient/b853af5e-c0b9-4ace-8d4a-45b9a8969b8f"
+            },
+            "resourceType": "ServiceRequest",
+            "status": "draft",
+            "subject": {
+                "display": "Vasu M Dodamani",
+                "reference": "Patient/b853af5e-c0b9-4ace-8d4a-45b9a8969b8f"
+            },
+            "text": {
+                "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">, CBC Pnl Bld Auto, 1,3 beta glucan [Mass/volume] in Serum</div>",
+                "status": "generated"
+            }
+        }
+
+        const res = await new GcpFhirCRUD().updateFhirResource(body, body.id, "ServiceRequest")
+        console.log(res)
     }
 
 
@@ -189,7 +257,7 @@ class excute {
 
 
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -200,4 +268,6 @@ new excute().callFunction()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().diagnosticReportComposition()
+
+new excute().updateServiceRequest()
 

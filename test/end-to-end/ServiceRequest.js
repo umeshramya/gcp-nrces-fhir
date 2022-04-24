@@ -1,3 +1,4 @@
+const console = require("console");
 const { ServiceRequest } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
@@ -25,7 +26,7 @@ const setServiceRequest = async () => {
         "status": "draft",
         "date": new Date().toISOString(),
         "services": [{ "display": "Echocardiography", "system": "http://snomed.info/sct" }],
-        "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id" : resources.practioner.id }]
+        "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id": resources.practioner.id }]
     })
 
 
@@ -35,5 +36,9 @@ const setServiceRequest = async () => {
     const ret = serviceRequest.convertFhirToObject(res.data)
     return ret;
 }
+
+
+
+
 
 module.exports = { setServiceRequest }
