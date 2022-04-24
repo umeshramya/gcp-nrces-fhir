@@ -2,7 +2,7 @@ const { setMedicationRequest } = require("./medication")
 const { callFunction, resources } = require("./index");
 const { setCondition } = require("./condion");
 const { setPractiotionerRole } = require("./PractitionerRole")
-const { PrescriptionRecord, OPConsultRecord, DiagnosticReportComp, GcpFhirCRUD, PractitionerRole, DiagnosticReport } = require("gcp-nrces-fhir");
+const { PrescriptionRecord, OPConsultRecord, DiagnosticReportComp, GcpFhirCRUD, PractitionerRole, DiagnosticReport, ServiceRequest } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
 const { setDiagnosticReport } = require("./DiagnosticReport");
@@ -247,8 +247,12 @@ class excute {
             }
         }
 
-        const res = await new GcpFhirCRUD().updateFhirResource(body, body.id, "ServiceRequest")
-        console.log(res)
+
+        const convert = new ServiceRequest().convertFhirToObject(body)
+        console.log(convert)
+
+        // const res = await new GcpFhirCRUD().updateFhirResource(body, body.id, "ServiceRequest")
+        // console.log(res)
     }
 
 

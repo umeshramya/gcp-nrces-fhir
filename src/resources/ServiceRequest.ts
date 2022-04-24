@@ -118,13 +118,6 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
           display: el.display,
         };
       }),
-
-      // [
-      //   {
-      //     reference: `${options.performer[0].resource}/${options.performer[0].id}`,
-      //     display: options.performer[0].display,
-      //   },
-      // ],
     };
 
     return body;
@@ -166,24 +159,6 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
           resource: resource,
         });
       });
-
-      // const resource = `${options.performer[0].reference}`.substring(
-      //   0,
-      //   `${options.performer[0].reference}`.indexOf("/")
-      // ) as any;
-
-      // const id = this.getIdFromReference({
-      //   ref: options.requester.reference,
-      //   resourceType: resource,
-      // });
-
-      // let ret: performer[] = [
-      //   {
-      //     display: options.performer[0].display,
-      //     id: id,
-      //     resource: resource,
-      //   },
-      // ];
       return ret;
     };
 
