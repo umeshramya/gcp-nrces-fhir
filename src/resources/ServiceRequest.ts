@@ -112,13 +112,13 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
       },
-      performer: options.performer.map(el=>{
+      performer: options.performer.map((el) => {
         return {
           reference: `${el.resource}/${el.id}`,
           display: el.display,
-        }
+        };
       }),
-      
+
       // [
       //   {
       //     reference: `${options.performer[0].resource}/${options.performer[0].id}`,
@@ -150,23 +150,40 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     };
 
     const performer = (): performer[] => {
-      const resource = `${options.performer[0].reference}`.substring(
-        0,
-        `${options.performer[0].reference}`.indexOf("/")
-      ) as any;
-
-      const id = this.getIdFromReference({
-        ref: options.requester.reference,
-        resourceType: resource,
-      });
-
-      let ret: performer[] = [
-        {
-          display: options.performer[0].display,
+      let ret: performer[] = [];
+      options.performer.forEach((el: any) => {
+        const resource = `${el.reference}`.substring(
+          0,
+          `${el.reference}`.indexOf("/")
+        ) as any;
+        const id = this.getIdFromReference({
+          ref: el.reference,
+          resourceType: resource,
+        });
+        ret.push({
+          display: el.display,
           id: id,
           resource: resource,
-        },
-      ];
+        });
+      });
+
+      // const resource = `${options.performer[0].reference}`.substring(
+      //   0,
+      //   `${options.performer[0].reference}`.indexOf("/")
+      // ) as any;
+
+      // const id = this.getIdFromReference({
+      //   ref: options.requester.reference,
+      //   resourceType: resource,
+      // });
+
+      // let ret: performer[] = [
+      //   {
+      //     display: options.performer[0].display,
+      //     id: id,
+      //     resource: resource,
+      //   },
+      // ];
       return ret;
     };
 
@@ -191,6 +208,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     };
     return ret;
   }
+
   statusArray = (): ServiceRequestStatus[] => {
     return ServiceRequestStatusArray.map((el) => el);
   };
