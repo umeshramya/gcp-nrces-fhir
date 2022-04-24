@@ -1,5 +1,5 @@
 import { type } from "os";
-import { CodeDisplay, PERIOD } from "../config";
+import { CODEABLE_CONCEPT, CodeDisplay, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
 import ResourceMain from "./ResourceMai";
@@ -12,7 +12,7 @@ export interface SPECIMEN {
   /**
    * Specimen type blood serun , or plural fluid , HPR tissue etc
    * */
-  type: CodeDisplay[];
+  type: CODEABLE_CONCEPT;
 }
 export class Specimen extends ResourceMain implements ResourceMaster {
   getFHIR(options: SPECIMEN) {
@@ -24,11 +24,9 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: options.type[0].display,
+        div: options.type.text,
       },
-      type: {
-        coding: options.type,
-      },
+      type:options.type,
       subject: { reference: `Patient/${options.patientId}` },
       receivedTime: options.recivedDateTime,
       collection: options.collection,
@@ -43,7 +41,7 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       }),
       recivedDateTime: options.receivedTime,
       collection: options.collection,
-      type: options.type.coding,
+      type: options.type,
     };
     return ret;
   }

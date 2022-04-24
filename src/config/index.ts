@@ -65,7 +65,7 @@ export interface coding extends CodeDisplay {
 }
 
 export interface CODEABLE_CONCEPT {
-  coding: coding[]; // Code defined by a terminology system
+  coding?: coding[]; // Code defined by a terminology system
   text?: string; // Plain text representation of the concept
 }
 export interface PERIOD {

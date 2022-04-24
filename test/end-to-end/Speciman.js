@@ -15,7 +15,7 @@ const setSpecimen = async() => {
         "collection" : {"collectedDateTime" : new Date().toISOString()},
         "patientId" : resources.patient.id,
         "recivedDateTime" : new Date().toISOString(),
-        "type" :  [{"display" : "Plural Fluid", "system" : ""}],
+        "type" :  {"text" : "Plural Fluid"},
     })
 
     const res = await gcpFhirCRUD.createFhirResource(body, "Specimen")
