@@ -8,7 +8,7 @@ export interface SPECIMEN {
   id?: string;
   patientId: string;
   recivedDateTime: string;
-  collection: { collectedDateTime: string; collectedPeriod?: PERIOD };
+  collection: { collectedDateTime: string };
   /**
    * Specimen type blood serun , or plural fluid , HPR tissue etc
    * */
@@ -26,7 +26,7 @@ export class Specimen extends ResourceMain implements ResourceMaster {
         status: "generated",
         div: options.type.text,
       },
-      type:options.type,
+      type: options.type,
       subject: { reference: `Patient/${options.patientId}` },
       receivedTime: options.recivedDateTime,
       collection: options.collection,
@@ -42,6 +42,7 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       recivedDateTime: options.receivedTime,
       collection: options.collection,
       type: options.type,
+      id: options.id,
     };
     return ret;
   }
