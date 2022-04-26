@@ -51,6 +51,7 @@ const resourceTypeArray = [
   "MedicationDispense",
   "Immunization",
   "ImagingStudy",
+  "RelatedPerson",
 ] as const;
 
 type resourceType = typeof resourceTypeArray[number];

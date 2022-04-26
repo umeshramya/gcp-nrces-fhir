@@ -1,8 +1,9 @@
-import { MULTI_RESOURCE } from "../config";
+import { type } from "os";
+import { CODEABLE_CONCEPT, MULTI_RESOURCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
-interface basedOn extends MULTI_RESOURCE {
+interface BasedOn extends MULTI_RESOURCE {
   resource:
     | "CarePlan"
     | "DeviceRequest"
@@ -12,7 +13,7 @@ interface basedOn extends MULTI_RESOURCE {
     | "MedicationRequest";
 }
 
-interface partOf extends MULTI_RESOURCE {
+interface PartOf extends MULTI_RESOURCE {
   resource:
     | "MedicationAdministration"
     | "MedicationDispense"
@@ -22,9 +23,26 @@ interface partOf extends MULTI_RESOURCE {
     | "ImagingStudy";
 }
 
+const statusArray = ["registered", "preliminary", "final", "amended"] as const;
+type status = typeof statusArray[number];
+
+interface Performer extends MULTI_RESOURCE {
+  resource:
+    | "CareTeam"
+    | "RelatedPerson"
+    | "Practitioner"
+    | "Organization"
+    | "PractitionerRole"
+    | "Patient";
+}
+
 export interface OBSERVATION {
-  basedOn?: basedOn;
-  partOf?: partOf;
+  basedOn?: BasedOn[];
+  partOf?: PartOf[];
+  status: status;
+  code: CODEABLE_CONCEPT;
+  patientId: string;
+  performer: Performer[];
 }
 
 export class Observation extends ResourceMain implements ResourceMaster {
@@ -71,5 +89,7 @@ export class Observation extends ResourceMain implements ResourceMaster {
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");
   }
-  statusArray?: Function | undefined;
+  statusArray(): status[] {
+    return statusArray.map((el) => el);
+  }
 }
