@@ -1,1 +1,31 @@
-{"resourceType":"Observation","id":"example-10","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-10</p><p><b>status</b>: final</p><p><b>code</b>: Glucose [Mass/volume] in Blood <span>(Details : LOINC code '2339-0' = 'Glucose [Mass/volume] in Blood', given as 'Glucose [Mass/volume] in Blood')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 142 mg/dL<span> (Details: UCUM code mg/dL = 'mg/dL')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"2339-0","display":"Glucose [Mass/volume] in Blood"}],"text":"Glucose [Mass/volume] in Blood"},"subject":{"reference":"Patient/1"},"valueQuantity":{"value":142,"unit":"mg/dL","system":"http://unitsofmeasure.org","code":"mg/dL"}}
+{
+  "resourceType": "Observation",
+  "id": "example-10",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-10</p><p><b>status</b>: final</p><p><b>code</b>: Glucose [Mass/volume] in Blood <span>(Details : LOINC code '2339-0' = 'Glucose [Mass/volume] in Blood', given as 'Glucose [Mass/volume] in Blood')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 142 mg/dL<span> (Details: UCUM code mg/dL = 'mg/dL')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "2339-0",
+        "display": "Glucose [Mass/volume] in Blood"
+      }
+    ],
+    "text": "Glucose [Mass/volume] in Blood"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueQuantity": {
+    "value": 142,
+    "unit": "mg/dL",
+    "system": "http://unitsofmeasure.org",
+    "code": "mg/dL"
+  }
+}

@@ -1,1 +1,32 @@
-{"resourceType":"Observation","id":"example-34","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationBodyMeasurement"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-35</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: Body height <span>(Details : {LOINC code '8302-2' = 'Body height', given as 'Body height'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 29/09/2020</p><p><b>value</b>: 66.899999999999991 in<span> (Details: UCUM code [in_i] = 'in_i')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"8302-2","display":"Body height"}],"text":"Body height"},"subject":{"reference":"Patient/1"},"effectiveDateTime":"2020-09-29","valueQuantity":{"value":66.89999999999999,"unit":"in","system":"http://unitsofmeasure.org","code":"{[in_us],cm,m}"}}
+{
+  "resourceType": "Observation",
+  "id": "example-34",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationBodyMeasurement"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-35</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: Body height <span>(Details : {LOINC code '8302-2' = 'Body height', given as 'Body height'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 29/09/2020</p><p><b>value</b>: 66.899999999999991 in<span> (Details: UCUM code [in_i] = 'in_i')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "8302-2",
+        "display": "Body height"
+      }
+    ],
+    "text": "Body height"
+  },
+  "subject": { "reference": "Patient/1" },
+  "effectiveDateTime": "2020-09-29",
+  "valueQuantity": {
+    "value": 66.89999999999999,
+    "unit": "in",
+    "system": "http://unitsofmeasure.org",
+    "code": "{[in_us],cm,m}"
+  }
+}

@@ -1,1 +1,31 @@
-{"resourceType":"Observation","id":"example-20","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-20</p><p><b>status</b>: final</p><p><b>code</b>: Age at menarche <span>(Details : LOINC code '42798-9' = 'Age at menarche', given as 'Age at menarche')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 14 age</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"42798-9","display":"Age at menarche"}],"text":"Age at menarche"},"subject":{"reference":"Patient/1"},"valueQuantity":{"value":14,"unit":"age","system":"http://unitsofmeasure.org","code":"{age}"}}
+{
+  "resourceType": "Observation",
+  "id": "example-20",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-20</p><p><b>status</b>: final</p><p><b>code</b>: Age at menarche <span>(Details : LOINC code '42798-9' = 'Age at menarche', given as 'Age at menarche')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 14 age</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "42798-9",
+        "display": "Age at menarche"
+      }
+    ],
+    "text": "Age at menarche"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueQuantity": {
+    "value": 14,
+    "unit": "age",
+    "system": "http://unitsofmeasure.org",
+    "code": "{age}"
+  }
+}

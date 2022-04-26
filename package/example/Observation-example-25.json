@@ -1,1 +1,35 @@
-{"resourceType":"Observation","id":"example-25","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationLifestyle"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-25</p><p><b>status</b>: final</p><p><b>code</b>: Finding relating to alcohol drinking behavior <span>(Details : SNOMED CT code '228273003' = 'Finding relating to alcohol drinking behavior', given as 'Finding relating to alcohol drinking behavior')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: Craving for alcohol<span> (Details: SNOMED CT code 228365005 = 'Craving for alcohol', given as 'Craving for alcohol')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://snomed.info/sct","code":"228273003","display":"Finding relating to alcohol drinking behavior"}],"text":"Finding relating to alcohol drinking behavior"},"subject":{"reference":"Patient/1"},"valueCodeableConcept":{"coding":[{"system":"http://snomed.info/sct","code":"228365005","display":"Craving for alcohol"}],"text":"Craving for alcohol"}}
+{
+  "resourceType": "Observation",
+  "id": "example-25",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationLifestyle"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-25</p><p><b>status</b>: final</p><p><b>code</b>: Finding relating to alcohol drinking behavior <span>(Details : SNOMED CT code '228273003' = 'Finding relating to alcohol drinking behavior', given as 'Finding relating to alcohol drinking behavior')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: Craving for alcohol<span> (Details: SNOMED CT code 228365005 = 'Craving for alcohol', given as 'Craving for alcohol')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "228273003",
+        "display": "Finding relating to alcohol drinking behavior"
+      }
+    ],
+    "text": "Finding relating to alcohol drinking behavior"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "228365005",
+        "display": "Craving for alcohol"
+      }
+    ],
+    "text": "Craving for alcohol"
+  }
+}

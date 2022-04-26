@@ -1,1 +1,26 @@
-{"resourceType":"Observation","id":"example-09","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationPhysicalActivity"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-09</p><p><b>status</b>: final</p><p><b>code</b>: Activity level [Acceleration] <span>(Details : LOINC code '80493-0' = 'Activity level [Acceleration]', given as 'Activity level [Acceleration]')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: Moderate</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"80493-0","display":"Activity level [Acceleration]"}],"text":"Activity level [Acceleration]"},"subject":{"reference":"Patient/1"},"valueString":"Moderate"}
+{
+  "resourceType": "Observation",
+  "id": "example-09",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationPhysicalActivity"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-09</p><p><b>status</b>: final</p><p><b>code</b>: Activity level [Acceleration] <span>(Details : LOINC code '80493-0' = 'Activity level [Acceleration]', given as 'Activity level [Acceleration]')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: Moderate</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "80493-0",
+        "display": "Activity level [Acceleration]"
+      }
+    ],
+    "text": "Activity level [Acceleration]"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueString": "Moderate"
+}

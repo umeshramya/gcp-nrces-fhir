@@ -1,1 +1,32 @@
-{"resourceType":"Observation","id":"example-22","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationVitalSigns"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-22</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: Body surface temperature <span>(Details : {LOINC code '61008-9' = 'Body surface temperature', given as 'Body surface temperature'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 2021-03-09</p><p><b>value</b>: 36.5 Cel</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"61008-9","display":"Body surface temperature"}],"text":"Body surface temperature"},"subject":{"reference":"Patient/1"},"effectiveDateTime":"2021-03-09","valueQuantity":{"value":36.5,"unit":"Cel","system":"http://unitsofmeasure.org","code":"{Cel or degF}"}}
+{
+  "resourceType": "Observation",
+  "id": "example-22",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationVitalSigns"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-22</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: Body surface temperature <span>(Details : {LOINC code '61008-9' = 'Body surface temperature', given as 'Body surface temperature'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 2021-03-09</p><p><b>value</b>: 36.5 Cel</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "61008-9",
+        "display": "Body surface temperature"
+      }
+    ],
+    "text": "Body surface temperature"
+  },
+  "subject": { "reference": "Patient/1" },
+  "effectiveDateTime": "2021-03-09",
+  "valueQuantity": {
+    "value": 36.5,
+    "unit": "Cel",
+    "system": "http://unitsofmeasure.org",
+    "code": "{Cel or degF}"
+  }
+}

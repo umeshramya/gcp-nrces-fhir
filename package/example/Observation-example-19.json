@@ -1,1 +1,32 @@
-{"resourceType":"Observation","id":"example-19","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-19</p><p><b>status</b>: final</p><p><b>code</b>: Number of menstrual periods per year <span>(Details : LOINC code '92656-8' = 'Number of menstrual periods per year', given as 'Number of menstrual periods per year')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 12 per year</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"92656-8","display":"Number of menstrual periods per year"}],"text":"Number of menstrual periods per year"},"subject":{"reference":"Patient/1"},"performer":[{"reference":"Practi/1"}],"valueQuantity":{"value":12,"unit":"per year","system":"http://unitsofmeasure.org","code":"{per year}"}}
+{
+  "resourceType": "Observation",
+  "id": "example-19",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-19</p><p><b>status</b>: final</p><p><b>code</b>: Number of menstrual periods per year <span>(Details : LOINC code '92656-8' = 'Number of menstrual periods per year', given as 'Number of menstrual periods per year')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 12 per year</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "92656-8",
+        "display": "Number of menstrual periods per year"
+      }
+    ],
+    "text": "Number of menstrual periods per year"
+  },
+  "subject": { "reference": "Patient/1" },
+  "performer": [{ "reference": "Practi/1" }],
+  "valueQuantity": {
+    "value": 12,
+    "unit": "per year",
+    "system": "http://unitsofmeasure.org",
+    "code": "{per year}"
+  }
+}

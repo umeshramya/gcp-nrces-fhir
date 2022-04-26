@@ -1,1 +1,31 @@
-{"resourceType":"Observation","id":"example-07","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationPhysicalActivity"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-07</p><p><b>status</b>: final</p><p><b>code</b>: Number of steps in unspecified time Pedometer <span>(Details : LOINC code '93832-4' = 'Sleep duration', given as 'Sleep duration')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 8 h<span> (Details: UCUM code h = 'hours')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"93832-4","display":"Sleep duration"}],"text":"Sleep duration"},"subject":{"reference":"Patient/1"},"valueQuantity":{"value":8,"unit":"h","system":"http://unitsofmeasure.org","code":"h"}}
+{
+  "resourceType": "Observation",
+  "id": "example-07",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationPhysicalActivity"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-07</p><p><b>status</b>: final</p><p><b>code</b>: Number of steps in unspecified time Pedometer <span>(Details : LOINC code '93832-4' = 'Sleep duration', given as 'Sleep duration')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 8 h<span> (Details: UCUM code h = 'hours')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "93832-4",
+        "display": "Sleep duration"
+      }
+    ],
+    "text": "Sleep duration"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueQuantity": {
+    "value": 8,
+    "unit": "h",
+    "system": "http://unitsofmeasure.org",
+    "code": "h"
+  }
+}

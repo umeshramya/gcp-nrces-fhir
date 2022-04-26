@@ -1,1 +1,32 @@
-{"resourceType":"Observation","id":"example-23","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-23</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: Last menstrual period start date <span>(Details : {LOINC code '8665-2' = 'Last menstrual period start date', given as 'Last menstrual period start date'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 2021-03-09</p><p><b>value</b>: 030121 MMDDYY</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"8665-2","display":"Last menstrual period start date"}],"text":"Last menstrual period start date"},"subject":{"reference":"Patient/1"},"effectiveDateTime":"2021-03-09","valueQuantity":{"value":30121,"unit":"MMDDYY","system":"http://unitsofmeasure.org","code":"{MMDDYY}"}}
+{
+  "resourceType": "Observation",
+  "id": "example-23",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-23</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: Last menstrual period start date <span>(Details : {LOINC code '8665-2' = 'Last menstrual period start date', given as 'Last menstrual period start date'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 2021-03-09</p><p><b>value</b>: 030121 MMDDYY</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "8665-2",
+        "display": "Last menstrual period start date"
+      }
+    ],
+    "text": "Last menstrual period start date"
+  },
+  "subject": { "reference": "Patient/1" },
+  "effectiveDateTime": "2021-03-09",
+  "valueQuantity": {
+    "value": 30121,
+    "unit": "MMDDYY",
+    "system": "http://unitsofmeasure.org",
+    "code": "{MMDDYY}"
+  }
+}

@@ -1,1 +1,32 @@
-{"resourceType":"Observation","id":"example-18","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-18</p><p><b>status</b>: final</p><p><b>code</b>: Ovulation date <span>(Details : LOINC code '11976-8' = 'Ovulation date', given as 'Ovulation date')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 041021 MMDDYY</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"11976-8","display":"Ovulation date"}],"text":"Ovulation date"},"subject":{"reference":"Patient/1"},"performer":[{"reference":"Practi/1"}],"valueQuantity":{"value":41021,"unit":"MMDDYY","system":"http://unitsofmeasure.org","code":"{MMDDYY}"}}
+{
+  "resourceType": "Observation",
+  "id": "example-18",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationWomenHealth"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-18</p><p><b>status</b>: final</p><p><b>code</b>: Ovulation date <span>(Details : LOINC code '11976-8' = 'Ovulation date', given as 'Ovulation date')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 041021 MMDDYY</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "11976-8",
+        "display": "Ovulation date"
+      }
+    ],
+    "text": "Ovulation date"
+  },
+  "subject": { "reference": "Patient/1" },
+  "performer": [{ "reference": "Practi/1" }],
+  "valueQuantity": {
+    "value": 41021,
+    "unit": "MMDDYY",
+    "system": "http://unitsofmeasure.org",
+    "code": "{MMDDYY}"
+  }
+}

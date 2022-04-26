@@ -1,1 +1,31 @@
-{"resourceType":"Observation","id":"example-13","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-13</p><p><b>status</b>: final</p><p><b>code</b>: Fluid intake oral Estimated <span>(Details : LOINC code '8999-5' = 'Fluid intake oral Estimated', given as 'Fluid intake oral Estimated')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 3 Litres</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"8999-5","display":"Fluid intake oral Estimated"}],"text":"Fluid intake oral Estimated"},"subject":{"reference":"Patient/1"},"valueQuantity":{"value":3,"unit":"Litres","system":"http://unitsofmeasure.org","code":"{mL or Litres}"}}
+{
+  "resourceType": "Observation",
+  "id": "example-13",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-13</p><p><b>status</b>: final</p><p><b>code</b>: Fluid intake oral Estimated <span>(Details : LOINC code '8999-5' = 'Fluid intake oral Estimated', given as 'Fluid intake oral Estimated')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 3 Litres</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "8999-5",
+        "display": "Fluid intake oral Estimated"
+      }
+    ],
+    "text": "Fluid intake oral Estimated"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueQuantity": {
+    "value": 3,
+    "unit": "Litres",
+    "system": "http://unitsofmeasure.org",
+    "code": "{mL or Litres}"
+  }
+}

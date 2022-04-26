@@ -1,1 +1,31 @@
-{"resourceType":"Observation","id":"example-14","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-14</p><p><b>status</b>: final</p><p><b>code</b>: Calorie intake total <span>(Details : LOINC code '9052-2' = 'Calorie intake total', given as 'Calorie intake total')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 1750 kcal<span> (Details: UCUM code kcal = 'kcal')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"9052-2","display":"Calorie intake total"}],"text":"Calorie intake total"},"subject":{"reference":"Patient/1"},"valueQuantity":{"value":1750,"unit":"kcal","system":"http://unitsofmeasure.org","code":"kcal"}}
+{
+  "resourceType": "Observation",
+  "id": "example-14",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-14</p><p><b>status</b>: final</p><p><b>code</b>: Calorie intake total <span>(Details : LOINC code '9052-2' = 'Calorie intake total', given as 'Calorie intake total')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: 1750 kcal<span> (Details: UCUM code kcal = 'kcal')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "9052-2",
+        "display": "Calorie intake total"
+      }
+    ],
+    "text": "Calorie intake total"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueQuantity": {
+    "value": 1750,
+    "unit": "kcal",
+    "system": "http://unitsofmeasure.org",
+    "code": "kcal"
+  }
+}

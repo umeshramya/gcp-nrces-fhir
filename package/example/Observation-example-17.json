@@ -1,1 +1,32 @@
-{"resourceType":"Observation","id":"example-17","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-17</p><p><b>status</b>: final</p><p><b>code</b>: Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise <span>(Details : LOINC code '94122-9' = 'Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise', given as 'Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 36 mL/kg.min</p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"94122-9","display":"Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise"}],"text":"Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise"},"subject":{"reference":"Patient/1"},"performer":[{"reference":"Practi/1"}],"valueQuantity":{"value":36,"unit":"mL/kg.min","system":"http://unitsofmeasure.org","code":"mL/kg.min"}}
+{
+  "resourceType": "Observation",
+  "id": "example-17",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-17</p><p><b>status</b>: final</p><p><b>code</b>: Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise <span>(Details : LOINC code '94122-9' = 'Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise', given as 'Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 36 mL/kg.min</p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "94122-9",
+        "display": "Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise"
+      }
+    ],
+    "text": "Oxygen consumption (VO2)/Body weight [Volume Rate Content] --peak during exercise"
+  },
+  "subject": { "reference": "Patient/1" },
+  "performer": [{ "reference": "Practi/1" }],
+  "valueQuantity": {
+    "value": 36,
+    "unit": "mL/kg.min",
+    "system": "http://unitsofmeasure.org",
+    "code": "mL/kg.min"
+  }
+}

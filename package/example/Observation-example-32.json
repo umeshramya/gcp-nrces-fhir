@@ -1,1 +1,32 @@
-{"resourceType":"Observation","id":"example-32","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationBodyMeasurement"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-33</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: BMI <span>(Details : {LOINC code '39156-5' = 'Body mass index (BMI) [Ratio]', given as 'Body mass index (BMI) [Ratio]'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 29/09/2020</p><p><b>value</b>: 16.2 kg/m2<span> (Details: UCUM code kg/m2 = 'kg/m2')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"39156-5","display":"Body mass index (BMI) [Ratio]"}],"text":"BMI"},"subject":{"reference":"Patient/1"},"effectiveDateTime":"2020-09-29","valueQuantity":{"value":16.2,"unit":"kg/m2","system":"http://unitsofmeasure.org","code":"kg/m2"}}
+{
+  "resourceType": "Observation",
+  "id": "example-32",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationBodyMeasurement"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-33</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>code</b>: BMI <span>(Details : {LOINC code '39156-5' = 'Body mass index (BMI) [Ratio]', given as 'Body mass index (BMI) [Ratio]'})</span></p><p><b>subject</b>: <a>Patient/1</a></p><p><b>effective</b>: 29/09/2020</p><p><b>value</b>: 16.2 kg/m2<span> (Details: UCUM code kg/m2 = 'kg/m2')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "39156-5",
+        "display": "Body mass index (BMI) [Ratio]"
+      }
+    ],
+    "text": "BMI"
+  },
+  "subject": { "reference": "Patient/1" },
+  "effectiveDateTime": "2020-09-29",
+  "valueQuantity": {
+    "value": 16.2,
+    "unit": "kg/m2",
+    "system": "http://unitsofmeasure.org",
+    "code": "kg/m2"
+  }
+}

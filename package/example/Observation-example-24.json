@@ -1,1 +1,35 @@
-{"resourceType":"Observation","id":"example-24","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-24</p><p><b>status</b>: final</p><p><b>code</b>: Mental status <span>(Details : LOINC code '8693-4' = 'Mental status', given as 'Mental status')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: Anxiety and fear<span> (Details: SNOMED CT code 247805009 = 'Anxiety and fear', given as 'Anxiety and fear')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"8693-4","display":"Mental status"}],"text":"Mental status"},"subject":{"reference":"Patient/1"},"valueCodeableConcept":{"coding":[{"system":"http://snomed.info/sct","code":"247805009","display":"Anxiety and fear"}],"text":"Anxiety and fear"}}
+{
+  "resourceType": "Observation",
+  "id": "example-24",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationGeneralAssessment"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-24</p><p><b>status</b>: final</p><p><b>code</b>: Mental status <span>(Details : LOINC code '8693-4' = 'Mental status', given as 'Mental status')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: Anxiety and fear<span> (Details: SNOMED CT code 247805009 = 'Anxiety and fear', given as 'Anxiety and fear')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "8693-4",
+        "display": "Mental status"
+      }
+    ],
+    "text": "Mental status"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "247805009",
+        "display": "Anxiety and fear"
+      }
+    ],
+    "text": "Anxiety and fear"
+  }
+}
