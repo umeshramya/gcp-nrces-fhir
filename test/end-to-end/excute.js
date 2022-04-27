@@ -8,6 +8,8 @@ const { setServiceRequest } = require("./ServiceRequest");
 const { setDiagnosticReport } = require("./DiagnosticReport");
 const { setMedia } = require("./Media");
 const { emptySign } = require("gcp-nrces-fhir/lib/resources/Composition");
+const { setObservation } = require("./Observation");
+const console = require("console");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 class excute {
@@ -68,6 +70,12 @@ class excute {
         const res = await setDiagnosticReport();
         console.log(res)
 
+    }
+
+    observation = async()=>{
+        await callFunction()
+        const res = await setObservation()
+        console.log(res)
     }
 
     precsriptinComposition = async () => {
@@ -265,12 +273,13 @@ class excute {
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
-new excute().specimen()
+// new excute().specimen()
 // new excute().serviceRequest()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
+new excute().observation()
 // new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()

@@ -54,7 +54,7 @@ import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { COMPOSITOIN, Composition } from "./resources/Composition/index";
 import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import { OPConsultRecord } from "./resources/Composition/OPConsultRecord";
-import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportComp"
+import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportComp";
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -81,6 +81,7 @@ import {
   DIAGNOSTIC_REPORT,
 } from "./resources/DiagnosticReport";
 import { Media, MEDIA } from "./resources/Media";
+import { Observation, OBSERVATION } from "./resources/Observation";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export type { resourceType };
@@ -123,7 +124,7 @@ export { DOCUMENT_BUNDLE, DocumentBundle };
 export { COMPOSITOIN, Composition };
 export { PrescriptionRecord };
 export { OPConsultRecord };
-export { DiagnosticReportComp }
+export { DiagnosticReportComp };
 export {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -156,3 +157,4 @@ export { PrescriptionBundle };
 export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
 export { Media, MEDIA };
+export { Observation, OBSERVATION };

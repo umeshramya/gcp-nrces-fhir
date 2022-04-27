@@ -65,6 +65,20 @@ interface SAMPLE_DATA {
   data?: string;
 }
 
+interface VALUE {
+  valueQuantity?: QUANTITY;
+  valueCodeableConcept?: CODEABLE_CONCEPT;
+  valueString?: string;
+  valueBoolean?: boolean;
+  valueInteger?: number;
+  valueRange?: RANGE;
+  valueRatio?: RATIO;
+  valueSampledData?: SAMPLE_DATA;
+  valueTime?: string;
+  valueDateTime?: string;
+  valuePeriod?: PERIOD;
+}
+
 export interface OBSERVATION {
   id?: string;
   basedOn?: BasedOn[];
@@ -73,19 +87,8 @@ export interface OBSERVATION {
   code: CODEABLE_CONCEPT;
   patientId: string;
   performer: Performer[];
-  value: {
-    valueQuantity?: QUANTITY;
-    valueCodeableConcept?: CODEABLE_CONCEPT;
-    valueString?: string;
-    valueBoolean?: boolean;
-    valueInteger?: number;
-    valueRange?: RANGE;
-    valueRatio?: RATIO;
-    valueSampledData?: SAMPLE_DATA;
-    valueTime?: string;
-    valueDateTime?: string;
-    valuePeriod?: PERIOD;
-  };
+  valueType: keyof VALUE;
+  value: VALUE;
 }
 
 export class Observation extends ResourceMain implements ResourceMaster {
@@ -120,7 +123,9 @@ export class Observation extends ResourceMain implements ResourceMaster {
       }),
     };
 
-    body.value = options.value;
+    body[options.valueType] = Object.values(options.value)[0];
+
+    return body;
   }
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");

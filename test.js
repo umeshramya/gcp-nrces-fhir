@@ -1,5 +1,9 @@
-const cities = ["hubli", "Dharawad", "Belguam", "Bijapur", "Davanageri"];
+const key1 = 123; // number
+const key2 = 'puppy'; // string key
 
+const obj = {
+  [key1]: 'Value 1',
+  [key2]: 'Value 2'
+}
 
-const str = cities.reduce((pr, cu)=> pr += cu)
-console.log(str);
+console.log(obj);
