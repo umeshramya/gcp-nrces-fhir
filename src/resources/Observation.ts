@@ -1,5 +1,5 @@
 import { type } from "os";
-import { CODEABLE_CONCEPT, MULTI_RESOURCE } from "../config";
+import { CODEABLE_CONCEPT, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -36,20 +36,67 @@ interface Performer extends MULTI_RESOURCE {
     | "Patient";
 }
 
+interface SAMPLE_QUANTITY {
+  value: number;
+  unit: string;
+  system: "http://unitsofmeasure.org";
+  code: string;
+}
+
+interface QUANTITY extends SAMPLE_QUANTITY {}
+
+interface RANGE {
+  low: SAMPLE_QUANTITY;
+  high: SAMPLE_QUANTITY;
+}
+
+interface RATIO {
+  numerator: QUANTITY;
+  denominator: QUANTITY;
+}
+
+interface SAMPLE_DATA {
+  origin: SAMPLE_QUANTITY;
+  period: number;
+  factor: number;
+  lowerLimit: number;
+  upperLimit: number;
+  dimensions: number;
+  data?: string;
+}
+
 export interface OBSERVATION {
+  id?: string;
   basedOn?: BasedOn[];
   partOf?: PartOf[];
   status: status;
   code: CODEABLE_CONCEPT;
   patientId: string;
   performer: Performer[];
+  value: {
+    valueQuantity?: QUANTITY;
+    valueCodeableConcept?: CODEABLE_CONCEPT;
+    valueString?: string;
+    valueBoolean?: boolean;
+    valueInteger?: number;
+    valueRange?: RANGE;
+    valueRatio?: RATIO;
+    valueSampledData?: SAMPLE_DATA;
+    valueTime?: string;
+    valueDateTime?: string;
+    valuePeriod?: PERIOD;
+  };
 }
 
 export class Observation extends ResourceMain implements ResourceMaster {
-  getFHIR(options: any) {
-    const body = {
+  getFHIR(options: OBSERVATION) {
+    const getText = (): string => {
+      let ret: string = "";
+      return ret;
+    };
+    const body: any = {
       resourceType: "Observation",
-      id: "example-03",
+      id: options.id,
       meta: {
         profile: [
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationBodyMeasurement",
@@ -57,34 +104,23 @@ export class Observation extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-03</p><p><b>status</b>: final</p><p><b>code</b>: Circumference Mid upper arm - right <span>(Details : LOINC code '56072-2' = 'Circumference Mid upper arm - right', given as 'Circumference Mid upper arm - right')</span></p><p><b>subject</b>: ABC</p><p><b>performer</b>: Dr. DEF, MD</p><p><b>value</b>: 14.3 cm<span> (Details: UCUM code cm = 'cm')</span></p></div>",
+        div: getText(),
       },
-      status: "final",
-      code: {
-        coding: [
-          {
-            system: "http://loinc.org",
-            code: "56072-2",
-            display: "Circumference Mid upper arm - right",
-          },
-        ],
-        text: "Circumference Mid upper arm - right",
-      },
+      basedOn: options.basedOn,
+      partOf: options.partOf,
+      status: options.status,
+      code: options.code,
       subject: {
-        reference: "Patient/1",
+        reference: `Patient/${options.patientId}`,
       },
-      performer: [
-        {
-          reference: "Organization/1",
-        },
-      ],
-      valueQuantity: {
-        value: 14.3,
-        unit: "cm",
-        system: "http://unitsofmeasure.org",
-        code: "cm",
-      },
+      performer: options.performer.map((el) => {
+        return {
+          reference: `${el.resource}/${el.id}`,
+        };
+      }),
     };
+
+    body.value = options.value;
   }
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");
