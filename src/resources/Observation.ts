@@ -79,6 +79,15 @@ interface VALUE {
   valuePeriod?: PERIOD;
 }
 
+
+interface REFERENCE_RANGE {
+  low?: SAMPLE_QUANTITY;
+  high?: SAMPLE_QUANTITY;
+  type?: CODEABLE_CONCEPT;
+  appliesTo?: CODEABLE_CONCEPT[];
+  age?: RANGE;
+  text?: string;
+}
 export interface OBSERVATION {
   id?: string;
   basedOn?: BasedOn[];
@@ -88,7 +97,8 @@ export interface OBSERVATION {
   patientId: string;
   performer?: Performer[];
   value: VALUE;
-  encounterId?: string
+  encounterId?: string;
+  referenceRange?: REFERENCE_RANGE[]
 }
 
 export class Observation extends ResourceMain implements ResourceMaster {
@@ -131,6 +141,10 @@ export class Observation extends ResourceMain implements ResourceMaster {
 
     if (options.performer) {
       body.performer = options.performer.map((el) => { return { reference: `${el.resource}/${el.id}` } })
+    }
+
+    if (options.referenceRange) {
+      body.referenceRange = options.referenceRange
     }
     body[Object.keys(options.value)[0]] = Object.values(options.value)[0];
 
