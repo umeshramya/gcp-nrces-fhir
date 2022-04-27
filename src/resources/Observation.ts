@@ -5,22 +5,22 @@ import ResourceMain from "./ResourceMai";
 
 interface BasedOn extends MULTI_RESOURCE {
   resource:
-    | "CarePlan"
-    | "DeviceRequest"
-    | "ImmunizationRecommendation"
-    | "NutritionOrder"
-    | "ServiceRequest"
-    | "MedicationRequest";
+  | "CarePlan"
+  | "DeviceRequest"
+  | "ImmunizationRecommendation"
+  | "NutritionOrder"
+  | "ServiceRequest"
+  | "MedicationRequest";
 }
 
 interface PartOf extends MULTI_RESOURCE {
   resource:
-    | "MedicationAdministration"
-    | "MedicationDispense"
-    | "MedicationStatement"
-    | "Procedure"
-    | "Immunization"
-    | "ImagingStudy";
+  | "MedicationAdministration"
+  | "MedicationDispense"
+  | "MedicationStatement"
+  | "Procedure"
+  | "Immunization"
+  | "ImagingStudy";
 }
 
 const statusArray = ["registered", "preliminary", "final", "amended"] as const;
@@ -28,12 +28,12 @@ type status = typeof statusArray[number];
 
 interface Performer extends MULTI_RESOURCE {
   resource:
-    | "CareTeam"
-    | "RelatedPerson"
-    | "Practitioner"
-    | "Organization"
-    | "PractitionerRole"
-    | "Patient";
+  | "CareTeam"
+  | "RelatedPerson"
+  | "Practitioner"
+  | "Organization"
+  | "PractitionerRole"
+  | "Patient";
 }
 
 interface SAMPLE_QUANTITY {
@@ -43,7 +43,7 @@ interface SAMPLE_QUANTITY {
   code: string;
 }
 
-interface QUANTITY extends SAMPLE_QUANTITY {}
+interface QUANTITY extends SAMPLE_QUANTITY { }
 
 interface RANGE {
   low: SAMPLE_QUANTITY;
@@ -86,9 +86,9 @@ export interface OBSERVATION {
   status: status;
   code: CODEABLE_CONCEPT;
   patientId: string;
-  performer: Performer[];
-  valueType: keyof VALUE;
+  performer?: Performer[];
   value: VALUE;
+  encounterId?: string
 }
 
 export class Observation extends ResourceMain implements ResourceMaster {
@@ -109,21 +109,30 @@ export class Observation extends ResourceMain implements ResourceMaster {
         status: "generated",
         div: getText(),
       },
-      basedOn: options.basedOn,
-      partOf: options.partOf,
+
+
       status: options.status,
       code: options.code,
       subject: {
         reference: `Patient/${options.patientId}`,
       },
-      performer: options.performer.map((el) => {
-        return {
-          reference: `${el.resource}/${el.id}`,
-        };
-      }),
-    };
 
-    body[options.valueType] = Object.values(options.value)[0];
+    };
+    if (options.encounterId) {
+      body.encounter = { "reference": `Encounter/${options.encounterId}` }
+    }
+
+    if (options.basedOn) {
+      body.basedOn = options.basedOn.map(el => { return { "reference": `${el.resource}/${el.id}` } })
+    }
+    if (options.partOf) {
+      body.partOf = options.partOf.map(el => { return { "reference": `${el.resource}/${el.id}` } })
+    }
+
+    if (options.performer) {
+      body.performer = options.performer.map((el) => { return { reference: `${el.resource}/${el.id}` } })
+    }
+    body[Object.keys(options.value)[0]] = Object.values(options.value)[0];
 
     return body;
   }
