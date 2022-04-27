@@ -1,26 +1,27 @@
 import { type } from "os";
+import GcpFhirCRUD from "../classess/gcp";
 import { CODEABLE_CONCEPT, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
 interface BasedOn extends MULTI_RESOURCE {
   resource:
-  | "CarePlan"
-  | "DeviceRequest"
-  | "ImmunizationRecommendation"
-  | "NutritionOrder"
-  | "ServiceRequest"
-  | "MedicationRequest";
+    | "CarePlan"
+    | "DeviceRequest"
+    | "ImmunizationRecommendation"
+    | "NutritionOrder"
+    | "ServiceRequest"
+    | "MedicationRequest";
 }
 
 interface PartOf extends MULTI_RESOURCE {
   resource:
-  | "MedicationAdministration"
-  | "MedicationDispense"
-  | "MedicationStatement"
-  | "Procedure"
-  | "Immunization"
-  | "ImagingStudy";
+    | "MedicationAdministration"
+    | "MedicationDispense"
+    | "MedicationStatement"
+    | "Procedure"
+    | "Immunization"
+    | "ImagingStudy";
 }
 
 const statusArray = ["registered", "preliminary", "final", "amended"] as const;
@@ -28,12 +29,16 @@ type status = typeof statusArray[number];
 
 interface Performer extends MULTI_RESOURCE {
   resource:
-  | "CareTeam"
-  | "RelatedPerson"
-  | "Practitioner"
-  | "Organization"
-  | "PractitionerRole"
-  | "Patient";
+    | "CareTeam"
+    | "RelatedPerson"
+    | "Practitioner"
+    | "Organization"
+    | "PractitionerRole"
+    | "Patient";
+}
+
+interface HasMember extends MULTI_RESOURCE {
+  resource: "Observation" | "QuestionnaireResponse" | "MolecularSequence";
 }
 
 interface SAMPLE_QUANTITY {
@@ -43,7 +48,7 @@ interface SAMPLE_QUANTITY {
   code: string;
 }
 
-interface QUANTITY extends SAMPLE_QUANTITY { }
+interface QUANTITY extends SAMPLE_QUANTITY {}
 
 interface RANGE {
   low: SAMPLE_QUANTITY;
@@ -79,7 +84,6 @@ interface VALUE {
   valuePeriod?: PERIOD;
 }
 
-
 interface REFERENCE_RANGE {
   low?: SAMPLE_QUANTITY;
   high?: SAMPLE_QUANTITY;
@@ -98,13 +102,26 @@ export interface OBSERVATION {
   performer?: Performer[];
   value: VALUE;
   encounterId?: string;
-  referenceRange?: REFERENCE_RANGE[]
+  referenceRange?: REFERENCE_RANGE[];
+  hasMember: HasMember[];
+  specimenId: string;
+  text: string;
 }
 
 export class Observation extends ResourceMain implements ResourceMaster {
   getFHIR(options: OBSERVATION) {
     const getText = (): string => {
       let ret: string = "";
+      if (options.hasMember) {
+        options.hasMember.forEach(async (el) => {
+          const res: any = (
+            await new GcpFhirCRUD().getFhirResource(el.id, el.resource)
+          ).data;
+          ret = `${ret}<br/>${res.text.div}`;
+        });
+      } else {
+        ret = options.text;
+      }
       return ret;
     };
     const body: any = {
@@ -120,31 +137,44 @@ export class Observation extends ResourceMain implements ResourceMaster {
         div: getText(),
       },
 
-
       status: options.status,
       code: options.code,
       subject: {
         reference: `Patient/${options.patientId}`,
       },
-
     };
     if (options.encounterId) {
-      body.encounter = { "reference": `Encounter/${options.encounterId}` }
+      body.encounter = { reference: `Encounter/${options.encounterId}` };
     }
 
     if (options.basedOn) {
-      body.basedOn = options.basedOn.map(el => { return { "reference": `${el.resource}/${el.id}` } })
+      body.basedOn = options.basedOn.map((el) => {
+        return { reference: `${el.resource}/${el.id}` };
+      });
     }
     if (options.partOf) {
-      body.partOf = options.partOf.map(el => { return { "reference": `${el.resource}/${el.id}` } })
+      body.partOf = options.partOf.map((el) => {
+        return { reference: `${el.resource}/${el.id}` };
+      });
+    }
+
+    if (options.hasMember) {
+      body.hasMember = options.hasMember.map((el) => {
+        return { reference: `${el.resource}/${el.id}` };
+      });
     }
 
     if (options.performer) {
-      body.performer = options.performer.map((el) => { return { reference: `${el.resource}/${el.id}` } })
+      body.performer = options.performer.map((el) => {
+        return { reference: `${el.resource}/${el.id}` };
+      });
     }
 
     if (options.referenceRange) {
-      body.referenceRange = options.referenceRange
+      body.referenceRange = options.referenceRange;
+    }
+    if (options.specimenId) {
+      body.Specimen = { reference: `Specimen/${options.specimenId}` };
     }
     body[Object.keys(options.value)[0]] = Object.values(options.value)[0];
 
