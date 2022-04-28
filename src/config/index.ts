@@ -98,3 +98,15 @@ export interface MULTI_RESOURCE {
   id: string;
   display?: string;
 }
+
+export const LOINC_SCALE = [
+  "Doc",
+  "OrdQn",
+  "-",
+  "Nar",
+  "Nom",
+  "Ord",
+  "Qn",
+] as const;
+
+export type LoincScale = typeof LOINC_SCALE[number];

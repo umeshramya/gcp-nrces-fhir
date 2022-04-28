@@ -158,3 +158,7 @@ export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
 export { Media, MEDIA };
 export { Observation, OBSERVATION };
+
+import { LOINC_SCALE, LoincScale } from "./config/index";
+export type { LoincScale };
+export { LOINC_SCALE };
