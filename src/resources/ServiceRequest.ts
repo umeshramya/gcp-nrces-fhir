@@ -59,6 +59,7 @@ export interface SERVICE_REQUEST {
   date: string;
   priority: ServiceRequestPriority;
   category: ServceRequestCategory;
+  encounterId?: string;
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
@@ -74,7 +75,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       let ret = services;
       return ret;
     };
-    const body = {
+    const body: any = {
       resourceType: "ServiceRequest",
       id: options.id || undefined,
       meta: {
@@ -119,6 +120,10 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         };
       }),
     };
+
+    if (options.encounterId) {
+      body.encounter = { reference: `Encounter/${options.encounterId}` };
+    }
 
     return body;
   }
@@ -181,6 +186,13 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         display: options.category[0].coding[0].display,
       },
     };
+
+    if (options.encounter) {
+      ret.encounterId = this.getIdFromReference({
+        ref: options.encounter,
+        resourceType: "Encounter",
+      });
+    }
     return ret;
   }
 
