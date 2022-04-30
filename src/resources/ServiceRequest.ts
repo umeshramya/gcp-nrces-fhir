@@ -189,7 +189,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
 
     if (options.encounter) {
       ret.encounterId = this.getIdFromReference({
-        ref: options.encounter,
+        ref: options.encounter.reference,
         resourceType: "Encounter",
       });
     }
