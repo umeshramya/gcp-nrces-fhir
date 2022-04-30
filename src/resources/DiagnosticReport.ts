@@ -65,6 +65,7 @@ export interface DIAGNOSTIC_REPORT {
   basedOn: Basedon[];
   subject: Subject;
   resultsInterpreter: ResultsInterpreter[];
+  encounterId?: string;
 }
 
 export class DiagnosticReport extends ResourceMain implements ResourceMaster {
@@ -145,6 +146,9 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           return { reference: `Observation/${el}` };
         });
       }
+      if (options.encounterId) {
+        body.encounter = { reference: `Encounter/${options.encounterId}` };
+      }
 
       return body;
     } catch (error) {
@@ -187,6 +191,12 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
     }
     if (options.category) {
       ret.category = options.category;
+    }
+    if (options.encounter) {
+      ret.encounterId = this.getIdFromReference({
+        ref: options.encounter.reference,
+        resourceType: "Encounter",
+      });
     }
     return ret;
   }
