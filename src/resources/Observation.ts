@@ -100,11 +100,11 @@ export interface OBSERVATION {
   code: CODEABLE_CONCEPT;
   patientId: string;
   performer?: Performer[];
-  value: VALUE;
+  value?: VALUE;
   encounterId?: string;
   referenceRange?: REFERENCE_RANGE[];
-  hasMember: HasMember[];
-  specimenId: string;
+  hasMember?: HasMember[];
+  specimenId?: string;
   text: string;
 }
 
@@ -174,14 +174,156 @@ export class Observation extends ResourceMain implements ResourceMaster {
       body.referenceRange = options.referenceRange;
     }
     if (options.specimenId) {
-      body.Specimen = { reference: `Specimen/${options.specimenId}` };
+      body.specimen = { reference: `Specimen/${options.specimenId}` };
     }
-    body[Object.keys(options.value)[0]] = Object.values(options.value)[0];
+    if (options.value) {
+      body[Object.keys(options.value)[0]] = Object.values(options.value)[0];
+    }
 
     return body;
   }
   convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+    const hasMember = () => {
+      let ret: HasMember[] = [];
+      options.hasMember.forEach((el: any) => {
+        const resource = `${el.reference}`.substring(
+          0,
+          `${el.reference}`.indexOf("/")
+        ) as any;
+        const id = this.getIdFromReference({
+          ref: el.reference,
+          resourceType: resource,
+        });
+        ret.push({
+          display: el.display,
+          id: id,
+          resource: resource,
+        });
+      });
+      return ret;
+    };
+
+    const basedOn = () => {
+      let ret: BasedOn[] = [];
+      options.basedOn.forEach((el: any) => {
+        const resource = `${el.reference}`.substring(
+          0,
+          `${el.reference}`.indexOf("/")
+        ) as any;
+        const id = this.getIdFromReference({
+          ref: el.reference,
+          resourceType: resource,
+        });
+        ret.push({
+          display: el.display,
+          id: id,
+          resource: resource,
+        });
+      });
+      return ret;
+    };
+
+    const partOf = () => {
+      let ret: PartOf[] = [];
+      options.partOf.forEach((el: any) => {
+        const resource = `${el.reference}`.substring(
+          0,
+          `${el.reference}`.indexOf("/")
+        ) as any;
+        const id = this.getIdFromReference({
+          ref: el.reference,
+          resourceType: resource,
+        });
+        ret.push({
+          display: el.display,
+          id: id,
+          resource: resource,
+        });
+      });
+      return ret;
+    };
+    const performer = () => {
+      let ret: Performer[] = [];
+      options.performer.forEach((el: any) => {
+        const resource = `${el.reference}`.substring(
+          0,
+          `${el.reference}`.indexOf("/")
+        ) as any;
+        const id = this.getIdFromReference({
+          ref: el.reference,
+          resourceType: resource,
+        });
+        ret.push({
+          display: el.display,
+          id: id,
+          resource: resource,
+        });
+      });
+      return ret;
+    };
+
+    let ret: OBSERVATION = {
+      status: options.status,
+      code: options.code,
+      patientId: this.getIdFromReference({
+        ref: options.subject.reference,
+        resourceType: "Patient",
+      }),
+      id: options.id,
+      value:
+        options.valueQuantity ||
+        options.valueCodeableConcept ||
+        options.valueString ||
+        options.valueBoolean ||
+        options.valueInteger ||
+        options.valueRange ||
+        options.valueRatio ||
+        options.valueSampledData ||
+        options.valueTime ||
+        options.valueDateTime ||
+        options.valuePeriod,
+      text: options.text.div,
+      hasMember: hasMember(),
+      basedOn: basedOn(),
+      partOf: partOf(),
+      encounterId: this.getIdFromReference({
+        ref: options.encounter.reference,
+        resourceType: "Encounter",
+      }),
+      performer: performer(),
+      referenceRange: options.referenceRange,
+      specimenId: this.getIdFromReference({
+        ref: options.specimen.reference,
+        resourceType: "Specimen",
+      }),
+    };
+
+    if (ret.value == undefined) {
+      delete ret.value;
+    }
+    if (options.hasMember == undefined) {
+      delete ret.hasMember;
+    }
+    if (ret.basedOn == undefined) {
+      delete ret.basedOn;
+    }
+    if (ret.partOf == undefined) {
+      delete ret.partOf;
+    }
+    if (ret.encounterId == undefined) {
+      delete ret.encounterId;
+    }
+    if (ret.performer == undefined) {
+      delete ret.performer;
+    }
+    if (ret.referenceRange == undefined) {
+      delete ret.referenceRange;
+    }
+    if (ret.specimenId == undefined) {
+      delete ret.specimenId;
+    }
+
+    return ret;
   }
   statusArray(): status[] {
     return statusArray.map((el) => el);
