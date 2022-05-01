@@ -14,11 +14,18 @@ const setObservation = async () => {
    const body = observation.getFHIR({
       "status": "final",
       "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
-      "value": { "valueBoolean": true }
+      "value": { "valueBoolean": true },
+      "code" :{"text" :"Echocardiography"},
+      "patientId" : resources.patient.id,
+      "text" : "Testing"
+      
    })
 
+   // console.log(body)
+   // return
 
-   let res = body;
+   let res = (await new GcpFhirCRUD().createFhirResource(body, "Observation")).data;
+   // res = new Observation().convertFhirToObject(res)
 
    return res;
 }

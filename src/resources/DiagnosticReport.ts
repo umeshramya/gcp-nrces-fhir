@@ -62,7 +62,7 @@ export interface DIAGNOSTIC_REPORT {
   specimenId?: string[];
   observationResultid?: string[];
   performer: Performer[];
-  basedOn: Basedon[];
+  basedOn?: Basedon[];
   subject: Subject;
   resultsInterpreter: ResultsInterpreter[];
   encounterId?: string;
@@ -99,9 +99,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           status: "generated",
           div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
         },
-        basedOn: options.basedOn.map((el) => {
-          return { reference: `${el.resource}/${el.id}` };
-        }),
+
         status: options.status,
         code: options.code,
         subject: {
@@ -128,6 +126,11 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           },
         ],
       };
+      if (options.basedOn) {
+        body.basedOn = options.basedOn.map((el) => {
+          return { reference: `${el.resource}/${el.id}` };
+        });
+      }
       if (options.category) {
         body.category = options.category;
       }
@@ -174,11 +177,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           return this.getFromMultResource(el);
         }
       ),
-      basedOn: options.basedOn.map(
-        (el: { reference: string; display?: string | undefined }) => {
-          return this.getFromMultResource(el);
-        }
-      ),
+
       subject: this.getFromMultResource(options.subject) as any,
       resultsInterpreter: options.resultsInterpreter.map(
         (el: { reference: string; display?: string | undefined }) => {
@@ -186,6 +185,15 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         }
       ),
     };
+
+    if (options.basedOn) {
+      ret.basedOn = options.basedOn.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      );
+    }
+
     if (options.conclusionCode) {
       ret.conclusionCode = options.conclusionCode;
     }

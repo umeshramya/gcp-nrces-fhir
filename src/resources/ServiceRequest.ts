@@ -55,7 +55,7 @@ export interface SERVICE_REQUEST {
   patientId: string;
   patientName: string;
   requester: requester;
-  performer: performer[];
+  performer?: performer[];
   date: string;
   priority: ServiceRequestPriority;
   category: ServceRequestCategory;
@@ -113,13 +113,16 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
       },
-      performer: options.performer.map((el) => {
+    };
+
+    if (options.performer) {
+      body.performer = options.performer.map((el) => {
         return {
           reference: `${el.resource}/${el.id}`,
           display: el.display,
         };
-      }),
-    };
+      });
+    }
 
     if (options.encounterId) {
       body.encounter = { reference: `Encounter/${options.encounterId}` };
@@ -192,6 +195,9 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         ref: options.encounter.reference,
         resourceType: "Encounter",
       });
+    }
+    if (ret.performer == undefined) {
+      delete ret.performer;
     }
     return ret;
   }
