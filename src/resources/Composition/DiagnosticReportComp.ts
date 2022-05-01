@@ -27,11 +27,13 @@ export class DiagnosticReportComp extends Composition implements Records {
       display: serviceRequestBody.requester.display,
     });
 
-    diagnosticReportObj.performer.forEach((el) => {
-      if (el.display) {
-        this.setPerformer({ display: el.display, reesource: el.resource });
-      }
-    });
+    if (diagnosticReportObj.performer) {
+      diagnosticReportObj.performer.forEach((el) => {
+        if (el.display) {
+          this.setPerformer({ display: el.display, reesource: el.resource });
+        }
+      });
+    }
   };
   create = async (options: args) => {
     this.setPerformerAndRequester(options);

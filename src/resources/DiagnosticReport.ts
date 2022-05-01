@@ -61,9 +61,9 @@ export interface DIAGNOSTIC_REPORT {
   base64Data?: string;
   specimenId?: string[];
   observationResultid?: string[];
-  performer: Performer[];
+  performer?: Performer[];
   basedOn?: Basedon[];
-  subject: Subject;
+  subject?: Subject;
   resultsInterpreter: ResultsInterpreter[];
   encounterId?: string;
 }
@@ -102,14 +102,9 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
 
         status: options.status,
         code: options.code,
-        subject: {
-          reference: `${options.subject.resource}/${options.subject.id}`,
-          display: options.subject.display,
-        },
+
         issued: options.issuedDate,
-        performer: options.performer.map((el) => {
-          return { reference: `${el.resource}/${el.id}`, display: el.display };
-        }),
+
         resultsInterpreter: options.resultsInterpreter.map((el) => {
           return { reference: `${el.resource}/${el.id}`, display: el.display };
         }),
@@ -126,6 +121,18 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           },
         ],
       };
+      if (options.performer) {
+        body.performer = options.performer.map((el) => {
+          return { reference: `${el.resource}/${el.id}`, display: el.display };
+        });
+      }
+
+      if (options.subject) {
+        body.subject = {
+          reference: `${options.subject.resource}/${options.subject.id}`,
+          display: options.subject.display,
+        };
+      }
       if (options.basedOn) {
         body.basedOn = options.basedOn.map((el) => {
           return { reference: `${el.resource}/${el.id}` };
@@ -172,20 +179,22 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       status: "registered",
       code: options.code,
 
-      performer: options.performer.map(
-        (el: { reference: string; display?: string | undefined }) => {
-          return this.getFromMultResource(el);
-        }
-      ),
-
-      subject: this.getFromMultResource(options.subject) as any,
       resultsInterpreter: options.resultsInterpreter.map(
         (el: { reference: string; display?: string | undefined }) => {
           return this.getFromMultResource(el);
         }
       ),
     };
-
+    if (options.performer) {
+      performer: options.performer.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      );
+    }
+    if (options.subject) {
+      ret.subject = this.getFromMultResource(options.subject) as any;
+    }
     if (options.basedOn) {
       ret.basedOn = options.basedOn.map(
         (el: { reference: string; display?: string | undefined }) => {
