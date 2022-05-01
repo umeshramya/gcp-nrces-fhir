@@ -25,7 +25,7 @@ const setObservation = async () => {
    // return
 
    let res = (await new GcpFhirCRUD().createFhirResource(body, "Observation")).data;
-   // res = new Observation().convertFhirToObject(res)
+   res = new Observation().convertFhirToObject(res)
 
    return res;
 }

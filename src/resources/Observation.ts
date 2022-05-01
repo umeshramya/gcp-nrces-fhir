@@ -183,85 +183,6 @@ export class Observation extends ResourceMain implements ResourceMaster {
     return body;
   }
   convertFhirToObject(options: any) {
-    const hasMember = () => {
-      let ret: HasMember[] = [];
-      options.hasMember.forEach((el: any) => {
-        const resource = `${el.reference}`.substring(
-          0,
-          `${el.reference}`.indexOf("/")
-        ) as any;
-        const id = this.getIdFromReference({
-          ref: el.reference,
-          resourceType: resource,
-        });
-        ret.push({
-          display: el.display,
-          id: id,
-          resource: resource,
-        });
-      });
-      return ret;
-    };
-
-    const basedOn = () => {
-      let ret: BasedOn[] = [];
-      options.basedOn.forEach((el: any) => {
-        const resource = `${el.reference}`.substring(
-          0,
-          `${el.reference}`.indexOf("/")
-        ) as any;
-        const id = this.getIdFromReference({
-          ref: el.reference,
-          resourceType: resource,
-        });
-        ret.push({
-          display: el.display,
-          id: id,
-          resource: resource,
-        });
-      });
-      return ret;
-    };
-
-    const partOf = () => {
-      let ret: PartOf[] = [];
-      options.partOf.forEach((el: any) => {
-        const resource = `${el.reference}`.substring(
-          0,
-          `${el.reference}`.indexOf("/")
-        ) as any;
-        const id = this.getIdFromReference({
-          ref: el.reference,
-          resourceType: resource,
-        });
-        ret.push({
-          display: el.display,
-          id: id,
-          resource: resource,
-        });
-      });
-      return ret;
-    };
-    const performer = () => {
-      let ret: Performer[] = [];
-      options.performer.forEach((el: any) => {
-        const resource = `${el.reference}`.substring(
-          0,
-          `${el.reference}`.indexOf("/")
-        ) as any;
-        const id = this.getIdFromReference({
-          ref: el.reference,
-          resourceType: resource,
-        });
-        ret.push({
-          display: el.display,
-          id: id,
-          resource: resource,
-        });
-      });
-      return ret;
-    };
-
     let ret: OBSERVATION = {
       status: options.status,
       code: options.code,
@@ -283,44 +204,60 @@ export class Observation extends ResourceMain implements ResourceMaster {
         options.valueDateTime ||
         options.valuePeriod,
       text: options.text.div,
-      hasMember: hasMember(),
-      basedOn: basedOn(),
-      partOf: partOf(),
-      encounterId: this.getIdFromReference({
-        ref: options.encounter.reference,
-        resourceType: "Encounter",
-      }),
-      performer: performer(),
       referenceRange: options.referenceRange,
-      specimenId: this.getIdFromReference({
-        ref: options.specimen.reference,
-        resourceType: "Specimen",
-      }),
     };
 
     if (ret.value == undefined) {
       delete ret.value;
     }
-    if (options.hasMember == undefined) {
-      delete ret.hasMember;
+
+    if (options.hasMember) {
+      ret.hasMember = options.hasMember.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      );
     }
-    if (ret.basedOn == undefined) {
-      delete ret.basedOn;
+
+    if (options.basedOn) {
+      ret.basedOn = options.basedOn.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      );
     }
-    if (ret.partOf == undefined) {
-      delete ret.partOf;
+
+    if (options.partOf) {
+      ret.partOf = options.partOf.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      );
     }
-    if (ret.encounterId == undefined) {
-      delete ret.encounterId;
+
+    if (options.encounterId) {
+      ret.encounterId = this.getIdFromReference({
+        ref: options.encounter.reference,
+        resourceType: "Encounter",
+      });
     }
-    if (ret.performer == undefined) {
-      delete ret.performer;
+
+    if (options.performer) {
+      ret.performer = options.performer.map(
+        (el: { reference: string; display?: string | undefined }) => {
+          return this.getFromMultResource(el);
+        }
+      );
     }
     if (ret.referenceRange == undefined) {
       delete ret.referenceRange;
     }
-    if (ret.specimenId == undefined) {
-      delete ret.specimenId;
+
+    if (options.specimenId) {
+      ret.specimenId = this.getIdFromReference({
+        ref: options.specimen.reference,
+        resourceType: "Specimen",
+      });
     }
 
     return ret;
