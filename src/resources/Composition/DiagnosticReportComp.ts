@@ -6,7 +6,7 @@ import { ServiceRequest } from "../ServiceRequest";
 interface args {
   composition: COMPOSITOIN;
   diagnosticReport: any;
-  media: [];
+  // media: [];
   serviceRequest: any;
 }
 

@@ -155,11 +155,6 @@ class excute {
         const media = (await gcpFhirCRUD.getFhirResource(resources.media.id, "Media")).data;
         const serviceRequest = (await gcpFhirCRUD.getFhirResource(resources.serviceRequest.id, "ServiceRequest")).data;
 
-        console.log(media)
-        console.log(serviceRequest)
-        console.log(diag)
-
-        return;
         const diagnosticReport = new DiagnosticReportComp();
         const data = await diagnosticReport.create({
             "composition": {
@@ -176,7 +171,6 @@ class excute {
                 "type": "DiagnosticReport"
             },
             "diagnosticReport": diag,
-            "media": [media],
             "serviceRequest": serviceRequest
         })
 
