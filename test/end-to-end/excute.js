@@ -268,6 +268,7 @@ class excute {
 }
 
 
+9902878503 
 
 // new excute().callFunction()
 // new excute().medicationrequest();
@@ -278,7 +279,7 @@ class excute {
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 // new excute().media()
-// new excute().diagnosticReport()
+new excute().diagnosticReport()
 // new excute().observation()
 // new excute().diagnosticReportComposition()
 

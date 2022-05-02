@@ -6,6 +6,7 @@ import {
   MULTI_RESOURCE,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { OBSERVATION } from "./Observation";
 import ResourceMain from "./ResourceMai";
 
 const diagnosticReportStatus = [
@@ -66,24 +67,27 @@ export interface DIAGNOSTIC_REPORT {
   subject?: Subject;
   resultsInterpreter: ResultsInterpreter[];
   encounterId?: string;
+  observations?: OBSERVATION[];
+  text?: string;
 }
 
 export class DiagnosticReport extends ResourceMain implements ResourceMaster {
   getFHIR(options: DIAGNOSTIC_REPORT) {
     try {
       const getText = (): string => {
-        let ret: string = options.conclusion;
-
-        if (options.observationResultid) {
-          options.observationResultid.forEach(async (el) => {
-            const res = (
-              await new GcpFhirCRUD().getFhirResource(el, "Observation")
-            ).data;
-            ret = `${ret}<p>${res.text.div}</P>`;
+        let ret: string = "";
+        if (options.observations) {
+          options.observations.forEach((el) => {
+            const res = el.text;
+            ret = `${ret}<p>${res}</p>`;
           });
+        } else if (options.text) {
+          ret = `${ret}<p>${options.text}</p>`;
         }
+        ret = `${ret}<p>${options.conclusion}</p>`;
         return ret;
       };
+
       const identifiers: IDENTTIFIER[] = [];
       const body: any = {
         resourceType: "DiagnosticReport",
@@ -174,6 +178,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
           resourceType: "Media",
         });
       }),
+      text: options.text.div,
       issuedDate: options.issued,
       conclusion: options.conclusion,
       status: "registered",
