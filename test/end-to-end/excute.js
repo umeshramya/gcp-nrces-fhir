@@ -155,6 +155,11 @@ class excute {
         const media = (await gcpFhirCRUD.getFhirResource(resources.media.id, "Media")).data;
         const serviceRequest = (await gcpFhirCRUD.getFhirResource(resources.serviceRequest.id, "ServiceRequest")).data;
 
+        console.log(media)
+        console.log(serviceRequest)
+        console.log(diag)
+
+        return;
         const diagnosticReport = new DiagnosticReportComp();
         const data = await diagnosticReport.create({
             "composition": {
@@ -175,7 +180,7 @@ class excute {
             "serviceRequest": serviceRequest
         })
 
-        // console.log(data.data)
+        console.log(data.data)
         // return
         const pdf = await diagnosticReport.getPdf({
             "html": data.data.text.div,
@@ -279,9 +284,9 @@ class excute {
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 // new excute().media()
-new excute().diagnosticReport()
+// new excute().diagnosticReport()
 // new excute().observation()
-// new excute().diagnosticReportComposition()
+new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()
 
