@@ -278,9 +278,9 @@ class excute {
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 // new excute().media()
-// new excute().diagnosticReport()
+new excute().diagnosticReport()
 // new excute().observation()
-new excute().diagnosticReportComposition()
+// new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()
 
