@@ -18,6 +18,9 @@ import ResourceMain from "../resources/ResourceMai";
 import GcpFhirCRUD from "./gcp";
 import { Specimen } from "../resources/Specimen";
 import { PractitionerRole } from "../resources/PractitionerRole";
+import { DiagnosticReport } from "../resources/DiagnosticReport";
+import { Media } from "../resources/Media";
+import { Observation } from "../resources/Observation";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -56,12 +59,18 @@ export default class ResourceFactory
       this.resource = new MedicationRequest();
     } else if (this.resourceType === "MedicationStatement") {
       this.resource = new MedicationStatement();
-    } else if ((this.resourceType = "Binary")) {
+    } else if (this.resourceType === "Binary") {
       this.resource = new Binary();
-    } else if ((this.resourceType = "Specimen")) {
+    } else if (this.resourceType === "Specimen") {
       this.resource = new Specimen();
-    } else if ((this.resourceType = "PractitionerRole")) {
+    } else if (this.resourceType === "PractitionerRole") {
       this.resource = new PractitionerRole();
+    } else if (this.resourceType === "DiagnosticReport") {
+      this.resource = new DiagnosticReport();
+    } else if (this.resourceType === "Media") {
+      this.resource = new Media();
+    } else if (this.resourceType === "Observation") {
+      this.resource = new Observation();
     } else {
       const errMessage = `Not Implimented resourceType ${this.resourceType}`;
       console.log(errMessage);
