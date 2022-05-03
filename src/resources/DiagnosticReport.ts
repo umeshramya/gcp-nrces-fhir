@@ -193,7 +193,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
     if (options.result) {
       ret.observationResultid = options.result.map((el: any) =>
         this.getIdFromReference({
-          ref: options.result.reference,
+          ref: el.reference,
           resourceType: "Observation",
         })
       );
