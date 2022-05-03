@@ -181,7 +181,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       text: options.text.div,
       issuedDate: options.issued,
       conclusion: options.conclusion,
-      status: "registered",
+      status: options.status,
       code: options.code,
 
       resultsInterpreter: options.resultsInterpreter.map(
@@ -190,6 +190,14 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         }
       ),
     };
+    if (options.result) {
+      ret.observationResultid = options.result.map((el: any) =>
+        this.getIdFromReference({
+          ref: options.result.reference,
+          resourceType: "Observation",
+        })
+      );
+    }
     if (options.performer) {
       performer: options.performer.map(
         (el: { reference: string; display?: string | undefined }) => {
