@@ -324,6 +324,15 @@ export class Composition extends ResourceMain implements ResourceMaster {
       identifier: options.identifier.value,
       author: options.author,
     };
+    if (ret.patient == undefined) {
+      delete ret.patient;
+    }
+    if (ret.encounter == undefined) {
+      delete ret.encounter;
+    }
+    if (ret.organization) {
+      delete ret.encounter;
+    }
     return ret;
   }
 
