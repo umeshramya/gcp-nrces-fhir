@@ -330,8 +330,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
     if (ret.encounter == undefined) {
       delete ret.encounter;
     }
-    if (ret.organization) {
-      delete ret.encounter;
+    if (ret.organization == undefined) {
+      delete ret.organization;
     }
     return ret;
   }
