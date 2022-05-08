@@ -21,6 +21,7 @@ import { PractitionerRole } from "../resources/PractitionerRole";
 import { DiagnosticReport } from "../resources/DiagnosticReport";
 import { Media } from "../resources/Media";
 import { Observation } from "../resources/Observation";
+import { ServiceRequest } from "../resources/ServiceRequest";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -71,6 +72,8 @@ export default class ResourceFactory
       this.resource = new Media();
     } else if (this.resourceType === "Observation") {
       this.resource = new Observation();
+    } else if (this.resourceType == "ServiceRequest") {
+      this.resource = new ServiceRequest();
     } else {
       const errMessage = `Not Implimented resourceType ${this.resourceType}`;
       console.log(errMessage);
