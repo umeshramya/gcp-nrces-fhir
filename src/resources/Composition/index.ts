@@ -382,10 +382,15 @@ export class Composition extends ResourceMain implements ResourceMaster {
     qrCode: string;
     paperSize: string;
     headerbase64Image?: string;
+    /*
+     * this is for setting footer height in care of preprinted paper
+     */
+    bottomMargin?: number;
   }): Promise<string | Buffer> => {
     const pdf = new CreatePdf();
     const retPdf = await pdf.create(options.html, {
       base64: options.base64,
+      bottomMargin: options.bottomMargin,
       esign: {
         image:
           options.composition.status == "final"
