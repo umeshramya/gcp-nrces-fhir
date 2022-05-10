@@ -162,3 +162,6 @@ export { Observation, OBSERVATION };
 import { LOINC_SCALE, LoincScale } from "./config/index";
 export type { LoincScale };
 export { LOINC_SCALE };
+
+import { PDF_HEADER } from "js-ts-report";
+export { PDF_HEADER };
