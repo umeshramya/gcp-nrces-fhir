@@ -382,6 +382,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
     qrCode: string;
     paperSize: string;
     headerbase64Image?: string;
+    /**
+     * This is letter pad header preprinted
+     */
+    topMargin?: number;
     /*
      * this is for setting footer height in care of preprinted paper
      */
@@ -390,6 +394,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     const pdf = new CreatePdf();
     const retPdf = await pdf.create(options.html, {
       base64: options.base64,
+      topMargin: options.topMargin,
       bottomMargin: options.bottomMargin,
       esign: {
         image:
