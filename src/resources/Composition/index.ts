@@ -9,6 +9,7 @@ import { GcpFhirCRUD, GcpFhirSearch } from "../..";
 import { Practitioner, PRACTITIONER } from "../Practitioner";
 import { CreatePdf, PDF_HEADER } from "js-ts-report";
 import { resourceType } from "../../config";
+import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
 
 export const compositionTypeArrey = [
   {
@@ -375,6 +376,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   getPdf = async (options: {
     html: string;
     header?: (options: PDF_HEADER) => [];
+    footer?: (options: PDF_FOOter) => [];
     composition: COMPOSITOIN;
     base64: boolean;
     signBase64: string;
@@ -396,6 +398,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     const retPdf = await pdf.create(options.html, {
       base64: options.base64,
       header: options.header,
+      footer: options.footer,
       topMargin: options.topMargin,
       bottomMargin: options.bottomMargin,
       esign: {
