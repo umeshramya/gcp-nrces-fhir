@@ -27,7 +27,7 @@ interface PartOf extends MULTI_RESOURCE {
 const statusArray = ["registered", "preliminary", "final", "amended"] as const;
 type status = typeof statusArray[number];
 
-interface Performer extends MULTI_RESOURCE {
+export interface Performer extends MULTI_RESOURCE {
   resource:
     | "CareTeam"
     | "RelatedPerson"
@@ -37,30 +37,30 @@ interface Performer extends MULTI_RESOURCE {
     | "Patient";
 }
 
-interface HasMember extends MULTI_RESOURCE {
+export interface HasMember extends MULTI_RESOURCE {
   resource: "Observation" | "QuestionnaireResponse" | "MolecularSequence";
 }
 
-interface SAMPLE_QUANTITY {
+export interface SAMPLE_QUANTITY {
   value: number;
   unit: string;
   system: "http://unitsofmeasure.org";
   code: string;
 }
 
-interface QUANTITY extends SAMPLE_QUANTITY {}
+export interface QUANTITY extends SAMPLE_QUANTITY {}
 
-interface RANGE {
+export interface RANGE {
   low: SAMPLE_QUANTITY;
   high: SAMPLE_QUANTITY;
 }
 
-interface RATIO {
+export interface RATIO {
   numerator: QUANTITY;
   denominator: QUANTITY;
 }
 
-interface SAMPLE_DATA {
+export interface SAMPLE_DATA {
   origin: SAMPLE_QUANTITY;
   period: number;
   factor: number;
@@ -70,7 +70,7 @@ interface SAMPLE_DATA {
   data?: string;
 }
 
-interface VALUE {
+export interface VALUE {
   valueQuantity?: QUANTITY;
   valueCodeableConcept?: CODEABLE_CONCEPT;
   valueString?: string;
@@ -84,7 +84,7 @@ interface VALUE {
   valuePeriod?: PERIOD;
 }
 
-interface REFERENCE_RANGE {
+export interface REFERENCE_RANGE {
   low?: SAMPLE_QUANTITY;
   high?: SAMPLE_QUANTITY;
   type?: CODEABLE_CONCEPT;
