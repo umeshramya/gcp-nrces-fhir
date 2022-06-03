@@ -175,7 +175,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
           ? `Health Id ${options.patient.healthNumber}`
           : ""
       }</div>
-                <div>MRN:- ${options.patient.MRN}</div>
+                <div>MRN:- ${options.patient.MRN}
+                ${
+                  options.patient.phrAddress
+                    ? ` ABHA Address : ${options.patient.phrAddress}`
+                    : ""
+                }
+                </div>
                 <div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
         new Date(options.patient.dob)
       )} ph: ${options.patient.mobile}</div>`;
