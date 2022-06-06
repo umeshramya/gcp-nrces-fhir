@@ -908,16 +908,12 @@ const getBundle = async()=>{
   try {
     id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
     const compositionResource = await  new GcpFhirCRUD().getFhirResource(id, "Composition");
-    const composition= new Composition()
-    const compositionObj = composition.convertFhirToObject(compositionResource.data)
+    const html =`${compositionResource.data.text.div}`.trim()
 
- 
-    // const html =`${compositionResource.data.text.div}`.trim()
-    const html = compositionObj.documentDatahtml
     console.log(html)
     const pdf =await new PrescriptionBundle().getpdf({
       html: html,
-      "qrCode" : `https://psychic-city-328609.el.r.appspot.com/api/${compositionObj.id}?bundletype=Prescription`
+      "qrCode" : `https://psychic-city-328609.el.r.appspot.com/api/${compositionResource.data.id}?bundletype=Prescription`
     })
 
     console.log(pdf)
