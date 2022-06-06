@@ -4,6 +4,7 @@ import GcpFhirCrud from "../../classess/gcp";
 import ResourceMain from "../ResourceMai";
 import { Binary, BINARY } from "../Binary";
 import { CreatePdf } from "js-ts-report";
+import { DocumentReference } from "../DocumentReference";
 
 export class BundelMain extends ResourceMain {
   async getentries(
@@ -60,12 +61,18 @@ export class BundelMain extends ResourceMain {
         ),
       },
       {
-        fullUrl: "Binary/1",
-        resource: new Binary().getFHIR({
-          id: "1",
-          data: pdfData,
-        }),
-      },
+        fullUrl : `DocumentReference/${compositionObj.id}`,
+        resource : new DocumentReference().getFHIR({
+          "id": compositionObj.id,
+          "patientId": compositionObj.patientId,
+          "pdf": pdfData,
+          "docStatus": compositionObj.status,
+          "title": "",
+          "type" : composition.type,
+          status: "current"
+      })
+    }
+      
     ];
 
     authors.forEach((el: { fullUrl: string; resource: any }) => {

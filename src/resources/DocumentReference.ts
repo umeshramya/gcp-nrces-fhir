@@ -1,6 +1,7 @@
-import { CodeDisplay } from "../config";
+import { CODEABLE_CONCEPT, CodeDisplay } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
+import ResourceMain from "./ResourceMai";
 
 export const documentStatusArrey = ["current", "superseded", "entered-in-error"
 ] as const
@@ -14,15 +15,14 @@ export interface DOCUMENT_REFERENCE {
   id?: string;
   status: DocumentStatus;
   docStatus: DocumentDocStatus;
-  patient: PATIENT
+  type:CODEABLE_CONCEPT
   patientId: string
   pdf: string
-  code: CodeDisplay[]
   title: string
 }
 
 
-export class DocumentReference implements ResourceMaster {
+export class DocumentReference extends ResourceMain implements ResourceMaster {
   getFHIR(options: DOCUMENT_REFERENCE) {
     const body = {
       resourceType: "DocumentReference",
@@ -34,14 +34,11 @@ export class DocumentReference implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: `<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Narrative with Details</b></p><p><b>id</b>: 1</p><p><b>status</b>: ${options.status}</p><p><b>docStatus</b>: ${options.docStatus}</p><p><b>subject</b>: ${options.patient.MRN} ${options.patient.name}</p><p><b>type</b>: ${options.title}</p><p><b>content</b>: Dr. PQR</p></div>`,
+        div: `<div xmlns="http://www.w3.org/1999/xhtml"></div>`,
       },
       status: options.status,
       docStatus: options.docStatus,
-      type: {
-        coding: options.code,
-        text: options.title,
-      },
+      type: options.type,
       subject: { reference: `Patient/${options.patientId}` },
       content: [
         {
@@ -59,8 +56,18 @@ export class DocumentReference implements ResourceMaster {
 
     return body;
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options: any):DOCUMENT_REFERENCE {
+    let ret:DOCUMENT_REFERENCE={
+      status: options.status,
+      docStatus: options.docStatus,
+      type: options.type,
+      patientId: this.getIdFromReference({"ref" : options.subject.reference, "resourceType" : "Patient"}),
+      pdf: options.content[0].attachment.data,
+      title: options.content[0].attachment.title
+    }
+
+    return ret
+    
   }
 
 }
