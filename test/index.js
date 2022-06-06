@@ -912,7 +912,9 @@ const getBundle = async()=>{
     const compositionObj = composition.convertFhirToObject(compositionResource.data)
 
  
-    const html =`${compositionResource.data.text.div}`.trim()
+    // const html =`${compositionResource.data.text.div}`.trim()
+    const html = compositionObj.documentDatahtml
+    console.log(html)
     const pdf =await new PrescriptionBundle().getpdf({
       html: html,
       "qrCode" : `https://psychic-city-328609.el.r.appspot.com/api/${compositionObj.id}?bundletype=Prescription`

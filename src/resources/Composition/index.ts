@@ -329,6 +329,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       id: options.id,
       identifier: options.identifier.value,
       author: options.author,
+      documentDatahtml: options.text.div.trim(),
     };
     if (ret.patient == undefined) {
       delete ret.patient;
@@ -339,6 +340,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     if (ret.organization == undefined) {
       delete ret.organization;
     }
+
     return ret;
   }
 
