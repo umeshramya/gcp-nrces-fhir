@@ -27,25 +27,25 @@ export class DiagnsoticReportBundle
     );
 
     const entry = bundlemain.entry;
-    // write code to pusj medication trequest here
+    // write code to pusj diagnosticreport here
     const sectionEntries = bundlemain.compositionObj.section[0].entry as {
       reference: string;
       type: resourceType;
     }[];
 
-    const medicationRequestId = this.getIdFromReference({
-      ref: sectionEntries.filter((el) => el.type == "MedicationRequest")[0]
+    const diagnosticReportId = this.getIdFromReference({
+      ref: sectionEntries.filter((el) => el.type == "DiagnosticReport")[0]
         .reference,
-      resourceType: "MedicationRequest",
+      resourceType: "DiagnosticReport",
     });
 
-    const medicationRequest = await new GcpFhirCrud()
-      .getFhirResource(medicationRequestId, "MedicationRequest")
+    const diagnsoticReport = await new GcpFhirCrud()
+      .getFhirResource(diagnosticReportId, "DiagnosticReport")
       .then((res) => res.data);
 
     entry.push({
-      fullUrl: `MedicationRequest/${medicationRequestId}`,
-      resource: medicationRequest,
+      fullUrl: `DiagnosticReport/${diagnosticReportId}`,
+      resource: diagnsoticReport,
     });
     const body = {
       resourceType: "Bundle",

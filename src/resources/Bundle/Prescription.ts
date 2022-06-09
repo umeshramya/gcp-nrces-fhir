@@ -24,19 +24,21 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
     );
 
     const entry = bundlemain.entry;
-    // write code to pusj medication trequest here
+   
     const sectionEntries = bundlemain.compositionObj.section[0].entry as {
       reference: string;
       type: resourceType;
     }[];
 
+     // write code to pusj medication trequest here
     const medicationRequestId = this.getIdFromReference({
       ref: sectionEntries.filter((el) => el.type == "MedicationRequest")[0]
         .reference,
       resourceType: "MedicationRequest",
     });
 
-    const medicationRequest = await new GcpFhirCrud()
+    const gcpFhirCrud = new GcpFhirCrud()
+    const medicationRequest = await gcpFhirCrud
       .getFhirResource(medicationRequestId, "MedicationRequest")
       .then((res) => res.data);
 
@@ -44,6 +46,17 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
       fullUrl: `MedicationRequest/${medicationRequestId}`,
       resource: medicationRequest,
     });
+
+    // Get Condition
+    const conditionId = this.getIdFromReference({
+      "ref" : sectionEntries.filter(el=> el.type == "Condition")[0].reference,
+      resourceType : "Condition"
+    })
+    const condition = await gcpFhirCrud.getFhirResource(conditionId, "Condition").then(res=>res.data)
+    entry.push({
+      fullUrl: `Condition/${conditionId}`,
+      resource: condition,
+    })
     const body = {
       resourceType: "Bundle",
       id: options.id,
