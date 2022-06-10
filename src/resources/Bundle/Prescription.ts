@@ -48,15 +48,36 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
     });
 
     // Get Condition
-    const conditionId = this.getIdFromReference({
-      "ref" : sectionEntries.filter(el=> el.type == "Condition")[0].reference,
-      resourceType : "Condition"
-    })
-    const condition = await gcpFhirCrud.getFhirResource(conditionId, "Condition").then(res=>res.data)
-    entry.push({
-      fullUrl: `Condition/${conditionId}`,
-      resource: condition,
-    })
+    const conditionArray = sectionEntries.filter(el=> el.type == "Condition")
+    if(conditionArray.length >0){
+      const conditionId = this.getIdFromReference({
+        "ref" : conditionArray[0].reference,
+        resourceType : "Condition"
+      })
+      const condition = await gcpFhirCrud.getFhirResource(conditionId, "Condition").then(res=>res.data)
+      entry.push({
+        fullUrl: `Condition/${conditionId}`,
+        resource: condition,
+      })
+    }
+
+
+    // Binary
+    const binaryArray = sectionEntries.filter(el=> el.type == "Binary")
+    if(binaryArray.length > 0){
+      const binaryId = this.getIdFromReference({
+        "ref" : binaryArray[0].reference,
+        "resourceType" : "Binary"
+      })
+      const binary = await gcpFhirCrud.getFhirResource(binaryId, "Binary").then(res=>res.data);
+      entry.push({
+        fullUrl: `Binary/${binaryId}`,
+        resource: binary,
+      })
+    }
+
+ 
+
     const body = {
       resourceType: "Bundle",
       id: options.id,
