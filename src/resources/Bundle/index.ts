@@ -40,25 +40,25 @@ export class BundelMain extends ResourceMain {
       },
       {
         fullUrl: `Patient/${compositionObj.patientId}`,
-        resource: await gcpGcpFhir.getFhirResource(
+        resource: (await gcpGcpFhir.getFhirResource(
           compositionObj.patientId,
           "Patient"
-        ),
+        )).data,
       },
       {
         fullUrl: `Encounter/${compositionObj.encounterId}`,
-        resource: await gcpGcpFhir.getFhirResource(
+        resource: (await gcpGcpFhir.getFhirResource(
           compositionObj.encounterId,
           "Encounter"
-        ),
+        )).data,
       },
 
       {
         fullUrl: `Organization/${compositionObj.organizationId}`,
-        resource: await gcpGcpFhir.getFhirResource(
+        resource: (await gcpGcpFhir.getFhirResource(
           compositionObj.organizationId,
           "Organization"
-        ),
+        )).data,
       },
       {
         fullUrl : `DocumentReference/${compositionObj.id}`,

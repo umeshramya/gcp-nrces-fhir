@@ -923,7 +923,10 @@ const getBundle = async()=>{
   
 
 
-    console.log(bundle.entry)
+    bundle.entry.forEach(el=>{
+      console.log(el.resource)
+      console.log(`\n\n\n\n`)
+    })
   } catch (error) {
    console.log(error) 
   }
