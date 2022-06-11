@@ -1,7 +1,7 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
 const { cpSync } = require('fs')
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory, PrescriptionBundle, DiagnsoticReportBundle } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory, PrescriptionBundle, DiagnsoticReportBundle, OPConsultationBundle } = require("gcp-nrces-fhir")
 const { emptySign } = require('gcp-nrces-fhir/lib/resources/Composition')
 
 
@@ -906,20 +906,20 @@ const getCompositoon = async () => {
 
 const getBundle = async () => {
   try {
-    id = "591f4b2d-9a1f-444b-9972-338e3ce2f058"
+    id = "b4c21792-5a90-41c4-9a6d-59eccc1efc1c"
     const compositionResource = await new GcpFhirCRUD().getFhirResource(id, "Composition");
     const html = `${compositionResource.data.text.div}`.trim()
 
-    console.log(html)
-    const pdf = await new DiagnsoticReportBundle().getpdf({
+    // console.log(html)
+    const pdf = await new OPConsultationBundle().getpdf({
       html: html,
       "qrCode": `https://psychic-city-328609.el.r.appspot.com/api/${compositionResource.data.id}?bundletype=Prescription`
     })
 
-    console.log(pdf)
+    // console.log(pdf)
 
 
-    const bundle = await new DiagnsoticReportBundle().getFHIR({ "composition": compositionResource.data, "pdfData": pdf })
+    const bundle = await new OPConsultationBundle().getFHIR({ "composition": compositionResource.data, "pdfData": pdf })
 
 
 
