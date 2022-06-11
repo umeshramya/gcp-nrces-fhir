@@ -3,11 +3,11 @@ import ResourceMain from "../ResourceMai";
 import { IDENTTIFIER, resourceType } from "../../config";
 import GcpFhirCrud from "../../classess/gcp";
 import { BundelMain } from ".";
+import { DiagnosticReport } from "../DiagnosticReport";
 
 export class DiagnsoticReportBundle
   extends BundelMain
-  implements ResourceMaster
-{
+  implements ResourceMaster {
   async getFHIR(options: {
     id?: string;
     identifier?: IDENTTIFIER;
@@ -39,14 +39,27 @@ export class DiagnsoticReportBundle
       resourceType: "DiagnosticReport",
     });
 
-    const diagnsoticReport = await new GcpFhirCrud()
+    const gcpCrud = new GcpFhirCrud()
+    const diagnsoticReport = await gcpCrud
       .getFhirResource(diagnosticReportId, "DiagnosticReport")
       .then((res) => res.data);
+
+
+    const diagnosticReportObj = new DiagnosticReport().convertFhirToObject(diagnsoticReport)
+    const mediaId = diagnosticReportObj.mediaId;
+    const specimenID = diagnosticReportObj.specimenId;
+    const serviceRequest = diagnosticReportObj.basedOn
+
+    console.log(mediaId)
+    console.log(specimenID)
+    console.log(serviceRequest)
 
     entry.push({
       fullUrl: `DiagnosticReport/${diagnosticReportId}`,
       resource: diagnsoticReport,
     });
+
+
     const body = {
       resourceType: "Bundle",
       id: options.id,

@@ -76,6 +76,7 @@ import {
 import { ServiceRequest, SERVICE_REQUEST } from "./resources/ServiceRequest";
 
 import { PrescriptionBundle } from "./resources/Bundle/Prescription";
+import { DiagnsoticReportBundle } from "./resources/Bundle/DiagnsoticReport"
 import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
@@ -153,6 +154,7 @@ export interface GcpNrcesFhirType {
 }
 
 export { PrescriptionBundle };
+export { DiagnsoticReportBundle }
 
 export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };

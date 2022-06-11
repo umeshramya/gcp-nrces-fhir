@@ -1,7 +1,7 @@
 require('dotenv').config("env")
 const v4 = require("uuid").v4
 const { cpSync } = require('fs')
-const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory, PrescriptionBundle } = require("gcp-nrces-fhir")
+const { GcpFhirCRUD, GcpFhirSearch, Encounter, OrganizationResource, PatientResource, Patient, PractitionerResource, EncounterResource, EncounterClassArray, EncounterStatusArray, Procedure, Condition, AllergyIntolerance, Appointment, DocumentBundle, Composition, Organization, Practitioner, MedicationRequest, PrescriptionRecord, OPConsultRecord, ResourceFactory, PrescriptionBundle, DiagnsoticReportBundle } = require("gcp-nrces-fhir")
 const { emptySign } = require('gcp-nrces-fhir/lib/resources/Composition')
 
 
@@ -174,7 +174,7 @@ const searchsimple = async () => {
   //   // console.log(el)
   // })
   let patinetId = "37"
-  let id="00ce344c-244e-4162-ad99-8c52726f6fe1"
+  let id = "00ce344c-244e-4162-ad99-8c52726f6fe1"
   let mobile = "9343403620"
   // const fhirRes = await gcpFhirSearch.search(
   //   "Patient",
@@ -895,40 +895,40 @@ const comOPD = async () => {
 
 
 
-const getCompositoon=async()=>{
-  id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
-  const res =await  new GcpFhirCRUD().getFhirResource(id, "Composition");
+const getCompositoon = async () => {
+  id = "bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
+  const res = await new GcpFhirCRUD().getFhirResource(id, "Composition");
   const obj = new ResourceFactory("Composition").convertFhirToObject(res.data);
   console.log(obj.section[0].entry)
 }
 
 // getCompositoon()
 
-const getBundle = async()=>{
+const getBundle = async () => {
   try {
-    id="bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
-    const compositionResource = await  new GcpFhirCRUD().getFhirResource(id, "Composition");
-    const html =`${compositionResource.data.text.div}`.trim()
+    id = "591f4b2d-9a1f-444b-9972-338e3ce2f058"
+    const compositionResource = await new GcpFhirCRUD().getFhirResource(id, "Composition");
+    const html = `${compositionResource.data.text.div}`.trim()
 
     console.log(html)
-    const pdf =await new PrescriptionBundle().getpdf({
+    const pdf = await new DiagnsoticReportBundle().getpdf({
       html: html,
-      "qrCode" : `https://psychic-city-328609.el.r.appspot.com/api/${compositionResource.data.id}?bundletype=Prescription`
+      "qrCode": `https://psychic-city-328609.el.r.appspot.com/api/${compositionResource.data.id}?bundletype=Prescription`
     })
 
     console.log(pdf)
-    
-  
-    const bundle =await new PrescriptionBundle().getFHIR({"composition" : compositionResource.data , "pdfData" : pdf})
-  
 
 
-    bundle.entry.forEach(el=>{
+    const bundle = await new DiagnsoticReportBundle().getFHIR({ "composition": compositionResource.data, "pdfData": pdf })
+
+
+
+    bundle.entry.forEach(el => {
       console.log(el.resource)
       console.log(`\n\n\n\n`)
     })
   } catch (error) {
-   console.log(error) 
+    console.log(error)
   }
 
 }
