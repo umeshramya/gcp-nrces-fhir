@@ -5,6 +5,7 @@ import GcpFhirCrud from "../../classess/gcp";
 import { BundelMain } from ".";
 
 export class OPConsultationBundle extends BundelMain implements ResourceMaster {
+  private entry:any[]=[]
   async getFHIR(options: {
     id?: string;
     identifier?: IDENTTIFIER;
@@ -23,11 +24,11 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
       options.pdfData
     );
 
-    const entry = bundlemain.entry;
+    this.entry = bundlemain.entry;
    
     const sectionEntries = options.composition.section
 
-    await this.getAllSectionAndAllEntries(0, sectionEntries, entry)
+    await this.getAllSectionAndAllEntries(0, sectionEntries)
 
     const body = {
       resourceType: "Bundle",
@@ -49,7 +50,7 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
       identifier: options.identifier,
       type: "document",
       timestamp: new Date().toISOString,
-      entry: entry,
+      entry: this.entry,
     };
 
     return body;
@@ -59,30 +60,37 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
     throw new Error("Method not implemented.");
   }
 
-  private getAllSectionAndAllEntries = async(index:number, sections:any[], entry:any[])=>{
+  private getAllSectionAndAllEntries = async(index:number, sections:any[])=>{
 
       if(index >= sections.length){
         return;
       }
-      await this.getEntriesPerSection(0, sections[index].entry, entry)
+     
+     await this.getEntriesPerSection(0, sections[index].entry)
+    
       index= index+1
-      this.getAllSectionAndAllEntries(index, sections, entry)
+     await this.getAllSectionAndAllEntries(index, sections)
 
     }
 
 
-  private getEntriesPerSection = async(index:number, sectionEntries:any[], entry:any[])=>{
-    if(index >- sectionEntries.length){
+  private getEntriesPerSection = async(index:number, sectionEntries:any[], )=>{
+    if(index >= sectionEntries.length){
       return
     }
-    const curSectionEntryObj = this.getFromMultResource(sectionEntries[index].reference)
+
+    const curSectionEntryObj = this.getFromMultResource({"reference" : sectionEntries[index].reference})
     const curSectionEntry = await new GcpFhirCrud().getFhirResource(curSectionEntryObj.id, curSectionEntryObj.resource);
-    entry.push({
+
+ 
+    this.entry.push({
       fullUrl: `${curSectionEntryObj.resource}/${curSectionEntryObj.id}`,
       resource: curSectionEntry.data,
     })
+
+
     index = index +1;
-    this.getEntriesPerSection(index, sectionEntries, entry)
+    await this.getEntriesPerSection(index, sectionEntries)
   }
 
 

@@ -921,10 +921,8 @@ const getBundle = async () => {
 
     const bundle = await new OPConsultationBundle().getFHIR({ "composition": compositionResource.data, "pdfData": pdf })
 
-
-
     bundle.entry.forEach(el => {
-      console.log(el.resource)
+      console.log(el)
       console.log(`\n\n\n\n`)
     })
   } catch (error) {
