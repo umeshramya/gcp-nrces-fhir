@@ -61,6 +61,10 @@ export class DiagnsoticReportBundle
     if(specimenIDs?.length > 0){
       await this.getSpecimen(0, specimenIDs, entry)
     }
+    if(diagnosticReportObj.basedOn){
+
+      await this.getBasedOn(0, diagnosticReportObj.basedOn, entry)
+    }
 
 
     const body = {
@@ -117,6 +121,14 @@ export class DiagnsoticReportBundle
     })
     index = index + 1;
     this.getMedia(index, specimenids, entry)
+  }
+
+  private getBasedOn = async(index:number, basedOnRefs:any[], entry:any[])=>{
+    if(index >= basedOnRefs.length){
+      return;
+    }
+    const basedOn = this.getFromMultResource({"reference" : basedOnRefs[index]})
+    console.log(basedOn.id)
   }
 
   statusArray?: Function | undefined;
