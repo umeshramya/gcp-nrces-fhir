@@ -118,6 +118,7 @@ export class DiagnsoticReportBundle
     index = index + 1;
     this.getMedia(index, specimenids, entry)
   }
+
   statusArray?: Function | undefined;
 }
 
