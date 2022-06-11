@@ -1,13 +1,14 @@
 import { ResourceMaster } from "../../Interfaces";
 import ResourceMain from "../ResourceMai";
-import { IDENTTIFIER, resourceType } from "../../config";
+import { IDENTTIFIER, MULTI_RESOURCE, resourceType } from "../../config";
 import GcpFhirCrud from "../../classess/gcp";
 import { BundelMain } from ".";
 import { DiagnosticReport } from "../DiagnosticReport";
 
 export class DiagnsoticReportBundle
   extends BundelMain
-  implements ResourceMaster {
+  implements ResourceMaster
+{
   async getFHIR(options: {
     id?: string;
     identifier?: IDENTTIFIER;
@@ -39,33 +40,30 @@ export class DiagnsoticReportBundle
       resourceType: "DiagnosticReport",
     });
 
-    const gcpCrud = new GcpFhirCrud()
+    const gcpCrud = new GcpFhirCrud();
     const diagnsoticReport = await gcpCrud
       .getFhirResource(diagnosticReportId, "DiagnosticReport")
       .then((res) => res.data);
 
-
-    const diagnosticReportObj = new DiagnosticReport().convertFhirToObject(diagnsoticReport)
+    const diagnosticReportObj = new DiagnosticReport().convertFhirToObject(
+      diagnsoticReport
+    );
     const mediaIds = diagnosticReportObj.mediaId;
-    const specimenIDs = diagnosticReportObj.specimenId || []
+    const specimenIDs = diagnosticReportObj.specimenId || [];
     // const serviceRequest = diagnosticReportObj.basedOn
-
-
 
     entry.push({
       fullUrl: `DiagnosticReport/${diagnosticReportId}`,
       resource: diagnsoticReport,
     });
 
-    await this.getMedia(0,mediaIds,entry);
-    if(specimenIDs?.length > 0){
-      await this.getSpecimen(0, specimenIDs, entry)
+    await this.getMedia(0, mediaIds, entry);
+    if (specimenIDs?.length > 0) {
+      await this.getSpecimen(0, specimenIDs, entry);
     }
-    if(diagnosticReportObj.basedOn){
-
-      await this.getBasedOn(0, diagnosticReportObj.basedOn, entry)
+    if (diagnosticReportObj.basedOn) {
+      await this.getBasedOn(0, diagnosticReportObj.basedOn, entry);
     }
-
 
     const body = {
       resourceType: "Bundle",
@@ -97,40 +95,63 @@ export class DiagnsoticReportBundle
     throw new Error("Method not implemented.");
   }
 
-  private getMedia = async (index: number, mediaids: string[], entry: any[]) => {
+  private getMedia = async (
+    index: number,
+    mediaids: string[],
+    entry: any[]
+  ) => {
     if (index >= mediaids.length) {
       return;
-    };
-    const media = (await new GcpFhirCrud().getFhirResource(mediaids[index], "Media")).data;
+    }
+    const media = (
+      await new GcpFhirCrud().getFhirResource(mediaids[index], "Media")
+    ).data;
     entry.push({
       fullUrl: `Media/${mediaids[index]}`,
       resource: media,
-    })
+    });
     index = index + 1;
-    this.getMedia(index, mediaids, entry)
-  }
+    this.getMedia(index, mediaids, entry);
+  };
 
-  private getSpecimen = async (index: number, specimenids: string[], entry: any[]) => {
+  private getSpecimen = async (
+    index: number,
+    specimenids: string[],
+    entry: any[]
+  ) => {
     if (index >= specimenids.length) {
       return;
-    };
-    const specimen = (await new GcpFhirCrud().getFhirResource(specimenids[index], "Specimen")).data;
+    }
+    const specimen = (
+      await new GcpFhirCrud().getFhirResource(specimenids[index], "Specimen")
+    ).data;
     entry.push({
       fullUrl: `Specimen/${specimenids[index]}`,
       resource: specimen,
-    })
+    });
     index = index + 1;
-    this.getMedia(index, specimenids, entry)
-  }
+    this.getSpecimen(index, specimenids, entry);
+  };
 
-  private getBasedOn = async(index:number, basedOnRefs:any[], entry:any[])=>{
-    if(index >= basedOnRefs.length){
+  private getBasedOn = async (
+    index: number,
+    basedOnRefs: MULTI_RESOURCE[],
+    entry: any[]
+  ) => {
+    if (index >= basedOnRefs.length) {
       return;
     }
-    const basedOn = this.getFromMultResource({"reference" : basedOnRefs[index]})
-    console.log(basedOn.id)
-  }
+    const basedOn = await new GcpFhirCrud().getFhirResource(
+      basedOnRefs[index].id,
+      basedOnRefs[index].resource
+    );
+    entry.push({
+      fullUrl: `${basedOnRefs[index].resource}/${basedOnRefs[index].id}`,
+      resource: basedOn.data,
+    });
+    index = index + 1;
+    this.getBasedOn(index, basedOnRefs, entry);
+  };
 
   statusArray?: Function | undefined;
 }
-
