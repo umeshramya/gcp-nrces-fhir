@@ -91,3 +91,17 @@ export class DiagnsoticReportBundle
   }
   statusArray?: Function | undefined;
 }
+
+
+const getMedia = async (index: number, mediaids: string[], entry: any[]) => {
+  if (index >= mediaids.length) {
+    return;
+  };
+  const media = (await new GcpFhirCrud().getFhirResource(mediaids[index], "Media")).data;
+  entry.push({
+    fullUrl: `Media/${mediaids[index]}`,
+    resource: media,
+  })
+  index = index + 1;
+  getMedia(index, mediaids, entry)
+}
