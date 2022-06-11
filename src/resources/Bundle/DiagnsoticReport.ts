@@ -50,7 +50,7 @@ export class DiagnsoticReportBundle
     );
     const mediaIds = diagnosticReportObj.mediaId;
     const specimenIDs = diagnosticReportObj.specimenId || [];
-    // const serviceRequest = diagnosticReportObj.basedOn
+   
 
     entry.push({
       fullUrl: `DiagnosticReport/${diagnosticReportId}`,
@@ -63,6 +63,9 @@ export class DiagnsoticReportBundle
     }
     if (diagnosticReportObj.basedOn) {
       await this.getBasedOn(0, diagnosticReportObj.basedOn, entry);
+    }
+    if (diagnosticReportObj.observationResultid){
+      await this.getObservations(0, diagnosticReportObj.observationResultid, entry)
     }
 
     const body = {
@@ -131,6 +134,25 @@ export class DiagnsoticReportBundle
     });
     index = index + 1;
     this.getSpecimen(index, specimenids, entry);
+  };
+
+    private getObservations = async (
+    index: number,
+    observationids: string[],
+    entry: any[]
+  ) => {
+    if (index >= observationids.length) {
+      return;
+    }
+    const observation = (
+      await new GcpFhirCrud().getFhirResource(observationids[index], "Observation")
+    ).data;
+    entry.push({
+      fullUrl: `Observation/${observationids[index]}`,
+      resource: observation,
+    });
+    index = index + 1;
+    this.getObservations(index, observationids, entry);
   };
 
   private getBasedOn = async (
