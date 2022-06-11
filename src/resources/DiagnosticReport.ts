@@ -198,8 +198,14 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         })
       );
     }
+
+    if (options.specimen) {
+      ret.specimenId = options.specimen.map((el: any) =>
+        this.getIdFromReference({ ref: el.reference, resourceType: "Specimen" })
+      );
+    }
     if (options.performer) {
-      performer: options.performer.map(
+      ret.performer = options.performer.map(
         (el: { reference: string; display?: string | undefined }) => {
           return this.getFromMultResource(el);
         }

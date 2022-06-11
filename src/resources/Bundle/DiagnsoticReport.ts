@@ -46,18 +46,21 @@ export class DiagnsoticReportBundle
 
 
     const diagnosticReportObj = new DiagnosticReport().convertFhirToObject(diagnsoticReport)
-    const mediaId = diagnosticReportObj.mediaId;
-    const specimenID = diagnosticReportObj.specimenId;
-    const serviceRequest = diagnosticReportObj.basedOn
+    const mediaIds = diagnosticReportObj.mediaId;
+    const specimenIDs = diagnosticReportObj.specimenId || []
+    // const serviceRequest = diagnosticReportObj.basedOn
 
-    console.log(mediaId)
-    console.log(specimenID)
-    console.log(serviceRequest)
+
 
     entry.push({
       fullUrl: `DiagnosticReport/${diagnosticReportId}`,
       resource: diagnsoticReport,
     });
+
+    await this.getMedia(0,mediaIds,entry);
+    if(specimenIDs?.length > 0){
+      await this.getSpecimen(0, specimenIDs, entry)
+    }
 
 
     const body = {
@@ -89,19 +92,32 @@ export class DiagnsoticReportBundle
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");
   }
+
+  private getMedia = async (index: number, mediaids: string[], entry: any[]) => {
+    if (index >= mediaids.length) {
+      return;
+    };
+    const media = (await new GcpFhirCrud().getFhirResource(mediaids[index], "Media")).data;
+    entry.push({
+      fullUrl: `Media/${mediaids[index]}`,
+      resource: media,
+    })
+    index = index + 1;
+    this.getMedia(index, mediaids, entry)
+  }
+
+  private getSpecimen = async (index: number, specimenids: string[], entry: any[]) => {
+    if (index >= specimenids.length) {
+      return;
+    };
+    const specimen = (await new GcpFhirCrud().getFhirResource(specimenids[index], "Specimen")).data;
+    entry.push({
+      fullUrl: `Specimen/${specimenids[index]}`,
+      resource: specimen,
+    })
+    index = index + 1;
+    this.getMedia(index, specimenids, entry)
+  }
   statusArray?: Function | undefined;
 }
 
-
-const getMedia = async (index: number, mediaids: string[], entry: any[]) => {
-  if (index >= mediaids.length) {
-    return;
-  };
-  const media = (await new GcpFhirCrud().getFhirResource(mediaids[index], "Media")).data;
-  entry.push({
-    fullUrl: `Media/${mediaids[index]}`,
-    resource: media,
-  })
-  index = index + 1;
-  getMedia(index, mediaids, entry)
-}
