@@ -896,7 +896,7 @@ const comOPD = async () => {
 
 
 const getCompositoon = async () => {
-  id = "bfb6a47a-58a9-4ce1-98ba-7a66c8876eb9"
+  id = "56b874c3-2909-4eab-b8ec-d55551eaaba1"
   const res = await new GcpFhirCRUD().getFhirResource(id, "Composition");
   const obj = new ResourceFactory("Composition").convertFhirToObject(res.data);
   console.log(obj.section[0].entry)
@@ -932,4 +932,4 @@ const getBundle = async () => {
 }
 
 
-getBundle()
+// getBundle()
