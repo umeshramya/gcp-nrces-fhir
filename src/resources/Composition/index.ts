@@ -201,6 +201,52 @@ export class Composition extends ResourceMain implements ResourceMaster {
       return str;
     };
 
+    const getHtmlText = (): string => {
+      let html = `<div xmlns="http://www.w3.org/1999/xhtml">`;
+      html += `<div style="text-align: right">`;
+      html += `Date:-${new Date(options.date).toDateString()}`;
+      html += `</div>`;
+      html += `<div style="text-align: right; font-size: 9px">`;
+      html += `Docurment Status :${options.status}`;
+      html += `</div>`;
+      html += `<div style="text-align: right; font-size: 9px">`;
+      html += `Docurment Type :${options.type}`;
+      html += `</div>`;
+      html += `<table data-pdfmake="{'widths':['60%','40%']}">`;
+      html += `<tr>`;
+      html += `<td>${getpatientdetails()}</td>`;
+      html += `<td>${getDoctors()}`;
+
+      html += `${
+        this.performer.length > 0
+          ? `<div>Performed By :${this.performer.reduce(
+              (pr, cu) => (pr += `${cu}<\br>`)
+            )}</div>`
+          : ""
+      }`;
+      html += `</td>`;
+      html += `</tr>`;
+
+      html += `${
+        this.requeter || options.patient.internalId
+          ? `<tr><td>${
+              this.requeter ? `Requested By : ${this.requeter}` : ""
+            }</td><td>${
+              options.patient.internalId
+                ? `Internal Id : ${options.patient.internalId}`
+                : ""
+            }</td></tr>`
+          : ""
+      }`;
+
+      html += `</table>`;
+      html += `<hr />`;
+      html += `<div>${options.documentDatahtml}</div`;
+      html += `</div>`;
+
+      return html.trim();
+    };
+
     this.mapCompositionType(options.type);
     const body = {
       resourceType: "Composition",
