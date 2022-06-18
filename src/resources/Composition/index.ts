@@ -259,48 +259,49 @@ export class Composition extends ResourceMain implements ResourceMaster {
       language: "en-IN",
       text: {
         status: "generated",
-        div: `<div xmlns="http://www.w3.org/1999/xhtml">
-        <div style="text-align: right">
-          Date:-${new Date(options.date).toDateString()}
-        </div>
-        <div style="text-align: right; font-size: 9px">
-          Docurment Status :${options.status}
-        </div>
-        <div style="text-align: right; font-size: 9px">
-          Docurment Type :${options.type}
-        </div>
-        <table data-pdfmake="{'widths':['60%','40%']}">
-          <tr>
-            <td>${getpatientdetails()}</td>
-            <td>${getDoctors()}
+        div : getHtmlText(),
+      //   div: `<div xmlns="http://www.w3.org/1999/xhtml">
+      //   <div style="text-align: right">
+      //     Date:-${new Date(options.date).toDateString()}
+      //   </div>
+      //   <div style="text-align: right; font-size: 9px">
+      //     Docurment Status :${options.status}
+      //   </div>
+      //   <div style="text-align: right; font-size: 9px">
+      //     Docurment Type :${options.type}
+      //   </div>
+      //   <table data-pdfmake="{'widths':['60%','40%']}">
+      //     <tr>
+      //       <td>${getpatientdetails()}</td>
+      //       <td>${getDoctors()}
 
-                ${
-                  this.performer.length > 0
-                    ? `<div>Performed By :${this.performer.reduce(
-                        (pr, cu) => (pr += `${cu}<\br>`)
-                      )}</div>`
-                    : ""
-                }
-            </td>
-          </tr>
+      //           ${
+      //             this.performer.length > 0
+      //               ? `<div>Performed By :${this.performer.reduce(
+      //                   (pr, cu) => (pr += `${cu}<\br>`)
+      //                 )}</div>`
+      //               : ""
+      //           }
+      //       </td>
+      //     </tr>
 
-          ${
-            this.requeter || options.patient.internalId
-              ? `<tr>
-            <td>${this.requeter ? `Requested By : ${this.requeter}` : ""}</td>
-            <td>${
-              options.patient.internalId
-                ? `Internal Id : ${options.patient.internalId}`
-                : ""
-            }</td>
-            </tr>`
-              : ""
-          }
+      //     ${
+      //       this.requeter || options.patient.internalId
+      //         ? `<tr>
+      //       <td>${this.requeter ? `Requested By : ${this.requeter}` : ""}</td>
+      //       <td>${
+      //         options.patient.internalId
+      //           ? `Internal Id : ${options.patient.internalId}`
+      //           : ""
+      //       }</td>
+      //       </tr>`
+      //         : ""
+      //     }
 
-        </table>
-        <hr />
-        <div>${options.documentDatahtml}</div
-      </div>`,
+      //   </table>
+      //   <hr />
+      //   <div>${options.documentDatahtml}</div
+      // </div>`,
       },
       identifier: {
         system: "https://ndhm.in/phr",
