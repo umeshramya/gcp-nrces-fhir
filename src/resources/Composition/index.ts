@@ -254,7 +254,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
         </table>
         <hr />
         <div>${options.documentDatahtml}</div
-      </div>`,
+      </div>`.replace(/\n/g, ''),
       },
       identifier: {
         system: "https://ndhm.in/phr",

@@ -35,7 +35,7 @@ export class DiagnosticReportComp extends Composition implements Records {
       <tbody>
       ${options.html}
       </tbody>
-      </table></div>`;
+      </table></div>`.replace(/\n/g, '');
       
     }
     return ret;
