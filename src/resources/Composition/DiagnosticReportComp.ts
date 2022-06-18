@@ -25,20 +25,19 @@ export class DiagnosticReportComp extends Composition implements Records {
 
     let ret:string =options.html;
     if(options.intable){
-      ret = `<div><table  style="border-collapse: collapse; width: 99.9739%;" border="0">
-      <thead><tr>
-      <th style="width: 23.6406%;">Test</th>
-      <th style="width: 23.6406%;"> Value</th>
-      <th style="width: 23.6406%;">Units</th>
-      <th style="width: 23.6406%;">Reference Range </th>
-      </tr></thead>
-      <tbody>
-      ${options.html}
-      </tbody>
-      </table></div>`.replace(/\n/g, '');
+      ret = `<div><table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
+      ret += `<thead><tr>`;
+      ret += `<th style="width: 23.6406%;">Test</th>`
+      ret += `<th style="width: 23.6406%;"> Value</th>`
+      ret += `<th style="width: 23.6406%;">Units</th>`
+      ret += `<th style="width: 23.6406%;">Reference Range </th>`
+      ret += `</tr></thead>`
+      ret += `<tbody>`
+      ret += `${options.html}`
+      ret += `</tbody></table>`;
       
     }
-    return ret;
+    return ret.trim();
   }
   private setPerformerAndRequester = (options: args) => {
     const serviceRequest = new ServiceRequest();
