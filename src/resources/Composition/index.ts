@@ -170,9 +170,9 @@ export class Composition extends ResourceMain implements ResourceMaster {
   };
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
-      return `<div>Patient:- ${options.patient.name}.</div>
-                <div>MRN:- ${options.patient.MRN} </div>
-                ${
+      let ret = `<div>Patient:- ${options.patient.name}.</div>`
+        ret += `<div>MRN:- ${options.patient.MRN} </div>`
+        ret +=  `${
                   options.patient.phrAddress
                     ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
                         options.patient.healthNumber
@@ -180,10 +180,15 @@ export class Composition extends ResourceMain implements ResourceMaster {
                           : ""
                       }</div>`
                     : ""
-                }
-                <div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
+                }`
+       ret +=  `<div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
         new Date(options.patient.dob)
       )} ph: ${options.patient.mobile}</div>`;
+
+
+      return ret.trim()
+
+
     };
     /**
      * This is for doctors who authored the document or who interpreted the results

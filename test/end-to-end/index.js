@@ -31,6 +31,8 @@ const setOrganization = async () => {
         "phone": "08362260624",
         "providerNumber": "123",
     });
+
+
     let res = await gcpFhirCRUD.createFhirResource(body, "Organization")
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "Organization");
     resources.organization = organization.convertFhirToObject(res.data)
@@ -109,12 +111,15 @@ const setEncounter = async () => {
 
 
 
+
 const callFunction = async () => {
     await setOrganization();
     await setPatient();
     await setPractinioner();
     await setEncounter();
 }
+
+callFunction()
 
 
 
