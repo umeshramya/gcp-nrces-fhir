@@ -6,11 +6,40 @@ import { ServiceRequest } from "../ServiceRequest";
 interface args {
   composition: COMPOSITOIN;
   diagnosticReport: any;
+  textInTable:boolean;
   // media: [];
   serviceRequest: any;
 }
 
 export class DiagnosticReportComp extends Composition implements Records {
+
+  /**
+   * This sournads the table format in case data to be presented in table
+   * @param options 
+   * @returns 
+   */
+  private getTxtHTML = (options:{
+    html:string;
+    intable: boolean
+  }):string=>{
+
+    let ret:string =options.html;
+    if(options.intable){
+      const text = `<div><table  style="border-collapse: collapse; width: 99.9739%;" border="0">
+      <thead><tr>
+      <th style="width: 23.6406%;">Test</th>
+      <th style="width: 23.6406%;"> Value</th>
+      <th style="width: 23.6406%;">Units</th>
+      <th style="width: 23.6406%;">Reference Range </th>
+      </tr></thead>
+      <tbody>
+      ${options.html}
+      </tbody>
+      </table></div>`;
+      
+    }
+    return ret;
+  }
   private setPerformerAndRequester = (options: args) => {
     const serviceRequest = new ServiceRequest();
     const serviceRequestBody = serviceRequest.convertFhirToObject(
@@ -49,7 +78,7 @@ export class DiagnosticReportComp extends Composition implements Records {
       ],
     });
 
-    options.composition.documentDatahtml = options.diagnosticReport.text.div;
+    options.composition.documentDatahtml =this.getTxtHTML({"html" :options.diagnosticReport.text.div, "intable" : options.textInTable});
 
     const body = this.getFHIR(options.composition);
 
@@ -72,7 +101,7 @@ export class DiagnosticReportComp extends Composition implements Records {
       ],
     });
 
-    options.composition.documentDatahtml = options.diagnosticReport.text.div;
+    options.composition.documentDatahtml = this.getTxtHTML({"html" :options.diagnosticReport.text.div, "intable" : options.textInTable});
 
     const body = this.getFHIR(options.composition);
 
