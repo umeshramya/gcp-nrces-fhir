@@ -25,12 +25,12 @@ export class DiagnosticReportComp extends Composition implements Records {
 
     let ret:string =options.html;
     if(options.intable){
-      ret = `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
+      ret = `<table data-pdfmake="{'widths':['60%','40%']} style="border-collapse: collapse;" border="0">`;
       ret += `<thead><tr>`;
-      ret += `<th style="width: 23.6406%;">Test</th>`
-      ret += `<th style="width: 23.6406%;"> Value</th>`
-      ret += `<th style="width: 23.6406%;">Units</th>`
-      ret += `<th style="width: 23.6406%;">Reference Range </th>`
+      ret += `<th style="width: 40%;">Test</th>`
+      ret += `<th style="width: 20%;"> Value</th>`
+      ret += `<th style="width: 20%;">Units</th>`
+      ret += `<th style="width: 20%;">Reference Range </th>`
       ret += `</tr></thead>`
       ret += `<tbody>`
       ret += `${options.html}`
