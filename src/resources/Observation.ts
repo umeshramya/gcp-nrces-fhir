@@ -48,7 +48,9 @@ export interface SAMPLE_QUANTITY {
   code: string;
 }
 
-export interface QUANTITY extends SAMPLE_QUANTITY {}
+export interface QUANTITY extends Partial<SAMPLE_QUANTITY> {
+  comparator ?: "<" | "<=" | ">=" | ">"
+}
 
 export interface RANGE {
   low: SAMPLE_QUANTITY;
@@ -101,6 +103,7 @@ export interface OBSERVATION {
   patientId: string;
   performer?: Performer[];
   value?: VALUE;
+  dataAbsentReason?: CODEABLE_CONCEPT
   encounterId?: string;
   referenceRange?: REFERENCE_RANGE[];
   hasMember?: HasMember[];
@@ -258,6 +261,10 @@ export class Observation extends ResourceMain implements ResourceMaster {
         ref: options.specimen.reference,
         resourceType: "Specimen",
       });
+    }
+
+    if(options.dataAbsentReason){
+      ret.dataAbsentReason = options.dataAbsentReason
     }
 
     return ret;
