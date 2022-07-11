@@ -40,6 +40,7 @@ interface Subject extends MULTI_RESOURCE {
 
 export interface DIAGNOSTIC_REPORT {
   id?: string;
+  labId?:string;
   mediaId: string[];
   issuedDate: string;
   /**
@@ -89,9 +90,12 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       };
 
       const identifiers: IDENTTIFIER[] = [];
+
       const body: any = {
         resourceType: "DiagnosticReport",
+
         id: options.id || undefined,
+      
         meta: {
           versionId: "1",
           lastUpdated: "2020-07-09T15:32:26.605+05:30",
@@ -163,7 +167,25 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       if (options.encounterId) {
         body.encounter = { reference: `Encounter/${options.encounterId}` };
       }
+      if(options.labId){
+        identifiers.push({
+          type: {
+            coding: [
+              {
+                // system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+                // code: "MR",
+                display: "Lab Id",
+              },
+            ],
+          },
+          "system" :"https://www.nicehms.com/labId",
+          "value" : options.labId
 
+        })
+      }
+
+
+      body.identifier=identifiers
       return body;
     } catch (error) {
       console.log(error);
@@ -233,6 +255,16 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
         ref: options.encounter.reference,
         resourceType: "Encounter",
       });
+    }
+
+    if (options.identifier) {
+      const labId: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://www.nicehms.com/labId"
+      );
+
+      if (labId.length > 0) {
+        ret.labId= labId[0].value;
+      }
     }
     return ret;
   }
