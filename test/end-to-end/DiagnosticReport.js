@@ -48,7 +48,8 @@ const setDiagnosticReport = async ()=>{
             "resultsInterpreter" : [{"resource" : "Practitioner", "id" : resources.practioner.id, "display" : resources.practioner.name}],
             "status" : "final",
             "subject" : {"resource" : "Patient", "id" : resources.patient.id, "display" : resources.patient.name},
-            "mediaId" : [resources.media.id]
+            "mediaId" : [resources.media.id],
+            "labId" : "CAG-1234"
         })
     
         // console.log(body)
