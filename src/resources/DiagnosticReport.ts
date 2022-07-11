@@ -77,6 +77,9 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
     try {
       const getText = (): string => {
         let ret: string = "";
+        if(options.labId){
+          ret=`${ret}<p>Lab Id: ${options.labId}</p>`
+        }
         if (options.observations) {
           options.observations.forEach((el) => {
             const res = el.text;
