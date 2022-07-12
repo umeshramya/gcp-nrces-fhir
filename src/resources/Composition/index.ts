@@ -69,6 +69,7 @@ export interface compositionAuthor {
 export interface COMPOSITOIN {
   id?: string;
   identifier?: string;
+  userId?: string;
   patient: PATIENT;
   patientId: string;
   encounter: ENCOUNTER;
@@ -170,25 +171,22 @@ export class Composition extends ResourceMain implements ResourceMaster {
   };
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
-      let ret = `<div>Patient:- ${options.patient.name}.</div>`
-        ret += `<div>MRN:- ${options.patient.MRN} </div>`
-        ret +=  `${
-                  options.patient.phrAddress
-                    ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
-                        options.patient.healthNumber
-                          ? `ABHA Number ${options.patient.healthNumber}`
-                          : ""
-                      }</div>`
-                    : ""
-                }`
-       ret +=  `<div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
+      let ret = `<div>Patient:- ${options.patient.name}.</div>`;
+      ret += `<div>MRN:- ${options.patient.MRN} </div>`;
+      ret += `${
+        options.patient.phrAddress
+          ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
+              options.patient.healthNumber
+                ? `ABHA Number ${options.patient.healthNumber}`
+                : ""
+            }</div>`
+          : ""
+      }`;
+      ret += `<div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
         new Date(options.patient.dob)
       )} ph: ${options.patient.mobile}</div>`;
 
-
-      return ret.trim()
-
-
+      return ret.trim();
     };
     /**
      * This is for doctors who authored the document or who interpreted the results
@@ -251,6 +249,14 @@ export class Composition extends ResourceMain implements ResourceMaster {
       return html.trim();
     };
 
+    const extensions: any[] = [];
+    if (options.userId) {
+      extensions.push({
+        url: "https://www.nicehms.com/userId",
+        valueString: options.userId,
+      });
+    }
+
     this.mapCompositionType(options.type);
     const body = {
       resourceType: "Composition",
@@ -263,50 +269,9 @@ export class Composition extends ResourceMain implements ResourceMaster {
       language: "en-IN",
       text: {
         status: "generated",
-        div : getHtmlText(),
-      //   div: `<div xmlns="http://www.w3.org/1999/xhtml">
-      //   <div style="text-align: right">
-      //     Date:-${new Date(options.date).toDateString()}
-      //   </div>
-      //   <div style="text-align: right; font-size: 9px">
-      //     Docurment Status :${options.status}
-      //   </div>
-      //   <div style="text-align: right; font-size: 9px">
-      //     Docurment Type :${options.type}
-      //   </div>
-      //   <table data-pdfmake="{'widths':['60%','40%']}">
-      //     <tr>
-      //       <td>${getpatientdetails()}</td>
-      //       <td>${getDoctors()}
-
-      //           ${
-      //             this.performer.length > 0
-      //               ? `<div>Performed By :${this.performer.reduce(
-      //                   (pr, cu) => (pr += `${cu}<\br>`)
-      //                 )}</div>`
-      //               : ""
-      //           }
-      //       </td>
-      //     </tr>
-
-      //     ${
-      //       this.requeter || options.patient.internalId
-      //         ? `<tr>
-      //       <td>${this.requeter ? `Requested By : ${this.requeter}` : ""}</td>
-      //       <td>${
-      //         options.patient.internalId
-      //           ? `Internal Id : ${options.patient.internalId}`
-      //           : ""
-      //       }</td>
-      //       </tr>`
-      //         : ""
-      //     }
-
-      //   </table>
-      //   <hr />
-      //   <div>${options.documentDatahtml}</div
-      // </div>`,
+        div: getHtmlText(),
       },
+      extension: extensions,
       identifier: {
         system: "https://ndhm.in/phr",
         value: options.identifier || uuidv4(),
@@ -390,6 +355,15 @@ export class Composition extends ResourceMain implements ResourceMaster {
     }
     if (ret.organization == undefined) {
       delete ret.organization;
+    }
+    if (options.extension) {
+      const userId = options.extension.filter((el: any) => {
+        if ((el.url = "https://www.nicehms.com/userId")) {
+          return el;
+        }
+      });
+
+      ret.userId = userId[0].valueString;
     }
 
     return ret;

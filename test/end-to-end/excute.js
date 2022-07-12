@@ -168,7 +168,8 @@ class excute {
                 "patientId": resources.patient.id,
                 "section": [],
                 "status": "final",
-                "type": "DiagnosticReport"
+                "type": "DiagnosticReport",
+                "userId" : "123"
             },
             "textInTable" : true,
             "diagnosticReport": diag,
