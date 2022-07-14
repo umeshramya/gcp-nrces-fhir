@@ -90,7 +90,7 @@ export class DiagnosticReportComp extends Composition implements Records {
     this.setPerformerAndRequester(options);
     options.composition.section = [];
     options.composition.section.push({
-      title: "Computed tomography imaging report",
+      title: options.diagnosticReport.code.text,
       code: options.diagnosticReport.code,
       entry: [
         {
