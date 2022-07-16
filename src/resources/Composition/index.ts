@@ -418,6 +418,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
     qrCode: string;
     paperSize: string;
     headerbase64Image?: string;
+    paragraphSpace ?: number;
+    
     /**
      * This is letter pad header preprinted
      */
@@ -429,6 +431,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   }): Promise<string | Buffer> => {
     const pdf = new CreatePdf();
     const retPdf = await pdf.create(options.html, {
+      paragraphSpace:options.paragraphSpace || 6,
       base64: options.base64,
       header: options.header,
       footer: options.footer,
