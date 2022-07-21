@@ -94,6 +94,8 @@ export interface REFERENCE_RANGE {
   age?: RANGE;
   text?: string;
 }
+
+
 export interface OBSERVATION {
   id?: string;
   basedOn?: BasedOn[];
@@ -109,10 +111,22 @@ export interface OBSERVATION {
   hasMember?: HasMember[];
   specimenId?: string;
   text: string;
+  orgPanel ?:any
 }
+
+
 
 export class Observation extends ResourceMain implements ResourceMaster {
   getFHIR(options: OBSERVATION) {
+
+  const extensions: any[] = [];
+  if (options.orgPanel) {
+    extensions.push({
+      url: "https://www.nicehms.com/orgPanel",
+      valueString: JSON.stringify(options.orgPanel),
+    });
+}
+    
     const getText = (): string => {
       let ret: string = "";
       if (options.hasMember) {
@@ -141,6 +155,7 @@ export class Observation extends ResourceMain implements ResourceMaster {
       },
 
       status: options.status,
+      extension : extensions,
       code: options.code,
       subject: {
         reference: `Patient/${options.patientId}`,
@@ -265,6 +280,16 @@ export class Observation extends ResourceMain implements ResourceMaster {
 
     if(options.dataAbsentReason){
       ret.dataAbsentReason = options.dataAbsentReason
+    }
+
+    if (options.extension) {
+      const orgPanel = options.extension.filter((el: any) => {
+        if ((el.url = "https://www.nicehms.com/orgPanel")) {
+          return el;
+        }
+      });
+
+      ret.orgPanel = JSON.parse(orgPanel[0].valueString);
     }
 
     return ret;

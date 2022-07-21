@@ -17,7 +17,8 @@ const setObservation = async () => {
       "value": { "valueBoolean": true },
       "code" :{"text" :"Echocardiography"},
       "patientId" : resources.patient.id,
-      "text" : "Testing"
+      "text" : "Testing",
+      "orgPanel" : {"parentName" : "Echocardiography", "chileName" : "Echocardiography"}
       
    })
 

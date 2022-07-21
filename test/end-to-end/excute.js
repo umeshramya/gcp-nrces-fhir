@@ -280,8 +280,8 @@ class excute {
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
-// new excute().observation()
-new excute().diagnosticReportComposition()
+new excute().observation()
+// new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()
 
