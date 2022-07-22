@@ -169,7 +169,7 @@ class excute {
                 "section": [],
                 "status": "final",
                 "type": "DiagnosticReport",
-                "user" : {"id" : 123, name : "ramesh", username:"jamesbond", date : new Date().toISOString()}
+                "user" : [{"date" : new Date().toDateString, "id" : 1, "name" : "Prakasj", "orgId" : 1, "orgName" : "JJH"}, {"date" : new Date().toDateString, "id" : 1, "name" : "Prakasj", "orgId" : 1, "orgName" : "JJH"}]
             },
             "textInTable" : true,
             "diagnosticReport": diag,

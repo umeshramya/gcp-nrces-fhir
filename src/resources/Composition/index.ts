@@ -72,7 +72,7 @@ export interface COMPOSITOIN {
   /**
    * user Object
    */
-  user?: any;
+  user?: USER_COMPOSITION_EXTENSION[];
   patient: PATIENT;
   patientId: string;
   encounter: ENCOUNTER;
@@ -85,6 +85,14 @@ export interface COMPOSITOIN {
   type: compositionType;
   documentDatahtml?: string;
   section: any[];
+}
+
+export interface USER_COMPOSITION_EXTENSION {
+  date: string,
+  id: number,
+  orgId: number,
+  name: string,
+  orgName: string,
 }
 export class Composition extends ResourceMain implements ResourceMaster {
   private compType!: {
@@ -254,11 +262,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
     };
 
     const extensions: any[] = [];
-    if (options.user) {
-      extensions.push({
-        url: "https://www.nicehms.com/user",
-        valueString: JSON.stringify(options.user),
-      });
+    if (options.user && options.user.length > 0) {
+        options.user.forEach(el=>{
+          extensions.push({
+            url: "https://www.nicehms.com/user",
+            valueString: JSON.stringify(el),
+          });
+        })
     }
 
     this.mapCompositionType(options.type);
@@ -361,13 +371,16 @@ export class Composition extends ResourceMain implements ResourceMaster {
       delete ret.organization;
     }
     if (options.extension) {
-      const user = options.extension.filter((el: any) => {
+      const user:any[] = options.extension.filter((el: any) => {
         if ((el.url = "https://www.nicehms.com/user")) {
           return el;
         }
-      });
+      }).map((pl:any)=>{
+        return JSON.parse(pl.valueString)
+      })
 
-      ret.user = JSON.parse( user[0].valueString)
+      ret.user=user
+ 
     }
 
     return ret;
