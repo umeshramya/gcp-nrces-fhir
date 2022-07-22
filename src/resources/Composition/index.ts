@@ -69,7 +69,10 @@ export interface compositionAuthor {
 export interface COMPOSITOIN {
   id?: string;
   identifier?: string;
-  userId?: string;
+  /**
+   * user Object
+   */
+  user?: any;
   patient: PATIENT;
   patientId: string;
   encounter: ENCOUNTER;
@@ -251,10 +254,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
     };
 
     const extensions: any[] = [];
-    if (options.userId) {
+    if (options.user) {
       extensions.push({
-        url: "https://www.nicehms.com/userId",
-        valueString: options.userId,
+        url: "https://www.nicehms.com/user",
+        valueString: JSON.stringify(options.user),
       });
     }
 
@@ -358,13 +361,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
       delete ret.organization;
     }
     if (options.extension) {
-      const userId = options.extension.filter((el: any) => {
-        if ((el.url = "https://www.nicehms.com/userId")) {
+      const user = options.extension.filter((el: any) => {
+        if ((el.url = "https://www.nicehms.com/user")) {
           return el;
         }
       });
 
-      ret.userId = userId[0].valueString;
+      ret.user = JSON.parse( user[0].valueString)
     }
 
     return ret;

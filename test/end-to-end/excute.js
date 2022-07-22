@@ -169,7 +169,7 @@ class excute {
                 "section": [],
                 "status": "final",
                 "type": "DiagnosticReport",
-                "userId" : "123"
+                "user" : {"id" : 123, name : "ramesh", username:"jamesbond", date : new Date().toISOString()}
             },
             "textInTable" : true,
             "diagnosticReport": diag,
@@ -280,8 +280,8 @@ class excute {
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
-new excute().observation()
-// new excute().diagnosticReportComposition()
+// new excute().observation()
+new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()
 
