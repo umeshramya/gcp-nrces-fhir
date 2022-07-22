@@ -432,6 +432,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     nameLine1: string;
     nameLine2?: string;
     qrCode: string;
+    qrCodeWidth ?: number;
     paperSize: string;
     headerbase64Image?: string;
     paragraphSpace ?: number;
@@ -462,6 +463,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
         nameLine2: options.nameLine2 || "",
       },
       qrcode: options.qrCode,
+      qrCodeWidth: options.qrCodeWidth, 
       paperSize: options.paperSize,
       headerbase64Image: options.headerbase64Image,
     });
