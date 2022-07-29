@@ -7,6 +7,16 @@ import { CreatePdf } from "js-ts-report";
 import { DocumentReference } from "../DocumentReference";
 
 export class BundelMain extends ResourceMain {
+
+  protected  gcpCredetials:any
+  protected  gcpPath:any
+
+  constructor(gcpCredetials:any,gcpPath:any ){
+    super()
+    this.gcpCredetials = gcpCredetials
+    this.gcpPath= gcpPath;
+  }
+
   async getentries(
     composition: any,
     pdfData: string
@@ -14,7 +24,7 @@ export class BundelMain extends ResourceMain {
     const compositionObj = new ResourceFactory(
       "Composition"
     ).convertFhirToObject<COMPOSITOIN>(composition);
-    const gcpGcpFhir = new GcpFhirCrud();
+    const gcpGcpFhir = new GcpFhirCrud(this.gcpCredetials, this.gcpPath);
 
     const authors: any = await Promise.all(
       compositionObj.author.map(async (el) => {

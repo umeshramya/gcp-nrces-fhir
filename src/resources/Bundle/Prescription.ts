@@ -18,7 +18,7 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
       };
     }
 
-    const bundlemain = await new BundelMain().getentries(
+    const bundlemain = await new BundelMain(this.gcpCredetials, this.gcpPath).getentries(
       options.composition,
       options.pdfData
     );
@@ -109,3 +109,5 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
   }
   statusArray?: Function | undefined;
 }
+
+

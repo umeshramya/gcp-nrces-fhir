@@ -19,7 +19,7 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
       };
     }
     
-    const bundlemain = await new BundelMain().getentries(
+    const bundlemain = await new BundelMain(this.gcpCredetials, this.gcpPath).getentries(
       options.composition,
       options.pdfData
     );

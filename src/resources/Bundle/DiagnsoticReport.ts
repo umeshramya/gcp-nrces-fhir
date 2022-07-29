@@ -22,7 +22,7 @@ export class DiagnsoticReportBundle
       };
     }
 
-    const bundlemain = await new BundelMain().getentries(
+    const bundlemain = await new BundelMain(this.gcpCredetials,this.gcpPath).getentries(
       options.composition,
       options.pdfData
     );
