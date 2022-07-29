@@ -40,7 +40,7 @@ export class DiagnsoticReportBundle
       resourceType: "DiagnosticReport",
     });
 
-    const gcpCrud = new GcpFhirCrud();
+    const gcpCrud = new GcpFhirCrud(this.gcpCredetials, this.gcpPath);
     const diagnsoticReport = await gcpCrud
       .getFhirResource(diagnosticReportId, "DiagnosticReport")
       .then((res) => res.data);
@@ -107,7 +107,7 @@ export class DiagnsoticReportBundle
       return;
     }
     const media = (
-      await new GcpFhirCrud().getFhirResource(mediaids[index], "Media")
+      await new GcpFhirCrud(this.gcpCredetials, this.gcpPath).getFhirResource(mediaids[index], "Media")
     ).data;
     entry.push({
       fullUrl: `Media/${mediaids[index]}`,
@@ -126,7 +126,7 @@ export class DiagnsoticReportBundle
       return;
     }
     const specimen = (
-      await new GcpFhirCrud().getFhirResource(specimenids[index], "Specimen")
+      await new GcpFhirCrud(this.gcpCredetials, this.gcpPath).getFhirResource(specimenids[index], "Specimen")
     ).data;
     entry.push({
       fullUrl: `Specimen/${specimenids[index]}`,
@@ -145,7 +145,7 @@ export class DiagnsoticReportBundle
       return;
     }
     const observation = (
-      await new GcpFhirCrud().getFhirResource(observationids[index], "Observation")
+      await new GcpFhirCrud(this.gcpCredetials, this.gcpPath).getFhirResource(observationids[index], "Observation")
     ).data;
     entry.push({
       fullUrl: `Observation/${observationids[index]}`,
@@ -163,7 +163,7 @@ export class DiagnsoticReportBundle
     if (index >= basedOnRefs.length) {
       return;
     }
-    const basedOn = await new GcpFhirCrud().getFhirResource(
+    const basedOn = await new GcpFhirCrud(this.gcpCredetials, this.gcpPath).getFhirResource(
       basedOnRefs[index].id,
       basedOnRefs[index].resource
     );

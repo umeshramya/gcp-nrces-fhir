@@ -37,7 +37,7 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
       resourceType: "MedicationRequest",
     });
 
-    const gcpFhirCrud = new GcpFhirCrud()
+    const gcpFhirCrud = new GcpFhirCrud(this.gcpCredetials, this.gcpPath)
     const medicationRequest = await gcpFhirCrud
       .getFhirResource(medicationRequestId, "MedicationRequest")
       .then((res) => res.data);

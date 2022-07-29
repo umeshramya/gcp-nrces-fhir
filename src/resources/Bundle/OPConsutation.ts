@@ -80,7 +80,7 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
     }
 
     const curSectionEntryObj = this.getFromMultResource({"reference" : sectionEntries[index].reference})
-    const curSectionEntry = await new GcpFhirCrud().getFhirResource(curSectionEntryObj.id, curSectionEntryObj.resource);
+    const curSectionEntry = await new GcpFhirCrud(this.gcpCredetials, this.gcpPath).getFhirResource(curSectionEntryObj.id, curSectionEntryObj.resource);
 
  
     this.entry.push({
