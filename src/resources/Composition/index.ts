@@ -14,7 +14,7 @@ import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
 export const compositionTypeArrey = [
   {
     type: "OPConsultation",
-    system: "http://snomed.info/sct",
+    system: "https://projecteka.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord",
     code: "371530004",
     text: "Clinical consultation report",
@@ -22,7 +22,7 @@ export const compositionTypeArrey = [
 
   {
     type: "DischargeSummary",
-    system: "http://snomed.info/sct",
+    system: "https://projecteka.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord",
     code: "373942005",
     text: "Discharge summary",
@@ -30,21 +30,21 @@ export const compositionTypeArrey = [
 
   {
     type: "ImmunizationRecord",
-    system: "http://snomed.info/sct",
+    system: "https://projecteka.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ImmunizationRecord",
     code: "41000179103",
     text: "Immunization record",
   },
   {
     type: "Prescription",
-    system: "http://snomed.info/sct",
+    system: "https://projecteka.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/PrescriptionRecord",
     code: "440545006",
     text: "Prescription record",
   },
   {
     type: "DiagnosticReport",
-    system: "http://snomed.info/sct",
+    system: "https://projecteka.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportRecord",
     code: "721981007",
     text: "Diagnostic studies report",
@@ -97,7 +97,7 @@ export interface USER_COMPOSITION_EXTENSION {
 export class Composition extends ResourceMain implements ResourceMaster {
   private compType!: {
     type: string;
-    system: "http://snomed.info/sct";
+    system: "https://projecteka.in/sct";
     url: string;
     code: string;
     text: string;
@@ -184,15 +184,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
     const getpatientdetails = () => {
       let ret = `<div>Patient:- ${options.patient.name}.</div>`;
       ret += `<div>MRN:- ${options.patient.MRN} </div>`;
-      ret += `${
-        options.patient.phrAddress
-          ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
-              options.patient.healthNumber
-                ? `ABHA Number ${options.patient.healthNumber}`
-                : ""
-            }</div>`
+      ret += `${options.patient.phrAddress
+          ? `<div>ABHA Address : ${options.patient.phrAddress}. ${options.patient.healthNumber
+            ? `ABHA Number ${options.patient.healthNumber}`
+            : ""
+          }</div>`
           : ""
-      }`;
+        }`;
       ret += `<div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
         new Date(options.patient.dob)
       )} ph: ${options.patient.mobile}</div>`;
@@ -231,27 +229,23 @@ export class Composition extends ResourceMain implements ResourceMaster {
       html += `<td>${getpatientdetails()}</td>`;
       html += `<td>${getDoctors()}`;
 
-      html += `${
-        this.performer.length > 0
+      html += `${this.performer.length > 0
           ? `<div>Performed By :${this.performer.reduce(
-              (pr, cu) => (pr += `${cu}<\br>`)
-            )}</div>`
+            (pr, cu) => (pr += `${cu}<\br>`)
+          )}</div>`
           : ""
-      }`;
+        }`;
       html += `</td>`;
       html += `</tr>`;
 
-      html += `${
-        this.requeter || options.patient.internalId
-          ? `<tr><td>${
-              this.requeter ? `Requested By : ${this.requeter}` : ""
-            }</td><td>${
-              options.patient.internalId
-                ? `Internal Id : ${options.patient.internalId}`
-                : ""
-            }</td></tr>`
+      html += `${this.requeter || options.patient.internalId
+          ? `<tr><td>${this.requeter ? `Requested By : ${this.requeter}` : ""
+          }</td><td>${options.patient.internalId
+            ? `Internal Id : ${options.patient.internalId}`
+            : ""
+          }</td></tr>`
           : ""
-      }`;
+        }`;
 
       html += `</table>`;
       html += `<div>${options.documentDatahtml}</div`;
@@ -263,12 +257,12 @@ export class Composition extends ResourceMain implements ResourceMaster {
 
     const extensions: any[] = [];
     if (options.user && options.user.length > 0) {
-        options.user.forEach(el=>{
-          extensions.push({
-            url: "https://www.nicehms.com/user",
-            valueString: JSON.stringify(el),
-          });
-        })
+      options.user.forEach(el => {
+        extensions.push({
+          url: "https://www.nicehms.com/user",
+          valueString: JSON.stringify(el),
+        });
+      })
     }
 
     this.mapCompositionType(options.type);
@@ -294,7 +288,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       type: {
         coding: [
           {
-            system: "http://snomed.info/sct",
+            system: "https://projecteka.in/sct",
             code: this.compType.code,
             display: this.compType.text,
           },
@@ -321,7 +315,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
           code: {
             coding: [
               {
-                system: "http://snomed.info/sct",
+                system: "https://projecteka.in/sct",
                 code: this.compType.code,
                 display: options.type,
               },
@@ -371,16 +365,16 @@ export class Composition extends ResourceMain implements ResourceMaster {
       delete ret.organization;
     }
     if (options.extension) {
-      const user:any[] = options.extension.filter((el: any) => {
+      const user: any[] = options.extension.filter((el: any) => {
         if ((el.url = "https://www.nicehms.com/user")) {
           return el;
         }
-      }).map((pl:any)=>{
+      }).map((pl: any) => {
         return JSON.parse(pl.valueString)
       })
 
-      ret.user=user
- 
+      ret.user = user
+
     }
 
     return ret;
@@ -432,11 +426,11 @@ export class Composition extends ResourceMain implements ResourceMaster {
     nameLine1: string;
     nameLine2?: string;
     qrCode: string;
-    qrCodeWidth ?: number;
+    qrCodeWidth?: number;
     paperSize: string;
     headerbase64Image?: string;
-    paragraphSpace ?: number;
-    
+    paragraphSpace?: number;
+
     /**
      * This is letter pad header preprinted
      */
@@ -448,7 +442,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   }): Promise<string | Buffer> => {
     const pdf = new CreatePdf();
     const retPdf = await pdf.create(options.html, {
-      paragraphSpace:options.paragraphSpace || 6,
+      paragraphSpace: options.paragraphSpace || 6,
       base64: options.base64,
       header: options.header,
       footer: options.footer,
@@ -463,7 +457,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
         nameLine2: options.nameLine2 || "",
       },
       qrcode: options.qrCode,
-      qrCodeWidth: options.qrCodeWidth, 
+      qrCodeWidth: options.qrCodeWidth,
       paperSize: options.paperSize,
       headerbase64Image: options.headerbase64Image,
     });
