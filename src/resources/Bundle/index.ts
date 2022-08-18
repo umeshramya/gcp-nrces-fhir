@@ -46,6 +46,7 @@ export class BundelMain extends ResourceMain {
     delete copyComposoition.extension
     delete copyComposoition.language
     delete copyComposoition.meta
+    delete copyComposoition.text
 
     const entry = [
       {
