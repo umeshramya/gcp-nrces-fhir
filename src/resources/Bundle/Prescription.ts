@@ -13,7 +13,7 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
   }) {
     if (options.identifier) {
       let ret: IDENTTIFIER = {
-        system: "http://www.nicehms.com",
+        system: "http://www.nicehms.com/bundle",
         value: options.identifier.value,
       };
     }
@@ -76,31 +76,25 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
       })
     }
 
+
+   const  filteredEntry = entry.filter(el =>el.resource.resourceType !== "DocumentReference")
+
  
 
     const body = {
-      resourceType: "Bundle",
-      id: options.id,
-      meta: {
-        versionId: "1",
-        lastUpdated: new Date().toISOString(),
-        profile: [
-          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DocumentBundle",
-        ],
-        security: [
-          {
-            system: "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
-            code: "V",
-            display: "very restricted",
-          },
-        ],
+      "resourceType": "Bundle",
+      "id": options.id,
+      "meta": {
+        "lastUpdated": new Date().toISOString()
       },
-      identifier: options.identifier,
-      type: "document",
-      timestamp: new Date().toISOString,
-      entry: entry,
-    };
-
+      "identifier": {
+        "system": "https://www.nicehms.com/bundle",
+        "value": options.id
+      },
+      "type": "document",
+      "timestamp": options.composition.date,
+      "entry": filteredEntry
+    }
     return body;
   }
 
@@ -109,5 +103,7 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
   }
   statusArray?: Function | undefined;
 }
+
+
 
 

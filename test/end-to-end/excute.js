@@ -281,7 +281,7 @@ class excute {
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()
-new excute().diagnosticReportComposition()
+// new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()
 
