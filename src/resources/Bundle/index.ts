@@ -42,11 +42,15 @@ export class BundelMain extends ResourceMain {
         };
       })
     ).then((res) => res);
+    const copyComposoition = Object.assign({}, composition)
+    delete copyComposoition.extension
+    delete copyComposoition.language
+    delete copyComposoition.meta
 
     const entry = [
       {
         fullUrl: `Composition/${compositionObj.id}`,
-        resource: composition,
+        resource: copyComposoition,
       },
       {
         fullUrl: `Patient/${compositionObj.patientId}`,
