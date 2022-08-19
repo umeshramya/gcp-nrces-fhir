@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { ResourceMaster } from "../Interfaces";
+import ResourceMain from './ResourceMai';
 
 
 export interface DOCUMENT_BUNDLE {
@@ -12,7 +13,7 @@ export interface DOCUMENT_BUNDLE {
   signedDate:string
 }
 
-export class DocumentBundle implements ResourceMaster {
+export class DocumentBundle extends ResourceMain implements ResourceMaster {
   getFHIR(options: DOCUMENT_BUNDLE): any {
     const body = {
       resourceType: "Bundle",

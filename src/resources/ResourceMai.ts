@@ -71,4 +71,17 @@ export default class ResourceMain {
     }
     return ret;
   };
+
+  /**
+   * this will return copy of resource modified
+   * @param resource 
+   */
+  public budlify(resource:any):any{
+    const copyComposoition = Object.assign({}, resource)
+    delete copyComposoition.extension
+    delete copyComposoition.language
+    delete copyComposoition.meta
+    delete copyComposoition.text
+    return copyComposoition
+    }
 }

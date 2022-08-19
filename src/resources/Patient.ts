@@ -1,5 +1,6 @@
 import { coding, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import ResourceMain from "./ResourceMai";
 
 export interface PATIENT {
   id?: string;
@@ -14,7 +15,7 @@ export interface PATIENT {
   organizationId: string;
 }
 
-export class Patient implements ResourceMaster {
+export class Patient extends ResourceMain implements ResourceMaster {
   getFHIR(options: PATIENT) {
     const identifiers: IDENTTIFIER[] = [];
     if (options.internalId) {

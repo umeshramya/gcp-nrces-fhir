@@ -1,5 +1,6 @@
 import { ResourceMaster } from "../Interfaces";
 import { CodeDisplay } from "../config/index";
+import ResourceMain from "./ResourceMai";
 
 export const allergyClinicalStatusArray = [
   "active",
@@ -28,7 +29,7 @@ export interface ALLERGY_INTOLERANCE {
   note: { text: string }[];
 }
 
-export class AllergyIntolerance implements ResourceMaster {
+export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
   getFHIR(options: ALLERGY_INTOLERANCE): any {
     const getAllergy = (): string => {
       let ret = "";

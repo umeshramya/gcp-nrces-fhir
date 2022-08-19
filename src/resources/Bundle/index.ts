@@ -1,10 +1,13 @@
 import ResourceFactory from "../../classess/ResourceFactory";
-import { COMPOSITOIN, emptySign } from "../Composition";
+import { Composition, COMPOSITOIN, emptySign } from "../Composition";
 import GcpFhirCrud from "../../classess/gcp";
 import ResourceMain from "../ResourceMai";
 import { Binary, BINARY } from "../Binary";
 import { CreatePdf } from "js-ts-report";
 import { DocumentReference } from "../DocumentReference";
+import { Patient } from "../Patient";
+import { Encounter } from "../Encounter";
+import { Organization } from "../Organization";
 
 export class BundelMain extends ResourceMain {
 
@@ -42,38 +45,33 @@ export class BundelMain extends ResourceMain {
         };
       })
     ).then((res) => res);
-    const copyComposoition = Object.assign({}, composition)
-    delete copyComposoition.extension
-    delete copyComposoition.language
-    delete copyComposoition.meta
-    delete copyComposoition.text
-
+  
     const entry = [
       {
         fullUrl: `Composition/${compositionObj.id}`,
-        resource: copyComposoition,
+        resource:  new Composition().budlify(composition),
       },
       {
         fullUrl: `Patient/${compositionObj.patientId}`,
-        resource: (await gcpGcpFhir.getFhirResource(
+        resource: new Patient().budlify((await gcpGcpFhir.getFhirResource(
           compositionObj.patientId,
           "Patient"
-        )).data,
+        )).data),
       },
       {
         fullUrl: `Encounter/${compositionObj.encounterId}`,
-        resource: (await gcpGcpFhir.getFhirResource(
+        resource: new Encounter().budlify((await gcpGcpFhir.getFhirResource(
           compositionObj.encounterId,
           "Encounter"
-        )).data,
+        )).data),
       },
 
       {
         fullUrl: `Organization/${compositionObj.organizationId}`,
-        resource: (await gcpGcpFhir.getFhirResource(
+        resource: new Organization().budlify((await gcpGcpFhir.getFhirResource(
           compositionObj.organizationId,
           "Organization"
-        )).data,
+        )).data),
       },
       {
         fullUrl : `DocumentReference/${compositionObj.id}`,

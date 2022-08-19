@@ -1,5 +1,6 @@
 import { IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import ResourceMain from "./ResourceMai";
 
 export interface ORGANIZATION {
   id?: string;
@@ -10,7 +11,7 @@ export interface ORGANIZATION {
   ndhmFacilityNumber?: string;
 }
 
-export class Organization implements ResourceMaster {
+export class Organization extends ResourceMain implements ResourceMaster {
   getFHIR(options: ORGANIZATION) {
     const identifiers: IDENTTIFIER[] = [];
 
