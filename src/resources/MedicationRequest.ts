@@ -186,16 +186,185 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     return ret;
   }
 
-  bundlify(resource:any){
-   let curResource = super.bundlify(resource);
-   delete curResource.reasonCode
-   delete curResource.reasonReference
-   const  dosageInstruction = curResource.dosageInstruction.map((el:any)=>{
-    delete el.additionalInstruction
-    return el
-   })
-   curResource.dosageInstruction= dosageInstruction
-   return curResource;
+  bundlify(resource: any) {
+    let curResource = super.bundlify(resource);
+    delete curResource.reasonCode;
+    delete curResource.reasonReference;
+    const ret = curResource.dosageInstruction.map(
+      (el: dosageInstruction, i: number) => {
+        const temmplate = {
+          fullUrl: `MedicationRequest/${curResource.id}-med${i}`,
+          resource: {
+            resourceType: "MedicationRequest",
+            id: `${curResource.id}-med${i}`,
+            status: curResource.status,
+            intent: curResource.intent,
+
+            subject: curResource.subject,
+            authoredOn: curResource.authoredOn,
+            requester: curResource.requester,
+            dosageInstruction: [
+              {
+                text: `${el.method.coding[0].display} ${el.route.coding[0].display} ${el.timing.code.text} ${el.text}`,
+              },
+            ],
+            medicationCodeableConcept: {
+              coding: [curResource.medicationCodeableConcept[i]],
+            },
+          },
+        };
+        return temmplate
+
+      }
+    );
+
+    return ret;
   }
 }
 
+interface dosageInstruction {
+  method: Method;
+  route: Route;
+  text: string;
+  timing: Timing;
+}
+
+interface Method {
+  coding: Coding[];
+}
+
+interface Coding {
+  display: string;
+  system: string;
+}
+
+interface Route {
+  coding: Coding2[];
+}
+
+interface Coding2 {
+  display: string;
+  system: string;
+}
+
+interface Timing {
+  code: Code;
+}
+
+interface Code {
+  text: string;
+}
+
+const demo = {
+  fullUrl: "MedicationRequest/68d9667c-00c3-455f-b75d-d580950498a0",
+  resource: {
+    resourceType: "MedicationRequest",
+    id: "68d9667c-00c3-455f-b75d-d580950498a0",
+    status: "active",
+    intent: "order",
+    medicationReference: {
+      reference: "Medication/54ab5657-5e79-4461-a823-20e522eb337d",
+    },
+    subject: {
+      reference: "Patient/RVH9999",
+    },
+    authoredOn: "2016-08-07T00:00:00+05:30",
+    requester: {
+      reference: "Practitioner/MAX5001",
+    },
+    dosageInstruction: [
+      {
+        text: "1 capsule 2 times a day",
+      },
+    ],
+    medicationCodeableConcept: {
+      coding: [
+        {
+          display: "Tab Ecosprin 150mg",
+          system: "http://snomed.info/sct",
+        },
+      ],
+    },
+  },
+};
+
+const actual = {
+  fullUrl: "MedicationRequest/4c2261fd-73fb-4a99-b178-f1ceaa8ebf91",
+  resource: {
+    authoredOn: "2022-08-14T16:32:24.570Z",
+    dosageInstruction: [
+      {
+        method: {
+          coding: [
+            {
+              display: "After food",
+              system: "http://snomed.info/sct",
+            },
+          ],
+        },
+        route: {
+          coding: [
+            {
+              display: "Oral route",
+              system: "http://snomed.info/sct",
+            },
+          ],
+        },
+        text: "For 5 days",
+        timing: {
+          code: {
+            text: "0-1-0",
+          },
+        },
+      },
+      {
+        method: {
+          coding: [
+            {
+              display: "Before Food",
+              system: "http://snomed.info/sct",
+            },
+          ],
+        },
+        route: {
+          coding: [
+            {
+              display: "Oral ",
+              system: "http://snomed.info/sct",
+            },
+          ],
+        },
+        text: "For 5 Days",
+        timing: {
+          code: {
+            text: "1-0-0",
+          },
+        },
+      },
+    ],
+    id: "4c2261fd-73fb-4a99-b178-f1ceaa8ebf91",
+    intent: "order",
+    medicationCodeableConcept: {
+      coding: [
+        {
+          display: "Tab Ecosprin 150mg",
+          system: "http://snomed.info/sct",
+        },
+        {
+          display: "Tab Pantop 40mg",
+          system: "http://snomed.info/sct",
+        },
+      ],
+    },
+    requester: {
+      display: "Dr U R  Bilagi MD DM ",
+      reference: "Practitioner/cf4a6ab1-3f32-4b92-adc5-89489da6ca14",
+    },
+    resourceType: "MedicationRequest",
+    status: "active",
+    subject: {
+      display: "Umesh Ramachandra Bilagi",
+      reference: "Patient/bfe2059d-1e1e-4e06-bf26-3b07dc2b8fa7",
+    },
+  },
+};

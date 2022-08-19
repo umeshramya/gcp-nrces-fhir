@@ -75,7 +75,7 @@ export class BundelMain extends ResourceMain {
       },
       {
         fullUrl : `DocumentReference/${compositionObj.id}`,
-        resource : new DocumentReference().getFHIR({
+        resource : new DocumentReference().bundlify(new DocumentReference().getFHIR({
           "id": compositionObj.id,
           "patientId": compositionObj.patientId,
           "pdf": pdfData,
@@ -83,7 +83,7 @@ export class BundelMain extends ResourceMain {
           "title": "",
           "type" : composition.type,
           status: "current"
-      })
+      }))
     }
       
     ];
