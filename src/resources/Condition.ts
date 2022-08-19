@@ -51,4 +51,9 @@ export class Condition extends  ResourceMain implements ResourceMaster {
     return ret
   }
 
+  bundlify (resource:any):any{
+    const copy=super.bundlify(resource)
+    return copy
+  }
+
 }

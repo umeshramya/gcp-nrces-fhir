@@ -49,18 +49,18 @@ export class BundelMain extends ResourceMain {
     const entry = [
       {
         fullUrl: `Composition/${compositionObj.id}`,
-        resource:  new Composition().budlify(composition),
+        resource:  new Composition().bundlify(composition),
       },
       {
         fullUrl: `Patient/${compositionObj.patientId}`,
-        resource: new Patient().budlify((await gcpGcpFhir.getFhirResource(
+        resource: new Patient().bundlify((await gcpGcpFhir.getFhirResource(
           compositionObj.patientId,
           "Patient"
         )).data),
       },
       {
         fullUrl: `Encounter/${compositionObj.encounterId}`,
-        resource: new Encounter().budlify((await gcpGcpFhir.getFhirResource(
+        resource: new Encounter().bundlify((await gcpGcpFhir.getFhirResource(
           compositionObj.encounterId,
           "Encounter"
         )).data),
@@ -68,7 +68,7 @@ export class BundelMain extends ResourceMain {
 
       {
         fullUrl: `Organization/${compositionObj.organizationId}`,
-        resource: new Organization().budlify((await gcpGcpFhir.getFhirResource(
+        resource: new Organization().bundlify((await gcpGcpFhir.getFhirResource(
           compositionObj.organizationId,
           "Organization"
         )).data),

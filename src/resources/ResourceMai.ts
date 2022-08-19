@@ -1,5 +1,5 @@
 import { resourceType } from "..";
-import { MULTI_RESOURCE } from "../config";
+import { CodeDisplay, MULTI_RESOURCE } from "../config";
 
 export default class ResourceMain {
   /**
@@ -74,14 +74,27 @@ export default class ResourceMain {
 
   /**
    * this will return copy of resource modified
-   * @param resource 
+   * @param resource
    */
-  public budlify(resource:any):any{
-    const copyComposoition = Object.assign({}, resource)
-    delete copyComposoition.extension
-    delete copyComposoition.language
-    delete copyComposoition.meta
-    delete copyComposoition.text
-    return copyComposoition
+  public bundlify(resource: any): any {
+    const copyComposoition = Object.assign({}, resource);
+    delete copyComposoition.extension;
+    delete copyComposoition.language;
+    delete copyComposoition.meta;
+    delete copyComposoition.text;
+
+    let codedisplay: CodeDisplay[] = copyComposoition.code as any
+
+    if(codedisplay && codedisplay.length >0){
+      codedisplay = codedisplay.map((el) => {
+        if (el.system == "" && el.system == null) {
+          el.system = "https://www.nicehms.com/system";
+        }
+        return el;
+      });
     }
+
+    copyComposoition.code=codedisplay;
+    return copyComposoition;
+  }
 }

@@ -3,6 +3,8 @@ import ResourceMain from "../ResourceMai";
 import { IDENTTIFIER, resourceType } from "../../config";
 import GcpFhirCrud from "../../classess/gcp";
 import { BundelMain } from ".";
+import { MedicationRequest } from "../MedicationRequest";
+import { Condition } from "../Condition";
 
 export class PrescriptionBundle extends BundelMain implements ResourceMaster {
   async getFHIR(options: {
@@ -38,9 +40,9 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
     });
 
     const gcpFhirCrud = new GcpFhirCrud(this.gcpCredetials, this.gcpPath)
-    const medicationRequest = await gcpFhirCrud
+    const medicationRequest = new MedicationRequest().bundlify(await gcpFhirCrud
       .getFhirResource(medicationRequestId, "MedicationRequest")
-      .then((res) => res.data);
+      .then((res) => res.data));
 
     entry.push({
       fullUrl: `MedicationRequest/${medicationRequestId}`,
@@ -57,7 +59,7 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
       const condition = await gcpFhirCrud.getFhirResource(conditionId, "Condition").then(res=>res.data)
       entry.push({
         fullUrl: `Condition/${conditionId}`,
-        resource: condition,
+        resource: new Condition().bundlify(condition),
       })
     }
 
