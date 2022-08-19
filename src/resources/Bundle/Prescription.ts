@@ -56,6 +56,8 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
         "ref" : conditionArray[0].reference,
         resourceType : "Condition"
       })
+
+      
       const condition = await gcpFhirCrud.getFhirResource(conditionId, "Condition").then(res=>res.data)
       entry.push({
         fullUrl: `Condition/${conditionId}`,

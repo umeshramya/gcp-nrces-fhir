@@ -88,14 +88,14 @@ export default class ResourceMain {
     if(codedisplay){
       if( codedisplay.length >0){
         codedisplay = codedisplay.map((el:CodeDisplay) => {
-          if (el.system == "" && el.system == null) {
+          if (el.system == "" || el.system == null) {
             el.system = "https://www.nicehms.com/system";
           }
           return el;
         });
       }else if(codedisplay.coding && codedisplay.coding.length > 0){
         codedisplay.coding = codedisplay.coding.map((el:CodeDisplay)=>{
-          if (el.system == "" && el.system == null) {
+          if (el.system == "" || el.system == null) {
             el.system = "https://www.nicehms.com/system";
           }
           return el;
