@@ -1,5 +1,5 @@
 import { resourceType } from "..";
-import { CodeDisplay, MULTI_RESOURCE } from "../config";
+import { CODEABLE_CONCEPT, CodeDisplay, MULTI_RESOURCE } from "../config";
 
 export default class ResourceMain {
   /**
@@ -83,16 +83,28 @@ export default class ResourceMain {
     delete copyComposoition.meta;
     delete copyComposoition.text;
 
-    let codedisplay: CodeDisplay[] = copyComposoition.code as any
+    let codedisplay  = copyComposoition.code as any
 
-    if(codedisplay && codedisplay.length >0){
-      codedisplay = codedisplay.map((el) => {
-        if (el.system == "" && el.system == null) {
-          el.system = "https://www.nicehms.com/system";
-        }
-        return el;
-      });
+    if(codedisplay){
+      if( codedisplay.length >0){
+        codedisplay = codedisplay.map((el:CodeDisplay) => {
+          if (el.system == "" && el.system == null) {
+            el.system = "https://www.nicehms.com/system";
+          }
+          return el;
+        });
+      }else if(codedisplay.coding && codedisplay.coding.length > 0){
+        codedisplay.coding = codedisplay.coding.map((el:CodeDisplay)=>{
+          if (el.system == "" && el.system == null) {
+            el.system = "https://www.nicehms.com/system";
+          }
+          return el;
+        })
+      }
+
     }
+
+    
 
     copyComposoition.code=codedisplay;
     return copyComposoition;
