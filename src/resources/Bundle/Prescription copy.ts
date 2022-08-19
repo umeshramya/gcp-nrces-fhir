@@ -3,6 +3,7 @@ import ResourceMain from "../ResourceMai";
 import { IDENTTIFIER, resourceType } from "../../config";
 import GcpFhirCrud from "../../classess/gcp";
 import { BundelMain } from ".";
+import { Binary } from "../Binary";
 
 export class PrescriptionBundle extends BundelMain implements ResourceMaster {
   async getFHIR(options: {
@@ -72,7 +73,7 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
       const binary = await gcpFhirCrud.getFhirResource(binaryId, "Binary").then(res=>res.data);
       entry.push({
         fullUrl: `Binary/${binaryId}`,
-        resource: binary,
+        resource: new Binary().bundlify(binary),
       })
     }
 
