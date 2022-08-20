@@ -87,6 +87,9 @@ export default class ResourceFactory
   convertFhirToObject<T>(options: any): T {
     return this.resource.convertFhirToObject(options);
   }
+  bundlefy(resource:any):any{
+    return this.resource.bundlify(resource)
+  }
 
   /**
    * This  methois create or updates the respources depending id property

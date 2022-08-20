@@ -11,6 +11,8 @@ const {
   PractitionerRole,
   DiagnosticReport,
   PrescriptionBundle,
+  OPConsultationBundle,
+  DiagnsoticReportBundle,
   ServiceRequest,
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
@@ -341,6 +343,66 @@ class excute {
     })
     return bundle;
   };
+
+  createOPConsultationBundle = async (
+  ) => {
+    const compositionResource = await new GcpFhirCRUD()
+    .getFhirResource("f5d60c07-8592-4b56-8a31-eade429d6eca", "Composition")
+    .then((res) => res.data);
+    const html = `${compositionResource.text.div}`.trim();
+
+    const pdf = await new OPConsultationBundle(
+      credentials,
+      databasePath
+    ).getpdf({
+      html: html,
+      qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=OPConsultation`,
+    });
+    const bundle = await new OPConsultationBundle(
+      credentials,
+      databasePath
+    ).getFHIR({
+      composition: compositionResource,
+      id: compositionResource.id,
+      pdfData: pdf,
+    });
+    await axios({
+      "methos" : "POST",
+      url : "https://webhook.site/1244fe5a-5541-49b3-a8da-32ac4d4f4b97/pres",
+      data : bundle
+  })
+  return bundle;
+  };
+
+  createDiagnosticReportBundle = async (
+
+  )=> {
+    const compositionResource = await new GcpFhirCRUD()
+    .getFhirResource("", "Composition")
+    .then((res) => res.data);
+    const html = `${compositionResource.text.div}`.trim();
+    const pdf = await new DiagnsoticReportBundle(
+      credentials,
+      databasePath
+    ).getpdf({
+      html: html,
+      qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=DiagnosticReport`,
+    });
+    const bundle = await new DiagnsoticReportBundle(
+      credentials,
+      databasePath
+    ).getFHIR({
+      composition: compositionResource,
+      pdfData: pdf,
+      id: compositionResource.id,
+    });
+    await axios({
+      "methos" : "POST",
+      url : "https://webhook.site/1244fe5a-5541-49b3-a8da-32ac4d4f4b97/pres",
+      data : bundle
+  })
+  return bundle;
+  };
 }
 
 // new excute().callFunction()
@@ -358,4 +420,5 @@ class excute {
 
 // new excute().updateServiceRequest()
 
-new excute().createPrescriptionBundle()
+// new excute().createPrescriptionBundle()
+new excute().createOPConsultationBundle();
