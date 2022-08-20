@@ -100,7 +100,7 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
       },
       "type": "document",
       "timestamp": options.composition.date,
-      "entry": entry
+      "entry": filteredEntry
     }
     return body;
   }
