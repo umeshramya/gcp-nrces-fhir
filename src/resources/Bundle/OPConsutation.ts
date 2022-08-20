@@ -20,6 +20,7 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
         value: options.identifier.value,
       };
     }
+    options.composition.title = "OP Consultation Document";
 
     const bundlemain = await new BundelMain(
       this.gcpCredetials,
@@ -27,9 +28,8 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
     ).getentries(options.composition, options.pdfData);
 
     this.entry = bundlemain.entry;
-    
-    const sectionEntries = options.composition.section;
 
+    const sectionEntries = options.composition.section;
 
     await this.getAllSectionAndAllEntries(0, sectionEntries);
     const body = {
@@ -46,6 +46,16 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
       timestamp: options.composition.date,
       entry: this.entry,
     };
+    const medicationRef = body.entry
+      .filter((el) => el.resource.resourceType == "MedicationRequest")
+      .map((el) => {
+        return {
+          reference: `MedicationRequest/${el.resource.id}`,
+        };
+      });
+    body.entry[0].resource.section.find(
+      (m: any) => m.code.coding[0].display == "Medication summary document"
+    ).entry = medicationRef;
 
     return body;
   }
@@ -83,18 +93,14 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
       this.gcpCredetials,
       this.gcpPath
     ).getFhirResource(curSectionEntryObj.id, curSectionEntryObj.resource);
-    if(curSectionEntryObj.resource== "MedicationRequest"){
-      const medicationRequest = new MedicationRequest().bundlify(curSectionEntry.data)
-      medicationRequest.forEach((el:any, i:number)=>{
-        this.entry.push(el)
-         if(i!=0){
-           this.entry[0].resource.section[0].entry.push( {
-             "reference": el.fullUrl
-           })
-         }
-       })
-
-    }else{
+    if (curSectionEntryObj.resource == "MedicationRequest") {
+      const medicationRequest = new MedicationRequest().bundlify(
+        curSectionEntry.data
+      );
+      medicationRequest.forEach((el: any, i: number) => {
+        this.entry.push(el);
+      });
+    } else {
       this.entry.push({
         fullUrl: `${curSectionEntryObj.resource}/${curSectionEntryObj.id}`,
         resource: new ResourceFactory(curSectionEntryObj.resource).bundlefy(
@@ -102,7 +108,6 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
         ),
       });
     }
-
 
     curSectionEntry.data;
     index = index + 1;
@@ -716,3 +721,4 @@ const demo = {
     },
   ],
 };
+
