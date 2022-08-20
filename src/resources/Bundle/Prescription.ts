@@ -43,14 +43,14 @@ export class PrescriptionBundle extends BundelMain implements ResourceMaster {
     const medicationRequest = new MedicationRequest().bundlify(await gcpFhirCrud
       .getFhirResource(medicationRequestId, "MedicationRequest")
       .then((res) => res.data));
-      medicationRequest.forEach((el:any)=>{
+      medicationRequest.forEach((el:any, i:number)=>{
        entry.push(el)
+        if(i!=0){
+          entry[0].resource.section[0].entry.push( {
+            "reference": el.fullUrl
+          })
+        }
       })
-
-    // entry.push({
-    //   fullUrl: `MedicationRequest/${medicationRequestId}`,
-    //   resource: medicationRequest,
-    // });
 
     // Get Condition
     const conditionArray = sectionEntries.filter(el=> el.type == "Condition")

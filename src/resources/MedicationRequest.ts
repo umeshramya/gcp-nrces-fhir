@@ -193,10 +193,10 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     const ret = curResource.dosageInstruction.map(
       (el: dosageInstruction, i: number) => {
         const temmplate = {
-          fullUrl: `MedicationRequest/${curResource.id}-med${i}`,
+          fullUrl: i==0 ? `MedicationRequest/${curResource.id}` :`MedicationRequest/${curResource.id}-med${i}`,
           resource: {
             resourceType: "MedicationRequest",
-            id: `${curResource.id}-med${i}`,
+            id: i==0 ?`${curResource.id}` : `${curResource.id}-med${i}`,
             status: curResource.status,
             intent: curResource.intent,
 
@@ -209,7 +209,7 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
               },
             ],
             medicationCodeableConcept: {
-              coding: [curResource.medicationCodeableConcept[i]],
+              coding: [curResource.medicationCodeableConcept.coding[i]],
             },
           },
         };

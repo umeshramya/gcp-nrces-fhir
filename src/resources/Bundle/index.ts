@@ -80,7 +80,7 @@ export class BundelMain extends ResourceMain {
           "patientId": compositionObj.patientId,
           "pdf": pdfData,
           "docStatus": compositionObj.status,
-          "title": "",
+          "title": composition.title,
           "type" : composition.type,
           status: "current"
       }))
