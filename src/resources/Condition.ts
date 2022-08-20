@@ -1,6 +1,7 @@
 import { ResourceMaster } from "../Interfaces/index"
 import { CodeDisplay } from "../config";
 import ResourceMain from "./ResourceMai";
+import {convert } from "html-to-text"
 
 export interface CONDITION {
   id?: string
@@ -53,7 +54,7 @@ export class Condition extends  ResourceMain implements ResourceMaster {
 
   bundlify (resource:any):any{
     const copy=super.bundlify(resource)
-    copy.code.text = resource.text.div
+    copy.code.text =convert( resource.text.div)
     return copy
   }
 
