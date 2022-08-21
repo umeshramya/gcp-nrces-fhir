@@ -4,6 +4,7 @@ import { IDENTTIFIER, MULTI_RESOURCE, resourceType } from "../../config";
 import GcpFhirCrud from "../../classess/gcp";
 import { BundelMain } from ".";
 import { DiagnosticReport } from "../DiagnosticReport";
+import ResourceFactory from "../../classess/ResourceFactory";
 
 export class DiagnsoticReportBundle
   extends BundelMain
@@ -54,7 +55,7 @@ export class DiagnsoticReportBundle
 
     entry.push({
       fullUrl: `DiagnosticReport/${diagnosticReportId}`,
-      resource: diagnsoticReport,
+      resource: new ResourceFactory("DiagnosticReport").bundlefy(diagnsoticReport),
     });
 
     await this.getMedia(0, mediaIds, entry);
@@ -72,22 +73,14 @@ export class DiagnsoticReportBundle
       resourceType: "Bundle",
       id: options.id,
       meta: {
-        versionId: "1",
         lastUpdated: new Date().toISOString(),
-        profile: [
-          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DocumentBundle",
-        ],
-        security: [
-          {
-            system: "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
-            code: "V",
-            display: "very restricted",
-          },
-        ],
       },
-      identifier: options.identifier,
+      identifier: {
+        system: "https://www.nicehms.com/bundle",
+        value: options.id,
+      },
       type: "document",
-      timestamp: new Date().toISOString,
+      timestamp: options.composition.date,
       entry: entry,
     };
 
@@ -111,7 +104,7 @@ export class DiagnsoticReportBundle
     ).data;
     entry.push({
       fullUrl: `Media/${mediaids[index]}`,
-      resource: media,
+      resource: new ResourceFactory("Media").bundlefy(media),
     });
     index = index + 1;
     this.getMedia(index, mediaids, entry);
@@ -130,7 +123,7 @@ export class DiagnsoticReportBundle
     ).data;
     entry.push({
       fullUrl: `Specimen/${specimenids[index]}`,
-      resource: specimen,
+      resource: new ResourceFactory("Specimen").bundlefy(specimen),
     });
     index = index + 1;
     this.getSpecimen(index, specimenids, entry);
@@ -149,7 +142,7 @@ export class DiagnsoticReportBundle
     ).data;
     entry.push({
       fullUrl: `Observation/${observationids[index]}`,
-      resource: observation,
+      resource: new ResourceFactory("Observation").bundlefy(observation),
     });
     index = index + 1;
     this.getObservations(index, observationids, entry);
@@ -169,7 +162,7 @@ export class DiagnsoticReportBundle
     );
     entry.push({
       fullUrl: `${basedOnRefs[index].resource}/${basedOnRefs[index].id}`,
-      resource: basedOn.data,
+      resource: new ResourceFactory(basedOnRefs[index].resource).bundlefy( basedOn.data),
     });
     index = index + 1;
     this.getBasedOn(index, basedOnRefs, entry);
