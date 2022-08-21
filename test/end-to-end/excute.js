@@ -26,6 +26,8 @@ const { setObservation } = require("./Observation");
 const console = require("console");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
+
+const webhookURL="https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7"
 class excute {
   callFunction = async () => {
     await callFunction();
@@ -338,7 +340,7 @@ class excute {
     });
     await axios({
         "methos" : "POST",
-        url : "https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7/pres",
+        url : `${webhookURL}/pres`,
         data : bundle
     })
     return bundle;
@@ -368,7 +370,7 @@ class excute {
     });
     await axios({
       "methos" : "POST",
-      url : "https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7/opd",
+      url : `${webhookURL}/opd`,
       data : bundle
   })
   return bundle;
@@ -398,7 +400,7 @@ class excute {
     });
     await axios({
       "methos" : "POST",
-      url : "https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7/diagnostic",
+      url : `${webhookURL}/diagnostic`,
       data : bundle
   })
   return bundle;
