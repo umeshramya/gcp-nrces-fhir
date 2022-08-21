@@ -338,7 +338,7 @@ class excute {
     });
     await axios({
         "methos" : "POST",
-        url : "https://webhook.site/1244fe5a-5541-49b3-a8da-32ac4d4f4b97/pres",
+        url : "https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7/pres",
         data : bundle
     })
     return bundle;
@@ -368,7 +368,7 @@ class excute {
     });
     await axios({
       "methos" : "POST",
-      url : "https://webhook.site/1244fe5a-5541-49b3-a8da-32ac4d4f4b97/pres",
+      url : "https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7/opd",
       data : bundle
   })
   return bundle;
@@ -398,7 +398,7 @@ class excute {
     });
     await axios({
       "methos" : "POST",
-      url : "https://webhook.site/1244fe5a-5541-49b3-a8da-32ac4d4f4b97/pres",
+      url : "https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7/diagnostic",
       data : bundle
   })
   return bundle;
