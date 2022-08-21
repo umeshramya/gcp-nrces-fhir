@@ -56,6 +56,7 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
     body.entry[0].resource.section.find(
       (m: any) => m.code.coding[0].display == "Medication summary document"
     ).entry = medicationRef;
+    
     const  filteredEntry =body.entry.filter(el =>el.resource.resourceType !== "DocumentReference")
     body.entry=filteredEntry;
     return body;

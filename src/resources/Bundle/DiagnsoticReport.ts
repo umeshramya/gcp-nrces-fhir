@@ -58,7 +58,7 @@ export class DiagnsoticReportBundle
       resource: new ResourceFactory("DiagnosticReport").bundlefy(diagnsoticReport),
     });
 
-    await this.getMedia(0, mediaIds, entry);
+    // await this.getMedia(0, mediaIds, entry);
     if (specimenIDs?.length > 0) {
       await this.getSpecimen(0, specimenIDs, entry);
     }
@@ -83,6 +83,9 @@ export class DiagnsoticReportBundle
       timestamp: options.composition.date,
       entry: entry,
     };
+
+    const  filteredEntry =body.entry.filter(el =>el.resource.resourceType !== "DocumentReference")
+    body.entry=filteredEntry;
 
     return body;
   }

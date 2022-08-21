@@ -294,7 +294,7 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
     }else{
       copy.presentedForm = correctedPresentedForm
     }
-
+    delete copy.media
     return copy
   }
 }
