@@ -102,6 +102,7 @@ export class DiagnsoticReportBundle
     const media = (
       await new GcpFhirCrud(this.gcpCredetials, this.gcpPath).getFhirResource(mediaids[index], "Media")
     ).data;
+    
     entry.push({
       fullUrl: `Media/${mediaids[index]}`,
       resource: new ResourceFactory("Media").bundlefy(media),

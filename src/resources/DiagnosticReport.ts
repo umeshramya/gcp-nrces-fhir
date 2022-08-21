@@ -274,4 +274,27 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
   statusArray(): DiagnosticReportStatus[] {
     return diagnosticReportStatus.map((el) => el);
   }
+
+  bundlify(resource:any):any{
+    const copy = super.bundlify(resource)
+    if( copy.conclusion == null || copy.conclusion == ""){
+      delete copy.conclusion
+    }
+
+    const  presentedForm:{
+      "contentType": string,
+      "data": any,
+      "language": string
+      "title": string
+    }[] = copy.presentedForm;
+
+    const correctedPresentedForm = presentedForm.filter(el=> el.data !="");
+    if(correctedPresentedForm.length == 0){
+      delete copy.presentedForm
+    }else{
+      copy.presentedForm = correctedPresentedForm
+    }
+
+    return copy
+  }
 }

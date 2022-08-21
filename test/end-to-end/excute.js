@@ -378,7 +378,7 @@ class excute {
 
   )=> {
     const compositionResource = await new GcpFhirCRUD()
-    .getFhirResource("", "Composition")
+    .getFhirResource("ca7bfd8c-5208-48a2-a53d-e09228d64794", "Composition")
     .then((res) => res.data);
     const html = `${compositionResource.text.div}`.trim();
     const pdf = await new DiagnsoticReportBundle(
@@ -421,4 +421,6 @@ class excute {
 // new excute().updateServiceRequest()
 
 // new excute().createPrescriptionBundle()
-new excute().createOPConsultationBundle();
+// new excute().createOPConsultationBundle();
+  
+new excute().createDiagnosticReportBundle()

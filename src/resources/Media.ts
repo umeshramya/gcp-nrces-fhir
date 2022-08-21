@@ -106,4 +106,49 @@ export class Media extends ResourceMain implements ResourceMaster {
   mimeTypeArray(): MediaMimeType[] {
     return mediaMimeType.map((el) => el);
   }
+
+  bundlify(resource: any): any {
+    const copy = super.bundlify(resource);
+    const bodySite: {
+      coding: {
+        display: string;
+        system: string;
+      }[];
+    } = copy.bodySite;
+
+    copy.bodySite.coding = bodySite.coding.map(el=>{
+      if(el.system == ""){
+        el.system = "https://www.nicehms.com/bodysite"
+      }
+      return el
+    })
+
+    const content: {
+      "contentType": string,
+      "creation": string,
+      "data": string,
+      "language":string
+      "title": string
+    }= copy.content;
+    if(content.data == ""){
+      content.data ="."
+      copy.content= content;
+    }
+
+    const modality: {
+      "coding": [
+        {
+          "display": string,
+          "system": string
+        }
+      ]
+    }=copy.modality
+    copy.modality.coding = modality.coding.map(el=>{
+      if(el.system == ""){
+        el.system = "https://www.nicehms.com/modality"
+      }
+      return el
+    })
+    return copy
+  }
 }
