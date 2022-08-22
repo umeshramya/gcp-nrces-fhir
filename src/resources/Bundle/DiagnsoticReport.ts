@@ -111,7 +111,7 @@ export class DiagnsoticReportBundle
       resource: new ResourceFactory("Media").bundlefy(media),
     });
     index = index + 1;
-    this.getMedia(index, mediaids, entry);
+    await this.getMedia(index, mediaids, entry);
   };
 
   private getSpecimen = async (
@@ -130,7 +130,7 @@ export class DiagnsoticReportBundle
       resource: new ResourceFactory("Specimen").bundlefy(specimen),
     });
     index = index + 1;
-    this.getSpecimen(index, specimenids, entry);
+   await this.getSpecimen(index, specimenids, entry);
   };
 
     private getObservations = async (
@@ -149,7 +149,7 @@ export class DiagnsoticReportBundle
       resource: new ResourceFactory("Observation").bundlefy(observation),
     });
     index = index + 1;
-    this.getObservations(index, observationids, entry);
+    await this.getObservations(index, observationids, entry);
   };
 
   private getBasedOn = async (
@@ -169,7 +169,7 @@ export class DiagnsoticReportBundle
       resource: new ResourceFactory(basedOnRefs[index].resource).bundlefy( basedOn.data),
     });
     index = index + 1;
-    this.getBasedOn(index, basedOnRefs, entry);
+    await this.getBasedOn(index, basedOnRefs, entry);
   };
 
   statusArray?: Function | undefined;
