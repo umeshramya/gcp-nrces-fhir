@@ -348,6 +348,7 @@ class excute {
 
   createOPConsultationBundle = async (
   ) => {
+
     const compositionResource = await new GcpFhirCRUD()
     .getFhirResource("f5d60c07-8592-4b56-8a31-eade429d6eca", "Composition")
     .then((res) => res.data);
@@ -379,8 +380,11 @@ class excute {
   createDiagnosticReportBundle = async (
 
   )=> {
+    const lipidId ="ca7bfd8c-5208-48a2-a53d-e09228d64794"
+    const echoId="c552eb24-b711-46f1-b1ea-1d70ec1a4b9f"
+    
     const compositionResource = await new GcpFhirCRUD()
-    .getFhirResource("ca7bfd8c-5208-48a2-a53d-e09228d64794", "Composition")
+    .getFhirResource(echoId, "Composition")
     .then((res) => res.data);
     const html = `${compositionResource.text.div}`.trim();
     const pdf = await new DiagnsoticReportBundle(

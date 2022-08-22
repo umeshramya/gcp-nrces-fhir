@@ -1,3 +1,4 @@
+import { htmlToText } from "html-to-text";
 import { type } from "os";
 import GcpFhirCRUD from "../classess/gcp";
 import { CODEABLE_CONCEPT, MULTI_RESOURCE, PERIOD } from "../config";
@@ -296,5 +297,13 @@ export class Observation extends ResourceMain implements ResourceMaster {
   }
   statusArray(): status[] {
     return statusArray.map((el) => el);
+  }
+
+  bundlify(resource:any):any{
+    const copy = super.bundlify(resource)
+    if(copy.valueString){
+      copy.valueString = htmlToText(copy.valueString)
+    }
+    return copy
   }
 }
