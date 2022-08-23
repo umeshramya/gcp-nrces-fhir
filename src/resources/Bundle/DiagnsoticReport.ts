@@ -84,8 +84,8 @@ export class DiagnsoticReportBundle
       entry: entry,
     };
 
-    const  filteredEntry =body.entry.filter(el =>el.resource.resourceType !== "DocumentReference")
-    body.entry=filteredEntry;
+    // const  filteredEntry =body.entry.filter(el =>el.resource.resourceType !== "DocumentReference")
+    // body.entry=filteredEntry;
 
     return body;
   }
