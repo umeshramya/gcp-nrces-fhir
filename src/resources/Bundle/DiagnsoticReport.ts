@@ -53,7 +53,7 @@ export class DiagnsoticReportBundle
     const specimenIDs = diagnosticReportObj.specimenId || [];
    
     const diagnsoticReoprtBundlified = new ResourceFactory("DiagnosticReport").bundlefy(diagnsoticReport)
-    diagnsoticReoprtBundlified.presentedForm[0].data= options.pdfData
+    // diagnsoticReoprtBundlified.presentedForm[0].data= options.pdfData
     entry.push({
       fullUrl: `DiagnosticReport/${diagnosticReportId}`,
       resource: diagnsoticReoprtBundlified,

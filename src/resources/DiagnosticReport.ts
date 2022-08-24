@@ -281,19 +281,19 @@ export class DiagnosticReport extends ResourceMain implements ResourceMaster {
       delete copy.conclusion
     }
 
-    // const  presentedForm:{
-    //   "contentType": string,
-    //   "data": any,
-    //   "language": string
-    //   "title": string
-    // }[] = copy.presentedForm;
+    const  presentedForm:{
+      "contentType": string,
+      "data": any,
+      "language": string
+      "title": string
+    }[] = copy.presentedForm;
 
-    // const correctedPresentedForm = presentedForm.filter(el=> el.data !="");
-    // if(correctedPresentedForm.length == 0){
-    //   delete copy.presentedForm
-    // }else{
-    //   copy.presentedForm = correctedPresentedForm
-    // }
+    const correctedPresentedForm = presentedForm.filter(el=> el.data !="");
+    if(correctedPresentedForm.length == 0){
+      delete copy.presentedForm
+    }else{
+      copy.presentedForm = correctedPresentedForm
+    }
     return copy
   }
 }

@@ -301,8 +301,30 @@ export class Observation extends ResourceMain implements ResourceMaster {
 
   bundlify(resource:any):any{
     const copy = super.bundlify(resource)
+
     if(copy.valueString){
       copy.valueString = htmlToText(copy.valueString)
+    }
+
+    if(copy.valueQuantity){
+      let valueString= `${copy.valueQuantity.value} ${copy.valueQuantity.unit} `;
+      if(copy.referenceRange){
+        const lessThan:string=  copy.referenceRange.filter((el:any)=>el.high)[0].high.value as string || "";
+        const morethan:string = copy.referenceRange.filter((el:any)=>el.low)[0].low.value as string || "";
+        if (lessThan == "" && morethan == ""){
+        }else if(lessThan != "" && morethan != ""){
+          valueString = `${valueString} Reference Range ${lessThan}-${morethan}`;
+        }else if(lessThan == ""){
+          valueString = `${valueString} Reference Range less than ${morethan}`
+        }else if(morethan == ""){
+          valueString = `${valueString}Reference Range more than ${lessThan}`
+        }
+
+        delete copy.referenceRange
+      }
+      valueString = valueString
+      delete copy.valueQuantity
+      copy.valueString = valueString;
     }
     return copy
   }
