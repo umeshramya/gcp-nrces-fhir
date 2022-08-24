@@ -304,20 +304,27 @@ export class Observation extends ResourceMain implements ResourceMaster {
 
     if(copy.valueString){
       copy.valueString = htmlToText(copy.valueString)
+      return copy
     }
 
     if(copy.valueQuantity){
+      if(!copy.valueQuantity.value){
+        delete copy.valueQuantity
+        delete copy.referenceRange
+        copy.valueString = "Not Done"
+        return copy
+      }
       let valueString= `${copy.valueQuantity.value} ${copy.valueQuantity.unit} `;
       if(copy.referenceRange){
-        const lessThan:string=  copy.referenceRange.filter((el:any)=>el.high)[0].high.value as string || "";
-        const morethan:string = copy.referenceRange.filter((el:any)=>el.low)[0].low.value as string || "";
+        const lessThan:string=  copy.referenceRange.filter((el:any)=>el.high).length > 0 ? copy.referenceRange.filter((el:any)=>el.high)[0].high.value : ""
+        const morethan:string = copy.referenceRange.filter((el:any)=>el.low).length > 0 ? copy.referenceRange.filter((el:any)=>el.low)[0].low.value : "";
         if (lessThan == "" && morethan == ""){
         }else if(lessThan != "" && morethan != ""){
-          valueString = `${valueString} Reference Range ${lessThan}-${morethan}`;
+          valueString = `${valueString} Reference Range ${morethan}-${lessThan}`;
         }else if(lessThan == ""){
-          valueString = `${valueString} Reference Range less than ${morethan}`
+          valueString = `${valueString} Reference Range more than ${morethan}`
         }else if(morethan == ""){
-          valueString = `${valueString}Reference Range more than ${lessThan}`
+          valueString = `${valueString} Reference Range less than ${lessThan}`
         }
 
         delete copy.referenceRange
