@@ -53,13 +53,15 @@ export class DiagnsoticReportBundle
     const specimenIDs = diagnosticReportObj.specimenId || [];
    
     const diagnsoticReoprtBundlified = new ResourceFactory("DiagnosticReport").bundlefy(diagnsoticReport)
+    delete diagnsoticReoprtBundlified.media;
+    
     // diagnsoticReoprtBundlified.presentedForm[0].data= options.pdfData
     entry.push({
       fullUrl: `DiagnosticReport/${diagnosticReportId}`,
       resource: diagnsoticReoprtBundlified,
     });
 
-    await this.getMedia(0, mediaIds, entry);
+    // await this.getMedia(0, mediaIds, entry);
     if (specimenIDs?.length > 0) {
       await this.getSpecimen(0, specimenIDs, entry);
     }

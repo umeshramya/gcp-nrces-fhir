@@ -305,9 +305,7 @@ export class Observation extends ResourceMain implements ResourceMaster {
     if(copy.valueString){
       copy.valueString = htmlToText(copy.valueString)
       return copy
-    }
-
-    if(copy.valueQuantity){
+    }else if(copy.valueQuantity){
       if(!copy.valueQuantity.value){
         delete copy.valueQuantity
         delete copy.referenceRange
@@ -329,9 +327,16 @@ export class Observation extends ResourceMain implements ResourceMaster {
 
         delete copy.referenceRange
       }
-      valueString = valueString
+    
       delete copy.valueQuantity
+
+ 
+      // if (!copy.valueString && valueString){
+      //   valueString="Panel"
+      // }
       copy.valueString = valueString;
+    }else{
+      copy.valueString="Panel"
     }
     return copy
   }
