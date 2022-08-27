@@ -1,6 +1,7 @@
 import { ResourceMaster } from "../Interfaces/index";
-import { CodeDisplay } from "../config/index";
+import { CODEABLE_CONCEPT, CodeDisplay } from "../config/index";
 import ResourceMain from "./ResourceMai";
+import { PRACTITIONER } from "./Practitioner";
 
 export const procedureStatusArray = [
   "preparation",
@@ -18,21 +19,18 @@ export interface PROCEDURE {
   id?: string;
   status: ProcedureStatus;
   text: string;
-  procedure: CodeDisplay[];
-  complication?: CodeDisplay[];
+  procedure: CODEABLE_CONCEPT;
+  outcome:CODEABLE_CONCEPT
   patientID: string;
   procedureDate: string;
+  performer:PRACTITIONER;
+  asserter?:PRACTITIONER;
+  recorder?:PRACTITIONER
+  encounterId:string;
 }
 export class Procedure extends ResourceMain implements ResourceMaster {
   getFHIR(options: PROCEDURE) {
-    const getProcedure = (): string => {
-      let ret = "";
-      options.procedure.forEach((el) => {
-        ret = ret + `${el.display}, `;
-      });
-      return ret;
-    };
-    const body = {
+    const body:any= {
       resourceType: "Procedure",
       id: options.id || undefined,
       meta: {
@@ -42,34 +40,73 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: `<div><h5>${getProcedure()}</h5><div>${options.text}</div></div>`,
+        div: options.text,
       },
       status: options.status,
-      code: {
-        coding: options.procedure,
-        text: options.text,
-      },
+      code: options.procedure,
       subject: { reference: `Patient/${options.patientID}` },
       performedDateTime: options.procedureDate,
-      complication: [
+      "performer": [
         {
-          coding: options.complication,
-        },
+          "actor": {
+            "reference": `Practitioner/${options.performer.id}`,
+            "display":  options.performer.name
+          }
+        }
       ],
+      "encounter": {
+        "reference": `Encounter/${options.encounterId}`,
+      },
+      outcome:options.outcome
     };
 
+    if(options.recorder){
+      body.recorder ={
+        "reference": `Practitioner/${options.recorder.id}`,
+        "display": options.recorder.name
+      }
+    }
+    if(options.asserter){
+      body.recorder ={
+        "reference": `Practitioner/${options.asserter.id}`,
+        "display": options.asserter.name
+      }
+    }
     return body;
   }
   convertFhirToObject(options: any): PROCEDURE {
+    const performer:Partial<PRACTITIONER>={
+      "id" : this.getIdFromReference({
+        "ref" : options.performer[0].actor.reference, "resourceType" : "Practitioner"
+      }),
+      "name" : options.performer[0].actor.display
+    }
+
     let ret: PROCEDURE = {
       status: options.status,
       text: options.code.text,
-      procedure: options.code.coding,
+      procedure: options.code,
       patientID: `${options.subject.reference}`.substring(8),
       procedureDate: options.performedDateTime,
       id: options.id,
-      complication: options.complication[0].coding,
+      performer: performer as any,
+      encounterId: this.getIdFromReference({ "ref": options.encounter.reference, "resourceType": "Encounter" }),
+      outcome: options.outcome
     };
+
+    if(options.asserter){
+      ret.asserter={
+        "id" : this.getIdFromReference({"ref" : options.asserter.reference, "resourceType" : "Practitioner"}),
+        "name" : options.asserter.display
+      } as any
+    }
+
+    if(options.recorder){
+      ret.recorder={
+        "id" : this.getIdFromReference({"ref" : options.recorder.reference, "resourceType" : "Practitioner"}),
+        "name" : options.recorder.display
+      } as any
+    }
 
     return ret;
   }

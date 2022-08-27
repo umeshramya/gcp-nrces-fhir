@@ -2,6 +2,7 @@ const { setMedicationRequest } = require("./medication");
 const { callFunction, resources } = require("./index");
 const { setCondition } = require("./condion");
 const { setPractiotionerRole } = require("./PractitionerRole");
+const {setProcedure} = require("./Procedure")
 const axios = require("axios")
 const {
   PrescriptionRecord,
@@ -54,6 +55,13 @@ class excute {
     const data = await setSpecimen();
     console.log(data);
   };
+
+  procedure= async () => {
+    await callFunction();
+    const data = await setProcedure();
+    console.log(data);
+  };
+
 
   practionerRole = async () => {
     await callFunction();
@@ -417,6 +425,7 @@ class excute {
 // new excute().conditon()
 // new excute().practionerRole()
 // new excute().specimen()
+new excute().procedure()
 // new excute().serviceRequest()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
@@ -430,4 +439,4 @@ class excute {
 // new excute().createPrescriptionBundle()
 // new excute().createOPConsultationBundle();
   
-new excute().createDiagnosticReportBundle()
+// new excute().createDiagnosticReportBundle()
