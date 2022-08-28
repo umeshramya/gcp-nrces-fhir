@@ -28,9 +28,9 @@ const setProcedure = async() => {
 
     })
 
-    console.log(body)
     const res = await gcpFhirCRUD.createFhirResource(body, "Procedure")
     const ret = proceduer.convertFhirToObject(res.data)
+    resources.procedure= ret;
     // const ret = res.data
     return ret;
 

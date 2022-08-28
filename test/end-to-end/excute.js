@@ -141,6 +141,7 @@ class excute {
     await callFunction();
     await setMedicationRequest();
     await setCondition();
+    await setProcedure()
     const gcpFhirCRUD = new GcpFhirCRUD();
     const medciationResource = (
       await gcpFhirCRUD.getFhirResource(
@@ -174,6 +175,9 @@ class excute {
         type: "Prescription",
       },
       chiefComplaints: condionResource,
+      // medicalHistory : condionResource,
+      // physicalExamination: resources.conditon,
+      procedure : resources.procedure,
       medicationRequest: medciationResource,
     });
 
@@ -425,10 +429,10 @@ class excute {
 // new excute().conditon()
 // new excute().practionerRole()
 // new excute().specimen()
-new excute().procedure()
+// new excute().procedure()
 // new excute().serviceRequest()
 // new excute().precsriptinComposition();
-// new excute().OpCunsulatationComposition()
+new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()

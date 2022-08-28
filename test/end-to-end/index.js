@@ -11,6 +11,7 @@ const resources = {
     practioner: null,
     encounter: null,
     conditon: null,
+    procedure:null,
     medicationsRequest: null,
     serviceRequest : null,
     media:null

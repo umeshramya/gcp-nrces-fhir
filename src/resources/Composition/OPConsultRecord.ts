@@ -130,6 +130,51 @@ export class OPConsultRecord extends Composition implements Records {
         `<h4>Investigation Advice</h4> ${options.investigationAdvice.text.div}`;
     }
 
+    if (options.procedure) {
+      options.composition.section.push({
+        title: "Procedure",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "371525003",
+              display: "Clinical procedure report",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Procedure/${options.procedure.id}`,
+          },
+        ],
+      });
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        `<h4>Procedure</h4>${options.procedure.text.div}`;
+    }
+    if (options.followUp) {
+      options.composition.section.push({
+        title: "Follow Up",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "736271009",
+              display: "Outpatient care plan",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Appointment/${options.followUp.id}`,
+          },
+        ],
+      });
+
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        `<h4>Follow up</h4>${options.followUp.text.div}`;
+    }
     if (options.medicationRequest || options.medicationRequest) {
       let entry = [];
       if (options.medicationStatement) {
@@ -165,55 +210,9 @@ export class OPConsultRecord extends Composition implements Records {
       });
     }
 
-    if (options.procedure) {
-      options.composition.section.push({
-        title: "Procedure",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "371525003",
-              display: "Clinical procedure report",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `Procedure/${options.procedure}`,
-          },
-        ],
-      });
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
-        `<h4>Procedure</h4>${options.procedure.text.div}`;
-    }
-
-    if (options.followUp) {
-      options.composition.section.push({
-        title: "Follow Up",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "736271009",
-              display: "Outpatient care plan",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `Appointment/${options.followUp.id}`,
-          },
-        ],
-      });
-
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
-        `<h4>Follow up</h4>${options.followUp.text.div}`;
-    }
-
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
+
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
@@ -284,143 +283,143 @@ export class OPConsultRecord extends Composition implements Records {
       });
     }
 
-      if (options.physicalExamination) {
-        options.composition.section.push({
-          title: "Physical Examination",
-          code: {
-            coding: [
-              {
-                system: "http://snomed.info/sct",
-                code: "371529009",
-                display: " physical report",
-              },
-            ],
-          },
-          entry: [
+    if (options.physicalExamination) {
+      options.composition.section.push({
+        title: "Physical Examination",
+        code: {
+          coding: [
             {
-              reference: `Condition/${options.physicalExamination.id}`,
+              system: "http://snomed.info/sct",
+              code: "371529009",
+              display: " physical report",
             },
           ],
-        });
-
-        options.composition.documentDatahtml =
-          options.composition.documentDatahtml +
-          `<h4>Physical Examination</h4> ${options.physicalExamination.text.div}`;
-      }
-
-      if (options.investigationAdvice) {
-        options.composition.section.push({
-          title: "Investigation Advice",
-          code: {
-            coding: [
-              {
-                system: "http://snomed.info/sct",
-                code: "721963009",
-                display: "Order document",
-              },
-            ],
+        },
+        entry: [
+          {
+            reference: `Condition/${options.physicalExamination.id}`,
           },
-          entry: [
-            {
-              reference: `ServiceRequest/${options.investigationAdvice.id}`,
-            },
-          ],
-        });
-        options.composition.documentDatahtml =
-          options.composition.documentDatahtml +
-          `<h4>Investigation Advice</h4> ${options.investigationAdvice.text.div}`;
-      }
+        ],
+      });
 
-      if (options.medicationRequest || options.medicationRequest) {
-        let entry = [];
-        if (options.medicationStatement) {
-          entry.push({
-            reference: `MedicationStatement/${options.medicationStatement.id}`,
-          });
-
-          options.composition.documentDatahtml =
-            options.composition.documentDatahtml +
-            `<h4>Medication Statement</h4>${options.medicationStatement.text.div}`;
-        }
-        if (options.medicationRequest) {
-          entry.push({
-            reference: `MedicationRequest/${options.medicationRequest.id}`,
-          });
-          options.composition.documentDatahtml =
-            options.composition.documentDatahtml +
-            `<h4>Prescription</h4>${options.medicationRequest.text.div}`;
-        }
-
-        options.composition.section.push({
-          title: "Medications",
-          code: {
-            coding: [
-              {
-                system: "http://snomed.info/sct",
-                code: "721912009",
-                display: "Medication summary document",
-              },
-            ],
-          },
-          entry: entry,
-        });
-      }
-
-      if (options.procedure) {
-        options.composition.section.push({
-          title: "Procedure",
-          code: {
-            coding: [
-              {
-                system: "http://snomed.info/sct",
-                code: "371525003",
-                display: "Clinical procedure report",
-              },
-            ],
-          },
-          entry: [
-            {
-              reference: `Procedure/${options.procedure}`,
-            },
-          ],
-        });
-        options.composition.documentDatahtml =
-          options.composition.documentDatahtml +
-          `<h4>Procedure</h4>${options.procedure.text.div}`;
-      }
-
-      if (options.followUp) {
-        options.composition.section.push({
-          title: "Follow Up",
-          code: {
-            coding: [
-              {
-                system: "http://snomed.info/sct",
-                code: "736271009",
-                display: "Outpatient care plan",
-              },
-            ],
-          },
-          entry: [
-            {
-              reference: `Appointment/${options.followUp.id}`,
-            },
-          ],
-        });
-
-        options.composition.documentDatahtml =
-          options.composition.documentDatahtml +
-          `<h4>Follow up</h4>${options.followUp.text.div}`;
-      }
-
-      const body = this.getFHIR(options.composition);
-      body.section = options.composition.section;
-      const gcpFhirCrud = new GcpFhirCRUD();
-      const res = await gcpFhirCrud.updateFhirResource(
-        body,
-        options.composition.id || "",
-        "Composition"
-      );
-      return res;
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        `<h4>Physical Examination</h4> ${options.physicalExamination.text.div}`;
     }
+
+    if (options.investigationAdvice) {
+      options.composition.section.push({
+        title: "Investigation Advice",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "721963009",
+              display: "Order document",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `ServiceRequest/${options.investigationAdvice.id}`,
+          },
+        ],
+      });
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        `<h4>Investigation Advice</h4> ${options.investigationAdvice.text.div}`;
+    }
+
+    if (options.procedure) {
+      options.composition.section.push({
+        title: "Procedure",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "371525003",
+              display: "Clinical procedure report",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Procedure/${options.procedure.id}`,
+          },
+        ],
+      });
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        `<h4>Procedure</h4>${options.procedure.text.div}`;
+    }
+
+    if (options.followUp) {
+      options.composition.section.push({
+        title: "Follow Up",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "736271009",
+              display: "Outpatient care plan",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Appointment/${options.followUp.id}`,
+          },
+        ],
+      });
+
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        `<h4>Follow up</h4>${options.followUp.text.div}`;
+    }
+
+    if (options.medicationRequest || options.medicationRequest) {
+      let entry = [];
+      if (options.medicationStatement) {
+        entry.push({
+          reference: `MedicationStatement/${options.medicationStatement.id}`,
+        });
+
+        options.composition.documentDatahtml =
+          options.composition.documentDatahtml +
+          `<h4>Medication Statement</h4>${options.medicationStatement.text.div}`;
+      }
+      if (options.medicationRequest) {
+        entry.push({
+          reference: `MedicationRequest/${options.medicationRequest.id}`,
+        });
+        options.composition.documentDatahtml =
+          options.composition.documentDatahtml +
+          `<h4>Prescription</h4>${options.medicationRequest.text.div}`;
+      }
+
+      options.composition.section.push({
+        title: "Medications",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "721912009",
+              display: "Medication summary document",
+            },
+          ],
+        },
+        entry: entry,
+      });
+    }
+
+    const body = this.getFHIR(options.composition);
+    body.section = options.composition.section;
+    const gcpFhirCrud = new GcpFhirCRUD();
+    const res = await gcpFhirCrud.updateFhirResource(
+      body,
+      options.composition.id || "",
+      "Composition"
+    );
+    return res;
+  };
 }
