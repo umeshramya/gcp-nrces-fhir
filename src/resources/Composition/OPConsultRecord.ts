@@ -104,7 +104,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<b><u>physicalExamination</u></b> ${options.physicalExamination.text.div}`;
+        `<b><u>Physical Examination</u></b> ${options.physicalExamination.text.div}`;
     }
 
     if (options.investigationAdvice) {
@@ -131,7 +131,6 @@ export class OPConsultRecord extends Composition implements Records {
     }
 
     if (options.procedure) {
-      console.log(options.procedure)
       options.composition.section.push({
         title: "Procedure",
         code: {
