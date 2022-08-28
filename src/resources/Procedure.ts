@@ -2,6 +2,7 @@ import { ResourceMaster } from "../Interfaces/index";
 import { CODEABLE_CONCEPT, CodeDisplay } from "../config/index";
 import ResourceMain from "./ResourceMai";
 import { PRACTITIONER } from "./Practitioner";
+import { htmlToText } from "html-to-text";
 
 export const procedureStatusArray = [
   "preparation",
@@ -63,6 +64,10 @@ export class Procedure extends ResourceMain implements ResourceMaster {
     } 
 
  
+    options.code = {
+      "coding" : options.code.coding,
+      "text" : htmlToText(options.text)
+    }
     const body: any = {
       resourceType: "Procedure",
       id: options.id || undefined,
@@ -91,7 +96,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
         reference: `Encounter/${options.encounterId}`,
       },
       note : options.note.map((el:any)=>{
-        return{text: el}
+        return{text: htmlToText(el)}
       }),
 
       outcome: options.outcome,
