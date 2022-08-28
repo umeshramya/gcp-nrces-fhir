@@ -131,6 +131,7 @@ export class OPConsultRecord extends Composition implements Records {
     }
 
     if (options.procedure) {
+      console.log(options.procedure)
       options.composition.section.push({
         title: "Procedure",
         code: {

@@ -19,7 +19,7 @@ export type ProcedureStatus = typeof procedureStatusArray[number];
 export interface PROCEDURE {
   id?: string;
   status: ProcedureStatus;
-  text:string
+  text: string;
   code: CODEABLE_CONCEPT;
   outcome?: CODEABLE_CONCEPT;
   patientID: string;
@@ -35,39 +35,37 @@ export interface PROCEDURE {
 export class Procedure extends ResourceMain implements ResourceMaster {
   getFHIR(options: PROCEDURE) {
     const getText = (): string => {
-      let ret:string="";
-        ret= `<div>Performer : ${options.performer.name}</div>`
-        if(options.asserter){
-          ret = `${ret}<div>Assereted By : ${options.asserter.name}</div>`
-        }
-        if(options.recorder){
-          ret = `${ret}<div>Assereted By : ${options.recorder.name}</div>`
-        }
-        ret=`${ret}<div>Procedure Notes</div>`
-        options.note.forEach(el=>{
-          ret = `${ret} ${el}`
-        })
-        ret=ret.trim();
-        ret=`${ret}<div>Outcome</div>`
-        if(options.outcome){
-         ret=`${ret}<div>${options.outcome.text}</div>` 
-        }
-        ret=`${ret}<div>Follow Up</div>`
-        if(options.followUp){
-          options.followUp.forEach(el=>{
-            ret = `${ret} <div>${el}</div>`
-          })
-        }
-        
+      let ret: string = "";
+      ret = `<div>Performer : ${options.performer.name}</div>`;
+      if (options.asserter) {
+        ret = `${ret}<div>Assereted By : ${options.asserter.name}</div>`;
+      }
+      if (options.recorder) {
+        ret = `${ret}<div>Assereted By : ${options.recorder.name}</div>`;
+      }
+      ret = `${ret}<div>Procedure Notes</div>`;
+      ret = `${ret}${options.text}`;
+
+      ret = `${ret}<div>Outcome</div>`;
+      if (options.outcome) {
+        ret = `${ret}<div>${options.outcome.text}</div>`;
+      }
+      ret = `${ret}<div>Follow Up</div>`;
+      if (options.followUp) {
+        options.followUp.forEach((el) => {
+          ret = `${ret} <div>${el}</div>`;
+        });
+      }
+
+      ret = ret.trim();
+
       return ret;
+    };
 
-    } 
-
- 
     options.code = {
-      "coding" : options.code.coding,
-      "text" : htmlToText(options.text)
-    }
+      coding: options.code.coding,
+      text: htmlToText(options.text),
+    };
     const body: any = {
       resourceType: "Procedure",
       id: options.id || undefined,
@@ -95,9 +93,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       encounter: {
         reference: `Encounter/${options.encounterId}`,
       },
-      note : options.note.map((el:any)=>{
-        return{text: htmlToText(el)}
-      }),
+      note:[{ text: options.text }],
 
       outcome: options.outcome,
     };
@@ -150,23 +146,25 @@ export class Procedure extends ResourceMain implements ResourceMaster {
         ref: options.encounter.reference,
         resourceType: "Encounter",
       }),
-      note: options.note.map((el:any)=>{
-        return el.text
+      note: options.note.map((el: any) => {
+        return el.text;
       }),
-      
     };
 
-    if(options.followUp){
-      ret.followUp = options.followUp.map((el:any)=> el.text)
+    if (options.followUp) {
+      ret.followUp = options.followUp.map((el: any) => el.text);
     }
-    if(options.outcome){
-      ret.outcome =options.outcome
+    if (options.outcome) {
+      ret.outcome = options.outcome;
     }
 
-    if(options.report){
-      ret.report = options.report.map((el:any)=>{
-          return this.getIdFromReference({"ref" : el.reference, "resourceType" : "DiagnosticReport"})
-      })
+    if (options.report) {
+      ret.report = options.report.map((el: any) => {
+        return this.getIdFromReference({
+          ref: el.reference,
+          resourceType: "DiagnosticReport",
+        });
+      });
     }
     if (options.asserter) {
       ret.asserter = {

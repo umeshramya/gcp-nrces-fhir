@@ -172,7 +172,7 @@ class excute {
         patientId: resources.patient.id,
         section: [],
         status: "final",
-        type: "Prescription",
+        type: "OPConsultation",
       },
       chiefComplaints: condionResource,
       // medicalHistory : condionResource,
