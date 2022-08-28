@@ -20,7 +20,7 @@ export interface PROCEDURE {
   status: ProcedureStatus;
   text:string
   code: CODEABLE_CONCEPT;
-  outcome: CODEABLE_CONCEPT;
+  outcome?: CODEABLE_CONCEPT;
   patientID: string;
   procedureDate: string;
   performer: PRACTITIONER;
@@ -33,6 +33,36 @@ export interface PROCEDURE {
 }
 export class Procedure extends ResourceMain implements ResourceMaster {
   getFHIR(options: PROCEDURE) {
+    const getText = (): string => {
+      let ret:string="";
+        ret= `<div>Performer : ${options.performer.name}</div>`
+        if(options.asserter){
+          ret = `${ret}<div>Assereted By : ${options.asserter.name}</div>`
+        }
+        if(options.recorder){
+          ret = `${ret}<div>Assereted By : ${options.recorder.name}</div>`
+        }
+        ret=`${ret}<div>Procedure Notes</div>`
+        options.note.forEach(el=>{
+          ret = `${ret} ${el}`
+        })
+        ret=ret.trim();
+        ret=`${ret}<div>Outcome</div>`
+        if(options.outcome){
+         ret=`${ret}<div>${options.outcome.text}</div>` 
+        }
+        ret=`${ret}<div>Follow Up</div>`
+        if(options.followUp){
+          options.followUp.forEach(el=>{
+            ret = `${ret} <div>${el}</div>`
+          })
+        }
+        
+      return ret;
+
+    } 
+
+ 
     const body: any = {
       resourceType: "Procedure",
       id: options.id || undefined,
@@ -43,7 +73,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: options.text,
+        div: getText(),
       },
       status: options.status,
       code: options.code,
@@ -115,13 +145,24 @@ export class Procedure extends ResourceMain implements ResourceMaster {
         ref: options.encounter.reference,
         resourceType: "Encounter",
       }),
-      outcome: options.outcome,
       note: options.note.map((el:any)=>{
         return el.text
       }),
-      followUp : options.followUp.map((el:any)=> el.text)
+      
     };
 
+    if(options.followUp){
+      ret.followUp = options.followUp.map((el:any)=> el.text)
+    }
+    if(options.outcome){
+      ret.outcome =options.outcome
+    }
+
+    if(options.report){
+      ret.report = options.report.map((el:any)=>{
+          return this.getIdFromReference({"ref" : el.reference, "resourceType" : "DiagnosticReport"})
+      })
+    }
     if (options.asserter) {
       ret.asserter = {
         id: this.getIdFromReference({

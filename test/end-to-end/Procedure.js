@@ -22,8 +22,9 @@ const setProcedure = async() => {
         "status" : "in-progress",
         "text" : "<div>Umesh Did this proceduer</div>",
         "note" : ["These are the notes of the procedure"],
-        "followUp" : ["Review after 15 days"]
-        // "report" : ["ca7bfd8c-5208-48a2-a53d-e09228d64794", "70334fba-ad8d-494a-bc44-4b0f8f7015cf" , "10454763-d469-42e4-8c04-62c98744bb38"]
+        "followUp" : ["Review after 15 days"],
+        "report" : ["c08e5635-ac16-42e4-a48d-0218fea037a9", "133862ca-5602-481d-a569-bfc325aa4bee" , "598135e3-e7ce-4859-aa9f-69a6bd0f1e1d"],
+        "code" : {"text" : "<div>Umesh Did this proceduer</div>"}
 
     })
 
