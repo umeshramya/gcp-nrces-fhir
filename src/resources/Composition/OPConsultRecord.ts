@@ -33,7 +33,7 @@ export class OPConsultRecord extends Composition implements Records {
         },
       ],
     });
-    options.composition.documentDatahtml = `<h4>Chief complaints</h4> ${options.chiefComplaints.text.div}`;
+    options.composition.documentDatahtml = `<div><b>Chief complaints</b></div> ${options.chiefComplaints.text.div}`;
 
     if (options.allergies) {
       options.composition.section.push({
@@ -56,7 +56,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Allergies</h4> ${options.allergies.text.div}`;
+        `<div><b>Allergies</b></div> ${options.allergies.text.div}`;
     }
 
     if (options.medicalHistory) {
@@ -80,7 +80,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Medical History</h4> ${options.medicalHistory.text.div}`;
+        `<div><b>Medical History</b></div> ${options.medicalHistory.text.div}`;
     }
 
     if (options.physicalExamination) {
@@ -104,7 +104,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>physicalExamination</h4> ${options.physicalExamination.text.div}`;
+        `<div><b>physicalExamination</b></div> ${options.physicalExamination.text.div}`;
     }
 
     if (options.investigationAdvice) {
@@ -127,7 +127,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Investigation Advice</h4> ${options.investigationAdvice.text.div}`;
+        `<div><b>Investigation Advice</b></div> ${options.investigationAdvice.text.div}`;
     }
 
     if (options.procedure) {
@@ -151,7 +151,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Procedure</h4>${options.procedure.text.div}`;
+        `<div><b>Procedure</b></div>${options.procedure.text.div}`;
     }
     if (options.followUp) {
       options.composition.section.push({
@@ -174,7 +174,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Follow up</h4>${options.followUp.text.div}`;
+        `<div><b>Follow up</b></div>${options.followUp.text.div}`;
     }
     if (options.medicationRequest || options.medicationRequest) {
       let entry = [];
@@ -185,7 +185,7 @@ export class OPConsultRecord extends Composition implements Records {
 
         options.composition.documentDatahtml =
           options.composition.documentDatahtml +
-          `<h4>Medication Statement</h4>${options.medicationStatement.text.div}`;
+          `<div><b>Medication Statement</b></div>${options.medicationStatement.text.div}`;
       }
       if (options.medicationRequest) {
         entry.push({
@@ -193,7 +193,7 @@ export class OPConsultRecord extends Composition implements Records {
         });
         options.composition.documentDatahtml =
           options.composition.documentDatahtml +
-          `<h4>Prescription</h4>${options.medicationRequest.text.div}`;
+          `<div><b>Prescription</b></div>${options.medicationRequest.text.div}`;
       }
 
       options.composition.section.push({
@@ -238,7 +238,7 @@ export class OPConsultRecord extends Composition implements Records {
         },
       ],
     });
-    options.composition.documentDatahtml = `<h4>Chief Complaints</h4> ${options.chiefComplaints.text.div}`;
+    options.composition.documentDatahtml = `<div><b>Chief Complaints</b></div> ${options.chiefComplaints.text.div}`;
 
     if (options.allergies) {
       options.composition.section.push({
@@ -261,7 +261,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Allergies</h4> ${options.allergies.text.div}`;
+        `<div><b>Allergies</b></div> ${options.allergies.text.div}`;
     }
 
     if (options.medicalHistory) {
@@ -305,7 +305,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Physical Examination</h4> ${options.physicalExamination.text.div}`;
+        `<div><b>Physical Examination</b></div> ${options.physicalExamination.text.div}`;
     }
 
     if (options.investigationAdvice) {
@@ -328,7 +328,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Investigation Advice</h4> ${options.investigationAdvice.text.div}`;
+        `<div><b>Investigation Advice</b></div> ${options.investigationAdvice.text.div}`;
     }
 
     if (options.procedure) {
@@ -351,7 +351,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Procedure</h4>${options.procedure.text.div}`;
+        `<div><b>Procedure</b></div>${options.procedure.text.div}`;
     }
 
     if (options.followUp) {
@@ -375,7 +375,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<h4>Follow up</h4>${options.followUp.text.div}`;
+        `<div><b>Follow up</b></div>${options.followUp.text.div}`;
     }
 
     if (options.medicationRequest || options.medicationRequest) {
@@ -387,7 +387,7 @@ export class OPConsultRecord extends Composition implements Records {
 
         options.composition.documentDatahtml =
           options.composition.documentDatahtml +
-          `<h4>Medication Statement</h4>${options.medicationStatement.text.div}`;
+          `<div><b>Medication Statement</b></div>${options.medicationStatement.text.div}`;
       }
       if (options.medicationRequest) {
         entry.push({
@@ -395,7 +395,7 @@ export class OPConsultRecord extends Composition implements Records {
         });
         options.composition.documentDatahtml =
           options.composition.documentDatahtml +
-          `<h4>Prescription</h4>${options.medicationRequest.text.div}`;
+          `<div><b>Prescription</b></div>${options.medicationRequest.text.div}`;
       }
 
       options.composition.section.push({

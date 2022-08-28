@@ -46,12 +46,14 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       ret = `${ret}<div>Procedure Notes</div>`;
       ret = `${ret}${options.text}`;
 
-      ret = `${ret}<div>Outcome</div>`;
+     
       if (options.outcome) {
+        ret = `${ret}<div>Outcome</div>`;
         ret = `${ret}<div>${options.outcome.text}</div>`;
       }
-      ret = `${ret}<div>Follow Up</div>`;
+      
       if (options.followUp) {
+        ret = `${ret}<div>Follow Up</div>`;
         options.followUp.forEach((el) => {
           ret = `${ret} <div>${el}</div>`;
         });
