@@ -24,7 +24,7 @@ export interface PROCEDURE {
   outcome?: CODEABLE_CONCEPT;
   patientID: string;
   procedureDate: string;
-  performer: PRACTITIONER;
+  performer?: PRACTITIONER;
   asserter?: PRACTITIONER;
   recorder?: PRACTITIONER;
   encounterId: string;
@@ -36,7 +36,10 @@ export class Procedure extends ResourceMain implements ResourceMaster {
   getFHIR(options: PROCEDURE) {
     const getText = (): string => {
       let ret: string = "";
-      ret = `<div>Performer : ${options.performer.name}</div>`;
+      if(options.performer){
+        ret = `<div>Performer : ${options.performer.name}</div>`;
+      }
+      
       if (options.asserter) {
         ret = `${ret}<div>Assereted By : ${options.asserter.name}</div>`;
       }
@@ -84,14 +87,6 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       code: options.code,
       subject: { reference: `Patient/${options.patientID}` },
       performedDateTime: options.procedureDate,
-      performer: [
-        {
-          actor: {
-            reference: `Practitioner/${options.performer.id}`,
-            display: options.performer.name,
-          },
-        },
-      ],
       encounter: {
         reference: `Encounter/${options.encounterId}`,
       },
@@ -100,6 +95,16 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       outcome: options.outcome,
     };
 
+    if(options.performer){
+      body.performer =  [
+        {
+          actor: {
+            reference: `Practitioner/${options.performer.id}`,
+            display: options.performer.name,
+          },
+        },
+      ]
+    }
     if (options.recorder) {
       body.recorder = {
         reference: `Practitioner/${options.recorder.id}`,
@@ -107,7 +112,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       };
     }
     if (options.asserter) {
-      body.recorder = {
+      body.asserter = {
         reference: `Practitioner/${options.asserter.id}`,
         display: options.asserter.name,
       };
@@ -128,13 +133,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
     return body;
   }
   convertFhirToObject(options: any): PROCEDURE {
-    const performer: Partial<PRACTITIONER> = {
-      id: this.getIdFromReference({
-        ref: options.performer[0].actor.reference,
-        resourceType: "DiagnosticReport",
-      }),
-      name: options.performer[0].actor.display,
-    };
+
 
     let ret: PROCEDURE = {
       status: options.status,
@@ -143,7 +142,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       patientID: `${options.subject.reference}`.substring(8),
       procedureDate: options.performedDateTime,
       id: options.id,
-      performer: performer as any,
+
       encounterId: this.getIdFromReference({
         ref: options.encounter.reference,
         resourceType: "Encounter",
@@ -152,7 +151,16 @@ export class Procedure extends ResourceMain implements ResourceMaster {
         return el.text;
       }),
     };
+    if(options.performer){
+      ret.performer = {
+        id: this.getIdFromReference({
+          ref: options.performer[0].actor.reference,
+          resourceType: "DiagnosticReport",
+        }),
+        name: options.performer[0].actor.display,
+      } as any
 
+    }
     if (options.followUp) {
       ret.followUp = options.followUp.map((el: any) => el.text);
     }

@@ -12,7 +12,8 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 const setProcedure = async() => {
     const proceduer = new Procedure()
     const body =proceduer.getFHIR({
-        "performer" : resources.practioner,
+        // "performer" : resources.practioner,
+        "asserter" : resources.practioner,
         "complication" : "Bleeding from site",
         "patientID" : resources.patient.id,
         "procedure" : {"text" : "PTCA to LAD"},
@@ -28,7 +29,10 @@ const setProcedure = async() => {
 
     })
 
-    const res = await gcpFhirCRUD.createFhirResource(body, "Procedure")
+    // const res = await gcpFhirCRUD.createFhirResource(body, "Procedure")
+    id = '53dbf2b5-f50f-456c-954b-c7dbe6d98a72'
+    body.id = id
+    const res = await gcpFhirCRUD.updateFhirResource(body, id, "Procedure")
     const ret = proceduer.convertFhirToObject(res.data)
     resources.procedure= res.data;
     // const ret = res.data
