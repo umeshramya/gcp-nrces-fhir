@@ -1,5 +1,5 @@
 import { credentials, databasePath } from "./config/index";
-
+import { htmlToText } from "html-to-text";
 import GcpFhirCRUD from "./classess/gcp";
 import GcpFhirSearch from "./classess/gcpSearch";
 import ResourceFactory from "./classess/ResourceFactory";
@@ -86,6 +86,7 @@ import { Media, MEDIA } from "./resources/Media";
 import { Observation, OBSERVATION } from "./resources/Observation";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
+export {htmlToText}
 export type { resourceType };
 export { PATIENT, PatientResource, Patient };
 export { ORGANIZATION, OrganizationResource, Organization };
