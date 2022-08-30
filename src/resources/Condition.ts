@@ -59,24 +59,3 @@ export class Condition extends  ResourceMain implements ResourceMaster {
   }
 
 }
-
-
-const demo=    {
-  "fullUrl": "Condition/3a5cd214-fe9b-4d9c-a552-685d09978c20",
-  "resource": {
-    "code": {
-      "coding": [
-        {
-          "display": "Notes",
-          "system": "https://www.nicehms.com/system"
-        }
-      ],
-      "text": "Notes"
-    },
-    "id": "3a5cd214-fe9b-4d9c-a552-685d09978c20",
-    "resourceType": "Condition",
-    "subject": {
-      "reference": "Patient/bfe2059d-1e1e-4e06-bf26-3b07dc2b8fa7"
-    }
-  }
-}

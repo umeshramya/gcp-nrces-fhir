@@ -36,25 +36,24 @@ export class Procedure extends ResourceMain implements ResourceMaster {
   getFHIR(options: PROCEDURE) {
     const getText = (): string => {
       let ret: string = "";
-      if(options.performer){
+      if (options.performer) {
         ret = `<div>Performer : ${options.performer.name}</div>`;
       }
-      
+
       if (options.asserter) {
-        ret = `${ret}<div>Assereted By : ${options.asserter.name}</div>`;
+        ret = `${ret}<div>Asserted By : ${options.asserter.name}</div>`;
       }
       if (options.recorder) {
-        ret = `${ret}<div>Assereted By : ${options.recorder.name}</div>`;
+        ret = `${ret}<div>Recorded By : ${options.recorder.name}</div>`;
       }
       ret = `${ret}<div>Procedure Notes</div>`;
       ret = `${ret}${options.text}`;
 
-     
       if (options.outcome) {
         ret = `${ret}<div>Outcome</div>`;
         ret = `${ret}<div>${options.outcome.text}</div>`;
       }
-      
+
       if (options.followUp) {
         ret = `${ret}<div>Follow Up</div>`;
         options.followUp.forEach((el) => {
@@ -90,20 +89,20 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       encounter: {
         reference: `Encounter/${options.encounterId}`,
       },
-      note:[{ text: options.text }],
+      note: [{ text: options.text }],
 
       outcome: options.outcome,
     };
 
-    if(options.performer){
-      body.performer =  [
+    if (options.performer) {
+      body.performer = [
         {
           actor: {
             reference: `Practitioner/${options.performer.id}`,
             display: options.performer.name,
           },
         },
-      ]
+      ];
     }
     if (options.recorder) {
       body.recorder = {
@@ -133,8 +132,6 @@ export class Procedure extends ResourceMain implements ResourceMaster {
     return body;
   }
   convertFhirToObject(options: any): PROCEDURE {
-
-
     let ret: PROCEDURE = {
       status: options.status,
       text: options.text.div,
@@ -151,15 +148,14 @@ export class Procedure extends ResourceMain implements ResourceMaster {
         return el.text;
       }),
     };
-    if(options.performer){
+    if (options.performer) {
       ret.performer = {
         id: this.getIdFromReference({
           ref: options.performer[0].actor.reference,
           resourceType: "DiagnosticReport",
         }),
         name: options.performer[0].actor.display,
-      } as any
-
+      } as any;
     }
     if (options.followUp) {
       ret.followUp = options.followUp.map((el: any) => el.text);

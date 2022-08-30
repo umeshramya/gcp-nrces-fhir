@@ -429,10 +429,10 @@ class excute {
 // new excute().conditon()
 // new excute().practionerRole()
 // new excute().specimen()
-new excute().procedure()
+// new excute().procedure()
 // new excute().serviceRequest()
 // new excute().precsriptinComposition();
-// new excute().OpCunsulatationComposition()
+new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()
