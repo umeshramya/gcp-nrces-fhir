@@ -36,6 +36,9 @@ export class Procedure extends ResourceMain implements ResourceMaster {
   getFHIR(options: PROCEDURE) {
     const getText = (): string => {
       let ret: string = "";
+      if(options.text=="" || options.text == undefined){
+        return "";
+      }
       if (options.performer) {
         ret = `<div>Performer : ${options.performer.name}</div>`;
       }
