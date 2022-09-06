@@ -6,7 +6,7 @@ import ResourceMain from "./ResourceMai";
 export interface SCHEDULE{
     id?:string
     readonly text:string;
-    identifiers?:IDENTTIFIER[]
+    // identifiers?:IDENTTIFIER[]
     active:boolean
     serviceCategory?:CODEABLE_CONCEPT[]
     serviceType?:CODEABLE_CONCEPT[]
@@ -17,7 +17,7 @@ export interface SCHEDULE{
 }
 
 export class Schedule extends ResourceMain implements ResourceMaster{
-    getFHIR(options: SCHEDULE) {
+    getFHIR(options: SCHEDULE):any {
         const getText=():string=>{
             let ret:string=""
             ret= options.comment
@@ -41,7 +41,7 @@ export class Schedule extends ResourceMain implements ResourceMaster{
               "status": "generated",
               "div": getText()
             },
-            "identifier": options.identifiers,
+            // "identifier": options.identifiers,
             "active": options.active,
             "serviceCategory":options.serviceCategory,
             "serviceType": options.serviceType,
@@ -50,9 +50,11 @@ export class Schedule extends ResourceMain implements ResourceMaster{
             "planningHorizon": options.planningHorizon,
             "comment": options.comment
           }
+          return body;
     }
     convertFhirToObject(options: any):SCHEDULE {
        const ret:SCHEDULE={
+           id:options.id,
            text: options.text,
            planningHorizon:   options.planningHorizon ,
            comment: options.comment,

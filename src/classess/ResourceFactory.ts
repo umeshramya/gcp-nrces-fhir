@@ -22,6 +22,8 @@ import { DiagnosticReport } from "../resources/DiagnosticReport";
 import { Media } from "../resources/Media";
 import { Observation } from "../resources/Observation";
 import { ServiceRequest } from "../resources/ServiceRequest";
+import { Schedule } from "../resources/Schedule";
+import { Slot } from "../resources/Slot";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -74,7 +76,12 @@ export default class ResourceFactory
       this.resource = new Observation();
     } else if (this.resourceType == "ServiceRequest") {
       this.resource = new ServiceRequest();
-    } else {
+    } else if (this.resourceType == "Schedule") {
+      this.resource = new Schedule();
+    }else if (this.resourceType == "Slot") {
+      this.resource = new Slot();
+    }
+    else {
       const errMessage = `Not Implimented resourceType ${this.resourceType}`;
       console.log(errMessage);
       throw (new Error().message = errMessage);

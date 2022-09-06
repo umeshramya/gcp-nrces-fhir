@@ -25,6 +25,7 @@ const {  credentials,
     databasePath} = require("gcp-nrces-fhir/lib/config/index")
 const { setObservation } = require("./Observation");
 const console = require("console");
+const { setSChedule } = require("./Schedule");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -94,6 +95,12 @@ class excute {
     const res = await setObservation();
     console.log(res);
   };
+
+  schedule = async()=>{
+    await callFunction()
+    const res= await setSChedule()
+    console.log(res)
+  }
 
   precsriptinComposition = async () => {
     await callFunction();
@@ -431,8 +438,9 @@ class excute {
 // new excute().specimen()
 // new excute().procedure()
 // new excute().serviceRequest()
+new excute().schedule()
 // new excute().precsriptinComposition();
-new excute().OpCunsulatationComposition()
+// new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()

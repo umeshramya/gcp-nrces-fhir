@@ -74,7 +74,8 @@ import {
 } from "./resources/MedicationStatement";
 
 import { ServiceRequest, SERVICE_REQUEST } from "./resources/ServiceRequest";
-
+import {SCHEDULE, Schedule} from "./resources/Schedule"
+import {SLOT, Slot} from "./resources/Slot"
 import { PrescriptionBundle } from "./resources/Bundle/Prescription";
 import { DiagnsoticReportBundle } from "./resources/Bundle/DiagnsoticReport"
 import {OPConsultationBundle} from  "./resources/Bundle/OPConsutation"
@@ -146,7 +147,8 @@ export {
   MedicationRequest,
 };
 export { ServiceRequest, SERVICE_REQUEST };
-
+export{SCHEDULE, Schedule}
+export {SLOT, Slot}
 type Credentials = typeof credentials;
 type DatabasePath = typeof databasePath;
 
