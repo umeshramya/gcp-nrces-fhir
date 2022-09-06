@@ -56,6 +56,7 @@ export class Slot extends ResourceMain implements ResourceMaster {
 
   convertFhirToObject(options: any):SLOT {
     const ret:SLOT={
+        id:options.id,
         comment: options.comment,
         appointmentType: options.appointmentType,
         serviceCategory:options.serviceCategory,

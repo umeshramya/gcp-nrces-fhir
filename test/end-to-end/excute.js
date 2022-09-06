@@ -26,6 +26,7 @@ const {  credentials,
 const { setObservation } = require("./Observation");
 const console = require("console");
 const { setSChedule } = require("./Schedule");
+const {setSlot} = require("./Slot")
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -99,6 +100,12 @@ class excute {
   schedule = async()=>{
     await callFunction()
     const res= await setSChedule()
+    console.log(res)
+  }
+
+  slot= async()=>{
+    // await callFunction()
+    const res= await setSlot()
     console.log(res)
   }
 
@@ -438,7 +445,8 @@ class excute {
 // new excute().specimen()
 // new excute().procedure()
 // new excute().serviceRequest()
-new excute().schedule()
+// new excute().schedule()
+new excute().slot()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 // new excute().media()
