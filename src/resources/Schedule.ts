@@ -1,5 +1,6 @@
 import { CODEABLE_CONCEPT, IDENTTIFIER, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { Actor, ACTOR } from "./objects/Actor";
 import ResourceMain from "./ResourceMai";
 
 export interface SCHEDULE{
@@ -12,12 +13,23 @@ export interface SCHEDULE{
     specialty?:CODEABLE_CONCEPT[]
     planningHorizon:PERIOD
     comment : String
+    actors:ACTOR[]
 }
 
 export class Schedule extends ResourceMain implements ResourceMaster{
     getFHIR(options: SCHEDULE) {
         const getText=():string=>{
             const ret:string=""
+            return ret;
+        }
+
+        const getActors=():any[]=>{
+            const ret:any[]=[]
+            const actor=new Actor();
+            options.actors.forEach(el=>{
+                actor.setActor(el)
+                ret.push(actor.getJson)
+            })
             return ret;
         }
 
@@ -33,12 +45,7 @@ export class Schedule extends ResourceMain implements ResourceMaster{
             "serviceCategory":options.serviceCategory,
             "serviceType": options.serviceType,
             "specialty": options.specialty,
-            "actor": [
-              {
-                "reference": "Location/1",
-                "display": "Burgers UMC, South Wing, second floor"
-              }
-            ],
+            "actor": getActors(),
             "planningHorizon": options.planningHorizon,
             "comment": options.comment
           }
@@ -49,3 +56,5 @@ export class Schedule extends ResourceMain implements ResourceMaster{
     statusArray?: Function | undefined;
     
 }
+
+

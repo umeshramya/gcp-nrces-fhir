@@ -54,9 +54,11 @@ const resourceTypeArray = [
   "RelatedPerson",
   "MolecularSequence",
   "QuestionnaireResponse",
+  "Slot",
+  "Schedule"
 ] as const;
 
-type resourceType = typeof resourceTypeArray[number];
+export type resourceType = typeof resourceTypeArray[number];
 
 export interface CodeDisplay {
   code?: string;
@@ -110,3 +112,4 @@ export const LOINC_SCALE = [
 ] as const;
 
 export type LoincScale = typeof LOINC_SCALE[number];
+

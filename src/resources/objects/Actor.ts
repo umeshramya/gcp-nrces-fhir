@@ -1,0 +1,31 @@
+import { MULTI_RESOURCE, resourceType } from "../../config";
+import ResourceMain from "../ResourceMai";
+
+export interface ACTOR {
+  multiResource: MULTI_RESOURCE;
+}
+
+export class Actor extends ResourceMain {
+  private actor!: ACTOR;
+  setActor(_actor: ACTOR) {
+    this.actor = _actor;
+  }
+
+  getJson(): any {
+    const body = {
+      reference: `${this.actor.multiResource.resource}/${this.actor.multiResource.id}`,
+      display: this.actor.multiResource.display,
+    };
+    return body;
+  }
+  getObject(options: any): ACTOR {
+    const ret: ACTOR = {
+      multiResource: this.getFromMultResource({
+        display: options.display,
+        reference: options.reference,
+      }),
+    };
+
+    return ret;
+  }
+}
