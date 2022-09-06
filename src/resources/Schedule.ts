@@ -1,6 +1,6 @@
-import { CODEABLE_CONCEPT, IDENTTIFIER, PERIOD } from "../config";
+import { CODEABLE_CONCEPT, IDENTTIFIER, PERIOD, ACTOR } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import { Actor, ACTOR } from "./objects/Actor";
+import { Actor} from "./objects/Actor";
 import ResourceMain from "./ResourceMai";
 
 export interface SCHEDULE{
@@ -11,15 +11,16 @@ export interface SCHEDULE{
     serviceCategory?:CODEABLE_CONCEPT[]
     serviceType?:CODEABLE_CONCEPT[]
     specialty?:CODEABLE_CONCEPT[]
-    planningHorizon:PERIOD
-    comment : String
+    planningHorizon:PERIOD,
+    comment : string
     actors:ACTOR[]
 }
 
 export class Schedule extends ResourceMain implements ResourceMaster{
     getFHIR(options: SCHEDULE) {
         const getText=():string=>{
-            const ret:string=""
+            let ret:string=""
+            ret= options.comment
             return ret;
         }
 
@@ -51,7 +52,18 @@ export class Schedule extends ResourceMain implements ResourceMaster{
           }
     }
     convertFhirToObject(options: any):SCHEDULE {
-        throw new Error("Method not implemented.");
+       const ret:SCHEDULE={
+           text: options.text,
+           planningHorizon:   options.planningHorizon ,
+           comment: options.comment,
+           active:options.active,
+           serviceCategory:options.serviceCategory,
+           serviceType:options.serviceType,
+           specialty:options.specialty,
+           actors:options.actor.map((el: any)=> new Actor().getObject(el))
+       }
+
+       return ret;
     }
     statusArray?: Function | undefined;
     

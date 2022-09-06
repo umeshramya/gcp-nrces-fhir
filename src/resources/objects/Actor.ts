@@ -1,9 +1,6 @@
-import { MULTI_RESOURCE, resourceType } from "../../config";
+import { ACTOR} from "../../config";
 import ResourceMain from "../ResourceMai";
 
-export interface ACTOR {
-  multiResource: MULTI_RESOURCE;
-}
 
 export class Actor extends ResourceMain {
   private actor!: ACTOR;

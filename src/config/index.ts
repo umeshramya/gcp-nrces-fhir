@@ -93,8 +93,6 @@ export interface IDENTTIFIER {
 
 export { credentials, resourceTypeArray, databasePath };
 
-export type { resourceType };
-
 export interface MULTI_RESOURCE {
   resource: resourceType;
   id: string;
@@ -113,3 +111,7 @@ export const LOINC_SCALE = [
 
 export type LoincScale = typeof LOINC_SCALE[number];
 
+
+export interface ACTOR {
+  multiResource: MULTI_RESOURCE
+}
