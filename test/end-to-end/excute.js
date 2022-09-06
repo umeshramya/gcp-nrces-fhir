@@ -445,8 +445,8 @@ class excute {
 // new excute().specimen()
 // new excute().procedure()
 // new excute().serviceRequest()
-// new excute().schedule()
-new excute().slot()
+new excute().schedule()
+// new excute().slot()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 // new excute().media()

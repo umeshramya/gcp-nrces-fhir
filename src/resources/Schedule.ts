@@ -59,11 +59,18 @@ export class Schedule extends ResourceMain implements ResourceMaster{
            planningHorizon:   options.planningHorizon ,
            comment: options.comment,
            active:options.active,
-           serviceCategory:options.serviceCategory,
-           serviceType:options.serviceType,
-           specialty:options.specialty,
            actors:options.actor.map((el: any)=> new Actor().getObject(el))
        }
+
+       if(options.serviceCategory){
+        ret.serviceCategory =options.serviceCategory
+      }
+      if(options.serviceType){
+        ret.serviceType= options.serviceType
+      }
+      if(options.specialty){
+        ret.specialty=options.specialty
+      }
 
        return ret;
     }

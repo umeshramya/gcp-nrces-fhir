@@ -59,13 +59,19 @@ export class Slot extends ResourceMain implements ResourceMaster {
         id:options.id,
         comment: options.comment,
         appointmentType: options.appointmentType,
-        serviceCategory:options.serviceCategory,
-        serviceType:options.serviceType,
-        specialty:options.specialty,
         scheduleId: this.getIdFromReference({"ref" : options.schedule.reference, "resourceType" : "Schedule"}),
         status: options.status,
         start: options.start,
         end: options.end
+    }
+    if(options.serviceCategory){
+      ret.serviceCategory =options.serviceCategory
+    }
+    if(options.serviceType){
+      ret.serviceType= options.serviceType
+    }
+    if(options.specialty){
+      ret.specialty=options.specialty
     }
     return ret;
   }
