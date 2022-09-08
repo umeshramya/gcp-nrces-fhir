@@ -11,7 +11,7 @@ export interface SCHEDULE{
     serviceCategory?:CODEABLE_CONCEPT[]
     serviceType?:CODEABLE_CONCEPT[]
     specialty?:CODEABLE_CONCEPT[]
-    planningHorizon:PERIOD,
+    planningHorizon?:PERIOD,
     comment : string
     actors:ACTOR[]
 }
@@ -70,6 +70,9 @@ export class Schedule extends ResourceMain implements ResourceMaster{
       }
       if(options.specialty){
         ret.specialty=options.specialty
+      }
+      if(options.planningHorizon){
+        ret.planningHorizon =options.planningHorizon
       }
 
        return ret;
