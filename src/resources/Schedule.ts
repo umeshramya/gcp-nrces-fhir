@@ -29,7 +29,7 @@ export class Schedule extends ResourceMain implements ResourceMaster{
             const actor=new Actor();
             options.actors.forEach(el=>{
                 actor.setActor(el)
-                ret.push(actor.getJson)
+                ret.push(actor.getJson())
             })
             return ret;
         }
