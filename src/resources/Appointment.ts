@@ -1,5 +1,13 @@
-import { CONDITION, Condition, GcpFhirCRUD, PATIENT, Patient, PRACTITIONER, Practitioner } from "..";
-import { CodeDisplay } from "../config";
+import {
+  CONDITION,
+  Condition,
+  GcpFhirCRUD,
+  PATIENT,
+  Patient,
+  PRACTITIONER,
+  Practitioner,
+} from "..";
+import { CODEABLE_CONCEPT, CodeDisplay } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -31,24 +39,26 @@ export interface APPOINTMENT {
   status: AppointmentStatus;
   patient: PATIENT;
   practitioner: PRACTITIONER;
-  serviceCategory: CodeDisplay[];
-  serviceType: CodeDisplay[];
-  appointmentType: CodeDisplay[];
-  reasonReferenceCondition?: CONDITION;
+  serviceCategory?: CODEABLE_CONCEPT[];
+  serviceType?: CODEABLE_CONCEPT[];
+  specialty?: CODEABLE_CONCEPT[];
+  appointmentType?: CODEABLE_CONCEPT;
+  reasonCode?: CODEABLE_CONCEPT[];
   createdDate: string;
   startDate: string;
   endDate: string;
   description: string;
   patientStatus: AppointmentActorStatus;
   practitionerStatus: AppointmentActorStatus;
+  priority: number;
+  slotId?: string;
 }
 
 export class Appointment extends ResourceMain implements ResourceMaster {
   getFHIR(options: APPOINTMENT): any {
     const getText = (): any => {
-      const patient = options.patient
-      const practitioner = options.practitioner
-      const condtion = options.reasonReferenceCondition
+      const patient = options.patient;
+      const practitioner = options.practitioner;
 
       let ret = `Appointment status ${options.status}`;
       ret = `${ret} <div> ${patient.name} (${options.patientStatus}) </div>`;
@@ -57,17 +67,19 @@ export class Appointment extends ResourceMain implements ResourceMaster {
         options.startDate
       ).toDateString()} to ${new Date(options.endDate).toDateString()} </div>`;
       if (options.serviceCategory) {
-        ret = `${ret} <div>Service Category ${options.serviceCategory[0].display}</div>`;
+        ret = `${ret} <div>Service Category ${options.serviceCategory[0].text}</div>`;
       }
 
       if (options.serviceType) {
-        ret = `${ret} <div>Service Type ${options.serviceType[0].display}</div>`;
+        ret = `${ret} <div>Service Type ${options.serviceType[0].text}</div>`;
       }
-
+      if(options.reasonCode){
+        ret = `${ret} <div>Reason ${options.reasonCode[0].text}</div>`;
+      }
       ret = `${ret} <div>${options.description}</div>`;
       return ret;
     };
-    let body = {
+    let body: any = {
       resourceType: "Appointment",
       id: options.id || undefined,
       meta: {
@@ -80,24 +92,11 @@ export class Appointment extends ResourceMain implements ResourceMaster {
         div: `<div xmlns="http://www.w3.org/1999/xhtml">${getText()}</div>`,
       },
       status: options.status,
-      serviceCategory: [
-        {
-          coding: options.serviceCategory,
-        },
-      ],
-      serviceType: [
-        {
-          coding: options.serviceType,
-        },
-      ],
-      appointmentType: {
-        coding: options.appointmentType,
-      },
-      reasonReference: options.reasonReferenceCondition ? [
-        {
-          reference: `Condition/${options.reasonReferenceCondition}`,
-        },
-      ] : undefined,
+      serviceCategory: options.serviceCategory,
+      serviceType: options.serviceCategory,
+      specialty: options.serviceType,
+      appointmentType: options.appointmentType,
+      reasonCode: options.reasonCode,
       description: options.description,
       start: options.startDate,
       end: options.endDate,
@@ -116,36 +115,33 @@ export class Appointment extends ResourceMain implements ResourceMaster {
           status: options.practitionerStatus,
         },
       ],
+      priority: options.priority,
     };
-
-
+    if (options.slotId) {
+      body.slot = {
+        reference: `Slot/${options.slotId}`,
+      };
+    }
 
     return body;
   }
   convertFhirToObject(options: any): APPOINTMENT {
     let ret: APPOINTMENT = {
+      priority: options.priority,
       status: options.status,
       patient: {
         id: this.getIdFromReference({
           ref: options.participant[0].actor.reference,
           resourceType: "Patient",
-        })
+        }),
       } as any,
       practitioner: {
         id: this.getIdFromReference({
           ref: options.participant[1].actor.reference,
           resourceType: "Practitioner",
-        })
+        }),
       } as any,
-      serviceCategory: options.serviceCategory,
-      serviceType: options.serviceType,
-      appointmentType: options.appointmentType,
-      reasonReferenceCondition: {
-        id: this.getIdFromReference({
-          ref: options.reasonReference[0].reference,
-          resourceType: "Condition",
-        })
-      } as any,
+
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,
@@ -154,7 +150,26 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       practitionerStatus: options.participant[0].status,
       id: options.id,
     };
+    if (options.slot) {
+      ret.slotId = this.getIdFromReference({
+        ref: options.slot.reference,
+        resourceType: "Slot",
+      });
+    }
 
+    if (options.serviceCategory) {
+      ret.serviceCategory = options.serviceCategory;
+    }
+    if (options.serviceType) {
+      ret.serviceType = options.serviceType;
+    }
+    if (options.specialty) {
+      ret.specialty = options.specialty;
+    }
+
+    if (options.appointmentType) {
+      ret.appointmentType = options.appointmentType;
+    }
 
     return ret;
   }
