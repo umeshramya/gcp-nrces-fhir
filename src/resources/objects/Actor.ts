@@ -5,7 +5,7 @@ import ResourceMain from "../ResourceMai";
 
 export class Actor extends ResourceMain implements FhirObjectsMethods{
   private actor!: ACTOR;
-  setActor(_actor: ACTOR) {
+  setObject(_actor: ACTOR) {
     this.actor = _actor;
   }
 

@@ -9,6 +9,7 @@ import {
 } from "..";
 import { CODEABLE_CONCEPT, CodeDisplay } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { Participant, PARTICIPANT } from "./objects/Partipant";
 import ResourceMain from "./ResourceMai";
 
 export const AppointmentStatusArray = [
@@ -36,9 +37,8 @@ type AppointmentActorStatus = typeof AppointmentActorStatusArray[number];
 
 export interface APPOINTMENT {
   id?: string;
+  participants:PARTICIPANT[]
   status: AppointmentStatus;
-  patient: PATIENT;
-  practitioner: PRACTITIONER;
   serviceCategory?: CODEABLE_CONCEPT[];
   serviceType?: CODEABLE_CONCEPT[];
   specialty?: CODEABLE_CONCEPT[];
@@ -48,8 +48,6 @@ export interface APPOINTMENT {
   startDate: string;
   endDate: string;
   description: string;
-  patientStatus: AppointmentActorStatus;
-  practitionerStatus: AppointmentActorStatus;
   priority: number;
   slotId?: string;
 }
@@ -57,15 +55,10 @@ export interface APPOINTMENT {
 export class Appointment extends ResourceMain implements ResourceMaster {
   getFHIR(options: APPOINTMENT): any {
     const getText = (): any => {
-      const patient = options.patient;
-      const practitioner = options.practitioner;
-
-      let ret = `Appointment status ${options.status}`;
-      ret = `${ret} <div> ${patient.name} (${options.patientStatus}) </div>`;
-      ret = `${ret} <div> ${practitioner.name} (${options.practitionerStatus}) </div>`;
-      ret = `${ret} <div>From ${new Date(
+      let ret = ``;
+      ret = `${ret} <div>Date ${new Date(
         options.startDate
-      ).toDateString()} to ${new Date(options.endDate).toDateString()} </div>`;
+      ).toDateString() || new Date(options.endDate).toDateString()}} `;
       if (options.serviceCategory) {
         ret = `${ret} <div>Service Category ${options.serviceCategory[0].text}</div>`;
       }
@@ -79,6 +72,19 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       ret = `${ret} <div>${options.description}</div>`;
       return ret;
     };
+    
+    const getParticipant=():any[]=>{
+      const ret:any[]=[]
+      const participant = new Participant()
+      options.participants.forEach(el=>{
+        participant.setObject(el);
+        ret.push(participant.getJson())
+      })
+      return ret;
+    }
+
+
+    
     let body: any = {
       resourceType: "Appointment",
       id: options.id || undefined,
@@ -89,8 +95,9 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: `<div xmlns="http://www.w3.org/1999/xhtml">${getText()}</div>`,
+        div: getText(),
       },
+  
       status: options.status,
       serviceCategory: options.serviceCategory,
       serviceType: options.serviceCategory,
@@ -101,20 +108,7 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       start: options.startDate,
       end: options.endDate,
       created: options.createdDate,
-      participant: [
-        {
-          actor: {
-            reference: `Patient/${options.patient.id}`,
-          },
-          status: options.patientStatus,
-        },
-        {
-          actor: {
-            reference: `Practitioner/${options.practitioner.id}`,
-          },
-          status: options.practitionerStatus,
-        },
-      ],
+      participant: getParticipant(),
       priority: options.priority,
     };
     if (options.slotId) {
@@ -129,25 +123,12 @@ export class Appointment extends ResourceMain implements ResourceMaster {
     let ret: APPOINTMENT = {
       priority: options.priority,
       status: options.status,
-      patient: {
-        id: this.getIdFromReference({
-          ref: options.participant[0].actor.reference,
-          resourceType: "Patient",
-        }),
-      } as any,
-      practitioner: {
-        id: this.getIdFromReference({
-          ref: options.participant[1].actor.reference,
-          resourceType: "Practitioner",
-        }),
-      } as any,
-
+      participants:undefined,
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,
       description: options.description,
-      patientStatus: options.participant[0].status,
-      practitionerStatus: options.participant[0].status,
+
       id: options.id,
     };
     if (options.slot) {

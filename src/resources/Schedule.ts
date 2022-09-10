@@ -28,7 +28,7 @@ export class Schedule extends ResourceMain implements ResourceMaster{
             const ret:any[]=[]
             const actor=new Actor();
             options.actors.forEach(el=>{
-                actor.setActor(el)
+                actor.setObject(el)
                 ret.push(actor.getJson())
             })
             return ret;

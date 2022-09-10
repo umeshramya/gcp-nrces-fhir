@@ -5,6 +5,7 @@ export interface ResourceMaster {
 }
 
 export interface FhirObjectsMethods{
+  setObject:(o:any)=>void
   getJson:()=>any;
   getObject:(option:any)=>any
 }

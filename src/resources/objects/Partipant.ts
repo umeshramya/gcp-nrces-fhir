@@ -3,7 +3,7 @@ import { FhirObjectsMethods } from "../../Interfaces";
 import ResourceMain from "../ResourceMai";
 import { Actor } from "./Actor";
 
-interface PARTICIPANT {
+export interface PARTICIPANT {
   actor: ACTOR;
   status: string;
   type: CODEABLE_CONCEPT[];
@@ -11,7 +11,7 @@ interface PARTICIPANT {
 
 export class Participant extends ResourceMain implements FhirObjectsMethods {
   private participant!: PARTICIPANT;
-  setActor(_paticipant: PARTICIPANT) {
+  setObject(_paticipant: PARTICIPANT) {
     this.participant = _paticipant;
   }
 
