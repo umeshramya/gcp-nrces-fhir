@@ -49,7 +49,7 @@ export interface APPOINTMENT {
   endDate: string;
   description: string;
   priority: number;
-  slotId?: string;
+  slotId?: string[];
 }
 
 export class Appointment extends ResourceMain implements ResourceMaster {
@@ -111,10 +111,12 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       participant: getParticipant(),
       priority: options.priority,
     };
-    if (options.slotId) {
-      body.slot = {
-        reference: `Slot/${options.slotId}`,
-      };
+    if (options.slotId && options.slotId?.length > 0) {
+      body.slot = options.slotId.map(el=>{
+        return {
+          reference: `Slot/${el}`
+        }
+      });
     }
 
     return body;
@@ -131,10 +133,12 @@ export class Appointment extends ResourceMain implements ResourceMaster {
 
       id: options.id,
     };
-    if (options.slot) {
-      ret.slotId = this.getIdFromReference({
-        ref: options.slot.reference,
-        resourceType: "Slot",
+    if (options.slot && options.slot.length > 0 ){
+      ret.slotId = options.slot.map((el:any)=>{
+       return this.getIdFromReference({
+          ref: el.reference,
+          resourceType: "Slot",
+        })
       });
     }
 

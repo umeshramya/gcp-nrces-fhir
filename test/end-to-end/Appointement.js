@@ -21,7 +21,8 @@ const setAppointment= async () => {
       {
         "actor" : {"multiResource" : {"display" : resources.patient.name, "id" : resources.patient.id, "resource" : "Patient"}},
         "status" : "tentative",
-        "type" : [{"text" : "Patient"}]
+        "type" : [{"text" : "Patient"}],
+        "required" : "required"
       },
       {
         "actor" : {"multiResource" : {"display" : resources.practioner.name, "id" : resources.practioner.id, "resource" : "Practitioner"}},
@@ -31,7 +32,8 @@ const setAppointment= async () => {
     ],
     "priority" : 1,
     "specialty" : [{"text" : "Cardiology"}],
-    "status" : "proposed"
+    "status" : "proposed",
+    "slotId" :[ "8ad46b43-4785-4e88-a3c5-13320a884426"]
   });
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Appointment");
