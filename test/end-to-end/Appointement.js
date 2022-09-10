@@ -12,31 +12,31 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 const setAppointment= async () => {
   const appointment = new Appointment();
   const body = appointment.getFHIR({
-    active: true,
-    actors: [
+    "appointmentType" : {"text" : "Consulatation"},
+    "createdDate" : new Date().toISOString(),
+    "description" : "Appointement for Consulatation in view of Post PTCA follwup",
+    "endDate" : new Date().toISOString(),
+    "startDate" : new Date().toISOString(),
+    "participants" : [
       {
-        multiResource: {
-          display: resources.practioner.name,
-          id: resources.practioner.id,
-          resource: "Practitioner",
-        },
+        "actor" : {"multiResource" : {"display" : resources.patient.name, "id" : resources.patient.id, "resource" : "Patient"}},
+        "status" : "tentative",
+        "type" : [{"text" : "Patient"}]
       },
+      {
+        "actor" : {"multiResource" : {"display" : resources.practioner.name, "id" : resources.practioner.id, "resource" : "Practitioner"}},
+        "status" : "accepted",
+        "type" : [{"text" : "Doctor"}]
+      }
     ],
-
-    comment: "This is Augst Schedule of Dr Umesh R Bilagi",
-    planningHorizon: {
-      start: new Date("2022-09-01").toISOString(),
-      end: new Date("2022-09-30").toISOString(),
-    },
-    serviceCategory: [{ text: "Consultation" }],
-    specialty: [{ text: "Cardiology" }],
+    "priority" : 1,
+    "specialty" : [{"text" : "Cardiology"}],
+    "status" : "proposed"
   });
 
-
-
-  const res = await gcpFhirCRUD.createFhirResource(body, "Schedule");
+  const res = await gcpFhirCRUD.createFhirResource(body, "Appointment");
   const ret = appointment.convertFhirToObject(res.data);
   return ret;
 };
 
-module.exports = { setSChedule };
+module.exports = { setAppointment };

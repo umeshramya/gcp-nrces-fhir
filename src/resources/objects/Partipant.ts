@@ -5,8 +5,8 @@ import { Actor } from "./Actor";
 
 export interface PARTICIPANT {
   actor: ACTOR;
-  status: string;
-  type: CODEABLE_CONCEPT[];
+  status: 	"accepted" | "declined" | "tentative" |"needs-action"
+  type?: CODEABLE_CONCEPT[];
 }
 
 export class Participant extends ResourceMain implements FhirObjectsMethods {
@@ -22,7 +22,7 @@ export class Participant extends ResourceMain implements FhirObjectsMethods {
         reference: `${this.participant.actor.multiResource.resource}/${this.participant.actor.multiResource.id}`,
         display: this.participant.actor.multiResource.display,
       },
-      status: this.participant.type,
+      status: this.participant.status,
     };
     return body;
   }
@@ -35,8 +35,11 @@ export class Participant extends ResourceMain implements FhirObjectsMethods {
           }),
         },
         status: options.status,
-        type: options.type,
+        
       };
+      if(options.type){
+        ret.type=options.type
+      }
       return ret;
 
   }

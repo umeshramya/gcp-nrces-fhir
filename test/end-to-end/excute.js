@@ -15,6 +15,7 @@ const {
   OPConsultationBundle,
   DiagnsoticReportBundle,
   ServiceRequest,
+  Appointment,
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -26,7 +27,8 @@ const {  credentials,
 const { setObservation } = require("./Observation");
 const console = require("console");
 const { setSChedule } = require("./Schedule");
-const {setSlot} = require("./Slot")
+const {setSlot} = require("./Slot");
+const { setAppointment } = require("./Appointement");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -100,6 +102,12 @@ class excute {
   schedule = async()=>{
     await callFunction()
     const res= await setSChedule()
+    console.log(res)
+  }
+
+  appointment = async()=>{
+    await callFunction()
+    const res= await setAppointment()
     console.log(res)
   }
 
@@ -445,7 +453,8 @@ class excute {
 // new excute().specimen()
 // new excute().procedure()
 // new excute().serviceRequest()
-new excute().schedule()
+// new excute().schedule()
+new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
