@@ -1,8 +1,9 @@
 import { ACTOR} from "../../config";
+import { FhirObjectsMethods } from "../../Interfaces";
 import ResourceMain from "../ResourceMai";
 
 
-export class Actor extends ResourceMain {
+export class Actor extends ResourceMain implements FhirObjectsMethods{
   private actor!: ACTOR;
   setActor(_actor: ACTOR) {
     this.actor = _actor;

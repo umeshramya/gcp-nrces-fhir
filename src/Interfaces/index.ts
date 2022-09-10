@@ -3,3 +3,8 @@ export interface ResourceMaster {
   convertFhirToObject(options: any): any;
   statusArray?: Function;
 }
+
+export interface FhirObjectsMethods{
+  getJson:()=>any;
+  getObject:(option:any)=>any
+}
