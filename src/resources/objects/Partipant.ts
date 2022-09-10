@@ -26,20 +26,18 @@ export class Participant extends ResourceMain implements FhirObjectsMethods {
     };
     return body;
   }
-  getObject(options: any): PARTICIPANT[] {
-    const ret: PARTICIPANT[] = options.participant.map((el: any) => {
-      const mapret: PARTICIPANT = {
+  getObject(options: any): PARTICIPANT {
+      const ret: PARTICIPANT = {
         actor: {
           multiResource: this.getFromMultResource({
-            reference: el.actor.reference,
-            display: el.actor.display,
+            reference: options.actor.reference,
+            display: options.actor.display,
           }),
         },
-        status: el.status,
-        type: el.type,
+        status: options.status,
+        type: options.type,
       };
-      return mapret;
-    });
-    return ret;
+      return ret;
+
   }
 }

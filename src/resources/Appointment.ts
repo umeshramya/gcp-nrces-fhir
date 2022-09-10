@@ -123,7 +123,7 @@ export class Appointment extends ResourceMain implements ResourceMaster {
     let ret: APPOINTMENT = {
       priority: options.priority,
       status: options.status,
-      participants:undefined,
+      participants:options.participant.map((el: any)=> new Participant().getObject(el)),
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,
