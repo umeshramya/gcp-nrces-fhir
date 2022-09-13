@@ -14,7 +14,7 @@ interface Args {
 }
 export class OPConsultRecord extends Composition implements Records {
   create = async (options: Args) => {
-    options = this.getOptions(options)
+    options = this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
 
@@ -23,7 +23,7 @@ export class OPConsultRecord extends Composition implements Records {
     return res;
   };
   update = async (options: Args) => {
-    options= this.getOptions(options)
+    options = this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
     const gcpFhirCrud = new GcpFhirCRUD();
@@ -35,16 +35,20 @@ export class OPConsultRecord extends Composition implements Records {
     return res;
   };
 
-  getOptions(options:Args):Args{
+  getOptions(options: Args): Args {
     options.composition.section = [];
-    options.composition.documentDatahtml =""
-    let docHtml = ""   
+    options.composition.documentDatahtml = "";
+    let docHtml = "";
     docHtml = `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
     docHtml += `<tbody style="display: table-header-group"><tr>`;
-    docHtml += `<td style="width: 50%;"  border="0" >${this.getLeftColumn(options)}</td>`
-    docHtml += `<td style="width: 50%;"  border="0" >${this.getRightColumn(options)}</td>`
-    docHtml += `</tr></thead>`
-    docHtml += `<tbody>`
+    docHtml += `<td style="width: 50%;"  border="0" >${this.getLeftColumn(
+      options
+    )}</td>`;
+    docHtml += `<td style="width: 50%;"  border="0" >${this.getRightColumn(
+      options
+    )}</td>`;
+    docHtml += `</tr></thead>`;
+    docHtml += `<tbody>`;
     docHtml += `</table>`;
 
     if (options.medicationRequest || options.medicationRequest) {
@@ -54,17 +58,16 @@ export class OPConsultRecord extends Composition implements Records {
           reference: `MedicationStatement/${options.medicationStatement.id}`,
         });
 
-       docHtml =
-         docHtml +
-          `<h6>Medication Statement</h6>${options.medicationStatement.text.div}`;
+        docHtml =
+          docHtml +
+          `<b>Medication Statement</b>${options.medicationStatement.text.div}`;
       }
       if (options.medicationRequest) {
         entry.push({
           reference: `MedicationRequest/${options.medicationRequest.id}`,
         });
-       docHtml =
-         docHtml +
-          `<h6>Prescription</h6>${options.medicationRequest.text.div}`;
+        docHtml =
+          docHtml + `<b>Prescription</b>${options.medicationRequest.text.div}`;
       }
 
       options.composition.section.push({
@@ -82,14 +85,14 @@ export class OPConsultRecord extends Composition implements Records {
       });
     }
 
-    options.composition.documentDatahtml=docHtml
+    options.composition.documentDatahtml = docHtml;
 
-    return options
+    return options;
   }
 
-  getLeftColumn=(options:Args):string=>{
-    let docHtml=""
-    if(options.chiefComplaints){
+  getLeftColumn = (options: Args): string => {
+    let docHtml = "";
+    if (options.chiefComplaints) {
       options.composition.section.push({
         title: "Chief complaints",
         code: {
@@ -107,11 +110,11 @@ export class OPConsultRecord extends Composition implements Records {
           },
         ],
       });
-     docHtml =options.composition.documentDatahtml + `<h6>Chief complaints</h6>${options.chiefComplaints.text.div}`;
-  
-
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.chiefComplaints.text.div}<br/>`;
     }
-    
+
     if (options.medicalHistory) {
       options.composition.section.push({
         title: "Medical History",
@@ -131,9 +134,9 @@ export class OPConsultRecord extends Composition implements Records {
         ],
       });
 
-     docHtml =
-       docHtml +
-        `<h6>Medical History</h6>${options.medicalHistory.text.div}`;
+      docHtml =
+        docHtml +
+        `<b>Medical History</b>${options.medicalHistory.text.div}<br/>`;
     }
 
     if (options.physicalExamination) {
@@ -150,37 +153,14 @@ export class OPConsultRecord extends Composition implements Records {
         },
         entry: [
           {
-            reference: `Condition/${options.physicalExamination.id}`,
+            reference: `Condition/${options.physicalExamination.id}<br/>`,
           },
         ],
       });
 
-     docHtml =
-       docHtml +
-        `<h6>Physical Examination</h6>${options.physicalExamination.text.div}`;
-    }
-
-    if (options.investigationAdvice) {
-      options.composition.section.push({
-        title: "Investigation Advice",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "721963009",
-              display: "Order document",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `ServiceRequest/${options.investigationAdvice.id}`,
-          },
-        ],
-      });
-     docHtml =
-       docHtml +
-        `<h6>Investigation Advice</h6>${options.investigationAdvice.text.div}`;
+      docHtml =
+        docHtml +
+        `<b>Physical Examination</b>${options.physicalExamination.text.div}`;
     }
 
     if (options.procedure) {
@@ -201,15 +181,13 @@ export class OPConsultRecord extends Composition implements Records {
           },
         ],
       });
-     docHtml =
-       docHtml +
-        `<h6>Procedure</h6>${options.procedure.text.div}`;
+      docHtml = docHtml + `<b>Procedure</b>${options.procedure.text.div}</br>`;
     }
-    return docHtml
-  }
+    return docHtml;
+  };
 
-  getRightColumn =(options:Args):string=>{
-    let docHtml=""
+  getRightColumn = (options: Args): string => {
+    let docHtml = "";
     if (options.followUp) {
       options.composition.section.push({
         title: "Follow Up",
@@ -228,10 +206,13 @@ export class OPConsultRecord extends Composition implements Records {
           },
         ],
       });
-      
-     docHtml =
-       docHtml +
-        `<div"><span><b>Follow up:-</b>${new Date(options.followUp.start).toDateString() || new Date(options.followUp.end).toDateString()}`;
+
+      docHtml =
+        docHtml +
+        `<div"><span><b>Follow up:-</b>${
+          new Date(options.followUp.start).toDateString() ||
+          new Date(options.followUp.end).toDateString()
+        }${options.followUp.text.div}</br>`;
     }
     if (options.allergies) {
       options.composition.section.push({
@@ -252,12 +233,32 @@ export class OPConsultRecord extends Composition implements Records {
         ],
       });
 
-     docHtml =
-       docHtml +
-        `<h6>Allergies</h6>${options.allergies.text.div}`;
+      docHtml = docHtml + `<b>Allergies</b>${options.allergies.text.div}</br>`;
     }
 
-    return docHtml
+    if (options.investigationAdvice) {
+      options.composition.section.push({
+        title: "Investigation Advice",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "721963009",
+              display: "Order document",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `ServiceRequest/${options.investigationAdvice.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Investigation Advice</b>${options.investigationAdvice.text.div}</br>`;
+    }
 
-  }
+    return docHtml;
+  };
 }
