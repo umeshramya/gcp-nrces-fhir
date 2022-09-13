@@ -38,30 +38,57 @@ export class OPConsultRecord extends Composition implements Records {
   getOptions(options:Args):Args{
     options.composition.section = [];
     options.composition.documentDatahtml =""
-    if (options.followUp) {
+    let docHtml = ""   
+    docHtml = `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
+    docHtml += `<tbody style="display: table-header-group"><tr>`;
+    docHtml += `<td style="width: 50%;"  border="0" >${this.getLeftColumn(options)}</td>`
+    docHtml += `<td style="width: 50%;"  border="0" >${this.getRightColumn(options)}</td>`
+    docHtml += `</tr></thead>`
+    docHtml += `<tbody>`
+    docHtml += `</table>`;
+
+    if (options.medicationRequest || options.medicationRequest) {
+      let entry = [];
+      if (options.medicationStatement) {
+        entry.push({
+          reference: `MedicationStatement/${options.medicationStatement.id}`,
+        });
+
+       docHtml =
+         docHtml +
+          `<h6>Medication Statement</h6>${options.medicationStatement.text.div}`;
+      }
+      if (options.medicationRequest) {
+        entry.push({
+          reference: `MedicationRequest/${options.medicationRequest.id}`,
+        });
+       docHtml =
+         docHtml +
+          `<h6>Prescription</h6>${options.medicationRequest.text.div}`;
+      }
+
       options.composition.section.push({
-        title: "Follow Up",
+        title: "Medications",
         code: {
           coding: [
             {
               system: "http://snomed.info/sct",
-              code: "736271009",
-              display: "Outpatient care plan",
+              code: "721912009",
+              display: "Medication summary document",
             },
           ],
         },
-        entry: [
-          {
-            reference: `Appointment/${options.followUp.id}`,
-          },
-        ],
+        entry: entry,
       });
-      
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
-        `<div"><span><b>Follow up:-</b>${new Date(options.followUp.start).toDateString() || new Date(options.followUp.end).toDateString()}</span>${options.followUp.text.div}</div>`;
     }
 
+    options.composition.documentDatahtml=docHtml
+
+    return options
+  }
+
+  getLeftColumn=(options:Args):string=>{
+    let docHtml=""
     if(options.chiefComplaints){
       options.composition.section.push({
         title: "Chief complaints",
@@ -80,35 +107,11 @@ export class OPConsultRecord extends Composition implements Records {
           },
         ],
       });
-      options.composition.documentDatahtml =options.composition.documentDatahtml + `<h6>Chief complaints</h6>${options.chiefComplaints.text.div}`;
+     docHtml =options.composition.documentDatahtml + `<h6>Chief complaints</h6>${options.chiefComplaints.text.div}`;
   
 
     }
     
-    if (options.allergies) {
-      options.composition.section.push({
-        title: "Allergies",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "722446000",
-              display: "Allergy record",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `AllergyIntolerance/${options.allergies.id}`,
-          },
-        ],
-      });
-
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
-        `<h6>Allergies</h6>${options.allergies.text.div}`;
-    }
-
     if (options.medicalHistory) {
       options.composition.section.push({
         title: "Medical History",
@@ -128,8 +131,8 @@ export class OPConsultRecord extends Composition implements Records {
         ],
       });
 
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
+     docHtml =
+       docHtml +
         `<h6>Medical History</h6>${options.medicalHistory.text.div}`;
     }
 
@@ -152,8 +155,8 @@ export class OPConsultRecord extends Composition implements Records {
         ],
       });
 
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
+     docHtml =
+       docHtml +
         `<h6>Physical Examination</h6>${options.physicalExamination.text.div}`;
     }
 
@@ -175,8 +178,8 @@ export class OPConsultRecord extends Composition implements Records {
           },
         ],
       });
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
+     docHtml =
+       docHtml +
         `<h6>Investigation Advice</h6>${options.investigationAdvice.text.div}`;
     }
 
@@ -198,45 +201,63 @@ export class OPConsultRecord extends Composition implements Records {
           },
         ],
       });
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
+     docHtml =
+       docHtml +
         `<h6>Procedure</h6>${options.procedure.text.div}`;
     }
-  
-    if (options.medicationRequest || options.medicationRequest) {
-      let entry = [];
-      if (options.medicationStatement) {
-        entry.push({
-          reference: `MedicationStatement/${options.medicationStatement.id}`,
-        });
+    return docHtml
+  }
 
-        options.composition.documentDatahtml =
-          options.composition.documentDatahtml +
-          `<h6>Medication Statement</h6>${options.medicationStatement.text.div}`;
-      }
-      if (options.medicationRequest) {
-        entry.push({
-          reference: `MedicationRequest/${options.medicationRequest.id}`,
-        });
-        options.composition.documentDatahtml =
-          options.composition.documentDatahtml +
-          `<h6>Prescription</h6>${options.medicationRequest.text.div}`;
-      }
-
+  getRightColumn =(options:Args):string=>{
+    let docHtml=""
+    if (options.followUp) {
       options.composition.section.push({
-        title: "Medications",
+        title: "Follow Up",
         code: {
           coding: [
             {
               system: "http://snomed.info/sct",
-              code: "721912009",
-              display: "Medication summary document",
+              code: "736271009",
+              display: "Outpatient care plan",
             },
           ],
         },
-        entry: entry,
+        entry: [
+          {
+            reference: `Appointment/${options.followUp.id}`,
+          },
+        ],
       });
+      
+     docHtml =
+       docHtml +
+        `<div"><span><b>Follow up:-</b>${new Date(options.followUp.start).toDateString() || new Date(options.followUp.end).toDateString()}`;
     }
-    return options
+    if (options.allergies) {
+      options.composition.section.push({
+        title: "Allergies",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "722446000",
+              display: "Allergy record",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `AllergyIntolerance/${options.allergies.id}`,
+          },
+        ],
+      });
+
+     docHtml =
+       docHtml +
+        `<h6>Allergies</h6>${options.allergies.text.div}`;
+    }
+
+    return docHtml
+
   }
 }

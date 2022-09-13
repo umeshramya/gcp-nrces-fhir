@@ -70,6 +70,7 @@ export class Appointment extends ResourceMain implements ResourceMaster {
         ret = `${ret} <div>Reason ${options.reasonCode[0].text}</div>`;
       }
       ret = `${ret} <div>${options.description}</div>`;
+
       return ret;
     };
     

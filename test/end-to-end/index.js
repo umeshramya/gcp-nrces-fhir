@@ -12,6 +12,7 @@ const resources = {
     encounter: null,
     conditon: null,
     procedure:null,
+    appointment:null,
     medicationsRequest: null,
     serviceRequest : null,
     media:null

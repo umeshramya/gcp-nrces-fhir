@@ -30,6 +30,7 @@ const setAppointment= async () => {
         "type" : [{"text" : "Doctor"}]
       }
     ],
+    serviceCategory : [{"text" : "Consultation"}],
     "priority" : 1,
     "specialty" : [{"text" : "Cardiology"}],
     "status" : "proposed",
@@ -38,7 +39,10 @@ const setAppointment= async () => {
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Appointment");
   const ret = appointment.convertFhirToObject(res.data);
+  
+  resources.appointment= res.data
   return ret;
+  
 };
 
 module.exports = { setAppointment };

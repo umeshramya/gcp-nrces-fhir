@@ -108,7 +108,6 @@ class excute {
   appointment = async()=>{
     await callFunction()
     const res= await setAppointment()
-    return res
     console.log(res)
   }
 
@@ -165,6 +164,7 @@ class excute {
     await setMedicationRequest();
     await setCondition();
     await setProcedure()
+    await setAppointment()
 
     
     const gcpFhirCRUD = new GcpFhirCRUD();
@@ -204,8 +204,9 @@ class excute {
       // physicalExamination: resources.conditon,
       procedure : resources.procedure,
       medicationRequest: medciationResource,
-      // "followUp" : await this.appointment()
+      "followUp" : resources.appointment
     });
+    // console.log(resources.appointment)
 
     console.log(res.data);
   };
@@ -388,7 +389,7 @@ class excute {
   ) => {
 
     const compositionResource = await new GcpFhirCRUD()
-    .getFhirResource("8a246219-1d8f-4386-9373-9a7b3bb3533f", "Composition")
+    .getFhirResource("76fa9016-7f3c-4e9c-98f7-d21561e1b829", "Composition")
     .then((res) => res.data);
     const html = `${compositionResource.text.div}`.trim();
 
@@ -474,6 +475,6 @@ class excute {
 // new excute().updateServiceRequest()
 
 // new excute().createPrescriptionBundle()
-// new excute().createOPConsultationBundle();
+new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
