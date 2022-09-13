@@ -56,10 +56,10 @@ export class OPConsultRecord extends Composition implements Records {
           },
         ],
       });
-
+      
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<div"><b>Follow up:-</b>${new Date(options.followUp.start).toDateString() || new Date(options.followUp.end).toDateString()}${options.followUp.text.div}</div>`;
+        `<div"><span><b>Follow up:-</b>${new Date(options.followUp.start).toDateString() || new Date(options.followUp.end).toDateString()}</span>${options.followUp.text.div}</div>`;
     }
 
     if(options.chiefComplaints){
