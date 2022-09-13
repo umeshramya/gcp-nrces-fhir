@@ -153,14 +153,14 @@ export class OPConsultRecord extends Composition implements Records {
         },
         entry: [
           {
-            reference: `Condition/${options.physicalExamination.id}<br/>`,
+            reference: `Condition/${options.physicalExamination.id}`,
           },
         ],
       });
 
       docHtml =
         docHtml +
-        `<b>Physical Examination</b>${options.physicalExamination.text.div}`;
+        `<b>Physical Examination</b>${options.physicalExamination.text.div}</br>`;
     }
 
     if (options.procedure) {

@@ -201,7 +201,7 @@ class excute {
       },
       chiefComplaints: condionResource,
       // medicalHistory : condionResource,
-      // physicalExamination: resources.conditon,
+      physicalExamination: condionResource,
       procedure : resources.procedure,
       medicationRequest: medciationResource,
       "followUp" : resources.appointment
@@ -466,7 +466,7 @@ class excute {
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
-// new excute().OpCunsulatationComposition()
+new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()
@@ -475,6 +475,6 @@ class excute {
 // new excute().updateServiceRequest()
 
 // new excute().createPrescriptionBundle()
-new excute().createOPConsultationBundle();
+// new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
