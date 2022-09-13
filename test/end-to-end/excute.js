@@ -108,6 +108,7 @@ class excute {
   appointment = async()=>{
     await callFunction()
     const res= await setAppointment()
+    return res
     console.log(res)
   }
 
@@ -164,6 +165,8 @@ class excute {
     await setMedicationRequest();
     await setCondition();
     await setProcedure()
+
+    
     const gcpFhirCRUD = new GcpFhirCRUD();
     const medciationResource = (
       await gcpFhirCRUD.getFhirResource(
@@ -201,6 +204,7 @@ class excute {
       // physicalExamination: resources.conditon,
       procedure : resources.procedure,
       medicationRequest: medciationResource,
+      // "followUp" : await this.appointment()
     });
 
     console.log(res.data);
@@ -384,7 +388,7 @@ class excute {
   ) => {
 
     const compositionResource = await new GcpFhirCRUD()
-    .getFhirResource("f5d60c07-8592-4b56-8a31-eade429d6eca", "Composition")
+    .getFhirResource("8a246219-1d8f-4386-9373-9a7b3bb3533f", "Composition")
     .then((res) => res.data);
     const html = `${compositionResource.text.div}`.trim();
 
@@ -395,6 +399,10 @@ class excute {
       html: html,
       qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=OPConsultation`,
     });
+
+
+    console.log(pdf)
+    return
     const bundle = await new OPConsultationBundle(
       credentials,
       databasePath
@@ -457,7 +465,7 @@ class excute {
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
-new excute().OpCunsulatationComposition()
+// new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()

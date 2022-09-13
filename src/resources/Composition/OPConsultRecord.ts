@@ -37,6 +37,7 @@ export class OPConsultRecord extends Composition implements Records {
 
   getOptions(options:Args):Args{
     options.composition.section = [];
+    options.composition.documentDatahtml =""
     if (options.followUp) {
       options.composition.section.push({
         title: "Follow Up",
@@ -58,7 +59,7 @@ export class OPConsultRecord extends Composition implements Records {
 
       options.composition.documentDatahtml =
         options.composition.documentDatahtml +
-        `<div style="text-align: right"><b>Follow up :-</b> ${options.followUp.text.div}</div>`;
+        `<div style="text-align: right"><span><b>Follow up:-</b></span>${options.followUp.text.div}</div><spanstyle="text-align: left"></span>`;
     }
 
     if(options.chiefComplaints){
