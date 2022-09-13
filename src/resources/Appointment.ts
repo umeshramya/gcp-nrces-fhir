@@ -56,9 +56,9 @@ export class Appointment extends ResourceMain implements ResourceMaster {
   getFHIR(options: APPOINTMENT): any {
     const getText = (): any => {
       let ret = ``;
-      ret = `${ret} <div>Date ${new Date(
-        options.startDate
-      ).toDateString() || new Date(options.endDate).toDateString()}`;
+      // ret = `${ret} <div>Date ${new Date(
+      //   options.startDate
+      // ).toDateString() || new Date(options.endDate).toDateString()}`;
       if (options.serviceCategory) {
         ret = `${ret} <div>Service Category ${options.serviceCategory[0].text}</div>`;
       }
