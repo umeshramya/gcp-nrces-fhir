@@ -61,26 +61,29 @@ export class OPConsultRecord extends Composition implements Records {
         `<div style="text-align: right"><b>Follow up :-</b> ${options.followUp.text.div}</div>`;
     }
 
-    
-    options.composition.section.push({
-      title: "Chief complaints",
-      code: {
-        coding: [
+    if(options.chiefComplaints){
+      options.composition.section.push({
+        title: "Chief complaints",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "422843007",
+              display: "Chief complaint section",
+            },
+          ],
+        },
+        entry: [
           {
-            system: "http://snomed.info/sct",
-            code: "422843007",
-            display: "Chief complaint section",
+            reference: `Condition/${options.chiefComplaints.id}`,
           },
         ],
-      },
-      entry: [
-        {
-          reference: `Condition/${options.chiefComplaints.id}`,
-        },
-      ],
-    });
-    options.composition.documentDatahtml = `<h6>Chief complaints</h6>${options.chiefComplaints.text.div}`;
+      });
+      options.composition.documentDatahtml =options.composition.documentDatahtml + `<h6>Chief complaints</h6>${options.chiefComplaints.text.div}`;
+  
 
+    }
+    
     if (options.allergies) {
       options.composition.section.push({
         title: "Allergies",
