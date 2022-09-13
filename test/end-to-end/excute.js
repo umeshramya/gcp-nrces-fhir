@@ -203,7 +203,7 @@ class excute {
       medicationRequest: medciationResource,
     });
 
-    console.log(res);
+    console.log(res.data);
   };
 
   diagnosticReportComposition = async () => {
@@ -454,10 +454,10 @@ class excute {
 // new excute().procedure()
 // new excute().serviceRequest()
 // new excute().schedule()
-new excute().appointment()
+// new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
-// new excute().OpCunsulatationComposition()
+new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()
