@@ -37,6 +37,31 @@ export class OPConsultRecord extends Composition implements Records {
 
   getOptions(options:Args):Args{
     options.composition.section = [];
+    if (options.followUp) {
+      options.composition.section.push({
+        title: "Follow Up",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "736271009",
+              display: "Outpatient care plan",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Appointment/${options.followUp.id}`,
+          },
+        ],
+      });
+
+      options.composition.documentDatahtml =
+        options.composition.documentDatahtml +
+        `<div style="text-align: right"><b>Follow up :-</b> ${options.followUp.text.div}</div>`;
+    }
+
+    
     options.composition.section.push({
       title: "Chief complaints",
       code: {
@@ -173,29 +198,7 @@ export class OPConsultRecord extends Composition implements Records {
         options.composition.documentDatahtml +
         `<h6>Procedure</h6>${options.procedure.text.div}`;
     }
-    if (options.followUp) {
-      options.composition.section.push({
-        title: "Follow Up",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "736271009",
-              display: "Outpatient care plan",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `Appointment/${options.followUp.id}`,
-          },
-        ],
-      });
-
-      options.composition.documentDatahtml =
-        options.composition.documentDatahtml +
-        `<h6>Follow up</h6>${options.followUp.text.div}`;
-    }
+  
     if (options.medicationRequest || options.medicationRequest) {
       let entry = [];
       if (options.medicationStatement) {

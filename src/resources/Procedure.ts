@@ -49,7 +49,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       if (options.recorder) {
         ret = `${ret}<div>Recorded By : ${options.recorder.name}</div>`;
       }
-      ret = `${ret}<div>Procedure Notes</div>`;
+      // ret = `${ret}<div>Procedure Notes</div>`;
       ret = `${ret}${options.text}`;
 
       if (options.outcome) {
