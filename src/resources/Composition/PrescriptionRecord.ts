@@ -1,12 +1,13 @@
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
-
+interface Args {
+  composition: COMPOSITOIN;
+  medicationRequest: any;
+  diagnosis?: any;
+}
 export class PrescriptionRecord extends Composition implements Records {
-  create = async (options: {
-    composition: COMPOSITOIN;
-    medicationRequest: any;
-    diagnosis?: any;
-  }) => {
+
+  create = async (options:Args ) => {
     if (options.diagnosis) {
       options.composition.section.push({
         reference: `Condition/${options.diagnosis.id}`,
@@ -27,11 +28,7 @@ export class PrescriptionRecord extends Composition implements Records {
     return res;
   };
 
-  update = async (options: {
-    composition: COMPOSITOIN;
-    medicationRequest: any;
-    diagnosis?: any;
-  }) => {
+  update = async (options: Args) => {
     if (!options.composition.id) {
       throw (new Error().message = "id of composition is required");
     }
@@ -58,4 +55,9 @@ export class PrescriptionRecord extends Composition implements Records {
     );
     return res;
   };
+
+  getOptions = (options:Args):string=>{
+    let docHTML=""
+    return docHTML
+  }
 }

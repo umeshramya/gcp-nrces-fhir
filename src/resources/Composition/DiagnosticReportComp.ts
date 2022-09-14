@@ -3,7 +3,7 @@ import GcpFhirCRUD from "../../classess/gcp";
 import { DiagnosticReport } from "../DiagnosticReport";
 import { ServiceRequest } from "../ServiceRequest";
 
-interface args {
+interface Args {
   composition: COMPOSITOIN;
   diagnosticReport: any;
   textInTable:boolean;
@@ -39,7 +39,7 @@ export class DiagnosticReportComp extends Composition implements Records {
     }
     return ret.trim();
   }
-  private setPerformerAndRequester = (options: args) => {
+  private setPerformerAndRequester = (options: Args) => {
     const serviceRequest = new ServiceRequest();
     const serviceRequestBody = serviceRequest.convertFhirToObject(
       options.serviceRequest
@@ -63,7 +63,7 @@ export class DiagnosticReportComp extends Composition implements Records {
       });
     }
   };
-  create = async (options: args) => {
+  create = async (options: Args) => {
     this.setPerformerAndRequester(options);
 
     options.composition.section.push({
@@ -86,7 +86,7 @@ export class DiagnosticReportComp extends Composition implements Records {
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
   };
-  update = async (options: args) => {
+  update = async (options: Args) => {
     this.setPerformerAndRequester(options);
     options.composition.section = [];
     options.composition.section.push({
@@ -113,4 +113,9 @@ export class DiagnosticReportComp extends Composition implements Records {
     );
     return res;
   };
+
+  getOptions = (options:Args):string=>{
+    let docHTML=""
+    return docHTML
+  }
 }

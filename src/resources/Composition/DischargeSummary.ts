@@ -13,6 +13,7 @@ interface Args {
   followUp?: any;
 }
 export class DischargeSUmmery extends Composition implements Records {
+
   create = async (options: Args) => {
     options.composition.section = [];
 
@@ -427,6 +428,11 @@ export class DischargeSUmmery extends Composition implements Records {
     );
     return res;
   };
+
+  getOptions = (options:Args):string=>{
+    let docHTML=""
+    return docHTML
+  }
 }
 
 const test = {

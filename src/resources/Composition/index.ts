@@ -471,7 +471,5 @@ export const emptySign = `data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAACZ
 export interface Records {
   create: Function;
   update: Function;
-
-  // create = async (options: { composition: COMPOSITOIN }) => {};
-  // update = async (options: { composition: COMPOSITOIN }) => {};
+  getOptions:Function
 }
