@@ -1,29 +1,19 @@
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
+import { APPOINTMENT } from "../Appointment";
 interface Args {
   composition: COMPOSITOIN;
   medicationRequest: any;
   diagnosis?: any;
+  followUp?:any
 }
 export class PrescriptionRecord extends Composition implements Records {
 
   create = async (options:Args ) => {
-    if (options.diagnosis) {
-      options.composition.section.push({
-        reference: `Condition/${options.diagnosis.id}`,
-        type: "Condition",
-      });
-      options.composition.documentDatahtml = `${options.diagnosis.text.div}`;
-    }
-
-    options.composition.section.push({
-      reference: `MedicationRequest/${options.medicationRequest.id}`,
-      type: "MedicationRequest",
-    });
-    options.composition.documentDatahtml += options.medicationRequest.text.div;
-
+    options = this.getOptions(options);
     const body = this.getFHIR(options.composition);
     const gcpFhirCrud = new GcpFhirCRUD();
+    body.section = options.composition.section;
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
   };
@@ -32,21 +22,9 @@ export class PrescriptionRecord extends Composition implements Records {
     if (!options.composition.id) {
       throw (new Error().message = "id of composition is required");
     }
-
-    if (options.diagnosis) {
-      options.composition.section.push({
-        reference: `Condition/${options.diagnosis.id}`,
-        type: "Condition",
-      });
-      options.composition.documentDatahtml = `${options.diagnosis.text.div}`;
-    }
-    options.composition.section.push({
-      reference: `MedicationRequest/${options.medicationRequest.id}`,
-      type: "MedicationRequest",
-    });
-    options.composition.documentDatahtml += options.medicationRequest.text.div;
+    options = this.getOptions(options);
     const body = this.getFHIR(options.composition);
-
+    body.section = options.composition.section;
     const gcpFhirCrud = new GcpFhirCRUD();
     const res = await gcpFhirCrud.updateFhirResource(
       body,
@@ -56,8 +34,80 @@ export class PrescriptionRecord extends Composition implements Records {
     return res;
   };
 
-  getOptions = (options:Args):string=>{
-    let docHTML=""
-    return docHTML
+  getOptions = (options:Args):Args=>{
+    let docHtml=""
+
+    interface SECTION_ZERO{
+      "code": {
+        "coding": [
+          {
+            "code": "440545006",
+            "display": "Prescription",
+            "system": "https://ndhm.gov.in/sct"
+          }
+        ]
+      },
+      "entry": any[],
+      "title": "Prescription"
+    }
+    const sectionZero:SECTION_ZERO={
+      "code": {
+        "coding": [
+          {
+            "code": "440545006",
+            "display": "Prescription",
+            "system": "https://ndhm.gov.in/sct"
+          }
+        ]
+      },
+      "entry" : [],
+      "title": "Prescription"
+    }
+    if (options.diagnosis) {
+      sectionZero.entry.push({
+        reference: `Condition/${options.diagnosis.id}`,
+        type: "Condition",
+      });
+      docHtml= `${options.diagnosis.text.div}`;
+    }
+
+    sectionZero.entry.push({
+      reference: `MedicationRequest/${options.medicationRequest.id}`,
+      type: "MedicationRequest",
+    });
+
+
+    options.composition.section.push(sectionZero);
+    if (options.followUp) {
+      options.composition.section.push({
+        title: "Follow Up",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "736271009",
+              display: "Outpatient care plan",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Appointment/${options.followUp.id}`,
+          },
+        ],
+      });
+
+      docHtml =
+        docHtml +
+        `<div"><span><b>Follow up:-</b>${
+          new Date(options.followUp.start).toDateString() ||
+          new Date(options.followUp.end).toDateString()
+        }${options.followUp.text.div}</br>`;
+    }
+
+    docHtml += options.medicationRequest.text.div;
+
+    options.composition.documentDatahtml =docHtml
+    return options
   }
 }
