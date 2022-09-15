@@ -1,5 +1,6 @@
-import { IDENTTIFIER } from "../config";
+import { CODEABLE_CONCEPT, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { PARTICIPANT } from "./objects/Partipant";
 import ResourceMain from "./ResourceMai";
 
 const EncounterStatusArray = [
@@ -54,7 +55,24 @@ interface ENCOUNTER {
   patientId: string;
   startDate: string;
   endDate: string;
-  dischargeDisposition: EncounterHospitalizationDischargeDisposition;
+  appointment?: {"reference" : string, "type" : "Appointment"}[];
+  reasonReference	?:{"reference" : string, "type" : "ImmunizationRecommendation" | "Condition" | "Procedure" | "Observation"}[]
+  reasonCode?:CODEABLE_CONCEPT[]
+  hospitalization?:{
+    dischargeDisposition?:CODEABLE_CONCEPT;
+    id?:string;
+    origin?:{"reference" : string, "type" : "Location" | "Organization"};
+    admitSource?:CODEABLE_CONCEPT;
+    reAdmission?:CODEABLE_CONCEPT;
+    dietPreference?:CODEABLE_CONCEPT;
+    destination?:{"reference" : string, "type" : "Location" | "Organization"}
+  }
+  diagnosis ?: {
+    condition:{"reference" : string, "type" : "Condition" | "Procedure"},
+    use ?: CODEABLE_CONCEPT 
+  }[],
+  participant?:{"type" : CODEABLE_CONCEPT[] , individual : {"reference" : string, "type" : "RelatedPerson" | "Practitioner" | "PractitionerRole"} }[]
+  account?:{"reference" : string, "type" : "Account"}[]
 }
 
 export class Encounter extends ResourceMain implements ResourceMaster {
@@ -106,19 +124,14 @@ export class Encounter extends ResourceMain implements ResourceMaster {
         start: options.startDate,
         end: options.endDate,
       },
-      hospitalization: {
-        dischargeDisposition: {
-          coding: [
-            {
-              system:
-                "http://terminology.hl7.org/CodeSystem/discharge-disposition",
-              code: options.dischargeDisposition.code,
-              display: options.dischargeDisposition.display,
-            },
-          ],
-          text: "Discharged to Home Care",
-        },
-      },
+      hospitalization: options.hospitalization,
+      diagnosis: options.diagnosis,
+      participant : options.participant,
+      reasonReference:options.reasonReference,
+      reasonCode:options.reasonCode,
+      account:options.account
+      
+      
     };
 
     return body;
@@ -132,12 +145,29 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       patientId: `${options.subject.reference}`.substring(8),
       startDate: options.period.start,
       endDate: options.period.end,
-      dischargeDisposition: {
-        code: options.hospitalization.dischargeDisposition.coding[0].code,
-        display: options.hospitalization.dischargeDisposition.coding[0].display,
-      },
       id: options.id,
     };
+    if(options.diagnosis){
+      ret.diagnosis=options.diagnosis
+    }
+    if(options.account){
+      ret.account=options.account
+    }
+    if(options.appointment){
+      ret.appointment=options.appointment
+    }
+    if(options.reasonCode){
+      ret.reasonCode=options.reasonCode
+    }
+    if(options.reasonReference){
+      ret.reasonReference= options.reasonReference
+    }
+    if(options.participant){
+      ret.participant= options.participant
+    }
+    if(options.hospitalization){
+      ret.hospitalization=options.hospitalization
+    }
 
     if (options.identifier) {
       const careContext: any[] = options.identifier.filter(

@@ -96,7 +96,9 @@ const setEncounter = async () => {
     const encounter = new Encounter();
     const body = encounter.getFHIR({
         "class": { "code": "IMP", "display": "in-patient" },
-        "dischargeDisposition": { "code": "home", "display": "home" },
+        // "dischargeDisposition": { "code": "home", "display": "home" },
+        "diagnosis" : [{"condition" : {"reference" :`Condition/20568363-847f-4369-a8f9-ae7a6905865c`}}] ,
+        "participant" : [{"individual" : {"reference" : `Practitioner/f97e79a1-7532-4d44-906e-cd981c475ddc`, "type" : "Practitioner"}}],
         "endDate": new Date().toISOString(),
         "startDate": new Date().toISOString(),
         "identifier": new Date().getTime().toString(),
