@@ -32,7 +32,7 @@ const { setAppointment } = require("./Appointement");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
-const webhookURL="https://webhook.site/145332ce-6f1d-4e11-a8f5-88e5d85611b7"
+const webhookURL="https://webhook.site/46dbc082-f990-4ddd-b5cf-767a35bdc40d"
 class excute {
   callFunction = async () => {
     await callFunction();
@@ -372,8 +372,6 @@ class excute {
       qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=Prescription`,
     });
 
-    console.log(pdf)
-    return
     const bundle = await new PrescriptionBundle(
       credentials,
       databasePath
@@ -392,7 +390,8 @@ class excute {
 
   createOPConsultationBundle = async (
   ) => {
-
+    try {
+      
     const compositionResource = await new GcpFhirCRUD()
     .getFhirResource("0118c2bb-73c7-40ce-a0a5-7ba620cf32f1", "Composition")
     .then((res) => res.data);
@@ -406,9 +405,6 @@ class excute {
       qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=OPConsultation`,
     });
 
-
-    console.log(pdf)
-    return
     const bundle = await new OPConsultationBundle(
       credentials,
       databasePath
@@ -423,6 +419,10 @@ class excute {
       data : bundle
   })
   return bundle;
+    } catch (error) {
+      console.log(error)
+    }
+
   };
 
   createDiagnosticReportBundle = async (
