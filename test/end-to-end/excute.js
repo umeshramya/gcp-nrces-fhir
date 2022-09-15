@@ -122,6 +122,7 @@ class excute {
     await setMedicationRequest();
     await setCondition();
     await setAppointment()
+
     const gcpFhirCRUD = new GcpFhirCRUD();
     const medciationResource = (
       await gcpFhirCRUD.getFhirResource(
@@ -363,7 +364,7 @@ class excute {
   // aca383e6-621e-4faa-88b0-78cfbf47f10b
   createPrescriptionBundle = async () => {
     const compositionResource = await new GcpFhirCRUD()
-      .getFhirResource("58e92597-3a31-495c-9507-a18e8a185795", "Composition")
+      .getFhirResource("3945404f-c713-4108-be8f-6e4d84509f6e", "Composition")
       .then((res) => res.data);
     const html = `${compositionResource.text.div}`.trim();
 
@@ -371,6 +372,7 @@ class excute {
       html: html,
       qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=Prescription`,
     });
+    console.log(pdf)
 
     const bundle = await new PrescriptionBundle(
       credentials,
@@ -460,7 +462,7 @@ class excute {
   };
 }
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -479,7 +481,7 @@ new excute().callFunction()
 
 // new excute().updateServiceRequest()
 
-// new excute().createPrescriptionBundle()
+new excute().createPrescriptionBundle()
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()

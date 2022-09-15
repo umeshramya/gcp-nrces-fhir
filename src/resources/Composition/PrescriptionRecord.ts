@@ -10,7 +10,7 @@ interface Args {
 export class PrescriptionRecord extends Composition implements Records {
 
   create = async (options:Args ) => {
-    options = this.getOptions(options);
+    options = await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     const gcpFhirCrud = new GcpFhirCRUD();
     body.section = options.composition.section;
@@ -22,7 +22,7 @@ export class PrescriptionRecord extends Composition implements Records {
     if (!options.composition.id) {
       throw (new Error().message = "id of composition is required");
     }
-    options = this.getOptions(options);
+    options =await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
     const gcpFhirCrud = new GcpFhirCRUD();
@@ -34,7 +34,7 @@ export class PrescriptionRecord extends Composition implements Records {
     return res;
   };
 
-  getOptions = (options:Args):Args=>{
+  getOptions = async(options:Args):Promise<Args>=>{
     let docHtml=""
 
     interface SECTION_ZERO{
@@ -104,6 +104,16 @@ export class PrescriptionRecord extends Composition implements Records {
           new Date(options.followUp.end).toDateString()
         }${options.followUp.text.div}</br>`;
     }
+  
+   let diagnosis:string[] = []
+   await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
+   console.log(diagnosis)
+   if(diagnosis && diagnosis.length > 0){
+    let diagnosisString=""
+    diagnosis.forEach(el=> diagnosisString +=`<div>${el}</div>`)
+    docHtml = `<div><b>Diagnosis</b></div>${diagnosisString}${docHtml}`
+
+   }
 
     docHtml += options.medicationRequest.text.div;
 
