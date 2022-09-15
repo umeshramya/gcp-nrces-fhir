@@ -7,7 +7,7 @@ import ResourceFactory from "../../classess/ResourceFactory";
 import { MedicationRequest } from "../MedicationRequest";
 
 export class OPConsultationBundle extends BundelMain implements ResourceMaster {
-  private entry: any[] = [];
+  
   async getFHIR(options: {
     id?: string;
     identifier?: IDENTTIFIER;
@@ -66,55 +66,6 @@ export class OPConsultationBundle extends BundelMain implements ResourceMaster {
     throw new Error("Method not implemented.");
   }
 
-  private getAllSectionAndAllEntries = async (
-    index: number,
-    sections: any[]
-  ) => {
-    if (index >= sections.length) {
-      return;
-    }
-
-    await this.getEntriesPerSection(0, sections[index].entry);
-
-    index = index + 1;
-    await this.getAllSectionAndAllEntries(index, sections);
-  };
-
-  private getEntriesPerSection = async (
-    index: number,
-    sectionEntries: any[]
-  ) => {
-    if (index >= sectionEntries.length) {
-      return;
-    }
-
-    const curSectionEntryObj = this.getFromMultResource({
-      reference: sectionEntries[index].reference,
-    });
-    const curSectionEntry = await new GcpFhirCrud(
-      this.gcpCredetials,
-      this.gcpPath
-    ).getFhirResource(curSectionEntryObj.id, curSectionEntryObj.resource);
-    if (curSectionEntryObj.resource == "MedicationRequest") {
-      const medicationRequest = new MedicationRequest().bundlify(
-        curSectionEntry.data
-      );
-      medicationRequest.forEach((el: any, i: number) => {
-        this.entry.push(el);
-      });
-    } else {
-      this.entry.push({
-        fullUrl: `${curSectionEntryObj.resource}/${curSectionEntryObj.id}`,
-        resource: new ResourceFactory(curSectionEntryObj.resource).bundlefy(
-          curSectionEntry.data
-        ),
-      });
-    }
-
-    curSectionEntry.data;
-    index = index + 1;
-    await this.getEntriesPerSection(index, sectionEntries);
-  };
 
   statusArray?: Function | undefined;
 }

@@ -8,8 +8,10 @@ import { DocumentReference } from "../DocumentReference";
 import { Patient } from "../Patient";
 import { Encounter } from "../Encounter";
 import { Organization } from "../Organization";
+import { MedicationRequest } from "../MedicationRequest";
 
 export class BundelMain extends ResourceMain {
+  protected entry: any[] = [];
 
   protected  gcpCredetials:any
   protected  gcpPath:any
@@ -108,4 +110,55 @@ export class BundelMain extends ResourceMain {
     });
     return ret as any;
   }
+
+
+  protected getAllSectionAndAllEntries = async (
+    index: number,
+    sections: any[]
+  ) => {
+    if (index >= sections.length) {
+      return;
+    }
+
+    await this.getEntriesPerSection(0, sections[index].entry);
+
+    index = index + 1;
+    await this.getAllSectionAndAllEntries(index, sections);
+  };
+
+  protected getEntriesPerSection = async (
+    index: number,
+    sectionEntries: any[]
+  ) => {
+    if (index >= sectionEntries.length) {
+      return;
+    }
+
+    const curSectionEntryObj = this.getFromMultResource({
+      reference: sectionEntries[index].reference,
+    });
+    const curSectionEntry = await new GcpFhirCrud(
+      this.gcpCredetials,
+      this.gcpPath
+    ).getFhirResource(curSectionEntryObj.id, curSectionEntryObj.resource);
+    if (curSectionEntryObj.resource == "MedicationRequest") {
+      const medicationRequest = new MedicationRequest().bundlify(
+        curSectionEntry.data
+      );
+      medicationRequest.forEach((el: any, i: number) => {
+        this.entry.push(el);
+      });
+    } else {
+      this.entry.push({
+        fullUrl: `${curSectionEntryObj.resource}/${curSectionEntryObj.id}`,
+        resource: new ResourceFactory(curSectionEntryObj.resource).bundlefy(
+          curSectionEntry.data
+        ),
+      });
+    }
+
+    curSectionEntry.data;
+    index = index + 1;
+    await this.getEntriesPerSection(index, sectionEntries);
+  };
 }
