@@ -91,36 +91,41 @@ export interface IDENTTIFIER {
   assigner?: { Reference: `Organization/` | string }; // Organization that issued id (may be just text)
 }
 
-export interface ADDRESS{
-  use ?: 	"home" | "work" | "temp" | "old" | "billing"
-  type ? : "postal" | "physical" | "both"
-  text ?: string;
-  line?:string;
-  city?:string;
-  district:string;
-  state:string;
-  postalCode?:string;
-  country?:string;
-  period?:PERIOD
+export interface ADDRESS {
+  use?: "home" | "work" | "temp" | "old" | "billing"
+  type?: "postal" | "physical" | "both"
+  text?: string;
+  line?: string;
+  city?: string;
+  district: string;
+  state: string;
+  postalCode?: string;
+  country?: string;
+  period?: PERIOD
 }
 
-export interface CONTACT_POINT{
+export interface CONTACT_POINT {
   system?: "phone" | "fax" | "email" | "pager" | "url" | "sms" | "other";
-  value ?: string;
-  use ?: "home" | "work" | "temp" | "old" | "mobile";
-  rank ?: number;
-  period ?:PERIOD
+  value?: string;
+  use?: "home" | "work" | "temp" | "old" | "mobile";
+  rank?: number;
+  period?: PERIOD
 }
 
-export interface HUMAN_NAME{
-  use ?: "usual" | "official" | "temp" | "nickname" | "anonymous" | "old" | "maiden"
-  text ?:string;
-  family ? : string;
-  given ? : string;
-  prefix?:string
-  suffix?:string;
-  period?:PERIOD
+export interface HUMAN_NAME {
+  use?: "usual" | "official" | "temp" | "nickname" | "anonymous" | "old" | "maiden"
+  text?: string;
+  family?: string;
+  given?: string;
+  prefix?: string
+  suffix?: string;
+  period?: PERIOD
 }
+export interface COMMUNICATION {
+  language: CODEABLE_CONCEPT;
+  preferred?: boolean;
+}
+
 
 
 export interface MULTI_RESOURCE {
