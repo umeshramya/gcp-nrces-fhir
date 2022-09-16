@@ -69,7 +69,8 @@ interface ENCOUNTER {
   }
   diagnosis ?: {
     condition:{"reference" : string, "type" : "Condition" | "Procedure"},
-    use ?: CODEABLE_CONCEPT 
+    use ?: CODEABLE_CONCEPT
+    rank?:number
   }[],
   participant?:{"type" : CODEABLE_CONCEPT[] , individual : {"reference" : string, "type" : "RelatedPerson" | "Practitioner" | "PractitionerRole"} }[]
   account?:{"reference" : string, "type" : "Account"}[]

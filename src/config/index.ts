@@ -1,4 +1,4 @@
-const credentials = {
+export const credentials = {
   type: process.env.GCP_FHIR_type,
   project_id: process.env.GCP_FHIR_project_id,
   private_key_id: process.env.GCP_FHIR_private_key_id,
@@ -11,14 +11,14 @@ const credentials = {
   client_x509_cert_url: process.env.client_x509_cert_url,
 };
 
-const databasePath = {
+export const databasePath = {
   cloudRegion: process.env.GCP_FHIR_cloudRegion,
   projectId: process.env.GCP_FHIR_projectId,
   datasetId: process.env.GCP_FHIR_datasetId,
   fhirStoreId: process.env.GCP_FHIR_fhirStoreId,
 };
 
-const resourceTypeArray = [
+export const resourceTypeArray = [
   "Patient",
   "Practitioner",
   "Organization",
@@ -91,7 +91,37 @@ export interface IDENTTIFIER {
   assigner?: { Reference: `Organization/` | string }; // Organization that issued id (may be just text)
 }
 
-export { credentials, resourceTypeArray, databasePath };
+export interface ADDRESS{
+  use ?: 	"home" | "work" | "temp" | "old" | "billing"
+  type ? : "postal" | "physical" | "both"
+  text ?: string;
+  line?:string;
+  city?:string;
+  district:string;
+  state:string;
+  postalCode?:string;
+  country?:string;
+  period?:PERIOD
+}
+
+export interface CONTACT_POINT{
+  system?: "phone" | "fax" | "email" | "pager" | "url" | "sms" | "other";
+  value ?: string;
+  use ?: "home" | "work" | "temp" | "old" | "mobile";
+  rank ?: number;
+  period ?:PERIOD
+}
+
+export interface HUMAN_NAME{
+  use ?: "usual" | "official" | "temp" | "nickname" | "anonymous" | "old" | "maiden"
+  text ?:string;
+  family ? : string;
+  given ? : string;
+  prefix?:string
+  suffix?:string;
+  period?:PERIOD
+}
+
 
 export interface MULTI_RESOURCE {
   resource: resourceType;
