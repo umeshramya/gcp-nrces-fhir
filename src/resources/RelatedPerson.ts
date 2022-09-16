@@ -2,7 +2,7 @@ import { ADDRESS, CODEABLE_CONCEPT, coding, COMMUNICATION, CONTACT_POINT, HUMAN_
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
-export interface PATIENT {
+export interface RELATED_PERSON {
   id?: string;
   identifiers?: IDENTTIFIER
   patientId: string
@@ -19,7 +19,7 @@ export interface PATIENT {
 }
 
 export class RelatedPerson extends ResourceMain implements ResourceMaster {
-  getFHIR(options: PATIENT) {
+  getFHIR(options: RELATED_PERSON) {
     const identifiers: IDENTTIFIER[] = [];
     const getText = (): string => {
       let ret: string = ""
@@ -51,8 +51,8 @@ export class RelatedPerson extends ResourceMain implements ResourceMaster {
 
     return body;
   }
-  convertFhirToObject(options: any): PATIENT {
-    let ret: PATIENT = {
+  convertFhirToObject(options: any): RELATED_PERSON {
+    let ret: RELATED_PERSON = {
       name: options.name,
       patientId: this.getIdFromReference({ "ref": options.patient.reference, "resourceType": "Patient" })
     };

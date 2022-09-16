@@ -4,6 +4,7 @@ import GcpFhirCRUD from "./classess/gcp";
 import GcpFhirSearch from "./classess/gcpSearch";
 import ResourceFactory from "./classess/ResourceFactory";
 import { PATIENT, PatientResource, Patient } from "./resources/Patient";
+import { RelatedPerson, RELATED_PERSON } from "./resources/RelatedPerson"
 import {
   PRACTITIONER,
   PractitionerResource,
@@ -74,11 +75,11 @@ import {
 } from "./resources/MedicationStatement";
 
 import { ServiceRequest, SERVICE_REQUEST } from "./resources/ServiceRequest";
-import {SCHEDULE, Schedule} from "./resources/Schedule"
-import {SLOT, Slot} from "./resources/Slot"
+import { SCHEDULE, Schedule } from "./resources/Schedule"
+import { SLOT, Slot } from "./resources/Slot"
 import { PrescriptionBundle } from "./resources/Bundle/Prescription";
 import { DiagnsoticReportBundle } from "./resources/Bundle/DiagnsoticReport"
-import {OPConsultationBundle} from  "./resources/Bundle/OPConsutation"
+import { OPConsultationBundle } from "./resources/Bundle/OPConsutation"
 import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
@@ -87,9 +88,11 @@ import { Media, MEDIA } from "./resources/Media";
 import { Observation, OBSERVATION } from "./resources/Observation";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
-export {htmlToText}
+export { htmlToText }
 export type { resourceType };
 export { PATIENT, PatientResource, Patient };
+export { RelatedPerson, RELATED_PERSON }
+
 export { ORGANIZATION, OrganizationResource, Organization };
 export { PRACTITIONER, PractitionerResource, Practitioner };
 export { PRACTITIONER_ROLE, PractitionerRole, NOT_AVAILABLE, AVAILABLE_TIME };
@@ -147,8 +150,8 @@ export {
   MedicationRequest,
 };
 export { ServiceRequest, SERVICE_REQUEST };
-export{SCHEDULE, Schedule}
-export {SLOT, Slot}
+export { SCHEDULE, Schedule }
+export { SLOT, Slot }
 type Credentials = typeof credentials;
 type DatabasePath = typeof databasePath;
 
@@ -159,7 +162,7 @@ export interface GcpNrcesFhirType {
 
 export { PrescriptionBundle };
 export { DiagnsoticReportBundle }
-export {OPConsultationBundle} 
+export { OPConsultationBundle }
 
 export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
