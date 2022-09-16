@@ -79,19 +79,20 @@ const setRelatedPerson = async () => {
     const relatedPaerson = new RelatedPerson();
     const body = relatedPaerson.getFHIR({
         "active": true,
-        "address": [{
-            "city": "Hubli",
-            "country": "india",
-            "district": "Dharawad",
-            "line": "Vishwearanagar",
-            "postalCode": "580020",
-            "state": "Karanataka",
-            "text": "HNo 11, Sopukruth aparatrament",
-            "type": "both",
+        // "address": [{
+        //     "city": "Hubli",
+        //     "country": "india",
+        //     "district": "Dharawad",
+        //     "line": "Vishwearanagar",
+        //     "postalCode": "580020",
+        //     "state": "Karanataka",
+        //     "text": "HNo 11, Sopukruth aparatrament",
+        //     "type": "both",
 
-        }],
+        // }],
         "communication": [{ "language": { "text": "Kannada" }, "preferred": true }, { "language": { "text": "English" }, "preferred": false }],
-        "dob": "1960-09-29",
+        "dob": "1969-09-29",
+        "name" : [{"text" : "Raju Patil"}],
         "gender": "male",
         "relationship": [{ "text": "Friend", }],
         "patientId": resources.patient.id,
@@ -99,7 +100,7 @@ const setRelatedPerson = async () => {
 
 
     })
-
+    // console.log(body)
     let res = await gcpFhirCRUD.createFhirResource(body, "RelatedPerson")
     res = await gcpFhirCRUD.getFhirResource(res.data.id, "RelatedPerson");
     resources.relatedPerson = relatedPaerson.convertFhirToObject(res.data);

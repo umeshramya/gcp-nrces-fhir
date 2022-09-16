@@ -23,6 +23,7 @@ export class RelatedPerson extends ResourceMain implements ResourceMaster {
     const identifiers: IDENTTIFIER[] = [];
     const getText = (): string => {
       let ret: string = ""
+      ret+=`<div>${options.name[0].text}</div>`
       return ret;
     }
 
