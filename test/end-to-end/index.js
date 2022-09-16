@@ -163,6 +163,7 @@ const callFunction = async () => {
     await setPatient();
     await setPractinioner();
     await setEncounter();
+    await setRelatedPerson();
 }
 
 callFunction()
