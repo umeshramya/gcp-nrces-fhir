@@ -462,7 +462,7 @@ class excute {
   };
 }
 
-// new excute().callFunction()
+new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -481,7 +481,7 @@ class excute {
 
 // new excute().updateServiceRequest()
 
-new excute().createPrescriptionBundle()
+// new excute().createPrescriptionBundle()
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()

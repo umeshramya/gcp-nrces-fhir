@@ -139,7 +139,7 @@ const setEncounter = async () => {
     const body = encounter.getFHIR({
         "class": { "code": "IMP", "display": "in-patient" },
         // "dischargeDisposition": { "code": "home", "display": "home" },
-        "diagnosis": [{ "condition": { "reference": `Condition/20568363-847f-4369-a8f9-ae7a6905865c` } }],
+        "diagnosis": [{ "condition": { "reference": `Condition/20568363-847f-4369-a8f9-ae7a6905865c` }, "rank": 1 }, { "condition": { "reference": `Condition/20568363-847f-4369-a8f9-ae7a6905865c` }, "rank": 2 }],
         "participant": [{ "individual": { "reference": `Practitioner/f97e79a1-7532-4d44-906e-cd981c475ddc`, "type": "Practitioner" } }],
         "endDate": new Date().toISOString(),
         "startDate": new Date().toISOString(),
