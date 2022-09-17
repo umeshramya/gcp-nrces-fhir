@@ -95,7 +95,7 @@ export interface ADDRESS {
   use?: "home" | "work" | "temp" | "old" | "billing"
   type?: "postal" | "physical" | "both"
   text?: string;
-  line?: string;
+  line?: string[];
   city?: string;
   district: string;
   state: string;
@@ -116,9 +116,9 @@ export interface HUMAN_NAME {
   use?: "usual" | "official" | "temp" | "nickname" | "anonymous" | "old" | "maiden"
   text?: string;
   family?: string;
-  given?: string;
-  prefix?: string
-  suffix?: string;
+  given?: string[];
+  prefix?: string[]
+  suffix?: string[]
   period?: PERIOD
 }
 export interface COMMUNICATION {
