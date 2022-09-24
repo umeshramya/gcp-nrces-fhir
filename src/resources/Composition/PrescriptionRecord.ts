@@ -109,8 +109,8 @@ export class PrescriptionRecord extends Composition implements Records {
    await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
    if(diagnosis && diagnosis.length > 0){
     let diagnosisString=""
-    diagnosis.forEach((el, i)=> diagnosisString +=`${i+1}. ${el}, `)
-    docHtml = `<div><b>Diagnosis :- </b>${diagnosisString}${docHtml}</div><br/>`
+    diagnosis.forEach((el, i)=> diagnosisString +=`${i+1}. ${el} `)
+    docHtml = `<p><b>Diagnosis :- </b>${diagnosisString}${docHtml}</p><p></p>`
 
    }
 
