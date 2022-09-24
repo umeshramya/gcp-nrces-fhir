@@ -482,7 +482,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   const condition = (await new GcpFhirCRUD().getFhirResource(resource.id, resource.resource)).data
   diagnosisStringArray.push(condition.text.div)
   index++
-  this.getDiagnosisFromEnconter(diagnosis, index, diagnosisStringArray )
+ await this.getDiagnosisFromEnconter(diagnosis, index, diagnosisStringArray )
 
  }
 }
