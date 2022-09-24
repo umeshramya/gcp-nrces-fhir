@@ -110,7 +110,7 @@ export class PrescriptionRecord extends Composition implements Records {
    if(diagnosis && diagnosis.length > 0){
     let diagnosisString=""
     diagnosis.forEach((el, i)=> diagnosisString +=`${i+1}. ${el}, `)
-    docHtml = `<div><b>Diagnosis</b></div>${diagnosisString}${docHtml}`
+    docHtml = `<div><b>Diagnosis :- </b>${diagnosisString}${docHtml}</div>`
 
    }
 

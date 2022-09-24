@@ -14,7 +14,7 @@ interface Args {
 }
 export class OPConsultRecord extends Composition implements Records {
   create = async (options: Args) => {
-    options = this.getOptions(options);
+    options = await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
 
@@ -23,7 +23,7 @@ export class OPConsultRecord extends Composition implements Records {
     return res;
   };
   update = async (options: Args) => {
-    options = this.getOptions(options);
+    options =await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
     const gcpFhirCrud = new GcpFhirCRUD();
@@ -35,10 +35,18 @@ export class OPConsultRecord extends Composition implements Records {
     return res;
   };
 
-  getOptions(options: Args): Args {
+  async getOptions(options: Args):Promise<Args> {
     options.composition.section = [];
     options.composition.documentDatahtml = "";
     let docHtml = "";
+    let diagnosis:string[] = []
+    await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
+    if(diagnosis && diagnosis.length > 0){
+     let diagnosisString=""
+     diagnosis.forEach((el, i)=> diagnosisString +=`${i+1}. ${el}, `)
+     docHtml = `<div><b>Diagnosis :- </b>${diagnosisString}${docHtml}</div>`
+ 
+    }
     docHtml = `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
     docHtml += `<tbody style="display: table-header-group"><tr>`;
     docHtml += `<td style="width: 50%;"  border="0" >${this.getLeftColumn(
