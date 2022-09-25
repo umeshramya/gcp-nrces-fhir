@@ -59,7 +59,7 @@ export class OPConsultRecord extends Composition implements Records {
     docHtml += `<tbody>`;
     docHtml += `</table>`;
 
-    if (options.medicationRequest || options.medicationRequest) {
+    if (options.medicationRequest || options.medicationStatement) {
       let entry = [];
       if (options.medicationStatement) {
         entry.push({
