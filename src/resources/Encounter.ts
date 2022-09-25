@@ -54,7 +54,7 @@ interface ENCOUNTER {
   class: EncounterClass;
   patientId: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   appointment?: {"reference" : string, "type" : "Appointment"}[];
   reasonReference	?:{"reference" : string, "type" : "ImmunizationRecommendation" | "Condition" | "Procedure" | "Observation"}[]
   reasonCode?:CODEABLE_CONCEPT[]
@@ -145,9 +145,12 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       class: { code: options.class.code, display: options.class.display },
       patientId: `${options.subject.reference}`.substring(8),
       startDate: options.period.start,
-      endDate: options.period.end,
+      
       id: options.id,
     };
+    if(options.period.end){
+      ret.endDate = options.period.end
+    }
     if(options.diagnosis){
       ret.diagnosis=options.diagnosis
     }
