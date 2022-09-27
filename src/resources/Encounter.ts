@@ -1,6 +1,7 @@
 import { CODEABLE_CONCEPT, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import { PARTICIPANT } from "./objects/Partipant";
+import { Participant, PARTICIPANT } from "./objects/Partipant";
+import { PRACTITIONER } from "./Practitioner";
 import ResourceMain from "./ResourceMai";
 
 const EncounterStatusArray = [
@@ -183,6 +184,39 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       }
     }
 
+    return ret;
+  }
+
+/**
+ * 
+ * @param particpants particpants of encounters
+ * @param allPractioners supply array of practioners for filtering
+ * @returns array of practioners
+ */
+  getPractionersFromParticipants=(particpants:ENCOUNTER["participant"], allPractioners:PRACTITIONER[]):PRACTITIONER[]=>{
+    let ret:PRACTITIONER[]=[]
+    if(particpants && particpants.length>0){
+      ret= particpants?.map(el=>{
+        const multisource = this.getFromMultResource({"reference" : el.individual.reference})
+        return allPractioners.filter(el=>el.id == multisource.id)[0]
+      })
+    }
+    return ret;
+    
+  }
+  /**
+   * This converts Practioners to encounter particpants
+   * @param practioners  PRACTINIORS
+   * @returns 
+   */
+  convertPractionersToParticpants =(practioners:PRACTITIONER[]):ENCOUNTER["participant"]=>{
+    let ret:ENCOUNTER["participant"]=[]
+    ret = practioners.map(el=>{
+      return   {
+        "individual" : {"reference" : `Practitioner/${el.id}`, "type" : `Practitioner`},
+        "type" : [{"text" : "Practitioner"}]
+      }
+    })
     return ret;
   }
 }

@@ -462,7 +462,7 @@ class excute {
   };
 }
 
-// new excute().callFunction()
+new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -472,7 +472,7 @@ class excute {
 // new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
-new excute().precsriptinComposition();
+// new excute().precsriptinComposition();
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
