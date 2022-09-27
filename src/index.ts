@@ -24,6 +24,7 @@ import {
 } from "./resources/Organization";
 import {
   ENCOUNTER,
+  ENCOUNTER_PARTICIPANT,
   Encounter,
   EncounterResource,
   EncounterHospitalizationDischargeDispositionArray,
@@ -101,6 +102,7 @@ import { Specimen, SPECIMEN } from "./resources/Specimen";
 
 export {
   ENCOUNTER,
+  ENCOUNTER_PARTICIPANT,
   Encounter,
   EncounterResource,
   EncounterHospitalizationDischargeDispositionArray,

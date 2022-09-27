@@ -1,6 +1,5 @@
 import { CODEABLE_CONCEPT, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import { Participant, PARTICIPANT } from "./objects/Partipant";
 import { PRACTITIONER } from "./Practitioner";
 import ResourceMain from "./ResourceMai";
 
@@ -47,6 +46,7 @@ type EncounterClass = typeof EncounterClassArray[number];
 type EncounterHospitalizationDischargeDisposition =
   typeof EncounterHospitalizationDischargeDispositionArray[number];
 
+interface ENCOUNTER_PARTICIPANT{"type" : CODEABLE_CONCEPT[] , individual : {"reference" : string, "type" : "RelatedPerson" | "Practitioner" | "PractitionerRole"} }
 interface ENCOUNTER {
   id?: string;
   text: string;
@@ -73,7 +73,7 @@ interface ENCOUNTER {
     use ?: CODEABLE_CONCEPT
     rank?:number
   }[],
-  participant?:{"type" : CODEABLE_CONCEPT[] , individual : {"reference" : string, "type" : "RelatedPerson" | "Practitioner" | "PractitionerRole"} }[]
+  participant?:ENCOUNTER_PARTICIPANT[]
   account?:{"reference" : string, "type" : "Account"}[]
 }
 
@@ -193,7 +193,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
  * @param allPractioners supply array of practioners for filtering
  * @returns array of practioners
  */
-  getPractionersFromParticipants=(particpants:ENCOUNTER["participant"], allPractioners:PRACTITIONER[]):PRACTITIONER[]=>{
+  getPractionersFromParticipants=(particpants:ENCOUNTER_PARTICIPANT[], allPractioners:PRACTITIONER[]):PRACTITIONER[]=>{
     let ret:PRACTITIONER[]=[]
     if(particpants && particpants.length>0){
       ret= particpants?.map(el=>{
@@ -210,7 +210,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
    * @returns 
    */
   convertPractionersToParticpants =(practioners:PRACTITIONER[]):ENCOUNTER["participant"]=>{
-    let ret:ENCOUNTER["participant"]=[]
+    let ret:ENCOUNTER_PARTICIPANT[]=[]
     ret = practioners.map(el=>{
       return   {
         "individual" : {"reference" : `Practitioner/${el.id}`, "type" : `Practitioner`},
@@ -233,6 +233,7 @@ const EncounterResource = (options: ENCOUNTER) => {
 
 export {
   ENCOUNTER,
+  ENCOUNTER_PARTICIPANT,
   EncounterResource,
   EncounterHospitalizationDischargeDispositionArray,
   EncounterStatusArray,
