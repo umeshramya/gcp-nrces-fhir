@@ -56,6 +56,7 @@ import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { COMPOSITOIN, Composition } from "./resources/Composition/index";
 import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import { OPConsultRecord } from "./resources/Composition/OPConsultRecord";
+import {DischargeSUmmery} from "./resources/Composition/DischargeSummary"
 import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportComp";
 import {
   DOCUMENT_REFERENCE,
@@ -102,7 +103,7 @@ import { Specimen, SPECIMEN } from "./resources/Specimen";
 
 export {
   ENCOUNTER,
-  ENCOUNTER_PARTICIPANT,
+ENCOUNTER_PARTICIPANT,
   Encounter,
   EncounterResource,
   EncounterHospitalizationDischargeDispositionArray,
@@ -133,6 +134,7 @@ export { DOCUMENT_BUNDLE, DocumentBundle };
 export { COMPOSITOIN, Composition };
 export { PrescriptionRecord };
 export { OPConsultRecord };
+export {DischargeSUmmery}
 export { DiagnosticReportComp };
 export {
   DOCUMENT_REFERENCE,
