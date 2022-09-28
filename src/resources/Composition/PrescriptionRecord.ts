@@ -5,11 +5,10 @@ interface Args {
   composition: COMPOSITOIN;
   medicationRequest: any;
   diagnosis?: any;
-  followUp?:any
+  followUp?: any;
 }
 export class PrescriptionRecord extends Composition implements Records {
-
-  create = async (options:Args ) => {
+  create = async (options: Args) => {
     options = await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     const gcpFhirCrud = new GcpFhirCRUD();
@@ -22,7 +21,7 @@ export class PrescriptionRecord extends Composition implements Records {
     if (!options.composition.id) {
       throw (new Error().message = "id of composition is required");
     }
-    options =await this.getOptions(options);
+    options = await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
     const gcpFhirCrud = new GcpFhirCRUD();
@@ -34,48 +33,47 @@ export class PrescriptionRecord extends Composition implements Records {
     return res;
   };
 
-  getOptions = async(options:Args):Promise<Args>=>{
-    let docHtml=""
+  getOptions = async (options: Args): Promise<Args> => {
+    let docHtml = "";
 
-    interface SECTION_ZERO{
-      "code": {
-        "coding": [
+    interface SECTION_ZERO {
+      code: {
+        coding: [
           {
-            "code": "440545006",
-            "display": "Prescription",
-            "system": "https://ndhm.gov.in/sct"
+            code: "440545006";
+            display: "Prescription";
+            system: "https://ndhm.gov.in/sct";
           }
-        ]
-      },
-      "entry": any[],
-      "title": "Prescription"
+        ];
+      };
+      entry: any[];
+      title: "Prescription";
     }
-    const sectionZero:SECTION_ZERO={
-      "code": {
-        "coding": [
+    const sectionZero: SECTION_ZERO = {
+      code: {
+        coding: [
           {
-            "code": "440545006",
-            "display": "Prescription",
-            "system": "https://ndhm.gov.in/sct"
-          }
-        ]
+            code: "440545006",
+            display: "Prescription",
+            system: "https://ndhm.gov.in/sct",
+          },
+        ],
       },
-      "entry" : [],
-      "title": "Prescription"
-    }
+      entry: [],
+      title: "Prescription",
+    };
     if (options.diagnosis) {
       sectionZero.entry.push({
         reference: `Condition/${options.diagnosis.id}`,
         type: "Condition",
       });
-      docHtml= `${options.diagnosis.text.div}`;
+      docHtml = `${options.diagnosis.text.div}`;
     }
 
     sectionZero.entry.push({
       reference: `MedicationRequest/${options.medicationRequest.id}`,
       type: "MedicationRequest",
     });
-
 
     options.composition.section.push(sectionZero);
     if (options.followUp) {
@@ -104,19 +102,22 @@ export class PrescriptionRecord extends Composition implements Records {
           new Date(options.followUp.end).toDateString()
         }${options.followUp.text.div}</br>`;
     }
-  
-   let diagnosis:string[] = []
-   await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
-   if(diagnosis && diagnosis.length > 0){
-    let diagnosisString=""
-    diagnosis.forEach((el, i)=> diagnosisString +=`${i+1}. ${el} `)
-    docHtml = `<p><b>Diagnosis :- </b>${diagnosisString}${docHtml}</p><p></p>`
 
-   }
+    let diagnosis: string[] = [];
+    await this.getDiagnosisFromEnconter(
+      options.composition.encounter.diagnosis,
+      0,
+      diagnosis
+    );
+    if (diagnosis && diagnosis.length > 0) {
+      let diagnosisString = "";
+      diagnosis.forEach((el, i) => (diagnosisString += `${i + 1}. ${el} `));
+      docHtml = `<p><b>Diagnosis :- </b>${diagnosisString}${docHtml}</p><p></p>`;
+    }
 
     docHtml += options.medicationRequest.text.div;
 
-    options.composition.documentDatahtml =docHtml
-    return options
-  }
+    options.composition.documentDatahtml = docHtml;
+    return options;
+  };
 }
