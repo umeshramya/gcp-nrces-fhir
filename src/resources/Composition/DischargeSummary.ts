@@ -167,7 +167,7 @@ export class DischargeSUmmery extends Composition implements Records {
         entry: entry,
       });
     }
-
+    options.composition.documentDatahtml =docHtml
     return options;
   };
 }
