@@ -39,12 +39,13 @@ export class DischargeSUmmery extends Composition implements Records {
     const dateOfAddmission = `<p><b>Date of Admission : <b> ${new Date(options.composition.encounter.startDate).toString()} <b>Date Of Discharge : </b> ${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toString() : ""}<p/>`
 
     docHtml += dateOfAddmission
+
     let diagnosis:string[] = []
     await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
     if(diagnosis && diagnosis.length > 0){
      let diagnosisString=""
      diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
-     docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}${docHtml}</p><p></p>`
+     docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`
  
     }
     

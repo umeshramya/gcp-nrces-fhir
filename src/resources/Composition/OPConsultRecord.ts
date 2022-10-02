@@ -44,7 +44,7 @@ export class OPConsultRecord extends Composition implements Records {
     if(diagnosis && diagnosis.length > 0){
      let diagnosisString=""
      diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
-     docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}${docHtml}</p><p></p>`
+     docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`
  
     }
     docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;

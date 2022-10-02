@@ -111,8 +111,8 @@ export class PrescriptionRecord extends Composition implements Records {
     );
     if (diagnosis && diagnosis.length > 0) {
       let diagnosisString = "";
-      diagnosis.forEach((el, i) => (diagnosisString += `${i + 1}. ${el} `));
-      docHtml = `<p><b>Diagnosis :- </b>${diagnosisString}${docHtml}</p><p></p>`;
+      diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
+      docHtml = `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`;
     }
 
     docHtml += options.medicationRequest.text.div;
