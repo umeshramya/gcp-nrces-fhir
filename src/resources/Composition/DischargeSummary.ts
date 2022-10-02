@@ -38,7 +38,7 @@ export class DischargeSUmmery extends Composition implements Records {
     let docHtml = "";
     docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
     docHtml += `<tbody style="display: table-header-group"><tr>`;
-    const dateOfAddmission = `<div><b>Date of Admission : <b></div><div>${new Date(options.composition.encounter.startDate).toString()}</div>`
+    const dateOfAddmission = `<div><b>Date of Admission : </b></div><div>${new Date(options.composition.encounter.startDate).toString()}</div>`
     const dateOfDischarge = `<div><b>Date Of Discharge : </b></div><div>${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toString() : ""}</div>`
     docHtml += `<td style="width: 50%;"  border="0" >${dateOfAddmission}</td>`;
     docHtml += `<td style="width: 50%;"  border="0" >${dateOfDischarge}</td>`;
