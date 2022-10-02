@@ -55,8 +55,7 @@ export class OPConsultRecord extends Composition implements Records {
     docHtml += `<td style="width: 50%;"  border="0" >${this.getRightColumn(
       options
     )}</td>`;
-    docHtml += `</tr></thead>`;
-    docHtml += `<tbody>`;
+    docHtml += `</tbody>`;
     docHtml += `</table>`;
 
     if (options.medicationRequest || options.medicationStatement) {

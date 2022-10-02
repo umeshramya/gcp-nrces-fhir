@@ -36,9 +36,76 @@ export class DischargeSUmmery extends Composition implements Records {
   };
   getOptions = async (options: Args): Promise<Args> => {
     let docHtml = "";
-    const dateOfAddmission = `<p><b>Date of Admission : <b> ${new Date(options.composition.encounter.startDate).toString()} <b>Date Of Discharge : </b> ${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toString() : ""}<p/>`
+    docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
+    docHtml += `<tbody style="display: table-header-group"><tr>`;
+    const dateOfAddmission = `<b>Date of Admission : <b><br/> ${new Date(options.composition.encounter.startDate).toString()}<p/>`
+    const dateOfDischarge = `<b>Date Of Discharge : </b> <br/>${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toString() : ""}`
+    docHtml += `<td style="width: 50%;"  border="0" >${dateOfAddmission}</td>`;
+    docHtml += `<td style="width: 50%;"  border="0" >${dateOfDischarge}</td>`;
+    docHtml += `</tr>`;
+    const getFollowup=():string=>{
+      let ret:string=""
+      if (options.followUp) {
+        options.composition.section.push({
+          title: "Follow Up",
+          code: {
+            coding: [
+              {
+                system: "http://snomed.info/sct",
+                code: "736271009",
+                display: "Outpatient care plan",
+              },
+            ],
+          },
+          entry: [
+            {
+              reference: `Appointment/${options.followUp.id}`,
+            },
+          ],
+        });
+  
+        ret =
+          `<div"><span><b>Follow up:-</b>${
+            new Date(options.followUp.start).toDateString() ||
+            new Date(options.followUp.end).toDateString()
+          }${options.followUp.text.div}</br>`;
+      }
+       return ret;
+    }
 
-    docHtml += dateOfAddmission
+    const getAllergy=():string=>{
+      let ret:string=""
+      if (options.allergies) {
+        options.composition.section.push({
+          title: "Allergies",
+          code: {
+            coding: [
+              {
+                system: "http://snomed.info/sct",
+                code: "722446000",
+                display: "Allergy record",
+              },
+            ],
+          },
+          entry: [
+            {
+              reference: `AllergyIntolerance/${options.allergies.id}`,
+            },
+          ],
+        });
+  
+        ret =  `<b>Allergies</b>${options.allergies.text.div}</br>`;
+      }
+      return ret;
+    }
+
+
+    docHtml +=`<tr>`
+    docHtml += `<td style="width: 50%;"  border="0" >${getFollowup()}</td>`;
+    docHtml += `<td style="width: 50%;"  border="0" >${getAllergy()}</td>`;
+    docHtml += `</tr>`;
+    docHtml += `</tbody>`;
+    docHtml += `</table>`;
 
     let diagnosis:string[] = []
     await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
@@ -48,54 +115,11 @@ export class DischargeSUmmery extends Composition implements Records {
      docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`
  
     }
+
+
     
-    if (options.allergies) {
-      options.composition.section.push({
-        title: "Allergies",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "722446000",
-              display: "Allergy record",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `AllergyIntolerance/${options.allergies.id}`,
-          },
-        ],
-      });
 
-      docHtml = docHtml + `<b>Allergies</b>${options.allergies.text.div}</br>`;
-    }
-    if (options.followUp) {
-      options.composition.section.push({
-        title: "Follow Up",
-        code: {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: "736271009",
-              display: "Outpatient care plan",
-            },
-          ],
-        },
-        entry: [
-          {
-            reference: `Appointment/${options.followUp.id}`,
-          },
-        ],
-      });
 
-      docHtml =
-        docHtml +
-        `<div"><span><b>Follow up:-</b>${
-          new Date(options.followUp.start).toDateString() ||
-          new Date(options.followUp.end).toDateString()
-        }${options.followUp.text.div}</br>`;
-    }
     if (options.PresentingProblems) {
       options.composition.section.push({
         title: "Presenting Problems",
