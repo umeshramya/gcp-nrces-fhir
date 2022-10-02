@@ -36,7 +36,7 @@ export class DischargeSUmmery extends Composition implements Records {
   };
   getOptions = async (options: Args): Promise<Args> => {
     let docHtml = "";
-    const dateOfAddmission = `<p>Date of Addmission ${this.encounter.startDate} Date Of Discharge ${this.encounter.endDate || ""}<p/>`
+    const dateOfAddmission = `<p>Date of Addmission ${options.composition.encounter.startDate} Date Of Discharge ${options.composition.encounter.endDate || ""}<p/>`
 
     let diagnosis:string[] = []
     await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
