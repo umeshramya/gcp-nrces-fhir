@@ -35,10 +35,18 @@ export class DischargeSUmmery extends Composition implements Records {
     return res;
   };
   getOptions = async (options: Args): Promise<Args> => {
-    let docHTML = "";
-
     let docHtml = "";
+    const dateOfAddmission = `<p>Date of Addmission ${this.encounter.startDate} Date Of Discharge ${this.encounter.endDate || ""}<p/>`
 
+    let diagnosis:string[] = []
+    await this.getDiagnosisFromEnconter(options.composition.encounter.diagnosis, 0, diagnosis)
+    if(diagnosis && diagnosis.length > 0){
+     let diagnosisString=""
+     diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
+     docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}${docHtml}</p><p></p>`
+ 
+    }
+    
     if (options.allergies) {
       options.composition.section.push({
         title: "Allergies",
