@@ -35,6 +35,9 @@ const resources = {
   organization: null,
   patient: null,
   practioner: null,
+  practioner1:null,
+  practioner2:null,
+  practioner3:null,
   encounter: null,
   conditon: null,
   procedure: null,
@@ -153,6 +156,52 @@ const setPractinioner = async () => {
   let res = await gcpFhirCRUD.createFhirResource(body, "Practitioner");
   res = await gcpFhirCRUD.getFhirResource(res.data.id, "Practitioner");
   resources.practioner = practitioner.convertFhirToObject(res.data);
+
+
+
+};
+
+const setOtherPractinioner = async () => {
+  const practitioner = new Practitioner();
+  let body = practitioner.getFHIR({
+    medicalLicenseNumber: "KMC 35167",
+    name: "Dr A D  Bilagi",
+    ndhmProfessionalId: "123456",
+    qualification: "MD",
+    orgnizationId: resources.organization.id,
+  });
+
+  let res = await gcpFhirCRUD.createFhirResource(body, "Practitioner");
+  res = await gcpFhirCRUD.getFhirResource(res.data.id, "Practitioner");
+  resources.practioner1 = practitioner.convertFhirToObject(res.data);
+
+
+  body = practitioner.getFHIR({
+    medicalLicenseNumber: "KMC 35167",
+    name: "Dr Nice Bilagi",
+    ndhmProfessionalId: "123456",
+    qualification: " Cardiology",
+    orgnizationId: resources.organization.id,
+  });
+
+   res = await gcpFhirCRUD.createFhirResource(body, "Practitioner");
+  res = await gcpFhirCRUD.getFhirResource(res.data.id, "Practitioner");
+  resources.practioner2 = practitioner.convertFhirToObject(res.data);
+
+  body = practitioner.getFHIR({
+    medicalLicenseNumber: "KMC 35167",
+    name: "Dr A D Bilagi",
+    ndhmProfessionalId: "123456",
+    qualification: " Cardiology",
+    orgnizationId: resources.organization.id,
+  });
+
+   res = await gcpFhirCRUD.createFhirResource(body, "Practitioner");
+  res = await gcpFhirCRUD.getFhirResource(res.data.id, "Practitioner");
+  resources.practioner3 = practitioner.convertFhirToObject(res.data);
+
+
+
 };
 
 const setEncounter = async () => {
@@ -205,4 +254,4 @@ const callFunction = async () => {
 
 callFunction();
 
-module.exports = { callFunction, resources };
+module.exports = { callFunction, resources, setOtherPractinioner };

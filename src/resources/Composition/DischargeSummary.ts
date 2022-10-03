@@ -36,6 +36,7 @@ export class DischargeSUmmery extends Composition implements Records {
   };
   getOptions = async (options: Args): Promise<Args> => {
     let docHtml = "";
+    docHtml += `<h3 style="text-align: center;">Discharge Summary</h3>`
     docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
     docHtml += `<tbody style="display: table-header-group"><tr>`;
     const dateOfAddmission = `<div><b>Date of Admission : </b></div><div>${new Date(options.composition.encounter.startDate).toString()}</div>`

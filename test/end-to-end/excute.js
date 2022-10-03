@@ -1,5 +1,5 @@
 const { setMedicationRequest } = require("./medication");
-const { callFunction, resources } = require("./index");
+const { callFunction, resources, setOtherPractinioner } = require("./index");
 const { setCondition } = require("./condion");
 const { setPractiotionerRole } = require("./PractitionerRole");
 const {setProcedure} = require("./Procedure")
@@ -119,6 +119,7 @@ class excute {
 
   precsriptinComposition = async () => {
     await callFunction();
+    await setOtherPractinioner()
     await setMedicationRequest();
     await setCondition();
     await setAppointment()
@@ -144,6 +145,7 @@ class excute {
           },
         ],
         date: new Date().toISOString(),
+        
         encounter: resources.encounter,
         encounterId: resources.encounter.id,
         organization: resources.organization,
@@ -191,6 +193,7 @@ class excute {
             reference: `Practitioner/${resources.practioner.id}`,
           },
         ],
+        
         date: new Date().toISOString(),
         encounter: resources.encounter,
         encounterId: resources.encounter.id,
@@ -473,7 +476,7 @@ new excute().callFunction()
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
-// new excute().OpCunsulatationComposition()
+new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()
