@@ -36,6 +36,18 @@ export class PrescriptionRecord extends Composition implements Records {
   getOptions = async (options: Args): Promise<Args> => {
     let docHtml = "";
 
+    let diagnosis: string[] = [];
+    await this.getDiagnosisFromEnconter(
+      options.composition.encounter.diagnosis,
+      0,
+      diagnosis
+    );
+    if (diagnosis && diagnosis.length > 0) {
+      let diagnosisString = "";
+      diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
+      docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`;
+    }
+
     interface SECTION_ZERO {
       code: {
         coding: [
@@ -103,17 +115,7 @@ export class PrescriptionRecord extends Composition implements Records {
         }${options.followUp.text.div}</br>`;
     }
 
-    let diagnosis: string[] = [];
-    await this.getDiagnosisFromEnconter(
-      options.composition.encounter.diagnosis,
-      0,
-      diagnosis
-    );
-    if (diagnosis && diagnosis.length > 0) {
-      let diagnosisString = "";
-      diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
-      docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`;
-    }
+
 
     docHtml += options.medicationRequest.text.div;
 
