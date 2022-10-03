@@ -4,7 +4,7 @@ import { APPOINTMENT } from "../Appointment";
 interface Args {
   composition: COMPOSITOIN;
   medicationRequest: any;
-  diagnosis?: any;
+  notes?: any;
   followUp?: any;
 }
 export class PrescriptionRecord extends Composition implements Records {
@@ -62,12 +62,12 @@ export class PrescriptionRecord extends Composition implements Records {
       entry: [],
       title: "Prescription",
     };
-    if (options.diagnosis) {
+    if (options.notes) {
       sectionZero.entry.push({
-        reference: `Condition/${options.diagnosis.id}`,
+        reference: `Condition/${options.notes.id}`,
         type: "Condition",
       });
-      docHtml = `${options.diagnosis.text.div}`;
+      docHtml += `${options.notes.text.div}`;
     }
 
     sectionZero.entry.push({
@@ -112,7 +112,7 @@ export class PrescriptionRecord extends Composition implements Records {
     if (diagnosis && diagnosis.length > 0) {
       let diagnosisString = "";
       diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
-      docHtml = `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`;
+      docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`;
     }
 
     docHtml += options.medicationRequest.text.div;
