@@ -81,7 +81,8 @@ import { SCHEDULE, Schedule } from "./resources/Schedule"
 import { SLOT, Slot } from "./resources/Slot"
 import { PrescriptionBundle } from "./resources/Bundle/Prescription";
 import { DiagnsoticReportBundle } from "./resources/Bundle/DiagnsoticReport"
-import { OPConsultationBundle } from "./resources/Bundle/OPConsutation"
+import { OPConsultationBundle } from "./resources/Bundle/OPConsultation"
+import {DischargeSummaryBundle} from "./resources/Bundle/DischargeSummary"
 import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
@@ -167,7 +168,7 @@ export interface GcpNrcesFhirType {
 export { PrescriptionBundle };
 export { DiagnsoticReportBundle }
 export { OPConsultationBundle }
-
+export {DischargeSummaryBundle} 
 export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
 export { Media, MEDIA };
