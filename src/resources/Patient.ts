@@ -1,4 +1,4 @@
-import { coding, IDENTTIFIER } from "../config";
+import { CODING, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 

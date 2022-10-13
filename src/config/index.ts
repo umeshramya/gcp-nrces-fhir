@@ -55,7 +55,9 @@ export const resourceTypeArray = [
   "MolecularSequence",
   "QuestionnaireResponse",
   "Slot",
-  "Schedule"
+  "Schedule",
+  "endpoint" 
+
 ] as const;
 
 export type resourceType = typeof resourceTypeArray[number];
@@ -66,7 +68,7 @@ export interface CodeDisplay {
   system?: "http://snomed.info/sct" | string;
 }
 
-export interface coding extends CodeDisplay {
+export interface CODING extends CodeDisplay {
   // system?: string;
   version?: string; // Version of the system - if relevant
   // code?: string; // Symbol in syntax defined by the system
@@ -75,7 +77,7 @@ export interface coding extends CodeDisplay {
 }
 
 export interface CODEABLE_CONCEPT {
-  coding?: coding[]; // Code defined by a terminology system
+  coding?: CODING[]; // Code defined by a terminology system
   text?: string; // Plain text representation of the concept
 }
 export interface PERIOD {
@@ -149,4 +151,20 @@ export type LoincScale = typeof LOINC_SCALE[number];
 
 export interface ACTOR {
   multiResource: MULTI_RESOURCE
+}
+
+export interface POSITION{
+  longitude : number
+  latitude : number
+  altitude ?: number
+}
+
+export const DaysOfWeek =[ "mon" , "tue" , "wed" , "thu" , "fri" , "sat" , "sun" ] as const
+type DaysOfWeek = typeof DaysOfWeek[number]
+export  interface HOURS_OF_OPERATION{
+  daysOfWeek ?: DaysOfWeek[];
+  allDay ?: boolean;
+  openingTime ?: string;
+  closingTime ?:string
+
 }

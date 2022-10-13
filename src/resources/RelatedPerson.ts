@@ -1,4 +1,4 @@
-import { ADDRESS, CODEABLE_CONCEPT, coding, COMMUNICATION, CONTACT_POINT, HUMAN_NAME, IDENTTIFIER } from "../config";
+import { ADDRESS, CODEABLE_CONCEPT, CODING, COMMUNICATION, CONTACT_POINT, HUMAN_NAME, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
