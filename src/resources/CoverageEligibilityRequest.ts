@@ -2,8 +2,11 @@ import { CODEABLE_CONCEPT, IDENTTIFIER, MULTI_RESOURCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
+const CoverageEligibilityRequestStatus = [	"active" , "cancelled" , "draft" , "entered-in-error"] as const
+
+type CoverageEligibilityRequestStatus = typeof CoverageEligibilityRequestStatus[number]
 const CoverageEligibilityRequestPurpose = [
-  "auth-requirements ",
+  "auth-requirements",
   "benefits",
   "discovery",
   "validation",
@@ -40,6 +43,7 @@ interface ITEM{
 
 export interface COVERAGE_ELIGIBILITY_REQUEST {
   id?: string;
+  status : CoverageEligibilityRequestStatus
   text: string;
   identifier: IDENTTIFIER;
   priority: CODEABLE_CONCEPT;
@@ -62,7 +66,7 @@ export class CoverageEligibilityRequest
   extends ResourceMain
   implements ResourceMaster
 {
-  getFHIR(options: COVERAGE_ELIGIBILITY_REQUEST) {
+  getFHIR(options: COVERAGE_ELIGIBILITY_REQUEST):any {
     const getText = (): string => {
       let ret: string = "";
       ret += options.text;
@@ -102,11 +106,35 @@ export class CoverageEligibilityRequest
       item:options.item,
       detail : options.detail
     };
+
+    return body
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options: any):COVERAGE_ELIGIBILITY_REQUEST {
+    let ret:COVERAGE_ELIGIBILITY_REQUEST={
+      id: options.id,
+      status: options.status,
+      text: options.text,
+      identifier: options.identifier,
+      priority: options.priority,
+      purpose: options.purpose,
+      patientId: this.getIdFromReference({"ref" : options.patient.reference, "resourceType" : "Patient"}),
+      createdDateTime: options.created,
+      enterer: options.enterer,
+      provider: options.provider,
+      insurerOrganizationId: this.getIdFromReference({"ref" : options.insurer.reference, "resourceType" : "Organization"}),
+      locationId: this.getIdFromReference({"ref" : options.facility.reference, "resourceType" : "Location"}),
+      coverageId: this.getIdFromReference({"ref" : options.insurance.reference, "resourceType" : "Coverage"}),
+      item: options.item
+    }
+
+    if(options.detail){
+      ret.detail= options.detail
+    }
+    return ret
   }
-  statusArray?: Function | undefined;
+  statusArray =():CoverageEligibilityRequestStatus[]=>{
+    return CoverageEligibilityRequestStatus.map(el=>el)
+  }
 
   Purpose = (): CoverageEligibilityRequestPurpoe[] => {
     return CoverageEligibilityRequestPurpose.map((el) => el);
