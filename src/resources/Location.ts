@@ -30,6 +30,11 @@ export  class Location extends ResourceMain implements ResourceMaster{
   getFHIR(options: LOCATION):any {
     const body={
       id:options.id,
+      resourceType: "Location",
+      "text": {
+        "status": "generated",
+        "div": options.description
+      },
       identifier: options.indentifiers,
       name : options.name,
       alias : options.alias,
@@ -47,7 +52,7 @@ export  class Location extends ResourceMain implements ResourceMaster{
       hoursOfOperation: options.hoursOfOperation,
       availabilityExceptions: options.availabilityExceptions,
       endpoint :     {
-        reference: `endpoint/${options.endpointId}`,
+        reference: `Endpoint/${options.endpointId}`,
       }
     }
 
@@ -97,7 +102,7 @@ export  class Location extends ResourceMain implements ResourceMaster{
       ret.availabilityExceptions= options.availabilityExceptions
     }
     if(options.endpoint){
-      ret.endpointId = this.getIdFromReference({"ref" : options.endpoint.reference, "resourceType" : "endpoint"})
+      ret.endpointId = this.getIdFromReference({"ref" : options.endpoint.reference, "resourceType" : "Endpoint"})
     }
     return ret
     

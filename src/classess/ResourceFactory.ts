@@ -24,6 +24,9 @@ import { Observation } from "../resources/Observation";
 import { ServiceRequest } from "../resources/ServiceRequest";
 import { Schedule } from "../resources/Schedule";
 import { Slot } from "../resources/Slot";
+import { CoverageEligibilityRequest } from "../resources/CoverageEligibilityRequest";
+import { EndPoint } from "../resources/Endpoint";
+import { Coverage } from "../resources/Coverage";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -80,7 +83,16 @@ export default class ResourceFactory
       this.resource = new Schedule();
     }else if (this.resourceType == "Slot") {
       this.resource = new Slot();
+    }else if(this.resourceType== "CoverageEligibilityRequest"){
+      this.resource= new CoverageEligibilityRequest()
+    }else if(this.resourceType== "Location"){
+      this.resource = new Location()
+    }else if(this.resourceType== "Endpoint"){
+      this.resource= new EndPoint()
+    }else if(this.resourceType== "Coverage"){
+      this.resource= new Coverage()
     }
+
     else {
       const errMessage = `Not Implimented resourceType ${this.resourceType}`;
       console.log(errMessage);
