@@ -36,7 +36,7 @@ const webhookURL="https://webhook.site/46dbc082-f990-4ddd-b5cf-767a35bdc40d"
 class excute {
   callFunction = async () => {
     await callFunction();
-    console.log(resources);
+    console.log(resources.patient);
   };
 
   /**
@@ -476,7 +476,7 @@ new excute().callFunction()
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
-new excute().OpCunsulatationComposition()
+// new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()

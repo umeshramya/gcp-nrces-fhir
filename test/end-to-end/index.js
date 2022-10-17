@@ -84,6 +84,10 @@ const setPatient = async () => {
     MRN: "5002",
     organizationId: resources.organization.id,
     internalId: "156141",
+    identifier : [{
+      "system" : "https://vidal.com",
+      "value" : "v1-12"
+    }]
   });
 
   let res = await gcpFhirCRUD.createFhirResource(body, "Patient");

@@ -13,6 +13,7 @@ export interface PATIENT {
   dob: string;
   MRN?: string;
   organizationId: string;
+  identifier?:IDENTTIFIER[]
 }
 
 export class Patient extends ResourceMain implements ResourceMaster {
@@ -70,6 +71,9 @@ export class Patient extends ResourceMain implements ResourceMaster {
       };
 
       identifiers.push(id);
+    }
+    if(options.identifier && options.identifier.length >0){
+      identifiers.push(...options.identifier)
     }
 
     if (options.MRN) {
@@ -166,6 +170,15 @@ export class Patient extends ResourceMain implements ResourceMaster {
       if (phrAddress.length > 0) {
         ret.phrAddress = phrAddress[0].value;
       }
+
+      ret.identifier= options.identifier.filter((el:IDENTTIFIER)=>{
+         if(el.system !=  "https://healthid.ndhm.gov.in/phr-address" 
+         && el.system !=  "https://healthid.ndhm.gov.in/health-number"
+         &&   el.system != "https://www.nicehms.com/internalid"
+         &&  el.system != "https://www.nicehms.com"){
+          return el
+         }
+      })
     }
 
     return ret;
