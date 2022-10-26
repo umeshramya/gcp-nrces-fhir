@@ -89,6 +89,9 @@ import {
 } from "./resources/DiagnosticReport";
 import { Media, MEDIA } from "./resources/Media";
 import { Observation, OBSERVATION } from "./resources/Observation";
+import { Specimen, SPECIMEN } from "./resources/Specimen";
+import {Coverage, COVERAGE } from "./resources/Coverage";
+import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./resources/CoverageEligibilityRequest"
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export { htmlToText }
@@ -100,7 +103,7 @@ export { ORGANIZATION, OrganizationResource, Organization };
 export { PRACTITIONER, PractitionerResource, Practitioner };
 export { PRACTITIONER_ROLE, PractitionerRole, NOT_AVAILABLE, AVAILABLE_TIME };
 
-import { Specimen, SPECIMEN } from "./resources/Specimen";
+
 
 export {
   ENCOUNTER,
@@ -180,3 +183,6 @@ export { LOINC_SCALE };
 
 import { PDF_HEADER } from "js-ts-report";
 export { PDF_HEADER };
+
+export {Coverage, COVERAGE }
+export {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} 

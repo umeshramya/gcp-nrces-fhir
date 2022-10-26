@@ -29,6 +29,7 @@ const console = require("console");
 const { setSChedule } = require("./Schedule");
 const {setSlot} = require("./Slot");
 const { setAppointment } = require("./Appointement");
+const { setCoverage } = require("./Coverage");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -115,6 +116,12 @@ class excute {
     // await callFunction()
     const res= await setSlot()
     console.log(res)
+  }
+
+  coverage = async()=>{
+    await callFunction();
+   const ret = await setCoverage()
+   console.log(ret)
   }
 
   precsriptinComposition = async () => {
@@ -465,7 +472,7 @@ class excute {
   };
 }
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -488,3 +495,4 @@ new excute().callFunction()
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
+new excute().coverage()

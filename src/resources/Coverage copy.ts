@@ -5,6 +5,7 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { VALUE } from "./Observation";
 import ResourceMain from "./ResourceMai";
 const CoverageStatus = [
   "active",
@@ -13,14 +14,18 @@ const CoverageStatus = [
   "entered-in-error",
 ] as const;
 type CoverageStatus = typeof CoverageStatus[number];
-
+const CoverageKind = ["insurance", "self-pay", "other"] as const;
+type CoverageKind = typeof CoverageKind[number];
+interface party extends MULTI_RESOURCE {
+  resource: "Patient" | "RelatedPerson" | "Organization";
+}
 interface policyHolder extends MULTI_RESOURCE {
   resource: "Patient" | "RelatedPerson" | "Organization";
 }
 interface subscriber extends MULTI_RESOURCE {
   resource: "Patient" | "RelatedPerson";
 }
-interface payor extends MULTI_RESOURCE {
+interface payer extends MULTI_RESOURCE {
   resource: "Patient" | "RelatedPerson" | "Organization";
 }
 
@@ -48,18 +53,23 @@ interface costToBeneficiary {
 export interface COVERAGE {
   id?: string;
   identifier: IDENTTIFIER[];
-  text: string;
+  text:string
   status: CoverageStatus;
+  kind: CoverageKind;
+  paymentBy?: {
+    party: party;
+    responsibility?: string;
+  }[];
   type?: CODEABLE_CONCEPT;
   policyHolder?: policyHolder;
   subscriber?: subscriber;
   subscriberId?: IDENTTIFIER[];
   beneficiaryPatientId: string;
-  dependent?: string;
+  dependent: string;
   relationship?: CODEABLE_CONCEPT;
   period?: PERIOD;
   insurerOrganizationId?: string;
-  payor: payor[];
+  payer: payer[];
   class?: {
     type: CODEABLE_CONCEPT;
     value: IDENTTIFIER;
@@ -74,21 +84,36 @@ export interface COVERAGE {
 }
 
 export class Coverage extends ResourceMain implements ResourceMaster {
+
+
   getFHIR(options: COVERAGE) {
-    const getText = (): string => {
-      let ret: string = "";
-      ret = options.text;
-      return ret;
-    };
+    
+    const getText =():string=>{
+        let ret:string=""
+        ret=options.text
+        return ret
+    }
     const body = {
       id: options.id,
-      resourceType: "Coverage",
       identifier: options.identifier,
-      //   text: {
-      //     status: "generated",
-      //     div: getText(),
-      //   },
+      meta: {
+        lastUpdated: new Date().toISOString(),
+        profile: [
+          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Coverage",
+        ],
+      },
+      text: {
+        status: "generated",
+        div: getText(),
+      },
       status: options.status,
+      kind: options.kind,
+      paymentBy: options.paymentBy?.map((el) => {
+        return {
+          party: { reference: `${el.party.resource}/${el.party.id}` },
+          responsibility: el.responsibility,
+        };
+      }),
       policyHolder: options.policyHolder
         ? {
             reference: `${options.policyHolder.resource}/${options.policyHolder.id}`,
@@ -99,11 +124,10 @@ export class Coverage extends ResourceMain implements ResourceMaster {
             reference: `${options.subscriber.resource}/${options.subscriber.id}`,
           }
         : undefined,
-      subscriberId: options.subscriberId,
       beneficiary: { reference: `Patient/${options.beneficiaryPatientId}` },
       dependent: options.dependent,
       relationship: options.relationship,
-      payor: options.payor.map((el) => {
+      payer: options.payer.map((el) => {
         const ret: any = { reference: `${el.resource}/${el.id}` };
         if (el.display) {
           ret.display = el.display;
