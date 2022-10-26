@@ -58,7 +58,8 @@ export const resourceTypeArray = [
   "Schedule",
   "Endpoint" ,
   "CoverageEligibilityRequest",
-  "Coverage"
+  "Coverage",
+  "Contract"
 
 ] as const;
 

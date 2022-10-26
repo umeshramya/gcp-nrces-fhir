@@ -83,11 +83,12 @@ export class Coverage extends ResourceMain implements ResourceMaster {
     const body = {
       id: options.id,
       resourceType: "Coverage",
+      type: options.type,
       identifier: options.identifier,
-      //   text: {
-      //     status: "generated",
-      //     div: getText(),
-      //   },
+      text: {
+        status: "generated",
+        div: getText(),
+      },
       status: options.status,
       policyHolder: options.policyHolder
         ? {
@@ -129,7 +130,81 @@ export class Coverage extends ResourceMain implements ResourceMaster {
     return body;
   }
   convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+    const ret: COVERAGE = {
+      id: options.id,
+      identifier: options.identifier,
+      text: options.text.div,
+      status: options.status,
+      beneficiaryPatientId: this.getIdFromReference({
+        ref: options.beneficiary.reference,
+        resourceType: "Patient",
+      }),
+      payor: options.payor.map((el: any) => {
+        const ret: MULTI_RESOURCE = this.getFromMultResource(el);
+        return ret;
+      }),
+    };
+
+    if (options.type) {
+      ret.type = options.type;
+    }
+    if (options.policyHolder) {
+      ret.policyHolder = this.getFromMultResource(options.policyHolder) as any;
+    }
+    if (options.subscriber) {
+      ret.subscriber = this.getFromMultResource(options.subscriber) as any;
+    }
+    if (options.subscriberId) {
+      ret.subscriberId = options.subscriberId;
+    }
+    if (options.dependent) {
+      ret.dependent = options.dependent;
+    }
+    if (options.relationship) {
+      ret.relationship = options.relationship;
+    }
+
+    if (options.period) {
+      ret.period = options.period;
+    }
+
+    if (options.insurer) {
+      ret.insurerOrganizationId = this.getIdFromReference({
+        ref: options.insurer.reference,
+        resourceType: "Organization",
+      });
+    }
+
+    if (options.dependent) {
+      ret.dependent = options.dependent;
+    }
+
+    if (options.class) {
+      ret.class = options.class;
+    }
+    if (options.order) {
+      ret.order = options.order;
+    }
+    if (options.network) {
+      ret.network = options.network;
+    }
+    if (options.costToBeneficiary) {
+      ret.costToBeneficiary = options.costToBeneficiary;
+    }
+
+    if (options.subrogation) {
+      ret.subrogation = options.subrogation;
+    }
+    if (options.contract) {
+      ret.contractId = options.contract.map((el: any) => {
+        const ret: string = this.getIdFromReference({
+          ref: el.reference,
+          resourceType: "Contract",
+        });
+      });
+    }
+
+    return ret;
   }
   statusArray?: Function | undefined;
 }
