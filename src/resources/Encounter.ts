@@ -1,4 +1,5 @@
-import { CODEABLE_CONCEPT, IDENTTIFIER } from "../config";
+import { brotliDecompressSync } from "zlib";
+import { CODEABLE_CONCEPT, IDENTTIFIER, MULTI_RESOURCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PRACTITIONER } from "./Practitioner";
 import ResourceMain from "./ResourceMai";
@@ -47,6 +48,10 @@ type EncounterHospitalizationDischargeDisposition =
   typeof EncounterHospitalizationDischargeDispositionArray[number];
 
 interface ENCOUNTER_PARTICIPANT{"type" : CODEABLE_CONCEPT[] , individual : {"reference" : string, "type" : "RelatedPerson" | "Practitioner" | "PractitionerRole"} }
+interface BASED_ON extends MULTI_RESOURCE{
+  resource : "CarePlan" | "DeviceRequest" | "MedicationRequest" | "ServiceRequest" 
+}
+
 interface ENCOUNTER {
   id?: string;
   text: string;
@@ -75,6 +80,7 @@ interface ENCOUNTER {
   }[],
   participant?:ENCOUNTER_PARTICIPANT[]
   account?:{"reference" : string, "type" : "Account"}[]
+  basedOn?:BASED_ON[]
 }
 
 export class Encounter extends ResourceMain implements ResourceMaster {
@@ -99,7 +105,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       identifiers.push(id);
     }
 
-    const body = {
+    const body:any = {
       resourceType: "Encounter",
       id: options.id,
       meta: {
@@ -131,10 +137,17 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       participant : options.participant,
       reasonReference:options.reasonReference,
       reasonCode:options.reasonCode,
-      account:options.account
-      
-      
+      account:options.account,
+  
     };
+
+    if(options.basedOn){
+      body.basedOn = options.basedOn.map(el=>{
+        return {
+          "reference" : `${el.resource}/${el.id}`
+        }
+      })
+    }
 
     return body;
   }
@@ -182,6 +195,13 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       if (careContext.length > 0) {
         ret.careContext = careContext[0].value;
       }
+    }
+
+    if(options.basedOn){
+      ret.basedOn = options.basedOn.map((el: any)=>{
+        const ret:BASED_ON= this.getFromMultResource({"reference" : el.reference}) as any
+        return ret;
+      })
     }
 
     return ret;

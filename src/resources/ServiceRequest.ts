@@ -60,14 +60,14 @@ export interface SERVICE_REQUEST {
   id?: string;
   status: ServiceRequestStatus;
   intent: ServiceRequestIntent;
-  services: CodeDisplay[];
+  services?: CodeDisplay[];
   patientId: string;
   patientName: string;
   requester: requester;
   performer?: performer[];
   date: string;
-  priority: ServiceRequestPriority;
-  category: ServceRequestCategory;
+  priority?: ServiceRequestPriority;
+  category?: ServceRequestCategory;
   encounterId?: string;
   note?:ANNOTATION[]
 }
@@ -76,7 +76,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
   getFHIR(options: SERVICE_REQUEST): any {
     const getText = (): string => {
       let services = "";
-      if (options.services.length > 0) {
+      if (options.services && options.services.length > 0) {
         options.services.forEach((el) => {
           services = `${services}, ${el.display}`;
         });
@@ -93,18 +93,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ServiceRequest",
         ],
       },
-      priority: options.priority,
-      category: [
-        {
-          coding: [
-            {
-              system: "http://snomed.info/sct",
-              code: options.category.code,
-              display: options.category.display,
-            },
-          ],
-        },
-      ],
+      
       text: {
         status: "generated",
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
@@ -119,11 +108,32 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         display: options.patientName,
       },
       occurrenceDateTime: options.date,
-      requester: {
+    };
+
+
+    if(options.priority){
+      body.priority=options.priority
+    }
+
+    if(options.category){
+      body.category=[
+        {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: options.category.code,
+              display: options.category.display,
+            },
+          ],
+        },
+      ]
+    }
+    if(options.requester){
+      body.requester={
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
-      },
-    };
+      }
+    }
 
     if (options.performer) {
       body.performer = options.performer.map((el) => {
@@ -186,22 +196,34 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     let ret: SERVICE_REQUEST = {
       status: options.status,
       intent: options.intent,
-      services: options.code.coding,
       patientId: this.getIdFromReference({
         ref: options.subject.reference,
         resourceType: "Patient",
       }),
       patientName: options.subject.display,
-      requester: requester(),
-      performer: performer(),
       date: options.occurrenceDateTime,
       id: options.id,
-      priority: options.priority,
-      category: {
+   
+      requester: requester()
+    };
+
+    if(options.priority){
+      ret.priority=options.priority
+    }
+
+    if(options.category){
+      ret.category={
         code: options.category[0].coding[0].code,
         display: options.category[0].coding[0].display,
-      },
-    };
+      }
+    }
+
+    if(options.code && options.code.coding){
+      ret.services= options.code.coding
+    }
+    if(options.performer){
+      ret.performer = performer()
+    }
 
     if (options.encounter) {
       ret.encounterId = this.getIdFromReference({
