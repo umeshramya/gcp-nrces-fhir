@@ -20,13 +20,14 @@ const setServiceRequest = async () => {
         "patientName": resources.patient.name,
         "priority": "routine",
         "requester": { "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" },
-        "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
+        // "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
         "patientId": resources.patient.id,
         "patientName": resources.patient.name,
         "status": "draft",
         "date": new Date().toISOString(),
         "services": [{ "display": "Echocardiography", "system": "http://snomed.info/sct" }],
-        "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id": resources.practioner.id }]
+        note: [{"text" : "Referig for CAG"}],
+        "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id": "https://nicehms.com" }]
     })
 
 

@@ -478,7 +478,7 @@ class excute {
 // new excute().practionerRole()
 // new excute().specimen()
 // new excute().procedure()
-// new excute().serviceRequest()
+new excute().serviceRequest()
 // new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
@@ -495,4 +495,4 @@ class excute {
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
-new excute().coverage()
+// new excute().coverage()

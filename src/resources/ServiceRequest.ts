@@ -1,5 +1,5 @@
 import { PATIENT, PRACTITIONER } from "..";
-import { CodeDisplay, resourceType } from "../config";
+import { CodeDisplay, MULTI_RESOURCE, resourceType } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { ORGANIZATION } from "./Organization";
 import ResourceMain from "./ResourceMai";
@@ -47,6 +47,15 @@ export type ServceRequestCategory = typeof serviceRequestCategory[number];
 const serviceRequestPriority = ["routine", "urgent", "asap", "stat"] as const;
 
 export type ServiceRequestPriority = typeof serviceRequestPriority[number];
+interface authorReference	extends MULTI_RESOURCE{
+  resource : "Practitioner" | "Patient" | "RelatedPerson" | "Organization",
+  
+}
+interface ANNOTATION {
+  // author?:{author:authorReference; authorString : string}
+  // time:string
+  text:string
+}
 export interface SERVICE_REQUEST {
   id?: string;
   status: ServiceRequestStatus;
@@ -60,6 +69,7 @@ export interface SERVICE_REQUEST {
   priority: ServiceRequestPriority;
   category: ServceRequestCategory;
   encounterId?: string;
+  note?:ANNOTATION[]
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
@@ -126,6 +136,9 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
 
     if (options.encounterId) {
       body.encounter = { reference: `Encounter/${options.encounterId}` };
+    }
+    if(options.note){
+      body.note = options.note
     }
 
     return body;
@@ -196,9 +209,14 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         resourceType: "Encounter",
       });
     }
+
+    if(options.note){
+      ret.note=options.note
+    }
     if (ret.performer == undefined) {
       delete ret.performer;
     }
+
     return ret;
   }
 
