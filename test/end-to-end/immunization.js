@@ -12,7 +12,7 @@ const setImmunization = async () => {
    const immunization = new Immunization()
 
    const body = immunization.getFHIR({
-      "extension" : [{"url" : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/BrandName" , "valueString" : "abcd"}],
+      // "extension" : [{"url" : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/BrandName" , "valueString" : "abcd"}],
       "id" : undefined,
       "meta" : {"profile" : ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Immunization"]},
       "occurrenceDateTime" : new Date().toISOString(),
@@ -24,10 +24,10 @@ const setImmunization = async () => {
       "vaccineCode" :  {"text" : "DPT"},
    })
 
-// console.log(body)
+
 
    let res = (await new GcpFhirCRUD().createFhirResource(body, "Immunization")).data;
-   // res = new Observation().convertFhirToObject(res)
+   res = new Immunization().convertFhirToObject(res)
 
    return res;
 }
