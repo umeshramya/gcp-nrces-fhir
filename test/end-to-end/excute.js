@@ -30,6 +30,7 @@ const { setSChedule } = require("./Schedule");
 const {setSlot} = require("./Slot");
 const { setAppointment } = require("./Appointement");
 const { setCoverage } = require("./Coverage");
+const { setImmunization } = require("./immunization");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -99,6 +100,12 @@ class excute {
     const res = await setObservation();
     console.log(res);
   };
+
+  immunization = async ()=>{
+    await callFunction();
+    const res = await setImmunization();
+    console.log(res)
+  }
 
   schedule = async()=>{
     await callFunction()
@@ -478,7 +485,7 @@ class excute {
 // new excute().practionerRole()
 // new excute().specimen()
 // new excute().procedure()
-new excute().serviceRequest()
+// new excute().serviceRequest()
 // new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
@@ -496,3 +503,5 @@ new excute().serviceRequest()
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
+new excute().immunization()
+

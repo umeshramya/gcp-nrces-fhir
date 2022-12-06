@@ -92,6 +92,8 @@ import { Observation, OBSERVATION } from "./resources/Observation";
 import { Specimen, SPECIMEN } from "./resources/Specimen";
 import {Coverage, COVERAGE } from "./resources/Coverage";
 import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./resources/CoverageEligibilityRequest"
+import { Immunization , IMMUNIZATION } from "./resources/Immunization";
+
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export { htmlToText }
@@ -186,3 +188,5 @@ export { PDF_HEADER };
 
 export {Coverage, COVERAGE }
 export {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} 
+
+export { Immunization , IMMUNIZATION }
