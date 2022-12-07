@@ -31,6 +31,7 @@ const {setSlot} = require("./Slot");
 const { setAppointment } = require("./Appointement");
 const { setCoverage } = require("./Coverage");
 const { setImmunization } = require("./immunization");
+const { setImmunizationRecommendation } = require("./immunizationRecomaadation");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -104,6 +105,11 @@ class excute {
   immunization = async ()=>{
     await callFunction();
     const res = await setImmunization();
+    console.log(res)
+  }
+  immunizationRecomndation = async ()=>{
+    await callFunction();
+    const res = await setImmunizationRecommendation();
     console.log(res)
   }
 
@@ -503,5 +509,6 @@ class excute {
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
-new excute().immunization()
+// new excute().immunization()
+new excute().immunizationRecomndation()
 

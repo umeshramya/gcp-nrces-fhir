@@ -93,7 +93,7 @@ import { Specimen, SPECIMEN } from "./resources/Specimen";
 import {Coverage, COVERAGE } from "./resources/Coverage";
 import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./resources/CoverageEligibilityRequest"
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
-
+import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resources/ImmunizationRecommendation";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export { htmlToText }
@@ -190,3 +190,4 @@ export {Coverage, COVERAGE }
 export {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} 
 
 export { Immunization , IMMUNIZATION }
+export { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION }
