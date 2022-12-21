@@ -53,7 +53,7 @@ import {
   AppointmentActorStatusArray,
 } from "./resources/Appointment";
 import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
-import { COMPOSITOIN, Composition } from "./resources/Composition/index";
+import { COMPOSITOIN, Composition, emptySign } from "./resources/Composition/index";
 import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import { OPConsultRecord } from "./resources/Composition/OPConsultRecord";
 import {DischargeSUmmery} from "./resources/Composition/DischargeSummary"
@@ -138,7 +138,7 @@ export {
   AppointmentActorStatusArray,
 };
 export { DOCUMENT_BUNDLE, DocumentBundle };
-export { COMPOSITOIN, Composition };
+export { COMPOSITOIN, Composition , emptySign};
 export { PrescriptionRecord };
 export { OPConsultRecord };
 export {DischargeSUmmery}
