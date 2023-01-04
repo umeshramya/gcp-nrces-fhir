@@ -24,16 +24,7 @@ export class DiagnosticReportComp extends Composition implements Records {
   }): string => {
     let ret: string = options.html;
     if (options.intable) {
-      const labId = options.diagnosticReportResourse.identifier
-        .filter((el: any) => el.system == "https://www.nicehms.com/labId")
-        .map((el: any) => el.value);
-
-      if (labId.length > 0) {
-        const searchString = `<div xmlns="http://www.w3.org/1999/xhtml"><p>Lab Id: ${labId[0]}</p>`;
-        const replaceString = `<div xmlns="http://www.w3.org/1999/xhtml">`;
-        options.html = options.html.replace(searchString, replaceString);
-      }
-
+      ret=""
       ret += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
       ret += `<thead style="display: table-header-group"><tr>`;
       ret += `<th style="width: 40%;">Test</th>`;
