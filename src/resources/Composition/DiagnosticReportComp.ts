@@ -6,39 +6,47 @@ import { ServiceRequest } from "../ServiceRequest";
 interface Args {
   composition: COMPOSITOIN;
   diagnosticReport: any;
-  textInTable:boolean;
+  textInTable: boolean;
   // media: [];
   serviceRequest: any;
 }
 
 export class DiagnosticReportComp extends Composition implements Records {
-
   /**
    * This sournads the table format in case data to be presented in table
-   * @param options 
-   * @returns 
+   * @param options
+   * @returns
    */
-  private getTxtHTML = (options:{
-    html:string;
-    intable: boolean
-  }):string=>{
+  private getTxtHTML = (options: {
+    html: string;
+    intable: boolean;
+    diagnosticReportResourse: any;
+  }): string => {
+    let ret: string = options.html;
+    if (options.intable) {
+      const labId = options.diagnosticReportResourse.identifier
+        .filter((el: any) => el.system == "https://www.nicehms.com/labId")
+        .map((el: any) => el.value);
 
-    let ret:string =options.html;
-    if(options.intable){
+      if (labId.length > 0) {
+        const searchString = `<div xmlns="http://www.w3.org/1999/xhtml"><p>Lab Id: ${labId[0]}</p>`;
+        const replaceString = `<div xmlns="http://www.w3.org/1999/xhtml">`;
+        options.html = options.html.replace(searchString, replaceString);
+      }
+
       ret += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
       ret += `<thead style="display: table-header-group"><tr>`;
-      ret += `<th style="width: 40%;">Test</th>`
-      ret += `<th style="width: 20%;"> Value</th>`
-      ret += `<th style="width: 20%;">Units</th>`
-      ret += `<th style="width: 20%;">Reference Range </th>`
-      ret += `</tr></thead>`
-      ret += `<tbody>`
-      ret += `${options.html}`
+      ret += `<th style="width: 40%;">Test</th>`;
+      ret += `<th style="width: 20%;"> Value</th>`;
+      ret += `<th style="width: 20%;">Units</th>`;
+      ret += `<th style="width: 20%;">Reference Range </th>`;
+      ret += `</tr></thead>`;
+      ret += `<tbody>`;
+      ret += `${options.html}`;
       ret += `</tbody></table>`;
-      
     }
     return ret.trim();
-  }
+  };
   private setPerformerAndRequester = (options: Args) => {
     const serviceRequest = new ServiceRequest();
     const serviceRequestBody = serviceRequest.convertFhirToObject(
@@ -77,7 +85,11 @@ export class DiagnosticReportComp extends Composition implements Records {
       ],
     });
 
-    options.composition.documentDatahtml =this.getTxtHTML({"html" :options.diagnosticReport.text.div, "intable" : options.textInTable});
+    options.composition.documentDatahtml = this.getTxtHTML({
+      html: options.diagnosticReport.text.div,
+      intable: options.textInTable,
+      diagnosticReportResourse: options.diagnosticReport,
+    });
 
     const body = this.getFHIR(options.composition);
 
@@ -100,7 +112,11 @@ export class DiagnosticReportComp extends Composition implements Records {
       ],
     });
 
-    options.composition.documentDatahtml = this.getTxtHTML({"html" :options.diagnosticReport.text.div, "intable" : options.textInTable});
+    options.composition.documentDatahtml = this.getTxtHTML({
+      html: options.diagnosticReport.text.div,
+      intable: options.textInTable,
+      diagnosticReportResourse: options.diagnosticReport,
+    });
 
     const body = this.getFHIR(options.composition);
 
@@ -114,8 +130,8 @@ export class DiagnosticReportComp extends Composition implements Records {
     return res;
   };
 
-  getOptions = (options:Args):string=>{
-    let docHTML=""
-    return docHTML
-  }
+  getOptions = (options: Args): string => {
+    let docHTML = "";
+    return docHTML;
+  };
 }
