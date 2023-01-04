@@ -25,7 +25,14 @@ export class DiagnosticReportComp extends Composition implements Records {
 
     let ret:string =options.html;
     if(options.intable){
-      ret = `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
+      ret =""
+      const labidstr =`<p><tr><td style="width: 40%; border: 0em; margin-bottom: 2.5px; margin-top: 2.5px;">`;
+      const index= options.html.indexOf(labidstr)
+      const labIdOnly = options.html.substring(0, index)
+      const rest = options.html.substring(index)
+
+      ret += labIdOnly
+      ret += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
       ret += `<thead style="display: table-header-group"><tr>`;
       ret += `<th style="width: 40%;">Test</th>`
       ret += `<th style="width: 20%;"> Value</th>`
@@ -33,7 +40,7 @@ export class DiagnosticReportComp extends Composition implements Records {
       ret += `<th style="width: 20%;">Reference Range </th>`
       ret += `</tr></thead>`
       ret += `<tbody>`
-      ret += `${options.html}`
+      ret += `${rest}`
       ret += `</tbody></table>`;
       
     }
