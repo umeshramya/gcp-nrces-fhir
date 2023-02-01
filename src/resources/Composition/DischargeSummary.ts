@@ -39,8 +39,8 @@ export class DischargeSUmmery extends Composition implements Records {
     docHtml += `<h3 style="text-align: center;">Discharge Summary</h3>`
     docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
     docHtml += `<tbody style="display: table-header-group"><tr>`;
-    const dateOfAddmission = `<div><b>Date of Admission : </b></div><div>${new Date(options.composition.encounter.startDate).toString()}</div>`
-    const dateOfDischarge = `<div><b>Date Of Discharge : </b></div><div>${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toString() : ""}</div>`
+    const dateOfAddmission = `<div><b>Date of Admission : </b></div><div>${new Date(options.composition.encounter.startDate).toLocaleString()}</div>`
+    const dateOfDischarge = `<div><b>Date Of Discharge : </b></div><div>${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toLocaleString() : ""}</div>`
     docHtml += `<td style="width: 50%;"  border="0" >${dateOfAddmission}</td>`;
     docHtml += `<td style="width: 50%;"  border="0" >${dateOfDischarge}</td>`;
     docHtml += `</tr>`;

@@ -1,3 +1,2 @@
-const st="umesh"
-
-console.log(st.replace("u","p"))
+const date = new Date();
+console.log (date.toDateString(), date.toLocaleString())
