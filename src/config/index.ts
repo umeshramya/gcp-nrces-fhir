@@ -172,3 +172,9 @@ export  interface HOURS_OF_OPERATION{
   closingTime ?:string
 
 }
+
+
+export interface EXTENSION {
+  url:string;
+  valueString?:string
+}

@@ -214,6 +214,7 @@ const setEncounter = async () => {
   const body = encounter.getFHIR({
     class: { code: "IMP", display: "in-patient" },
     // "dischargeDisposition": { "code": "home", "display": "home" },
+    extension : [{"url" : "https://nicehms.com/payor" , "valueString" : JSON.stringify({"Payor" : "mediassit", "teriffName" : "medi asst teriff"})}],
     diagnosis: [
       {
         condition: {

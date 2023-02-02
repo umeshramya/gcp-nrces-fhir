@@ -1,5 +1,5 @@
 import { brotliDecompressSync } from "zlib";
-import { CODEABLE_CONCEPT, IDENTTIFIER, MULTI_RESOURCE } from "../config";
+import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PRACTITIONER } from "./Practitioner";
 import ResourceMain from "./ResourceMai";
@@ -55,6 +55,7 @@ interface BASED_ON extends MULTI_RESOURCE{
 interface ENCOUNTER {
   id?: string;
   text: string;
+  extension ?: EXTENSION[];
   status: EncounterStatus;
   careContext?: string;
   class: EncounterClass;
@@ -141,6 +142,10 @@ export class Encounter extends ResourceMain implements ResourceMaster {
   
     };
 
+    if(options.extension){
+      body.extension = options.extension
+    }
+
     if(options.basedOn){
       body.basedOn = options.basedOn.map(el=>{
         return {
@@ -187,6 +192,9 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       ret.hospitalization=options.hospitalization
     }
 
+    if(options.extension){
+      ret.extension=options.extension
+    }
     if (options.identifier) {
       const careContext: any[] = options.identifier.filter(
         (el: any) => el.system == "https://ndhm.in"
