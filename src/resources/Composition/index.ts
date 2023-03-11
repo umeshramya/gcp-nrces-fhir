@@ -10,6 +10,7 @@ import { Practitioner, PRACTITIONER } from "../Practitioner";
 import { CreatePdf, PDF_HEADER } from "js-ts-report";
 import { resourceType } from "../../config";
 import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
+import { TimeZone } from "../../TimeZone";
 
 export const compositionTypeArrey = [
   {
@@ -216,7 +217,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     const getHtmlText = (): string => {
       let html = `<div xmlns="http://www.w3.org/1999/xhtml">`;
       html += `<div style="text-align: right">`;
-      html += `Date:-${new Date(options.date).toDateString()}`;
+      html += `Date:-${new TimeZone().convertTZ(options.date, process.env.TZ as any,  true)}`;
       html += `</div>`;
       html += `<div style="text-align: right; font-size: 9px">`;
       html += `Docurment Status :${options.status}`;

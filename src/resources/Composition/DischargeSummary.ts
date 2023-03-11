@@ -1,3 +1,4 @@
+import { TimeZone } from "../../TimeZone";
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 interface Args {
@@ -39,8 +40,14 @@ export class DischargeSUmmery extends Composition implements Records {
     docHtml += `<h3 style="text-align: center;">Discharge Summary</h3>`
     docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
     docHtml += `<tbody style="display: table-header-group"><tr>`;
-    const dateOfAddmission = `<div><b>Date of Admission : </b></div><div>${new Date(options.composition.encounter.startDate).toLocaleString()}</div>`
-    const dateOfDischarge = `<div><b>Date Of Discharge : </b></div><div>${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toLocaleString() : ""}</div>`
+    // const dateOfAddmission = `<div><b>Date of Admission : </b></div><div>${new Date(options.composition.encounter.startDate).toLocaleString()}</div>`
+    // const dateOfDischarge = `<div><b>Date Of Discharge : </b></div><div>${options.composition.encounter.endDate?  new Date(options.composition.encounter.endDate).toLocaleString() : ""}</div>`
+    
+    const dateOfAddmission = `<div><b>Date of Admission : </b></div><div>${new TimeZone().convertTZ(options.composition.encounter.startDate, process.env.TZ as any, false)}</div>`
+    const dateOfDischarge = `<div><b>Date Of Discharge : </b></div><div>
+    ${options.composition.encounter.endDate?  new TimeZone().convertTZ(options.composition.encounter.endDate, process.env.TZ as any, false) : ""}
+    </div>`
+    
     docHtml += `<td style="width: 50%;"  border="0" >${dateOfAddmission}</td>`;
     docHtml += `<td style="width: 50%;"  border="0" >${dateOfDischarge}</td>`;
     docHtml += `</tr>`;
@@ -65,10 +72,16 @@ export class DischargeSUmmery extends Composition implements Records {
           ],
         });
   
-        ret =
+        // ret =
+        //   `<div"><span><b>Follow up:-</b>${
+        //     new Date(options.followUp.start).toDateString() ||
+        //     new Date(options.followUp.end).toDateString()
+        //   }${options.followUp.text.div}</br>`;
+
+          ret =
           `<div"><span><b>Follow up:-</b>${
-            new Date(options.followUp.start).toDateString() ||
-            new Date(options.followUp.end).toDateString()
+            new TimeZone().convertTZ(options.followUp.start, process.env.TZ as any, true) ||
+            new TimeZone().convertTZ(options.followUp.end, process.env.TZ as any, true)
           }${options.followUp.text.div}</br>`;
       }
        return ret;

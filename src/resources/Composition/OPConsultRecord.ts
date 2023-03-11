@@ -1,3 +1,4 @@
+import { TimeZone } from "../../TimeZone";
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 interface Args {
@@ -214,11 +215,17 @@ export class OPConsultRecord extends Composition implements Records {
         ],
       });
 
-      docHtml =
-        docHtml +
+      // docHtml =
+      //   docHtml +
+      //   `<div"><span><b>Follow up:-</b>${
+      //     new Date(options.followUp.start).toDateString() ||
+      //     new Date(options.followUp.end).toDateString()
+      //   }${options.followUp.text.div}</br>`;
+
+        docHtml = docHtml + 
         `<div"><span><b>Follow up:-</b>${
-          new Date(options.followUp.start).toDateString() ||
-          new Date(options.followUp.end).toDateString()
+          new TimeZone().convertTZ(options.followUp.start, process.env.TZ as any, true) ||
+          new TimeZone().convertTZ(options.followUp.end, process.env.TZ as any, true)
         }${options.followUp.text.div}</br>`;
     }
     if (options.allergies) {
