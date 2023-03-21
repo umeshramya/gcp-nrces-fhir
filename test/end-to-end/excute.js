@@ -16,6 +16,7 @@ const {
   DiagnsoticReportBundle,
   ServiceRequest,
   Appointment,
+  HealthDocumentRecord,
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -183,6 +184,50 @@ class excute {
 
     console.log(res.data);
   };
+
+  healthDocumentComposition = async()=>{
+    await callFunction();
+    await setOtherPractinioner()
+    await setMedicationRequest();
+    await setCondition();
+    await setAppointment()
+    await setMedia();
+
+    const condionResource = (
+      await gcpFhirCRUD.getFhirResource(resources.conditon.id, "Condition")
+    ).data;
+
+    const media = (
+      await gcpFhirCRUD.getFhirResource(resources.media.id, "Media")
+    ).data
+
+
+    const healthDocument = await new HealthDocumentRecord().create({
+      composition: {
+        author: [
+          {
+            display: resources.practioner.name,
+            reference: `Practitioner/${resources.practioner.id}`,
+          },
+        ],
+        date: new Date().toISOString(),
+        
+        encounter: resources.encounter,
+        encounterId: resources.encounter.id,
+        organization: resources.organization,
+        organizationId: resources.organization.id,
+        patient: resources.patient,
+        patientId: resources.patient.id,
+        section: [],
+        status: "final",
+        type: "HealthDocumentRecord",
+      },
+      "media" :[media],
+      "notes" : condionResource
+    })
+
+
+  }
 
   OpCunsulatationComposition = async () => {
     await callFunction();
@@ -485,7 +530,7 @@ class excute {
   };
 }
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -496,6 +541,7 @@ new excute().callFunction()
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
+new excute().healthDocumentComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()

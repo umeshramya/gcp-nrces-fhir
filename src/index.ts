@@ -58,6 +58,7 @@ import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import { OPConsultRecord } from "./resources/Composition/OPConsultRecord";
 import {DischargeSUmmery} from "./resources/Composition/DischargeSummary"
 import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportComp";
+import { HealthDocumentRecord } from "./resources/Composition/HealthDocumentRecord";
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -140,6 +141,7 @@ export {
 export { DOCUMENT_BUNDLE, DocumentBundle };
 export { COMPOSITOIN, Composition , emptySign};
 export { PrescriptionRecord };
+export {HealthDocumentRecord}
 export { OPConsultRecord };
 export {DischargeSUmmery}
 export { DiagnosticReportComp };

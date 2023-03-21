@@ -44,6 +44,13 @@ export const compositionTypeArrey = [
     text: "Prescription record",
   },
   {
+    type: "HealthDocumentRecord",
+    system: "https://ndhm.gov.in/sct",
+    url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/HealthDocumentRecord",
+    code: "419891008",
+    text: "Health Document",
+  },
+  {
     type: "DiagnosticReport",
     system: "https://ndhm.gov.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DiagnosticReportRecord",

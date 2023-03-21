@@ -29,6 +29,7 @@ const setMedia = async () => {
   })
 
   const res =await gcpFhirCRUD.createFhirResource(body, "Media");
+  resources.media= res.data
   const ret  = media.convertFhirToObject(res.data)
   return ret
 
