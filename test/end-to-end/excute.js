@@ -222,9 +222,26 @@ class excute {
         status: "final",
         type: "HealthDocumentRecord",
       },
-      "media" :[media],
+      "media" :[media, media],
       "notes" : condionResource
     })
+
+
+    const Health = new HealthDocumentRecord().convertFhirToObject(healthDocument.data)
+    const pdf =await  new HealthDocumentRecord().getPdf({
+      "base64" : true,
+      "bottomMargin" : 50,
+      "topMargin" : 50,
+      "composition" : Health,
+      "html" : Health.documentDatahtml,
+      "paperSize" : "A4",
+      "qrCode" : "",
+      "signBase64" : emptySign,
+    
+    })
+    console.log(pdf)
+
+
 
 
   }

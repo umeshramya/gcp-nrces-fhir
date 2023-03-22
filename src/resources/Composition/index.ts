@@ -5,7 +5,7 @@ import { Patient, PATIENT } from "../Patient";
 import { Organization, ORGANIZATION } from "../Organization";
 import ResourceMain from "../ResourceMai";
 import { Age } from "date-age";
-import { GcpFhirCRUD, GcpFhirSearch } from "../..";
+import { GcpFhirCRUD, GcpFhirSearch, Media } from "../..";
 import { Practitioner, PRACTITIONER } from "../Practitioner";
 import { CreatePdf, PDF_HEADER } from "js-ts-report";
 import { resourceType } from "../../config";
@@ -448,6 +448,19 @@ export class Composition extends ResourceMain implements ResourceMaster {
      */
     bottomMargin?: number;
   }): Promise<string | Buffer> => {
+
+    // code check media
+    const mediaId:string[]=options.composition.section[0].entry.map((el:any)=>{
+      const id = this.getIdFromReference({"ref" : el.reference, "resourceType" : "Media"})
+      return id
+    })
+
+    const mediaContent:string[]=[];
+    await this.getMediaComposition(0, mediaId, mediaContent)
+
+  
+
+
     const pdf = new CreatePdf();
     const retPdf = await pdf.create(options.html, {
       paragraphSpace: options.paragraphSpace || 6,
@@ -468,11 +481,23 @@ export class Composition extends ResourceMain implements ResourceMaster {
       qrCodeWidth: options.qrCodeWidth,
       paperSize: options.paperSize,
       headerbase64Image: options.headerbase64Image,
+      "media" : mediaContent.length > 0  ? {"content" : mediaContent, "singleImagePerPage" : false} : undefined
     });
 
     return retPdf;
   };
 
+
+  getMediaComposition = async(index:number, mediaId:string[], content:string[])=>{
+    if(index >= mediaId.length){
+      return
+    }
+    const resource = (await new GcpFhirCRUD().getFhirResource(mediaId[index], "Media")).data
+    content.push(`data:image/jpeg;base64,${new Media().convertFhirToObject(resource).base64Data}`)
+    index= index+1;
+    await this.getMediaComposition(index, mediaId, content)
+
+  }
 
 
     /**

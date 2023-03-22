@@ -17,7 +17,7 @@ const setMedia = async () => {
 
   const media = new Media();
   const body = media.getFHIR({
-      "base64Data" : "",
+      "base64Data" : base64Data,
       "bodySite" : [{"display" : "Heart", "system" : ""}],
       "createdDate" : new Date().toISOString(),
       "mimeType" : "image/jpeg",
