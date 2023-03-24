@@ -237,6 +237,7 @@ class excute {
       "paperSize" : "A4",
       "qrCode" : "",
       "signBase64" : emptySign,
+      "singleImagePerPage" : true
     
     })
     console.log(pdf)

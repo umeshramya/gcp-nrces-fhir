@@ -84,6 +84,7 @@ import { PrescriptionBundle } from "./resources/Bundle/Prescription";
 import { DiagnsoticReportBundle } from "./resources/Bundle/DiagnsoticReport"
 import { OPConsultationBundle } from "./resources/Bundle/OPConsultation"
 import {DischargeSummaryBundle} from "./resources/Bundle/DischargeSummary"
+import { HealthDocumentBundle } from "./resources/Bundle/HealthDocumnet";
 import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
@@ -195,3 +196,5 @@ export {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest}
 export { Immunization , IMMUNIZATION }
 export { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION }
 export {CreatePdf}
+
+export {HealthDocumentBundle}
