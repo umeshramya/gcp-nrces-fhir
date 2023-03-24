@@ -458,7 +458,7 @@ class excute {
       html: html,
       qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=Prescription`,
     });
-    console.log(pdf)
+    // console.log(pdf)
 
     const bundle = await new PrescriptionBundle(
       credentials,
@@ -468,6 +468,7 @@ class excute {
       id: compositionResource.id,
       pdfData: pdf,
     });
+
     await axios({
         "methos" : "POST",
         url : `${webhookURL}/pres`,

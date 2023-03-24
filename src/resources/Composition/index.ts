@@ -461,7 +461,12 @@ export class Composition extends ResourceMain implements ResourceMaster {
     bottomMargin?: number;
   }): Promise<string | Buffer> => {
     // code check media
-    const mediaId: string[] = options.composition.section[0].entry.map(
+
+    const mediaId: string[] = options.composition.section[0].entry.filter((el:any)=>{
+      if(el.type=="Media"){
+        return el
+      }
+    }).map(
       (el: any) => {
         const id = this.getIdFromReference({
           ref: el.reference,
@@ -472,7 +477,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
     );
 
     const mediaContent: string[] = [];
-    await this.getMediaComposition(0, mediaId, mediaContent);
+    if(mediaId.length > 0){
+      await this.getMediaComposition(0, mediaId, mediaContent);
+    }
+   
 
     const pdf = new CreatePdf();
     const retPdf = await pdf.create(options.html, {
