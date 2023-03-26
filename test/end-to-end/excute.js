@@ -223,7 +223,7 @@ class excute {
         type: "HealthDocumentRecord",
       },
       "media" :[media, media],
-      "notes" : condionResource
+      // "notes" : condionResource
     })
 
 
@@ -235,8 +235,8 @@ class excute {
       "composition" : Health,
       "html" : Health.documentDatahtml,
       "paperSize" : "A4",
-      "qrCode" : "",
-      "signBase64" : emptySign,
+      // "qrCode" : "",
+      // "signBase64" : emptySign,
       "singleImagePerPage" : true
     
     })
