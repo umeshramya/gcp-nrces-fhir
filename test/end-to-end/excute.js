@@ -17,6 +17,7 @@ const {
   ServiceRequest,
   Appointment,
   HealthDocumentRecord,
+  HealthDocumentBundle,
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -36,7 +37,7 @@ const { setImmunizationRecommendation } = require("./immunizationRecomaadation")
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
-const webhookURL="https://webhook.site/46dbc082-f990-4ddd-b5cf-767a35bdc40d"
+const webhookURL="https://webhook.site/f65a3d20-7617-406d-8f44-0f4024ebbbf9"
 class excute {
   callFunction = async () => {
     await callFunction();
@@ -222,7 +223,7 @@ class excute {
         status: "final",
         type: "HealthDocumentRecord",
       },
-      "media" :[media, media],
+      "media" :[media],
       // "notes" : condionResource
     })
 
@@ -457,8 +458,11 @@ class excute {
     const pdf = await new PrescriptionBundle(credentials, databasePath).getpdf({
       html: html,
       qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=Prescription`,
+      compositionRes:compositionResource
     });
-    // console.log(pdf)
+    console.log(pdf)
+
+    return
 
     const bundle = await new PrescriptionBundle(
       credentials,
@@ -547,6 +551,44 @@ class excute {
   })
   return bundle;
   };
+  
+
+  createHealthDocumentBundle = async () => {
+    const compositionResource = await new GcpFhirCRUD()
+      .getFhirResource("edceb67d-6e46-4053-804c-9b3ec96f93ee", "Composition")
+      .then((res) => res.data);
+    const html = `${compositionResource.text.div}`.trim();
+
+
+    // console.log(compositionResource)
+    // return
+
+    const pdf = await new HealthDocumentBundle(credentials, databasePath).getpdf({
+      html: html,
+      qrCode: ``,
+      compositionRes:compositionResource,
+      singleImagePerPage:false
+    });
+
+
+    const bundle = await new HealthDocumentBundle(
+      credentials,
+      databasePath
+    ).getFHIR({
+      composition: compositionResource,
+      id: compositionResource.id,
+      pdfData: pdf,
+    });
+
+
+console.log(bundle)
+    await axios({
+        "methos" : "POST",
+        url : `${webhookURL}/pres`,
+        data : bundle
+    })
+    return bundle;
+  };
 }
 
 // new excute().callFunction()
@@ -560,7 +602,7 @@ class excute {
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
-new excute().healthDocumentComposition()
+// new excute().healthDocumentComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
@@ -570,6 +612,7 @@ new excute().healthDocumentComposition()
 // new excute().updateServiceRequest()
 
 // new excute().createPrescriptionBundle()
+new excute().createHealthDocumentBundle();
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()

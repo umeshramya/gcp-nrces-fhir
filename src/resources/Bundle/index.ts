@@ -97,7 +97,34 @@ export class BundelMain extends ResourceMain {
     return { entry, compositionObj };
   }
 
-  async getpdf(options: { html: string; qrCode: string }): Promise<string> {
+  async getpdf(options: { html: string; qrCode: string , compositionRes?:any, singleImagePerPage ?: boolean}): Promise<string> {
+    const composition = new Composition()
+      const mediaContent: string[] = [];
+    if(options.compositionRes){
+      const section = composition.convertFhirToObject(options.compositionRes).section as any
+
+         const mediaId: string[] = section[0].entry.filter((el:any)=>{
+      if(el.type=="Media"){
+        return el
+      }
+    }).map(
+      (el: any) => {
+        const id = this.getIdFromReference({
+          ref: el.reference,
+          resourceType: "Media",
+        });
+        return id;
+      }
+    );
+
+  
+    if(mediaId.length > 0){
+      await composition.getMediaComposition(0, mediaId, mediaContent);
+    }
+    }
+
+ 
+   
     let pdf = new CreatePdf();
     const ret = await pdf.create(options.html, {
       base64: true,
@@ -107,6 +134,10 @@ export class BundelMain extends ResourceMain {
         image: emptySign,
         nameLine1: "Scan QR code to get full document",
       },
+      media :mediaContent.length > 0 ?  {
+        "content" : mediaContent,
+        singleImagePerPage : options.singleImagePerPage || false 
+      } : undefined
     });
     return ret as any;
   }
@@ -162,3 +193,5 @@ export class BundelMain extends ResourceMain {
     await this.getEntriesPerSection(index, sectionEntries);
   };
 }
+
+
