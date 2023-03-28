@@ -45,6 +45,27 @@ export class HealthDocumentBundle extends BundelMain implements ResourceMaster {
       timestamp: options.composition.date,
       entry: this.entry,
     };
+
+
+
+    body.entry = body.entry.filter(el=>{
+      if(el.resource.resourceType != "Media"){
+        return el
+      }
+    }).map(el=>{
+      if(el.resource.resourceType== "Composition"){
+        console.log("composition")
+        const composition:{
+          fullUrl : string
+          resource:any
+        }=el
+        delete composition.resource.section
+        return composition
+      }else{
+        return el
+      }
+    })
+
     
     return body;
   }
