@@ -116,12 +116,15 @@ export class Media extends ResourceMain implements ResourceMaster {
       }[];
     } = copy.bodySite;
 
-    copy.bodySite.coding = bodySite.coding.map(el=>{
-      if(el.system == ""){
-        el.system = "https://www.nicehms.com/bodysite"
-      }
-      return el
-    })
+    if(copy.bodySite && copy.bodySite.coding && copy.bodySite.coding.length > 0){
+      copy.bodySite.coding = bodySite.coding.map(el=>{
+        if(el.system == ""){
+          el.system = "https://www.nicehms.com/bodysite"
+        }
+        return el
+      })
+    }
+
 
     const content: {
       "contentType": string,
@@ -143,12 +146,16 @@ export class Media extends ResourceMain implements ResourceMaster {
         }
       ]
     }=copy.modality
-    copy.modality.coding = modality.coding.map(el=>{
-      if(el.system == ""){
-        el.system = "https://www.nicehms.com/modality"
-      }
-      return el
-    })
+
+    if(copy.modality && copy.modality.coding && copy.modality.coding.length){
+      copy.modality.coding = modality.coding.map(el=>{
+        if(el.system == ""){
+          el.system = "https://www.nicehms.com/modality"
+        }
+        return el
+      })
+    }
+
     return copy
   }
 }
