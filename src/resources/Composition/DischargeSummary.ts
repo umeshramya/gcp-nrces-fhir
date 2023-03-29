@@ -71,12 +71,6 @@ export class DischargeSUmmery extends Composition implements Records {
             },
           ],
         });
-  
-        // ret =
-        //   `<div"><span><b>Follow up:-</b>${
-        //     new Date(options.followUp.start).toDateString() ||
-        //     new Date(options.followUp.end).toDateString()
-        //   }${options.followUp.text.div}</br>`;
 
           ret =
           `<div"><span><b>Follow up:-</b>${

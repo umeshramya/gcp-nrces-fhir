@@ -224,7 +224,7 @@ class excute {
         type: "HealthDocumentRecord",
       },
       "media" :[media],
-      // "notes" : condionResource
+      "title" : "ECG scan"
     })
 
 

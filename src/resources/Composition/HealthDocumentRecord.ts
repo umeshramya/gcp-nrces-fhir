@@ -8,6 +8,7 @@ import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
 interface Args {
   composition: COMPOSITOIN;
   media?: MEDIA[];
+  title:string
 }
 export class HealthDocumentRecord extends Composition implements Records {
   create = async (options: Args) => {
@@ -48,7 +49,7 @@ export class HealthDocumentRecord extends Composition implements Records {
         ];
       };
       entry: any[];
-      title: "Health Document";
+      title: string;
     }
     const sectionZero: SECTION_ZERO = {
       code: {
@@ -61,7 +62,7 @@ export class HealthDocumentRecord extends Composition implements Records {
         ],
       },
       entry: [],
-      title: "Health Document",
+      title: options.title,
     };
 
     if (options.media && options.media.length > 0) {
