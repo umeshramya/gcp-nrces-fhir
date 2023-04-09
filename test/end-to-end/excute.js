@@ -591,7 +591,7 @@ console.log(bundle)
   };
 }
 
-// new excute().callFunction()
+new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -612,7 +612,7 @@ console.log(bundle)
 // new excute().updateServiceRequest()
 
 // new excute().createPrescriptionBundle()
-new excute().createHealthDocumentBundle();
+// new excute().createHealthDocumentBundle();
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()

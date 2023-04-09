@@ -229,6 +229,16 @@ const setEncounter = async () => {
         rank: 2,
       },
     ],
+    type:[
+      {
+        "coding" : [{
+          "code" : "MEDICO LEGAL CASE",
+          "system" : "https://www.nicehms.com/mlc",
+          "display" : "MEDICO LEGAL CASE"
+        }],
+        text: "MEDICO LEGAL CASE"
+      }
+  ],
     participant: [
       {
         individual: {

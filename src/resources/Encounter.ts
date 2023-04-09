@@ -59,6 +59,7 @@ interface ENCOUNTER {
   status: EncounterStatus;
   careContext?: string;
   class: EncounterClass;
+  type?:CODEABLE_CONCEPT[]
   patientId: string;
   startDate: string;
   endDate?: string;
@@ -154,6 +155,13 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       })
     }
 
+
+     if(options.type){
+      body.type=options.type
+     }
+     
+    
+
     return body;
   }
 
@@ -210,6 +218,10 @@ export class Encounter extends ResourceMain implements ResourceMaster {
         const ret:BASED_ON= this.getFromMultResource({"reference" : el.reference}) as any
         return ret;
       })
+    }
+
+    if(options.type){
+      ret.type=options.type
     }
 
     return ret;
