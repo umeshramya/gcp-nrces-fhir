@@ -1,8 +1,14 @@
 import { brotliDecompressSync } from "zlib";
-import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE } from "../config";
+import {
+  CODEABLE_CONCEPT,
+  EXTENSION,
+  IDENTTIFIER,
+  MULTI_RESOURCE,
+} from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PRACTITIONER } from "./Practitioner";
 import ResourceMain from "./ResourceMai";
+import { Organization } from "./Organization";
 
 const EncounterStatusArray = [
   "planned",
@@ -47,42 +53,60 @@ type EncounterClass = typeof EncounterClassArray[number];
 type EncounterHospitalizationDischargeDisposition =
   typeof EncounterHospitalizationDischargeDispositionArray[number];
 
-interface ENCOUNTER_PARTICIPANT{"type" : CODEABLE_CONCEPT[] , individual : {"reference" : string, "type" : "RelatedPerson" | "Practitioner" | "PractitionerRole"} }
-interface BASED_ON extends MULTI_RESOURCE{
-  resource : "CarePlan" | "DeviceRequest" | "MedicationRequest" | "ServiceRequest" 
+interface ENCOUNTER_PARTICIPANT {
+  type: CODEABLE_CONCEPT[];
+  individual: {
+    reference: string;
+    type: "RelatedPerson" | "Practitioner" | "PractitionerRole";
+  };
+}
+interface BASED_ON extends MULTI_RESOURCE {
+  resource:
+    | "CarePlan"
+    | "DeviceRequest"
+    | "MedicationRequest"
+    | "ServiceRequest";
 }
 
 interface ENCOUNTER {
   id?: string;
   text: string;
-  extension ?: EXTENSION[];
+  extension?: EXTENSION[];
   status: EncounterStatus;
   careContext?: string;
+  organizationId?: string;
   class: EncounterClass;
-  type?:CODEABLE_CONCEPT[]
+  type?: CODEABLE_CONCEPT[];
   patientId: string;
   startDate: string;
   endDate?: string;
-  appointment?: {"reference" : string, "type" : "Appointment"}[];
-  reasonReference	?:{"reference" : string, "type" : "ImmunizationRecommendation" | "Condition" | "Procedure" | "Observation"}[]
-  reasonCode?:CODEABLE_CONCEPT[]
-  hospitalization?:{
-    dischargeDisposition?:CODEABLE_CONCEPT;
-    id?:string;
-    origin?:{"reference" : string, "type" : "Location" | "Organization"};
-    admitSource?:CODEABLE_CONCEPT;
-    reAdmission?:CODEABLE_CONCEPT;
-    dietPreference?:CODEABLE_CONCEPT;
-    destination?:{"reference" : string, "type" : "Location" | "Organization"}
-  }
-  diagnosis ?: {
-    condition:{"reference" : string, "type" : "Condition" | "Procedure"},
-    use ?: CODEABLE_CONCEPT
-    rank?:number
-  }[],
-  participant?:ENCOUNTER_PARTICIPANT[]
-  account?:{"reference" : string, "type" : "Account"}[]
-  basedOn?:BASED_ON[]
+  appointment?: { reference: string; type: "Appointment" }[];
+  reasonReference?: {
+    reference: string;
+    type:
+      | "ImmunizationRecommendation"
+      | "Condition"
+      | "Procedure"
+      | "Observation";
+  }[];
+  reasonCode?: CODEABLE_CONCEPT[];
+  hospitalization?: {
+    dischargeDisposition?: CODEABLE_CONCEPT;
+    id?: string;
+    origin?: { reference: string; type: "Location" | "Organization" };
+    admitSource?: CODEABLE_CONCEPT;
+    reAdmission?: CODEABLE_CONCEPT;
+    dietPreference?: CODEABLE_CONCEPT;
+    destination?: { reference: string; type: "Location" | "Organization" };
+  };
+  diagnosis?: {
+    condition: { reference: string; type: "Condition" | "Procedure" };
+    use?: CODEABLE_CONCEPT;
+    rank?: number;
+  }[];
+  participant?: ENCOUNTER_PARTICIPANT[];
+  account?: { reference: string; type: "Account" }[];
+  basedOn?: BASED_ON[];
 }
 
 export class Encounter extends ResourceMain implements ResourceMaster {
@@ -107,7 +131,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       identifiers.push(id);
     }
 
-    const body:any = {
+    const body: any = {
       resourceType: "Encounter",
       id: options.id,
       meta: {
@@ -136,32 +160,33 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       },
       hospitalization: options.hospitalization,
       diagnosis: options.diagnosis,
-      participant : options.participant,
-      reasonReference:options.reasonReference,
-      reasonCode:options.reasonCode,
-      account:options.account,
-  
+      participant: options.participant,
+      reasonReference: options.reasonReference,
+      reasonCode: options.reasonCode,
+      account: options.account,
     };
 
-    if(options.extension){
-      body.extension = options.extension
+    if (options.extension) {
+      body.extension = options.extension;
     }
 
-    if(options.basedOn){
-      body.basedOn = options.basedOn.map(el=>{
+    if (options.basedOn) {
+      body.basedOn = options.basedOn.map((el) => {
         return {
-          "reference" : `${el.resource}/${el.id}`
-        }
-      })
+          reference: `${el.resource}/${el.id}`,
+        };
+      });
     }
 
+    if (options.type) {
+      body.type = options.type;
+    }
 
-     if(options.type){
-      body.type=options.type
-     }
-     
-    
-
+    if (options.organizationId) {
+      body.serviceProvider = {
+        reference: `Organization/${options.organizationId}`,
+      };
+    }
     return body;
   }
 
@@ -172,36 +197,43 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       class: { code: options.class.code, display: options.class.display },
       patientId: `${options.subject.reference}`.substring(8),
       startDate: options.period.start,
-      
+
       id: options.id,
     };
-    if(options.period.end){
-      ret.endDate = options.period.end
+
+    if (options.serviceProvider) {
+      ret.organizationId = this.getIdFromReference({
+        ref: options.serviceProvider.reference,
+        resourceType: "Organization",
+      });
     }
-    if(options.diagnosis){
-      ret.diagnosis=options.diagnosis
+    if (options.period.end) {
+      ret.endDate = options.period.end;
     }
-    if(options.account){
-      ret.account=options.account
+    if (options.diagnosis) {
+      ret.diagnosis = options.diagnosis;
     }
-    if(options.appointment){
-      ret.appointment=options.appointment
+    if (options.account) {
+      ret.account = options.account;
     }
-    if(options.reasonCode){
-      ret.reasonCode=options.reasonCode
+    if (options.appointment) {
+      ret.appointment = options.appointment;
     }
-    if(options.reasonReference){
-      ret.reasonReference= options.reasonReference
+    if (options.reasonCode) {
+      ret.reasonCode = options.reasonCode;
     }
-    if(options.participant){
-      ret.participant= options.participant
+    if (options.reasonReference) {
+      ret.reasonReference = options.reasonReference;
     }
-    if(options.hospitalization){
-      ret.hospitalization=options.hospitalization
+    if (options.participant) {
+      ret.participant = options.participant;
+    }
+    if (options.hospitalization) {
+      ret.hospitalization = options.hospitalization;
     }
 
-    if(options.extension){
-      ret.extension=options.extension
+    if (options.extension) {
+      ret.extension = options.extension;
     }
     if (options.identifier) {
       const careContext: any[] = options.identifier.filter(
@@ -213,52 +245,63 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       }
     }
 
-    if(options.basedOn){
-      ret.basedOn = options.basedOn.map((el: any)=>{
-        const ret:BASED_ON= this.getFromMultResource({"reference" : el.reference}) as any
+    if (options.basedOn) {
+      ret.basedOn = options.basedOn.map((el: any) => {
+        const ret: BASED_ON = this.getFromMultResource({
+          reference: el.reference,
+        }) as any;
         return ret;
-      })
+      });
     }
 
-    if(options.type){
-      ret.type=options.type
+    if (options.type) {
+      ret.type = options.type;
     }
 
     return ret;
   }
 
-/**
- * 
- * @param particpants particpants of encounters
- * @param allPractioners supply array of practioners for filtering
- * @returns array of practioners
- */
-  getPractionersFromParticipants=(particpants:ENCOUNTER_PARTICIPANT[], allPractioners:PRACTITIONER[]):PRACTITIONER[]=>{
-    let ret:PRACTITIONER[]=[]
-    if(particpants && particpants.length>0){
-      ret= particpants?.map(el=>{
-        const multisource = this.getFromMultResource({"reference" : el.individual.reference})
-        return allPractioners.filter(el=>el.id == multisource.id)[0]
-      })
+  /**
+   *
+   * @param particpants particpants of encounters
+   * @param allPractioners supply array of practioners for filtering
+   * @returns array of practioners
+   */
+  getPractionersFromParticipants = (
+    particpants: ENCOUNTER_PARTICIPANT[],
+    allPractioners: PRACTITIONER[]
+  ): PRACTITIONER[] => {
+    let ret: PRACTITIONER[] = [];
+    if (particpants && particpants.length > 0) {
+      ret = particpants?.map((el) => {
+        const multisource = this.getFromMultResource({
+          reference: el.individual.reference,
+        });
+        return allPractioners.filter((el) => el.id == multisource.id)[0];
+      });
     }
     return ret;
-    
-  }
+  };
   /**
    * This converts Practioners to encounter particpants
    * @param practioners  PRACTINIORS
-   * @returns 
+   * @returns
    */
-  convertPractionersToParticpants =(practioners:PRACTITIONER[]):ENCOUNTER["participant"]=>{
-    let ret:ENCOUNTER_PARTICIPANT[]=[]
-    ret = practioners.map(el=>{
-      return   {
-        "individual" : {"reference" : `Practitioner/${el.id}`, "type" : `Practitioner`},
-        "type" : [{"text" : "Practitioner"}]
-      }
-    })
+  convertPractionersToParticpants = (
+    practioners: PRACTITIONER[]
+  ): ENCOUNTER["participant"] => {
+    let ret: ENCOUNTER_PARTICIPANT[] = [];
+    ret = practioners.map((el) => {
+      return {
+        individual: {
+          reference: `Practitioner/${el.id}`,
+          type: `Practitioner`,
+        },
+        type: [{ text: "Practitioner" }],
+      };
+    });
     return ret;
-  }
+  };
 }
 
 /**

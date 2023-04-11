@@ -222,6 +222,7 @@ const setEncounter = async () => {
         },
         rank: 1,
       },
+
       {
         condition: {
           reference: `Condition/20568363-847f-4369-a8f9-ae7a6905865c`,
@@ -229,6 +230,8 @@ const setEncounter = async () => {
         rank: 2,
       },
     ],
+
+    "organizationId" : resources.organization.id,
     type:[
       {
         "coding" : [{
