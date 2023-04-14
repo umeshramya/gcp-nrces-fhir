@@ -28,7 +28,8 @@ const setServiceRequest = async () => {
         "date": new Date().toISOString(),
         // "services": [{ "display": "Echocardiography", "system": "http://snomed.info/sct" }],
         note: [{"text" : "Referig for CAG"}],
-        "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id": "https://nicehms.com" }]
+        "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id": "https://nicehms.com" },
+    {"resource" : "Organization", "id": resources.organization.id, "display" : resources.organization.name}]
     })
 
 

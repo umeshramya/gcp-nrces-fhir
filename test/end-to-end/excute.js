@@ -18,6 +18,7 @@ const {
   Appointment,
   HealthDocumentRecord,
   HealthDocumentBundle,
+  GcpFhirSearch,
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -43,6 +44,13 @@ class excute {
     await callFunction();
     console.log(resources.encounter);
   };
+
+
+  statResources=async()=>{
+    const res = await new GcpFhirSearch().search("Encounter", "_count=3")
+    console.log(res.data.link)
+    res.data.entry.forEach(el=>console.log(el.resource.resourceType))
+  }
 
   /**
    *
@@ -591,7 +599,7 @@ console.log(bundle)
   };
 }
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -606,7 +614,7 @@ new excute().callFunction()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
-// new excute().observation()
+new excute().observation()
 // new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()
@@ -619,4 +627,5 @@ new excute().callFunction()
 // new excute().coverage()
 // new excute().immunization()
 // new excute().immunizationRecomndation()
+// new excute().statResources()
 

@@ -90,7 +90,8 @@ export interface VALUE {
 export interface REFERENCE_RANGE {
   low?: SAMPLE_QUANTITY;
   high?: SAMPLE_QUANTITY;
-  type?: CODEABLE_CONCEPT;
+  // type?: CODEABLE_CONCEPT;
+  // normalValue?:CODEABLE_CONCEPT;
   appliesTo?: CODEABLE_CONCEPT[];
   age?: RANGE;
   text?: string;

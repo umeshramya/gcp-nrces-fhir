@@ -15,10 +15,22 @@ const setObservation = async () => {
       "status": "final",
       "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
       "value": { "valueBoolean": true },
-      "code" :{"text" :"Echocardiography"},
+      "code" :{"text" :"Hb"},
       "patientId" : resources.patient.id,
       "text" : "Testing",
-      "orgPanel" : {"parentName" : "Echocardiography", "chileName" : "Echocardiography"}
+      "orgPanel" : {"parentName" : "HB", "chileName" : "Hb"},
+      "referenceRange": [
+         {
+            "appliesTo" : [{"text" : "Male"}],
+            "high" : {"value" : 15, "system" : "http://unitsofmeasure.org", "unit" : "yrs"},
+            "low" : {"value" : 10, "system" : "http://unitsofmeasure.org", "unit" : "yrs"},
+            "age" : {"high" : {"code" : "hb", "system" : "http://unitsofmeasure.org", "unit" : "yrs", "value" : 1},
+                  "low" : {"code": "low", "system": "http://unitsofmeasure.org", "unit" : "yrs","value" : 5}},
+            "text" : "Negetive"
+            
+         }         
+
+]
       
    })
 
