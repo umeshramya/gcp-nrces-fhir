@@ -76,6 +76,7 @@ import {
   MedicationStatement,
   MedicationStatementStatusArray,
 } from "./resources/MedicationStatement";
+import {LOCATION, Location} from "./resources/Location"
 
 import { ServiceRequest, SERVICE_REQUEST } from "./resources/ServiceRequest";
 import { SCHEDULE, Schedule } from "./resources/Schedule"
@@ -196,5 +197,5 @@ export {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest}
 export { Immunization , IMMUNIZATION }
 export { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION }
 export {CreatePdf}
-
+export {LOCATION, Location} 
 export {HealthDocumentBundle}

@@ -1,4 +1,4 @@
-import { CodeDisplay, IDENTTIFIER, PERIOD } from "../config";
+import { AVAILABLE_TIME, CodeDisplay, IDENTTIFIER, NOT_AVAILABLE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { ORGANIZATION } from "./Organization";
 import { PRACTITIONER } from "./Practitioner";
@@ -14,17 +14,9 @@ export type PractitionerRoleSpecialities =
   typeof practitionerRoleSpecialities[number];
 type DaysOfWeek = typeof daysOfWeek[number];
 
-export interface AVAILABLE_TIME {
-  daysOfWeek: DaysOfWeek[];
-  allDay?: boolean;
-  availableStartTime: string;
-  availableEndTime: string;
-}
 
-export interface NOT_AVAILABLE {
-  description: string;
-  during: PERIOD;
-}
+
+export {AVAILABLE_TIME, NOT_AVAILABLE}
 
 export interface PRACTITIONER_ROLE {
   id?: string;

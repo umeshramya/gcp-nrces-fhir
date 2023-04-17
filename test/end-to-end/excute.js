@@ -35,6 +35,7 @@ const { setAppointment } = require("./Appointement");
 const { setCoverage } = require("./Coverage");
 const { setImmunization } = require("./immunization");
 const { setImmunizationRecommendation } = require("./immunizationRecomaadation");
+const {setLocation}= require("./Location")
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -120,6 +121,12 @@ class excute {
   immunizationRecomndation = async ()=>{
     await callFunction();
     const res = await setImmunizationRecommendation();
+    console.log(res)
+  }
+
+  location =async()=>{
+    await callFunction()
+    const res = await setLocation();
     console.log(res)
   }
 
@@ -614,7 +621,8 @@ console.log(bundle)
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
-new excute().observation()
+// new excute().observation()
+new excute().location()
 // new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()

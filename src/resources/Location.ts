@@ -1,9 +1,12 @@
-import { ADDRESS, CODEABLE_CONCEPT, CodeDisplay, CODING, CONTACT_POINT, HOURS_OF_OPERATION, IDENTTIFIER, POSITION } from "../config";
+import { type } from "os";
+import { ADDRESS, AVAILIBILITY, CODEABLE_CONCEPT, CodeDisplay, CODING, CONTACT_POINT, HOURS_OF_OPERATION, IDENTTIFIER, POSITION } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
 import ResourceMain from "./ResourceMai";
 
 const locatioStatusArray = ["active" , "suspended" , "inactive"] as const
+export const locationFormTypesArray = ["Site", "Building", "Wing", "Ward", "Level", "Corridor", "Room", "Bed", "Vehicle", "House","Cabinet", "Road", "Area", "Jurisdiction", "Virtual"] as const
+export type locationFormTypes = typeof locationFormTypesArray[number]
 type Status = typeof locatioStatusArray[number]
 export interface LOCATION{
   id?:string;
@@ -21,19 +24,18 @@ export interface LOCATION{
   position?:POSITION
   managingOrganizationId?:string	
   partOfLocationId?:string
-  hoursOfOperation?:HOURS_OF_OPERATION
   availabilityExceptions? : string
   endpointId ?: string
 }
 
 export  class Location extends ResourceMain implements ResourceMaster{
   getFHIR(options: LOCATION):any {
-    const body={
+    const body:any={
       id:options.id,
       resourceType: "Location",
       "text": {
         "status": "generated",
-        "div": options.description
+        "div": `<div>${ options.description}</div>`
       },
       identifier: options.indentifiers,
       name : options.name,
@@ -46,16 +48,28 @@ export  class Location extends ResourceMain implements ResourceMaster{
       managingOrganization	: {
         reference: `Organization/${options.managingOrganizationId}`,
       },
-      partOf:  {
-        reference: `Location/${options.partOfLocationId}`,
-      },
-      hoursOfOperation: options.hoursOfOperation,
+
+  
       availabilityExceptions: options.availabilityExceptions,
-      endpoint :     {
-        reference: `Endpoint/${options.endpointId}`,
+     
+    }
+
+    if(options.operationalStatus){
+      body.operationalStatus=options.operationalStatus
+    }
+
+
+    if(options.partOfLocationId){
+      body.partOf = {
+        reference: `Location/${options.partOfLocationId}`,
       }
     }
 
+    if(options.endpointId){
+      body.endpoint ={
+        reference: `Endpoint/${options.endpointId}`
+      }
+    }
     return body
   }
 
@@ -91,18 +105,21 @@ export  class Location extends ResourceMain implements ResourceMaster{
       ret.managingOrganizationId = this.getIdFromReference({"ref" : options.managingOrganization.reference, "resourceType" : "Organization"})
 
     }
+
     if(options.partOf){
       ret.partOfLocationId = this.getIdFromReference({"ref" : options.partOf.reference, "resourceType" : "Location"})
 
     }
-    if(options.hoursOfOperation){
-      ret.hoursOfOperation = options.hoursOfOperation
-    }
+
     if(options.availabilityExceptions){
       ret.availabilityExceptions= options.availabilityExceptions
     }
     if(options.endpoint){
       ret.endpointId = this.getIdFromReference({"ref" : options.endpoint.reference, "resourceType" : "Endpoint"})
+    }
+
+    if(options.operationalStatus){
+      ret.operationalStatus=options.operationalStatus
     }
     return ret
     

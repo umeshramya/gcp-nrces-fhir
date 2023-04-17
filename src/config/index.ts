@@ -173,6 +173,27 @@ export  interface HOURS_OF_OPERATION{
 
 }
 
+export  interface AVAILIBILITY{
+  availableTime:AVAILABLE_TIME[]
+  notAvailableTime:NOT_AVAILABLE[]
+
+}
+
+
+export interface AVAILABLE_TIME {
+  daysOfWeek: DaysOfWeek[];
+  allDay?: boolean;
+  availableStartTime: string;
+  availableEndTime: string;
+}
+
+export interface NOT_AVAILABLE {
+  description: string;
+  during: PERIOD;
+}
+
+
+
 
 export interface EXTENSION {
   url:string;

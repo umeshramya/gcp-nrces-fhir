@@ -46,7 +46,8 @@ const resources = {
   serviceRequest: null,
   media: null,
   relatedPerson: null,
-  coverage:null
+  coverage:null,
+  location:null
 };
 
 /**
