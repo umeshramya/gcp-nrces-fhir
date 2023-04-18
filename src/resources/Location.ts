@@ -57,6 +57,10 @@ export  class Location extends ResourceMain implements ResourceMaster{
      
     }
 
+    if(options.status){
+      body.status=options.status
+    }
+
     if(options.operationalStatus){
       body.operationalStatus=options.operationalStatus
     }
@@ -123,6 +127,10 @@ export  class Location extends ResourceMain implements ResourceMaster{
 
     if(options.operationalStatus){
       ret.operationalStatus=options.operationalStatus
+    }
+
+    if(options.status){
+      ret.status=options.status
     }
     return ret
     
