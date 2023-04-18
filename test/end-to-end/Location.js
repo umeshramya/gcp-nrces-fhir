@@ -32,6 +32,7 @@ const setLocation = async () => {
       ],
       text: "Room",
     }
+    
   });
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Location");

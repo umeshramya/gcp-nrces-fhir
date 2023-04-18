@@ -21,7 +21,6 @@ export interface LOCATION{
   description ?: string
   mode ? : CodeDisplay,
   type?:CODEABLE_CONCEPT[]
-  telecom?:CONTACT_POINT[]
   address?:ADDRESS
   physicalType?:CODEABLE_CONCEPT
   position?:POSITION
@@ -132,6 +131,7 @@ export  class Location extends ResourceMain implements ResourceMaster{
     if(options.status){
       ret.status=options.status
     }
+
     return ret
     
   }
