@@ -6,6 +6,9 @@ import ResourceMain from "./ResourceMai";
 
 const locatioStatusArray = ["active" , "suspended" , "inactive"] as const
 export const locationFormTypesArray = ["Site", "Building", "Wing", "Ward", "Level", "Corridor", "Room", "Bed", "Vehicle", "House","Cabinet", "Road", "Area", "Jurisdiction", "Virtual"] as const
+
+export const bedOPertaionalStatusArray =["Closed", "Housekeeping", "Occupied", "Unoccupied", "Contaminated", "Isolated"] as const
+export type BedOPertaionalStatus = typeof bedOPertaionalStatusArray[number]
 export type locationFormTypes = typeof locationFormTypesArray[number]
 type Status = typeof locatioStatusArray[number]
 export interface LOCATION{
