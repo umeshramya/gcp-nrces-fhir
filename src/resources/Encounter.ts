@@ -107,6 +107,14 @@ interface ENCOUNTER {
   participant?: ENCOUNTER_PARTICIPANT[];
   account?: { reference: string; type: "Account" }[];
   basedOn?: BASED_ON[];
+  location?: {
+    location: { reference: string };
+    period?: {
+      start: string;
+      end: string;
+    };
+    status?: "planned" | "active" | "reserved" | "completed";
+  }[];
 }
 
 export class Encounter extends ResourceMain implements ResourceMaster {
@@ -187,6 +195,9 @@ export class Encounter extends ResourceMain implements ResourceMaster {
         reference: `Organization/${options.organizationId}`,
       };
     }
+    if (options.location) {
+      body.location = options.location;
+    }
     return body;
   }
 
@@ -256,6 +267,9 @@ export class Encounter extends ResourceMain implements ResourceMaster {
 
     if (options.type) {
       ret.type = options.type;
+    }
+    if (options.location) {
+      ret.location = options.location;
     }
 
     return ret;

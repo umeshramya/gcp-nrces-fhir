@@ -216,6 +216,13 @@ const setEncounter = async () => {
     class: { code: "IMP", display: "in-patient" },
     // "dischargeDisposition": { "code": "home", "display": "home" },
     extension : [{"url" : "https://nicehms.com/payor" , "valueString" : JSON.stringify({"Payor" : "mediassit", "teriffName" : "medi asst teriff"})}],
+   location:[{"location" : {"reference" : `Location/f9138f68-0459-4ab0-b29a-1619169fe2c1`},
+    period : {
+      "start" : new Date().toISOString(),
+      "end" : new Date().toISOString(),
+    },
+    "status" : "completed",
+  }],
     diagnosis: [
       {
         condition: {
