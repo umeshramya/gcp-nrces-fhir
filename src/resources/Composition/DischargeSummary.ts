@@ -1,6 +1,7 @@
 import { TimeZone } from "../../TimeZone";
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
+import { databasePath } from "../../config";
 interface Args {
   composition: COMPOSITOIN;
   PresentingProblems: any;
@@ -14,12 +15,24 @@ interface Args {
   followUp?: any;
 }
 export class DischargeSUmmery extends Composition implements Records {
-  create = async (options: Args) => {
+  /**
+   * 
+   * @param options 
+   * @param Credentials 
+   * @param DatabasePath 
+   * @returns 
+   */
+  create = async (options: Args, Credentials?: any, DatabasePath?:any) => {
     options = await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
 
-    const gcpFhirCrud = new GcpFhirCRUD();
+    let gcpFhirCrud:GcpFhirCRUD;
+    if(Credentials){
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
+    }else{
+      gcpFhirCrud= new GcpFhirCRUD()
+    }
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
   };
