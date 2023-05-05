@@ -606,7 +606,7 @@ console.log(bundle)
   };
 }
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -620,7 +620,7 @@ new excute().callFunction()
 // new excute().healthDocumentComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
-// new excute().diagnosticReport()
+new excute().diagnosticReport()
 // new excute().observation()
 // new excute().location()
 // new excute().diagnosticReportComposition()

@@ -62,7 +62,7 @@ export class DiagnosticReportComp extends Composition implements Records {
       });
     }
   };
-  create = async (options: Args) => {
+  create = async (options: Args,Credentials?: any, DatabasePath?:any) => {
     this.setPerformerAndRequester(options);
 
     options.composition.section.push({
@@ -85,11 +85,16 @@ export class DiagnosticReportComp extends Composition implements Records {
     const body = this.getFHIR(options.composition);
 
     body.section = options.composition.section;
-    const gcpFhirCrud = new GcpFhirCRUD();
+    let gcpFhirCrud:GcpFhirCRUD
+    if(Credentials){
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
+    }else{
+      gcpFhirCrud= new GcpFhirCRUD()
+    }
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
   };
-  update = async (options: Args) => {
+  update = async (options: Args, Credentials?:any, DatabasePath?:any) => {
     this.setPerformerAndRequester(options);
     options.composition.section = [];
     options.composition.section.push({
@@ -112,7 +117,14 @@ export class DiagnosticReportComp extends Composition implements Records {
     const body = this.getFHIR(options.composition);
 
     body.section = options.composition.section;
-    const gcpFhirCrud = new GcpFhirCRUD();
+    // const gcpFhirCrud = new GcpFhirCRUD();
+
+    let gcpFhirCrud:GcpFhirCRUD
+    if(Credentials){
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
+    }else{
+      gcpFhirCrud= new GcpFhirCRUD()
+    }
     const res = await gcpFhirCrud.updateFhirResource(
       body,
       options.composition.id || "",
