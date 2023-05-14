@@ -258,8 +258,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
           ? `<tr><td>${
               this.requeter ? `Requested By : ${this.requeter}` : ""
             }</td><td>${
-              options.patient.internalId
-                ? `Internal Id : ${options.patient.internalId}`
+              options.patient.internalId || options.patient.facilityId
+                ? `Internal Id : ${options.patient.facilityId || ""} ${options.patient.internalId || ""}`
                 : ""
             }</td></tr>`
           : ""

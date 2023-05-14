@@ -81,6 +81,7 @@ const setPatient = async () => {
     name: "UMESH R BILAGI New",
     gender: "Male",
     mobile: "9343403620",
+    facilityId : 123,
     healthNumber: "23-3457-234",
     dob: "1969-09-29",
     MRN: "5002",

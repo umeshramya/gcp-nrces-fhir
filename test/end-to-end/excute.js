@@ -43,7 +43,7 @@ const webhookURL="https://webhook.site/f65a3d20-7617-406d-8f44-0f4024ebbbf9"
 class excute {
   callFunction = async () => {
     await callFunction();
-    console.log(resources.encounter);
+    console.log(resources.patient);
   };
 
 
@@ -466,7 +466,7 @@ class excute {
   // aca383e6-621e-4faa-88b0-78cfbf47f10b
   createPrescriptionBundle = async () => {
     const compositionResource = await new GcpFhirCRUD()
-      .getFhirResource("3945404f-c713-4108-be8f-6e4d84509f6e", "Composition")
+      .getFhirResource("a66c7d59-b314-4207-aee0-2721deb1b56a", "Composition")
       .then((res) => res.data);
     const html = `${compositionResource.text.div}`.trim();
 
@@ -620,14 +620,14 @@ console.log(bundle)
 // new excute().healthDocumentComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
-new excute().diagnosticReport()
+// new excute().diagnosticReport()
 // new excute().observation()
 // new excute().location()
 // new excute().diagnosticReportComposition()
 
 // new excute().updateServiceRequest()
 
-// new excute().createPrescriptionBundle()
+new excute().createPrescriptionBundle()
 // new excute().createHealthDocumentBundle();
 // new excute().createOPConsultationBundle();
   

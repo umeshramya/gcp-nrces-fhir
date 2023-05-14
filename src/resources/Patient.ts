@@ -5,6 +5,7 @@ import ResourceMain from "./ResourceMai";
 export interface PATIENT {
   id?: string;
   internalId?: string;
+  facilityId?:number
   name: string;
   gender: string;
   healthNumber?: string;
@@ -36,6 +37,25 @@ export class Patient extends ResourceMain implements ResourceMaster {
 
       identifiers.push(id);
     }
+
+    if (options.facilityId) {
+      const id: IDENTTIFIER = {
+        type: {
+          coding: [
+            {
+              system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+              code: "MR",
+              display: "Medical record number",
+            },
+          ],
+        },
+        system: "https://www.nicehms.com/facilityId",
+        value: `${options.facilityId}`,
+      };
+
+      identifiers.push(id);
+    }
+
 
     if (options.healthNumber) {
       const id: IDENTTIFIER = {
@@ -151,9 +171,20 @@ export class Patient extends ResourceMain implements ResourceMaster {
         (el: any) => el.system == "https://www.nicehms.com/internalid"
       );
 
+      
+
       if (internalId.length > 0) {
         ret.internalId = internalId[0].value;
       }
+
+      const facilityId: any[] = options.identifier.filter(
+        (el: any) => el.system == "https://www.nicehms.com/facilityId"
+      );
+
+      if (facilityId.length > 0) {
+        ret.facilityId = facilityId[0].value;
+      }
+      
 
       const healthNumber: any[] = options.identifier.filter(
         (el: any) => el.system == "https://healthid.ndhm.gov.in/health-number"
