@@ -39,7 +39,7 @@ const {setLocation}= require("./Location")
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
-const webhookURL="https://webhook.site/f65a3d20-7617-406d-8f44-0f4024ebbbf9"
+const webhookURL="https://webhook.site/3413e350-27be-4afd-816b-cc7cddf35d6f"
 class excute {
   callFunction = async () => {
     await callFunction();
@@ -466,7 +466,7 @@ class excute {
   // aca383e6-621e-4faa-88b0-78cfbf47f10b
   createPrescriptionBundle = async () => {
     const compositionResource = await new GcpFhirCRUD()
-      .getFhirResource("a66c7d59-b314-4207-aee0-2721deb1b56a", "Composition")
+      .getFhirResource("49b8aa69-069a-45fb-a95a-39501d4f475a", "Composition")
       .then((res) => res.data);
     const html = `${compositionResource.text.div}`.trim();
 
@@ -501,8 +501,10 @@ class excute {
     try {
       
     const compositionResource = await new GcpFhirCRUD()
-    .getFhirResource("0118c2bb-73c7-40ce-a0a5-7ba620cf32f1", "Composition")
+    
+    .getFhirResource("cc4cf76f-ad47-4980-a0c5-9e6a982dfed3", "Composition")
     .then((res) => res.data);
+
     const html = `${compositionResource.text.div}`.trim();
 
     const pdf = await new OPConsultationBundle(
@@ -512,6 +514,7 @@ class excute {
       html: html,
       qrCode: `https://www.nicehms.com/api/${compositionResource.id}?bundletype=OPConsultation`,
     });
+    console.log(pdf)
 
     const bundle = await new OPConsultationBundle(
       credentials,
@@ -627,9 +630,9 @@ console.log(bundle)
 
 // new excute().updateServiceRequest()
 
-new excute().createPrescriptionBundle()
+// new excute().createPrescriptionBundle()
 // new excute().createHealthDocumentBundle();
-// new excute().createOPConsultationBundle();
+new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()

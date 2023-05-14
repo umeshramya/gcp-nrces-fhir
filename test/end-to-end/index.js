@@ -86,7 +86,7 @@ const setPatient = async () => {
     dob: "1969-09-29",
     MRN: "5002",
     organizationId: resources.organization.id,
-    internalId: "156141",
+    // internalId: "156141",
     identifier : [{
       "system" : "https://vidal.com",
       "value" : "v1-12"

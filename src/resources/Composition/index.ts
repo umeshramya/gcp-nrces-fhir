@@ -254,7 +254,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       html += `</tr>`;
 
       html += `${
-        this.requeter || options.patient.internalId
+        this.requeter || options.patient.internalId || options.patient.facilityId
           ? `<tr><td>${
               this.requeter ? `Requested By : ${this.requeter}` : ""
             }</td><td>${
