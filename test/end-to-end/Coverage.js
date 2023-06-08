@@ -34,6 +34,7 @@ const setCoverage = async () => {
         },
       ],
     },
+    
   });
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Coverage");

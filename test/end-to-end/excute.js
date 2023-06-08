@@ -35,7 +35,8 @@ const { setAppointment } = require("./Appointement");
 const { setCoverage } = require("./Coverage");
 const { setImmunization } = require("./immunization");
 const { setImmunizationRecommendation } = require("./immunizationRecomaadation");
-const {setLocation}= require("./Location")
+const {setLocation}= require("./Location");
+const { setCoverageEligibiltyRequest } = require("./CoverageEligibiltyRequest");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -152,6 +153,12 @@ class excute {
     await callFunction();
    const ret = await setCoverage()
    console.log(ret)
+  }
+
+  coverageElegibityRequest =async()=>{
+    await callFunction();
+    const ret = await setCoverageEligibiltyRequest()
+    console.log(ret)
   }
 
   precsriptinComposition = async () => {
@@ -632,10 +639,11 @@ console.log(bundle)
 
 // new excute().createPrescriptionBundle()
 // new excute().createHealthDocumentBundle();
-new excute().createOPConsultationBundle();
+// new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
+new excute().coverageElegibityRequest()
 // new excute().immunization()
 // new excute().immunizationRecomndation()
 // new excute().statResources()

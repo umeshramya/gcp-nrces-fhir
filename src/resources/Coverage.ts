@@ -51,10 +51,26 @@ export interface COVERAGE {
   text: string;
   status: CoverageStatus;
   type?: CODEABLE_CONCEPT;
+  /**
+   * Corporate insurences
+   */
   policyHolder?: policyHolder;
+  /**
+   * main person in the policy
+   */
   subscriber?: subscriber;
+  /**
+   * id of the subscriber
+   */
   subscriberId?: IDENTTIFIER[];
+  /**
+   * Patient 
+   */
   beneficiaryPatientId: string;
+  /**
+   * 	
+For some coverages a single identifier is issued to the Subscriber and then a unique dependent number is issued to each beneficiary.
+   */
   dependent?: string;
   relationship?: CODEABLE_CONCEPT;
   period?: PERIOD;

@@ -38,7 +38,7 @@ interface ITEM{
   diagnosis:{
     diagnosis:CODEABLE_CONCEPT
     diagnosisReference:`Condtion/${string}`
-  }
+  }[]
 }
 
 export interface COVERAGE_ELIGIBILITY_REQUEST {
@@ -53,6 +53,9 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
   enterer :ENTERER
   provider : PROVIDER
   insurerOrganizationId : string
+  /**
+   * ward
+   */
   locationId : string
   coverageId:string
   item : ITEM
