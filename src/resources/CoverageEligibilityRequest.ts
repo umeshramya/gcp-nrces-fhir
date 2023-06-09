@@ -1,8 +1,31 @@
-import { CODEABLE_CONCEPT, IDENTTIFIER, MULTI_RESOURCE } from "../config";
+import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
 const CoverageEligibilityRequestStatus = [	"active" , "cancelled" , "draft" , "entered-in-error"] as const
+export interface INSURANCE {
+  id?: string
+  focal?: boolean
+  coverage: {
+    reference: string
+  }
+  businessArrangement?: string
+  extension ?: EXTENSION[]
+  modifierExtension?:EXTENSION[]
+}
+
+
+interface SUPPORTING_INFO {
+  id?: string;
+  extension?: EXTENSION[];
+  modifierExtension?: EXTENSION[];
+  sequence: number;
+  /**
+   * Any resource
+   */
+  information: {"reference" : string};
+  appliesToAll?: boolean;
+}
 
 type CoverageEligibilityRequestStatus = typeof CoverageEligibilityRequestStatus[number]
 const CoverageEligibilityRequestPurpose = [
@@ -29,27 +52,39 @@ type CoverageEligibilityRequestPurpoe =
     resource: "Location" | "Organization" 
   }
 
+  type DIAGNOSIS= {
+    diagnosisCodeableConcept: CODEABLE_CONCEPT
+  } | {diagnosisReference: {
+    reference: string;
+  }};
+
 interface ITEM{
   category?:CODEABLE_CONCEPT;
   productOrService:CODEABLE_CONCEPT;
   modifier ? :CODEABLE_CONCEPT[];
   provider: ITEM_PROVIDER
   facility: ITEM_FACILITY
-  diagnosis:{
-    diagnosis:CODEABLE_CONCEPT
-    diagnosisReference:`Condtion/${string}`
-  }[]
+  diagnosis:DIAGNOSIS[]
+  
 }
+
+
 
 export interface COVERAGE_ELIGIBILITY_REQUEST {
   id?: string;
   status : CoverageEligibilityRequestStatus
   text: string;
-  identifier: IDENTTIFIER;
+  identifier: IDENTTIFIER[];
   priority: CODEABLE_CONCEPT;
-  purpose: CoverageEligibilityRequestPurpoe;
+  purpose: CoverageEligibilityRequestPurpoe[];
   patientId: string;
   createdDateTime: string;
+  /**
+   * Only Date 2023-08-15
+   */
+  servicedDate?: string;
+  servicedPeriod?:PERIOD;
+  supportingInfo:SUPPORTING_INFO[]
   enterer :ENTERER
   provider : PROVIDER
   insurerOrganizationId : string
@@ -57,8 +92,8 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
    * ward
    */
   locationId : string
-  coverageId:string
-  item : ITEM
+  insurance: INSURANCE[]
+  item : ITEM[]
   detail ?: {
     reference : string
   }
@@ -88,6 +123,8 @@ export class CoverageEligibilityRequest
         status: "generated",
         div: getText(),
       },
+      servicedDate: options.servicedDate,
+      supportingInfo:options.supportingInfo,
       identifier: options.identifier,
       priority: options.priority,
       purpose: options.purpose,
@@ -95,19 +132,18 @@ export class CoverageEligibilityRequest
         reference: `Patient/${options.patientId}`,
       },
       created: options.createdDateTime,
-      enterer: options.enterer,
-      provider : options.provider,
+      enterer: {"reference" : `${options.enterer.resource}/${options.enterer.id}`},
+      provider : {"reference" : `${options.provider.resource}/${options.provider.id}`},
       insurer : {
         reference: `Organization/${options.insurerOrganizationId}`,
       },
       facility :{
         reference: `Location/${options.locationId}`,
       },
-      insurance:{
-        reference: `Coverage/${options.coverageId}`,
-      },
+      insurance:options.insurance,
       item:options.item,
-      detail : options.detail
+      detail : options.detail,
+      status : options.status
     };
 
     return body
@@ -126,10 +162,18 @@ export class CoverageEligibilityRequest
       provider: options.provider,
       insurerOrganizationId: this.getIdFromReference({"ref" : options.insurer.reference, "resourceType" : "Organization"}),
       locationId: this.getIdFromReference({"ref" : options.facility.reference, "resourceType" : "Location"}),
-      coverageId: this.getIdFromReference({"ref" : options.insurance.reference, "resourceType" : "Coverage"}),
-      item: options.item
+      insurance:options.insurance,
+      item: options.item,
+      supportingInfo:options.supportingInfo
     }
 
+    if(options.servicedPeriod){
+        ret.servicedPeriod = options.servicedPeriod
+      }
+
+      if(options.servicedDate){
+        ret.servicedDate=options.servicedDate
+      }
     if(options.detail){
       ret.detail= options.detail
     }
