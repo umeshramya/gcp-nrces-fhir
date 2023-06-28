@@ -93,7 +93,7 @@ export default class GcpFhirCRUD {
     }
   }
 
-  async getFhirResource(resourceId: string, resourceType: resourceType) {
+  async getFhirResource(resourceId: string, resourceType: resourceType, returnError?:boolean) {
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
       const request = { name };
@@ -105,6 +105,9 @@ export default class GcpFhirCRUD {
       return resource;
     } catch (error) {
       console.log(error);
+      if( returnError){
+        throw error
+      }
     }
   }
 
