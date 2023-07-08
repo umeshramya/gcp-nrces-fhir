@@ -46,7 +46,7 @@ export default class GcpFhirCRUD {
       }),
     });
   }
-  async createFhirResource(body: any, resourceType: resourceType) {
+  async createFhirResource(body: any, resourceType: resourceType, returnError?:boolean) {
     try {
       const request = {
         parent: this.parent,
@@ -60,6 +60,9 @@ export default class GcpFhirCRUD {
       return resource;
     } catch (error) {
       console.log(error);
+      if( returnError){
+        throw error
+      }
     }
   }
 
@@ -117,7 +120,8 @@ export default class GcpFhirCRUD {
   async updateFhirResource(
     updateOptions: any,
     resourceId: string,
-    resourceType: resourceType
+    resourceType: resourceType,
+    returnError?:boolean
   ) {
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
@@ -132,6 +136,9 @@ export default class GcpFhirCRUD {
       return resource;
     } catch (error) {
       console.log(error);
+      if( returnError){
+        throw error
+      }
     }
   }
 
