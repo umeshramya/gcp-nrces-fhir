@@ -168,7 +168,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       },
       hospitalization: options.hospitalization,
       diagnosis: options.diagnosis,
-      participant: options.participant,
+      participant: this.rearrangeParticipants(options.participant || []),
       reasonReference: options.reasonReference,
       reasonCode: options.reasonCode,
       account: options.account,
@@ -273,6 +273,32 @@ export class Encounter extends ResourceMain implements ResourceMaster {
     }
 
     return ret;
+  }
+
+  rearrangeParticipants (participant:ENCOUNTER_PARTICIPANT[]):ENCOUNTER_PARTICIPANT[]{
+    const ret:ENCOUNTER_PARTICIPANT[]=participant.sort((a, b) => {
+      const typeA = a.type[0];
+      const typeB = b.type[0];
+    
+      const codingA = typeA.coding ? typeA.coding[0] : undefined;
+      const codingB = typeB.coding ? typeB.coding[0] : undefined;
+    
+      const codeA = codingA ? codingA.code : undefined;
+      const codeB = codingB ? codingB.code : undefined;
+    
+      if (codeA && codeB) {
+        return codeA.localeCompare(codeB);
+      } else if (codeA) {
+        return -1;
+      } else if (codeB) {
+        return 1;
+      }
+    
+      return 0;
+    });
+    
+
+    return ret
   }
 
   /**
