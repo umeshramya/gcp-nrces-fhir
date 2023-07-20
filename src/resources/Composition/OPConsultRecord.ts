@@ -14,20 +14,30 @@ interface Args {
   followUp?: any;
 }
 export class OPConsultRecord extends Composition implements Records {
-  create = async (options: Args) => {
+  create = async (options: Args, Credentials?: any, DatabasePath?:any) => {
     options = await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
 
-    const gcpFhirCrud = new GcpFhirCRUD();
+    let gcpFhirCrud:GcpFhirCRUD;
+    if(Credentials){
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
+    }else{
+      gcpFhirCrud= new GcpFhirCRUD()
+    }
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
   };
-  update = async (options: Args) => {
+  update = async (options: Args, Credentials?: any, DatabasePath?:any) => {
     options =await this.getOptions(options);
     const body = this.getFHIR(options.composition);
     body.section = options.composition.section;
-    const gcpFhirCrud = new GcpFhirCRUD();
+    let gcpFhirCrud:GcpFhirCRUD;
+    if(Credentials){
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
+    }else{
+      gcpFhirCrud= new GcpFhirCRUD()
+    }
     const res = await gcpFhirCrud.updateFhirResource(
       body,
       options.composition.id || "",
