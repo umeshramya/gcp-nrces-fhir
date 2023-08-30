@@ -123,7 +123,8 @@ export class Appointment extends ResourceMain implements ResourceMaster {
 
 
   convertFhirToObject(options: any): APPOINTMENT {
-    const orgIdentifierArray:IDENTTIFIER[] = options.identifier.filter((el:IDENTTIFIER)=> el.system == "https://www.nicehms.com/orgnization");
+    let orgIdentifierArray:IDENTTIFIER[] = []
+    orgIdentifierArray =options.identifier.filter((el:IDENTTIFIER)=> el.system == "https://www.nicehms.com/orgnization");
 
     let ret: APPOINTMENT = {
       priority: options.priority,
