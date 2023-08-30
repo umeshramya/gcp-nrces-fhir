@@ -17,6 +17,7 @@ const setAppointment= async () => {
     "description" : "Appointement for Consulatation in view of Post PTCA follwup",
     "endDate" : new Date().toISOString(),
     "startDate" : new Date().toISOString(),
+    "organizationId" : resources.organization.id,
     "participants" : [
       {
         "actor" : {"multiResource" : {"display" : resources.patient.name, "id" : resources.patient.id, "resource" : "Patient"}},

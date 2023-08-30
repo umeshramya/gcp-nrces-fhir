@@ -1,13 +1,5 @@
-import {
-  CONDITION,
-  Condition,
-  GcpFhirCRUD,
-  PATIENT,
-  Patient,
-  PRACTITIONER,
-  Practitioner,
-} from "..";
-import { CODEABLE_CONCEPT, CodeDisplay } from "../config";
+
+import { CODEABLE_CONCEPT, CodeDisplay, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { Participant, PARTICIPANT } from "./objects/Partipant";
 import ResourceMain from "./ResourceMai";
@@ -50,15 +42,13 @@ export interface APPOINTMENT {
   description: string;
   priority: number;
   slotId?: string[];
+ organizationId:string;
 }
 
 export class Appointment extends ResourceMain implements ResourceMaster {
   getFHIR(options: APPOINTMENT): any {
     const getText = (): any => {
       let ret = ``;
-      // ret = `${ret} <div>Date ${new Date(
-      //   options.startDate
-      // ).toDateString() || new Date(options.endDate).toDateString()}`;
       if (options.serviceCategory) {
         ret = `${ret} <div>Service Category ${options.serviceCategory[0].text}</div>`;
       }
@@ -84,11 +74,17 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       return ret;
     }
 
+    const identifiers:IDENTTIFIER[]=[]
+    identifiers.push(    {
+      "value" : options.organizationId,
+      "system" : "https://www.nicehms.com/orgnization"
+    })
 
     
     let body: any = {
       resourceType: "Appointment",
       id: options.id || undefined,
+      identifier:identifiers,
       meta: {
         profile: [
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Appointment",
@@ -98,7 +94,9 @@ export class Appointment extends ResourceMain implements ResourceMaster {
         status: "generated",
         div: getText(),
       },
-  
+      supportingInformation:[{
+        reference: `Organization/${options.organizationId}`
+      }],
       status: options.status,
       serviceCategory: options.serviceCategory,
       serviceType: options.serviceCategory,
@@ -122,18 +120,22 @@ export class Appointment extends ResourceMain implements ResourceMaster {
 
     return body;
   }
+
+
   convertFhirToObject(options: any): APPOINTMENT {
+    const orgIdentifierArray:IDENTTIFIER[] = options.identifier.filter((el:IDENTTIFIER)=> el.system == "https://www.nicehms.com/orgnization");
+
     let ret: APPOINTMENT = {
       priority: options.priority,
       status: options.status,
-      participants:options.participant.map((el: any)=> new Participant().getObject(el)),
+      participants: options.participant.map((el: any) => new Participant().getObject(el)),
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,
       description: options.description,
-
       id: options.id,
-    };
+      organizationId : orgIdentifierArray.length > 0 ? orgIdentifierArray[0].value || "" : "",
+    }
     if (options.slot && options.slot.length > 0 ){
       ret.slotId = options.slot.map((el:any)=>{
        return this.getIdFromReference({
