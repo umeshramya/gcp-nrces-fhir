@@ -13,6 +13,7 @@ const setSChedule = async () => {
   const schedule = new Schedule();
   const body = schedule.getFHIR({
     active: true,
+    organizationId : resources.organization.id,
     actors: [
       {
         multiResource: {
