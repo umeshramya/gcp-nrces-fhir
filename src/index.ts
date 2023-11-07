@@ -5,6 +5,11 @@ import GcpFhirSearch from "./classess/gcpSearch";
 import ResourceFactory from "./classess/ResourceFactory";
 import { PATIENT, PatientResource, Patient } from "./resources/Patient";
 import { RelatedPerson, RELATED_PERSON } from "./resources/RelatedPerson"
+import {resourceType as ResourceType} from "./config/index"
+
+export type {
+  ResourceType
+}
 import {
   PRACTITIONER,
   PractitionerResource,
