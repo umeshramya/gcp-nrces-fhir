@@ -616,14 +616,14 @@ console.log(bundle)
   };
 }
 
-// new excute().callFunction()
+new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
 // new excute().specimen()
 // new excute().procedure()
 // new excute().serviceRequest()
-new excute().schedule()
+// new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();

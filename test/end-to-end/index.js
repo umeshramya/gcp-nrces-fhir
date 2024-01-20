@@ -90,7 +90,34 @@ const setPatient = async () => {
     identifier : [{
       "system" : "https://vidal.com",
       "value" : "v1-12"
-    }]
+    }],
+    contact: [
+      {
+        name :{
+          "family" : "patil",
+          "given" : ["Ramesh"],
+          "use" : "Official"
+        },
+        relationship : [
+          {
+            coding : [
+              {
+                "code" : "BRO",
+                "display" : "Brother",
+                "system" : "http://terminology.hl7.org/CodeSystem/v2-0131"
+              }
+            ]
+          }
+        ],
+        telecom : [
+          {
+            system : "Phone",
+            "use" : "home",
+            "value" : "898967676276"
+          }
+        ]
+      }
+    ]
   });
 
   let res = await gcpFhirCRUD.createFhirResource(body, "Patient");
@@ -216,7 +243,9 @@ const setEncounter = async () => {
   const body = encounter.getFHIR({
     class: { code: "IMP", display: "in-patient" },
     // "dischargeDisposition": { "code": "home", "display": "home" },
-    extension : [{"url" : "https://nicehms.com/payor" , "valueString" : JSON.stringify({"Payor" : "mediassit", "teriffName" : "medi asst teriff"})}],
+    extension : [{"url" : "https://nicehms.com/payor" , "valueString" : JSON.stringify({"Payor" : "mediassit", "teriffName" : "medi asst teriff"})},
+    {"url" : "https://nicehms.com/department", "valueString" : "Cardiology"}
+  ],
    location:[{"location" : {"reference" : `Location/f9138f68-0459-4ab0-b29a-1619169fe2c1`},
     period : {
       "start" : new Date().toISOString(),

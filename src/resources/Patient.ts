@@ -2,6 +2,59 @@ import { CODING, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
+type RelationshipCode = "FTH" | "MTH" | "SPS" | "HUSB" | "SON" | "DAU" | "BRO" | "SIS" | "UNCLE" | "AUNT" | "FRIEND";
+type RelationshipDisplay = "Father" | "Mother" | "Wife" | "Husband" | "Son" | "Daughter" | "Brother" | "Sister" | "Uncle" | "Aunt" | "Friend";
+
+
+
+interface Relationship {
+  relationship: {
+    code: RelationshipCode;
+    display: RelationshipDisplay;
+  };
+}
+
+interface PATIENT_CONTACT {
+  relationship: {
+    coding: {
+      system: "http://terminology.hl7.org/CodeSystem/v2-0131";
+      code: RelationshipCode;
+      display:RelationshipDisplay
+    }[];
+  }[];
+  name: {
+    use: string;
+    family: string;
+    given: string[];
+  };
+  telecom: 
+    {
+      "system": string,
+      "value": string,
+      "use": string
+    }[]
+
+}
+
+
+
+
+const relationships: Relationship[] = [
+  { relationship: { code: "FTH", display: "Father" } },
+  { relationship: { code: "MTH", display: "Mother" } },
+  { relationship: { code: "SPS", display: "Wife" } },
+  { relationship: { code: "HUSB", display: "Husband" } },
+  { relationship: { code: "SON", display: "Son" } },
+  { relationship: { code: "DAU", display: "Daughter" } },
+  { relationship: { code: "BRO", display: "Brother" } },
+  { relationship: { code: "SIS", display: "Sister" } },
+  { relationship: { code: "UNCLE", display: "Uncle" } },
+  { relationship: { code: "AUNT", display: "Aunt" } },
+  { relationship: { code: "FRIEND", display: "Friend" } }
+];
+
+export { Relationship, relationships, RelationshipCode, RelationshipDisplay , PATIENT_CONTACT};
+
 export interface PATIENT {
   id?: string;
   internalId?: string;
@@ -15,6 +68,7 @@ export interface PATIENT {
   MRN?: string;
   organizationId: string;
   identifier?:IDENTTIFIER[]
+  contact?:PATIENT_CONTACT[]
 }
 
 export class Patient extends ResourceMain implements ResourceMaster {
@@ -143,6 +197,8 @@ export class Patient extends ResourceMain implements ResourceMaster {
       managingOrganization: {
         reference: `Organization/${options.organizationId}`,
       },
+      contact: options.contact
+
     };
 
     return body;
@@ -210,6 +266,9 @@ export class Patient extends ResourceMain implements ResourceMaster {
           return el
          }
       })
+      if(options.contact){
+        ret.contact= options.contact;
+      }
     }
 
     return ret;
@@ -225,3 +284,11 @@ export const PatientResource = (options: PATIENT) => {
   const body = new Patient().getFHIR(options);
   return body;
 };
+
+
+
+
+
+
+
+
