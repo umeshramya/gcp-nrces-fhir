@@ -24,9 +24,9 @@ import { Observation } from "../resources/Observation";
 import { ServiceRequest } from "../resources/ServiceRequest";
 import { Schedule } from "../resources/Schedule";
 import { Slot } from "../resources/Slot";
-import { CoverageEligibilityRequest } from "../resources/CoverageEligibilityRequest";
+import { CoverageEligibilityRequest } from "../hcx/CoverageEligibilityRequest";
 import { EndPoint } from "../resources/Endpoint";
-import { Coverage } from "../resources/Coverage";
+import { Coverage } from "../hcx/Coverage";
 
 export default class ResourceFactory
   extends ResourceMain

@@ -98,8 +98,11 @@ import {
 import { Media, MEDIA } from "./resources/Media";
 import { Observation, OBSERVATION } from "./resources/Observation";
 import { Specimen, SPECIMEN } from "./resources/Specimen";
-import {Coverage, COVERAGE } from "./resources/Coverage";
-import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./resources/CoverageEligibilityRequest"
+import {Coverage, COVERAGE } from "./hcx/Coverage";
+import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./hcx/CoverageEligibilityRequest"
+import {createCoverelibiltyRequestBundle} from "./hcx/bundle/CoverageEligibiltyRequestBundle"
+
+
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
 import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resources/ImmunizationRecommendation";
 import {CreatePdf} from "js-ts-report"
@@ -198,6 +201,8 @@ export { PDF_HEADER };
 
 export {Coverage, COVERAGE }
 export {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} 
+
+export {createCoverelibiltyRequestBundle}
 
 export { Immunization , IMMUNIZATION }
 export { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION }

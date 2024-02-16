@@ -1,6 +1,6 @@
 import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import ResourceMain from "./ResourceMai";
+import ResourceMain from "../resources/ResourceMai";
 
 const CoverageEligibilityRequestStatus = [	"active" , "cancelled" , "draft" , "entered-in-error"] as const
 export interface INSURANCE {

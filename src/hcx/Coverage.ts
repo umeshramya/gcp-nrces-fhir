@@ -5,7 +5,7 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import ResourceMain from "./ResourceMai";
+import ResourceMain from "../resources/ResourceMai";
 const CoverageStatus = [
   "active",
   "cancelled",
