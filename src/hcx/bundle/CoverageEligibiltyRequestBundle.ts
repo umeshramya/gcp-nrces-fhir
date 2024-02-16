@@ -6,7 +6,7 @@ import { PRACTITIONER, Practitioner } from "../../resources/Practitioner"
 import { COVERAGE, Coverage } from "../Coverage"
 import { COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest } from "../CoverageEligibilityRequest"
 
-export class createCoverelibiltyRequestBundle {
+export class CoverageEligibilityRequestBundle {
 
 
 getFhir (options:{
