@@ -1,17 +1,24 @@
+import { ResourceMaster } from "../../Interfaces"
 import { IDENTTIFIER } from "../../config"
 import { LOCATION, Location } from "../../resources/Location"
 import { ORGANIZATION, Organization } from "../../resources/Organization"
 import { PATIENT, Patient } from "../../resources/Patient"
 import { PRACTITIONER, Practitioner } from "../../resources/Practitioner"
+import ResourceMain from "../../resources/ResourceMai"
 import { COVERAGE, Coverage } from "../Coverage"
 import { COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest } from "../CoverageEligibilityRequest"
 
-export class CoverageEligibilityRequestBundle {
+export class CoverageEligibilityRequestBundle extends ResourceMain implements ResourceMaster{
+
+convertFhirToObject(options: any) {
+  throw new Error("Method not implemented.")
+}
+statusArray?: Function | undefined
 
 
-getFhir (options:{
+getFHIR (options:{
     id?:string,
-    indentfier:IDENTTIFIER[]
+    indentfier:IDENTTIFIER
     dateTime: string
     CoverageEligibilityRequest:COVERAGE_ELIGIBILITY_REQUEST
     patient : PATIENT
@@ -22,10 +29,15 @@ getFhir (options:{
 
 }):any
 {
-    const CoverageEligibilityRequestResource = new CoverageEligibilityRequest().getFHIR(options.CoverageEligibilityRequest)
-    const patientResource = new Patient().getFHIR(options.patient)
-    const OrganizationResource = new Organization().getFHIR(options.organization)
-    const  CoverageResource = new Coverage().getFHIR(options.coverage)
+
+  
+    
+    const CoverageEligibilityRequestResource = new CoverageEligibilityRequest().removeUndefinedKeys(new CoverageEligibilityRequest().getFHIR(options.CoverageEligibilityRequest))
+    
+    
+    const patientResource = new Patient().removeUndefinedKeys(new Patient().getFHIR(options.patient))
+    const OrganizationResource = new Organization().removeUndefinedKeys(new Organization().getFHIR(options.organization))
+    const  CoverageResource = new Coverage().removeUndefinedKeys(new Coverage().getFHIR(options.coverage))
 
     const body = {
         "resourceType" : "Bundle",
@@ -34,24 +46,24 @@ getFhir (options:{
           "versionId" : "1",
           "profile" : ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequestBundle"]
         },
-        "identifier" : options.indentfier,
+        "identifier" : options.indentfier ,
         "type" : "collection",
-        "timestamp" : options.dateTime || new Date().toUTCString(),
+        "timestamp" : options.dateTime || new Date().toISOString(),
         "entry" : [{
-          "fullUrl" : options.CoverageEligibilityRequest.id,
+          "fullUrl" : `CoverageEligibilityRequest/${options.CoverageEligibilityRequest.id}`,
           "resource" : CoverageEligibilityRequestResource
         },
         {
-          "fullUrl" : options.CoverageEligibilityRequest.id,
+          "fullUrl" : `Patient/${options.patient.id}`,
           "resource" : patientResource
         },
         {
-          "fullUrl" : options.organization.id,
+          "fullUrl" : `Organization/${options.organization.id}`,
           "resource" : OrganizationResource
         },
 
         {
-          "fullUrl" :options.coverage.id,
+          "fullUrl" :`Coverage/${options.coverage.id}`,
           "resource" : CoverageResource
         }]
       }
@@ -59,14 +71,14 @@ getFhir (options:{
       if(options.practitioner){
         body.entry.push(
             {
-                fullUrl : options.practitioner.id,
+                fullUrl : `Practitioner/${options.practitioner.id}`,
                 resource : new Practitioner().getFHIR(options.practitioner)
             }
         )
       }
       if(options.location){
         body.entry.push({
-            fullUrl : options.location.id,
+            fullUrl : `Location/${options.location.id}`,
             resource :  new Location().getFHIR(options.location)
         })
       }

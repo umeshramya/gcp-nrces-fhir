@@ -28,7 +28,7 @@ const { emptySign } = require("gcp-nrces-fhir/lib/resources/Composition");
 const {  credentials,
     databasePath} = require("gcp-nrces-fhir/lib/config/index")
 const { setObservation } = require("./Observation");
-const console = require("console");
+
 const { setSChedule } = require("./Schedule");
 const {setSlot} = require("./Slot");
 const { setAppointment } = require("./Appointement");
@@ -37,6 +37,8 @@ const { setImmunization } = require("./immunization");
 const { setImmunizationRecommendation } = require("./immunizationRecomaadation");
 const {setLocation}= require("./Location");
 const { setCoverageEligibiltyRequest } = require("./CoverageEligibiltyRequest");
+
+const { setCoverageEligibiltyRequestBundle } = require("./CoverageEligibiltyRequestBundle");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -157,7 +159,16 @@ class excute {
 
   coverageElegibityRequest =async()=>{
     await callFunction();
+    await setCoverage()
     const ret = await setCoverageEligibiltyRequest()
+    console.log(ret)
+  }
+
+  coverageElegibityRequestBundle =async()=>{
+    await callFunction();
+    await setCoverage()
+    await setCoverageEligibiltyRequest()
+    const ret = await setCoverageEligibiltyRequestBundle()
     console.log(ret)
   }
 
@@ -616,7 +627,7 @@ console.log(bundle)
   };
 }
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -644,6 +655,7 @@ new excute().callFunction()
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
 // new excute().coverageElegibityRequest()
+new excute().coverageElegibityRequestBundle()
 // new excute().immunization()
 // new excute().immunizationRecomndation()
 // new excute().statResources()

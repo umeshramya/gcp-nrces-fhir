@@ -1,4 +1,4 @@
-const console = require("console");
+
 const { CoverageEligibilityRequest } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
@@ -16,7 +16,7 @@ const setCoverageEligibiltyRequest = async () => {
     insurance: [
       {
         coverage: {
-          reference: "Coverage/272a3661-ad2f-4ad6-a239-63172f6c4c2c",
+          reference: `Coverage/${resources.coverage.id}`,
         },
         focal: true,
         extension: [{ url: "https://nicehms.com/ex", valueString: "umesh" }],
@@ -108,9 +108,9 @@ const setCoverageEligibiltyRequest = async () => {
     "CoverageEligibilityRequest"
   );
   const ret = coverageEligilityRequest.convertFhirToObject(res.data);
-  console.log(ret);
-  // resources.coverage = res.data;
-  // return res;
+
+  resources.coverageEligilityRequest = ret;
+  return ret;
 };
 
 module.exports = { setCoverageEligibiltyRequest };

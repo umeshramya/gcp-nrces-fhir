@@ -220,6 +220,7 @@ export class Coverage extends ResourceMain implements ResourceMaster {
       });
     }
 
+    
     return ret;
   }
   statusArray?: Function | undefined;

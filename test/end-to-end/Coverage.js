@@ -1,4 +1,4 @@
-const console = require("console");
+
 const { Coverage } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
@@ -39,8 +39,8 @@ const setCoverage = async () => {
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Coverage");
   const ret = coverage.convertFhirToObject(res.data)
-  console.log(ret)
-  resources.coverage= res.data;
+
+  resources.coverage= ret;
   // return res;
 };
 

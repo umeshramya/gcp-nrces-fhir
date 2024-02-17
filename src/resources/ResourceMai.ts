@@ -109,4 +109,13 @@ export default class ResourceMain {
     copyComposoition.code=codedisplay;
     return copyComposoition;
   }
+
+  public removeUndefinedKeys<T>(obj: T): T {
+    for (const key in obj) {
+        if (obj[key] === undefined) {
+            delete obj[key];
+        }
+    }
+    return obj;
+}
 }
