@@ -31,14 +31,15 @@ const setCoverageEligibiltyRequest = async () => {
     locationId: "23da242a-a44f-49c2-b302-da05ebad8325",
     patientId: resources.patient.id,
     priority: { text: "Elective" },
-    supportingInfo: [
-      {
-        sequence: 1,
-        information: {
-          reference: "Condition/83059893-22bb-4aa8-9463-45667489666a",
-        },
-      },
-    ],
+    // supportingInfo: [
+    //   {
+    //     sequence: 1,
+    //     information: {
+    //       reference: "Condition/83059893-22bb-4aa8-9463-45667489666a",
+    //     },
+    //   },
+    // ],
+    supportingInfo: undefined,
     provider: {
       display: resources.organization.name,
       id: resources.organization.id,
@@ -162,7 +163,7 @@ const test = {
         enterer: { reference: "Practitioner/PractitionerViswasKar" },
         provider: { reference: "Organization/GICOFINDIA" },
         insurer: { reference: "Organization/WeMeanWell01" },
-        facility: { reference: "http://sgh.com.sa/Location/4461281" },
+        // facility: { reference: "http://sgh.com.sa/Location/4461281" },
         insurance: [{ coverage: { reference: "Coverage/COVERAGE1" } }],
         item: [
           {

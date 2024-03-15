@@ -84,16 +84,16 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
    */
   servicedDate?: string;
   servicedPeriod?:PERIOD;
-  supportingInfo:SUPPORTING_INFO[]
+  supportingInfo?:SUPPORTING_INFO[]
   enterer :ENTERER
   provider : PROVIDER
   insurerOrganizationId : string
   /**
    * ward
    */
-  locationId : string
+  locationId ?: string
   insurance: INSURANCE[]
-  item : ITEM[]
+  item ?: ITEM[]
   detail ?: {
     reference : string
   }
@@ -146,6 +146,13 @@ export class CoverageEligibilityRequest
       status : options.status
     };
 
+    const keys = Object.keys(body);
+    keys.forEach(el=>{
+      if(el== undefined){
+        delete body[`${el}`]
+      }
+    })
+
     return body
   }
   convertFhirToObject(options: any):COVERAGE_ELIGIBILITY_REQUEST {
@@ -163,10 +170,19 @@ export class CoverageEligibilityRequest
       // provider: options.provider,
       provider : this.getFromMultResource(options.provider) as any,
       insurerOrganizationId: this.getIdFromReference({"ref" : options.insurer.reference, "resourceType" : "Organization"}),
-      locationId: this.getIdFromReference({"ref" : options.facility.reference, "resourceType" : "Location"}),
+      
       insurance:options.insurance,
-      item: options.item,
-      supportingInfo:options.supportingInfo
+
+    }
+    if(options.item){
+      ret.item = options.item
+    }
+
+    if(options.facility){
+      ret.locationId= this.getIdFromReference({"ref" : options.facility.reference, "resourceType" : "Location"})
+    }
+    if(options.supportingInfo){
+      ret.supportingInfo= options.supportingInfo
     }
 
     if(options.servicedPeriod){
