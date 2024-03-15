@@ -15,7 +15,6 @@ const setCoverage = async () => {
   const body = coverage.getFHIR({
     beneficiaryPatientId: resources.patient.id,
     status: "active",
-    subscriber: { resource: "Patient", id: resources.patient.id },
     subscriberId: `SN-${resources.patient.id}`,
     identifier: [
       {
@@ -26,22 +25,14 @@ const setCoverage = async () => {
     payor: [{ resource: "Patient", id: resources.patient.id }],
 
     text: `<div>Cob</div>`,
-    relationship: {
-      coding: [
-        {
-          code: "self",
-          system: "http://hl7.org/fhir/ValueSet/subscriber-relationship",
-        },
-      ],
-    },
-    
+
   });
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Coverage");
   const ret = coverage.convertFhirToObject(res.data)
 
   resources.coverage= ret;
-  // return res;
+  return res;
 };
 
 module.exports = { setCoverage };

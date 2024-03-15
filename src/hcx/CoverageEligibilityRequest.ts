@@ -68,7 +68,7 @@ interface ITEM{
   
 }
 
-
+export type COVERAGE_ELIGIBILITY_REQUEST_PRIORITY = "stat" | "normal" | "deferred"
 
 export interface COVERAGE_ELIGIBILITY_REQUEST {
   id?: string;

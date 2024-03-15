@@ -653,9 +653,9 @@ console.log(bundle)
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
-// new excute().coverage()
+new excute().coverage()
 // new excute().coverageElegibityRequest()
-new excute().coverageElegibityRequestBundle()
+// new excute().coverageElegibityRequestBundle()
 // new excute().immunization()
 // new excute().immunizationRecomndation()
 // new excute().statResources()

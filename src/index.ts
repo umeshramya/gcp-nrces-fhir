@@ -101,6 +101,7 @@ import { Specimen, SPECIMEN } from "./resources/Specimen";
 import {Coverage, COVERAGE } from "./hcx/Coverage";
 import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./hcx/CoverageEligibilityRequest"
 import {CoverageEligibilityRequestBundle} from "./hcx/bundle/CoverageEligibiltyRequestBundle"
+import {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY} from "./hcx/CoverageEligibilityRequest"
 
 
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
@@ -116,6 +117,7 @@ export { RelatedPerson, RELATED_PERSON }
 export { ORGANIZATION, OrganizationResource, Organization };
 export { PRACTITIONER, PractitionerResource, Practitioner };
 export { PRACTITIONER_ROLE, PractitionerRole, NOT_AVAILABLE, AVAILABLE_TIME };
+
 
 
 
@@ -209,3 +211,4 @@ export { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION }
 export {CreatePdf}
 export {LOCATION, Location, bedOPertaionalStatusArray, BedOPertaionalStatus, locationFormTypesArray, locationFormTypes} 
 export {HealthDocumentBundle}
+export {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY}
