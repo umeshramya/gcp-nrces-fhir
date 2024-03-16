@@ -46,7 +46,7 @@ const webhookURL="https://webhook.site/3413e350-27be-4afd-816b-cc7cddf35d6f"
 class excute {
   callFunction = async () => {
     await callFunction();
-    console.log(resources.patient);
+    console.log(resources.organization);
   };
 
 
@@ -627,7 +627,7 @@ console.log(bundle)
   };
 }
 
-// new excute().callFunction()
+new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -654,7 +654,7 @@ console.log(bundle)
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
-new excute().coverageElegibityRequest()
+// new excute().coverageElegibityRequest()
 // new excute().coverageElegibityRequestBundle()
 // new excute().immunization()
 // new excute().immunizationRecomndation()

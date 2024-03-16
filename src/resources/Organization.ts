@@ -1,4 +1,4 @@
-import { IDENTTIFIER } from "../config";
+import { EXTENSION, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -9,6 +9,7 @@ export interface ORGANIZATION {
   email: string;
   providerNumber?: string;
   ndhmFacilityNumber?: string;
+  extension?:EXTENSION
 }
 
 export class Organization extends ResourceMain implements ResourceMaster {
@@ -50,7 +51,7 @@ export class Organization extends ResourceMain implements ResourceMaster {
       identifiers.push(id);
     }
 
-    const body = {
+    let body = {
       resourceType: "Organization",
       id: `${options.id}`,
       meta: {
@@ -77,7 +78,17 @@ export class Organization extends ResourceMain implements ResourceMaster {
           use: "work",
         },
       ],
+    
     };
+
+    if(options.extension){
+      // @ts-ignore
+      body.extension = options.extension
+    }
+    
+  
+
+   
 
     return body;
   }
@@ -102,6 +113,10 @@ export class Organization extends ResourceMain implements ResourceMaster {
 
       if (providerNumber.length > 0) {
         ret.providerNumber = providerNumber[0].value;
+      }
+
+      if(options.extension){
+        ret.extension= options.extension
       }
     }
 

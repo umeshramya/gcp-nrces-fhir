@@ -105,7 +105,8 @@ const setCoverageEligibiltyRequest = async () => {
 
   const res = await gcpFhirCRUD.createFhirResource(
     body,
-    "CoverageEligibilityRequest"
+    "CoverageEligibilityRequest",
+    true
   );
   const ret = coverageEligilityRequest.convertFhirToObject(res.data);
 

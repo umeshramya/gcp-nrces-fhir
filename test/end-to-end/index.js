@@ -63,6 +63,7 @@ const setOrganization = async () => {
     ndhmFacilityNumber: "JJH_123",
     phone: "08362260624",
     providerNumber: "123",
+    extension: [{url : "http://insurance/.com",  valueString:"1"}]
   });
 
   let res = await gcpFhirCRUD.createFhirResource(body, "Organization");
