@@ -168,6 +168,7 @@ class excute {
     await callFunction();
     await setCoverage()
     await setCoverageEligibiltyRequest()
+    await setCondition()
     const ret = await setCoverageEligibiltyRequestBundle()
     console.log(ret)
   }
@@ -654,8 +655,8 @@ console.log(bundle)
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
-new excute().coverageElegibityRequest()
-// new excute().coverageElegibityRequestBundle()
+// new excute().coverageElegibityRequest()
+new excute().coverageElegibityRequestBundle()
 // new excute().immunization()
 // new excute().immunizationRecomndation()
 // new excute().statResources()
