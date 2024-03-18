@@ -627,7 +627,7 @@ console.log(bundle)
   };
 }
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -654,7 +654,7 @@ new excute().callFunction()
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
-// new excute().coverageElegibityRequest()
+new excute().coverageElegibityRequest()
 // new excute().coverageElegibityRequestBundle()
 // new excute().immunization()
 // new excute().immunizationRecomndation()

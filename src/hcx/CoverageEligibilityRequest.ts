@@ -62,8 +62,8 @@ interface ITEM{
   category?:CODEABLE_CONCEPT;
   productOrService:CODEABLE_CONCEPT;
   modifier ? :CODEABLE_CONCEPT[];
-  provider: ITEM_PROVIDER
-  facility: ITEM_FACILITY
+  provider?: ITEM_PROVIDER
+  facility?: ITEM_FACILITY
   diagnosis:DIAGNOSIS[]
   
 }
