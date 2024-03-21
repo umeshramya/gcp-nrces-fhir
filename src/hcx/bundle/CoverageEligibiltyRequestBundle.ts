@@ -1,16 +1,7 @@
 import { ResourceMaster } from "../../Interfaces";
 import { IDENTTIFIER } from "../../config";
-import { CONDITION, Condition } from "../../resources/Condition";
-import { LOCATION, Location } from "../../resources/Location";
-import { ORGANIZATION, Organization } from "../../resources/Organization";
-import { PATIENT, Patient } from "../../resources/Patient";
-import { PRACTITIONER, Practitioner } from "../../resources/Practitioner";
 import ResourceMain from "../../resources/ResourceMai";
-import { COVERAGE, Coverage } from "../Coverage";
-import {
-  COVERAGE_ELIGIBILITY_REQUEST,
-  CoverageEligibilityRequest,
-} from "../CoverageEligibilityRequest";
+
 
 export class CoverageEligibilityRequestBundle
   extends ResourceMain
@@ -25,27 +16,15 @@ export class CoverageEligibilityRequestBundle
     id?: string;
     indentfier: IDENTTIFIER;
     dateTime: string;
-    CoverageEligibilityRequest: COVERAGE_ELIGIBILITY_REQUEST;
-    patient: PATIENT;
-    practitioner?: PRACTITIONER[];
-    organization: ORGANIZATION[];
-    location?: LOCATION;
-    coverage: COVERAGE;
-    condition?:CONDITION[]
+    CoverageEligibilityRequest: any;
+    patient: any;
+    practitioner?: any[];
+    organization: any[];
+    location?: any;
+    coverage: any;
+    condition?:any[]
   }): any {
-    const CoverageEligibilityRequestResource =
-      new CoverageEligibilityRequest().removeUndefinedKeys(
-        new CoverageEligibilityRequest().getFHIR(
-          options.CoverageEligibilityRequest
-        )
-      );
 
-    const patientResource = new Patient().removeUndefinedKeys(
-      new Patient().getFHIR(options.patient)
-    );
-    const CoverageResource = new Coverage().removeUndefinedKeys(
-      new Coverage().getFHIR(options.coverage)
-    );
 
     const body = {
       resourceType: "Bundle",
@@ -62,16 +41,16 @@ export class CoverageEligibilityRequestBundle
       entry: [
         {
           fullUrl: `CoverageEligibilityRequest/${options.CoverageEligibilityRequest.id}`,
-          resource: CoverageEligibilityRequestResource,
+          resource: options.CoverageEligibilityRequest,
         },
         {
           fullUrl: `Patient/${options.patient.id}`,
-          resource: patientResource,
+          resource: options.patient,
         },
 
         {
           fullUrl: `Coverage/${options.coverage.id}`,
-          resource: CoverageResource,
+          resource: options.coverage,
         },
       ],
     };
@@ -80,7 +59,7 @@ export class CoverageEligibilityRequestBundle
       options.practitioner.forEach((el) => {
         body.entry.push({
           fullUrl: `Practitioner/${el.id}`,
-          resource: new Practitioner().getFHIR(el),
+          resource: el,
         });
       });
     }
@@ -88,7 +67,7 @@ export class CoverageEligibilityRequestBundle
       options.organization.forEach((el) => {
         body.entry.push({
           fullUrl: `Organization/${el.id}`,
-          resource: new Organization().getFHIR(el),
+          resource: el,
         });
       });
     }
@@ -96,7 +75,7 @@ export class CoverageEligibilityRequestBundle
     if (options.location) {
       body.entry.push({
         fullUrl: `Location/${options.location.id}`,
-        resource: new Location().getFHIR(options.location),
+        resource: options.location,
       });
     }
 
@@ -104,7 +83,7 @@ export class CoverageEligibilityRequestBundle
       options.condition.forEach(el=>{
         body.entry.push({
           fullUrl: `Condition/${el.id}`,
-          resource: new Condition().getFHIR(el),
+          resource: el,
         })
       })
     }

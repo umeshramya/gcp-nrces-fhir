@@ -153,6 +153,7 @@ class excute {
 
   coverage = async()=>{
     await callFunction();
+    
    const ret = await setCoverage()
    console.log(ret)
   }

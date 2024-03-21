@@ -10,6 +10,7 @@ export interface ORGANIZATION {
   providerNumber?: string;
   ndhmFacilityNumber?: string;
   extension?:EXTENSION
+  identifier?:IDENTTIFIER[]
 }
 
 export class Organization extends ResourceMain implements ResourceMaster {
@@ -49,6 +50,12 @@ export class Organization extends ResourceMain implements ResourceMaster {
         value: `${options.providerNumber}`,
       };
       identifiers.push(id);
+    }
+    if(options.identifier && options.identifier.length > 0){
+      options.identifier.forEach(el=>{
+        identifiers.push(el)
+      })
+      
     }
 
     let body = {
@@ -115,9 +122,13 @@ export class Organization extends ResourceMain implements ResourceMaster {
         ret.providerNumber = providerNumber[0].value;
       }
 
-      if(options.extension){
-        ret.extension= options.extension
-      }
+      ret.identifier=options.identifier
+
+
+    }
+
+    if(options.extension){
+      ret.extension= options.extension
     }
 
     return ret;

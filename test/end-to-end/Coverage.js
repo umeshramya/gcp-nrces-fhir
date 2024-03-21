@@ -1,4 +1,3 @@
-
 const { Coverage } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
@@ -14,24 +13,38 @@ const setCoverage = async () => {
   const coverage = new Coverage();
   const body = coverage.getFHIR({
     beneficiaryPatientId: resources.patient.id,
+    hcx: "swasth",
     status: "active",
     subscriberId: `SN-${resources.patient.id}`,
+    subscriber: {
+      id: resources.patient.id,
+      resource: "Patient",
+      display: resources.patient.name,
+    },
+    relationship: {
+      coding: [
+        {
+          system:
+            "http://terminology.hl7.org/CodeSystem/subscriber-relationship",
+          code: "self",
+        },
+      ],
+    },
     identifier: [
       {
-        system: "https://www.nicehms.com",
-        value: "1",
+        system: "https://www.gicofIndia.in/policies",
+        value: "policy-RVH1003",
       },
     ],
-    payor: [{ resource: "Patient", id: resources.patient.id }],
+    payor: [{ resource: "Organization", id: resources.insuranceCompany.id }],
 
     text: `<div>Cob</div>`,
-
   });
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Coverage");
-  const ret = coverage.convertFhirToObject(res.data)
+  const ret = coverage.convertFhirToObject(res.data);
 
-  resources.coverage= ret;
+  resources.coverage = ret;
   return res;
 };
 

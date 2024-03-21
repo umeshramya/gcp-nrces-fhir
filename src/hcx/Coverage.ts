@@ -12,7 +12,7 @@ const CoverageStatus = [
   "draft",
   "entered-in-error",
 ] as const;
-type CoverageStatus = typeof CoverageStatus[number];
+type CoverageStatus = (typeof CoverageStatus)[number];
 
 interface policyHolder extends MULTI_RESOURCE {
   resource: "Patient" | "RelatedPerson" | "Organization";
@@ -44,6 +44,7 @@ interface costToBeneficiary {
   term?: CODEABLE_CONCEPT;
   value?: SAMPLE_QUANTITY | MONEY;
   exception?: { type: CODEABLE_CONCEPT; period?: PERIOD }[];
+  
 }
 export interface COVERAGE {
   id?: string;
@@ -64,9 +65,10 @@ export interface COVERAGE {
    */
   subscriberId?: IDENTTIFIER[];
   /**
-   * Patient 
+   * Patient
    */
   beneficiaryPatientId: string;
+
   /**
    * 	
 For some coverages a single identifier is issued to the Subscriber and then a unique dependent number is issued to each beneficiary.
@@ -87,6 +89,7 @@ For some coverages a single identifier is issued to the Subscriber and then a un
   subrogation?: boolean;
   contractId?: string[];
   insurancePlanId?: string;
+  hcx?: "nhcx" | "swasth";
 }
 
 export class Coverage extends ResourceMain implements ResourceMaster {
@@ -101,6 +104,13 @@ export class Coverage extends ResourceMain implements ResourceMaster {
       resourceType: "Coverage",
       type: options.type,
       identifier: options.identifier,
+
+      meta: {
+        profile: options.hcx == "nhcx" ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Coverage"] : [
+          "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Coverage.html",
+        ],
+      },
+
       text: {
         status: "generated",
         div: getText(),
@@ -220,7 +230,6 @@ export class Coverage extends ResourceMain implements ResourceMaster {
       });
     }
 
-    
     return ret;
   }
   statusArray?: Function | undefined;

@@ -1,5 +1,5 @@
 const console = require("console");
-const { CoverageEligibilityRequestBundle } = require("gcp-nrces-fhir");
+const { CoverageEligibilityRequestBundle, CoverageEligibilityRequest, Coverage, Patient, Practitioner, Organization, Condition, } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
 const v4 = require("uuid").v4;
@@ -12,16 +12,17 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 
 const setCoverageEligibiltyRequestBundle = async () => {
   const bundle = new CoverageEligibilityRequestBundle();
+ 
 
   const body = bundle.getFHIR({
-    indentfier: undefined,
+    indentfier: {"system" : "https//www.nicehms.com/" ,"value" : "1"},
     dateTime: new Date().toISOString(),
-    CoverageEligibilityRequest: resources.coverageEligilityRequest,
-    coverage: resources.coverage,
-    patient: resources.patient,
-    practitioner: [resources.practioner],
-    organization: [resources.organization],
-    condition:[resources.conditon]
+    CoverageEligibilityRequest: new CoverageEligibilityRequest().getFHIR(resources.coverageEligilityRequest),
+    coverage: new Coverage().getFHIR(resources.coverage),
+    patient: new Patient().getFHIR(resources.patient),
+    practitioner: [new Practitioner().getFHIR(resources.practioner)],
+    organization: [new Organization().getFHIR(resources.organization)],
+    condition:[new Condition().getFHIR(resources.conditon)]
   });
 
   // console.log(body.entry.forEach(element => {

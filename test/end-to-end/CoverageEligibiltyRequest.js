@@ -22,6 +22,7 @@ const setCoverageEligibiltyRequest = async () => {
       },
     ],
     createdDateTime: new Date().toISOString(),
+    hcx: "swasth",
     enterer: {
       display: resources.practioner.name,
       id: resources.practioner.id,
@@ -30,16 +31,20 @@ const setCoverageEligibiltyRequest = async () => {
     insurerOrganizationId: "5ee777fa-2ada-4797-a87a-806c68504402",
     locationId: "23da242a-a44f-49c2-b302-da05ebad8325",
     patientId: resources.patient.id,
-    priority: { text: "Elective" },
-    // supportingInfo: [
-    //   {
-    //     sequence: 1,
-    //     information: {
-    //       reference: "Condition/83059893-22bb-4aa8-9463-45667489666a",
-    //     },
-    //   },
-    // ],
-    supportingInfo: undefined,
+    "priority" : {
+      "coding" : [{
+        system: "http://terminology.hl7.org/CodeSystem/processpriority",
+        code: "normal",
+      }]
+    },
+    supportingInfo: [
+      {
+        sequence: 1,
+        information: {
+          reference: "Condition/83059893-22bb-4aa8-9463-45667489666a",
+        },
+      },
+    ],
     provider: {
       display: resources.organization.name,
       id: resources.organization.id,
@@ -62,9 +67,6 @@ const setCoverageEligibiltyRequest = async () => {
         value: "123456",
       },
     ],
-    priority: {
-      coding: [{ code: "normal" }],
-    },
     servicedDate: new Date().toISOString().substring(0, 10),
     servicedPeriod: { start: new Date().toISOString() },
     item: [
@@ -111,7 +113,7 @@ const setCoverageEligibiltyRequest = async () => {
   const ret = coverageEligilityRequest.convertFhirToObject(res.data);
 
   resources.coverageEligilityRequest = ret;
-  return ret;
+  return res.data;
 };
 
 module.exports = { setCoverageEligibiltyRequest };

@@ -71,6 +71,35 @@ const setOrganization = async () => {
   resources.organization = organization.convertFhirToObject(res.data);
 };
 
+const setInuranceCompany = async () => {
+  const organization = new Organization();
+  const body = organization.getFHIR({
+    email: "Bjaj@gmail.com",
+    name: "Bajaj insurance",
+    identifier : [{
+      type: {
+        coding: [
+          {
+            system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+            code: "AC",
+            display: "GOVOFINDIA",
+          },
+        ],
+      },
+      system: "http://irdai.gov.in/insurers",
+      value: "GICOFINDIA",
+    }],
+   
+    phone: "08362260624",
+    providerNumber: "123",
+    extension: [{url : "http://insurance/.com",  valueString:"1"}]
+  });
+
+  let res = await gcpFhirCRUD.createFhirResource(body, "Organization");
+  res = await gcpFhirCRUD.getFhirResource(res.data.id, "Organization");
+  resources.insuranceCompany = organization.convertFhirToObject(res.data);
+};
+
 /**
  * creates Patient,
  * gets it convert it to object
@@ -308,8 +337,9 @@ const callFunction = async () => {
   await setPractinioner();
   await setEncounter();
   await setRelatedPerson();
+  await setInuranceCompany()
 };
 
 callFunction();
 
-module.exports = { callFunction, resources, setOtherPractinioner };
+module.exports = { callFunction, resources, setOtherPractinioner , setInuranceCompany};
