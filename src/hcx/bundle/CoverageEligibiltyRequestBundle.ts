@@ -23,6 +23,7 @@ export class CoverageEligibilityRequestBundle
     location?: any;
     coverage: any;
     condition?:any[]
+    hcx : "nhcx" | "swasth"
   }): any {
 
 
@@ -30,9 +31,10 @@ export class CoverageEligibilityRequestBundle
       resourceType: "Bundle",
       id: options.id || undefined,
       meta: {
-        versionId: "1",
-        profile: [
+        profile: options.hcx == "nhcx" ? [
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequestBundle",
+        ] : [
+          "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityRequestBundle.html",
         ],
       },
       identifier: options.indentfier,

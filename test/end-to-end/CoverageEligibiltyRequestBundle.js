@@ -15,7 +15,10 @@ const setCoverageEligibiltyRequestBundle = async () => {
  
 
   const body = bundle.getFHIR({
-    indentfier: {"system" : "https//www.nicehms.com/" ,"value" : "1"},
+    indentfier: {
+      system: "https://www.tmh.in/bundle",
+      value: "745c15ea-b82a-46b4-a5f0-8288ed242ad3",
+    },
     dateTime: new Date().toISOString(),
     CoverageEligibilityRequest: new CoverageEligibilityRequest().getFHIR(resources.coverageEligilityRequest),
     coverage: new Coverage().getFHIR(resources.coverage),

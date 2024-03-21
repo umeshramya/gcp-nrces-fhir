@@ -46,8 +46,8 @@ const setCoverageEligibiltyRequest = async () => {
       },
     ],
     provider: {
-      display: resources.organization.name,
-      id: resources.organization.id,
+      display: resources.insuranceCompany.name,
+      id: resources.insuranceCompany.id,
       resource: "Organization",
     },
     purpose: ["validation"],
@@ -113,7 +113,7 @@ const setCoverageEligibiltyRequest = async () => {
   const ret = coverageEligilityRequest.convertFhirToObject(res.data);
 
   resources.coverageEligilityRequest = ret;
-  return res.data;
+  return ret
 };
 
 module.exports = { setCoverageEligibiltyRequest };
