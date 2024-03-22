@@ -47,7 +47,9 @@ const resources = {
   media: null,
   relatedPerson: null,
   coverage:null,
-  location:null
+  location:null,
+  claim:null,
+  insuranceCompany:null
 };
 
 /**

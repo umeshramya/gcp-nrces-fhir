@@ -12,101 +12,81 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 const setClaim = async () => {
   const claim = new Claim();
   const body = claim.getFHIR({
-    billablePeriod: { start: "2024-03-01", end: "2024-04-01" },
-    careteam: [
-      {
-        sequence: 1,
-        provider: { reference: `Organization/${resources.organization.id}` },
+    "billablePeriod" : {"start" : "2024-02-24", end : "2024-03-23"},
+    "careteam" : [{"sequence" : 1,
+  "provider" : {"reference" : `Organization/${resources.organization.id}`}}],
+  "createdDate" : new Date().toISOString(),
+  "diagnosis" : [
+    {
+      "sequence" :1,
+      "diagnosisCodeableConcept" : {
+        "text" : "Fever and Chills"
       },
-    ],
-    identifier: [
-      { system: "https://abdm.gov.in/facilities", value: "umesh@abdm" },
-    ],
-    insurance: [
-      {
-        focal: true,
-        sequence: 1,
-        coverage: { reference: `Coverage/${resources.coverage.id}` },
-      },
-    ],
-    item: [
-      {
-        sequence: 1,
-        productOrService: {
-          coding: [
-            {
-              code: "12344",
-              display: "PTCA",
-              system: "https://irdai.gov.in/package-code",
-            },
-          ],
-        },
-        unitPrice: { currency: "INR", value: 12000 },
-      },
-    ],
-    "patientGcpId" : resources.patient.id,
-    "payee" : {
-        "party" : {
-            "id" : resources.organization.id,
-            "identifier":{system : "http://abdm.gov.in/facilities", "value" : "INV20900001"}
-        },
-        "type" : {
-            "text" : "JJH"
+      "type" : [
+        {
+          "text" : "Admission"
         }
+      ],
+    }
+  ],
+  "identifier" : [
+    {
+      "system" : "https://www.nocehms.com", "value" : "1"
+    }
+  ],
+  "insurance" : [
+    {
+      "coverage" : {"reference" : `Coverage/${resources.coverage.id}`},
+      "focal" : true,
+      "sequence" : 1
+    }
+  ],
+  "item" : [{
+    "productOrService" : {
+      "coding" : [{
+        "code" : "E001",
+        "display" : "addmission",
+        "system" : "https://irdai.gov.in/package-code"
+      }]
     },
-    "payorId" : resources.organization.id,
-    "priority" : {
-        "text" : "Normal"
-    },
-    "providerId" : resources.organization.id,
-    "procedure" :[{
-        "sequence" : 1,
-        "procedureCodeableConcept" : {
-            "text" : "PTCA"
-        }
-    }],
-    "total" : {"currency" : "INR", "value" : 12000}
+    "sequence" : 1,
+    "unitPrice" : {"currency" : "INR", "value" : 12000}
+  }],
+  "patientGcpId" : resources.patient.id,
+  "payee" : {
+    "party" :{
+      "id" : resources.organization.id,
+      "identifier" : {
+        "system" : "http://abdm.gov.in/facilities",
+        "value" : "INV123233"
+      }
+    }
+  },
+  "payorId" : resources.insuranceCompany.id,
+  "priority" : {
+    "text" : "normal"
+  },
+  "providerId" : resources.organization.id,
+  "status" : "active",
+  "text" : "Testing",
+  "total" : {"currency" : "INR", "value" : 12000},
+  "type" : {
+    "text" : "Normal"
+  },
+  "use" : "claim"
   });
 
-  const res = await gcpFhirCRUD.createFhirResource(body, "Claim");
-  console.log(res)
-//   const ret = claim.convertFhirToObject(res.data);
 
-//   resources.coverage = ret;
+  
+
+  
+  const res = await gcpFhirCRUD.createFhirResource(body, "Claim", true);
+  // console.log(res)
+//   const ret = claim.convertFhirToObject(res.data);
+// resources.claim = ret
   return res;
 };
 
+
 module.exports = { setClaim };
 
-// const body =   {
-
-//   "resourceType": "Coverage",
-//   "id": "dadde132-ad64-4d18-8c18-1d52d7e86abc",
-//   "identifier": [
-//     {
-//       "system": "https://www.gicofIndia.in/policies",
-//       "value": "policy-RVH1003"
-//     }
-//   ],
-//   "status": "active",
-//   "subscriber": {
-//     "reference": `Patient/${resources.patient.id}`
-//   },
-//   "subscriberId": `SN-${resources.patient.id}`,
-//   "beneficiary": {
-//     "reference": `Patient/${resources.patient.id}`
-//   },
-//   "relationship": {
-//     "coding": [
-//       {
-//         "system": "http://hl7.org/fhir/ValueSet/subscriber-relationship",
-//         "code": "self"
-//       }
-//     ]
-//   },
-//   "payor": [
-//     {
-//       "reference": `Patient/${resources.patient.id}`
-//     }
-//   ]
-// }

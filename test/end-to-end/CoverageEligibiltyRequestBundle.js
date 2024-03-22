@@ -24,7 +24,7 @@ const setCoverageEligibiltyRequestBundle = async () => {
     coverage: new Coverage().getFHIR(resources.coverage),
     patient: new Patient().getFHIR(resources.patient),
     practitioner: [new Practitioner().getFHIR(resources.practioner)],
-    organization: [new Organization().getFHIR(resources.organization)],
+    organization: [new Organization().getFHIR(resources.organization), new Organization().getFHIR(resources.insuranceCompany)],
     condition:[new Condition().getFHIR(resources.conditon)]
   });
 

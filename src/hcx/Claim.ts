@@ -38,9 +38,10 @@ export interface CLAIM{
       },
       unitPrice: { value: number, currency: "INR" | "USD" },
     }[];
-    procedure ?: {
-      "sequence": number,
-      "procedureCodeableConcept": CODEABLE_CONCEPT
+    diagnosis : {
+      sequence: number,
+      diagnosisCodeableConcept: CODEABLE_CONCEPT,
+      type: CODEABLE_CONCEPT[]
     }[]
    insurance :  {
       "sequence": number,
@@ -48,46 +49,39 @@ export interface CLAIM{
       "identifier"?: IDENTTIFIER
       "coverage": { reference: `Coverage/${string}` }
     }[]
+    type:CODEABLE_CONCEPT
+    createdDate :string
+    use : "claim" | "preauthorization" | "predetermination"
 }
 
 export class Claim extends ResourceMain implements ResourceMaster {
     getFHIR(options: CLAIM) {
-        const body = {
-            "resourceType": "Claim",
-            "id": options.id ? options.id : undefined,
-            "meta": {
-              "versionId": "1",
-              "lastUpdated": "2020-10-07T03:26:09.060+00:00",
-              "source": "#BHZcRrcF4oS0JQ42"
-            },
-            "text": {
-              "status": "generated",
-              "div": options.text
-            },
-            "identifier": options.identifier,
-            "status": options.status,
-            "type": {
-              "coding": [
-                {
-                  "system": "http://terminology.hl7.org/CodeSystem/claim-type",
-                  "code": "institutional"
-                }
-              ]
-            },
-            "use": "claim",
-            patient: { reference: `Patient/${options.patientGcpId}` },
-            insurer: { reference: `Organization/${options.payorId}` },
-            provider: { reference: `Organization/${options.providerId}` },
-            "billablePeriod": options.billablePeriod,
-            "created": new Date().toISOString(),
-            "priority": options.priority,
-            "payee": options.payee,
-            "careTeam": options.careteam,
-            "procedure": options.procedure,
-            "insurance":options.insurance,
-            "item": options.item,
-            "total": options.total
-          }
+        const body={
+          resourceType: "Claim",
+          id: options.id ? options.id : undefined,
+          meta: {
+            lastUpdated: "2023-02-20T14:03:14.918+05:30",
+            profile: [
+              "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Claim.html",
+            ],
+          },
+          identifier:options.identifier,
+          status: options.status,
+          type: options.type,
+          patient: { reference: `Patient/${options.patientGcpId}` },
+          created: options.createdDate,
+          insurer: { reference: `Organization/${options.payorId}` },
+          provider: { reference: `Organization/${options.providerId}` },
+          priority: options.priority,
+          // payee:options.payee,
+          careTeam: options.careteam,
+          diagnosis:options.diagnosis,
+          insurance: options.insurance,
+          item: options.item,
+          total: options.total,
+          use : options.use
+        }
+        return body;
     }
     convertFhirToObject(options: any) {
         throw new Error("Method not implemented.");
