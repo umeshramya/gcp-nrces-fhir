@@ -12,14 +12,6 @@ export interface CLAIM{
     payorId : string
     billablePeriod:PERIOD
     priority:CODEABLE_CONCEPT
-    payee?:{"type" : CODEABLE_CONCEPT; party: {
-      "id": string,
-      "identifier": {
-        "system": "http://abdm.gov.in/facilities",
-        // HFR ID
-        "value": string
-      }
-    }}
     total:{
       "value": number,
       "currency": "INR" | "USD"
@@ -51,7 +43,8 @@ export interface CLAIM{
     }[]
     type:CODEABLE_CONCEPT
     createdDate :string
-    use : "claim" | "preauthorization" | "predetermination"
+    use : "claim" | "preauthorization" | "predetermination",
+    hcx : "nhcx" | "swastha"
 }
 
 export class Claim extends ResourceMain implements ResourceMaster {
@@ -61,9 +54,12 @@ export class Claim extends ResourceMain implements ResourceMaster {
           id: options.id ? options.id : undefined,
           meta: {
             lastUpdated: "2023-02-20T14:03:14.918+05:30",
-            profile: [
+            profile: options.hcx == "nhcx" ? 
+            [
+              "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim"
+           ] :[
               "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Claim.html",
-            ],
+            ]   ,
           },
           identifier:options.identifier,
           status: options.status,
@@ -73,7 +69,6 @@ export class Claim extends ResourceMain implements ResourceMaster {
           insurer: { reference: `Organization/${options.payorId}` },
           provider: { reference: `Organization/${options.providerId}` },
           priority: options.priority,
-          // payee:options.payee,
           careTeam: options.careteam,
           diagnosis:options.diagnosis,
           insurance: options.insurance,

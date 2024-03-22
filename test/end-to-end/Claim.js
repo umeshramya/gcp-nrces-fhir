@@ -53,15 +53,6 @@ const setClaim = async () => {
     "unitPrice" : {"currency" : "INR", "value" : 12000}
   }],
   "patientGcpId" : resources.patient.id,
-  "payee" : {
-    "party" :{
-      "id" : resources.organization.id,
-      "identifier" : {
-        "system" : "http://abdm.gov.in/facilities",
-        "value" : "INV123233"
-      }
-    }
-  },
   "payorId" : resources.insuranceCompany.id,
   "priority" : {
     "text" : "normal"
@@ -73,7 +64,8 @@ const setClaim = async () => {
   "type" : {
     "text" : "Normal"
   },
-  "use" : "claim"
+  "use" : "claim",
+  "hcx" : "nhcx"
   });
 
 
