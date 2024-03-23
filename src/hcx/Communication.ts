@@ -4,10 +4,10 @@ import ResourceMain from "../resources/ResourceMai";
 
 export interface COMMUNICATION {
   id?: string;
-  hcx: "nhcx" | "swasth";
+  hcx?: "nhcx" | "swasth";
   text: string;
   identifier: IDENTTIFIER[];
-  basedOnCommunicationIds?: string[];
+  CommunicationRequestIds?: string[];
   status:
     | "preparation"
     | "in-progress"
@@ -21,10 +21,10 @@ export interface COMMUNICATION {
   priority: "routine" | "urgent" | "asap" | "stat";
   recipientOrganizationIds: string[];
   senderOrganizationId: string;
-  contentBase64PDFstrings : {pdf :string, createdDate:string, title:string}[]
+  contentBase64PDFstrings ?: {pdf :string, createdDate:string, title:string}[]
 }
 
-export default class Communication
+export  class Communication
   extends ResourceMain
   implements ResourceMaster
 {
@@ -33,15 +33,15 @@ export default class Communication
       resourceType: "Communication",
       id: options.id ? options.id : undefined,
       meta: {
-        versionId: "1",
-        lastUpdated: "2023-09-07T14:58:58.181+05:30",
+        // versionId: "1",
+        // lastUpdated: "2023-09-07T14:58:58.181+05:30",
         profile:
           options.hcx == "nhcx"
             ? [
                 "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Communication",
               ]
             : [
-                "	https://ig.hcxprotocol.io/v0.8/StructureDefinition-Communication.html",
+                "https://ig.hcxprotocol.io/v0.8/StructureDefinition-Communication.html",
               ],
       },
       text: {
@@ -49,7 +49,7 @@ export default class Communication
         div: options.text,
       },
       identifier: options.identifier,
-      basedOn: options.basedOnCommunicationIds?.map((el) => ({
+      basedOn: options.CommunicationRequestIds?.map((el) => ({
         reference: `CommunicationRequest/${el}`,
       })),
       status: options.status,
@@ -61,24 +61,22 @@ export default class Communication
       sender: {
         reference: `Organization/${options.senderOrganizationId}`,
       },
-      payload: {
-        contentAttachment: options.contentBase64PDFstrings.map(el=>(
-          {
-           contentType: "application/pdf",
-           language: "en-IN",
-           data: el.pdf,
-           title: el.title,
-           creation: el.createdDate
-         }
-       ))
-      }
+      payload:options.contentBase64PDFstrings &&  options.contentBase64PDFstrings.map(el=>(
+        {
+          contentAttachment:{
+            contentType: "application/pdf",
+            language: "en-IN",
+            data: el.pdf,
+            title: el.title,
+            creation: el.createdDate
+          }
+        }
+     ))
     };
     return body;
   }
   convertFhirToObject(options: any) : COMMUNICATION {
     const communication:COMMUNICATION={
-      hcx: "nhcx",
-      id: options.id ? options.id : undefined,
       text: options.text.div,
       identifier: options.identifier,
       status: options.status,
@@ -86,14 +84,19 @@ export default class Communication
       priority: options.priority,
       recipientOrganizationIds: options.recipient.map((el:any) => this.getIdFromReference({"resourceType" : "Organization", "ref" : el.reference})),
       senderOrganizationId: this.getIdFromReference({"resourceType" : "Organization", "ref" : options.sender.reference}),
-      contentBase64PDFstrings: options.payload.contentAttachment.map((el:any) => (
-        {
-          pdf: el.data,
-          title: el.title,
-          createdDate : el.creation
-        }
-      ))
+      contentBase64PDFstrings: options.payload.map((el:any) => ({
+       pdf: el.contentAttachment.data,
+       title: el.contentAttachment.title,
+       createdDate: el.contentAttachment.creation
+      }))
     };
+
+    if(options.basedOn){
+      communication.CommunicationRequestIds = options.basedOn.map((el:any) => this.getIdFromReference({"resourceType" : "CommunicationRequest", "ref" : el.reference}));
+    }
+    if(options.id){
+      communication.id = options.id;
+    }
     return communication;
   }
   statusArray?: Function | undefined;

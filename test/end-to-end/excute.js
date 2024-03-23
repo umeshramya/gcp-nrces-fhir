@@ -41,6 +41,7 @@ const { setCoverageEligibiltyRequest } = require("./CoverageEligibiltyRequest");
 const { setCoverageEligibiltyRequestBundle } = require("./CoverageEligibiltyRequestBundle");
 const { setClaim } = require("./Claim");
 const { setClaimRequestBundle } = require("./ClaimRequestBundle");
+const {setCommunication} = require("./Communication")
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -166,6 +167,12 @@ class excute {
    const ret = await setClaim()
 
    console.log(ret)
+  }
+
+  communication = async()=>{
+    await callFunction();
+    const ret = await setCommunication()
+    console.log(ret)
   }
 
   coverageElegibityRequest =async()=>{
@@ -675,7 +682,8 @@ console.log(bundle)
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
-new excute().claim()
+// new excute().claim()
+new excute().communication()
 // new excute().claimRequestBundle()
 // new excute().coverageElegibityRequest()
 // new excute().coverageElegibityRequestBundle()
