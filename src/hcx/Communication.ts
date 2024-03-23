@@ -75,8 +75,26 @@ export default class Communication
     };
     return body;
   }
-  convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+  convertFhirToObject(options: any) : COMMUNICATION {
+    const communication:COMMUNICATION={
+      hcx: "nhcx",
+      id: options.id ? options.id : undefined,
+      text: options.text.div,
+      identifier: options.identifier,
+      status: options.status,
+      category: options.category,
+      priority: options.priority,
+      recipientOrganizationIds: options.recipient.map((el:any) => this.getIdFromReference({"resourceType" : "Organization", "ref" : el.reference})),
+      senderOrganizationId: this.getIdFromReference({"resourceType" : "Organization", "ref" : options.sender.reference}),
+      contentBase64PDFstrings: options.payload.contentAttachment.map((el:any) => (
+        {
+          pdf: el.data,
+          title: el.title,
+          createdDate : el.creation
+        }
+      ))
+    };
+    return communication;
   }
   statusArray?: Function | undefined;
 }
