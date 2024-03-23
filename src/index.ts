@@ -110,6 +110,8 @@ import {CreatePdf} from "js-ts-report"
 import { Claim, CLAIM } from "./hcx/Claim";
 import { ClaimRequestBundle } from "./hcx/bundle/ClaimRequestBundle";
 
+import {COMMUNICATION, Communication} from "./hcx/Communication"
+
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export { htmlToText }
 export type { resourceType };
@@ -216,3 +218,4 @@ export {HealthDocumentBundle}
 export {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY}
 export { Claim, CLAIM }
 export { ClaimRequestBundle }
+export {COMMUNICATION, Communication} 

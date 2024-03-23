@@ -49,7 +49,8 @@ const resources = {
   coverage:null,
   location:null,
   claim:null,
-  insuranceCompany:null
+  insuranceCompany:null,
+  communication:null
 };
 
 /**

@@ -60,7 +60,9 @@ export const resourceTypeArray = [
   "CoverageEligibilityRequest",
   "Coverage",
   "Contract",
-  "HealthcareService"
+  "HealthcareService",
+  "CommunicationRequest",
+  "Communication"
 
 ] as const;
 
