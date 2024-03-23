@@ -15,7 +15,7 @@ const setClaim = async () => {
     billablePeriod: { start: "2024-02-24", end: "2024-03-23" },
     careteam: [
       {
-        sequence: 1,
+        sequence: 4,
         provider: { reference: `Organization/${resources.organization.id}` },
       },
     ],
@@ -63,15 +63,25 @@ const setClaim = async () => {
     ],
     patientGcpId: resources.patient.id,
     payorId: resources.insuranceCompany.id,
-    priority: {
-      text: "normal",
+    priority:  {
+      coding: [
+        {
+          system: "http://terminology.hl7.org/CodeSystem/processpriority",
+          code: "normal",
+        },
+      ],
     },
     providerId: resources.organization.id,
     status: "active",
     text: "Testing",
     total: { currency: "INR", value: 12000 },
     type: {
-      text: "Normal",
+      coding: [
+        {
+          system: "http://terminology.hl7.org/CodeSystem/claim-type",
+          code: "institutional",
+        },
+      ],
     },
     use: "claim",
     hcx: "nhcx",
