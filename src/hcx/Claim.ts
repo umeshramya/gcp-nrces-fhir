@@ -101,6 +101,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
           type: options.type,
           createdDate: options.created,
           use: options.use,
+          id:options.id
           
         }
         return ret

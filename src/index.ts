@@ -108,6 +108,7 @@ import { Immunization , IMMUNIZATION } from "./resources/Immunization";
 import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resources/ImmunizationRecommendation";
 import {CreatePdf} from "js-ts-report"
 import { Claim, CLAIM } from "./hcx/Claim";
+import { ClaimRequestBundle } from "./hcx/bundle/ClaimRequestBundle";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export { htmlToText }
@@ -214,3 +215,4 @@ export {LOCATION, Location, bedOPertaionalStatusArray, BedOPertaionalStatus, loc
 export {HealthDocumentBundle}
 export {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY}
 export { Claim, CLAIM }
+export { ClaimRequestBundle }
