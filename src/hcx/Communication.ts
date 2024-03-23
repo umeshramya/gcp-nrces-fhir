@@ -33,8 +33,8 @@ export  class Communication
       resourceType: "Communication",
       id: options.id ? options.id : undefined,
       meta: {
-        // versionId: "1",
-        // lastUpdated: "2023-09-07T14:58:58.181+05:30",
+        versionId: "1",
+        lastUpdated: "2023-09-07T14:58:58.181+05:30",
         profile:
           options.hcx == "nhcx"
             ? [
