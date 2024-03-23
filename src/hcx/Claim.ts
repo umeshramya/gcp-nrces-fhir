@@ -44,7 +44,7 @@ export interface CLAIM{
     type:CODEABLE_CONCEPT
     createdDate :string
     use : "claim" | "preauthorization" | "predetermination",
-    hcx : "nhcx" | "swastha"
+    hcx ?: "nhcx" | "swastha"
 }
 
 export class Claim extends ResourceMain implements ResourceMaster {
@@ -74,12 +74,36 @@ export class Claim extends ResourceMain implements ResourceMaster {
           insurance: options.insurance,
           item: options.item,
           total: options.total,
-          use : options.use
+          use : options.use,
+          billablePeriod:options.billablePeriod,
+          "text" : {
+            "status" : "generated",
+            "div" : options.text
+          }
         }
         return body;
     }
     convertFhirToObject(options: any) {
-        throw new Error("Method not implemented.");
+        const ret:CLAIM={
+          text: options.text.div,
+          identifier: options.identifier,
+          status: "active",
+          patientGcpId: this.getIdFromReference({"resourceType" : "Patient", "ref" : options.patient.reference}),
+          providerId: this.getIdFromReference({"resourceType" : "Organization", "ref" : options.provider.reference}),
+          payorId: this.getIdFromReference({"resourceType" : "Organization", "ref" : options.insurer.reference}),
+          billablePeriod: options.billablePeriod,
+          priority: options.priority,
+          total: options.total,
+          careteam: options.careTeam,
+          item: options.item,
+          diagnosis: options.diagnosis,
+          insurance: options.insurance,
+          type: options.type,
+          createdDate: options.created,
+          use: options.use,
+          
+        }
+        return ret
     }
     statusArray?: Function | undefined;
 
