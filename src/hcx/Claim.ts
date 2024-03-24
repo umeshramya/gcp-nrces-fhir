@@ -1,5 +1,6 @@
 import { ResourceMaster } from "../Interfaces";
 import { CODEABLE_CONCEPT, IDENTTIFIER, PERIOD } from "../config";
+import { QUANTITY, SAMPLE_QUANTITY } from "../resources/Observation";
 import ResourceMain from "../resources/ResourceMai";
 
 export interface CLAIM{
@@ -29,6 +30,11 @@ export interface CLAIM{
         ],
       },
       unitPrice: { value: number, currency: "INR" | "USD" },
+      quantity : SAMPLE_QUANTITY,
+      encounter :{
+        "reference": `Encounter/${string}`
+      }[]
+
     }[];
     diagnosis : {
       sequence: number,

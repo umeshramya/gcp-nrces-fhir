@@ -59,6 +59,8 @@ const setClaim = async () => {
         },
         sequence: 1,
         unitPrice: { currency: "INR", value: 12000 },
+        quantity: {"system" : "http://unitsofmeasure.org", "code": undefined, "unit" : "Total", value : 12000},
+        encounter : [{"reference" : `Encounter/${resources.encounter.id}`}]
       },
     ],
     patientGcpId: resources.patient.id,
