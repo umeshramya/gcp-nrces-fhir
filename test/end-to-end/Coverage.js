@@ -8,19 +8,19 @@ const { GcpFhirCRUD } = require("gcp-nrces-fhir");
 const { resources } = require("./index");
 
 const gcpFhirCRUD = new GcpFhirCRUD();
-
+return
 const setCoverage = async () => {
   const coverage = new Coverage();
   const body = coverage.getFHIR({
     beneficiaryPatientId: resources.patient.id,
     hcx: "swasth",
     status: "active",
-    subscriberId: `SN-${resources.patient.id}`,
-    subscriber: {
-      id: resources.patient.id,
-      resource: "Patient",
-      display: resources.patient.name,
-    },
+    subscriberId: `SN-Father-Id`,
+    // subscriber: {
+    //   id: resources.relatedPerson.id,
+    //   resource: "RelatedPerson",
+    //   display: resources.relatedPerson.name,
+    // },
     relationship: {
       coding: [
         {
@@ -43,7 +43,7 @@ const setCoverage = async () => {
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Coverage");
   const ret = coverage.convertFhirToObject(res.data);
-
+  console.log(ret)
   resources.coverage = ret;
   return res;
 };

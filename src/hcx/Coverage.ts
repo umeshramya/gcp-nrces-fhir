@@ -63,7 +63,7 @@ export interface COVERAGE {
   /**
    * id of the subscriber
    */
-  subscriberId?: IDENTTIFIER[];
+  subscriberId?: string;
   /**
    * Patient
    */
