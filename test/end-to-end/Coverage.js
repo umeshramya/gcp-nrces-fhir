@@ -8,7 +8,7 @@ const { GcpFhirCRUD } = require("gcp-nrces-fhir");
 const { resources } = require("./index");
 
 const gcpFhirCRUD = new GcpFhirCRUD();
-return
+
 const setCoverage = async () => {
   const coverage = new Coverage();
   const body = coverage.getFHIR({

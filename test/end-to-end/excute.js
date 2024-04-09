@@ -41,7 +41,8 @@ const { setCoverageEligibiltyRequest } = require("./CoverageEligibiltyRequest");
 const { setCoverageEligibiltyRequestBundle } = require("./CoverageEligibiltyRequestBundle");
 const { setClaim } = require("./Claim");
 const { setClaimRequestBundle } = require("./ClaimRequestBundle");
-const {setCommunication} = require("./Communication")
+const {setCommunication} = require("./Communication");
+const { createValueSet } = require("./valueset");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -50,6 +51,12 @@ class excute {
   callFunction = async () => {
     await callFunction();
     console.log(resources.organization);
+  };
+
+  createValueset = async () => {
+    const res = await createValueSet();
+    console.log(res)
+    
   };
 
 
@@ -653,9 +660,15 @@ console.log(bundle)
     })
     return bundle;
   };
+
+  
 }
 
+
+
+
 // new excute().callFunction()
+// new excute().createValueset()
 // new excute().medicationrequest();
 // new excute().conditon()
 // new excute().practionerRole()
@@ -681,10 +694,10 @@ console.log(bundle)
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
-// new excute().coverage()
+new excute().coverage()
 // new excute().claim()
 // new excute().communication()
-new excute().claimRequestBundle()
+// new excute().claimRequestBundle()
 // new excute().coverageElegibityRequest()
 // new excute().coverageElegibityRequestBundle()
 // new excute().immunization()

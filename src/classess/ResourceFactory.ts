@@ -27,6 +27,8 @@ import { Slot } from "../resources/Slot";
 import { CoverageEligibilityRequest } from "../hcx/CoverageEligibilityRequest";
 import { EndPoint } from "../resources/Endpoint";
 import { Coverage } from "../hcx/Coverage";
+import { Communication } from "../hcx/Communication";
+import { Claim } from "../hcx/Claim";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -91,6 +93,10 @@ export default class ResourceFactory
       this.resource= new EndPoint()
     }else if(this.resourceType== "Coverage"){
       this.resource= new Coverage()
+    }else if(this.resourceType == "Communication"){
+      this.resource = new Communication
+    }else if(this.resourceType == "Claim"){
+      this.resource = new Claim
     }
 
     else {
