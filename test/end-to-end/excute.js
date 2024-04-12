@@ -43,6 +43,7 @@ const { setClaim } = require("./Claim");
 const { setClaimRequestBundle } = require("./ClaimRequestBundle");
 const {setCommunication} = require("./Communication");
 const { createValueSet } = require("./valueset");
+const { setDocimentReference } = require("./DocumentRefereence");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -80,6 +81,12 @@ class excute {
     await callFunction();
     await setCondition();
   };
+
+  docimentReference =async()=>{
+    await callFunction()
+    const ret =await setDocimentReference()
+    console.log(ret)
+  }
 
   specimen = async () => {
     await callFunction();
@@ -170,6 +177,7 @@ class excute {
   claim = async()=>{
     await callFunction();
      await setCoverage()
+     await setDocimentReference()
 
    const ret = await setClaim()
 
@@ -695,6 +703,7 @@ console.log(bundle)
   
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
+// new excute().docimentReference()
 new excute().claim()
 // new excute().communication()
 // new excute().claimRequestBundle()

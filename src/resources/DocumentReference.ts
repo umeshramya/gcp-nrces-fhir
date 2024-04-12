@@ -58,6 +58,7 @@ export class DocumentReference extends ResourceMain implements ResourceMaster {
   }
   convertFhirToObject(options: any):DOCUMENT_REFERENCE {
     let ret:DOCUMENT_REFERENCE={
+      id: options.id,
       status: options.status,
       docStatus: options.docStatus,
       type: options.type,

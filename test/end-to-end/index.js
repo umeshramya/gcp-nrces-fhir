@@ -50,7 +50,8 @@ const resources = {
   location:null,
   claim:null,
   insuranceCompany:null,
-  communication:null
+  communication:null,
+  documentReference:null
 };
 
 /**

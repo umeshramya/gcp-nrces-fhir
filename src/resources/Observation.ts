@@ -97,6 +97,15 @@ export interface REFERENCE_RANGE {
   text?: string;
 }
 
+export interface SUPPORTING_INFO{
+  sequence:number,
+  category:CODEABLE_CONCEPT;
+  code : CODEABLE_CONCEPT;
+  "valueReference" ?: {
+    "reference" : `DocumentReference/${string}`
+  }
+}
+
 
 export interface OBSERVATION {
   id?: string;

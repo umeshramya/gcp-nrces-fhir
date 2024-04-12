@@ -17,6 +17,7 @@ export class ClaimRequestBundle extends ResourceMain implements ResourceMaster {
     practitioner?: any[];
     organization: any[];
     coverage: any;
+    documentReference?:any[]
     hcx: "nhcx" | "swasth";
   }): any {
     const body = {
@@ -65,6 +66,14 @@ export class ClaimRequestBundle extends ResourceMain implements ResourceMaster {
           resource: el,
         });
       });
+    }
+    if(options.documentReference && options.documentReference.length > 0){
+      options.documentReference.forEach(el=>{
+        body.entry.push({
+          fullUrl: `DocumentReference/${el.id}`,
+          resource: el,
+        });
+      })
     }
     return body;
   }
