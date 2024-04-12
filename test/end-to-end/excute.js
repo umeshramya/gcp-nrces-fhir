@@ -694,8 +694,8 @@ console.log(bundle)
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
-new excute().coverage()
-// new excute().claim()
+// new excute().coverage()
+new excute().claim()
 // new excute().communication()
 // new excute().claimRequestBundle()
 // new excute().coverageElegibityRequest()

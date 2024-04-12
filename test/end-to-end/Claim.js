@@ -46,6 +46,23 @@ const setClaim = async () => {
         sequence: 1,
       },
     ],
+    "payee" : {
+      "party" : {
+        "id" : "INV291000012",
+        "identifier" : {
+          "system" : "http://abdm.gov.in/facilities",
+          "value" : "HFR-ID-FOR-TMH"
+        }
+      }, 
+    "type" : {"coding" : [{
+      "system" : "http://terminology.hl7.org/CodeSystem/payeetype",
+      "code" : "provider",
+      "display" : "Provider"
+    }],
+    // "text" : "Any benefit payable will be paid to the provider (Assignment of Benefit)."
+  
+  }
+},
     item: [
       {
         productOrService: {
@@ -59,7 +76,7 @@ const setClaim = async () => {
         },
         sequence: 1,
         unitPrice: { currency: "INR", value: 12000 },
-        quantity: {"system" : "http://unitsofmeasure.org", "code": undefined, "unit" : "Total", value : 12000},
+        quantity: {"system" : "http://unitsofmeasure.org", "code": undefined, "unit" : "Total", value : 12000 },
         encounter : [{"reference" : `Encounter/${resources.encounter.id}`}]
       },
     ],
@@ -88,6 +105,9 @@ const setClaim = async () => {
     use: "claim",
     hcx: "nhcx",
   });
+
+
+
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Claim", true);
 
