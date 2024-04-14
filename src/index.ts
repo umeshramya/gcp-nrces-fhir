@@ -102,7 +102,7 @@ import {Coverage, COVERAGE } from "./hcx/Coverage";
 import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./hcx/CoverageEligibilityRequest"
 import {CoverageEligibilityRequestBundle} from "./hcx/bundle/CoverageEligibiltyRequestBundle"
 import {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY} from "./hcx/CoverageEligibilityRequest"
-
+import {COVERAGE_ELIGIBILITY_RESPONSE, CoverageEligibiltyResponse} from "./hcx/CpverageEligibiltyResponse"
 
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
 import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resources/ImmunizationRecommendation";
@@ -121,6 +121,8 @@ export { RelatedPerson, RELATED_PERSON }
 export { ORGANIZATION, OrganizationResource, Organization };
 export { PRACTITIONER, PractitionerResource, Practitioner };
 export { PRACTITIONER_ROLE, PractitionerRole, NOT_AVAILABLE, AVAILABLE_TIME };
+export {COVERAGE_ELIGIBILITY_RESPONSE, CoverageEligibiltyResponse}
+
 
 
 
