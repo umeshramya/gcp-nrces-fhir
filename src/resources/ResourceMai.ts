@@ -1,7 +1,8 @@
 import { resourceType } from "..";
+import ResourceToHTML from "../classess/ReseorcetToHtml";
 import { CODEABLE_CONCEPT, CodeDisplay, MULTI_RESOURCE } from "../config";
 
-export default class ResourceMain {
+export default class ResourceMain extends ResourceToHTML{
   /**
    * this return the tex div by subcratig first 42 charceters and last 6 s=charecters
    * @param divtext

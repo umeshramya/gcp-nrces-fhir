@@ -1,4 +1,4 @@
-import { CODEABLE_CONCEPT, MULTI_RESOURCE, PERIOD } from "../config";
+import { CODEABLE_CONCEPT, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
 const CoverageEligibilityResponcePurpose = [
@@ -29,6 +29,7 @@ interface BENFIT {
 export interface COVERAGE_ELIGIBILITY_RESPONSE {
   id?: string;
   hcx?: "nhcx" | "swasth";
+  identifiers?:IDENTTIFIER[];
   text?: string;
   status: "active" | "cancelled" | "draft" | "entered-in-error";
   purpose: CoverageEligibilityResponcePurpose[];
@@ -104,6 +105,7 @@ export class CoverageEligibiltyResponse
       },
       insurance: options.insurance,
       error: options.error,
+      identifier:options.identifiers
     };
 
     return body;
@@ -120,7 +122,7 @@ export class CoverageEligibiltyResponse
       }),
       createdDate: options.created,
       coverageEligibilityRequestId: this.getIdFromReference({
-        resourceType: "CommunicationRequest",
+        resourceType: "CoverageEligibilityRequest",
         ref: options.request.reference,
       }),
       outcome: options.outcome,
@@ -130,6 +132,7 @@ export class CoverageEligibiltyResponse
       }),
       insurance: options.insurance,
       error: options.error,
+      identifiers : options.identifier,
       practitionerId:
         options.requestor &&
         this.getIdFromReference({
