@@ -113,8 +113,8 @@ export default class ResourceFactory
       throw (new Error().message = errMessage);
     }
   }
-  toHtml(): string {
-    throw new Error("Method not implemented.");
+  toHtml<T>(options:T): string {
+    return this.resource.toHtml(options)
   }
   statusArray?: Function | undefined;
 
