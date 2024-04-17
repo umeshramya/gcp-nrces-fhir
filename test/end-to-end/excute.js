@@ -687,7 +687,7 @@ console.log(bundle)
 // new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
-// new excute().precsriptinComposition();
+new excute().precsriptinComposition();
 // new excute().healthDocumentComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
@@ -993,5 +993,5 @@ const CVN ={
 }
 
 
-testBundle()
+// testBundle()
 
