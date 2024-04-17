@@ -64,7 +64,9 @@ export const resourceTypeArray = [
   "CommunicationRequest",
   "Communication",
   "ValueSet",
-  "Claim"
+  "Claim",
+  "CoverageEligibilityResponse",
+  "ClaimResponse"
 
 ] as const;
 
