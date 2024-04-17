@@ -7,6 +7,9 @@ import { MedicationRequest } from "../MedicationRequest";
 import { Condition } from "../Condition";
 
 export class PrescriptionBundle extends BundelMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   // async getFHIR(options: {
   //   id?: string;
   //   identifier?: IDENTTIFIER;

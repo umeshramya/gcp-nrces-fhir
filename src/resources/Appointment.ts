@@ -46,6 +46,9 @@ export interface APPOINTMENT {
 }
 
 export class Appointment extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: APPOINTMENT): any {
     const getText = (): any => {
       let ret = ``;

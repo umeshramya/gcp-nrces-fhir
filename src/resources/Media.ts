@@ -51,6 +51,9 @@ export interface MEDIA {
 }
 
 export class Media extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: MEDIA) {
     const body = {
       resourceType: "Media",

@@ -118,6 +118,10 @@ interface ENCOUNTER {
 }
 
 export class Encounter extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: ENCOUNTER) {
     const identifiers: IDENTTIFIER[] = [];
 

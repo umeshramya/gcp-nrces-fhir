@@ -103,6 +103,9 @@ export interface USER_COMPOSITION_EXTENSION {
   orgName: string;
 }
 export class Composition extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   private compType!: {
     type: string;
     system: "https://ndhm.gov.in/sct";

@@ -76,6 +76,9 @@ export interface CLAIM {
 }
 
 export class Claim extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: CLAIM) {
     const body = {
       resourceType: "Claim",

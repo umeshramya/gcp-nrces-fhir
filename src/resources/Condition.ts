@@ -12,6 +12,10 @@ export interface CONDITION {
 }
 
 export class Condition extends  ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: CONDITION): any {
 
     const body = {

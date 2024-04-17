@@ -15,6 +15,9 @@ export interface SPECIMEN {
   type: CODEABLE_CONCEPT;
 }
 export class Specimen extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: SPECIMEN) {
     const body = {
       resourceType: "Specimen",

@@ -1,15 +1,31 @@
 import { CODEABLE_CONCEPT } from "../config";
 
 export default class ResourceToHTML {
-    codebleConcept(val:CODEABLE_CONCEPT):string{
+    codebleConceptToHtml(val:CODEABLE_CONCEPT):string{
         let ret:string = ""
         if (val.coding){
             val.coding.forEach(el=>{
-                ret += el.code && `Code : ${el.code} <br/>`
-                ret += el.display && `Display : ${el.display} <br/>`
-                ret += el.system && `System : ${el.system}<br\>`
-                ret += el.userSelected && `UserSelected : ${el.userSelected}<br/>`
-                ret += el.version && `Version : ${el.version}<br/>`
+                ret += `<br/>`
+                if( el.code){
+                    ret += `<i>Code</i> : ${el.code} <br/>` 
+                }   
+                
+                if(el.display){
+                    ret += `<i>Display</i> : ${el.display} <br/>`
+                }
+               
+                if(el.system){
+                    ret += `<i>System</i> : <a href=${el.system} target="_blank" rel="noopener noreferrer">${el.system}</a>
+                    <br\>`
+                }
+               
+                if(el.userSelected){
+                    ret +=  `<i>UserSelected<i/> : ${el.userSelected}<br/>`
+                }
+                if(el.version){
+                    ret +=   `<i>Version</i> : ${el.version}<br/>`
+                }
+                
              })
         }
 

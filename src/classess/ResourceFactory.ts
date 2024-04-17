@@ -105,6 +105,10 @@ export default class ResourceFactory
       throw (new Error().message = errMessage);
     }
   }
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
 
   getFHIR<T>(options: T): any {
     return this.resource.getFHIR(options);

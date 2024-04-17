@@ -14,6 +14,10 @@ export interface DOCUMENT_BUNDLE {
 }
 
 export class DocumentBundle extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error('Method not implemented.');
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: DOCUMENT_BUNDLE): any {
     const body = {
       resourceType: "Bundle",

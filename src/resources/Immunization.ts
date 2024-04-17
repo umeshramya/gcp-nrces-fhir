@@ -54,6 +54,9 @@ interface Patient {
 }
 
 export class Immunization extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: IMMUNIZATION) {
     const patientString = `Patient/${options.patient.reference}`;
     const body: IMMUNIZATION = {

@@ -13,6 +13,10 @@ export interface PRACTITIONER {
 }
 
 export class Practitioner extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: PRACTITIONER) {
     const identifiers: IDENTTIFIER[] = [];
     if (options.ndhmProfessionalId) {

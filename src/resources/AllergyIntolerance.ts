@@ -30,6 +30,10 @@ export interface ALLERGY_INTOLERANCE {
 }
 
 export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: ALLERGY_INTOLERANCE): any {
     const getAllergy = (): string => {
       let ret = "";

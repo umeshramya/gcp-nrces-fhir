@@ -89,6 +89,9 @@ export class ImmunizationRecommendation
   extends ResourceMain
   implements ResourceMaster
 {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: IMMUNIZATION_RECOMMENDATION) {
     const supportingImmunization = (): Recommendation[] => {
       let ret: Recommendation[] = options.recommendation.map((el) => {

@@ -23,6 +23,10 @@ export interface DOCUMENT_REFERENCE {
 
 
 export class DocumentReference extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: DOCUMENT_REFERENCE) {
     const body = {
       resourceType: "DocumentReference",

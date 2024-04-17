@@ -33,6 +33,9 @@ export interface PROCEDURE {
   note: string[];
 }
 export class Procedure extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: PROCEDURE) {
     const getText = (): string => {
       let ret: string = "";

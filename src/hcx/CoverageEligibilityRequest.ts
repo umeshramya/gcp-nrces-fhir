@@ -1,6 +1,9 @@
 import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { ORGANIZATION } from "../resources/Organization";
+import { PATIENT } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
+import { TimeZone } from "../TimeZone";
 
 const CoverageEligibilityRequestStatus = [	"active" , "cancelled" , "draft" , "entered-in-error"] as const
 export interface INSURANCE {
@@ -104,6 +107,26 @@ export class CoverageEligibilityRequest
   extends ResourceMain
   implements ResourceMaster
 {
+  toHtml(option:{    addResourceType: boolean;
+    body: COVERAGE_ELIGIBILITY_REQUEST
+    patinet?:PATIENT
+    insurance?:ORGANIZATION}): string {
+      let ret:string=""
+      if(option.addResourceType){
+        ret += `<h4>Coverage Eligibility Request</h4>`
+      }
+
+      ret += `Date : ${new TimeZone().convertTZ(option.body.createdDateTime, "Asia/Kolkata", false)}`
+      ret += option.patinet ? `Patient Name : ${option.patinet.name}<br/> ${option.body.text} <br/>` : `Patient Id : ${option.body.patientId}<br/>`
+      ret += option.insurance ? `Insurance : ${option.insurance.name}<br/>` : `Insurance Id : ${option.body.insurerOrganizationId}<br/>`
+      ret += `Text ${option.body.text}<br/>`;
+      ret += option.body.purpose && `Purpose : ${option.body.purpose}</br>`
+    
+
+
+      return ret;
+      
+  }
   getFHIR(options: COVERAGE_ELIGIBILITY_REQUEST):any {
     const getText = (): string => {
       let ret: string = "";

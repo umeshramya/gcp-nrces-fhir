@@ -7,6 +7,9 @@ import ResourceFactory from "../../classess/ResourceFactory";
 import { MedicationRequest } from "../MedicationRequest";
 
 export class DischargeSummaryBundle extends BundelMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   
   async getFHIR(options: {
     id?: string;

@@ -23,6 +23,9 @@ export interface CARE_PLAN{
 
 }
 export class CarePlan extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: CARE_PLAN) {
     const body = {
       resourceType: "CarePlan",

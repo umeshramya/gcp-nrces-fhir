@@ -73,6 +73,9 @@ export interface DIAGNOSTIC_REPORT {
 }
 
 export class DiagnosticReport extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: DIAGNOSTIC_REPORT) {
     try {
       const getText = (): string => {

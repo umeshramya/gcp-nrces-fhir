@@ -716,87 +716,7 @@ console.log(bundle)
 
 
 const testBundle=()=>{
-// const CVN = {
-//     "resourceType": "CoverageEligibilityResponse",
-//     "id": "87f444cd-d258-4263-8879-c4528b604b3b",
-//     "meta": {
-//       "lastUpdated": "2024-04-15T18:15:07.649+00:00",
-//       "profile": [
-//         "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityResponse.html"
-//       ]
-//     },
-//     "identifier": [
-//       {
-//         "system": "http://identifiersystem.com",
-//         "value": "IdentifierValue"
-//       }
-//     ],
-//     "status": "active",
-//     "purpose": [
-//       "benefits"
-//     ],
-//     "patient": {
-//       "reference": "Patient/RVH1003"
-//     },
-//     "created": "2024-04-15T18:15:07+00:00",
-//     "requestor": {
-//       "reference": "Organization/WeMeanWell01"
-//     },
-//     "request": {
-//       "reference": "CoverageEligibilityRequest/dc82673b-8c71-48c2-8a17-16dcb3b035f6"
-//     },
-//     "outcome": "complete",
-//     "insurer": {
-//       "reference": "Organization/GICOFINDIA"
-//     }
-//   }
 
-// const CVN ={
-//   "resourceType" : "CoverageEligibilityResponse",
-//   "id" : "E2503",
-//   "text" : {
-//     "status" : "generated",
-//     "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">A human-readable rendering of the CoverageEligibilityResponse.</div>"
-//   },
-//   "identifier" : [{
-//     "system" : "http://www.BenefitsInc.com/fhir/coverageeligibilityresponse",
-//     "value" : "8812343"
-//   }],
-//   "status" : "active",
-//   "purpose" : ["validation"],
-//   "patient" : {
-//     "reference" : "Patient/f201"
-//   },
-//   "created" : "2014-09-16",
-//   "requestor" : {
-//     "identifier" : {
-//       "system" : "http://national.org/clinic",
-//       "value" : "OR1234"
-//     }
-//   },
-//   "request" : {
-//     "reference" : "http://www.BenefitsInc.com/fhir/coverageeligibilityresponse/225476332406"
-//   },
-//   "outcome" : "error",
-//   "disposition" : "Eligibiliy request could not be processed, please address errors before submitting.",
-//   "insurer" : {
-//     "reference" : "Organization/2"
-//   },
-//   "form" : {
-//     "coding" : [{
-//       "system" : "http://national.org/form",
-//       "code" : "ELRSP/2017/01"
-//     }]
-//   },
-//   "error" : [{
-//     "code" : {
-//       "coding" : [{
-//         "system" : "http://terminology.hl7.org/CodeSystem/adjudication-error",
-//         "code" : "a001"
-//       }]
-//     }
-//   }]
-// }
 
 const CVN ={
   "resourceType" : "CoverageEligibilityResponse",
@@ -930,7 +850,8 @@ const CVN ={
           "code" : "annual"
         }]
       },
-      "benefit" : [{
+      "benefit" : [
+      {
         "type" : {
           "coding" : [{
             "code" : "benefit"
@@ -1062,9 +983,13 @@ const CVN ={
   }
 }
 
+
+
  const result = new CoverageEligibiltyResponse().convertFhirToObject(CVN)
 
- console.log(result.insurance[0].item[0])
+ console.log(new CoverageEligibiltyResponse().toHtml({"addResourceType" : true, "body" : result}))
+
+//  console.log(result.insurance[0].item[0])
 }
 
 

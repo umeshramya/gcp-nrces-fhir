@@ -2,6 +2,9 @@ import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
 export class EndPoint extends ResourceMain implements ResourceMaster{
+    toHtml(): string {
+        throw new Error("Method not implemented.");
+    }
     getFHIR(options: any) {
         throw new Error("Method not implemented.");
     }

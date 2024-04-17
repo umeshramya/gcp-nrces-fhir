@@ -7,6 +7,9 @@ export class CoverageEligibilityRequestBundle
   extends ResourceMain
   implements ResourceMaster
 {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");
   }

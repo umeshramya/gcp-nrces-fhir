@@ -50,6 +50,10 @@ export interface DOSAGE_INSTRUCTION {
   method: CodeDisplay[];
 }
 export class MedicationRequest extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: MEDICATION_REQUEST): any {
     const dosageInstruction = options.DOSAGE_INSTRUCTION
       ? options.DOSAGE_INSTRUCTION.map((el) => {

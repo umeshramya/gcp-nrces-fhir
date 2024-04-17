@@ -7,6 +7,10 @@ export interface BINARY {
 }
 
 export class Binary extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: BINARY) {
     const body = {
       resourceType: "Binary",

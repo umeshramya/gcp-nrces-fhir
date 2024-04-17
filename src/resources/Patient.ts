@@ -72,6 +72,10 @@ export interface PATIENT {
 }
 
 export class Patient extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: PATIENT) {
     const identifiers: IDENTTIFIER[] = [];
     if (options.internalId) {

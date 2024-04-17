@@ -19,6 +19,10 @@ export interface RELATED_PERSON {
 }
 
 export class RelatedPerson extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
+  statusArray?: Function | undefined;
   getFHIR(options: RELATED_PERSON) {
     const identifiers: IDENTTIFIER[] = [];
     const getText = (): string => {

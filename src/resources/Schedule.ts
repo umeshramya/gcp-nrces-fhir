@@ -17,6 +17,9 @@ export interface SCHEDULE {
 }
 
 export class Schedule extends ResourceMain implements ResourceMaster {
+  toHtml(): string {
+    throw new Error("Method not implemented.");
+  }
   getFHIR(options: SCHEDULE): any {
     const getText = (): string => {
       let ret: string = "";
