@@ -31,6 +31,7 @@ import { Communication } from "../hcx/Communication";
 import { Claim } from "../hcx/Claim";
 import { ClaimResponse } from "../hcx/ClaimResponse";
 import { CommunicationRequest } from "../hcx/CommunicationRequest";
+import {CoverageEligibiltyResponse} from "../hcx/CoverageEligibilityResponse"
 
 export default class ResourceFactory
   extends ResourceMain
@@ -96,15 +97,15 @@ export default class ResourceFactory
     }else if(this.resourceType== "Coverage"){
       this.resource= new Coverage()
     }else if(this.resourceType == "Communication"){
-      this.resource = new Communication
+      this.resource = new Communication()
     }else if(this.resourceType == "Claim"){
-      this.resource = new Claim
+      this.resource = new Claim()
     }else if(this.resourceType == "CoverageEligibilityResponse"){
-      this.resource = new CoverageEligibilityRequest
+      this.resource = new CoverageEligibiltyResponse()
     }else if(this.resourceType == "ClaimResponse"){
-      this.resource = new ClaimResponse
+      this.resource = new ClaimResponse()
     }else if(this.resourceType == "CommunicationRequest"){
-      this.resource = new CommunicationRequest
+      this.resource = new CommunicationRequest()
     }
 
     else {

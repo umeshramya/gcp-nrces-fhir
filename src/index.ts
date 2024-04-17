@@ -102,7 +102,7 @@ import {Coverage, COVERAGE } from "./hcx/Coverage";
 import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./hcx/CoverageEligibilityRequest"
 import {CoverageEligibilityRequestBundle} from "./hcx/bundle/CoverageEligibiltyRequestBundle"
 import {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY} from "./hcx/CoverageEligibilityRequest"
-import {COVERAGE_ELIGIBILITY_RESPONSE, CoverageEligibiltyResponse} from "./hcx/CpverageEligibiltyResponse"
+import {COVERAGE_ELIGIBILITY_RESPONSE, CoverageEligibiltyResponse} from "./hcx/CoverageEligibilityResponse"
 
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
 import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resources/ImmunizationRecommendation";
