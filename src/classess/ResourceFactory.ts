@@ -29,6 +29,8 @@ import { EndPoint } from "../resources/Endpoint";
 import { Coverage } from "../hcx/Coverage";
 import { Communication } from "../hcx/Communication";
 import { Claim } from "../hcx/Claim";
+import { ClaimResponse } from "../hcx/ClaimResponse";
+import { CommunicationRequest } from "../hcx/CommunicationRequest";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -97,6 +99,12 @@ export default class ResourceFactory
       this.resource = new Communication
     }else if(this.resourceType == "Claim"){
       this.resource = new Claim
+    }else if(this.resourceType == "CoverageEligibilityResponse"){
+      this.resource = new CoverageEligibilityRequest
+    }else if(this.resourceType == "ClaimResponse"){
+      this.resource = new ClaimResponse
+    }else if(this.resourceType == "CommunicationRequest"){
+      this.resource = new CommunicationRequest
     }
 
     else {

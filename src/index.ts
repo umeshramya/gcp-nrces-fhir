@@ -109,8 +109,11 @@ import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resou
 import {CreatePdf} from "js-ts-report"
 import { Claim, CLAIM } from "./hcx/Claim";
 import { ClaimRequestBundle } from "./hcx/bundle/ClaimRequestBundle";
+import { ClaimResponse } from "./hcx/ClaimResponse";
 
 import {COMMUNICATION, Communication} from "./hcx/Communication"
+
+import {CommunicationRequest} from "./hcx/CommunicationRequest"
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export { htmlToText }
@@ -221,3 +224,5 @@ export {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY}
 export { Claim, CLAIM }
 export { ClaimRequestBundle }
 export {COMMUNICATION, Communication} 
+export { ClaimResponse }
+export {CommunicationRequest}
