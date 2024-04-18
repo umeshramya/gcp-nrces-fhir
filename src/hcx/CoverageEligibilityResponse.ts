@@ -1,3 +1,5 @@
+import GcpFhirCRUD from "../classess/gcp";
+import ResourceFactory from "../classess/ResourceFactory";
 import {
   CODEABLE_CONCEPT,
   IDENTTIFIER,
@@ -5,8 +7,8 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import { ORGANIZATION } from "../resources/Organization";
-import { PATIENT } from "../resources/Patient";
+import { Organization, ORGANIZATION } from "../resources/Organization";
+import { Patient, PATIENT } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
@@ -79,13 +81,18 @@ export interface COVERAGE_ELIGIBILITY_RESPONSE {
   error?: CODEABLE_CONCEPT[];
 }
 
+
+export interface TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE extends Omit<TO_HTML_HCX_OPTIONS, 'body'> {
+  body: COVERAGE_ELIGIBILITY_RESPONSE;
+
+}
 export class CoverageEligibiltyResponse
   extends ResourceMain
   implements ResourceMaster
 {
-  async toHtml(option: TO_HTML_HCX_OPTIONS):Promise<string> {
+  async toHtml(option: TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE):Promise<string> {
     let ret = "";
-    const body:COVERAGE_ELIGIBILITY_RESPONSE = option.body as any
+    const body:COVERAGE_ELIGIBILITY_RESPONSE = option.body
 
     if (option.addResourceType) {
       ret += `<h1>Coverage Eligibility Response</h1>`;
@@ -97,30 +104,53 @@ export class CoverageEligibiltyResponse
       false
     )} <br/>`;
 
-    // Patient
-    ret += option.patinet
-      ? `<b>Patient Name<b/> : ${option.patinet.name}<br/> ${body.text} <br/>`
-      : `<b>Patient Id </b> : ${body.patientId}<br/>`;
+
+    const pateintFactory = new Patient
+    if(option.patinet == undefined){
+      option.patinet = pateintFactory.convertFhirToObject( (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient")).data)
+    }
+
+    ret +=`<h3>Patient</h3>`
+    ret += await pateintFactory.toHtml({
+      "addResourceType" : false,
+      "body" : option.patinet
+    })
+      
+
 
     // Insurance comapnany
-    ret += option.insurance
-      ? `<b>Insurance</b> : ${option.insurance.name}<br/>`
-      : `<b>Insurance Id</b> : ${body.insurerId}<br/>`;
-    ret += `<h3><b>Outcome</b> : ${body.outcome}</h3>`;
-
-    // Error
-    if(body.error){
-      ret +=
-      body.error &&
-      body.error.length > 0 &&
-      `<h3><b>Error</b> : ${body.error
-        .map((el) => this.codebleConceptToHtml(el))
-        .toString()}</h3>`;
+    // ret += option.insurance
+    //   ? `<b>Insurance</b> : ${option.insurance.name}<br/>`
+    //   : `<b>Insurance Id</b> : ${body.insurerId}<br/>`;
+   
+    const orgnaization = new Organization()
+    if(!option.insurance){
+      const resource = (await new GcpFhirCRUD().getFhirResource(option.body.insurerId, "Organization")).data
+      option.insurance = orgnaization.convertFhirToObject(resource)
     }
+    ret += `<h3>Insurance</h3>`
+    ret += await orgnaization.toHtml({"addResourceType" : false, "body" : option.insurance})
+    
+    ret += `<hr/>`
+      // Error
 
-    if(body.status){
-      ret += `<b>Satus</b> : ${body.status}<br/>`
+      if(body.error){
+        ret +=
+        body.error &&
+        body.error.length > 0 &&
+        `<h3><b>Error</b> : ${body.error
+          .map((el) => this.codebleConceptToHtml(el))
+          .toString()}</h3>`;
+      }
+
+      if(body.status){
+        ret += `<b>Satus</b> : ${body.status}<br/>`
+      }
+
+    if(body.outcome){
+      ret += `<h3><b>Outcome</b> : ${body.outcome}</h3>`;
     }
+  
 
     
     // Text

@@ -14,8 +14,39 @@ export interface ORGANIZATION {
 }
 
 export class Organization extends ResourceMain implements ResourceMaster {
- async toHtml():Promise<string>{
-    throw new Error("Method not implemented.");
+ async toHtml(options:{
+  body:ORGANIZATION,
+  addResourceType:boolean
+
+ }):Promise<string>{
+    let ret:string =""
+    if(options.addResourceType){
+      ret += `<h1>Organization</h1>`
+    }  
+
+    if(options.body.name){
+      ret += `<b>Organization Name</b> : ${options.body.name}<br/>`
+    }
+
+    if(options.body.providerNumber){
+      ret += `<b>Provider Number</b> : ${options.body.providerNumber}<br/>`
+    }
+
+    if(options.body.email){
+      ret += `<b>Email</b> : ${options.body.email}<br/>`
+    }
+
+    if(options.body.ndhmFacilityNumber){
+      ret += `<b>HFR ID</b> : ${options.body.ndhmFacilityNumber} <br/>`
+    }
+
+    if(options.body.phone){
+      ret += `<b>Phone</b> : ${options.body.phone}<br/>`
+    }
+
+
+
+    return ret
   }
   statusArray?: Function | undefined;
   getFHIR(options: ORGANIZATION) {

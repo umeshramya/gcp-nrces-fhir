@@ -741,10 +741,10 @@ const CVN ={
       }]
     },
     "subscriber" : {
-      "reference" : "Patient/f201"
+      "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
     },
     "beneficiary" : {
-      "reference" : "Patient/f201"
+      "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
     },
     "dependent" : "1",
     "relationship" : {
@@ -802,13 +802,13 @@ const CVN ={
   "purpose" : ["validation",
   "benefits"],
   "patient" : {
-    "reference" : "Patient/f201"
+    "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
   },
   "created" : "2014-09-16",
   "requestor" : {
     "identifier" : {
       "system" : "http://national.org/clinic",
-      "value" : "OR1234"
+      "value" : "OR1234" //e2653593-dc88-4861-bb5e-f349fa42e86e
     }
   },
   "request" : {
@@ -817,7 +817,7 @@ const CVN ={
   "outcome" : "complete",
   "disposition" : "Policy is currently in-force.",
   "insurer" : {
-    "reference" : "Organization/2"
+    "reference" : "Organization/e2653593-dc88-4861-bb5e-f349fa42e86e"
   },
   "insurance" : [{
     "coverage" : {

@@ -6,6 +6,7 @@ import {
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 const CoverageStatus = [
   "active",
   "cancelled",
@@ -92,9 +93,43 @@ For some coverages a single identifier is issued to the Subscriber and then a un
   hcx?: "nhcx" | "swasth";
 }
 
+export interface TO_HTML_HCX_OPTIONS_COVERAGE extends Omit<TO_HTML_HCX_OPTIONS, 'body'> {
+  body: COVERAGE;
+  showPateint:boolean;
+  showInsuranceCompany:boolean
+}
 export class Coverage extends ResourceMain implements ResourceMaster {
-  async toHtml():Promise<string>{
-    throw new Error("Method not implemented.");
+  async toHtml(options:TO_HTML_HCX_OPTIONS_COVERAGE):Promise<string>{
+    const body:COVERAGE = options.body
+    let ret =""
+    if(options.addResourceType){
+      ret +=`<h1>Coverage</h1>`
+    }
+     if (body.text && body.text!=""){
+      ret += `<h2>Text</h2>`
+      ret += `${body.text}`
+     }
+
+     if(options.showPateint){
+       if(options.patinet){
+        ret += `<b>Patient</b> : ${options.patinet.name}`
+        ret += `<b>UHID</b> : ${options.patinet.MRN}`
+        ret += `<b>Contact</b> : ${options.patinet.contact?.map(el=>{
+          return(`name : ${el.name}`)
+        })}`
+       }
+     }
+
+    
+
+
+
+
+
+
+    return ret;
+
+
   }
   getFHIR(options: COVERAGE) {
     const getText = (): string => {

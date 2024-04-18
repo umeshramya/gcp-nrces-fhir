@@ -1,5 +1,6 @@
 import { CODING, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { TimeZone } from "../TimeZone";
 import ResourceMain from "./ResourceMai";
 
 type RelationshipCode = "FTH" | "MTH" | "SPS" | "HUSB" | "SON" | "DAU" | "BRO" | "SIS" | "UNCLE" | "AUNT" | "FRIEND";
@@ -72,8 +73,52 @@ export interface PATIENT {
 }
 
 export class Patient extends ResourceMain implements ResourceMaster {
- async toHtml():Promise<string>{
-    throw new Error("Method not implemented.");
+ async toHtml(options:{
+  body:PATIENT,
+  addResourceType:boolean
+
+ }):Promise<string>{
+
+  let ret:string =""
+  if(options.addResourceType){
+    ret += `<h1>Patient</h1>`
+  }
+
+  
+
+  if(options.body.name){
+    ret += `<b>Name</b> : ${options.body.name}<br/>`
+  }
+
+  if(options.body.MRN){
+    ret +=`<b>UHID</b> : ${options.body.MRN}<br/>`
+  }
+
+  
+  if(options.body.facilityId){
+    ret += `<b>Id</b> : ${options.body.facilityId}<br/>`
+  }
+
+  if(options.body.phrAddress){
+    ret += `ABHA : ${options.body.phrAddress}`
+  }
+
+  if(options.body.gender){
+    ret += `<b>Gender</b> : ${options.body.gender}<br/>`
+  }
+
+  if(options.body.dob){
+    ret += `<b>Age</b> : ${new TimeZone().dobToAge(new Date(options.body.dob))}<br/>`
+  }
+
+  if(options.body.mobile){
+    ret += `<b>Mobile</b> : ${options.body.mobile}<br/>`
+  }
+
+
+
+  return ret;
+    
   }
   statusArray?: Function | undefined;
   getFHIR(options: PATIENT) {
