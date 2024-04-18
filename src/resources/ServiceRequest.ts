@@ -73,7 +73,7 @@ export interface SERVICE_REQUEST {
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: SERVICE_REQUEST): any {

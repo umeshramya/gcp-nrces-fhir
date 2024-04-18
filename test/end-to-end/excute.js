@@ -687,7 +687,7 @@ console.log(bundle)
 // new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
-new excute().precsriptinComposition();
+// new excute().precsriptinComposition();
 // new excute().healthDocumentComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
@@ -715,7 +715,7 @@ new excute().precsriptinComposition();
 // new excute().statResources()
 
 
-const testBundle=()=>{
+const testBundle=async()=>{
 
 
 const CVN ={
@@ -987,11 +987,11 @@ const CVN ={
 
  const result = new CoverageEligibiltyResponse().convertFhirToObject(CVN)
 
- console.log(new CoverageEligibiltyResponse().toHtml({"addResourceType" : true, "body" : result}))
+ console.log(await new CoverageEligibiltyResponse().toHtml({"addResourceType" : true, "body" : result}))
 
 //  console.log(result.insurance[0].item[0])
 }
 
 
-// testBundle()
+testBundle()
 

@@ -50,7 +50,7 @@ export interface DOSAGE_INSTRUCTION {
   method: CodeDisplay[];
 }
 export class MedicationRequest extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   statusArray?: Function | undefined;

@@ -93,7 +93,7 @@ For some coverages a single identifier is issued to the Subscriber and then a un
 }
 
 export class Coverage extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+  async toHtml():Promise<string>{
     throw new Error("Method not implemented.");
   }
   getFHIR(options: COVERAGE) {

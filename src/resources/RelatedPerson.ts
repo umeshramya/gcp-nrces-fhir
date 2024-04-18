@@ -19,7 +19,7 @@ export interface RELATED_PERSON {
 }
 
 export class RelatedPerson extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   statusArray?: Function | undefined;

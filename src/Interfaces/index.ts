@@ -1,7 +1,7 @@
 export interface ResourceMaster {
   getFHIR(options: any): any;
   convertFhirToObject(options: any): any;
-  toHtml(option:{addResourceType:boolean}):string
+  toHtml(option:any):Promise<string>
   statusArray?: Function;
 }
 

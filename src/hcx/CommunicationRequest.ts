@@ -8,7 +8,7 @@ export class CommunicationRequest extends ResourceMain implements ResourceMaster
     convertFhirToObject(options: any) {
         throw new Error("Method not implemented.");
     }
-    toHtml(option: { addResourceType: boolean; }): string {
+    async toHtml(option: { addResourceType: boolean; }):Promise<string> {
         throw new Error("Method not implemented.");
     }
     statusArray?: Function | undefined;

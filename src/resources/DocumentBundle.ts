@@ -14,7 +14,7 @@ export interface DOCUMENT_BUNDLE {
 }
 
 export class DocumentBundle extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+ async toHtml():Promise<string>{
     throw new Error('Method not implemented.');
   }
   statusArray?: Function | undefined;

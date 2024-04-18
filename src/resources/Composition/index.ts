@@ -103,7 +103,7 @@ export interface USER_COMPOSITION_EXTENSION {
   orgName: string;
 }
 export class Composition extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+  async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   private compType!: {

@@ -128,7 +128,7 @@ export interface OBSERVATION {
 
 
 export class Observation extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: OBSERVATION) {

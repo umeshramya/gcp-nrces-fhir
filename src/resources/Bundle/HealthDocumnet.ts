@@ -7,7 +7,7 @@ import { MedicationRequest } from "../MedicationRequest";
 import { Condition } from "../Condition";
 
 export class HealthDocumentBundle extends BundelMain implements ResourceMaster {
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
 

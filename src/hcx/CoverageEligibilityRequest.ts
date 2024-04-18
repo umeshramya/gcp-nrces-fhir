@@ -1,22 +1,33 @@
-import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from "../config";
+import {
+  CODEABLE_CONCEPT,
+  EXTENSION,
+  IDENTTIFIER,
+  MULTI_RESOURCE,
+  PERIOD,
+} from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { ORGANIZATION } from "../resources/Organization";
 import { PATIENT } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
-const CoverageEligibilityRequestStatus = [	"active" , "cancelled" , "draft" , "entered-in-error"] as const
+const CoverageEligibilityRequestStatus = [
+  "active",
+  "cancelled",
+  "draft",
+  "entered-in-error",
+] as const;
 export interface INSURANCE {
-  id?: string
-  focal?: boolean
+  id?: string;
+  focal?: boolean;
   coverage: {
-    reference: string
-  }
-  businessArrangement?: string
-  extension ?: EXTENSION[]
-  modifierExtension?:EXTENSION[]
+    reference: string;
+  };
+  businessArrangement?: string;
+  extension?: EXTENSION[];
+  modifierExtension?: EXTENSION[];
 }
-
 
 interface SUPPORTING_INFO {
   id?: string;
@@ -26,11 +37,12 @@ interface SUPPORTING_INFO {
   /**
    * Any resource
    */
-  information: {"reference" : string};
+  information: { reference: string };
   appliesToAll?: boolean;
 }
 
-type CoverageEligibilityRequestStatus = typeof CoverageEligibilityRequestStatus[number]
+type CoverageEligibilityRequestStatus =
+  (typeof CoverageEligibilityRequestStatus)[number];
 const CoverageEligibilityRequestPurpose = [
   "auth-requirements",
   "benefits",
@@ -38,44 +50,50 @@ const CoverageEligibilityRequestPurpose = [
   "validation",
 ] as const;
 type CoverageEligibilityRequestPurpoe =
-  typeof CoverageEligibilityRequestPurpose[number];
-  interface ENTERER extends MULTI_RESOURCE{
-     resource: "Practitioner" | "PractitionerRole"
-  }
-
-  interface PROVIDER extends MULTI_RESOURCE{
-    resource: "Practitioner" | "PractitionerRole" | "Organization"
-  }
-
-  interface ITEM_PROVIDER extends MULTI_RESOURCE{
-    resource: "Practitioner" | "PractitionerRole" 
-  }
-
-  interface ITEM_FACILITY extends MULTI_RESOURCE{
-    resource: "Location" | "Organization" 
-  }
-
-  type DIAGNOSIS= {
-    diagnosisCodeableConcept: CODEABLE_CONCEPT
-  } | {diagnosisReference: {
-    reference: string;
-  }};
-
-interface ITEM{
-  category?:CODEABLE_CONCEPT;
-  productOrService:CODEABLE_CONCEPT;
-  modifier ? :CODEABLE_CONCEPT[];
-  provider?: ITEM_PROVIDER
-  facility?: ITEM_FACILITY
-  diagnosis:DIAGNOSIS[]
-  
+  (typeof CoverageEligibilityRequestPurpose)[number];
+interface ENTERER extends MULTI_RESOURCE {
+  resource: "Practitioner" | "PractitionerRole";
 }
 
-export type COVERAGE_ELIGIBILITY_REQUEST_PRIORITY = "stat" | "normal" | "deferred"
+interface PROVIDER extends MULTI_RESOURCE {
+  resource: "Practitioner" | "PractitionerRole" | "Organization";
+}
+
+interface ITEM_PROVIDER extends MULTI_RESOURCE {
+  resource: "Practitioner" | "PractitionerRole";
+}
+
+interface ITEM_FACILITY extends MULTI_RESOURCE {
+  resource: "Location" | "Organization";
+}
+
+type DIAGNOSIS =
+  | {
+      diagnosisCodeableConcept: CODEABLE_CONCEPT;
+    }
+  | {
+      diagnosisReference: {
+        reference: string;
+      };
+    };
+
+interface ITEM {
+  category?: CODEABLE_CONCEPT;
+  productOrService: CODEABLE_CONCEPT;
+  modifier?: CODEABLE_CONCEPT[];
+  provider?: ITEM_PROVIDER;
+  facility?: ITEM_FACILITY;
+  diagnosis: DIAGNOSIS[];
+}
+
+export type COVERAGE_ELIGIBILITY_REQUEST_PRIORITY =
+  | "stat"
+  | "normal"
+  | "deferred";
 
 export interface COVERAGE_ELIGIBILITY_REQUEST {
   id?: string;
-  status : CoverageEligibilityRequestStatus
+  status: CoverageEligibilityRequestStatus;
   text: string;
   identifier: IDENTTIFIER[];
   priority: CODEABLE_CONCEPT;
@@ -86,48 +104,54 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
    * Only Date 2023-08-15
    */
   servicedDate?: string;
-  servicedPeriod?:PERIOD;
-  supportingInfo?:SUPPORTING_INFO[]
-  enterer :ENTERER
-  provider : PROVIDER
-  insurerOrganizationId : string
+  servicedPeriod?: PERIOD;
+  supportingInfo?: SUPPORTING_INFO[];
+  enterer: ENTERER;
+  provider: PROVIDER;
+  insurerOrganizationId: string;
   /**
    * ward
    */
-  locationId ?: string
-  insurance: INSURANCE[]
-  item ?: ITEM[]
-  detail ?: {
-    reference : string
-  }
-  hcx ?: "nhcx" | "swasth"
+  locationId?: string;
+  insurance: INSURANCE[];
+  item?: ITEM[];
+  detail?: {
+    reference: string;
+  };
+  hcx?: "nhcx" | "swasth";
 }
 
 export class CoverageEligibilityRequest
   extends ResourceMain
   implements ResourceMaster
 {
-  toHtml(option:{    addResourceType: boolean;
-    body: COVERAGE_ELIGIBILITY_REQUEST
-    patinet?:PATIENT
-    insurance?:ORGANIZATION}): string {
-      let ret:string=""
-      if(option.addResourceType){
-        ret += `<h4>Coverage Eligibility Request</h4>`
-      }
-
-      ret += `Date : ${new TimeZone().convertTZ(option.body.createdDateTime, "Asia/Kolkata", false)}`
-      ret += option.patinet ? `Patient Name : ${option.patinet.name}<br/> ${option.body.text} <br/>` : `Patient Id : ${option.body.patientId}<br/>`
-      ret += option.insurance ? `Insurance : ${option.insurance.name}<br/>` : `Insurance Id : ${option.body.insurerOrganizationId}<br/>`
-      ret += `Text ${option.body.text}<br/>`;
-      ret += option.body.purpose && `Purpose : ${option.body.purpose}</br>`
-    
 
 
-      return ret;
-      
+  async toHtml(option: TO_HTML_HCX_OPTIONS):Promise<string> {
+    let ret: string = "";
+    const body: COVERAGE_ELIGIBILITY_REQUEST = option.body as any;
+
+    if (option.addResourceType) {
+      ret += `<h4>Coverage Eligibility Request</h4>`;
+    }
+
+    ret += `Date : ${new TimeZone().convertTZ(
+      body.createdDateTime,
+      "Asia/Kolkata",
+      false
+    )}`;
+    ret += option.patinet
+      ? `Patient Name : ${option.patinet.name}<br/> ${body.text} <br/>`
+      : `Patient Id : ${body.patientId}<br/>`;
+    ret += option.insurance
+      ? `Insurance : ${option.insurance.name}<br/>`
+      : `Insurance Id : ${body.insurerOrganizationId}<br/>`;
+    ret += `Text ${body.text}<br/>`;
+    ret += body.purpose && `Purpose : ${body.purpose}</br>`;
+
+    return ret;
   }
-  getFHIR(options: COVERAGE_ELIGIBILITY_REQUEST):any {
+  getFHIR(options: COVERAGE_ELIGIBILITY_REQUEST): any {
     const getText = (): string => {
       let ret: string = "";
       ret += options.text;
@@ -137,12 +161,14 @@ export class CoverageEligibilityRequest
       resourceType: "CoverageEligibilityRequest",
       id: options.id,
       meta: {
-        
-        profile: options.hcx == "nhcx" ? [
-          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequest",
-        ] : [
-          "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityRequest.html",
-        ],
+        profile:
+          options.hcx == "nhcx"
+            ? [
+                "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequest",
+              ]
+            : [
+                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityRequest.html",
+              ],
       },
       language: "en",
       text: {
@@ -150,7 +176,7 @@ export class CoverageEligibilityRequest
         div: getText(),
       },
       servicedDate: options.servicedDate,
-      supportingInfo:options.supportingInfo,
+      supportingInfo: options.supportingInfo,
       identifier: options.identifier,
       priority: options.priority,
       purpose: options.purpose,
@@ -158,74 +184,86 @@ export class CoverageEligibilityRequest
         reference: `Patient/${options.patientId}`,
       },
       created: options.createdDateTime,
-      enterer: {"reference" : `${options.enterer.resource}/${options.enterer.id}`},
-      provider : {"reference" : `${options.provider.resource}/${options.provider.id}`},
-      insurer : {
+      enterer: {
+        reference: `${options.enterer.resource}/${options.enterer.id}`,
+      },
+      provider: {
+        reference: `${options.provider.resource}/${options.provider.id}`,
+      },
+      insurer: {
         reference: `Organization/${options.insurerOrganizationId}`,
       },
-      facility :{
+      facility: {
         reference: `Location/${options.locationId}`,
       },
-      insurance:options.insurance,
-      item:options.item,
-      detail : options.detail,
-      status : options.status
+      insurance: options.insurance,
+      item: options.item,
+      detail: options.detail,
+      status: options.status,
     };
 
     const keys = Object.keys(body);
-    keys.forEach(el=>{
-      if(el== undefined){
-        delete body[`${el}`]
+    keys.forEach((el) => {
+      if (el == undefined) {
+        delete body[`${el}`];
       }
-    })
+    });
 
-    return body
+    return body;
   }
-  convertFhirToObject(options: any):COVERAGE_ELIGIBILITY_REQUEST {
-    let ret:COVERAGE_ELIGIBILITY_REQUEST={
+  convertFhirToObject(options: any): COVERAGE_ELIGIBILITY_REQUEST {
+    let ret: COVERAGE_ELIGIBILITY_REQUEST = {
       id: options.id,
       status: options.status,
       text: options.text,
       identifier: options.identifier,
       priority: options.priority,
       purpose: options.purpose,
-      patientId: this.getIdFromReference({"ref" : options.patient.reference, "resourceType" : "Patient"}),
+      patientId: this.getIdFromReference({
+        ref: options.patient.reference,
+        resourceType: "Patient",
+      }),
       createdDateTime: options.created,
       // enterer: options.enterer,
-      enterer : this.getFromMultResource(options.enterer) as any,
+      enterer: this.getFromMultResource(options.enterer) as any,
       // provider: options.provider,
-      provider : this.getFromMultResource(options.provider) as any,
-      insurerOrganizationId: this.getIdFromReference({"ref" : options.insurer.reference, "resourceType" : "Organization"}),
-      
-      insurance:options.insurance,
+      provider: this.getFromMultResource(options.provider) as any,
+      insurerOrganizationId: this.getIdFromReference({
+        ref: options.insurer.reference,
+        resourceType: "Organization",
+      }),
 
-    }
-    if(options.item){
-      ret.item = options.item
-    }
-
-    if(options.facility){
-      ret.locationId= this.getIdFromReference({"ref" : options.facility.reference, "resourceType" : "Location"})
-    }
-    if(options.supportingInfo){
-      ret.supportingInfo= options.supportingInfo
+      insurance: options.insurance,
+    };
+    if (options.item) {
+      ret.item = options.item;
     }
 
-    if(options.servicedPeriod){
-        ret.servicedPeriod = options.servicedPeriod
-      }
-
-      if(options.servicedDate){
-        ret.servicedDate=options.servicedDate
-      }
-    if(options.detail){
-      ret.detail= options.detail
+    if (options.facility) {
+      ret.locationId = this.getIdFromReference({
+        ref: options.facility.reference,
+        resourceType: "Location",
+      });
     }
-    return ret
+    if (options.supportingInfo) {
+      ret.supportingInfo = options.supportingInfo;
+    }
+
+    if (options.servicedPeriod) {
+      ret.servicedPeriod = options.servicedPeriod;
+    }
+
+    if (options.servicedDate) {
+      ret.servicedDate = options.servicedDate;
+    }
+    if (options.detail) {
+      ret.detail = options.detail;
+    }
+    return ret;
   }
-  statusArray =():CoverageEligibilityRequestStatus[]=>{
-    return CoverageEligibilityRequestStatus.map(el=>el)
-  }
+  statusArray = (): CoverageEligibilityRequestStatus[] => {
+    return CoverageEligibilityRequestStatus.map((el) => el);
+  };
 
   Purpose = (): CoverageEligibilityRequestPurpoe[] => {
     return CoverageEligibilityRequestPurpose.map((el) => el);

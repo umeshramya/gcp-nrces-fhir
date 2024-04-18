@@ -31,7 +31,7 @@ export interface LOCATION{
 }
 
 export  class Location extends ResourceMain implements ResourceMaster{
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: LOCATION):any {

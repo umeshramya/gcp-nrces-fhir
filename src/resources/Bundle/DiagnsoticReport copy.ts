@@ -9,7 +9,7 @@ export class DiagnsoticReportBundle
   extends BundelMain
   implements ResourceMaster
 {
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   async getFHIR(options: {

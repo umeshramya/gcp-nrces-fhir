@@ -7,7 +7,7 @@ import ResourceFactory from "../../classess/ResourceFactory";
 import { MedicationRequest } from "../MedicationRequest";
 
 export class OPConsultationBundle extends BundelMain implements ResourceMaster {
-  toHtml(): string {
+ async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   

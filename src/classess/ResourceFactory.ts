@@ -114,7 +114,7 @@ export default class ResourceFactory
       throw (new Error().message = errMessage);
     }
   }
-  toHtml<T>(options:T): string {
+  async toHtml<T>(options:T):Promise<string>{
     return this.resource.toHtml(options)
   }
   statusArray?: Function | undefined;

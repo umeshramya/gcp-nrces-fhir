@@ -3,7 +3,7 @@ import { IDENTTIFIER } from "../../config";
 import ResourceMain from "../../resources/ResourceMai";
 
 export class ClaimRequestBundle extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+async  toHtml():Promise<string>{
     throw new Error("Method not implemented.");
   }
   convertFhirToObject(options: any) {

@@ -23,7 +23,7 @@ export interface CARE_PLAN{
 
 }
 export class CarePlan extends ResourceMain implements ResourceMaster {
-  toHtml(): string {
+  async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: CARE_PLAN) {
