@@ -11,6 +11,7 @@ import { Organization, ORGANIZATION } from "../resources/Organization";
 import { Patient, PATIENT } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
+import { COVERAGE, Coverage } from "./Coverage";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 const CoverageEligibilityResponcePurpose = [
   "auth-requirements",
@@ -28,20 +29,19 @@ interface PRVIDER_ITEM extends MULTI_RESOURCE {
 interface BENFIT {
   type?: CODEABLE_CONCEPT;
   allowedMoney?: {
-    
     value: number;
     currency: string;
   };
-  allowedUnsignedInt	?: number
-  allowedString ?: string
+  allowedUnsignedInt?: number;
+  allowedString?: string;
 
   usedMoney?: {
-    usedUnsignedInt?:number
+    usedUnsignedInt?: number;
     value: number;
     currency: string;
   };
-  usedUnsignedInt?:number
-  usedString?: string
+  usedUnsignedInt?: number;
+  usedString?: string;
 }
 
 export interface COVERAGE_ELIGIBILITY_RESPONSE {
@@ -81,18 +81,19 @@ export interface COVERAGE_ELIGIBILITY_RESPONSE {
   error?: CODEABLE_CONCEPT[];
 }
 
-
-export interface TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE extends Omit<TO_HTML_HCX_OPTIONS, 'body'> {
+export interface TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
   body: COVERAGE_ELIGIBILITY_RESPONSE;
-
 }
 export class CoverageEligibiltyResponse
   extends ResourceMain
   implements ResourceMaster
 {
-  async toHtml(option: TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE):Promise<string> {
+  async toHtml(
+    option: TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE
+  ): Promise<string> {
     let ret = "";
-    const body:COVERAGE_ELIGIBILITY_RESPONSE = option.body
+    const body: COVERAGE_ELIGIBILITY_RESPONSE = option.body;
 
     if (option.addResourceType) {
       ret += `<h1>Coverage Eligibility Response</h1>`;
@@ -104,176 +105,211 @@ export class CoverageEligibiltyResponse
       false
     )} <br/>`;
 
-
-    const pateintFactory = new Patient
-    if(option.patinet == undefined){
-      option.patinet = pateintFactory.convertFhirToObject( (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient")).data)
+    const pateintFactory = new Patient();
+    if (option.patinet == undefined) {
+      option.patinet = pateintFactory.convertFhirToObject(
+        (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient"))
+          .data
+      );
     }
 
-    ret +=`<h3>Patient</h3>`
+    ret += `<h3>Patient</h3>`;
     ret += await pateintFactory.toHtml({
-      "addResourceType" : false,
-      "body" : option.patinet
-    })
-      
+      addResourceType: false,
+      body: option.patinet,
+    });
 
-
-    // Insurance comapnany
-    // ret += option.insurance
-    //   ? `<b>Insurance</b> : ${option.insurance.name}<br/>`
-    //   : `<b>Insurance Id</b> : ${body.insurerId}<br/>`;
-   
-    const orgnaization = new Organization()
-    if(!option.insurance){
-      const resource = (await new GcpFhirCRUD().getFhirResource(option.body.insurerId, "Organization")).data
-      option.insurance = orgnaization.convertFhirToObject(resource)
+    const orgnaization = new Organization();
+    if (!option.insurance) {
+      const resource = (
+        await new GcpFhirCRUD().getFhirResource(
+          option.body.insurerId,
+          "Organization"
+        )
+      ).data;
+      option.insurance = orgnaization.convertFhirToObject(resource);
     }
-    ret += `<h3>Insurance</h3>`
-    ret += await orgnaization.toHtml({"addResourceType" : false, "body" : option.insurance})
-    
-    ret += `<hr/>`
-      // Error
+    ret += `<h3>Insurance</h3>`;
+    ret += await orgnaization.toHtml({
+      addResourceType: false,
+      body: option.insurance,
+    });
 
-      if(body.error){
-        ret +=
+    ret += `<hr/>`;
+    // Error
+
+    if (body.error) {
+      ret +=
         body.error &&
         body.error.length > 0 &&
         `<h3><b>Error</b> : ${body.error
           .map((el) => this.codebleConceptToHtml(el))
           .toString()}</h3>`;
-      }
+    }
 
-      if(body.status){
-        ret += `<b>Satus</b> : ${body.status}<br/>`
-      }
+    if (body.status) {
+      ret += `<b>Satus</b> : ${body.status}<br/>`;
+    }
 
-    if(body.outcome){
+    if (body.outcome) {
       ret += `<h3><b>Outcome</b> : ${body.outcome}</h3>`;
     }
-  
 
-    
     // Text
-    if(body.text){
-      ret +=`<h2>Text</h2>`
+    if (body.text) {
+      ret += `<h2>Text</h2>`;
       ret += ` ${body.text}<br/>`;
     }
-    
-    ret +=`<h2> Object to Text</h2>` 
+
+    ret += `<h2> Object to Text</h2>`;
     // disposition
-    if(body.disposition){
-      ret +=
-      `<b>Disposition</b> : ${body.disposition} <br/>`;
+    if (body.disposition) {
+      ret += `<b>Disposition</b> : ${body.disposition} <br/>`;
     }
 
     // Purpose
-    if(body.purpose){
+    if (body.purpose) {
       ret += `<h3><b>Purpose</b> : ${body.purpose.toString()}</h3>`;
     }
 
-    if(body.insurance && body.insurance.length > 0){
+    if (body.insurance && body.insurance.length > 0) {
+      ret += `<h4>Insurances</h4>`;
+      for (let index = 0; index < body.insurance.length; index++) {
+        const el = body.insurance[index]
 
-      ret += `<h4>Insurances</h4>`
-      body.insurance.forEach((el) => {
-      ret += `<br/><hr/>`
+        ret += `<br/><hr/>`;
 
-      if(el.benefitPeriod){
-        ret +=`<h4>Benefit Period</h4>`
-        ret +=  el.benefitPeriod.start && `Start : ${new TimeZone().convertTZ(
-          el.benefitPeriod.start,
-          "Asia/Kolkata",
-          false
-        )}<br/>`
-        
-        ret +=  el.benefitPeriod.end && `End : ${new TimeZone().convertTZ(
-          el.benefitPeriod.end,
-          "Asia/Kolkata",
-          false
-        )} <br/>`;
-      }
+        if (el.benefitPeriod) {
+          ret += `<h4>Benefit Period</h4>`;
+          ret +=
+            el.benefitPeriod.start &&
+            `Start : ${new TimeZone().convertTZ(
+              el.benefitPeriod.start,
+              "Asia/Kolkata",
+              false
+            )}<br/>`;
 
-      if(el.inforce){
-        ret +=  `<b>Inforce</b> ${el.inforce}<br/>`;
-      }
+          ret +=
+            el.benefitPeriod.end &&
+            `End : ${new TimeZone().convertTZ(
+              el.benefitPeriod.end,
+              "Asia/Kolkata",
+              false
+            )} <br/>`;
+        }
 
-      // ret += el.coverage
-      if(el.item && el.item.length > 0){
-        el.item.forEach((it, i )=>{
-          ret += `<h4>Item No ${i+1}</h4>`
-          if(it.name ){
-            ret += `Name :  ${it.name}<br/>`
-          }
+        if (el.inforce) {
+          ret += `<b>Inforce</b> ${el.inforce}<br/>`;
+        }
 
-          if(it.network ){
-            ret += `<b>Network</b> : ${this.codebleConceptToHtml(it.network)}<br/>`
-          }
-          if( it.productOrService){
-            ret +=  `Product Or Service : ${this.codebleConceptToHtml(it.productOrService)}` 
-  
-            }
-          if(it.description){
-            ret +=  `<b>Description</b> : ${it.description}<br/>`
-          }
+        // ret += el.coverage
 
-          if(it.category){
-            ret += `<b>Category</b> ${this.codebleConceptToHtml(it.category)}`
-          }
-
-          if(it.excluded){
-            ret += `<b>Excluded</b> : ${it.excluded}<br/>`
-          }
-
-          if(it.modifier){
-            ret +=   `<b>Modifier</b> : ${it.modifier}<br/>`  
-          }
-          
-          if(it.term ){
-            ret +=  `<b>Term</b> : ${this.codebleConceptToHtml(it.term)}<br/>`
-          }
-          if(it.unit ){
-            ret += `<b>Unit</b> : ${this.codebleConceptToHtml(it.unit)}<br/>`
-          }
-          
-          
-            
-          if( it.benefit){
-            ret +=`<h5>Benfits</h5>`
-        
-            it.benefit.forEach((be) => {
-              if(be.type){
-                ret += `<b>Type</b> : ${this.codebleConceptToHtml(be.type)}`;
-              }
-              if(be.allowedMoney && be.allowedMoney.value ){
-                ret += `<b>Allowed Money</b> : ${be.allowedMoney?.currency} ${be.allowedMoney?.value}<br/> `;
-              }
-              if(be.allowedUnsignedInt){
-                ret += `<b>Allowed UnsignedInt</b> : ${be.allowedUnsignedInt}<br/>`
-              }
-
-              if(be.allowedString){
-                ret += `<b>Allowed String</b> : ${be.allowedString}<br/>`
-              }
-              if(be.usedMoney && be.usedMoney.value){
-                ret += `<b>Used Money</b> : ${be.usedMoney?.currency} ${be.usedMoney?.value}<br/> `;
-              }
-              if(be.usedUnsignedInt){
-                ret += `<b>Used UnsignedInt</b> : ${be.usedUnsignedInt}<br/>`
-              }
-              if(be.usedString){
-                ret += `<b>Used String</b> : ${be.usedString}<br/>`
-              }
-
-
-              
+        if (
+          el.coverage &&
+          el.coverage.reference &&
+          option.coverages &&
+          option.coverages.length > 0
+        ) {
+          try {
+            const coverage = new Coverage();
+            const id = coverage.getIdFromReference({
+              resourceType: 'Coverage',
+              ref: el.coverage.reference,
             });
+            const filCoverage = option.coverages.filter((cl) => cl.id == id);
+            if (filCoverage && filCoverage.length > 0) {
+              ret += '<h3>Coverage</h3>';
+              ret += await coverage.toHtml({
+                addResourceType: false,
+                body: filCoverage[0],
+                showInsuranceCompany: false,
+                "showPatient": false, 
+              });
+            }
+          } catch (error) {
+            console.error('Error in coverage if block:', error);
           }
-        })
+        }
+        
 
-      }
-
+        if (el.item && el.item.length > 0) {
+          try {
+            el.item.forEach((it, i) => {
+              ret += `<h4>Item No ${i + 1}</h4>`;
+              if (it.name) {
+                ret += `Name :  ${it.name}<br/>`;
+              }
   
-    });
+              if (it.network) {
+                ret += `<b>Network</b> : ${this.codebleConceptToHtml(
+                  it.network
+                )}<br/>`;
+              }
+              if (it.productOrService) {
+                ret += `Product Or Service : ${this.codebleConceptToHtml(
+                  it.productOrService
+                )}`;
+              }
+              if (it.description) {
+                ret += `<b>Description</b> : ${it.description}<br/>`;
+              }
+  
+              if (it.category) {
+                ret += `<b>Category</b> ${this.codebleConceptToHtml(
+                  it.category
+                )}`;
+              }
+  
+              if (it.excluded) {
+                ret += `<b>Excluded</b> : ${it.excluded}<br/>`;
+              }
+  
+              if (it.modifier) {
+                ret += `<b>Modifier</b> : ${it.modifier}<br/>`;
+              }
+  
+              if (it.term) {
+                ret += `<b>Term</b> : ${this.codebleConceptToHtml(it.term)}<br/>`;
+              }
+              if (it.unit) {
+                ret += `<b>Unit</b> : ${this.codebleConceptToHtml(it.unit)}<br/>`;
+              }
+  
+              if (it.benefit) {
+                ret += `<h5>Benfits</h5>`;
+  
+                it.benefit.forEach((be) => {
+                  if (be.type) {
+                    ret += `<b>Type</b> : ${this.codebleConceptToHtml(be.type)}`;
+                  }
+                  if (be.allowedMoney && be.allowedMoney.value) {
+                    ret += `<b>Allowed Money</b> : ${be.allowedMoney?.currency} ${be.allowedMoney?.value}<br/> `;
+                  }
+                  if (be.allowedUnsignedInt) {
+                    ret += `<b>Allowed UnsignedInt</b> : ${be.allowedUnsignedInt}<br/>`;
+                  }
+  
+                  if (be.allowedString) {
+                    ret += `<b>Allowed String</b> : ${be.allowedString}<br/>`;
+                  }
+                  if (be.usedMoney && be.usedMoney.value) {
+                    ret += `<b>Used Money</b> : ${be.usedMoney?.currency} ${be.usedMoney?.value}<br/> `;
+                  }
+                  if (be.usedUnsignedInt) {
+                    ret += `<b>Used UnsignedInt</b> : ${be.usedUnsignedInt}<br/>`;
+                  }
+                  if (be.usedString) {
+                    ret += `<b>Used String</b> : ${be.usedString}<br/>`;
+                  }
+                });
+              }
+            });
+          } catch (error) {
+            console.log(`CoverageEligibiltyResponse.toHtml.item ${error}`)
+          }
 
+        }
+      };
     }
 
     return ret;

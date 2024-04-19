@@ -1,3 +1,4 @@
+import GcpFhirCRUD from "../classess/gcp";
 import {
   CODEABLE_CONCEPT,
   IDENTTIFIER,
@@ -5,7 +6,10 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { Organization, ORGANIZATION } from "../resources/Organization";
+import { PATIENT, Patient } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
+import { TimeZone } from "../TimeZone";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 const CoverageStatus = [
   "active",
@@ -45,7 +49,6 @@ interface costToBeneficiary {
   term?: CODEABLE_CONCEPT;
   value?: SAMPLE_QUANTITY | MONEY;
   exception?: { type: CODEABLE_CONCEPT; period?: PERIOD }[];
-  
 }
 export interface COVERAGE {
   id?: string;
@@ -93,43 +96,111 @@ For some coverages a single identifier is issued to the Subscriber and then a un
   hcx?: "nhcx" | "swasth";
 }
 
-export interface TO_HTML_HCX_OPTIONS_COVERAGE extends Omit<TO_HTML_HCX_OPTIONS, 'body'> {
+export interface TO_HTML_HCX_OPTIONS_COVERAGE
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
   body: COVERAGE;
-  showPateint:boolean;
-  showInsuranceCompany:boolean
+  showPatient: boolean;
+  showInsuranceCompany: boolean;
 }
 export class Coverage extends ResourceMain implements ResourceMaster {
-  async toHtml(options:TO_HTML_HCX_OPTIONS_COVERAGE):Promise<string>{
-    const body:COVERAGE = options.body
-    let ret =""
-    if(options.addResourceType){
-      ret +=`<h1>Coverage</h1>`
+  async toHtml(option: TO_HTML_HCX_OPTIONS_COVERAGE): Promise<string> {
+    const body: COVERAGE = option.body;
+    let ret = "";
+    if (option.addResourceType) {
+      ret += `<h1>Coverage</h1>`;
     }
-     if (body.text && body.text!=""){
-      ret += `<h2>Text</h2>`
-      ret += `${body.text}`
-     }
+    if (body.text && body.text != "") {
+      ret += `<h2>Text</h2>`;
+      ret += `${body.text}`;
+    }
 
-     if(options.showPateint){
-       if(options.patinet){
-        ret += `<b>Patient</b> : ${options.patinet.name}`
-        ret += `<b>UHID</b> : ${options.patinet.MRN}`
-        ret += `<b>Contact</b> : ${options.patinet.contact?.map(el=>{
-          return(`name : ${el.name}`)
-        })}`
-       }
-     }
+    if (option.showPatient) {
+      const pateintFactory = new Patient();
+      if (option.patinet == undefined) {
+        option.patinet = pateintFactory.convertFhirToObject(
+          (
+            await new GcpFhirCRUD().getFhirResource(
+              body.beneficiaryPatientId,
+              "Patient"
+            )
+          ).data
+        );
+      }
 
-    
+      ret += `<h3>Patient</h3>`;
+      ret += await pateintFactory.toHtml({
+        addResourceType: false,
+        body: option.patinet,
+      });
+    }
+
+    if (option.showInsuranceCompany && option.body.insurerOrganizationId) {
+      const orgnaization = new Organization();
+      if (!option.insurance) {
+        const resource = (
+          await new GcpFhirCRUD().getFhirResource(
+            option.body.insurerOrganizationId,
+            "Organization"
+          )
+        ).data;
+        option.insurance = orgnaization.convertFhirToObject(resource);
+      }
+      ret += `<h3>Insurance</h3>`;
+      ret += await orgnaization.toHtml({
+        addResourceType: false,
+        body: option.insurance,
+      });
+    }
 
 
+    if(option.body.payor && option.body.payor.length >0){
+      ret +=`<h3>Payor</h3>`
+      option.body.payor.forEach(el=>{
+        if(el.display){
+          ret += `<i>Display</i> : ${el.display}<br/>`
+        }
+        if(el.resource){
+          ret +=`<i>Resource Type</i> : ${el.resource} `
+        }
+        if(el.id){
+          ret += `<i>Id</i> : ${el.id}`
+        }
+      })
+    }
 
+    ret += `<hr/>`;
+
+    if(option.body.status){
+      ret += `<b>Coverage Status</b> : ${option.body.status}<br/>`
+    }
+
+    if (option.body.policyHolder && option.body.policyHolder.id) {
+      ret += `<b>PolicyHolder</b> : ${option.body.policyHolder.id}<br/>`;
+    }
+
+    if(option.body.subscriber && option.body.subscriber.id){
+      ret += `<b>Policy Subscriber</b> : ${option.body.subscriber.id}<br/>`
+    }
+
+    if(option.body.relationship){
+      ret += `<b>Coverage Relationship</b> : ${this.codebleConceptToHtml(option.body.relationship)}<br/>`
+    }
+
+    if (option.body.period) {
+      ret += `Coverage Period : Start : ${new TimeZone().convertTZ(
+        option.body.period.start,
+        "Asia/Kolkata",
+        true
+      )} - End : ${new TimeZone().convertTZ(
+        option.body.period.end,
+        "Asia/Kolkata",
+        true
+      )}<br/>`;
+    }
 
 
 
     return ret;
-
-
   }
   getFHIR(options: COVERAGE) {
     const getText = (): string => {
@@ -144,9 +215,12 @@ export class Coverage extends ResourceMain implements ResourceMaster {
       identifier: options.identifier,
 
       meta: {
-        profile: options.hcx == "nhcx" ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Coverage"] : [
-          "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Coverage.html",
-        ],
+        profile:
+          options.hcx == "nhcx"
+            ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Coverage"]
+            : [
+                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Coverage.html",
+              ],
       },
 
       text: {
@@ -197,13 +271,13 @@ export class Coverage extends ResourceMain implements ResourceMaster {
     const ret: COVERAGE = {
       id: options.id,
       identifier: options.identifier,
-      text: options.text.div,
+      text: options.text &&  options.text.div,
       status: options.status,
-      beneficiaryPatientId: this.getIdFromReference({
+      beneficiaryPatientId:options.beneficiary && this.getIdFromReference({
         ref: options.beneficiary.reference,
         resourceType: "Patient",
       }),
-      payor: options.payor.map((el: any) => {
+      payor:options.payor && options.payor.map((el: any) => {
         const ret: MULTI_RESOURCE = this.getFromMultResource(el);
         return ret;
       }),

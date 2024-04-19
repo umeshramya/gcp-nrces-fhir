@@ -20,6 +20,7 @@ const {
   HealthDocumentBundle,
   GcpFhirSearch,
   CoverageEligibiltyResponse,
+  Coverage
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -821,7 +822,7 @@ const CVN ={
   },
   "insurance" : [{
     "coverage" : {
-      "reference" : "#coverage-1"
+      "reference" : "Coverage/e04d92b4-a329-4045-acd9-15c3377ac4a9"
     },
     "inforce" : true,
     "item" : [{
@@ -985,9 +986,15 @@ const CVN ={
 
 
 
+
+const coverageRes = await new GcpFhirCRUD().getFhirResource("e04d92b4-a329-4045-acd9-15c3377ac4a9", "Coverage")
+const coverageObj = new Coverage().convertFhirToObject(coverageRes.data)
+
+
+
  const result = new CoverageEligibiltyResponse().convertFhirToObject(CVN)
 
- console.log(await new CoverageEligibiltyResponse().toHtml({"addResourceType" : true, "body" : result}))
+ console.log(await new CoverageEligibiltyResponse().toHtml({"addResourceType" : true, "body" : result, "coverages" : [coverageObj]}))
 
 //  console.log(result.insurance[0].item[0])
 }
