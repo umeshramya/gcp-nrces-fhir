@@ -100,7 +100,7 @@ export class Patient extends ResourceMain implements ResourceMaster {
   }
 
   if(options.body.phrAddress){
-    ret += `ABHA : ${options.body.phrAddress}`
+    ret += `<b>ABHA</b>: ${options.body.phrAddress}<br/>`
   }
 
   if(options.body.gender){

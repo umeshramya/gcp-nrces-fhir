@@ -20,7 +20,8 @@ const {
   HealthDocumentBundle,
   GcpFhirSearch,
   CoverageEligibiltyResponse,
-  Coverage
+  Coverage,
+  CoverageEligibilityRequest
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -719,282 +720,398 @@ console.log(bundle)
 const testBundle=async()=>{
 
 
-const CVN ={
-  "resourceType" : "CoverageEligibilityResponse",
-  "id" : "E2502",
-  "text" : {
-    "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">A human-readable rendering of the CoverageEligibilityResponse.</div>"
+// const CVN ={
+//   "resourceType" : "CoverageEligibilityResponse",
+//   "id" : "E2502",
+//   "text" : {
+//     "status" : "generated",
+//     "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">A human-readable rendering of the CoverageEligibilityResponse.</div>"
+//   },
+//   "contained" : [{
+//     "resourceType" : "Coverage",
+//     "id" : "coverage-1",
+//     "identifier" : [{
+//       "system" : "http://benefitsinc.com/certificate",
+//       "value" : "12345"
+//     }],
+//     "status" : "active",
+//     "kind" : "insurance",
+//     "type" : {
+//       "coding" : [{
+//         "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+//         "code" : "EHCPOL"
+//       }]
+//     },
+//     "subscriber" : {
+//       "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
+//     },
+//     "beneficiary" : {
+//       "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
+//     },
+//     "dependent" : "1",
+//     "relationship" : {
+//       "coding" : [{
+//         "code" : "self"
+//       }]
+//     },
+//     "insurer" : {
+//       "identifier" : {
+//         "system" : "http://www.bindb.com/bin",
+//         "value" : "123456"
+//       }
+//     },
+//     "class" : [{
+//       "type" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+//           "code" : "EHCPOL"
+//         }]
+//       },
+//       "value" : {
+//         "value" : "CBI35"
+//       },
+//       "name" : "Corporate Baker's Inc. Plan#35"
+//     },
+//     {
+//       "type" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/coverage-class",
+//           "code" : "subplan"
+//         }]
+//       },
+//       "value" : {
+//         "value" : "123"
+//       },
+//       "name" : "Trainee Part-time Benefits"
+//     },
+//     {
+//       "type" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/coverage-class",
+//           "code" : "sequence"
+//         }]
+//       },
+//       "value" : {
+//         "value" : "1"
+//       }
+//     }]
+//   }],
+//   "identifier" : [{
+//     "system" : "http://www.BenefitsInc.com/fhir/coverageeligibilityresponse",
+//     "value" : "8812342"
+//   }],
+//   "status" : "active",
+//   "purpose" : ["validation",
+//   "benefits"],
+//   "patient" : {
+//     "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
+//   },
+//   "created" : "2014-09-16",
+//   "requestor" : {
+//     "identifier" : {
+//       "system" : "http://national.org/clinic",
+//       "value" : "OR1234" //e2653593-dc88-4861-bb5e-f349fa42e86e
+//     }
+//   },
+//   "request" : {
+//     "reference" : "http://www.BenefitsInc.com/fhir/coverageeligibilityrequest/225476332405"
+//   },
+//   "outcome" : "complete",
+//   "disposition" : "Policy is currently in-force.",
+//   "insurer" : {
+//     "reference" : "Organization/e2653593-dc88-4861-bb5e-f349fa42e86e"
+//   },
+//   "insurance" : [{
+//     "coverage" : {
+//       "reference" : "Coverage/e04d92b4-a329-4045-acd9-15c3377ac4a9"
+//     },
+//     "inforce" : true,
+//     "item" : [{
+//       "category" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
+//           "code" : "30",
+//           "display" : "Health Benefit Plan Coverage"
+//         }]
+//       },
+//       "network" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-network",
+//           "code" : "in"
+//         }]
+//       },
+//       "unit" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-unit",
+//           "code" : "individual"
+//         }]
+//       },
+//       "term" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-term",
+//           "code" : "annual"
+//         }]
+//       },
+//       "benefit" : [
+//       {
+//         "type" : {
+//           "coding" : [{
+//             "code" : "benefit"
+//           }]
+//         },
+//         "allowedMoney" : {
+//           "value" : 500000,
+//           "currency" : "USD"
+//         },
+//         "usedMoney" : {
+//           "value" : 3748.00,
+//           "currency" : "USD"
+//         }
+//       },
+//       {
+//         "type" : {
+//           "coding" : [{
+//             "code" : "copay-maximum"
+//           }]
+//         },
+//         "allowedMoney" : {
+//           "value" : 100,
+//           "currency" : "USD"
+//         }
+//       },
+//       {
+//         "type" : {
+//           "coding" : [{
+//             "code" : "copay-percent"
+//           }]
+//         },
+//         "allowedUnsignedInt" : 20
+//       }]
+//     },
+//     {
+//       "category" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
+//           "code" : "69",
+//           "display" : "Maternity"
+//         }]
+//       },
+//       "network" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-network",
+//           "code" : "in"
+//         }]
+//       },
+//       "unit" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-unit",
+//           "code" : "individual"
+//         }]
+//       },
+//       "term" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-term",
+//           "code" : "annual"
+//         }]
+//       },
+//       "benefit" : [{
+//         "type" : {
+//           "coding" : [{
+//             "code" : "benefit"
+//           }]
+//         },
+//         "allowedMoney" : {
+//           "value" : 15000,
+//           "currency" : "USD"
+//         }
+//       }]
+//     },
+//     {
+//       "category" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
+//           "code" : "F3",
+//           "display" : "Dental Coverage"
+//         }]
+//       },
+//       "network" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-network",
+//           "code" : "in"
+//         }]
+//       },
+//       "unit" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-unit",
+//           "code" : "individual"
+//         }]
+//       },
+//       "term" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/benefit-term",
+//           "code" : "annual"
+//         }]
+//       },
+//       "benefit" : [{
+//         "type" : {
+//           "coding" : [{
+//             "code" : "benefit"
+//           }]
+//         },
+//         "allowedMoney" : {
+//           "value" : 2000,
+//           "currency" : "USD"
+//         }
+//       }]
+//     },
+//     {
+//       "category" : {
+//         "coding" : [{
+//           "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
+//           "code" : "F6",
+//           "display" : "Vision Coverage"
+//         }]
+//       },
+//       "excluded" : true,
+//       "name" : "Vision",
+//       "description" : "Vision products and services such as exams, glasses and contact lenses."
+//     }]
+//   }],
+//   "form" : {
+//     "coding" : [{
+//       "system" : "http://national.org/form",
+//       "code" : "ELRSP/2017/01"
+//     }]
+//   }
+// }
+
+const CER={
+  "created": "2024-04-15T18:14:59.042Z",
+  "enterer": {
+    "reference": "Practitioner/38072bae-89d0-493c-9b0b-271bdb399f5e"
   },
-  "contained" : [{
-    "resourceType" : "Coverage",
-    "id" : "coverage-1",
-    "identifier" : [{
-      "system" : "http://benefitsinc.com/certificate",
-      "value" : "12345"
-    }],
-    "status" : "active",
-    "kind" : "insurance",
-    "type" : {
-      "coding" : [{
-        "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-        "code" : "EHCPOL"
-      }]
-    },
-    "subscriber" : {
-      "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
-    },
-    "beneficiary" : {
-      "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
-    },
-    "dependent" : "1",
-    "relationship" : {
-      "coding" : [{
-        "code" : "self"
-      }]
-    },
-    "insurer" : {
-      "identifier" : {
-        "system" : "http://www.bindb.com/bin",
-        "value" : "123456"
-      }
-    },
-    "class" : [{
-      "type" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-          "code" : "EHCPOL"
-        }]
-      },
-      "value" : {
-        "value" : "CBI35"
-      },
-      "name" : "Corporate Baker's Inc. Plan#35"
-    },
-    {
-      "type" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/coverage-class",
-          "code" : "subplan"
-        }]
-      },
-      "value" : {
-        "value" : "123"
-      },
-      "name" : "Trainee Part-time Benefits"
-    },
-    {
-      "type" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/coverage-class",
-          "code" : "sequence"
-        }]
-      },
-      "value" : {
-        "value" : "1"
-      }
-    }]
-  }],
-  "identifier" : [{
-    "system" : "http://www.BenefitsInc.com/fhir/coverageeligibilityresponse",
-    "value" : "8812342"
-  }],
-  "status" : "active",
-  "purpose" : ["validation",
-  "benefits"],
-  "patient" : {
-    "reference" : "Patient/55654e66-f3b8-4f6f-8a40-d3ba2b283e67"
+  "facility": {
+    "reference": "Location/efedcb58-5ed6-4010-b4a0-c7557b6699d2"
   },
-  "created" : "2014-09-16",
-  "requestor" : {
-    "identifier" : {
-      "system" : "http://national.org/clinic",
-      "value" : "OR1234" //e2653593-dc88-4861-bb5e-f349fa42e86e
+  "id": "9e97014a-27db-44e1-ba3b-50037d94d73a",
+  "identifier": [
+    {
+      "system": "https://healthid.ndhm.gov.in/health-number",
+      "type": {
+        "coding": [
+          {
+            "code": "MR",
+            "display": "Medical record number",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203"
+          }
+        ]
+      },
+      "value": "umesh68787826@sbx"
     }
-  },
-  "request" : {
-    "reference" : "http://www.BenefitsInc.com/fhir/coverageeligibilityrequest/225476332405"
-  },
-  "outcome" : "complete",
-  "disposition" : "Policy is currently in-force.",
-  "insurer" : {
-    "reference" : "Organization/e2653593-dc88-4861-bb5e-f349fa42e86e"
-  },
-  "insurance" : [{
-    "coverage" : {
-      "reference" : "Coverage/e04d92b4-a329-4045-acd9-15c3377ac4a9"
-    },
-    "inforce" : true,
-    "item" : [{
-      "category" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
-          "code" : "30",
-          "display" : "Health Benefit Plan Coverage"
-        }]
-      },
-      "network" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-network",
-          "code" : "in"
-        }]
-      },
-      "unit" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-unit",
-          "code" : "individual"
-        }]
-      },
-      "term" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-term",
-          "code" : "annual"
-        }]
-      },
-      "benefit" : [
-      {
-        "type" : {
-          "coding" : [{
-            "code" : "benefit"
-          }]
-        },
-        "allowedMoney" : {
-          "value" : 500000,
-          "currency" : "USD"
-        },
-        "usedMoney" : {
-          "value" : 3748.00,
-          "currency" : "USD"
-        }
-      },
-      {
-        "type" : {
-          "coding" : [{
-            "code" : "copay-maximum"
-          }]
-        },
-        "allowedMoney" : {
-          "value" : 100,
-          "currency" : "USD"
-        }
-      },
-      {
-        "type" : {
-          "coding" : [{
-            "code" : "copay-percent"
-          }]
-        },
-        "allowedUnsignedInt" : 20
-      }]
-    },
+  ],
+  "insurance": [
     {
-      "category" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
-          "code" : "69",
-          "display" : "Maternity"
-        }]
+      "coverage": {
+        "reference": "Coverage/a5eede86-971a-43f4-8414-79b8c7f8d763"
       },
-      "network" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-network",
-          "code" : "in"
-        }]
-      },
-      "unit" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-unit",
-          "code" : "individual"
-        }]
-      },
-      "term" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-term",
-          "code" : "annual"
-        }]
-      },
-      "benefit" : [{
-        "type" : {
-          "coding" : [{
-            "code" : "benefit"
-          }]
-        },
-        "allowedMoney" : {
-          "value" : 15000,
-          "currency" : "USD"
+      "extension": [
+        {
+          "url": "http://hcp.org/codes/insurance-company-owners",
+          "valueString": "2"
         }
-      }]
-    },
+      ],
+      "focal": true
+    }
+  ],
+  "insurer": {
+    "reference": "Organization/d9db0789-6a56-494a-af8a-932ed18c29c0"
+  },
+  "item": [
     {
-      "category" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
-          "code" : "F3",
-          "display" : "Dental Coverage"
-        }]
+      "category": {
+        "coding": [
+          {
+            "code": "781087000",
+            "display": "Medical care",
+            "system": "http://snomed.info/sct"
+          }
+        ],
+        "text": "Medical care"
       },
-      "network" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-network",
-          "code" : "in"
-        }]
-      },
-      "unit" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-unit",
-          "code" : "individual"
-        }]
-      },
-      "term" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/benefit-term",
-          "code" : "annual"
-        }]
-      },
-      "benefit" : [{
-        "type" : {
-          "coding" : [{
-            "code" : "benefit"
-          }]
-        },
-        "allowedMoney" : {
-          "value" : 2000,
-          "currency" : "USD"
+      "diagnosis": [
+        {
+          "diagnosisCodeableConcept": {
+            "coding": [
+              {
+                "code": "Z71.9.",
+                "display": "Fever",
+                "system": "http://hl7.org/fhir/sid/icd-10"
+              }
+            ],
+            "text": "Fever"
+          }
         }
-      }]
-    },
-    {
-      "category" : {
-        "coding" : [{
-          "system" : "http://terminology.hl7.org/CodeSystem/ex-benefitcategory",
-          "code" : "F6",
-          "display" : "Vision Coverage"
-        }]
-      },
-      "excluded" : true,
-      "name" : "Vision",
-      "description" : "Vision products and services such as exams, glasses and contact lenses."
-    }]
-  }],
-  "form" : {
-    "coding" : [{
-      "system" : "http://national.org/form",
-      "code" : "ELRSP/2017/01"
-    }]
+      ],
+      "productOrService": {
+        "coding": [
+          {
+            "code": "416113008",
+            "display": "Febrile disorder",
+            "system": "http://snomed.info/sct"
+          }
+        ],
+        "text": "Febrile disorder"
+      }
+    }
+  ],
+  "language": "en",
+  "meta": {
+    "lastUpdated": "2024-04-15T18:15:00.433670+00:00",
+    "profile": [
+      "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityRequest.html"
+    ],
+    "versionId": "MTcxMzIwNDkwMDQzMzY3MDAwMA"
+  },
+  "patient": {
+    "reference": "Patient/66d78bfa-5088-4f91-b0d0-5f18bddd4bd1"
+  },
+  "priority": {
+    "coding": [
+      {
+        "code": "stat",
+        "display": "Immediate",
+        "system": "http://terminology.hl7.org/ValueSet/processpriority"
+      }
+    ],
+    "text": "Immediately in real time."
+  },
+  "provider": {
+    "reference": "Organization/fd6464c1-a8ef-4e95-aa2a-d5eac433b85d"
+  },
+  "purpose": [
+    "benefits"
+  ],
+  "resourceType": "CoverageEligibilityRequest",
+  "servicedDate": "2024-04-15",
+  "status": "active",
+  "text": {
+    "div": "\n  <div xmlns=\"http://www.w3.org/1999/xhtml\"><p>\n  Patient Name : Umesh Ramachandra Bilagi \n  Policy Id : BEN 123 \n  Insurance: ICICI Lombard General Insurance Co. Ltd. \n  Subscribeer Id : SUB 123 \n  Diagnosis : Fever \n  Discreption : Fever \n  </p></div>\n  ",
+    "status": "generated"
   }
 }
 
 
 
 
-const coverageRes = await new GcpFhirCRUD().getFhirResource("e04d92b4-a329-4045-acd9-15c3377ac4a9", "Coverage")
+
+const coverageRes = await new GcpFhirCRUD().getFhirResource("a5eede86-971a-43f4-8414-79b8c7f8d763", "Coverage")
 const coverageObj = new Coverage().convertFhirToObject(coverageRes.data)
 
 
+ const result = new CoverageEligibilityRequest().convertFhirToObject(CER)
+ console.log(result)
 
- const result = new CoverageEligibiltyResponse().convertFhirToObject(CVN)
-
- console.log(await new CoverageEligibiltyResponse().toHtml({"addResourceType" : true, "body" : result, "coverages" : [coverageObj]}))
+ console.log(await new CoverageEligibilityRequest().toHtml({"addResourceType" : true, "body" : result, "coverages" : [coverageObj]}))
 
 //  console.log(result.insurance[0].item[0])
 }

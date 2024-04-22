@@ -99,8 +99,8 @@ export interface IDENTTIFIER {
   type?: CODEABLE_CONCEPT; // Description of identifier
   system?: string; // The namespace for the identifier value
   value?: string; // The value that is unique
-  period?: { Period: PERIOD }; // Time period when id is/was valid for use
-  assigner?: { Reference: `Organization/` | string }; // Organization that issued id (may be just text)
+  period?: PERIOD; // Time period when id is/was valid for use
+  assigner?: { Reference: `Organization/${string}`  }; // Organization that issued id (may be just text)
 }
 
 export interface ADDRESS {

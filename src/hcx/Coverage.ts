@@ -96,8 +96,10 @@ For some coverages a single identifier is issued to the Subscriber and then a un
   hcx?: "nhcx" | "swasth";
 }
 
+
+
 export interface TO_HTML_HCX_OPTIONS_COVERAGE
-  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
+  extends Omit<Omit<TO_HTML_HCX_OPTIONS, "body">, "coverages"> {
   body: COVERAGE;
   showPatient: boolean;
   showInsuranceCompany: boolean;
@@ -178,12 +180,12 @@ export class Coverage extends ResourceMain implements ResourceMaster {
       ret += `<b>PolicyHolder</b> : ${option.body.policyHolder.id}<br/>`;
     }
 
-    if(option.body.subscriber && option.body.subscriber.id){
-      ret += `<b>Policy Subscriber</b> : ${option.body.subscriber.id}<br/>`
+    if(option.body.subscriberId){
+      ret += `<b>Policy Subscriber</b> : ${option.body.subscriberId}<br/>`
     }
 
     if(option.body.relationship){
-      ret += `<b>Coverage Relationship</b> : ${this.codebleConceptToHtml(option.body.relationship)}<br/>`
+      ret += `<b>Subscriber Relationship</b> : ${this.codebleConceptToHtml(option.body.relationship)}<br/>`
     }
 
     if (option.body.period) {

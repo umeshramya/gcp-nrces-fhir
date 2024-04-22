@@ -1,3 +1,4 @@
+import GcpFhirCRUD from "../classess/gcp";
 import {
   CODEABLE_CONCEPT,
   EXTENSION,
@@ -6,10 +7,11 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import { ORGANIZATION } from "../resources/Organization";
-import { PATIENT } from "../resources/Patient";
+import { Organization, ORGANIZATION } from "../resources/Organization";
+import { Patient, PATIENT } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
+import { Coverage } from "./Coverage";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 const CoverageEligibilityRequestStatus = [
@@ -121,18 +123,23 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
   hcx?: "nhcx" | "swasth";
 }
 
+export interface TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_REQUEST
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
+  body: COVERAGE_ELIGIBILITY_REQUEST;
+}
+
 export class CoverageEligibilityRequest
   extends ResourceMain
   implements ResourceMaster
 {
-
-
-  async toHtml(option: TO_HTML_HCX_OPTIONS):Promise<string> {
+  async toHtml(
+    option: TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_REQUEST
+  ): Promise<string> {
     let ret: string = "";
     const body: COVERAGE_ELIGIBILITY_REQUEST = option.body as any;
 
     if (option.addResourceType) {
-      ret += `<h4>Coverage Eligibility Request</h4>`;
+      ret += `<h1>Coverage Eligibility Request</h1>`;
     }
 
     ret += `Date : ${new TimeZone().convertTZ(
@@ -140,15 +147,134 @@ export class CoverageEligibilityRequest
       "Asia/Kolkata",
       false
     )}`;
-    ret += option.patinet
-      ? `Patient Name : ${option.patinet.name}<br/> ${body.text} <br/>`
-      : `Patient Id : ${body.patientId}<br/>`;
-    ret += option.insurance
-      ? `Insurance : ${option.insurance.name}<br/>`
-      : `Insurance Id : ${body.insurerOrganizationId}<br/>`;
-    ret += `Text ${body.text}<br/>`;
-    ret += body.purpose && `Purpose : ${body.purpose}</br>`;
 
+    const pateintFactory = new Patient();
+    if (option.patinet == undefined) {
+      option.patinet = pateintFactory.convertFhirToObject(
+        (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient"))
+          .data
+      );
+    }
+
+    ret += `<h3>Patient</h3>`;
+    ret += await pateintFactory.toHtml({
+      addResourceType: false,
+      body: option.patinet,
+    });
+
+    const orgnaization = new Organization();
+    if (!option.insurance) {
+      const resource = (
+        await new GcpFhirCRUD().getFhirResource(
+          option.body.insurerOrganizationId,
+          "Organization"
+        )
+      ).data;
+      option.insurance = orgnaization.convertFhirToObject(resource);
+    }
+    ret += `<h3>Insurance</h3>`;
+    ret += await orgnaization.toHtml({
+      addResourceType: false,
+      body: option.insurance,
+    });
+
+    ret += `<hr/>`;
+
+    if (body.text) {
+      ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
+    }
+
+    ret += `<h2>Object to Text</h2>`;
+
+    if (body.purpose) {
+      ret += body.purpose && `Purpose : ${body.purpose}</br>`;
+    }
+
+    if (option.body.identifier && option.body.identifier.length > 0) {
+      ret += `<h4>Identifiers</h4>`;
+      for (let index = 0; index < option.body.identifier.length; index++) {
+        ret += `${this.identifierToHtml(option.body.identifier[index])}`;
+      }
+    }
+
+    if (option.body.priority) {
+      ret += `<b>Priority</b> : ${this.codebleConceptToHtml(
+        option.body.priority
+      )}<br/>`;
+    }
+
+
+    if (body.insurance && body.insurance.length > 0) {
+      ret += `<h4>Insurances</h4>`;
+      ret +=`<table>
+        <tr>
+          <th>
+            Coverage
+          </th>
+          <th>
+            Extension
+          </th>
+          <th>
+            Focal
+          </th>
+        </tr>
+      `
+    
+      for (let index = 0; index < body.insurance.length; index++) {
+        ret +=`<tr>`
+        const el = body.insurance[index];
+        // Coverages
+        ret +=`<td>`
+        if (
+          el.coverage &&
+          el.coverage.reference &&
+          option.coverages &&
+          option.coverages.length > 0
+        ) {
+          try {
+            
+            const coverage = new Coverage();
+            const id = coverage.getIdFromReference({
+              resourceType: "Coverage",
+              ref: el.coverage.reference,
+            });
+            const filCoverage = option.coverages.filter((cl) => cl.id == id);
+            if (filCoverage && filCoverage.length > 0) {
+              
+              ret += await coverage.toHtml({
+                addResourceType: false,
+                body: filCoverage[0],
+                showInsuranceCompany: false,
+                showPatient: false,
+              });
+            }
+          } catch (error) {
+            console.error("Error in coverage if block:", error);
+          }
+        }
+        ret +=`</td>`
+
+        // Extension
+        ret +=`<td>`
+        if(el.extension){
+          ret += `${el.extension.map(ex=>{
+            return this.extensionToHtml(ex)
+          }).join(`<br/>`)}`
+        }
+        ret +=`</td>`
+
+        // Focal
+
+        ret += `<td>`
+        if(el.focal){
+          ret += `${el.focal}`
+        }
+        ret += `</td>`
+        ret +=`</tr>`
+      }
+    }
+
+    ret += `</table>`
     return ret;
   }
   getFHIR(options: COVERAGE_ELIGIBILITY_REQUEST): any {
@@ -215,7 +341,7 @@ export class CoverageEligibilityRequest
     let ret: COVERAGE_ELIGIBILITY_REQUEST = {
       id: options.id,
       status: options.status,
-      text: options.text,
+      text: options.text && options.text.div,
       identifier: options.identifier,
       priority: options.priority,
       purpose: options.purpose,
