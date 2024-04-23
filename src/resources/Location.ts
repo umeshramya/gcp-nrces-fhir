@@ -3,6 +3,7 @@ import { ADDRESS, AVAILIBILITY, CODEABLE_CONCEPT, CodeDisplay, CODING, CONTACT_P
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
 import ResourceMain from "./ResourceMai";
+import GcpFhirCRUD from "../classess/gcp";
 
 const locatioStatusArray = ["active" , "suspended" , "inactive"] as const
 export const locationFormTypesArray = ["Site", "Building", "Wing", "Ward", "Level", "Corridor", "Room", "Bed", "Vehicle", "House","Cabinet", "Road", "Area", "Jurisdiction", "Virtual"] as const
@@ -31,8 +32,75 @@ export interface LOCATION{
 }
 
 export  class Location extends ResourceMain implements ResourceMaster{
- async toHtml():Promise<string> {
-    throw new Error("Method not implemented.");
+ async toHtml(option:{
+  body:LOCATION;
+ }):Promise<string> {
+    let ret:string=""
+    if(option.body.name){
+      ret += `<h3>${option.body.name}</h3>`
+    }  
+
+    if(option.body.description){
+      ret +=`<b>Description</b> :${option.body.description}<br/>`
+    }
+
+    if(option.body.alias){
+      ret += `<b>Alias</b> : ${option.body.alias.join(' ,')}<br/>`
+    }
+
+    if(option.body.availabilityExceptions){
+      ret += `Availability Exceptions :${option.body.availabilityExceptions}`
+    }
+
+
+
+    if(option.body.indentifiers){
+      ret += `<h4>Identifiers</h4>`
+      option.body.indentifiers.forEach(el=>{
+        ret += `${this.identifierToHtml(el)}<br/>`
+      })
+    }
+
+    if(option.body.mode){
+      ret += `<b>Mode</b> : ${this.codeDiplaytoHtml(option.body.mode)} `
+    }
+
+    if(option.body.operationalStatus){
+      ret += `Operational Status : ${this.codingtoHtml(option.body.operationalStatus)}`
+    }
+
+    if(option.body.status){
+      ret += `<b>Status</b> : ${option.body.status}`
+    }
+
+    if(option.body.partOfLocationId){
+      try {
+        const resource = await new GcpFhirCRUD( ).getFhirResource(option.body.partOfLocationId,"Location")
+        if(resource.data){
+          const locationObj = new Location().convertFhirToObject(resource.data);
+          ret +=`<b>Part Of Location</b> : ${locationObj.name}<br/>`
+        }
+      } catch (error) {
+        console.log(error)
+        ret +=`Invalid Part of location id ${option.body.partOfLocationId}`
+      }
+
+    }
+
+    if(option.body.physicalType){
+      ret +=`<b>Physical Type</b> : ${this.codebleConceptToHtml(option.body.physicalType)}<br/>`
+    }
+
+    if(option.body.position){
+      ret += `<b>Position</b> : ${this.positionToHtml(option.body.position)}`
+    }
+
+    
+
+
+  
+
+    return ret;
   }
   getFHIR(options: LOCATION):any {
     const body:any={

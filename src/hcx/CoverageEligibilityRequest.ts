@@ -7,6 +7,7 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { Location } from "../resources/Location";
 import { Organization, ORGANIZATION } from "../resources/Organization";
 import { Patient, PATIENT } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
@@ -69,15 +70,14 @@ interface ITEM_FACILITY extends MULTI_RESOURCE {
   resource: "Location" | "Organization";
 }
 
-type DIAGNOSIS =
-  | {
+type DIAGNOSIS = {
       diagnosisCodeableConcept: CODEABLE_CONCEPT;
     }
-  | {
-      diagnosisReference: {
-        reference: string;
-      };
-    };
+  // | {
+  //     diagnosisReference: {
+  //       reference: string;
+  //     };
+  //   };
 
 interface ITEM {
   category?: CODEABLE_CONCEPT;
@@ -203,6 +203,20 @@ export class CoverageEligibilityRequest
       )}<br/>`;
     }
 
+    if(option.body.locationId){
+      try {
+        
+        const locationRes = await new GcpFhirCRUD().getFhirResource(option.body.locationId, "Location")
+        if(locationRes && locationRes.data){
+          const location =new Location()
+          const locationObj = location.convertFhirToObject(locationRes.data)
+          ret +=`<h3>Location</h3>  ${await location.toHtml({body : locationObj}) }`
+        }
+      } catch (error) {
+        
+      }
+    }
+
 
     if (body.insurance && body.insurance.length > 0) {
       ret += `<h4>Insurances</h4>`;
@@ -275,6 +289,53 @@ export class CoverageEligibilityRequest
     }
 
     ret += `</table>`
+
+    if(body.item && body.item.length > 0){
+      ret +=`<table>
+      <tr>
+        <th>category</th>
+        <th>diagnosis</th>
+        <th>productOrService</th>
+      </tr>`
+
+      for (let index = 0; index < body.item.length; index++) {
+        
+        const el = body.item[index];
+    
+        ret +=`<tr>`
+        if(el.category){
+
+          ret +=`<td>`
+          ret += this.codebleConceptToHtml(el.category)
+          ret +=`</td>`
+        }
+
+        if(el.diagnosis){
+          ret +=`<td>`
+          el.diagnosis.forEach((dia)=>{
+    
+           if(dia.diagnosisCodeableConcept ){
+              ret += `${this.codebleConceptToHtml(dia.diagnosisCodeableConcept )}`
+           }
+          })
+          ret += `</td>`
+        }
+
+        if(el.productOrService){
+
+          ret += `<td>`
+          ret += this.codebleConceptToHtml(el.productOrService)
+          ret+=`</td>`
+        
+        }
+
+         
+        ret +=`</tr>`
+      }
+
+      ret+=`</table>`
+
+    }
     return ret;
   }
   getFHIR(options: COVERAGE_ELIGIBILITY_REQUEST): any {

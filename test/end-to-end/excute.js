@@ -1109,7 +1109,7 @@ const coverageObj = new Coverage().convertFhirToObject(coverageRes.data)
 
 
  const result = new CoverageEligibilityRequest().convertFhirToObject(CER)
- console.log(result)
+//  console.log(result)
 
  console.log(await new CoverageEligibilityRequest().toHtml({"addResourceType" : true, "body" : result, "coverages" : [coverageObj]}))
 

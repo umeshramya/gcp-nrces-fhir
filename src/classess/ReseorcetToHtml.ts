@@ -1,4 +1,4 @@
-import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, PERIOD } from "../config";
+import { CODEABLE_CONCEPT, CodeDisplay, CODING, EXTENSION, IDENTTIFIER, PERIOD, POSITION } from "../config";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 
@@ -6,29 +6,35 @@ export default class ResourceToHTML {
 
   codebleConceptToHtml(val: CODEABLE_CONCEPT): string {
     let ret: string = "";
-    if (val.coding) {
-      val.coding.forEach((el) => {
-        ret += `<br/>`;
-        if (el.code) {
-          ret += `<i>Code</i> : ${el.code} <br/>`;
-        }
+    // if (val.coding) {
+    //   val.coding.forEach((el) => {
+    //     ret += `<br/>`;
+    //     if (el.code) {
+    //       ret += `<i>Code</i> : ${el.code} <br/>`;
+    //     }
 
-        if (el.display) {
-          ret += `<i>Display</i> : ${el.display} <br/>`;
-        }
+    //     if (el.display) {
+    //       ret += `<i>Display</i> : ${el.display} <br/>`;
+    //     }
 
-        if (el.system) {
-          ret += `<i>System</i> : <a href=${el.system} target="_blank" rel="noopener noreferrer">${el.system}</a>
-                    <br\>`;
-        }
+    //     if (el.system) {
+    //       ret += `<i>System</i> : <a href=${el.system} target="_blank" rel="noopener noreferrer">${el.system}</a>
+    //                 <br\>`;
+    //     }
 
-        if (el.userSelected) {
-          ret += `<i>UserSelected<i/> : ${el.userSelected}<br/>`;
-        }
-        if (el.version) {
-          ret += `<i>Version</i> : ${el.version}<br/>`;
-        }
-      });
+    //     if (el.userSelected) {
+    //       ret += `<i>UserSelected<i/> : ${el.userSelected}<br/>`;
+    //     }
+    //     if (el.version) {
+    //       ret += `<i>Version</i> : ${el.version}<br/>`;
+    //     }
+    //   });
+    // }
+
+    if(val.coding){
+      val.coding.forEach(el=>{
+        ret += this.codingtoHtml(el)
+      })
     }
 
     if (val.text) {
@@ -104,6 +110,59 @@ export default class ResourceToHTML {
       ret += `<i>Value</i> : ${val.valueString}`
     }
 
+    return ret;
+  }
+
+  codeDiplaytoHtml(val:CodeDisplay):string{
+    let ret:string=""
+    if(val.code){
+      ret += `<i>Code</i> : ${val.code}<br/>`
+    }
+
+    if(val.display){
+      ret +=`<i>Display</i> : ${val.display}<br/>`
+    }
+
+    if(val.system){
+      ret += `<i>System</i> : <a href=${val.system} target="_blank" rel="noopener noreferrer">${val.system}</a>
+      <br\>`;
+    }
+    
+    return ret;
+  }
+
+  codingtoHtml(val:CODING):string{
+    let ret:string=""
+    ret += this.codeDiplaytoHtml(val)
+
+    if(val.userSelected){
+      ret += `<i>User Selected</i> : ${val.userSelected}<br/>`
+    }
+
+    if(val.version){
+      ret +=`<i>Version</i> : ${val.version}<br/>`
+    }
+
+
+   
+
+    return ret;
+  }
+
+  positionToHtml(val:POSITION):string{
+    let ret:string=""
+
+    if(val.altitude){
+      ret +=`<i>Altitude</i> : ${val.altitude}<br/> `
+    }
+
+    if(val.latitude){
+      ret +=`<i>Latitude</i> : ${val.latitude}<br/>`
+    }
+
+    if(val.longitude){
+      ret += `<i>Longitude</i> : ${val.longitude}<br/>`
+    }
     return ret;
   }
 }
