@@ -33,7 +33,7 @@ export class DocumentReference extends ResourceMain implements ResourceMaster {
       id: options.id || undefined,
       meta: {
         profile: [
-          "httcps://nrces.in/ndhm/fhir/r4/StructureDefinition/DocumentReference",
+          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DocumentReference",
         ],
       },
       text: {
