@@ -115,7 +115,30 @@ export class CommunicationRequest extends ResourceMain implements ResourceMaster
       return body
     }
     convertFhirToObject(options: any) {
-        throw new Error("Method not implemented.");
+        const ret:COMMUNICATION_REQUEST={
+            text: options.text && options.text.div || "",
+            identifiers: options.identifier,
+            basedOn: options.basedOn && options.basedOn.map((el: { basedOn: { reference: any; }; display: any; })=>{
+                return this.getFromMultResource({"reference" : el.basedOn.reference, "display" : el.display || undefined})
+            }),
+            status: options.status,
+            category: options.category,
+            priority: options.priority,
+            reasonReference: options.reasonReference && options.reasonReference.map((el: { reference: any; display: any; })=>{
+                return this.getFromMultResource({"reference" : el.reference, display : el.display})
+            }),
+            statusReason: options.statusReason,
+            authoredOn: options.authoredOn,
+            requester: options.requester && this.getFromMultResource({"reference" : options.requester, "display" : options.requester.display}),
+            payload: options.payload,
+            recipient: options.recipient && options.recipient.map((el: { reference: any; display: any; })=>{
+                return this.getFromMultResource({"reference" : el.reference, display : el.display})
+            }),
+            sender: options.sender && this.getFromMultResource({"reference" : options.sender.reference, "display" : options.sender.display})
+        }
+
+
+        return ret;
     }
     async toHtml(option: { addResourceType: boolean; }):Promise<string> {
         throw new Error("Method not implemented.");
