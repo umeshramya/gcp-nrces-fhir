@@ -44,9 +44,9 @@ export interface HasMember extends MULTI_RESOURCE {
 
 export interface SAMPLE_QUANTITY {
   value: number;
-  unit: string;
-  system: "http://unitsofmeasure.org";
-  code: string;
+  unit?: string;
+  system?: "http://unitsofmeasure.org";
+  code?: string;
 }
 
 export interface QUANTITY extends Partial<SAMPLE_QUANTITY> {
