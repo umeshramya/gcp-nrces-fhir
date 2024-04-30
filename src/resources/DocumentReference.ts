@@ -1,3 +1,4 @@
+import { text } from "stream/consumers";
 import { CODEABLE_CONCEPT, CodeDisplay } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
@@ -19,6 +20,7 @@ export interface DOCUMENT_REFERENCE {
   patientId: string
   pdf: string
   title: string
+  text?:string
 }
 
 
@@ -38,7 +40,7 @@ export class DocumentReference extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: `<div xmlns="http://www.w3.org/1999/xhtml"></div>`,
+        div: `<div xmlns="http://www.w3.org/1999/xhtml">${options.text || options.title}</div>`,
       },
       status: options.status,
       docStatus: options.docStatus,
@@ -68,7 +70,8 @@ export class DocumentReference extends ResourceMain implements ResourceMaster {
       type: options.type,
       patientId: this.getIdFromReference({"ref" : options.subject.reference, "resourceType" : "Patient"}),
       pdf: options.content[0].attachment.data,
-      title: options.content[0].attachment.title
+      title: options.content[0].attachment.title, 
+      text : options.text.div
     }
 
     return ret
