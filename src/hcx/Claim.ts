@@ -1,4 +1,6 @@
 import { ResourceMaster } from "../Interfaces";
+import { TimeZone } from "../TimeZone";
+import GcpFhirCRUD from "../classess/gcp";
 import {
   CODEABLE_CONCEPT,
   EXTENSION,
@@ -7,7 +9,10 @@ import {
   PERIOD,
 } from "../config";
 import { QUANTITY, SAMPLE_QUANTITY, SUPPORTING_INFO } from "../resources/Observation";
+import { Organization } from "../resources/Organization";
+import { Patient } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 
 interface PAYEE_PARTY {
@@ -75,9 +80,81 @@ export interface CLAIM {
   hcx?: "nhcx" | "swastha";
 }
 
+interface TO_HTML_HCX_OPTIONS_CLAIM extends Omit<TO_HTML_HCX_OPTIONS, "body">{
+  body : CLAIM
+}
 export class Claim extends ResourceMain implements ResourceMaster {
- async  toHtml():Promise<string> {
-    throw new Error("Method not implemented.");
+ async  toHtml(options: TO_HTML_HCX_OPTIONS_CLAIM):Promise<string> {
+    const body:CLAIM= options.body
+    let ret : string = ""
+    try {
+      if(options.addResourceType){
+        ret+=`<h1>${body.use.toUpperCase()}</h1>`
+      }
+
+      if(body.createdDate){
+        ret += `Date : ${new TimeZone().convertTZ(body.createdDate, "Asia/Kolkata", false)}<br/>`
+      }
+
+      if(options.patinet){
+        ret += `<h3>Patient</h3>`;
+        ret += await new Patient().toHtml({"addResourceType" : false, body : options.patinet})
+      }
+
+      const orgnaization = new Organization();
+      if (!options.insurance) {
+        const resource = (
+          await new GcpFhirCRUD().getFhirResource(
+            options.body.payorId,
+            "Organization"
+          )
+        ).data;
+        options.insurance = orgnaization.convertFhirToObject(resource);
+      }
+      ret += `<h3>Insurance</h3>`;
+      ret += await orgnaization.toHtml({
+        addResourceType: false,
+        body: options.insurance,
+      });
+
+    ret += `<hr/>`;
+
+    if (body.text) {
+      ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
+      ret += `<h2>Object Text</h2>`
+    }
+
+    if(body.identifier && body.identifier.length >0){
+      ret += `<h4>Identifiers</h4>`
+      body.identifier.forEach(el=>{
+        ret += this.identifierToHtml(el)
+      })
+    }
+
+    if(body.diagnosis && body.diagnosis.length > 0){
+      body.diagnosis.forEach(el=>{
+        if(el.diagnosisCodeableConcept){
+          ret += `Diagnosis Codeable Concept  : ${this.codebleConceptToHtml(el.diagnosisCodeableConcept)}`
+        }
+
+        if(el.type && el.type.length > 0){
+          el.type.forEach(type=>{
+            ret += `Type : ${this.codebleConceptToHtml(type)}`
+          })
+        }
+      })
+    }
+
+   
+
+    
+
+      return ret;
+    } catch (error) {
+      console.log(error)
+      return ret;
+      
+    }
   }
   getFHIR(options: CLAIM) {
     const body = {
