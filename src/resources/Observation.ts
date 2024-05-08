@@ -1,7 +1,7 @@
 import { htmlToText } from "html-to-text";
 import { type } from "os";
 import GcpFhirCRUD from "../classess/gcp";
-import { CODEABLE_CONCEPT, MULTI_RESOURCE, PERIOD } from "../config";
+import { ATTACHMENT, CODEABLE_CONCEPT, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -101,6 +101,7 @@ export interface SUPPORTING_INFO{
   sequence:number,
   category:CODEABLE_CONCEPT;
   code : CODEABLE_CONCEPT;
+  "valueAttachment"?: ATTACHMENT;
   "valueReference" ?: {
     "reference" : `DocumentReference/${string}`
   }

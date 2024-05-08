@@ -205,3 +205,19 @@ export interface EXTENSION {
   url:string;
   valueString?:string
 }
+
+
+export interface ATTACHMENT {
+  /**"application/pdf" */
+  contentType: string,
+  language: "en-IN",
+  /**data 	base64Binary*/
+  data?: any
+  url?:string
+   /**base64Binary*/
+  hash ?: any
+  size ?:string
+  title: string,
+  /**new Date().toISOString() */
+  creation: string,
+}
