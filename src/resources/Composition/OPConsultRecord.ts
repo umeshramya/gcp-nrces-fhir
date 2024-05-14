@@ -1,9 +1,21 @@
 import { TimeZone } from "../../TimeZone";
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
+import { title } from "process";
 interface Args {
   composition: COMPOSITOIN;
-  chiefComplaints: any;
+  chiefComplaints?: any;
+  treamentProtocol?:any;
+  weight?:any;
+  height?:any;
+  heartRate:any
+  bloodPressurerightArm:any
+  bodyMassIndex?:any
+  bodySurfaceArea?:any
+  respiratoryRate?:any
+  spo2:any
+
+  stage?:any
   allergies?: any;
   medicalHistory?: any;
   investigationAdvice?: any;
@@ -110,6 +122,202 @@ export class OPConsultRecord extends Composition implements Records {
 
   getLeftColumn = (options: Args): string => {
     let docHtml = "";
+    if(options.weight){
+      options.composition.section.push({
+        title: "Body Weight",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "29463-7",
+              "display": "Body weight"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.weight.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.weight.text.div}<br/>`;
+
+    }
+
+    if(options.height){
+      options.composition.section.push({
+        title: "Body Height",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "8302-2",
+              "display": "Body height"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.height.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.height.text.div}<br/>`;
+
+    }
+
+    if(options.bodyMassIndex){
+      options.composition.section.push({
+        title: "Body Mass Index",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "39156-5",
+              "display": "Body mass index (BMI) [Ratio]"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.bodyMassIndex.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.bodyMassIndex.text.div}<br/>`;
+
+    }
+
+    if(options.bodySurfaceArea){
+      options.composition.section.push({
+        title: "Body Surface Area",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "58025-7",
+              "display": "Body Surface Area (BSA) [Ratio]"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.bodySurfaceArea.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.bodySurfaceArea.text.div}<br/>`;
+
+    }
+
+    if(options.respiratoryRate){
+      options.composition.section.push({
+        title: "Respiratory rate",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.respiratoryRate.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.respiratoryRate.text.div}<br/>`;
+
+    }
+
+    if(options.spo2){
+      options.composition.section.push({
+        title: "Oxygen saturation in Arterial blood",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation in Arterial blood"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.spo2.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.spo2.text.div}<br/>`;
+
+    }
+
+    if(options.heartRate){
+      options.composition.section.push({
+        title: "Oxygen saturation in Arterial blood",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.heartRate.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.heartRate.text.div}<br/>`;
+
+    }
+
+    if(options.bloodPressurerightArm){
+      options.composition.section.push({
+        title: "Blood pressure panel with all children optional",
+        code: {
+          coding: [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+        },
+        entry: [
+          {
+            reference: `Observation/${options.bloodPressurerightArm.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.bloodPressurerightArm.text.div}<br/>`;
+
+    }
+
+
+  
+
+
     if (options.chiefComplaints) {
       options.composition.section.push({
         title: "Chief complaints",
@@ -281,6 +489,29 @@ export class OPConsultRecord extends Composition implements Records {
       docHtml =
         docHtml +
         `<b>Investigation Advice</b>${options.investigationAdvice.text.div}</br>`;
+    }
+
+    if(options.treamentProtocol){
+      options.composition.section.push({
+        title: "Treatement Protocol",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "422843007",
+              display: "Treatement Protocol",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Condition/${options.treamentProtocol.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.treamentProtocol.text.div}<br/>`;
     }
 
     return docHtml;

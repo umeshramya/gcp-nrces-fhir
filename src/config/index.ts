@@ -221,3 +221,16 @@ export interface ATTACHMENT {
   /**new Date().toISOString() */
   creation: string,
 }
+
+
+export interface REFERENCE{
+  reference? :string;
+  type ?: resourceType
+  identifier ?: IDENTTIFIER
+  display ?:string
+}
+
+export interface MONEY{
+  value?: number;
+  currency?:string;
+}

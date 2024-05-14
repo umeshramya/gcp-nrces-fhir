@@ -1,1 +1,35 @@
-{"resourceType":"Observation","id":"example-27","meta":{"profile":["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationLifestyle"]},"text":{"status":"generated","div":"<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-27</p><p><b>status</b>: final</p><p><b>code</b>: Diet [Type] <span>(Details : LOINC code '81663-7' = 'Diet [Type]', given as 'Diet [Type]')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: Vegan<span> (Details: SNOMED CT code 24930006 = 'Vegan', given as 'Vegan')</span></p></div>"},"status":"final","code":{"coding":[{"system":"http://loinc.org","code":"81663-7","display":"Diet [Type]"}],"text":"Diet [Type]"},"subject":{"reference":"Patient/1"},"valueCodeableConcept":{"coding":[{"system":"http://snomed.info/sct","code":"24930006","display":"Vegan"}],"text":"Vegan"}}
+{
+  "resourceType": "Observation",
+  "id": "example-27",
+  "meta": {
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationLifestyle"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Narrative with Details</b></p><p><b>id</b>: example-27</p><p><b>status</b>: final</p><p><b>code</b>: Diet [Type] <span>(Details : LOINC code '81663-7' = 'Diet [Type]', given as 'Diet [Type]')</span></p><p><b>subject</b>: ABC</p><p><b>value</b>: Vegan<span> (Details: SNOMED CT code 24930006 = 'Vegan', given as 'Vegan')</span></p></div>"
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "81663-7",
+        "display": "Diet [Type]"
+      }
+    ],
+    "text": "Diet [Type]"
+  },
+  "subject": { "reference": "Patient/1" },
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "24930006",
+        "display": "Vegan"
+      }
+    ],
+    "text": "Vegan"
+  }
+}
