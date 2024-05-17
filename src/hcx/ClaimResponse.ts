@@ -87,11 +87,18 @@ interface ADD_ITEM{
 }
 
 interface INSURANCE{
-
+    sequence:number;
+    focal:boolean;
+    coverage:REFERENCE;
+    businessArrangement?:string
+    claimResponse?:REFERENCE
 }
 
 interface ERROR{
-    
+    itemSequence?:number;
+    detailSequence?:number;
+    subDetailSequence?:number
+    code:CODEABLE_CONCEPT
 }
 
 
@@ -125,13 +132,8 @@ interface CLAIM_RESPONSE{
     form:ATTACHMENT
     addItem:ADD_ITEM[]
     communicationRequest ?:REFERENCE
-    insurance?:INSURANCE
-    error:ERROR
-    
-
- 
-
-
+    insurance?:INSURANCE[]
+    error:ERROR[]
 }
 
 export class ClaimResponse extends ResourceMain implements ResourceMaster{
@@ -180,10 +182,12 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster{
           return body
     }
     convertFhirToObject(options: any) {
-        throw new Error("Method not implemented.");
+        const ret:CLAIM_RESPONSE=options;
+        options.text = options.text && options.text.div ? options.text.div : ""
+        return ret;
     }
     async toHtml(option: { addResourceType: boolean; }):Promise<string> {
-        throw new Error("Method not implemented.");
+        return ""
     }
     statusArray?: Function | undefined;
     
