@@ -2,18 +2,19 @@ import { TimeZone } from "../../TimeZone";
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 import { title } from "process";
+
 interface Args {
   composition: COMPOSITOIN;
   chiefComplaints?: any;
   treamentProtocol?:any;
   weight?:any;
   height?:any;
-  heartRate:any
-  bloodPressurerightArm:any
+  heartRate?:any
+  bloodPressurerightArm?:any
   bodyMassIndex?:any
   bodySurfaceArea?:any
   respiratoryRate?:any
-  spo2:any
+  spo2?:any
 
   stage?:any
   allergies?: any;
