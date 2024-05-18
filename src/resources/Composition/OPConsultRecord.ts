@@ -71,7 +71,10 @@ export class OPConsultRecord extends Composition implements Records {
      docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`
  
     }
-    if(!options.composition.documentSubType){
+    if(options.composition.documentSubType){
+      docHtml += `${this.getLeftColumn(options)}<br/>`
+      docHtml += `${this.getRightColumn(options)}`
+    }else{
       docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
       docHtml += `<tbody style="display: table-header-group"><tr>`;
       docHtml += `<td style="width: 50%;"  border="0" >${this.getLeftColumn(
@@ -82,9 +85,6 @@ export class OPConsultRecord extends Composition implements Records {
       )}</td>`;
       docHtml += `</tbody>`;
       docHtml += `</table>`;
-    }else{
-      docHtml += `${this.getLeftColumn(options)}<br/>`
-      docHtml += `${this.getRightColumn(options)}`
     }
 
     if (options.medicationRequest || options.medicationStatement) {

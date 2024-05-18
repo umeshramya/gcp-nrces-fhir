@@ -94,7 +94,7 @@ export interface COMPOSITOIN {
   documentDatahtml?: string;
   section: any[];
   extension?: EXTENSION[];
-  documentSubType:string
+  documentSubType?:string
 }
 
 export interface USER_COMPOSITION_EXTENSION {
@@ -105,8 +105,9 @@ export interface USER_COMPOSITION_EXTENSION {
   orgName: string;
 }
 export class Composition extends ResourceMain implements ResourceMaster {
-  async toHtml():Promise<string> {
-    throw new Error("Method not implemented.");
+  async toHtml(composition:COMPOSITOIN):Promise<string> {
+    return composition.documentDatahtml || ""
+    
   }
   private compType!: {
     type: string;
@@ -300,14 +301,14 @@ export class Composition extends ResourceMain implements ResourceMaster {
       if(options.extension && options.extension.length >0){
         const index = options.extension.findIndex(el => el.url == "https://www.nicehms.com/documentSubType");
         if (index <0){
-          options.extension.push({
+          extensions.push({
             "url" : "https://www.nicehms.com/documentSubType",
             "valueString" : options.documentSubType
           })
         }
      }else{
-      options.extension=[]
-      options.extension.push({
+
+      extensions.push({
         "url" : "https://www.nicehms.com/documentSubType",
         "valueString" : options.documentSubType
       })
