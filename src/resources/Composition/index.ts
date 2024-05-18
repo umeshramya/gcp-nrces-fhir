@@ -417,7 +417,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     if (options.extension) {
       const user: any[] = options.extension
         .filter((el: any) => {
-          if ((el.url = "https://www.nicehms.com/user")) {
+          if ((el.url == "https://www.nicehms.com/user")) {
             return el;
           }
         })

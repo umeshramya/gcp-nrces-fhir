@@ -343,7 +343,7 @@ export class OPConsultRecord extends Composition implements Records {
       });
       docHtml =
         docHtml +
-        `<b>Chief complaints</b>${options.letter.text.div}<br/>`;
+        `${options.letter.text.div}<br/>`;
     }
 
     if (options.chiefComplaints) {
