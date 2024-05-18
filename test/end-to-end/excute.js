@@ -350,6 +350,7 @@ class excute {
 
     const res = await OpConsultation.create({
       composition: {
+        // documentSubType: "letter",
         author: [
           {
             display: resources.practioner.name,
@@ -691,7 +692,7 @@ console.log(bundle)
 // new excute().slot()
 // new excute().precsriptinComposition();
 // new excute().healthDocumentComposition()
-// new excute().OpCunsulatationComposition()
+new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
 // new excute().observation()
@@ -707,7 +708,7 @@ console.log(bundle)
 // new excute().createDiagnosticReportBundle()
 // new excute().coverage()
 // new excute().docimentReference()
-new excute().claim()
+// new excute().claim()
 // new excute().communication()
 // new excute().claimRequestBundle()
 // new excute().coverageElegibityRequest()

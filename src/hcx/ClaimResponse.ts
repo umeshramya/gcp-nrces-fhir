@@ -1,7 +1,12 @@
+import GcpFhirCRUD from "../classess/gcp";
 import { ADDRESS, ATTACHMENT, CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MONEY, PERIOD, REFERENCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { SAMPLE_QUANTITY } from "../resources/Observation";
+import { Organization } from "../resources/Organization";
+import { Patient } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
+import { TimeZone } from "../TimeZone";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 interface ADJUDICATION{
     id?:string;
@@ -135,7 +140,9 @@ interface CLAIM_RESPONSE{
     insurance?:INSURANCE[]
     error:ERROR[]
 }
-
+interface TO_HTML_HCX_OPTIONS_CLAIM_RESPONSE extends Omit<TO_HTML_HCX_OPTIONS, "body">{
+    body : CLAIM_RESPONSE
+  }
 export class ClaimResponse extends ResourceMain implements ResourceMaster{
     getFHIR(options: CLAIM_RESPONSE) {
         const body = {
@@ -186,8 +193,97 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster{
         options.text = options.text && options.text.div ? options.text.div : ""
         return ret;
     }
-    async toHtml(option: { addResourceType: boolean; }):Promise<string> {
-        return ""
+    async toHtml(options: TO_HTML_HCX_OPTIONS_CLAIM_RESPONSE):Promise<string> {
+        let ret:string=""
+        const adjucation=(ad:ADJUDICATION)=>{
+            let adRet=""
+            if(ad.id){
+                adRet += `<i>Id</i>${ad.id}`
+            }
+            if(ad.amount){
+                adRet += `<i>Amount</i>${ad.amount.value}`
+            }
+            
+        }
+        try {
+            const body:CLAIM_RESPONSE = options.body 
+
+        if(options.addResourceType){
+            ret+=`<h1>${body.use.toUpperCase()}</h1>`
+          }
+          if(body.created){
+            ret += `Date : ${new TimeZone().convertTZ(body.created, "Asia/Kolkata", false)}<br/>`
+          }
+
+          if(options.patinet){
+            ret += `<h3>Patient</h3>`;
+            ret += await new Patient().toHtml({"addResourceType" : false, body : options.patinet})
+          }
+
+          const orgnaization = new Organization();
+          if (!options.insurance) {
+            try {
+                const resource = (
+                    await new GcpFhirCRUD().getFhirResource(
+                      this.getIdFromReference({"ref" : options.body.insurer.reference || "", "resourceType" : "Organization"}),
+                      "Organization"
+                    )
+                  ).data;
+                  options.insurance = orgnaization.convertFhirToObject(resource);
+                
+            } catch (error) {
+                
+            }
+          }
+
+          if(options.insurance){
+            ret += `<h3>Insurance</h3>`;
+            ret += await orgnaization.toHtml({
+              addResourceType: false,
+              body: options.insurance,
+            });
+          }
+          ret += `<hr/>`;
+
+          if (body.text) {
+            ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
+            ret += `<h2>Object Text</h2>`
+          }
+
+
+
+          if(body.identifiers && body.identifiers.length >0){
+            ret += `<h4>Identifiers</h4>`
+            body.identifiers.forEach(el=>{
+              ret += this.identifierToHtml(el)
+            })
+          }
+
+          if(body.disposition){
+            ret+=`<b>Disposition</b>${body.disposition}`
+          }
+
+          if(body.outcome){
+            ret += `<b>Outcome</b> ${body.outcome}`
+          }
+
+          if(body.item && body.item.length > 0){
+            ret += `<h4>Item</h4>`
+            body.item.forEach((el,i)=>{
+                
+            })
+          }
+          
+            
+        } catch (error) {
+            console.log(error)
+        }finally{
+            return ret;
+        }
+        
+
+
+
     }
     statusArray?: Function | undefined;
     

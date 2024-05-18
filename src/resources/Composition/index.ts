@@ -8,7 +8,7 @@ import { Age } from "date-age";
 import { GcpFhirCRUD, GcpFhirSearch, Media } from "../..";
 import { Practitioner, PRACTITIONER } from "../Practitioner";
 import { CreatePdf, PDF_HEADER } from "js-ts-report";
-import { resourceType } from "../../config";
+import { EXTENSION, resourceType } from "../../config";
 import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
 import { TimeZone } from "../../TimeZone";
 
@@ -93,6 +93,8 @@ export interface COMPOSITOIN {
   type: compositionType;
   documentDatahtml?: string;
   section: any[];
+  extension?: EXTENSION[];
+  documentSubType:string
 }
 
 export interface USER_COMPOSITION_EXTENSION {
@@ -286,6 +288,32 @@ export class Composition extends ResourceMain implements ResourceMaster {
       });
     }
 
+    
+
+    if(options.extension && options.extension.length >0){
+      options.extension.forEach(el=>
+        extensions.push(el)
+      )
+    }
+
+    if(options.documentSubType){
+      if(options.extension && options.extension.length >0){
+        const index = options.extension.findIndex(el => el.url == "https://www.nicehms.com/documentSubType");
+        if (index <0){
+          options.extension.push({
+            "url" : "https://www.nicehms.com/documentSubType",
+            "valueString" : options.documentSubType
+          })
+        }
+     }else{
+      options.extension=[]
+      options.extension.push({
+        "url" : "https://www.nicehms.com/documentSubType",
+        "valueString" : options.documentSubType
+      })
+     }
+    }
+
     this.mapCompositionType(options.type);
     const body = {
       resourceType: "Composition",
@@ -397,6 +425,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
         });
 
       ret.user = user;
+      ret.extension =options.extension
     }
 
     return ret;

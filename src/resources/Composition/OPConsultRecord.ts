@@ -15,7 +15,7 @@ interface Args {
   bodySurfaceArea?:any
   respiratoryRate?:any
   spo2?:any
-
+  letter:any
   stage?:any
   allergies?: any;
   medicalHistory?: any;
@@ -71,16 +71,21 @@ export class OPConsultRecord extends Composition implements Records {
      docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`
  
     }
-    docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
-    docHtml += `<tbody style="display: table-header-group"><tr>`;
-    docHtml += `<td style="width: 50%;"  border="0" >${this.getLeftColumn(
-      options
-    )}</td>`;
-    docHtml += `<td style="width: 50%;"  border="0" >${this.getRightColumn(
-      options
-    )}</td>`;
-    docHtml += `</tbody>`;
-    docHtml += `</table>`;
+    if(!options.composition.documentSubType){
+      docHtml += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
+      docHtml += `<tbody style="display: table-header-group"><tr>`;
+      docHtml += `<td style="width: 50%;"  border="0" >${this.getLeftColumn(
+        options
+      )}</td>`;
+      docHtml += `<td style="width: 50%;"  border="0" >${this.getRightColumn(
+        options
+      )}</td>`;
+      docHtml += `</tbody>`;
+      docHtml += `</table>`;
+    }else{
+      docHtml += `${this.getLeftColumn(options)}<br/>`
+      docHtml += `${this.getRightColumn(options)}`
+    }
 
     if (options.medicationRequest || options.medicationStatement) {
       let entry = [];
@@ -117,6 +122,7 @@ export class OPConsultRecord extends Composition implements Records {
     }
 
     options.composition.documentDatahtml = docHtml;
+    
 
     return options;
   }
@@ -317,7 +323,28 @@ export class OPConsultRecord extends Composition implements Records {
 
 
   
-
+    if (options.letter) {
+      options.composition.section.push({
+        title: "Letter",
+        code: {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "371998007",
+              display: "Letter",
+            },
+          ],
+        },
+        entry: [
+          {
+            reference: `Condition/${options.letter.id}`,
+          },
+        ],
+      });
+      docHtml =
+        docHtml +
+        `<b>Chief complaints</b>${options.letter.text.div}<br/>`;
+    }
 
     if (options.chiefComplaints) {
       options.composition.section.push({
