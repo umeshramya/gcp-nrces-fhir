@@ -15,7 +15,7 @@ interface Args {
   bodySurfaceArea?:any
   respiratoryRate?:any
   spo2?:any
-  letter:any
+  letter?:any
   stage?:any
   allergies?: any;
   medicalHistory?: any;
