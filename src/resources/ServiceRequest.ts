@@ -1,5 +1,5 @@
 import { PATIENT, PRACTITIONER } from "..";
-import { CodeDisplay, MULTI_RESOURCE, resourceType } from "../config";
+import { CodeDisplay, EXTENSION, MULTI_RESOURCE, resourceType } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { ORGANIZATION } from "./Organization";
 import ResourceMain from "./ResourceMai";
@@ -69,7 +69,8 @@ export interface SERVICE_REQUEST {
   priority?: ServiceRequestPriority;
   category?: ServceRequestCategory;
   encounterId?: string;
-  note?:ANNOTATION[]
+  note?:ANNOTATION[],
+  extension?:EXTENSION[];
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
@@ -101,6 +102,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         status: "generated",
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
       },
+
       status: options.status,
       intent: options.intent,
       code: {
@@ -153,6 +155,11 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     if(options.note){
       body.note = options.note
     }
+
+    if(options.extension){
+      body.extension = options.extension
+    }
+    
 
     return body;
   }
@@ -235,12 +242,19 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       });
     }
 
+    if(options.extension){
+      ret.extension = options.extension
+    }
+
     if(options.note){
       ret.note=options.note
     }
     if (ret.performer == undefined) {
       delete ret.performer;
     }
+
+
+    
 
     return ret;
   }
