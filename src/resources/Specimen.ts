@@ -9,6 +9,7 @@ export interface SPECIMEN {
   patientId: string;
   recivedDateTime: string;
   collection: { collectedDateTime: string };
+  serviceRequestIds:string[]
   /**
    * Specimen type blood serun , or plural fluid , HPR tissue etc
    * */
@@ -33,6 +34,9 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       subject: { reference: `Patient/${options.patientId}` },
       receivedTime: options.recivedDateTime,
       collection: options.collection,
+      request : options.serviceRequestIds && options.serviceRequestIds.length >0 && options.serviceRequestIds.map(el=>{
+        return{ reference: `ServiceRequest/${el}` }
+      })
     };
     return body;
   }
@@ -46,6 +50,9 @@ export class Specimen extends ResourceMain implements ResourceMaster {
       collection: options.collection,
       type: options.type,
       id: options.id,
+      serviceRequestIds: options.request && options.request.length >0 && options.request.map((el: { reference: any; })=> {
+        return this.getIdFromReference({"ref" : el.reference, "resourceType" : "ServiceRequest"})
+      })
     };
     return ret;
   }

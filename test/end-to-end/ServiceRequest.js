@@ -17,7 +17,7 @@ const setServiceRequest = async () => {
         "intent": "order",
         "date": new Date().toDateString(),
         "patientId": resources.patient.id,
-        "specimanIds" : ["3683a099-140e-4c78-bce1-8c25f0745317"],
+        // "specimanIds" : ["3683a099-140e-4c78-bce1-8c25f0745317"],
         "patientName": resources.patient.name,
         "extension" : [
             {"url" : "http://www.nicehms.com/allServices", "valueString" : "TRUE"}

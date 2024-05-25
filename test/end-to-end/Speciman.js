@@ -16,7 +16,10 @@ const setSpecimen = async() => {
         "patientId" : resources.patient.id,
         "recivedDateTime" : new Date().toISOString(),
         "type" :  {"text" : "Plural Fluid"},
+        "serviceRequestIds" : ["7baed12f-529d-4698-a5af-3936271b2dea"]
     })
+
+    console.log(JSON.stringify(body))
 
     const res = await gcpFhirCRUD.createFhirResource(body, "Specimen")
     const ret = specimen.convertFhirToObject(res.data)
