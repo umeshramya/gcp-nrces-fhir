@@ -1,5 +1,11 @@
 import { PATIENT, PRACTITIONER } from "..";
-import { CodeDisplay, EXTENSION, MULTI_RESOURCE, resourceType } from "../config";
+import {
+  CodeDisplay,
+  EXTENSION,
+  MULTI_RESOURCE,
+  REFERENCE,
+  resourceType,
+} from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { ORGANIZATION } from "./Organization";
 import ResourceMain from "./ResourceMai";
@@ -13,7 +19,7 @@ const ServiceRequestStatusArray = [
   "entered-in-error",
   "unknown",
 ] as const;
-export type ServiceRequestStatus = typeof ServiceRequestStatusArray[number];
+export type ServiceRequestStatus = (typeof ServiceRequestStatusArray)[number];
 const ServiceRequestIntentArray = [
   "proposal",
   "plan",
@@ -26,7 +32,7 @@ const ServiceRequestIntentArray = [
   "option",
 ] as const;
 
-export type ServiceRequestIntent = typeof ServiceRequestIntentArray[number];
+export type ServiceRequestIntent = (typeof ServiceRequestIntentArray)[number];
 
 interface requester {
   resource: "Practitioner" | "Patient" | "Organization" | "PractitionerRole";
@@ -43,19 +49,19 @@ const serviceRequestCategory = [
   { code: "387713003", display: "Surgical procedure" },
 ] as const;
 
-export type ServceRequestCategory = typeof serviceRequestCategory[number];
+export type ServceRequestCategory = (typeof serviceRequestCategory)[number];
 const serviceRequestPriority = ["routine", "urgent", "asap", "stat"] as const;
 
-export type ServiceRequestPriority = typeof serviceRequestPriority[number];
-interface authorReference	extends MULTI_RESOURCE{
-  resource : "Practitioner" | "Patient" | "RelatedPerson" | "Organization",
-  
+export type ServiceRequestPriority = (typeof serviceRequestPriority)[number];
+interface authorReference extends MULTI_RESOURCE {
+  resource: "Practitioner" | "Patient" | "RelatedPerson" | "Organization";
 }
 interface ANNOTATION {
   // author?:{author:authorReference; authorString : string}
   // time:string
-  text:string
+  text: string;
 }
+
 export interface SERVICE_REQUEST {
   id?: string;
   status: ServiceRequestStatus;
@@ -69,12 +75,13 @@ export interface SERVICE_REQUEST {
   priority?: ServiceRequestPriority;
   category?: ServceRequestCategory;
   encounterId?: string;
-  note?:ANNOTATION[],
-  extension?:EXTENSION[];
+  note?: ANNOTATION[];
+  extension?: EXTENSION[];
+  specimanIds?: string[];
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
- async toHtml():Promise<string> {
+  async toHtml(): Promise<string> {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: SERVICE_REQUEST): any {
@@ -97,12 +104,18 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ServiceRequest",
         ],
       },
-      
+
       text: {
         status: "generated",
         div: `<div xmlns=\"http://www.w3.org/1999/xhtml\">${getText()}</div>`,
       },
-
+      specimen:
+        options.specimanIds &&
+        options.specimanIds.map((el) => {
+          return {
+            reference: `Specimen/${el}`,
+          };
+        }),
       status: options.status,
       intent: options.intent,
       code: {
@@ -115,13 +128,12 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       occurrenceDateTime: options.date,
     };
 
-
-    if(options.priority){
-      body.priority=options.priority
+    if (options.priority) {
+      body.priority = options.priority;
     }
 
-    if(options.category){
-      body.category=[
+    if (options.category) {
+      body.category = [
         {
           coding: [
             {
@@ -131,13 +143,13 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
             },
           ],
         },
-      ]
+      ];
     }
-    if(options.requester){
-      body.requester={
+    if (options.requester) {
+      body.requester = {
         reference: `${options.requester.resource}/${options.requester.id}`,
         display: options.requester.display,
-      }
+      };
     }
 
     if (options.performer) {
@@ -152,14 +164,13 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     if (options.encounterId) {
       body.encounter = { reference: `Encounter/${options.encounterId}` };
     }
-    if(options.note){
-      body.note = options.note
+    if (options.note) {
+      body.note = options.note;
     }
 
-    if(options.extension){
-      body.extension = options.extension
+    if (options.extension) {
+      body.extension = options.extension;
     }
-    
 
     return body;
   }
@@ -213,26 +224,31 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       patientName: options.subject.display,
       date: options.occurrenceDateTime,
       id: options.id,
-   
-      requester: requester()
+
+      requester: requester(),
     };
 
-    if(options.priority){
-      ret.priority=options.priority
+    if (options.priority) {
+      ret.priority = options.priority;
     }
 
-    if(options.category){
-      ret.category={
+    if (options.category) {
+      ret.category = {
         code: options.category[0].coding[0].code,
         display: options.category[0].coding[0].display,
-      }
+      };
     }
 
-    if(options.code && options.code.coding){
-      ret.services= options.code.coding
+    if (options.specimen && options.specimen.length > 0) {
+      ret.specimanIds = options.specimen.map((el: { reference: any }) =>
+        this.getIdFromReference({ ref: el.reference, resourceType: "Specimen" })
+      );
     }
-    if(options.performer){
-      ret.performer = performer()
+    if (options.code && options.code.coding) {
+      ret.services = options.code.coding;
+    }
+    if (options.performer) {
+      ret.performer = performer();
     }
 
     if (options.encounter) {
@@ -242,19 +258,16 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       });
     }
 
-    if(options.extension){
-      ret.extension = options.extension
+    if (options.extension) {
+      ret.extension = options.extension;
     }
 
-    if(options.note){
-      ret.note=options.note
+    if (options.note) {
+      ret.note = options.note;
     }
     if (ret.performer == undefined) {
       delete ret.performer;
     }
-
-
-    
 
     return ret;
   }

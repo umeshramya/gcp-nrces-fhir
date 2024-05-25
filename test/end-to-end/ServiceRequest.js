@@ -13,13 +13,14 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 const setServiceRequest = async () => {
     const serviceRequest = new ServiceRequest();
     const body = serviceRequest.getFHIR({
-        // "category": { "code": "108252007", "display": "Laboratory procedure" },
+        "category": { "code": "108252007", "display": "Laboratory procedure" },
         "intent": "order",
         "date": new Date().toDateString(),
         "patientId": resources.patient.id,
+        "specimanIds" : ["3683a099-140e-4c78-bce1-8c25f0745317"],
         "patientName": resources.patient.name,
         "extension" : [
-            {"url" : "htttp://www.nicehms.com/allServices", "valueString" : "TRUE"}
+            {"url" : "http://www.nicehms.com/allServices", "valueString" : "TRUE"}
         ],
         // "priority": "routine",
         // "requester": { "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" },
@@ -34,6 +35,7 @@ const setServiceRequest = async () => {
         "performer": [{ "display": resources.practioner.name, "resource": "Practitioner", "id": "https://nicehms.com" },
     {"resource" : "Organization", "id": resources.organization.id, "display" : resources.organization.name}]
     })
+
 
 
 

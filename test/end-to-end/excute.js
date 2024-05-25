@@ -687,7 +687,7 @@ console.log(bundle)
 // new excute().practionerRole()
 // new excute().specimen()
 // new excute().procedure()
-// new excute().serviceRequest()
+new excute().serviceRequest()
 // new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
@@ -930,5 +930,5 @@ console.log(html)
 }
 
 
-testBundle()
+// testBundle()
 
