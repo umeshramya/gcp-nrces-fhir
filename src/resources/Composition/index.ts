@@ -292,7 +292,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
             this.specimenCollectedTime && `Specimen Collection Time ${new TimeZone().convertTZ(this.specimenCollectedTime, "Asia/Kolkata", false)}<br/>`
           }
           ${
-            this.specimenRecivedTime && `Specimen Received Time${new TimeZone().convertTZ(this.specimenRecivedTime, "Asia/Kolkata", false)}`
+            this.specimenRecivedTime && `Specimen Received Time ${new TimeZone().convertTZ(this.specimenRecivedTime, "Asia/Kolkata", false)}`
           }
         
         </td><td>
