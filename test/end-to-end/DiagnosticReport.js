@@ -15,6 +15,7 @@ const setDiagnosticReport = async ()=>{
         const diagnosticReport = new DiagnosticReport();
         const body = diagnosticReport.getFHIR({
             "basedOn" : [{"resource" : "ServiceRequest", "id" : resources.serviceRequest.id }],
+            "issuedDate" : new Date().toISOString(),
             "code" : {
               "coding" : [      {
                 "system" : "http://loinc.org",

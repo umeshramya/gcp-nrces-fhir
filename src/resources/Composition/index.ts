@@ -5,7 +5,7 @@ import { Patient, PATIENT } from "../Patient";
 import { Organization, ORGANIZATION } from "../Organization";
 import ResourceMain from "../ResourceMai";
 import { Age } from "date-age";
-import { GcpFhirCRUD, GcpFhirSearch, Media, SPECIMEN } from "../..";
+import { DIAGNOSTIC_REPORT, GcpFhirCRUD, GcpFhirSearch, Media, SPECIMEN } from "../..";
 import { Practitioner, PRACTITIONER } from "../Practitioner";
 import { CreatePdf, PDF_HEADER } from "js-ts-report";
 import { EXTENSION, resourceType } from "../../config";
@@ -152,6 +152,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
   /**Sample Type */
   private specimenType =""
 
+  private reportedDateandTime ="";
+
   private performer: string[] = [];
 
   async setEncounter(id: string) {
@@ -180,6 +182,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
     });
   }
 
+
+
   /**
    * service requested by could be patient , organization, patient him or herself
    * this is applicable diagnostic report
@@ -201,6 +205,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
     this.specimenRecivedTime = specimen.recivedDateTime;
     this.specimenType=specimen.type.text || "";
 
+  }
+
+  setDiagnosticReportDateTime=(diagnosticReport:DIAGNOSTIC_REPORT)=>{
+    this.reportedDateandTime= new TimeZone().convertTZ(diagnosticReport.issuedDate, "Asia/Kolkata", false);
   }
 
   setPerformer = (options: {
@@ -296,6 +304,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
           }
         
         </td><td>
+          ${this.reportedDateandTime && `Report Date and Time ${this.reportedDateandTime}`}
           ${this.specimenType && `Specimen Type ${this.specimenType}`}
         
         </td></tr>`

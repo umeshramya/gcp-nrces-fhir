@@ -39,7 +39,9 @@ export class DiagnosticReportComp extends Composition implements Records {
     }
     return ret.trim();
   };
-  private setPerformerAndRequester = async (options: Args) => {
+  private setPerformerAndRequesterAndSpecimenAndReortTime = async (
+    options: Args
+  ) => {
     const serviceRequest = new ServiceRequest();
     const serviceRequestBody = serviceRequest.convertFhirToObject(
       options.serviceRequest
@@ -49,6 +51,8 @@ export class DiagnosticReportComp extends Composition implements Records {
     const diagnosticReportObj = diagnosticReport.convertFhirToObject(
       options.diagnosticReport
     );
+
+    this.setDiagnosticReportDateTime(diagnosticReportObj);
 
     this.setRequester({
       reesource: serviceRequestBody.requester.resource,
@@ -64,8 +68,10 @@ export class DiagnosticReportComp extends Composition implements Records {
         serviceRequestBody.specimanIds[0],
         "Specimen"
       );
-      if(resource && resource.data){
-        this.setSpecimenRecivedAndCollectedTime(new Specimen().convertFhirToObject(resource.data))
+      if (resource && resource.data) {
+        this.setSpecimenRecivedAndCollectedTime(
+          new Specimen().convertFhirToObject(resource.data)
+        );
       }
     }
 
@@ -78,7 +84,7 @@ export class DiagnosticReportComp extends Composition implements Records {
     }
   };
   create = async (options: Args, Credentials?: any, DatabasePath?: any) => {
-    await this.setPerformerAndRequester(options);
+    await this.setPerformerAndRequesterAndSpecimenAndReortTime(options);
 
     options.composition.section.push({
       title: options.diagnosticReport.code.text,
@@ -110,7 +116,7 @@ export class DiagnosticReportComp extends Composition implements Records {
     return res;
   };
   update = async (options: Args, Credentials?: any, DatabasePath?: any) => {
-    await this.setPerformerAndRequester(options);
+    await this.setPerformerAndRequesterAndSpecimenAndReortTime(options);
     options.composition.section = [];
     options.composition.section.push({
       title: options.diagnosticReport.code.text,
