@@ -2,6 +2,7 @@ import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 import { DiagnosticReport } from "../DiagnosticReport";
 import { ServiceRequest } from "../ServiceRequest";
+import { Specimen } from "../Specimen";
 
 interface Args {
   composition: COMPOSITOIN;
@@ -24,7 +25,7 @@ export class DiagnosticReportComp extends Composition implements Records {
   }): string => {
     let ret: string = options.html;
     if (options.intable) {
-      ret=""
+      ret = "";
       ret += `<table  style="border-collapse: collapse; width: 99.9739%;" border="0">`;
       ret += `<thead style="display: table-header-group"><tr>`;
       ret += `<th style="width: 40%;">Test</th>`;
@@ -38,7 +39,7 @@ export class DiagnosticReportComp extends Composition implements Records {
     }
     return ret.trim();
   };
-  private setPerformerAndRequester = (options: Args) => {
+  private setPerformerAndRequester = async (options: Args) => {
     const serviceRequest = new ServiceRequest();
     const serviceRequestBody = serviceRequest.convertFhirToObject(
       options.serviceRequest
@@ -54,6 +55,20 @@ export class DiagnosticReportComp extends Composition implements Records {
       display: serviceRequestBody.requester.display,
     });
 
+    // code to get specimen
+    if (
+      serviceRequestBody.specimanIds &&
+      serviceRequestBody.specimanIds.length > 0
+    ) {
+      const resource = await new GcpFhirCRUD().getFhirResource(
+        serviceRequestBody.specimanIds[0],
+        "Specimen"
+      );
+      if(resource && resource.data){
+        this.setSpecimenRecivedAndCollectedTime(new Specimen().convertFhirToObject(resource.data))
+      }
+    }
+
     if (diagnosticReportObj.performer) {
       diagnosticReportObj.performer.forEach((el) => {
         if (el.display) {
@@ -62,8 +77,8 @@ export class DiagnosticReportComp extends Composition implements Records {
       });
     }
   };
-  create = async (options: Args,Credentials?: any, DatabasePath?:any) => {
-    this.setPerformerAndRequester(options);
+  create = async (options: Args, Credentials?: any, DatabasePath?: any) => {
+    await this.setPerformerAndRequester(options);
 
     options.composition.section.push({
       title: options.diagnosticReport.code.text,
@@ -85,17 +100,17 @@ export class DiagnosticReportComp extends Composition implements Records {
     const body = this.getFHIR(options.composition);
 
     body.section = options.composition.section;
-    let gcpFhirCrud:GcpFhirCRUD
-    if(Credentials){
-      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
-    }else{
-      gcpFhirCrud= new GcpFhirCRUD()
+    let gcpFhirCrud: GcpFhirCRUD;
+    if (Credentials) {
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath);
+    } else {
+      gcpFhirCrud = new GcpFhirCRUD();
     }
     const res = await gcpFhirCrud.createFhirResource(body, "Composition");
     return res;
   };
-  update = async (options: Args, Credentials?:any, DatabasePath?:any) => {
-    this.setPerformerAndRequester(options);
+  update = async (options: Args, Credentials?: any, DatabasePath?: any) => {
+    await this.setPerformerAndRequester(options);
     options.composition.section = [];
     options.composition.section.push({
       title: options.diagnosticReport.code.text,
@@ -119,11 +134,11 @@ export class DiagnosticReportComp extends Composition implements Records {
     body.section = options.composition.section;
     // const gcpFhirCrud = new GcpFhirCRUD();
 
-    let gcpFhirCrud:GcpFhirCRUD
-    if(Credentials){
-      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
-    }else{
-      gcpFhirCrud= new GcpFhirCRUD()
+    let gcpFhirCrud: GcpFhirCRUD;
+    if (Credentials) {
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath);
+    } else {
+      gcpFhirCrud = new GcpFhirCRUD();
     }
     const res = await gcpFhirCrud.updateFhirResource(
       body,

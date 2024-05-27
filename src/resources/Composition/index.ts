@@ -5,7 +5,7 @@ import { Patient, PATIENT } from "../Patient";
 import { Organization, ORGANIZATION } from "../Organization";
 import ResourceMain from "../ResourceMai";
 import { Age } from "date-age";
-import { GcpFhirCRUD, GcpFhirSearch, Media } from "../..";
+import { GcpFhirCRUD, GcpFhirSearch, Media, SPECIMEN } from "../..";
 import { Practitioner, PRACTITIONER } from "../Practitioner";
 import { CreatePdf, PDF_HEADER } from "js-ts-report";
 import { EXTENSION, resourceType } from "../../config";
@@ -145,6 +145,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
    * This is for diagnostic reporting enity requesting the services
    */
   private requeter: string = "";
+  /** This form specimen */
+  private specimenCollectedTime = "";
+   /** This form specimen */
+  private specimenRecivedTime ="";
+  /**Sample Type */
+  private specimenType =""
+
   private performer: string[] = [];
 
   async setEncounter(id: string) {
@@ -187,6 +194,14 @@ export class Composition extends ResourceMain implements ResourceMaster {
       this.requeter = `${options.display}`;
     }
   };
+
+
+  setSpecimenRecivedAndCollectedTime = (specimen:SPECIMEN)=>{
+    this.specimenCollectedTime=specimen.collection && specimen.collection.collectedDateTime;
+    this.specimenRecivedTime = specimen.recivedDateTime;
+    this.specimenType=specimen.type.text || "";
+
+  }
 
   setPerformer = (options: {
     reesource: resourceType;
@@ -270,6 +285,23 @@ export class Composition extends ResourceMain implements ResourceMaster {
             }</td></tr>`
           : ""
       }`;
+
+      html += `${this.specimenCollectedTime || this.specimenRecivedTime || this.specimenType ? 
+        `<tr><td>
+          ${
+            this.specimenCollectedTime && `Specimen Collection Time ${new TimeZone().convertTZ(this.specimenCollectedTime, "Asia/Kolkata", false)}<br/>`
+          }
+          ${
+            this.specimenRecivedTime && `Specimen Received Time${new TimeZone().convertTZ(this.specimenRecivedTime, "Asia/Kolkata", false)}`
+          }
+        
+        </td><td>
+          ${this.specimenType && `Specimen Type ${this.specimenType}`}
+        
+        </td></tr>`
+        :
+        ""
+      }`
 
       html += `</table>`;
       html += `<div>${options.documentDatahtml}</div`;
