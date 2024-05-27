@@ -304,7 +304,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
           }
         
         </td><td>
-          ${this.reportedDateandTime && `Report Date and Time ${this.reportedDateandTime}<br/>`}
+          ${this.reportedDateandTime && `Report Date ${this.reportedDateandTime}<br/>`}
           ${this.specimenType && `Specimen Type ${this.specimenType}`}
         
         </td></tr>`
