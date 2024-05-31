@@ -41,7 +41,7 @@ interface requester {
 }
 interface performer extends requester {}
 
-const serviceRequestCategory = [
+export const serviceRequestCategoryArray = [
   { code: "108252007", display: "Laboratory procedure" },
   { code: "363679005", display: "Imaging" },
   { code: "409063005", display: "Counselling" },
@@ -49,7 +49,7 @@ const serviceRequestCategory = [
   { code: "387713003", display: "Surgical procedure" },
 ] as const;
 
-export type ServceRequestCategory = (typeof serviceRequestCategory)[number];
+export type ServceRequestCategory = (typeof serviceRequestCategoryArray)[number];
 const serviceRequestPriority = ["routine", "urgent", "asap", "stat"] as const;
 
 export type ServiceRequestPriority = (typeof serviceRequestPriority)[number];
@@ -281,7 +281,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
   };
 
   category = (): ServceRequestCategory[] => {
-    return serviceRequestCategory.map((el) => el);
+    return serviceRequestCategoryArray.map((el) => el);
   };
   priority = (): ServiceRequestPriority[] => {
     return serviceRequestPriority.map((el) => el);

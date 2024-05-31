@@ -83,7 +83,7 @@ import {
 } from "./resources/MedicationStatement";
 import {LOCATION, Location, bedOPertaionalStatusArray, BedOPertaionalStatus, locationFormTypesArray, locationFormTypes} from "./resources/Location"
 
-import { ServiceRequest, SERVICE_REQUEST } from "./resources/ServiceRequest";
+import { ServiceRequest, SERVICE_REQUEST, serviceRequestCategoryArray } from "./resources/ServiceRequest";
 import { SCHEDULE, Schedule } from "./resources/Schedule"
 import { SLOT, Slot } from "./resources/Slot"
 import { PrescriptionBundle } from "./resources/Bundle/Prescription";
@@ -183,7 +183,7 @@ export {
   MedicatioRequestStatusArray,
   MedicationRequest,
 };
-export { ServiceRequest, SERVICE_REQUEST };
+export { ServiceRequest, SERVICE_REQUEST, serviceRequestCategoryArray };
 export { SCHEDULE, Schedule }
 export { SLOT, Slot }
 type Credentials = typeof credentials;
