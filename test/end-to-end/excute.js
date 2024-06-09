@@ -916,7 +916,7 @@ const resource={
 
 const curClass = new Claim()
 const obj = curClass.convertFhirToObject(resource)
-console.log(obj)
+// console.log(obj)
 const html = await curClass.toHtml({
   "addResourceType" : true,
   "body" : obj,
@@ -930,19 +930,7 @@ console.log(html)
 }
 
 
-// testBundle()
+testBundle()
 
 
 
-const getSer =async()=>{
-  const gcpFhirSearch = new GcpFhirSearch()
-  const res=await gcpFhirSearch.search(
-    "ServiceRequest",
-    `category=108252007&performer:Organization=41e0fadd-eba7-42d3-a123-b99c191fb97e&occurrence=ge2024-05-28T18:30:00.000Z&occurrence=lt2024-05-29T18:30:00.000Z&_include=ServiceRequest:subject&_include=ServiceRequest:specimen`
-  )
-
-  console.log(res.data.entry)
-}
-
-
-getSer()

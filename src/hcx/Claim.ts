@@ -8,6 +8,7 @@ import {
   MULTI_RESOURCE,
   PERIOD,
 } from "../config";
+import { Encounter } from "../resources/Encounter";
 import {
   QUANTITY,
   SAMPLE_QUANTITY,
@@ -155,6 +156,29 @@ export class Claim extends ResourceMain implements ResourceMaster {
         console.log(erorInfo, "text", error);
       }
 
+
+      
+      try {
+        ret +=`<h4>Status</h4>`
+        if(body.status){
+          ret += body.status
+        }
+
+      } catch (error) {
+        console.log(erorInfo, "Status", error);
+      }
+
+
+      try {
+        ret +=`<h4>Type</h4>`
+        if(body.type){
+          ret +=  this.codebleConceptToHtml(body.type)
+        }
+        
+      } catch (error) {
+        console.log(erorInfo, "Type", error);
+      }
+
       try {
         if (body.identifier && body.identifier.length > 0) {
           ret += `<h4>Identifiers</h4>`;
@@ -168,6 +192,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
 
 
       try {
+        ret += `<h4>Diagnosis</h4>`
         if (body.diagnosis && body.diagnosis.length > 0) {
           body.diagnosis.forEach((el) => {
             if (el.diagnosisCodeableConcept) {
@@ -184,8 +209,67 @@ export class Claim extends ResourceMain implements ResourceMaster {
           });
         }
       } catch (error) {
-        console.log(erorInfo, "identifier", error);
+        console.log(erorInfo, "diagnosis", error);
       }
+
+
+      try {
+        if(body.item && body.item.length > 0){
+          for (let index = 0; index < body.item.length; index++) {
+            const el = body.item[index];
+            if(el.encounter && el.encounter.length >0){
+              ret += `<h4>Encounter</h4>`
+              for (let encounterIndex = 0; encounterIndex < el.encounter.length; encounterIndex++) {
+                const encounterEl = el.encounter[ encounterIndex];
+                const encounterId = this.getIdFromReference({"ref" : encounterEl.reference,  "resourceType" : "Encounter"})
+                const resource = await new GcpFhirCRUD().getFhirResource(encounterId, "Encounter")
+                const curEncounter = new Encounter().convertFhirToObject(resource.data);
+                ret += `Encounter : ${curEncounter.text} start Date : ${new TimeZone().convertTZ(curEncounter.startDate, "Asia/Kolkata", false)} ${curEncounter.endDate && `End Date : ${new TimeZone().convertTZ(curEncounter.startDate, "Asia/Kolkata", false)}`}`
+              }
+              
+
+              ret += `<h4>Product and services </h4>`
+              ret += `${el.sequence} Name : ${el.productOrService.coding.map(el=>this.codingtoHtml(el)).join(", ")}, quantity: ${el.quantity.value} unitPrice ${el.unitPrice.value} ${el.unitPrice.currency}`
+
+              
+            }
+            
+          }
+        }
+        
+      } catch (error) {
+        console.log(erorInfo, "Prodcut and services", error);
+      }
+
+
+      try {
+        if(body.total){
+          ret += `<h4>Total ${body.total.value} ${body.total.currency} </h4>`
+        }
+        
+      } catch (error) {
+        console.log(erorInfo, "Total", error);
+      }
+
+      try {
+        ret += `<h4>Payee</h4>`
+        if(body.payee){
+          if(body.payee.type){
+            ret += this.codebleConceptToHtml(body.payee.type)
+          }
+
+          if(body.payee.party){
+            ret += `${body.payee.party.id} ${this.identifierToHtml(body.payee.party.identifier)}`
+          }
+        }
+      } catch (error) {
+        console.log(erorInfo, "Payee", error);
+      }
+
+
+
+
+
 
 
       return ret;
