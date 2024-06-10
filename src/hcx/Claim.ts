@@ -146,15 +146,22 @@ export class Claim extends ResourceMain implements ResourceMaster {
       }
 
       ret += `<hr/>`;
+
       
-      try {
-        if (body.text) {
-          ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
-          ret += `<h2>Object Text</h2>`;
-        }
-      } catch (error) {
-        console.log(erorInfo, "text", error);
-      }
+    if (body.text) {
+      ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
+    }
+
+    ret += `<h2>Object to Text</h2>`;
+      
+      // try {
+      //   if (body.text) {
+      //     ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
+      //     ret += `<h2>Object Text</h2>`;
+      //   }
+      // } catch (error) {
+      //   console.log(erorInfo, "text", error);
+      // }
 
 
       
