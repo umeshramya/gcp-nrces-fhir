@@ -220,7 +220,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   getFHIR(options: COMPOSITOIN) {
     const getpatientdetails = () => {
       let ret = `<div>Patient:- ${options.patient.name}.</div>`;
-      ret += `<div>MRN:- ${options.patient.MRN} </div>`;
+      ret += `<div>UHID :- ${options.patient.MRN} </div>`;
       ret += `${
         options.patient.phrAddress
           ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
