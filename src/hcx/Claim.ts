@@ -288,7 +288,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
 
               if(el.valueAttachment.data){
 
-                ret += `<a href="data:${el.valueAttachment.contentType};base64,${el.valueAttachment.data}" >Download ${st}</a>
+                ret += `<a href="data:${el.valueAttachment.contentType};base64,${el.valueAttachment.data}" >Right Click Open in new tab ${st}</a>
 `
 
               }
