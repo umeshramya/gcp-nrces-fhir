@@ -267,7 +267,40 @@ export class Claim extends ResourceMain implements ResourceMaster {
       }
 
 
+      try {
+        if(body.supportingInfo){
+          ret += `<h4>Supporting Info</h4>`
+          for (let index = 0; index < body.supportingInfo.length; index++) {
+            const el = body.supportingInfo[index];
+            if(el.category){
+              ret += `Category  ${this.codebleConceptToHtml(el.category)}`
+            }
+            if(el.code){
+              ret += `Code ${this.codebleConceptToHtml(el.code)}`
+            }
 
+            if(el.valueAttachment){
+              const st=`${el.valueAttachment.title} Craeted On ${new TimeZone().convertTZ(el.valueAttachment.creation, "Asia/Kolkata", false)} }`
+
+              if(el.valueAttachment.url){
+                ret += `<a href=${el.valueAttachment.url}>${`Click Here ${st}`}</a>`
+              }
+
+              if(el.valueAttachment.data){
+
+                ret += `<a href="data:${el.valueAttachment.contentType};base64,${el.valueAttachment.data}" download="download">Download ${st}</a>
+`
+
+              }
+            }
+
+            
+          }
+        }
+        
+      } catch (error) {
+        
+      }
 
 
 
