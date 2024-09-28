@@ -509,6 +509,17 @@ export class Composition extends ResourceMain implements ResourceMaster {
     return res;
   };
 
+/**
+ * 
+ * @param id This array of ids many merged pateints
+ * @returns compostions
+ */
+  getCompositionsByPatientArray= async(id:string[]):Promise<any>=>{
+    const gcpFhirSearch = new GcpFhirSearch();
+    const res = await gcpFhirSearch.search("Composition", `subject=${id.map(el=> "?").join(",")}`)
+    return res
+  }
+
   getPdf = async (options: {
     html: string;
     header?: (options: PDF_HEADER) => [];
