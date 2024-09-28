@@ -516,7 +516,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
  */
   getCompositionsByPatientArray= async(id:string[]):Promise<any>=>{
     const gcpFhirSearch = new GcpFhirSearch();
-    const res = await gcpFhirSearch.search("Composition", `subject=${id.map(el=> "?").join(",")}`)
+    const res = await gcpFhirSearch.search("Composition", `subject=${id.map(el=> el).join(",")}`)
     return res
   }
 
