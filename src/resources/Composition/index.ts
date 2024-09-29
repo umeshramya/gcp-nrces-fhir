@@ -258,7 +258,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       html += `Date:-${new TimeZone().convertTZ(
         options.date,
         process.env.TZ as any,
-        true
+        false
       )}`;
       html += `</div>`;
       html += `<div style="text-align: right; font-size: 9px">`;
