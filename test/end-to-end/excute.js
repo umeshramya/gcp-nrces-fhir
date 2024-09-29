@@ -55,7 +55,7 @@ const webhookURL="https://webhook.site/3413e350-27be-4afd-816b-cc7cddf35d6f"
 class excute {
   callFunction = async () => {
     await callFunction();
-    console.log(resources.organization);
+    console.log(resources.encounter);
   };
 
   createValueset = async () => {
@@ -680,7 +680,7 @@ console.log(bundle)
 
 
 
-// new excute().callFunction()
+new excute().callFunction()
 // new excute().createValueset()
 // new excute().medicationrequest();
 // new excute().conditon()
@@ -930,7 +930,7 @@ console.log(html)
 }
 
 
-testBundle()
+// testBundle()
 
 
 

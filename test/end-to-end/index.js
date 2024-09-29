@@ -283,9 +283,12 @@ const setEncounter = async () => {
    location:[{"location" : {"reference" : `Location/f9138f68-0459-4ab0-b29a-1619169fe2c1`},
     period : {
       "start" : new Date().toISOString(),
-      "end" : new Date().toISOString(),
+      "end" : undefined,
     },
     "status" : "completed",
+    "physicalType" : {
+      "text" : "Male Genral ward-bed 6"
+    }
   }],
     diagnosis: [
       {
@@ -329,6 +332,8 @@ const setEncounter = async () => {
     text: "discherged Home",
     status: "finished",
   });
+
+  console.log(JSON.stringify(body))
 
   let res = await gcpFhirCRUD.createFhirResource(body, "Encounter");
   res = await gcpFhirCRUD.getFhirResource(res.data.id, "Encounter");

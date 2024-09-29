@@ -111,9 +111,10 @@ interface ENCOUNTER {
     location: { reference: string };
     period?: {
       start: string;
-      end: string;
+      end?: string;
     };
     status?: "planned" | "active" | "reserved" | "completed";
+    physicalType:CODEABLE_CONCEPT
   }[];
 }
 
