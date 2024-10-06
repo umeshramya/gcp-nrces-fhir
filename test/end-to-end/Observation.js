@@ -13,6 +13,7 @@ const setObservation = async () => {
 
    const body = observation.getFHIR({
       "status": "final",
+      effectiveDateTime : new Date().toISOString(),
       "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
       "value": { "valueBoolean": true },
       "code" :{"text" :"Hb"},

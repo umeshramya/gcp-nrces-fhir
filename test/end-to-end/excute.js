@@ -680,7 +680,7 @@ console.log(bundle)
 
 
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().createValueset()
 // new excute().medicationrequest();
 // new excute().conditon()
@@ -696,7 +696,7 @@ new excute().callFunction()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
-// new excute().observation()
+new excute().observation()
 // new excute().location()
 // new excute().diagnosticReportComposition()
 

@@ -124,6 +124,8 @@ export interface OBSERVATION {
   specimenId?: string;
   text: string;
   orgPanel ?:any
+  effectiveDateTime?:string
+  effectivePeriod?:PERIOD
 }
 
 
@@ -164,6 +166,7 @@ export class Observation extends ResourceMain implements ResourceMaster {
           "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ObservationBodyMeasurement",
         ],
       },
+
       text: {
         status: "generated",
         div: getText(),
@@ -176,6 +179,13 @@ export class Observation extends ResourceMain implements ResourceMaster {
         reference: `Patient/${options.patientId}`,
       },
     };
+
+    if(options.effectiveDateTime){
+      body.effectiveDateTime = options.effectiveDateTime
+    }
+    if(options.effectivePeriod){
+      body.effectivePeriod = options.effectivePeriod
+    }
     if (options.encounterId) {
       body.encounter = { reference: `Encounter/${options.encounterId}` };
     }
@@ -240,10 +250,19 @@ export class Observation extends ResourceMain implements ResourceMaster {
       referenceRange: options.referenceRange,
     };
 
+
+
     if (ret.value == undefined) {
       delete ret.value;
     }
 
+    if(options.effectiveDateTime){
+      ret.effectiveDateTime = options.effectiveDateTime
+    }
+    if(options.effectivePeriod){
+      ret.effectivePeriod = options.effectivePeriod
+    }
+    
     if (options.hasMember) {
       ret.hasMember = options.hasMember.map(
         (el: { reference: string; display?: string | undefined }) => {
