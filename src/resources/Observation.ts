@@ -148,7 +148,7 @@ export interface OBSERVATION {
   code: CODEABLE_CONCEPT;
   patientId: string;
   performer?: Performer[];
-  value?: SingleValue;
+  value?: VALUE;
   dataAbsentReason?: CODEABLE_CONCEPT
   encounterId?: string;
   referenceRange?: REFERENCE_RANGE[];
