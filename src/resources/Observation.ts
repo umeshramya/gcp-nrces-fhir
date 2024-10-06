@@ -123,7 +123,7 @@ export interface SUPPORTING_INFO{
 interface COMPONENT{
   id?:string;
   extension?:EXTENSION[];
-  modifierExtension:EXTENSION[];
+  modifierExtension?:EXTENSION[];
   code : CODEABLE_CONCEPT
   interpretation?:CODEABLE_CONCEPT[]
   valueQuantity?: QUANTITY;
