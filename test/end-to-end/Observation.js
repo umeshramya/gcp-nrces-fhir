@@ -13,6 +13,32 @@ const setObservation = async () => {
 
    const body = observation.getFHIR({
       "status": "final",
+      "component":[
+         {
+            "code" : {
+               "text" : "Systolic",
+               
+            },
+            "valueQuantity": {
+               "value" : 130,
+               "unit" : "mmHg",
+               "system" : "http://unitsofmeasure.org",
+               "code" : "mm[Hg]"
+            }
+         },
+         {
+            "code" : {
+               "text" : "Diastolic Blood Presuure"
+            },
+
+            "valueQuantity": {
+               "value" : 80,
+               "unit" : "mmHg",
+               "system" : "http://unitsofmeasure.org",
+               "code" : "mm[Hg]"
+            }
+         }
+      ],
       effectiveDateTime : new Date().toISOString(),
       "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
       "value": { "valueBoolean": true },

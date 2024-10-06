@@ -1,7 +1,7 @@
 import { htmlToText } from "html-to-text";
 import { type } from "os";
 import GcpFhirCRUD from "../classess/gcp";
-import { ATTACHMENT, CODEABLE_CONCEPT, MULTI_RESOURCE, PERIOD } from "../config";
+import { ATTACHMENT, CODEABLE_CONCEPT, EXTENSION, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -87,6 +87,19 @@ export interface VALUE {
   valuePeriod?: PERIOD;
 }
 
+type SingleValue = 
+  | { valueQuantity: QUANTITY }
+  | { valueCodeableConcept: CODEABLE_CONCEPT }
+  | { valueString: string }
+  | { valueBoolean: boolean }
+  | { valueInteger: number }
+  | { valueRange: RANGE }
+  | { valueRatio: RATIO }
+  | { valueSampledData: SAMPLE_DATA }
+  | { valueTime: string }
+  | { valueDateTime: string }
+  | { valuePeriod: PERIOD };
+
 export interface REFERENCE_RANGE {
   low?: SAMPLE_QUANTITY;
   high?: SAMPLE_QUANTITY;
@@ -107,6 +120,25 @@ export interface SUPPORTING_INFO{
   }
 }
 
+interface COMPONENT{
+  id?:string;
+  extension?:EXTENSION[];
+  modifierExtension:EXTENSION[];
+  code : CODEABLE_CONCEPT
+  interpretation?:CODEABLE_CONCEPT[]
+  valueQuantity?: QUANTITY;
+  valueCodeableConcept?: CODEABLE_CONCEPT;
+  valueString?: string;
+  valueBoolean?: boolean;
+  valueInteger?: number;
+  valueRange?: RANGE;
+  valueRatio?: RATIO;
+  valueSampledData?: SAMPLE_DATA;
+  valueTime?: string;
+  valueDateTime?: string;
+  valuePeriod?: PERIOD;
+}
+
 
 export interface OBSERVATION {
   id?: string;
@@ -116,7 +148,7 @@ export interface OBSERVATION {
   code: CODEABLE_CONCEPT;
   patientId: string;
   performer?: Performer[];
-  value?: VALUE;
+  value?: SingleValue;
   dataAbsentReason?: CODEABLE_CONCEPT
   encounterId?: string;
   referenceRange?: REFERENCE_RANGE[];
@@ -126,6 +158,9 @@ export interface OBSERVATION {
   orgPanel ?:any
   effectiveDateTime?:string
   effectivePeriod?:PERIOD
+  interpretation?:CODEABLE_CONCEPT[]
+  bodySite?:CODEABLE_CONCEPT
+  component?:COMPONENT[]
 }
 
 
@@ -180,6 +215,9 @@ export class Observation extends ResourceMain implements ResourceMaster {
       },
     };
 
+
+
+
     if(options.effectiveDateTime){
       body.effectiveDateTime = options.effectiveDateTime
     }
@@ -222,6 +260,16 @@ export class Observation extends ResourceMain implements ResourceMaster {
     if (options.value) {
       body[Object.keys(options.value)[0]] = Object.values(options.value)[0];
     }
+    if(options.interpretation){
+      body.interpretation = options.interpretation
+    }
+    if(options.bodySite){
+      body.bodySite = options.bodySite
+    }
+
+    if(options.component){
+      body.component = options.component
+    }
 
     return body;
   }
@@ -251,6 +299,9 @@ export class Observation extends ResourceMain implements ResourceMaster {
     };
 
 
+    if(options.component){
+      ret.component = options.component
+    }
 
     if (ret.value == undefined) {
       delete ret.value;
@@ -261,6 +312,12 @@ export class Observation extends ResourceMain implements ResourceMaster {
     }
     if(options.effectivePeriod){
       ret.effectivePeriod = options.effectivePeriod
+    }
+    if(options.interpretation){
+      ret.interpretation = options.interpretation
+    }
+    if(options.bodySite){
+      ret.bodySite = options.bodySite
     }
     
     if (options.hasMember) {
