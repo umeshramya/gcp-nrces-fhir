@@ -161,6 +161,7 @@ export interface OBSERVATION {
   interpretation?:CODEABLE_CONCEPT[]
   bodySite?:CODEABLE_CONCEPT
   component?:COMPONENT[]
+  category?:CODEABLE_CONCEPT[]
 }
 
 
@@ -216,7 +217,9 @@ export class Observation extends ResourceMain implements ResourceMaster {
     };
 
 
-
+    if(options.category){
+      body.category = options.category
+    }
 
     if(options.effectiveDateTime){
       body.effectiveDateTime = options.effectiveDateTime
@@ -298,7 +301,9 @@ export class Observation extends ResourceMain implements ResourceMaster {
       referenceRange: options.referenceRange,
     };
 
-
+    if(options.category){
+      ret.category = options.category
+    }
     if(options.component){
       ret.component = options.component
     }

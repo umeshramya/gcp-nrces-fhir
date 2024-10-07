@@ -40,6 +40,11 @@ const setObservation = async () => {
          }
       ],
       effectiveDateTime : new Date().toISOString(),
+      category : [
+         {
+            "text" : "Vitals Sign"
+         }
+      ],
       "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
       "value": { "valueBoolean": true },
       "code" :{"text" :"Hb"},
