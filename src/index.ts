@@ -61,6 +61,7 @@ import { DOCUMENT_BUNDLE, DocumentBundle } from "./resources/DocumentBundle";
 import { COMPOSITOIN, Composition, emptySign } from "./resources/Composition/index";
 import { PrescriptionRecord } from "./resources/Composition/PrescriptionRecord";
 import { OPConsultRecord } from "./resources/Composition/OPConsultRecord";
+import {InitialAssessment} from "./resources/Composition/InitialAssessment"
 import {DischargeSUmmery} from "./resources/Composition/DischargeSummary"
 import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportComp";
 import { HealthDocumentRecord } from "./resources/Composition/HealthDocumentRecord";
@@ -166,6 +167,8 @@ export {HealthDocumentRecord}
 export { OPConsultRecord };
 export {DischargeSUmmery}
 export { DiagnosticReportComp };
+
+export {InitialAssessment}
 export {
   DOCUMENT_REFERENCE,
   DocumentReference,

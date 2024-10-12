@@ -57,6 +57,14 @@ export const compositionTypeArrey = [
     code: "721981007",
     text: "Diagnostic studies report",
   },
+  {
+    "type": "InitialAssessment",
+    "system": "http://snomed.info/sct",
+    "url": "",
+    "code": "371530004",
+    "text": "Initial assessment report"
+  }
+  
 ] as const;
 
 const onlyType = compositionTypeArrey.map((el) => el.type);
@@ -111,7 +119,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   }
   private compType!: {
     type: string;
-    system: "https://ndhm.gov.in/sct";
+    system: "https://ndhm.gov.in/sct" | "http://snomed.info/sct";
     url: string;
     code: string;
     text: string;
