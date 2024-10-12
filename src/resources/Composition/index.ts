@@ -60,7 +60,7 @@ export const compositionTypeArrey = [
   {
     "type": "InitialAssessment",
     "system": "http://snomed.info/sct",
-    "url": "",
+    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InitialAssessment",
     "code": "371530004",
     "text": "Initial assessment report"
   }
