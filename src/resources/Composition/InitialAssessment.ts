@@ -98,6 +98,8 @@ export class InitialAssessment extends Composition implements Records {
         type: "Observation",
       });
       docHtml += `<td>${options.weight.text.div}</td>`;
+    }else{
+      docHtml += `<td></td>`
     }
 
     // 2 height
@@ -107,6 +109,8 @@ export class InitialAssessment extends Composition implements Records {
         type: "Observation",
       });
       docHtml += `<td>${options.height.text.div}</td>`;
+    }else{
+      docHtml += `<td></td>`
     }
 
     // 3 pulse rate
@@ -116,6 +120,8 @@ export class InitialAssessment extends Composition implements Records {
         type: "Observation",
       });
       docHtml += `<td>${options.pulseRate.text.div}</td>`;
+    }else{
+      docHtml += `<td></td>`
     }
 
     docHtml += `</tr><tr>`
@@ -126,6 +132,8 @@ export class InitialAssessment extends Composition implements Records {
         type: "Observation",
       });
       docHtml += `<td>${options.bloodPressure.text.div}</td>`;
+    }else{
+      docHtml += `<td></td>`
     }
 // 2 SPO2
     if(options.spo2){
@@ -134,6 +142,8 @@ export class InitialAssessment extends Composition implements Records {
         type: "Observation",
       });
       docHtml += `<td>${options.spo2.text.div}</td>`;
+    }else{
+      docHtml += `<td></td>`
     }
 // 3 Blood Glucose
     if(options.bloodGlucose){
@@ -142,6 +152,8 @@ export class InitialAssessment extends Composition implements Records {
         type: "Observation",
       });
       docHtml += `<td>${options.bloodGlucose.text.div}</td>`;
+    }else{
+      docHtml += `<td></td>`
     }
 
   docHtml += `</tr><tr>`
@@ -152,6 +164,8 @@ export class InitialAssessment extends Composition implements Records {
       type: "Observation",
     });
     docHtml += `<td>${options.hba1c.text.div}</td>`;
+  }else{
+    docHtml += `<td></td>`
   }
 
   if(options.glasgowComaScale){
@@ -160,6 +174,8 @@ export class InitialAssessment extends Composition implements Records {
       type: "Observation",
     });
     docHtml += `<td>${options.glasgowComaScale.text.div}</td>`;
+  }else{
+    docHtml += `<td></td>`
   }
 
   if(options.hb){
@@ -168,6 +184,8 @@ export class InitialAssessment extends Composition implements Records {
       type: "Observation",
     });
     docHtml += `<td>${options.hb.text.div}</td>`;
+  }else{
+    docHtml += `<td></td>`
   }
 
   docHtml+=`</tr>`
