@@ -235,6 +235,7 @@ export class InitialAssessment extends Composition implements Records {
   }
 
     options.composition.documentDatahtml = docHtml;
+    options.composition.section.push(sectionZero);
     return options;
   };
 }
