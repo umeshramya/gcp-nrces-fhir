@@ -60,7 +60,7 @@ export class InitialAssessment extends Composition implements Records {
     encounterOPIONumber = options.encounter.extension.find(el => el.url == "https://nicehms.com/OPD" || el.url == "https://nicehms.com/IPD")?.valueString || "";
   }
   
-  docHtml += `<div style="text-align:center;"><h5>${options.encounter.text} ${encounterOPIONumber}</h5>
+  docHtml += `<div style="text-align:center;"><h5>${options.encounter.text}${encounterOPIONumber}</h5>
   </div>`;
 
     let diagnosis: string[] = [];

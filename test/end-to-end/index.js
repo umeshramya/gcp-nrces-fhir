@@ -200,7 +200,7 @@ const setRelatedPerson = async () => {
     patientId: resources.patient.id,
     telecom: [{ system: "phone", rank: 1, use: "mobile", value: "9343403620" }],
   });
-  // console.log(body)
+
   let res = await gcpFhirCRUD.createFhirResource(body, "RelatedPerson");
   res = await gcpFhirCRUD.getFhirResource(res.data.id, "RelatedPerson");
   resources.relatedPerson = relatedPaerson.convertFhirToObject(res.data);
@@ -333,7 +333,6 @@ const setEncounter = async () => {
     status: "finished",
   });
 
-  console.log(JSON.stringify(body))
 
   let res = await gcpFhirCRUD.createFhirResource(body, "Encounter");
   res = await gcpFhirCRUD.getFhirResource(res.data.id, "Encounter");

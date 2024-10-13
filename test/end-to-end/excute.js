@@ -48,6 +48,7 @@ const { setClaimRequestBundle } = require("./ClaimRequestBundle");
 const {setCommunication} = require("./Communication");
 const { createValueSet } = require("./valueset");
 const { setDocimentReference } = require("./DocumentRefereence");
+const { setAllergyIntorance } = require("./AllergyIntolence");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -65,12 +66,20 @@ class excute {
   };
 
 
+  
+
   statResources=async()=>{
     const res = await new GcpFhirSearch().search("Encounter", "_count=3")
     console.log(res.data.link)
     res.data.entry.forEach(el=>console.log(el.resource.resourceType))
   }
 
+
+  allergyIntolrence =async()=>{
+    await callFunction()
+    const res=  await setAllergyIntorance()
+    console.log(res)
+  }
   /**
    *
    */
@@ -696,9 +705,10 @@ console.log(bundle)
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
-new excute().observation()
+// new excute().observation()
 // new excute().location()
 // new excute().diagnosticReportComposition()
+new excute().allergyIntolrence()
 
 // new excute().updateServiceRequest()
 

@@ -1,5 +1,5 @@
 import { ResourceMaster } from "../Interfaces";
-import { CodeDisplay } from "../config/index";
+import { CODEABLE_CONCEPT, CodeDisplay, MULTI_RESOURCE } from "../config/index";
 import ResourceMain from "./ResourceMai";
 
 export const allergyClinicalStatusArray = [
@@ -17,15 +17,19 @@ export const allergyVerificationStatusArray = [
 ] as const;
 type AllergyVerificationStatus = typeof allergyVerificationStatusArray[number];
 
+interface RECORDER extends MULTI_RESOURCE{
+  "resource" : "Practitioner" | "PractitionerRole" | "Patient" | "RelatedPerson"
+}
+
 export interface ALLERGY_INTOLERANCE {
   id?: string;
   clinicalStatus: AllergyClinicalStatus;
   verificationStatus: AllergyVerificationStatus;
-  allergyIntolerance: CodeDisplay[];
+  code : CODEABLE_CONCEPT
   text: string;
   patientId: string;
   date: string;
-  practitionerId: string;
+  recorder?: RECORDER
   note: { text: string }[];
 }
 
@@ -75,15 +79,13 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
           },
         ],
       },
-      code: {
-        coding: options.allergyIntolerance,
-        text: options.text,
-      },
+      code: options.code,
       patient: { reference: `Patient/${options.patientId}` },
       recordedDate: options.date,
-      recorder: { reference: `Practitioner/${options.practitionerId}` },
+      recorder:{"reference" : `${options.recorder?.resource}/${options.recorder?.id}`},
       note: options.note,
     };
+
 
     return body;
   }
@@ -91,11 +93,11 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
     let ret: ALLERGY_INTOLERANCE = {
       clinicalStatus: options.clinicalStatus.coding[0].code,
       verificationStatus: options.verificationStatus.coding[0].code,
-      allergyIntolerance: options.code.coding,
+      code:options.code,
       text: options.code.text,
       patientId: `${options.patient.reference}`.substring(8),
       date: options.recordedDate,
-      practitionerId: `${options.recorder.reference}`.substring(13),
+      recorder : options.recorder && this.getFromMultResource({"reference" : options.recorder.reference}),
       note: options.note,
       id: options.id,
     };
