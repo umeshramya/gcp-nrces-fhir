@@ -2,6 +2,7 @@ import { TimeZone } from "../../TimeZone";
 import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 import { resourceType } from "../../config";
+import { ENCOUNTER } from "../Encounter";
 
 interface Args {
   composition: COMPOSITOIN;
@@ -21,6 +22,7 @@ interface Args {
   hb?:any
   medicationStatement?:any
   allergyIntolerance?:any
+  encounter:ENCOUNTER
 }
 export class InitialAssessment extends Composition implements Records {
   create = async (options: Args) => {
@@ -49,7 +51,17 @@ export class InitialAssessment extends Composition implements Records {
   };
 
   getOptions = async (options: Args): Promise<Args> => {
-    let docHtml = "";
+
+    let docHtml = `<div style="text-align:center;">
+    <h2>Initial Assessment</h2>`;
+    
+  let encounterOPIONumber = "";
+  if (options.encounter && options.encounter.extension) {
+    encounterOPIONumber = options.encounter.extension.find(el => el.url == "https://nicehms.com/OPD" || el.url == "https://nicehms.com/IPD")?.valueString || "";
+  }
+  
+  docHtml += `<h3>${options.encounter.text}, ${encounterOPIONumber}</h3>
+  </div>`;
 
     let diagnosis: string[] = [];
     await this.getDiagnosisFromEnconter(
