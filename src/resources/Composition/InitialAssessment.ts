@@ -102,7 +102,8 @@ export class InitialAssessment extends Composition implements Records {
       title: "InitialAssessment",
     };
 
-    docHtml = `<table><tr>`
+    
+    docHtml += `<table data-pdfmake="{'widths':['32%','32%','32%']}"><tr>`
     //1 weight
     if(options.weight){
       sectionZero.entry.push({
@@ -209,6 +210,8 @@ export class InitialAssessment extends Composition implements Records {
       reference: `AllergyIntolerance/${options.allergyIntolerance.id}`,
       type: "AllergyIntolerance",
     });
+
+    docHtml += `<h4>Allergy Intolerance</h4>`;
     docHtml += options.allergyIntolerance.text.div;
   }
 
@@ -219,7 +222,20 @@ export class InitialAssessment extends Composition implements Records {
       type: "Condition",
     });
 
+    docHtml += `<h4>Chief Complaints</h4>`;
     docHtml += options.chiefComplaints.text.div;
+  }
+
+
+  if(options.histroryOfPrsentingIllness){
+    sectionZero.entry.push({
+      reference: `Condition/${options.histroryOfPrsentingIllness.id}`,
+      type: "Condition",
+    });
+
+    docHtml += `<h4>History of Presenting Illness</h4>`;
+
+    docHtml += options.histroryOfPrsentingIllness.text.div;
   }
 
   // pasthistory
@@ -228,6 +244,8 @@ export class InitialAssessment extends Composition implements Records {
       reference: `Condition/${options.pasthistory.id}`,
       type: "Condition",
     });
+
+    docHtml += `<h4>Past History</h4>`;
 
     docHtml += options.pasthistory.text.div;
   }
@@ -240,6 +258,7 @@ export class InitialAssessment extends Composition implements Records {
       type: "MedicationStatement",
     });
 
+    docHtml += `<h4>Current Medications</h4>`;
     docHtml += options.medicationRequest.text.div;
 
   }
@@ -251,6 +270,7 @@ export class InitialAssessment extends Composition implements Records {
       type: "Condition",
     });
 
+    docHtml +=`<h4>Family History</h4>`
     docHtml += options.familyHistory.text.div;
   }
 
@@ -260,7 +280,7 @@ export class InitialAssessment extends Composition implements Records {
       reference: `MedicationRequest/${options.medicationRequest.id}`,
       type: "MedicationRequest",
     });
-
+    docHtml += `<h4>Advise Medicines</h4>`
     docHtml += options.medicationRequest.text.div;
   }
 
