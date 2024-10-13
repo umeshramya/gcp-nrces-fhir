@@ -188,7 +188,7 @@ export class InitialAssessment extends Composition implements Records {
     docHtml += `<td></td>`
   }
 
-  docHtml+=`</tr>`
+  docHtml+=`</tr></table>`
 
 
   // AllergyIntolerance

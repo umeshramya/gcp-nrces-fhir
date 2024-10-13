@@ -321,7 +321,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       }`
 
       html += `</table>`;
-      html += `<div>${options.documentDatahtml}</div`;
+      html += `<div>${options.documentDatahtml}</div>`;
       html += `</div>`;
       // html = `<span style="font-size: 10px;">${html}</span>`
 
