@@ -53,14 +53,14 @@ export class InitialAssessment extends Composition implements Records {
   getOptions = async (options: Args): Promise<Args> => {
 
     let docHtml = `<div style="text-align:center;">
-    <h2>Initial Assessment</h2>`;
+    <h2>Initial Assessment</h2></div>`;
     
   let encounterOPIONumber = "";
   if (options.encounter && options.encounter.extension) {
     encounterOPIONumber = options.encounter.extension.find(el => el.url == "https://nicehms.com/OPD" || el.url == "https://nicehms.com/IPD")?.valueString || "";
   }
   
-  docHtml += `<h3>${options.encounter.text}, ${encounterOPIONumber}</h3>
+  docHtml += `<div style="text-align:center;"><h5>${options.encounter.text} ${encounterOPIONumber}</h5>
   </div>`;
 
     let diagnosis: string[] = [];
