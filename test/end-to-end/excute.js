@@ -49,6 +49,7 @@ const {setCommunication} = require("./Communication");
 const { createValueSet } = require("./valueset");
 const { setDocimentReference } = require("./DocumentRefereence");
 const { setAllergyIntorance } = require("./AllergyIntolence");
+const { setMedicationStatement } = require("./medicationStatement");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -85,7 +86,14 @@ class excute {
    */
   medicationrequest = async () => {
     await callFunction();
-    await setMedicationRequest();
+   const res= await setMedicationRequest();
+   console.log(resources.medicationsRequest)
+  };
+
+  medicationStateement = async () => {
+    await callFunction();
+   const res= await setMedicationStatement();
+   console.log(resources.medicationStatment)
   };
   /**
    *
@@ -692,6 +700,7 @@ console.log(bundle)
 // new excute().callFunction()
 // new excute().createValueset()
 // new excute().medicationrequest();
+new excute().medicationStateement()
 // new excute().conditon()
 // new excute().practionerRole()
 // new excute().specimen()
@@ -708,7 +717,7 @@ console.log(bundle)
 // new excute().observation()
 // new excute().location()
 // new excute().diagnosticReportComposition()
-new excute().allergyIntolrence()
+// new excute().allergyIntolrence()
 
 // new excute().updateServiceRequest()
 

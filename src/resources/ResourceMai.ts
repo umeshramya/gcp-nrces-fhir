@@ -2,6 +2,14 @@ import { resourceType } from "..";
 import ResourceToHTML from "../classess/ReseorcetToHtml";
 import { CODEABLE_CONCEPT, CodeDisplay, MULTI_RESOURCE } from "../config";
 
+export interface DOSAGE_INSTRUCTION {
+  text: string;
+  additionalInstruction?: CodeDisplay[];
+  timing: string;
+  route: CodeDisplay[];
+  method: CodeDisplay[];
+}
+
 export default class ResourceMain extends ResourceToHTML{
   /**
    * this return the tex div by subcratig first 42 charceters and last 6 s=charecters
@@ -118,5 +126,46 @@ export default class ResourceMain extends ResourceToHTML{
         }
     }
     return obj;
+}
+
+
+createDosageInstrction(options: DOSAGE_INSTRUCTION): any {
+  const body = {
+    text: options.text,
+    additionalInstruction: [
+      {
+        coding: options.additionalInstruction,
+      },
+    ],
+    timing: {
+      code: {
+        text: options.timing,
+      },
+    },
+    route: {
+      coding: options.route,
+    },
+    method: {
+      coding: options.method,
+    },
+  };
+  return body;
+}
+
+
+convertDosageInstructionToObject(option: any): DOSAGE_INSTRUCTION {
+  let ret: DOSAGE_INSTRUCTION = {
+    text: option.text,
+    additionalInstruction: option.additionalInstruction[0].coding,
+    timing: option.timing.code.text,
+    route: option.route.coding,
+    method: option.method.coding,
+  };
+
+  if (ret.additionalInstruction == undefined) {
+    delete ret.additionalInstruction;
+  }
+
+  return ret;
 }
 }

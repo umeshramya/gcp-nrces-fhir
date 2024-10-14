@@ -2,7 +2,7 @@ import { CodeDisplay } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
 import { PRACTITIONER } from "./Practitioner";
-import ResourceMain from "./ResourceMai";
+import ResourceMain, { DOSAGE_INSTRUCTION } from "./ResourceMai";
 
 export const MedicatioRequestStatusArray = [
   "active",
@@ -42,13 +42,7 @@ export interface MEDICATION_REQUEST {
   DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[];
 }
 
-export interface DOSAGE_INSTRUCTION {
-  text: string;
-  additionalInstruction?: CodeDisplay[];
-  timing: string;
-  route: CodeDisplay[];
-  method: CodeDisplay[];
-}
+
 export class MedicationRequest extends ResourceMain implements ResourceMaster {
  async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
@@ -151,44 +145,6 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     return ret;
   }
 
-  createDosageInstrction(options: DOSAGE_INSTRUCTION): any {
-    const body = {
-      text: options.text,
-      additionalInstruction: [
-        {
-          coding: options.additionalInstruction,
-        },
-      ],
-      timing: {
-        code: {
-          text: options.timing,
-        },
-      },
-      route: {
-        coding: options.route,
-      },
-      method: {
-        coding: options.method,
-      },
-    };
-    return body;
-  }
-
-  convertDosageInstructionToObject(option: any): DOSAGE_INSTRUCTION {
-    let ret: DOSAGE_INSTRUCTION = {
-      text: option.text,
-      additionalInstruction: option.additionalInstruction[0].coding,
-      timing: option.timing.code.text,
-      route: option.route.coding,
-      method: option.method.coding,
-    };
-
-    if (ret.additionalInstruction == undefined) {
-      delete ret.additionalInstruction;
-    }
-
-    return ret;
-  }
 
   bundlify(resource: any) {
     let curResource = super.bundlify(resource);
@@ -225,6 +181,18 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
     return ret;
   }
 }
+
+
+
+
+
+
+
+
+
+/*
+  BELOW FOR  BUDLIFY
+*/ 
 
 interface dosageInstruction {
   method: Method;
