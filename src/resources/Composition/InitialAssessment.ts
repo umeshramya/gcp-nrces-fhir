@@ -7,6 +7,7 @@ import { ENCOUNTER } from "../Encounter";
 interface Args {
   composition: COMPOSITOIN;
   medicationRequest?: any;
+  presentingProblems?:any
   chiefComplaints:any
   histroryOfPrsentingIllness?:any;
   pasthistory?:any
@@ -214,6 +215,20 @@ export class InitialAssessment extends Composition implements Records {
     docHtml += `<h4>Allergy Intolerance</h4>`;
     docHtml += options.allergyIntolerance.text.div;
   }
+
+
+    // chiefComplaints
+    if(options.presentingProblems){
+      sectionZero.entry.push({
+        reference: `Condition/${options.presentingProblems.id}`,
+        type: "Condition",
+      });
+  
+      docHtml += `<h4>Presenting Problems</h4>`;
+      docHtml += options.presentingProblems.text.div;
+    }
+  
+  
 
   // chiefComplaints
   if(options.chiefComplaints){
