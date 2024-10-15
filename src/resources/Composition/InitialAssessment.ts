@@ -217,7 +217,7 @@ export class InitialAssessment extends Composition implements Records {
   }
 
 
-    // chiefComplaints
+    // presentingProblems
     if(options.presentingProblems){
       sectionZero.entry.push({
         reference: `Condition/${options.presentingProblems.id}`,
