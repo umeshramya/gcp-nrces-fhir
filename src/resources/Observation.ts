@@ -199,6 +199,10 @@ export class Observation extends ResourceMain implements ResourceMaster {
       }
       return ret;
     };
+
+    if(options.valueWithType){
+      options.value = options.valueWithType
+    }
     const body: any = {
       resourceType: "Observation",
       id: options.id,
