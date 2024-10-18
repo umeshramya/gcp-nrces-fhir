@@ -153,7 +153,7 @@ export interface OBSERVATION {
   /**  This is used when creating the resource (input) */ 
   value?: VALUE;
   /** This is used when converting the resource to an object (output) */ 
-  valueWithType?: SingleValue;
+  // valueWithType?: SingleValue;
   dataAbsentReason?: CODEABLE_CONCEPT
   encounterId?: string;
   referenceRange?: REFERENCE_RANGE[];
@@ -305,29 +305,29 @@ export class Observation extends ResourceMain implements ResourceMaster {
       text: options.text.div,
       referenceRange: options.referenceRange,
     };
-    if (options.valueQuantity){
-      ret.valueWithType = {"valueQuantity" : options.valueQuantity}
-    }else if(options.valueCodeableConcept){
-      ret.valueWithType = {"valueCodeableConcept" : options.valueCodeableConcept} 
-    }else if(options.valueString){
-      ret.valueWithType = {"valueString" : options.valueString} 
-    }else if(options.valueBoolean){
-      ret.valueWithType = {"valueBoolean" : options.valueBoolean} 
-    }else if(options.valueInteger){
-      ret.valueWithType = {"valueInteger" : options.valueInteger} 
-    }else if(options.valueRange){
-      ret.valueWithType = {"valueRange" : options.valueRange} 
-    }else if(options.valueRatio){
-      ret.valueWithType = {"valueRatio" : options.valueRatio} 
-    }else if(options.valueSampledData){
-      ret.valueWithType = {"valueSampledData" : options.valueSampledData} 
-    }else if(options.valueTime){
-      ret.valueWithType = {"valueTime" : options.valueTime} 
-    }else if(options.valueDateTime){
-      ret.valueWithType = {"valueDateTime" : options.valueDateTime} 
-    }else if(options.valuePeriod){
-      ret.valueWithType = {"valuePeriod" : options.valuePeriod} 
-    }
+    // if (options.valueQuantity){
+    //   ret.valueWithType = {"valueQuantity" : options.valueQuantity}
+    // }else if(options.valueCodeableConcept){
+    //   ret.valueWithType = {"valueCodeableConcept" : options.valueCodeableConcept} 
+    // }else if(options.valueString){
+    //   ret.valueWithType = {"valueString" : options.valueString} 
+    // }else if(options.valueBoolean){
+    //   ret.valueWithType = {"valueBoolean" : options.valueBoolean} 
+    // }else if(options.valueInteger){
+    //   ret.valueWithType = {"valueInteger" : options.valueInteger} 
+    // }else if(options.valueRange){
+    //   ret.valueWithType = {"valueRange" : options.valueRange} 
+    // }else if(options.valueRatio){
+    //   ret.valueWithType = {"valueRatio" : options.valueRatio} 
+    // }else if(options.valueSampledData){
+    //   ret.valueWithType = {"valueSampledData" : options.valueSampledData} 
+    // }else if(options.valueTime){
+    //   ret.valueWithType = {"valueTime" : options.valueTime} 
+    // }else if(options.valueDateTime){
+    //   ret.valueWithType = {"valueDateTime" : options.valueDateTime} 
+    // }else if(options.valuePeriod){
+    //   ret.valueWithType = {"valuePeriod" : options.valuePeriod} 
+    // }
 
     if(options.category){
       ret.category = options.category

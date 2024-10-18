@@ -46,7 +46,11 @@ const setObservation = async () => {
          }
       ],
       "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
-      "value": { "valueBoolean": true },
+      "value": { "valueQuantity" : {
+         "code" : "weight",
+         "system" : "http://unitsofmeasure.org",
+         "unit": "Kg",
+      }},
       "code" :{"text" :"Hb"},
       "patientId" : resources.patient.id,
       "text" : "Testing",
