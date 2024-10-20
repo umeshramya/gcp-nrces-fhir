@@ -145,9 +145,6 @@ export default class ResourceFactory
     let curresource:any = resource
     if (curresource.id) {
 
-    if(curresource.text && curresource.text.div != '' ){
-      curresource.text.div= " " 
-    }
     ret = await gcpFhirCrud.updateFhirResource(
       curresource,
       curresource.id,

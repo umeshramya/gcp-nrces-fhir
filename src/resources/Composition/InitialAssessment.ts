@@ -224,10 +224,10 @@ export class InitialAssessment extends Composition implements Records {
         type: "Condition",
       });
   
-      if( options.presentingProblems.text.div != " "){
+
         docHtml += `<h4>Presenting Problems</h4>`;
         docHtml += options.presentingProblems.text.div;
-      }
+      
 
     }
   
@@ -239,10 +239,10 @@ export class InitialAssessment extends Composition implements Records {
       reference: `Condition/${options.chiefComplaints.id}`,
       type: "Condition",
     });
-    if( options.chiefComplaints.text.div != " "){
+
       docHtml += `<h4>Chief Complaints</h4>`;
       docHtml += options.chiefComplaints.text.div;
-    }
+    
 
   }
 
@@ -253,10 +253,10 @@ export class InitialAssessment extends Composition implements Records {
       type: "Condition",
     });
 
-    if( options.histroryOfPrsentingIllness.text.div != " "){
+ 
       docHtml += `<h4>History of Presenting Illness</h4>`;
       docHtml += options.histroryOfPrsentingIllness.text.div;
-    }
+    
 
   }
 
@@ -267,10 +267,10 @@ export class InitialAssessment extends Composition implements Records {
       type: "Condition",
     });
 
-    if( options.pasthistory.text.div != " "){
+   
       docHtml += `<h4>Past History</h4>`;
       docHtml += options.pasthistory.text.div;
-    }
+    
   }
 
 
@@ -281,10 +281,10 @@ export class InitialAssessment extends Composition implements Records {
       type: "MedicationStatement",
     });
 
-    if(options.medicationRequest.text.div != " "){
+ 
       docHtml += `<h4>Current Medications</h4>`;
       docHtml += options.medicationRequest.text.div;
-    }
+    
 
 
   }
@@ -295,10 +295,10 @@ export class InitialAssessment extends Composition implements Records {
       reference: `Condition/${options.familyHistory.id}`,
       type: "Condition",
     });
-    if(options.familyHistory.text.div != " "){
+   
     docHtml +=`<h4>Family History</h4>`
     docHtml += options.familyHistory.text.div;
-    }
+    
   }
 
 //  medicationRequest
@@ -307,10 +307,10 @@ export class InitialAssessment extends Composition implements Records {
       reference: `MedicationRequest/${options.medicationRequest.id}`,
       type: "MedicationRequest",
     });
-    if(options.medicationRequest.text.div != " "){
+
     docHtml += `<h4>Advise Medicines</h4>`
     docHtml += options.medicationRequest.text.div;
-    }
+    
   }
   
     options.composition.documentDatahtml = docHtml;
