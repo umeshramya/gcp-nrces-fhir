@@ -39,6 +39,7 @@ const setObservation = async () => {
             }
          }
       ],
+      "encounterId": resources.encounter.id,
       effectiveDateTime : new Date().toISOString(),
       category : [
          {
@@ -70,8 +71,8 @@ const setObservation = async () => {
       
    })
 
-   // console.log(body)
-   // return
+   console.log(JSON.stringify(body))
+   return
 
    let res = (await new GcpFhirCRUD().createFhirResource(body, "Observation")).data;
    res = new Observation().convertFhirToObject(res)

@@ -137,19 +137,25 @@ export default class ResourceFactory
    */
   static async setResource<T>(
     resource: T,
-    resourceType: resourceType
+    resourceType: resourceType,
   ): Promise<any> {
     // check resource has id;
     const gcpFhirCrud = new GcpFhirCRUD();
     let ret: any;
-    // @ts-ignore
-    if (resource.id) {
+    let curresource:any = resource
+    if (curresource.id) {
+
+    if(curresource.text && curresource.text.div != '' ){
       ret = await gcpFhirCrud.updateFhirResource(
-        resource,
-        // @ts-ignore
-        resource.id,
+        curresource,
+        curresource.id,
         resourceType
       );
+    } else{
+      await gcpFhirCrud.deleteFhirResource( curresource.id, resourceType)
+      return null
+    }
+
     } else {
       ret = await gcpFhirCrud.createFhirResource(resource, resourceType);
     }
