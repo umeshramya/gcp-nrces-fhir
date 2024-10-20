@@ -146,15 +146,15 @@ export default class ResourceFactory
     if (curresource.id) {
 
     if(curresource.text && curresource.text.div != '' ){
-      ret = await gcpFhirCrud.updateFhirResource(
-        curresource,
-        curresource.id,
-        resourceType
-      );
-    } else{
-      await gcpFhirCrud.deleteFhirResource( curresource.id, resourceType)
-      return null
+      curresource.text.div= " " 
     }
+    ret = await gcpFhirCrud.updateFhirResource(
+      curresource,
+      curresource.id,
+      resourceType
+    );
+
+
 
     } else {
       ret = await gcpFhirCrud.createFhirResource(resource, resourceType);
