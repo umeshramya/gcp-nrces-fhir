@@ -191,6 +191,36 @@ export class Composition extends ResourceMain implements ResourceMaster {
   }
 
 
+  getOpdOrIPDNumber (encounter:ENCOUNTER):{type:"IPD" | "OPD", "opdOrIpdNumber" : string, "value" :string}{
+    let ret:{type:"IPD" | "OPD", "opdOrIpdNumber" : string, "value" :string}={
+      "opdOrIpdNumber" : "0",
+      "type": "OPD",
+      "value" : ""
+    }
+
+    if(encounter.extension && encounter.extension.length > 0){
+      const opdExtension = encounter.extension.find(el=>el.url =="https://nicehms.com/OPD") || null
+      const ipdExtension = encounter.extension.find(el=>el.url =="https://nicehms.com/IPD") || null
+      if(opdExtension){
+        ret={
+          "opdOrIpdNumber" : opdExtension.valueString || "",
+          "type" : "OPD",
+          "value" : `OPD No ${opdExtension.valueString}`
+        }
+      }else if(ipdExtension){
+        ret = {
+          opdOrIpdNumber : ipdExtension.valueString || "",
+          "type" : "IPD",
+          "value" :`IPD No ${ipdExtension.valueString}`
+        }
+      }
+    }
+    
+    return ret;
+   
+  }
+
+
 
   /**
    * service requested by could be patient , organization, patient him or herself
@@ -293,8 +323,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
       html += `${
         this.requeter || options.patient.internalId || options.patient.facilityId
           ? `<tr><td>${
-              this.requeter ? `Requested By : ${this.requeter}` : ""
-            }</td><td>${
+              this.requeter ? `Requested By : ${this.requeter}<br/>>` : ""
+            }
+          ${options.encounter && this.getOpdOrIPDNumber(options.encounter).value}
+            </td><td>${
               options.patient.internalId || options.patient.facilityId
                 ? `Internal Id : ${options.patient.facilityId || ""} ${options.patient.internalId || ""}`
                 : ""
