@@ -714,10 +714,10 @@ console.log(bundle)
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
-new excute().observation()
+// new excute().observation()
 // new excute().location()
 // new excute().diagnosticReportComposition()
-// new excute().allergyIntolrence()
+new excute().allergyIntolrence()
 
 // new excute().updateServiceRequest()
 

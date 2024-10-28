@@ -12,6 +12,7 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 const setAllergyIntorance= async () => {
   const allergyIntorance = new AllergyIntolerance();
   const body = allergyIntorance.getFHIR({
+    "encounterId" : resources.encounter.id,
     "clinicalStatus" : "active",
     "text" : "Allergic pencilllin",
     "code" : {

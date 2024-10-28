@@ -26,11 +26,12 @@ export interface ALLERGY_INTOLERANCE {
   clinicalStatus: AllergyClinicalStatus;
   verificationStatus: AllergyVerificationStatus;
   code : CODEABLE_CONCEPT
-  text: string;
+  text?: string;
   patientId: string;
   date: string;
   recorder?: RECORDER
   note: { text: string }[];
+  encounterId?:string
 }
 
 export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
@@ -41,13 +42,11 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
   getFHIR(options: ALLERGY_INTOLERANCE): any {
     const getAllergy = (): string => {
       let ret = "";
-      if (options.text) {
         ret = `<div>${options.text} clinical status:${options.clinicalStatus} verification status: ${options.verificationStatus}</div>`;
-        ret = `${ret} <div>${options.note}</div>`;
-      }
+        ret += `${ret} <div>${options.note.map(el=>el.text).join(". ")}</div>`;
       return ret;
     };
-    const body = {
+    const body:any = {
       resourceType: "AllergyIntolerance",
       id: options.id || undefined,
       meta: {
@@ -59,6 +58,7 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
         status: "generated",
         div: getAllergy(),
       },
+    
       clinicalStatus: {
         coding: [
           {
@@ -86,6 +86,12 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
       note: options.note,
     };
 
+    if(options.encounterId){
+      body.encounter=  {
+        "reference" : `Encounter/${options.encounterId}`
+      }
+    }
+
 
     return body;
   }
@@ -94,13 +100,16 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
       clinicalStatus: options.clinicalStatus.coding[0].code,
       verificationStatus: options.verificationStatus.coding[0].code,
       code:options.code,
-      text: options.code.text,
+      text: options.text.div,
       patientId: `${options.patient.reference}`.substring(8),
       date: options.recordedDate,
       recorder : options.recorder && this.getFromMultResource({"reference" : options.recorder.reference}),
       note: options.note,
       id: options.id,
     };
+    if(options.encounter){
+      ret.encounterId = this.getIdFromReference({"ref" : options.encounter.reference, "resourceType" : "Encounter"})
+    }
     return ret;
   }
 
