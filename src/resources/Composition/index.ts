@@ -256,25 +256,63 @@ export class Composition extends ResourceMain implements ResourceMaster {
     this.performer.push(options.display);
   };
   getFHIR(options: COMPOSITOIN) {
-    const getpatientdetails = () => {
-      let ret = `<div>Patient:- ${options.patient.name}.</div>`;
-      ret += `<div>UHID :- ${options.patient.MRN} </div>`;
-      ret += `${
-        options.patient.phrAddress
-          ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
-              options.patient.healthNumber
-                ? `ABHA Number ${options.patient.healthNumber}`
-                : ""
-            }</div>`
-          : ""
-      }`;
-      ret += `<div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
-        new Date(options.patient.dob)
-      )} ph: ${options.patient.mobile}</div>`;
 
+
+    // const getpatientdetails = () => {
+
+    //   const  MrTime = new Date().getTime() - new Date(options.patient.dob).getTime() > 12*365*24*60*60*1000
+    //   let prefix = MrTime && (options.patient.gender.toLowerCase().startsWith("m") ? "Mr " : "Ms " )|| ""
+      
+    //   let relative = options.patient.contact && (options.patient.contact?.map((el,i)=> `${i}. ${el.name} ${el.relationship[0].coding[0].display} ${el.telecom.map(tl=>tl.value).join(", ")}`).join(", ")) || ""
+    //   let ret = `<div>Patient:-${prefix}${options.patient.name}.</div>`;
+    //   ret += `<div>UHID :- ${options.patient.MRN} </div>`;
+    //   ret += `${
+    //     options.patient.phrAddress
+    //       ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
+    //           options.patient.healthNumber
+    //             ? `ABHA Number ${options.patient.healthNumber}`
+    //             : ""
+    //         }</div>`
+    //       : ""
+    //   }`;
+    //   ret += `<div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
+    //     new Date(options.patient.dob)
+    //   )} ph: ${options.patient.mobile}</div> `;
+
+    //   ret += relative != "" ? `<div>Secondary Contact ${relative}</div>` : ""
+
+    //   return ret.trim();
+    // };
+
+    const getPatientDetails  = () => {
+      const { patient } = options || {};
+      if (!patient) return "<div>No patient information available</div>";
+    
+      // Determine prefix based on age and gender
+      const isAdult = (new Date().getTime() - new Date(patient.dob).getTime()) > 12 * 365 * 24 * 60 * 60 * 1000;
+      const prefix = isAdult ? (patient.gender.toLowerCase().startsWith("m") ? "Mr " : "Ms ") : "";
+    
+      // Format secondary contact information
+      const relative = patient.contact 
+        ? patient.contact.map((el, i) => `${i + 1}. ${el.name?.given?.join(" ") || ""} ${el.name?.family || ""} (${el.relationship?.[0]?.coding?.[0]?.display || "Unknown"}) ${el.telecom?.map(tl => tl.value).join(", ")}`).join("; ")
+        : "";
+    
+      // Create patient details HTML
+      let ret = `<div>Patient: ${prefix}${patient.name || "Unknown"}.</div>`;
+      ret += `<div>UHID: ${patient.MRN || "N/A"}</div>`;
+      ret += patient.phrAddress 
+        ? `<div>ABHA Address: ${patient.phrAddress}. ${patient.healthNumber ? `ABHA Number: ${patient.healthNumber}` : ""}</div>` 
+        : "";
+      ret += `<div>Gender/Age: ${patient.gender || "Unknown"}/${new Age().dobToAge(new Date(patient.dob || Date.now()))} ph: ${patient.mobile || "N/A"}</div>`;
+      ret += relative ? `<div>Secondary Contact: ${relative}</div>` : "";
+    
       return ret.trim();
     };
+    
     /**
+     * 
+     * 
+     * 
      * This is for doctors who authored the document or who interpreted the results
      * @returns
      */
@@ -307,7 +345,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       html += `</div>`;
       html += `<table data-pdfmake="{'widths':['60%','40%']}">`;
       html += `<tr>`;
-      html += `<td>${getpatientdetails()}</td>`;
+      html += `<td>${getPatientDetails ()}</td>`;
       html += `<td>${getDoctors()}`;
 
       html += `${
