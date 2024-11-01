@@ -30,7 +30,7 @@ export interface ALLERGY_INTOLERANCE {
   patientId: string;
   date: string;
   recorder?: RECORDER
-  note: { text: string }[];
+  note?: { text: string }[];
   encounterId?:string
 }
 
@@ -43,7 +43,11 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
     const getAllergy = (): string => {
       let ret = "";
         ret = `<div>${options.text} clinical status:${options.clinicalStatus} verification status: ${options.verificationStatus}</div>`;
-        ret += `${ret} <div>${options.note.map(el=>el.text).join(". ")}</div>`;
+        
+        if(options.note && options.note.length > 0){
+          ret += `${ret} <div>${options.note.map(el=>el.text).join(". ")}</div>`;
+        }
+
       return ret;
     };
     const body:any = {
@@ -82,14 +86,22 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
       code: options.code,
       patient: { reference: `Patient/${options.patientId}` },
       recordedDate: options.date,
-      recorder:{"reference" : `${options.recorder?.resource}/${options.recorder?.id}`},
-      note: options.note,
+     
+      
     };
 
     if(options.encounterId){
       body.encounter=  {
         "reference" : `Encounter/${options.encounterId}`
       }
+    }
+
+    if(options.note){
+      body.note = options.note
+    }
+
+    if(options.recorder){
+      body.recorder={"reference" : `${options.recorder?.resource}/${options.recorder?.id}`}
     }
 
 
@@ -99,17 +111,27 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
     let ret: ALLERGY_INTOLERANCE = {
       clinicalStatus: options.clinicalStatus.coding[0].code,
       verificationStatus: options.verificationStatus.coding[0].code,
-      code:options.code,
+      code: options.code,
       text: options.text.div,
       patientId: `${options.patient.reference}`.substring(8),
       date: options.recordedDate,
-      recorder : options.recorder && this.getFromMultResource({"reference" : options.recorder.reference}),
-      note: options.note,
       id: options.id,
+
     };
     if(options.encounter){
       ret.encounterId = this.getIdFromReference({"ref" : options.encounter.reference, "resourceType" : "Encounter"})
     }
+    if(options.recorder){
+    ret.recorder = this.getFromMultResource({"reference" : options.recorder.reference }) as RECORDER
+    }
+
+    if(options.note){
+      ret.note= options.note
+    }
+
+      
+    
+    // note: options.note,
     return ret;
   }
 
