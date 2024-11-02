@@ -147,16 +147,34 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
   };
 
 
-  getPaientAllergyIntolerances = async(pateintId:string):Promise<ALLERGY_INTOLERANCE[]>=>{
-    let ret:ALLERGY_INTOLERANCE[]=[]
+  getPatientPerEncounterAllergyIntolerances = async (patientId: string, encounterId: string): Promise<ALLERGY_INTOLERANCE[]> => {
+    let ret: ALLERGY_INTOLERANCE[] = [];
     const gcpFhirSearch = new GcpFhirSearch();
-    const res = await  gcpFhirSearch.search("AllergyIntolerance", `patient=${pateintId}`)
-    if(res.data && res.data.entry&&res.data.entry.length >0){
-       ret= res.data.entry.map((el: { resource: any; })=>this.convertFhirToObject(el.resource))
+
+    try {
+        // Perform search for AllergyIntolerance resources by patient ID
+        const res = await gcpFhirSearch.search("AllergyIntolerance", `patient=${patientId}`);
+
+        // Check if the response contains valid data entries
+        if (res.data && res.data.entry && res.data.entry.length > 0) {
+            // Filter entries to only include those with a matching encounter ID
+            ret = res.data.entry
+                .filter((el: { resource: { reference: string; }; }) => {
+                    // Attempt to extract Encounter ID from the resource reference
+                    const id = this.getIdFromReference({ ref: el.resource.reference, resourceType: "Encounter" });
+                    return id === encounterId;
+                })
+                // Convert each filtered FHIR resource to ALLERGY_INTOLERANCE object
+                .map((el: { resource: any; }) => this.convertFhirToObject(el.resource));
+        }
+    } catch (error) {
+        console.error("Error fetching AllergyIntolerance data:", error);
+        // Optional: Handle errors, log, or throw to propagate further
     }
 
     return ret;
 }
+
 
 
 
