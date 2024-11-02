@@ -159,9 +159,9 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
         if (res.data && res.data.entry && res.data.entry.length > 0) {
             // Filter entries to only include those with a matching encounter ID
             ret = res.data.entry
-                .filter((el: { resource: { reference: string; }; }) => {
+                .filter((el: any) => {
                     // Attempt to extract Encounter ID from the resource reference
-                    const id = this.getIdFromReference({ ref: el.resource.reference, resourceType: "Encounter" });
+                    const id = this.getIdFromReference({ ref: el.resource.encounter.reference, resourceType: "Encounter" });
                     return id === encounterId;
                 })
                 // Convert each filtered FHIR resource to ALLERGY_INTOLERANCE object
