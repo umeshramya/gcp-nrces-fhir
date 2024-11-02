@@ -41,14 +41,11 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
   }
   statusArray?: Function | undefined;
   getFHIR(options: ALLERGY_INTOLERANCE): any {
-    const getAllergy = (): string => {
-      let ret = `<table data-pdfmake="{'widths':['90%']}">`;
-      ret += `<tr><td>`
-        
+    const getText = (): string => {
+      let ret = ""
         ret = `Agent:${options.code.text}, clinical status:${options.clinicalStatus}, verification status:${options.verificationStatus}`;
-        
         if(options.note && options.note.length > 0){
-          ret += `${ret} <div>${options.note.map(el=>el.text).join(". ")}</div>`;
+          ret += `<div>${options.note.map(el=>el.text).join(". ")}</div>`;
         }
 
       return ret;
@@ -63,7 +60,7 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
       },
       text: {
         status: "generated",
-        div: getAllergy(),
+        div: getText(),
       },
     
       clinicalStatus: {
@@ -181,7 +178,7 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
 gettAllergyIntolerancesText =(allergyIntolerances:ALLERGY_INTOLERANCE[]):string=>{
   let  ret:string=''
   allergyIntolerances.forEach((el, i)=>{
-    ret+= `<div>${i+1} ${el.text}</div>`
+    ret+= `<div>${i+1} ${el.text}</div`
   })
 
   return ret
