@@ -1,4 +1,5 @@
 import { ResourceMaster } from "../Interfaces";
+import GcpFhirSearch from "../classess/gcpSearch";
 import { CODEABLE_CONCEPT, CodeDisplay, MULTI_RESOURCE } from "../config/index";
 import ResourceMain from "./ResourceMai";
 
@@ -41,13 +42,16 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
   statusArray?: Function | undefined;
   getFHIR(options: ALLERGY_INTOLERANCE): any {
     const getAllergy = (): string => {
-      let ret = "";
-        ret = `<div>${options.text} clinical status:${options.clinicalStatus} verification status: ${options.verificationStatus}</div>`;
+      let ret = `<table data-pdfmake="{'widths':['90%']}">`;
+      ret += `<tr><td>`
+        
+        ret = `Agent:${options.code.text}, clinical status:${options.clinicalStatus}, verification status:${options.verificationStatus}`;
         
         if(options.note && options.note.length > 0){
           ret += `${ret} <div>${options.note.map(el=>el.text).join(". ")}</div>`;
         }
 
+      ret += `</tr></table>`
       return ret;
     };
     const body:any = {
@@ -142,4 +146,28 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
   getVerificationStatus = (): AllergyVerificationStatus[] => {
     return allergyVerificationStatusArray.map((el) => el);
   };
+
+
+  getPaientAllergyIntolerances = async(pateintId:string):Promise<ALLERGY_INTOLERANCE[]>=>{
+    let ret:ALLERGY_INTOLERANCE[]=[]
+    const gcpFhirSearch = new GcpFhirSearch();
+    const res = await  gcpFhirSearch.search("AllergyIntolerance", `patient=${pateintId}`)
+    if(res.data && res.data.entry&&res.data.entry.length >0){
+       ret= res.data.entry.map((el: { resource: any; })=>this.convertFhirToObject(el.resource))
+    }
+
+    return ret;
+}
+
+
+
+gettAllergyIntolerancesText =(allergyIntolerances:ALLERGY_INTOLERANCE[]):string=>{
+  let  ret:string=''
+  allergyIntolerances.forEach((el, i)=>{
+    ret+= `${i+1} ${el.text}`
+  })
+
+  return ret
+
+}
 }

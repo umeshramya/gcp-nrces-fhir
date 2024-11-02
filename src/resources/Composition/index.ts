@@ -258,31 +258,6 @@ export class Composition extends ResourceMain implements ResourceMaster {
   getFHIR(options: COMPOSITOIN) {
 
 
-    // const getpatientdetails = () => {
-
-    //   const  MrTime = new Date().getTime() - new Date(options.patient.dob).getTime() > 12*365*24*60*60*1000
-    //   let prefix = MrTime && (options.patient.gender.toLowerCase().startsWith("m") ? "Mr " : "Ms " )|| ""
-      
-    //   let relative = options.patient.contact && (options.patient.contact?.map((el,i)=> `${i}. ${el.name} ${el.relationship[0].coding[0].display} ${el.telecom.map(tl=>tl.value).join(", ")}`).join(", ")) || ""
-    //   let ret = `<div>Patient:-${prefix}${options.patient.name}.</div>`;
-    //   ret += `<div>UHID :- ${options.patient.MRN} </div>`;
-    //   ret += `${
-    //     options.patient.phrAddress
-    //       ? `<div>ABHA Address : ${options.patient.phrAddress}. ${
-    //           options.patient.healthNumber
-    //             ? `ABHA Number ${options.patient.healthNumber}`
-    //             : ""
-    //         }</div>`
-    //       : ""
-    //   }`;
-    //   ret += `<div>Gender/Age: ${options.patient.gender}/${new Age().dobToAge(
-    //     new Date(options.patient.dob)
-    //   )} ph: ${options.patient.mobile}</div> `;
-
-    //   ret += relative != "" ? `<div>Secondary Contact ${relative}</div>` : ""
-
-    //   return ret.trim();
-    // };
 
     const getPatientDetails  = () => {
       const { patient } = options || {};

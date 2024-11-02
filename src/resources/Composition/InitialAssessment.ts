@@ -3,6 +3,7 @@ import { Composition, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
 import { resourceType } from "../../config";
 import { ENCOUNTER } from "../Encounter";
+import { AllergyIntolerance } from "../AllergyIntolerance";
 
 interface Args {
   composition: COMPOSITOIN;
@@ -22,7 +23,7 @@ interface Args {
   bloodGlucose?:any
   hb?:any
   medicationStatement?:any
-  allergyIntolerance?:any
+  allergyIntolerance?:string
   encounter:ENCOUNTER
 }
 export class InitialAssessment extends Composition implements Records {
@@ -205,15 +206,12 @@ export class InitialAssessment extends Composition implements Records {
   docHtml+=`</tr></table>`
 
 
-  // AllergyIntolerance
-  if(options.allergyIntolerance){
-    sectionZero.entry.push({
-      reference: `AllergyIntolerance/${options.allergyIntolerance.id}`,
-      type: "AllergyIntolerance",
-    });
-
-    docHtml += `<h4>Allergy Intolerance</h4>`;
-    docHtml += options.allergyIntolerance.text.div;
+  // AllergyIntolerance This sis string
+  if(options.allergyIntolerance ){
+    if(options.allergyIntolerance!= ""){
+      docHtml += `<h4>Allergy Intolerance</h4>`;
+      docHtml += options.allergyIntolerance
+    }
   }
 
 
@@ -224,9 +222,10 @@ export class InitialAssessment extends Composition implements Records {
         type: "Condition",
       });
   
-
+      if(options.presentingProblems.text.div !=""){
         docHtml += `<h4>Presenting Problems</h4>`;
         docHtml += options.presentingProblems.text.div;
+      }
       
 
     }
