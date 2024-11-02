@@ -51,7 +51,6 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
           ret += `${ret} <div>${options.note.map(el=>el.text).join(". ")}</div>`;
         }
 
-      ret += `</tr></table>`
       return ret;
     };
     const body:any = {
