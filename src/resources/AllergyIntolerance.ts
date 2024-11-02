@@ -181,7 +181,7 @@ export class AllergyIntolerance extends ResourceMain implements ResourceMaster {
 gettAllergyIntolerancesText =(allergyIntolerances:ALLERGY_INTOLERANCE[]):string=>{
   let  ret:string=''
   allergyIntolerances.forEach((el, i)=>{
-    ret+= `${i+1} ${el.text}`
+    ret+= `<div>${i+1} ${el.text}</div>`
   })
 
   return ret
