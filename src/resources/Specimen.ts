@@ -1,5 +1,5 @@
 import { type } from "os";
-import { CODEABLE_CONCEPT, CodeDisplay, PERIOD } from "../config";
+import { CODEABLE_CONCEPT, CodeDisplay, IDENTTIFIER, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
 import ResourceMain from "./ResourceMai";
@@ -14,13 +14,14 @@ export interface SPECIMEN {
    * Specimen type blood serun , or plural fluid , HPR tissue etc
    * */
   type: CODEABLE_CONCEPT;
+  identifier?:IDENTTIFIER[]
 }
 export class Specimen extends ResourceMain implements ResourceMaster {
  async toHtml():Promise<string> {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: SPECIMEN) {
-    const body = {
+    const body:any = {
       resourceType: "Specimen",
       id: options.id,
       meta: {
@@ -31,6 +32,7 @@ export class Specimen extends ResourceMain implements ResourceMaster {
         div: options.type.text,
       },
       type: options.type,
+
       subject: { reference: `Patient/${options.patientId}` },
       receivedTime: options.recivedDateTime,
       collection: options.collection,
@@ -38,6 +40,10 @@ export class Specimen extends ResourceMain implements ResourceMaster {
         return{ reference: `ServiceRequest/${el}` }
       })
     };
+
+    if(options.identifier){
+      body.identifier = options.identifier
+    }
     return body;
   }
   convertFhirToObject(options: any) {
@@ -54,6 +60,10 @@ export class Specimen extends ResourceMain implements ResourceMaster {
         return this.getIdFromReference({"ref" : el.reference, "resourceType" : "ServiceRequest"})
       })
     };
+
+    if(options.identifier){
+      ret.identifier = options.identifier
+    }
     return ret;
   }
   statusArray?: Function | undefined;
