@@ -1,5 +1,6 @@
 import { PATIENT, PRACTITIONER } from "..";
 import {
+  CODEABLE_CONCEPT,
   CodeDisplay,
   EXTENSION,
   MULTI_RESOURCE,
@@ -78,6 +79,7 @@ export interface SERVICE_REQUEST {
   note?: ANNOTATION[];
   extension?: EXTENSION[];
   specimanIds?: string[];
+  reasonCode?:CODEABLE_CONCEPT[]
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
@@ -171,6 +173,9 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     if (options.extension) {
       body.extension = options.extension;
     }
+    if(options.reasonCode){
+      body.reasonCode = options.reasonCode
+    }
 
     return body;
   }
@@ -237,6 +242,9 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
         code: options.category[0].coding[0].code,
         display: options.category[0].coding[0].display,
       };
+    }
+    if(options.reasonCode){
+      ret.reasonCode = options.reasonCode
     }
 
     if (options.specimen && options.specimen.length > 0) {

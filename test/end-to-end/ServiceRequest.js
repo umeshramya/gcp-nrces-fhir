@@ -27,6 +27,16 @@ const setServiceRequest = async () => {
         "requester" : { "display": resources.practioner.name, "resource": "Practitioner", "id": "https://nicehms.com" },
         // "performer": [{ "display": resources.practioner.name, "id": resources.practioner.id, "resource": "Practitioner" }],
         "patientId": resources.patient.id,
+
+        "reasonCode" : [{
+            "coding": [
+              {
+                "system": "http://example.org/codes",
+                "code": "REPEAT",
+                "display": "Repeat Test"
+              }
+            ]
+          }],
         "patientName": resources.patient.name,
         "status": "draft",
         "date": new Date().toISOString(),
