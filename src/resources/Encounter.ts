@@ -75,6 +75,7 @@ interface ENCOUNTER {
   status: EncounterStatus;
   careContext?: string;
   organizationId?: string;
+  estimatedDateDischarge?:string
   class: EncounterClass;
   type?: CODEABLE_CONCEPT[];
   patientId: string;
@@ -179,9 +180,26 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       account: options.account,
     };
 
+    if(options.estimatedDateDischarge){
+      let  curExt:EXTENSION={
+        "url" : "https://www.nicehms.com/estimatedDateDischarge",
+        "valueString" : options.estimatedDateDischarge
+      }
+      if(options.extension){
+        options.extension.push(curExt)
+      }else{
+        options.extension= [curExt]
+      }
+
+    }
+
+
     if (options.extension) {
       body.extension = options.extension;
     }
+    
+
+
 
     if (options.basedOn) {
       body.basedOn = options.basedOn.map((el) => {
@@ -203,6 +221,8 @@ export class Encounter extends ResourceMain implements ResourceMaster {
     if (options.location) {
       body.location = options.location;
     }
+
+
     return body;
   }
 
@@ -277,6 +297,11 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       ret.location = options.location;
     }
 
+   const  estimatedDateDischargeExtension:EXTENSION = options.extension.find((el:EXTENSION)=> el.url == "https://www.nicehms.com/estimatedDateDischarge")
+
+   if(estimatedDateDischargeExtension){
+    ret.estimatedDateDischarge = estimatedDateDischargeExtension.valueString
+   }
     return ret;
   }
 
