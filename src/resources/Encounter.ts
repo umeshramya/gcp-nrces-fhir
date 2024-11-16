@@ -186,6 +186,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
         "valueString" : options.estimatedDateDischarge
       }
       if(options.extension){
+        options.extension = options.extension.filter(el=> el.url !="https://www.nicehms.com/estimatedDateDischarge")
         options.extension.push(curExt)
       }else{
         options.extension= [curExt]
