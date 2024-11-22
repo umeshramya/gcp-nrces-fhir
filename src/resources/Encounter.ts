@@ -298,7 +298,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
       ret.location = options.location;
     }
 
-   const  estimatedDateDischargeExtension:EXTENSION = options.extension.find((el:EXTENSION)=> el.url == "https://www.nicehms.com/estimatedDateDischarge")
+   const  estimatedDateDischargeExtension:EXTENSION = options.extension &&  options.extension.find((el:EXTENSION)=> el.url == "https://www.nicehms.com/estimatedDateDischarge")
 
    if(estimatedDateDischargeExtension){
     ret.estimatedDateDischarge = estimatedDateDischargeExtension.valueString
