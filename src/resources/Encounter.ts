@@ -75,6 +75,7 @@ interface ENCOUNTER {
   status: EncounterStatus;
   careContext?: string;
   organizationId?: string;
+  intrimOrFinal?: "Intrim" | "Final";
   estimatedDateDischarge?:string
   class: EncounterClass;
   type?: CODEABLE_CONCEPT[];
@@ -194,6 +195,18 @@ export class Encounter extends ResourceMain implements ResourceMaster {
 
     }
 
+    if(options.intrimOrFinal){
+      let  curExt:EXTENSION={
+        "url" : "https://www.nicehms.com/intrimOrFinal",
+        "valueString" : options.intrimOrFinal
+      }
+      if(options.extension){
+        options.extension = options.extension.filter(el=> el.url !="https://www.nicehms.com/intrimOrFinal")
+        options.extension.push(curExt)
+      }else{
+        options.extension= [curExt]
+      }
+    }
 
     if (options.extension) {
       body.extension = options.extension;
@@ -302,6 +315,12 @@ export class Encounter extends ResourceMain implements ResourceMaster {
 
    if(estimatedDateDischargeExtension){
     ret.estimatedDateDischarge = estimatedDateDischargeExtension.valueString
+   }
+
+   const  intrimOrFinalExtension:EXTENSION = options.extension &&  options.extension.find((el:EXTENSION)=> el.url == "https://www.nicehms.com/intrimOrFinal")
+
+   if(intrimOrFinalExtension){
+    ret.intrimOrFinal = intrimOrFinalExtension.valueString as any
    }
     return ret;
   }
