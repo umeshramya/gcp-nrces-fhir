@@ -20,6 +20,11 @@ export const databasePath = {
 
 export const resourceTypeArray = [
   "Patient",
+  "Task",
+  "Goal",
+  "VisionPrescription",
+  "RiskAssessment",
+  "RequestGroup",
   "Practitioner",
   "Organization",
   "Encounter",

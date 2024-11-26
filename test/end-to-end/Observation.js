@@ -71,12 +71,11 @@ const setObservation = async () => {
       
    })
 
-   console.log(JSON.stringify(body))
-   return
+
 
    let res = (await new GcpFhirCRUD().createFhirResource(body, "Observation")).data;
    res = new Observation().convertFhirToObject(res)
-
+   resources.observation = res
    return res;
 }
 

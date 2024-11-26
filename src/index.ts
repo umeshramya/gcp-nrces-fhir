@@ -6,6 +6,7 @@ import ResourceFactory from "./classess/ResourceFactory";
 import { PATIENT, PatientResource, Patient } from "./resources/Patient";
 import { RelatedPerson, RELATED_PERSON } from "./resources/RelatedPerson"
 import {resourceType as ResourceType} from "./config/index"
+import { GOAL, Goal } from "./resources/Goal";
 
 export type {
   ResourceType
@@ -229,3 +230,4 @@ export { ClaimRequestBundle }
 export {COMMUNICATION, Communication} 
 export { ClaimResponse }
 export {CommunicationRequest}
+export { GOAL, Goal }

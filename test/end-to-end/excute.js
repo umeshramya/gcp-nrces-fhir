@@ -50,6 +50,7 @@ const { createValueSet } = require("./valueset");
 const { setDocimentReference } = require("./DocumentRefereence");
 const { setAllergyIntorance } = require("./AllergyIntolence");
 const { setMedicationStatement } = require("./medicationStatement");
+const { setGoal } = require("./Goal");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -103,9 +104,19 @@ class excute {
     await setCondition();
   };
 
+  goal = async()=>{
+    await callFunction();
+    await setCondition();
+   await setObservation()
+
+   const ret = await setGoal()
+   console.log(ret)
+  }
+
   docimentReference =async()=>{
     await callFunction()
     const ret =await setDocimentReference()
+
     console.log(ret)
   }
 
@@ -697,11 +708,12 @@ console.log(bundle)
 
 
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().createValueset()
 // new excute().medicationrequest();
 // new excute().medicationStateement()
 // new excute().conditon()
+new excute().goal()
 // new excute().practionerRole()
 // new excute().specimen()
 // new excute().procedure()
