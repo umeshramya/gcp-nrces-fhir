@@ -4,6 +4,19 @@ import { Goal } from "./Goal";
 import { PATIENT } from "./Patient";
 import ResourceMain from "./ResourceMai";
 
+export const careplanActivityDetailStatusArray=[
+   "not-started"
+  , "scheduled"
+  , "in-progress"
+  , "on-hold"
+  , "completed"
+  , "cancelled"
+  , "stopped"
+  , "unknown"
+  , "entered-in-error"] as const
+
+  type CareplanActivityDetailStatus=typeof careplanActivityDetailStatusArray[number]
+
 const carePlanStatusArray = [
   "draft",
   "active",
@@ -55,16 +68,7 @@ export interface ACTIVITY {
       | "ServiceRequest"
       | "VisionPrescription";
     code: CODEABLE_CONCEPT;
-    status:
-      | "not-started"
-      | "scheduled"
-      | "in-progress"
-      | "on-hold"
-      | "completed"
-      | "cancelled"
-      | "stopped"
-      | "unknown"
-      | "entered-in-error";
+    status: CareplanActivityDetailStatus
   };
 }
 
