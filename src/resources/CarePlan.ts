@@ -228,7 +228,7 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         ret.goal=options.goal.map((el: { reference: any; })=>this.getFromMultResource({"reference" : el.reference}))
       }
 
-      if(options.subject){
+    if(options.subject){
         ret.patientId=this.getIdFromReference({"resourceType" : "Patient", "ref" : options.subject.reference})
       }
       return ret;
