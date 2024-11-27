@@ -68,6 +68,18 @@ export interface ACTIVITY {
   };
 }
 
+interface  AUTHOR extends MULTI_RESOURCE{
+  "resource" : "Device" | "RelatedPerson" | "CareTeam" | "Patient" | "Practitioner" | "PractitionerRole" | "Organization"
+}
+
+
+interface CONTRIBUTOR extends MULTI_RESOURCE{
+  "resource" : "Device" | "RelatedPerson" | "CareTeam" | "Patient" | "Practitioner" | "PractitionerRole" | "Organization"
+}
+
+interface ADDRESSES extends MULTI_RESOURCE{
+  "resource" : "Condition"
+}
 export interface CARE_PLAN {
   id?: string;
   basedOnCarePlanId?: string[];
@@ -82,6 +94,10 @@ export interface CARE_PLAN {
   patientId: string;
   goal?: GOAL[];
   activity?: ACTIVITY[];
+  encounterId?:string,
+  author ?: AUTHOR ;
+  contributor	?:CONTRIBUTOR[]
+  addresses ?: ADDRESSES[]
 }
 export class CarePlan extends ResourceMain implements ResourceMaster {
   async toHtml(): Promise<string> {
@@ -117,6 +133,14 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         status: "additional",
         div: options.text,
       },
+      author : options.author && {"reference" : `${options.author.resource}/${options.author.id}`},
+      contributor : options.contributor && options.contributor.map(el=>{
+        return {"reference" : `${el.resource}/${el.id}`}
+      }),
+      addresses : options.addresses && options.addresses.map(el=>{
+        return {"reference" : `${el.resource}/${el.id}`}
+      }),
+      encounter: options.encounterId && {"reference" : `Encounter/${options.encounterId}`},
       basedOn:
         options.basedOnCarePlanId &&
         options.basedOnCarePlanId.map((el) => {

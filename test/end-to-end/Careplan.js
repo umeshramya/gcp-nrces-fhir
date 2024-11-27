@@ -14,11 +14,17 @@ const setCarePlan = async () => {
 
   const body = careplan.getFHIR({
     category: [{ text: "Discharge CheckList" }],
-    "basedOnCarePlanId" : ["f219a193-d44c-4d07-ba5b-44fdfff5ce1a"],
-    "partOfCarePlanId" : ["f219a193-d44c-4d07-ba5b-44fdfff5ce1a"],
-    "replacesCarePlanId" : ["f219a193-d44c-4d07-ba5b-44fdfff5ce1a"],
+    basedOnCarePlanId: ["f219a193-d44c-4d07-ba5b-44fdfff5ce1a"],
+    partOfCarePlanId: ["f219a193-d44c-4d07-ba5b-44fdfff5ce1a"],
+    replacesCarePlanId: ["f219a193-d44c-4d07-ba5b-44fdfff5ce1a"],
     description: "This is check of discharge",
     goal: [{ resource: "Goal", id: "8656df85-3cf9-4339-b8e3-7464d07c1210" }],
+    encounterId: resources.encounter.id,
+    addresses: [
+      { resource: "Condition", id: "605673f0-2fac-44fd-bd62-c67b17d23222" },
+    ],
+    "author" : {"resource" : "Practitioner" , "id" :"7610c5b8-4b08-425c-86ef-84433238044c"},
+    "contributor" : [{"resource" : "Practitioner" , "id" :"7610c5b8-4b08-425c-86ef-84433238044c"}],
     inetent: "order",
     patientId: resources.patient.id,
     status: "active",
@@ -32,7 +38,6 @@ const setCarePlan = async () => {
           kind: "Task",
           code: { text: "Done" },
           status: "in-progress",
-
         },
       },
     ],
