@@ -7,6 +7,7 @@ import { PATIENT, PatientResource, Patient } from "./resources/Patient";
 import { RelatedPerson, RELATED_PERSON } from "./resources/RelatedPerson"
 import {resourceType as ResourceType} from "./config/index"
 import { GOAL, Goal } from "./resources/Goal";
+import { CARE_PLAN, CarePlan } from "./resources/CarePlan";
 
 export type {
   ResourceType
@@ -231,3 +232,4 @@ export {COMMUNICATION, Communication}
 export { ClaimResponse }
 export {CommunicationRequest}
 export { GOAL, Goal }
+export { CARE_PLAN, CarePlan }

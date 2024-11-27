@@ -13,7 +13,7 @@ const carePlanStatusArray = [
   "entered-in-error",
   "unknown",
 ] as const;
-export type CarePlanStatus = typeof carePlanStatusArray;
+export type CarePlanStatus = (typeof carePlanStatusArray)[number];
 
 export const carePlanIntentArray = [
   "proposal",
@@ -21,7 +21,7 @@ export const carePlanIntentArray = [
   "order",
   "option",
 ] as const;
-export type CarePlanIntent = typeof carePlanIntentArray;
+export type CarePlanIntent = (typeof carePlanIntentArray)[number];
 
 interface ACTIVITY_REFERENCE extends MULTI_RESOURCE {
   resource:
@@ -43,7 +43,6 @@ interface GOAL extends MULTI_RESOURCE {
 export interface ACTIVITY {
   outcomeCodeableConcept?: CODEABLE_CONCEPT[];
   outcomeReference?: MULTI_RESOURCE[];
-  progress?: string[];
   reference?: ACTIVITY_REFERENCE;
   detail?: {
     kind?:
@@ -66,19 +65,22 @@ export interface ACTIVITY {
       | "stopped"
       | "unknown"
       | "entered-in-error";
-    goal?: GOAL[];
   };
 }
 
 export interface CARE_PLAN {
   id?: string;
+  basedOnCarePlanId?: string[];
+  replacesCarePlanId?: string[];
+  partOfCarePlanId?: string[];
   status: CarePlanStatus;
   inetent: CarePlanIntent;
   text: string;
   category?: CODEABLE_CONCEPT[];
   title?: string;
   description?: string;
-  patient: PATIENT;
+  patientId: string;
+  goal?: GOAL[];
   activity?: ACTIVITY[];
 }
 export class CarePlan extends ResourceMain implements ResourceMaster {
@@ -86,6 +88,25 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: CARE_PLAN) {
+    let activity: ACTIVITY[];
+    if (options.activity) {
+      activity = [...options.activity];
+      activity.forEach((el) => {
+        el.outcomeReference =
+          el.outcomeReference &&
+          (el.outcomeReference?.map((out) => {
+            return {
+              reference: `${out.resource}/${out.id}`,
+            };
+          }) as any);
+
+        if (el.reference) {
+          el.reference = {
+            reference: `${el.reference.resource}/${el.reference.id}`,
+          } as any;
+        }
+      });
+    }
     const body = {
       resourceType: "CarePlan",
       id: options.id || undefined,
@@ -96,17 +117,38 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         status: "additional",
         div: options.text,
       },
+      basedOn:
+        options.basedOnCarePlanId &&
+        options.basedOnCarePlanId.map((el) => {
+          return { reference: `CarePlan/${el}` };
+        }),
+      replaces:
+        options.replacesCarePlanId &&
+        options.replacesCarePlanId.map((el) => {
+          return { reference: `CarePlan/${el}` };
+        }),
+      partOf:
+        options.partOfCarePlanId &&
+        options.partOfCarePlanId.map((el) => {
+          return { reference: `CarePlan/${el}` };
+        }),
       status: options.status,
       intent: options.inetent,
       category: options.category,
       title: options.title,
       description: options.description,
+      goal:
+        options.goal &&
+        options.goal.map((el) => {
+          return { reference: `${el.resource}/${el.id}` };
+        }),
       subject: {
-        reference: `Patient/${options.patient.id}`,
-        display: options.patient.name,
+        reference: `Patient/${options.patientId}`,
       },
       activity: options.activity,
     };
+
+    return body;
   }
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");
