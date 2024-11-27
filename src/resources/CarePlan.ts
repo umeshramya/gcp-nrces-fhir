@@ -175,7 +175,63 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
     return body;
   }
   convertFhirToObject(options: any) {
-    throw new Error("Method not implemented.");
+      const ret:CARE_PLAN={
+        status: options.status,
+        inetent: options.intent,
+        text: options.text.div,
+        patientId: options.patient && this.getIdFromReference({"ref" : options.patient.reference, "resourceType" : "Patient"}),
+      }
+
+      if(options.basedOn){
+        ret.basedOnCarePlanId = options.basedOn.map((el: { reference: any; })=>{
+          return this.getFromMultResource({"reference" : el.reference})
+        })
+      }
+      if(options.partOf){
+        ret.partOfCarePlanId = options.partOf.map((el: { reference: any; })=>{
+          return this.getFromMultResource({"reference" : el.reference})
+        })
+      }
+
+      if(options.replaces){
+        ret.replacesCarePlanId = options.replaces.map((el: { reference: any; })=>{
+          return this.getFromMultResource({"reference" : el.reference})
+        })
+      }
+      if(options.author){
+        ret.author = this.getFromMultResource({"reference" : options.author.reference}) as any
+      }
+      if(options.addresses){
+        ret.addresses = options.addresses.map((el: { reference: any; })=>{
+          return this.getFromMultResource({"reference" : el.reference})
+        })
+      }
+
+      if(options.contributor){
+        ret.contributor = options.contributor.map((el: { reference: any; })=>{
+          return this.getFromMultResource({"reference" : el.reference})
+        })
+      }
+
+      if(options.category){
+        ret.category=options.category
+      }
+
+      if(options.title){
+        ret.title=options.title
+      }
+      if(options.description){
+        ret.description=options.description
+      }
+
+      if(options.goal){
+        ret.goal=options.goal.map((el: { reference: any; })=>this.getFromMultResource({"reference" : el.reference}))
+      }
+
+      if(options.subject){
+        ret.patientId=this.getIdFromReference({"resourceType" : "Patient", "ref" : options.subject.reference})
+      }
+      return ret;
   }
   statusArray = (): CarePlanStatus[] => {
     return carePlanStatusArray.map((el) => el) as any;

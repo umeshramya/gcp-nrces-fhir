@@ -117,7 +117,7 @@ class excute {
 
   carePlan = async()=>{
     await callFunction();
-   await setCarePlan()
+  const ret = await setCarePlan()
 
    console.log(ret)
   }

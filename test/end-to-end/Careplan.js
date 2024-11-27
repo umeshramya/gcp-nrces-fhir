@@ -44,9 +44,9 @@ const setCarePlan = async () => {
   });
 
   const res = await gcpFhirCRUD.createFhirResource(body, "CarePlan");
-  console.log(res.data);
+  // console.log(res.data);
 
-  //  const ret = careplan.convertFhirToObject(res.data);
+   const ret = careplan.convertFhirToObject(res.data);
 
   return ret;
 };
