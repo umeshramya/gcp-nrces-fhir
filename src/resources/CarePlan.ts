@@ -240,4 +240,11 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
   statusArray = (): CarePlanStatus[] => {
     return carePlanStatusArray.map((el) => el) as any;
   };
+
+  /***
+   * This method retuns the CARE_PLAN["activity"][number]["detail"]["status"][]
+   *  */ 
+  careplanActivityDetailStatusArray=():typeof careplanActivityDetailStatusArray=>{
+    return careplanActivityDetailStatusArray
+  }
 }
