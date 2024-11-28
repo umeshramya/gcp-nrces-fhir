@@ -180,6 +180,7 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
   }
   convertFhirToObject(options: any) {
       const ret:CARE_PLAN={
+        id:options.id,
         status: options.status,
         inetent: options.intent,
         text: options.text.div,

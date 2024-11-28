@@ -144,7 +144,7 @@ export class Goal extends ResourceMain implements ResourceMaster {
   }
   convertFhirToObject(options: any): GOAL {
     const ret: GOAL = {
-    
+      id:options.id,
       lifecycleStatus: options.lifecycleStatus,
       description: options.description,
       subject: this.getFromMultResource({
