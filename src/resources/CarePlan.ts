@@ -219,8 +219,12 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         })
       }
 
-      if(options.category){
-        ret.category=options.category
+      if(options.activity){
+        if(options.activity.reference){
+          options.activity.reference = options.activity.reference.map((el: { reference: any; })=> this.getFromMultResource({"reference" : el.reference}))
+        }
+
+        ret.activity = options.activity
       }
 
       if(options.title){
