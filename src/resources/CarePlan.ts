@@ -92,8 +92,8 @@ export interface CARE_PLAN {
   status: CarePlanStatus;
   inetent: CarePlanIntent;
   text: string;
-  category?: CODEABLE_CONCEPT[];
-  title?: string;
+  category: CODEABLE_CONCEPT[];
+  title: string;
   description?: string;
   patientId: string;
   goal?: GOAL[];
@@ -183,7 +183,9 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         status: options.status,
         inetent: options.intent,
         text: options.text.div,
-        patientId: options.patient && this.getIdFromReference({"ref" : options.patient.reference, "resourceType" : "Patient"}),
+        patientId: options.patient && this.getIdFromReference({ "ref": options.patient.reference, "resourceType": "Patient" }),
+        category: options.category,
+        title: options.title
       }
 
       if(options.basedOn){
