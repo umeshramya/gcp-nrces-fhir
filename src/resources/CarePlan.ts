@@ -242,6 +242,13 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
     if(options.subject){
         ret.patientId=this.getIdFromReference({"resourceType" : "Patient", "ref" : options.subject.reference})
       }
+    if(options.encounter){
+      ret.encounterId= this.getIdFromReference({"ref" : options.encounter.reference, "resourceType" : "Encounter"})
+    }
+
+    if(options.subject){
+      ret.patientId=this.getIdFromReference({"ref" : options.subject.reference, "resourceType" : "Patient"})
+    }
       return ret;
   }
   statusArray = (): CarePlanStatus[] => {
