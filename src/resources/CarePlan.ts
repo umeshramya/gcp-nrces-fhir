@@ -87,6 +87,7 @@ interface ADDRESSES extends MULTI_RESOURCE{
 export interface CARE_PLAN {
   id?: string;
   basedOnCarePlanId?: string[];
+  lastUpdatedDate?:string
   replacesCarePlanId?: string[];
   partOfCarePlanId?: string[];
   status: CarePlanStatus;
@@ -174,7 +175,9 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         reference: `Patient/${options.patientId}`,
       },
       activity: options.activity,
+      lastUpdatedDate: options.lastUpdatedDate
     };
+
 
     return body;
   }
@@ -186,7 +189,8 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         text: options.text.div,
         patientId: options.patient && this.getIdFromReference({ "ref": options.patient.reference, "resourceType": "Patient" }),
         category: options.category,
-        title: options.title
+        title: options.title,
+        lastUpdatedDate : options.lastUpdatedDate
       }
 
       if(options.basedOn){
@@ -249,6 +253,8 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
     if(options.subject){
       ret.patientId=this.getIdFromReference({"ref" : options.subject.reference, "resourceType" : "Patient"})
     }
+
+    
       return ret;
   }
   statusArray = (): CarePlanStatus[] => {
