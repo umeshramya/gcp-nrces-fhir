@@ -133,6 +133,7 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
       id: options.id || undefined,
       meta: {
         profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/CarePlan"],
+        lastUpdatedDate: options.lastUpdatedDate
       },
       text: {
         status: "additional",
@@ -175,7 +176,7 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         reference: `Patient/${options.patientId}`,
       },
       activity: options.activity,
-      lastUpdatedDate: options.lastUpdatedDate
+      
     };
 
 
@@ -190,7 +191,7 @@ export class CarePlan extends ResourceMain implements ResourceMaster {
         patientId: options.patient && this.getIdFromReference({ "ref": options.patient.reference, "resourceType": "Patient" }),
         category: options.category,
         title: options.title,
-        lastUpdatedDate : options.lastUpdatedDate
+        lastUpdatedDate : options.meta.lastUpdatedDate
       }
 
       if(options.basedOn){
