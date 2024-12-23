@@ -1,3 +1,4 @@
+import { isIdentifier } from "typescript";
 import GcpFhirCRUD from "../classess/gcp";
 import {
   CODEABLE_CONCEPT,
@@ -110,7 +111,9 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
   supportingInfo?: SUPPORTING_INFO[];
   enterer: ENTERER;
   provider: PROVIDER;
-  insurerOrganizationId: string;
+  insurerOrganizationId?: string;
+  insurerParticipantId?:string
+  insurerName ?: string 
   /**
    * ward
    */
@@ -163,8 +166,8 @@ export class CoverageEligibilityRequest
     });
 
     const orgnaization = new Organization();
-    if (!option.insurance) {
-      const resource = (
+    if (!option.insurance && option.body.insurerOrganizationId ) {
+      const resource =(
         await new GcpFhirCRUD().getFhirResource(
           option.body.insurerOrganizationId,
           "Organization"
@@ -173,7 +176,7 @@ export class CoverageEligibilityRequest
       option.insurance = orgnaization.convertFhirToObject(resource);
     }
     ret += `<h3>Insurance</h3>`;
-    ret += await orgnaization.toHtml({
+    ret +=  option.insurance && await orgnaization.toHtml({
       addResourceType: false,
       body: option.insurance,
     });
@@ -373,12 +376,21 @@ export class CoverageEligibilityRequest
       created: options.createdDateTime,
       enterer: {
         reference: `${options.enterer.resource}/${options.enterer.id}`,
+        "display" :options.enterer &&  options.enterer.display,
+        identifier : options.enterer && options.enterer.identifier
       },
       provider: {
-        reference: `${options.provider.resource}/${options.provider.id}`,
+        reference: options.provider && `${options.provider.resource}/${options.provider.id}`,
+        "display" :options.provider &&  options.provider.display,
+        identifier : options.provider && options.provider.identifier
       },
       insurer: {
-        reference: `Organization/${options.insurerOrganizationId}`,
+        reference: options.insurerOrganizationId && `Organization/${options.insurerOrganizationId}`,
+        identifier : options.insurerParticipantId && {
+          "system" : "NHCX",
+          "value" : options.insurerParticipantId
+        },
+        display : options.insurerName,
       },
       facility: {
         reference: `Location/${options.locationId}`,
@@ -412,16 +424,33 @@ export class CoverageEligibilityRequest
       }),
       createdDateTime: options.created,
       // enterer: options.enterer,
-      enterer: this.getFromMultResource(options.enterer) as any,
+      enterer:{
+        "identifier" : options.enterer.identifier,
+        ...this.getFromMultResource(options.enterer) as any
+      } ,
       // provider: options.provider,
-      provider: this.getFromMultResource(options.provider) as any,
-      insurerOrganizationId: this.getIdFromReference({
-        ref: options.insurer.reference,
-        resourceType: "Organization",
-      }),
-
+      provider: {
+        "identifier" : options.provider.identifier,
+        ...this.getFromMultResource(options.provider) as any
+      } ,
+     
       insurance: options.insurance,
     };
+
+    if(options.insurer && options.insurer.reference){
+      ret.insurerOrganizationId =  this.getIdFromReference({
+        ref: options.insurer.reference,
+        resourceType: "Organization"
+      })
+    }
+
+    if(options.insurer && options.insurer.display){
+      ret.insurerName =  options.insurer.display
+    }
+
+    if(options.insurer && options.insurer.identifier){
+      ret.insurerParticipantId =  options.insurer.identifier.value
+    }
     if (options.item) {
       ret.item = options.item;
     }

@@ -27,15 +27,24 @@ const setCoverageEligibiltyRequest = async () => {
       display: resources.practioner.name,
       id: resources.practioner.id,
       resource: "Practitioner",
+      identifier : {
+        "system" : "HPR",
+        "value" : "umesh@hpr.ndhm",
+        "use" : "official",
+      }
     },
     insurerOrganizationId: "5ee777fa-2ada-4797-a87a-806c68504402",
+    insurerParticipantId: "1000003547@hcx",
+    insurerName: "Medi Asst",
     locationId: "23da242a-a44f-49c2-b302-da05ebad8325",
     patientId: resources.patient.id,
-    "priority" : {
-      "coding" : [{
-        system: "http://terminology.hl7.org/CodeSystem/processpriority",
-        code: "normal",
-      }]
+    priority: {
+      coding: [
+        {
+          system: "http://terminology.hl7.org/CodeSystem/processpriority",
+          code: "normal",
+        },
+      ],
     },
     supportingInfo: [
       {
@@ -46,9 +55,14 @@ const setCoverageEligibiltyRequest = async () => {
       },
     ],
     provider: {
-      display: resources.insuranceCompany.name,
+      display: "Jeevan Jyoti Hospital",
       id: resources.insuranceCompany.id,
       resource: "Organization",
+      identifier: {
+        system: "NHCX",
+        value: "1000003414@hcx",
+        use: "official",
+      },
     },
     purpose: ["validation"],
     status: "active",
@@ -113,7 +127,7 @@ const setCoverageEligibiltyRequest = async () => {
   const ret = coverageEligilityRequest.convertFhirToObject(res.data);
 
   resources.coverageEligilityRequest = ret;
-  return ret
+  return ret;
 };
 
 module.exports = { setCoverageEligibiltyRequest };

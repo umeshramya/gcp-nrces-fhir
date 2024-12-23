@@ -42,7 +42,8 @@ const setCoverage = async () => {
       "identifier" : {
         "system" : "NHCX",
         "value" : "1000003547@hcx"
-      }
+      },
+      display : "Mediasst"
      }],
 
     text: `<div>Cob</div>`,
