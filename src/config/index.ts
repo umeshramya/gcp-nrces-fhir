@@ -149,6 +149,8 @@ export interface MULTI_RESOURCE {
   resource: resourceType;
   id: string;
   display?: string;
+  type?:string;
+  identifier?:IDENTTIFIER
 }
 
 export const LOINC_SCALE = [

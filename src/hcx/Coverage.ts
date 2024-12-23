@@ -244,8 +244,17 @@ export class Coverage extends ResourceMain implements ResourceMaster {
       beneficiary: { reference: `Patient/${options.beneficiaryPatientId}` },
       dependent: options.dependent,
       relationship: options.relationship,
-      payor: options.payor.map((el) => {
-        const ret: any = { reference: `${el.resource}/${el.id}` };
+      payor:options.payor && options.payor.map((el) => {
+        let ret: any={}
+        if(el.resource){
+         ret.reference= `${el.resource}/${el.id}` ;
+        }
+        if(el.identifier){
+          ret.identifier= el.identifier
+        }
+       if(el.type){
+        ret.type= el.type
+       }
         if (el.display) {
           ret.display = el.display;
         }

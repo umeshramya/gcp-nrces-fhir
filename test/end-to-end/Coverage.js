@@ -13,7 +13,7 @@ const setCoverage = async () => {
   const coverage = new Coverage();
   const body = coverage.getFHIR({
     beneficiaryPatientId: resources.patient.id,
-    hcx: "swasth",
+    hcx: "nhcx",
     status: "active",
     subscriberId: `SN-Father-Id`,
     // subscriber: {
@@ -36,14 +36,21 @@ const setCoverage = async () => {
         value: "policy-RVH1003",
       },
     ],
-    payor: [{ resource: "Organization", id: resources.insuranceCompany.id }],
+    payor: [
+      { 
+      // resource: "Organization", id: resources.insuranceCompany.id,
+      "identifier" : {
+        "system" : "NHCX",
+        "value" : "1000003547@hcx"
+      }
+     }],
 
     text: `<div>Cob</div>`,
   });
 
   const res = await gcpFhirCRUD.createFhirResource(body, "Coverage");
   const ret = coverage.convertFhirToObject(res.data);
-  console.log(ret)
+
   resources.coverage = ret;
   return res;
 };

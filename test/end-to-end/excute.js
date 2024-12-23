@@ -212,7 +212,7 @@ class excute {
   coverage = async()=>{
     await callFunction();
    const ret = await setCoverage()
-   console.log(ret)
+   console.log(ret.data)
   }
 
   claim = async()=>{
@@ -723,7 +723,7 @@ console.log(bundle)
 // new excute().medicationStateement()
 // new excute().conditon()
 // new excute().goal()
-new excute().carePlan()
+// new excute().carePlan()
 // new excute().practionerRole()
 // new excute().specimen()
 // new excute().procedure()
@@ -748,7 +748,7 @@ new excute().carePlan()
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
-// new excute().coverage()
+new excute().coverage()
 // new excute().docimentReference()
 // new excute().claim()
 // new excute().communication()
