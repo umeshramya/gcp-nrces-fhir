@@ -1,6 +1,6 @@
 import { resourceType } from "..";
 import ResourceToHTML from "../classess/ReseorcetToHtml";
-import { CODEABLE_CONCEPT, CodeDisplay, MULTI_RESOURCE } from "../config";
+import { CODEABLE_CONCEPT, CodeDisplay, IDENTTIFIER, MULTI_RESOURCE } from "../config";
 
 export interface DOSAGE_INSTRUCTION {
   text: string;
@@ -59,6 +59,8 @@ export default class ResourceMain extends ResourceToHTML{
   public getFromMultResource = (multiResource: {
     reference: string;
     display?: string;
+    identifier?:IDENTTIFIER;
+    type?:string;
   }): MULTI_RESOURCE => {
     const resource = `${multiResource.reference}`.substring(
       0,
@@ -70,14 +72,25 @@ export default class ResourceMain extends ResourceToHTML{
       resourceType: resource,
     });
 
+
     let ret: MULTI_RESOURCE = {
       id: id,
       resource: resource,
+
     };
 
-    if (multiResource.display) {
-      ret.display = multiResource.display;
+    if(multiResource.display){
+      ret.display=multiResource.display
     }
+ 
+    if(multiResource.identifier){
+      ret.identifier = multiResource.identifier
+    }
+ 
+    if(multiResource.type){
+      ret.type = multiResource.type
+    }
+    
     return ret;
   };
 
