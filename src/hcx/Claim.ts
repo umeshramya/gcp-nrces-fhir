@@ -39,7 +39,9 @@ export interface CLAIM {
     type: CODEABLE_CONCEPT;
     party?: PAYEE_PARTY;
   };
-  payorId: string;
+  payorId?: string;
+  payorParticipantCode?:string
+  payorName:string
   billablePeriod: PERIOD;
   priority: CODEABLE_CONCEPT;
   total: {
@@ -128,7 +130,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
       const orgnaization = new Organization();
       try {
         if (!options.insurance) {
-          const resource = (
+          const resource = options.body.payorId && (
             await new GcpFhirCRUD().getFhirResource(
               options.body.payorId,
               "Organization"
@@ -336,7 +338,15 @@ export class Claim extends ResourceMain implements ResourceMaster {
       type: options.type,
       patient: { reference: `Patient/${options.patientGcpId}` },
       created: options.createdDate,
-      insurer: { reference: `Organization/${options.payorId}` },
+      insurer: { 
+        reference: options.payorId && `Organization/${options.payorId}`,
+        identifier :options .payorParticipantCode && {
+          "system" : "NHCX",
+          "value" : options.payorParticipantCode
+        },
+        display : options.payorName
+
+       },
       provider: { reference: `Organization/${options.providerId}` },
       priority: options.priority,
       careTeam: options.careteam,
@@ -371,10 +381,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
         resourceType: "Organization",
         ref: options.provider.reference,
       }),
-      payorId: this.getIdFromReference({
-        resourceType: "Organization",
-        ref: options.insurer.reference,
-      }),
+
       billablePeriod: options.billablePeriod,
       priority: options.priority,
       total: options.total,
@@ -386,7 +393,20 @@ export class Claim extends ResourceMain implements ResourceMaster {
       createdDate: options.created,
       use: options.use,
       id: options.id,
+      payorName: options.insurer.display
+    
     };
+
+    if(options.insurer.reference){
+      ret.payorId= this.getIdFromReference({
+        resourceType: "Organization",
+        ref: options.insurer.reference,
+      })
+    }
+
+    if(options.insurer.identifier){
+      ret.payorParticipantCode = options.insurer.identifier.value
+    }
 
     if (options.payee) {
       ret.payee = {
