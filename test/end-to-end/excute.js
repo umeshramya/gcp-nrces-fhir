@@ -748,7 +748,7 @@ console.log(bundle)
 // new excute().createOPConsultationBundle();
   
 // new excute().createDiagnosticReportBundle()
-new excute().coverage()
+// new excute().coverage()
 // new excute().docimentReference()
 // new excute().claim()
 // new excute().communication()
@@ -975,3 +975,55 @@ console.log(html)
 
 
 
+
+const test= {
+  "beneficiary": {
+    "reference": "Patient/ddd18477-0241-4663-a447-bcb6cb7885cd"
+  },
+  "id": "457a2aa5-cc98-4bdd-bcb2-a5d0e3555e4b",
+  "identifier": [
+    {
+      "system": "http://gicofIndia.com/policynumber",
+      "value": "123456"
+    },
+    {
+      "system": "http://gicofIndia.com/beneficiaries",
+      "value": "123456"
+    }
+  ],
+  "meta": {
+    "lastUpdated": "2024-12-25T17:23:14.583904+00:00",
+    "profile": [
+      "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Coverage.html"
+    ],
+    "versionId": "MTczNTE0NzM5NDU4MzkwNDAwMA"
+  },
+  "payor": [
+    {
+      "display": "NHCX Payer",
+      "identifier": {
+        "system": "NHCX",
+        "value": "1000003538@hcx"
+      }
+    }
+  ],
+  "relationship": {
+    "coding": [
+      {
+        "code": "child",
+        "display": "Child",
+        "system": "http://terminology.hl7.org/ValueSet/subscriber-relationship"
+      }
+    ],
+    "text": "The Beneficiary is a child of the Subscriber"
+  },
+  "resourceType": "Coverage",
+  "status": "active",
+  "subscriberId": "123456",
+  "text": {
+    "div": "\n  <div xmlns=\"http://www.w3.org/1999/xhtml\"><p>\n  Patient Name : Umesh Ramachandra Bilagi \n  Policy Id : 123456 \n  Insurance: NHCX Payer \n  Subscribeer Id : 123456 \n  Diagnosis : Fever \n  Discreption :  \n  </p></div>\n  ",
+    "status": "generated"
+  }
+}
+const ret = new Coverage().convertFhirToObject(test)
+console.log(JSON.stringify(ret))

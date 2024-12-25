@@ -62,19 +62,19 @@ export default class ResourceMain extends ResourceToHTML{
     identifier?:IDENTTIFIER;
     type?:string;
   }): MULTI_RESOURCE => {
-    const resource = `${multiResource.reference}`.substring(
+    const resource = multiResource.reference && `${multiResource.reference}`.substring(
       0,
       `${multiResource.reference}`.indexOf("/")
     ) as any;
 
-    const id = this.getIdFromReference({
+    const id =multiResource.reference &&  this.getIdFromReference({
       ref: multiResource.reference,
       resourceType: resource,
     });
 
 
     let ret: MULTI_RESOURCE = {
-      id: id,
+      id: id ,
       resource: resource,
 
     };
