@@ -107,9 +107,12 @@ export class Organization extends ResourceMain implements ResourceMaster {
       };
       identifiers.push(id);
     }
+
     if(options.identifier && options.identifier.length > 0){
       options.identifier.forEach(el=>{
-        identifiers.push(el)
+        if(el.system !== "NHCX" && el.system !=="https://www.nicehms.com" && el.system !== "https://healthid.ndhm.gov.in" ){
+          identifiers.push(el)
+        }
       })
       
     }
