@@ -8,6 +8,7 @@ export interface ORGANIZATION {
   phone: string;
   email: string;
   providerNumber?: string;
+  participantCode?:string
   ndhmFacilityNumber?: string;
   extension?:EXTENSION
   identifier?:IDENTTIFIER[]
@@ -38,6 +39,11 @@ export class Organization extends ResourceMain implements ResourceMaster {
 
     if(options.body.ndhmFacilityNumber){
       ret += `<b>HFR ID</b> : ${options.body.ndhmFacilityNumber} <br/>`
+    }
+
+    
+    if(options.body.participantCode){
+      ret += `<b>Partticipant Code</b> : ${options.body.participantCode} <br/>`
     }
 
     if(options.body.phone){
@@ -83,6 +89,21 @@ export class Organization extends ResourceMain implements ResourceMaster {
         },
         system: "https://www.nicehms.com",
         value: `${options.providerNumber}`,
+      };
+      identifiers.push(id);
+    }
+
+    if (options.participantCode) {
+      const id: IDENTTIFIER = {
+        type: {
+          coding: [
+            {              
+              display: "participantCode",
+            },
+          ],
+        },
+        system: "NHCX",
+        value: `${options.participantCode}`,
       };
       identifiers.push(id);
     }
@@ -155,6 +176,14 @@ export class Organization extends ResourceMain implements ResourceMaster {
 
       if (providerNumber.length > 0) {
         ret.providerNumber = providerNumber[0].value;
+      }
+
+      const participantCode: any[] = options.identifier.filter(
+        (el: any) => el.system == "NHCX"
+      );
+
+      if (participantCode.length > 0) {
+        ret.participantCode = participantCode[0].value;
       }
 
       ret.identifier=options.identifier
