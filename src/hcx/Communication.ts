@@ -1,13 +1,19 @@
-import { CODEABLE_CONCEPT, IDENTTIFIER } from "../config";
+import { CODEABLE_CONCEPT, IDENTTIFIER, MULTI_RESOURCE, REFERENCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
+
+
+interface subject extends MULTI_RESOURCE{
+  resource : "Patient" | "Group"
+}
 
 export interface COMMUNICATION {
   id?: string;
   hcx?: "nhcx" | "swasth";
   text: string;
+  subject ?: subject;
   identifier: IDENTTIFIER[];
-  CommunicationRequestIds?: string[];
+  basedOn ?: MULTI_RESOURCE[];
   status:
     | "preparation"
     | "in-progress"
@@ -34,7 +40,13 @@ export  class Communication
   getFHIR(options: COMMUNICATION) {
     const body = {
       resourceType: "Communication",
+      identifier:options.identifier, 
       id: options.id ? options.id : undefined,
+      subject :options.subject && {"reference" : options.subject.resource  && `${options.subject.resource}/${options.subject.id}`,
+        type : options.subject.type,
+        identifier : options.subject.identifier,
+        display : options.subject.display
+      },
       meta: {
         versionId: "1",
         lastUpdated: "2023-09-07T14:58:58.181+05:30",
@@ -51,10 +63,13 @@ export  class Communication
         status: "generated",
         div: options.text,
       },
-      identifier: options.identifier,
-      basedOn: options.CommunicationRequestIds?.map((el) => ({
-        reference: `CommunicationRequest/${el}`,
-      })),
+      basedOn: options.basedOn && options.basedOn.map(el=>{
+        return {"reference" : el.resource  && `${el.resource}/${el.id}`,
+          type : el.type,
+          identifier : el.identifier,
+          display : el.display
+        }
+      }),
       status: options.status,
       category: options.category,
       priority: options.priority,
@@ -85,17 +100,22 @@ export  class Communication
       status: options.status,
       category: options.category,
       priority: options.priority,
-      recipientOrganizationIds: options.recipient.map((el:any) => this.getIdFromReference({"resourceType" : "Organization", "ref" : el.reference})),
-      senderOrganizationId: this.getIdFromReference({"resourceType" : "Organization", "ref" : options.sender.reference}),
-      contentBase64PDFstrings: options.payload.map((el:any) => ({
-       pdf: el.contentAttachment.data,
-       title: el.contentAttachment.title,
-       createdDate: el.contentAttachment.creation
-      }))
+      recipientOrganizationIds: options.recipient.map((el: any) => this.getIdFromReference({ "resourceType": "Organization", "ref": el.reference })),
+      senderOrganizationId: this.getIdFromReference({ "resourceType": "Organization", "ref": options.sender.reference }),
+      contentBase64PDFstrings: options.payload.map((el: any) => ({
+        pdf: el.contentAttachment.data,
+        title: el.contentAttachment.title,
+        createdDate: el.contentAttachment.creation
+      })),
+      
     };
 
+    if(options.subject){
+      communication.subject = this.getFromMultResource(options.subject) as any
+    }
+
     if(options.basedOn){
-      communication.CommunicationRequestIds = options.basedOn.map((el:any) => this.getIdFromReference({"resourceType" : "CommunicationRequest", "ref" : el.reference}));
+      communication.basedOn = options.basedOn.map((el:any)=> this.getFromMultResource(el));
     }
     if(options.id){
       communication.id = options.id;

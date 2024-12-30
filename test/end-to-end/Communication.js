@@ -30,9 +30,27 @@ const setCommunication = async () => {
     }],
     priority:"asap",
     status:"completed",
+    basedOn : [{
+      "display" : resources.patient.name,
+      "resource" : "Patient",
+      "id" : resources.patient.id,
+      "type" : "comunication",
+      "identifier" : {
+        "value" : resources.patient.name
+      }
+    }],
+    subject: {
+      "display" : resources.patient.name,
+      "resource" : "Patient",
+      "id" : resources.patient.id,
+      "type" : "comunication",
+      "identifier" : {
+        "value" : resources.patient.name
+      }
+    },
     recipientOrganizationIds:[resources.insuranceCompany.id],
     senderOrganizationId:resources.organization.id,
-    text:"testing1232tset",
+    text:"testing1232tset some good text",
     "contentBase64PDFstrings" : [{
       "createdDate" : new  Date().toISOString(),
       "pdf" : data,
