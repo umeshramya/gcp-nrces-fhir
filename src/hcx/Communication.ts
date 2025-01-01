@@ -39,6 +39,14 @@ interface Sender extends MULTI_RESOURCE {
     | "Patient";
 }
 
+interface ReasonReference extends MULTI_RESOURCE{
+ resource : "DiagnosticReport" | "Condition" | "Observation" | "DocumentReference"
+}
+
+interface Encounter extends MULTI_RESOURCE{
+  resource : "Encounter"
+}
+
 const statusArray = [
   "preparation",
   "in-progress",
@@ -57,13 +65,18 @@ export interface COMMUNICATION {
   hcx?: "nhcx" | "swasth";
   text: string;
   subject?: subject;
+  encounter?: Encounter;
+  sentDate?: string;
+  receivedDate?: string;
   identifier: IDENTTIFIER[];
   basedOn?: MULTI_RESOURCE[];
   status: Status;
   category: CODEABLE_CONCEPT[];
   priority: "routine" | "urgent" | "asap" | "stat";
   recipient?: Recipient[];
-  sender?:Sender;
+  reasonCode?:CODEABLE_CONCEPT[];
+  reasonReference ?: ReasonReference[]
+  sender?: Sender;
   contentBase64PDFstrings?: {
     pdf: string;
     createdDate: string;
@@ -117,22 +130,24 @@ export class Communication extends ResourceMain implements ResourceMaster {
       status: options.status,
       category: options.category,
       priority: options.priority,
-      recipient:options.recipient &&
-      options.recipient.map((el) => {
-        return {
-          reference: el.resource && `${el.resource}/${el.id}`,
-          type: el.type,
-          identifier: el.identifier,
-          display: el.display,
-        };
-      }),
-      sender:options.sender && {
-        reference: options.sender.resource && `${options.sender.resource}/${options.sender.id}`,
+      recipient:
+        options.recipient &&
+        options.recipient.map((el) => {
+          return {
+            reference: el.resource && `${el.resource}/${el.id}`,
+            type: el.type,
+            identifier: el.identifier,
+            display: el.display,
+          };
+        }),
+      sender: options.sender && {
+        reference:
+          options.sender.resource &&
+          `${options.sender.resource}/${options.sender.id}`,
         type: options.sender.type,
         identifier: options.sender.identifier,
         display: options.sender.display,
-      }
-      ,
+      },
       payload:
         options.contentBase64PDFstrings &&
         options.contentBase64PDFstrings.map((el) => ({
@@ -144,7 +159,26 @@ export class Communication extends ResourceMain implements ResourceMaster {
             creation: el.createdDate,
           },
         })),
+
+      received: options.receivedDate,
+      sent: options.sentDate,
+      reasonCode:options.reasonCode,
+      reasonReference :options.reasonReference && options.reasonReference.map((el) => {
+        return {
+          reference: el.resource && `${el.resource}/${el.id}`,
+          type: el.type,
+          identifier: el.identifier,
+          display: el.display,
+        };
+      }), 
+      encounter : options.encounter && {
+        reference: options.encounter.resource && `${options.encounter.resource}/${options.encounter.id}`,
+        type: options.encounter.type,
+        identifier: options.encounter.identifier,
+        display: options.encounter.display,
+      }
     };
+
     return body;
   }
   convertFhirToObject(options: any): COMMUNICATION {
@@ -155,7 +189,6 @@ export class Communication extends ResourceMain implements ResourceMaster {
       category: options.category,
       priority: options.priority,
 
-
       contentBase64PDFstrings: options.payload.map((el: any) => ({
         pdf: el.contentAttachment.data,
         title: el.contentAttachment.title,
@@ -163,7 +196,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
       })),
       recipient: options.recipient.map((el: any) =>
         this.getFromMultResource(el)
-      )
+      ),
     };
 
     if (options.subject) {
@@ -175,18 +208,39 @@ export class Communication extends ResourceMain implements ResourceMaster {
         this.getFromMultResource(el)
       );
     }
-    if(options.recipient){
+    if (options.recipient) {
       communication.recipient = options.recipient.map((el: any) =>
         this.getFromMultResource(el)
-      )
-    if(options.sender){
-      communication.sender =  this.getFromMultResource(options.sender) as any
+      );
     }
 
+    if(options.reasonCode){
+      communication.reasonCode=options.reasonCode
     }
+
+    if(options.reasonReference){
+      communication.reasonReference = options.reasonReference.map((el: any) =>
+        this.getFromMultResource(el)
+      );
+    }
+      if (options.sender) {
+        communication.sender = this.getFromMultResource(options.sender) as any;
+      }
+
+      if (options.encounter) {
+        communication.encounter = this.getFromMultResource(options.encounter) as any;
+      }
+ 
 
     if (options.id) {
       communication.id = options.id;
+    }
+
+    if (options.sent) {
+      communication.sentDate = options.sent;
+    }
+    if (options.received) {
+      communication.receivedDate = options.received;
     }
     return communication;
   }

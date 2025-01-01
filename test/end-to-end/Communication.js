@@ -23,7 +23,18 @@ const setCommunication = async () => {
       ],
       "text" : "Alert"
     }],
-    hcx:"swasth",
+    "reasonCode" : [{
+      "text" : "To Get Money"
+    }],
+    "reasonReference" : [{
+      "identifier" : {
+        "value" : "Solid reson refernce"
+      }
+    }],
+    "encounter" : {"id" : resources.encounter.id, "resource" : "Encounter"},
+    sentDate : new Date().toISOString(),
+    "receivedDate" : new Date().toISOString(),
+    hcx:"nhcx",
     identifier: [{
       "system" : "https://www.nicehms.com",
       "value" : "123"
