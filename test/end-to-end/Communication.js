@@ -23,6 +23,15 @@ const setCommunication = async () => {
       ],
       "text" : "Alert"
     }],
+    "implicitRulesLink" : "https://www.nicehms.com",
+    "inResponseTo" :[
+      {
+        "identifier" : {"value" : "GHGHGHGH"}
+      }
+    ],
+    "partOf" : [{
+      "identifier" : {"value" : "112222"}
+    }],
     "reasonCode" : [{
       "text" : "To Get Money"
     }],
@@ -78,7 +87,7 @@ const setCommunication = async () => {
     text:"testing1232tset some good text",
     "contentBase64PDFstrings" : [{
       "createdDate" : new  Date().toISOString(),
-      "pdf" : data,
+      // "pdf" : data,
       "title" : "Test"
 
     }]

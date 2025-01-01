@@ -39,14 +39,21 @@ interface Sender extends MULTI_RESOURCE {
     | "Patient";
 }
 
-interface ReasonReference extends MULTI_RESOURCE{
- resource : "DiagnosticReport" | "Condition" | "Observation" | "DocumentReference"
+interface ReasonReference extends MULTI_RESOURCE {
+  resource:
+    | "DiagnosticReport"
+    | "Condition"
+    | "Observation"
+    | "DocumentReference";
 }
 
-interface Encounter extends MULTI_RESOURCE{
-  resource : "Encounter"
+interface Encounter extends MULTI_RESOURCE {
+  resource: "Encounter";
 }
 
+interface InResponseTo extends MULTI_RESOURCE {
+  resource: "Communication";
+}
 const statusArray = [
   "preparation",
   "in-progress",
@@ -64,18 +71,21 @@ export interface COMMUNICATION {
   id?: string;
   hcx?: "nhcx" | "swasth";
   text: string;
+  implicitRulesLink?: string;
   subject?: subject;
+  inResponseTo?: InResponseTo[];
   encounter?: Encounter;
   sentDate?: string;
   receivedDate?: string;
   identifier: IDENTTIFIER[];
   basedOn?: MULTI_RESOURCE[];
+  partOf?: MULTI_RESOURCE[];
   status: Status;
   category: CODEABLE_CONCEPT[];
   priority: "routine" | "urgent" | "asap" | "stat";
   recipient?: Recipient[];
-  reasonCode?:CODEABLE_CONCEPT[];
-  reasonReference ?: ReasonReference[]
+  reasonCode?: CODEABLE_CONCEPT[];
+  reasonReference?: ReasonReference[];
   sender?: Sender;
   contentBase64PDFstrings?: {
     pdf: string;
@@ -93,6 +103,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
       resourceType: "Communication",
       identifier: options.identifier,
       id: options.id ? options.id : undefined,
+      implicitRules: options.implicitRulesLink,
       subject: options.subject && {
         reference:
           options.subject.resource &&
@@ -120,6 +131,16 @@ export class Communication extends ResourceMain implements ResourceMaster {
       basedOn:
         options.basedOn &&
         options.basedOn.map((el) => {
+          return {
+            reference: el.resource && `${el.resource}/${el.id}`,
+            type: el.type,
+            identifier: el.identifier,
+            display: el.display,
+          };
+        }),
+      partOf:
+        options.partOf &&
+        options.partOf.map((el) => {
           return {
             reference: el.resource && `${el.resource}/${el.id}`,
             type: el.type,
@@ -162,21 +183,35 @@ export class Communication extends ResourceMain implements ResourceMaster {
 
       received: options.receivedDate,
       sent: options.sentDate,
-      reasonCode:options.reasonCode,
-      reasonReference :options.reasonReference && options.reasonReference.map((el) => {
-        return {
-          reference: el.resource && `${el.resource}/${el.id}`,
-          type: el.type,
-          identifier: el.identifier,
-          display: el.display,
-        };
-      }), 
-      encounter : options.encounter && {
-        reference: options.encounter.resource && `${options.encounter.resource}/${options.encounter.id}`,
+      reasonCode: options.reasonCode,
+      reasonReference:
+        options.reasonReference &&
+        options.reasonReference.map((el) => {
+          return {
+            reference: el.resource && `${el.resource}/${el.id}`,
+            type: el.type,
+            identifier: el.identifier,
+            display: el.display,
+          };
+        }),
+      encounter: options.encounter && {
+        reference:
+          options.encounter.resource &&
+          `${options.encounter.resource}/${options.encounter.id}`,
         type: options.encounter.type,
         identifier: options.encounter.identifier,
         display: options.encounter.display,
-      }
+      },
+      inResponseTo:
+        options.inResponseTo &&
+        options.inResponseTo.map((el) => {
+          return {
+            reference: el.resource && `${el.resource}/${el.id}`,
+            type: el.type,
+            identifier: el.identifier,
+            display: el.display,
+          };
+        }),
     };
 
     return body;
@@ -208,29 +243,47 @@ export class Communication extends ResourceMain implements ResourceMaster {
         this.getFromMultResource(el)
       );
     }
+
+    if (options.partOf) {
+      communication.partOf = options.partOf.map((el: any) =>
+        this.getFromMultResource(el)
+      );
+    }
     if (options.recipient) {
       communication.recipient = options.recipient.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
 
-    if(options.reasonCode){
-      communication.reasonCode=options.reasonCode
+    if (options.implicitRules) {
+      communication.implicitRulesLink = options.implicitRules;
     }
 
-    if(options.reasonReference){
+    if (options.reasonCode) {
+      communication.reasonCode = options.reasonCode;
+    }
+
+    if (options.reasonReference) {
       communication.reasonReference = options.reasonReference.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
-      if (options.sender) {
-        communication.sender = this.getFromMultResource(options.sender) as any;
-      }
 
-      if (options.encounter) {
-        communication.encounter = this.getFromMultResource(options.encounter) as any;
-      }
- 
+    if (options.inResponseTo) {
+      communication.inResponseTo = options.inResponseTo.map((el: any) =>
+        this.getFromMultResource(el)
+      );
+    }
+    if (options.sender) {
+      communication.sender = this.getFromMultResource(options.sender) as any;
+    }
+
+    if (options.encounter) {
+      communication.encounter = this.getFromMultResource(
+        options.encounter
+      ) as any;
+    }
+
 
     if (options.id) {
       communication.id = options.id;

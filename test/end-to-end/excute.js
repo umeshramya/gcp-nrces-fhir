@@ -228,7 +228,7 @@ class excute {
   communication = async()=>{
     await callFunction();
     const ret = await setCommunication()
-    console.log(ret)
+    console.log(JSON.stringify(ret))
   }
 
   coverageElegibityRequest =async()=>{
