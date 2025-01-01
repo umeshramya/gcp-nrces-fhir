@@ -48,8 +48,22 @@ const setCommunication = async () => {
         "value" : resources.patient.name
       }
     },
-    recipientOrganizationIds:[resources.insuranceCompany.id],
-    senderOrganizationId:resources.organization.id,
+    recipient : [{
+      "display" : resources.insuranceCompany.name,
+      "id" : resources.insuranceCompany.id,
+      "resource" :"Organization",
+      "identifier" : {
+        "value" : resources.insuranceCompany.name
+      }
+    } ],
+    sender : {
+      "display" : resources.practioner.name,
+      "id" : resources.practioner.id,
+      "resource" : "Practitioner",
+      "identifier" : {
+        "value" : resources.practioner.name
+      }
+    },
     text:"testing1232tset some good text",
     "contentBase64PDFstrings" : [{
       "createdDate" : new  Date().toISOString(),
