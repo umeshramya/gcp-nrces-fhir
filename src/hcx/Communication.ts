@@ -77,7 +77,7 @@ export interface COMMUNICATION {
   encounter?: Encounter;
   sentDate?: string;
   receivedDate?: string;
-  identifier: IDENTTIFIER[];
+  identifier?: IDENTTIFIER[];
   basedOn?: MULTI_RESOURCE[];
   partOf?: MULTI_RESOURCE[];
   status: Status;
@@ -219,7 +219,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
   convertFhirToObject(options: any): COMMUNICATION {
     const communication: COMMUNICATION = {
       text: options.text.div,
-      identifier: options.identifier,
+
       status: options.status,
       category: options.category,
       priority: options.priority,
@@ -233,6 +233,10 @@ export class Communication extends ResourceMain implements ResourceMaster {
         this.getFromMultResource(el)
       ),
     };
+
+    if (options.identifier) {
+      communication.identifier = options.identifier;
+    }
 
     if (options.subject) {
       communication.subject = this.getFromMultResource(options.subject) as any;
@@ -283,7 +287,6 @@ export class Communication extends ResourceMain implements ResourceMaster {
         options.encounter
       ) as any;
     }
-
 
     if (options.id) {
       communication.id = options.id;
