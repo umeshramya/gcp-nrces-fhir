@@ -1,5 +1,8 @@
+import { abort } from "process";
 import {
+  ATTACHMENT,
   CODEABLE_CONCEPT,
+  EXTENSION,
   IDENTTIFIER,
   MULTI_RESOURCE,
   REFERENCE,
@@ -67,6 +70,17 @@ const statusArray = [
 
 type Status = (typeof statusArray)[number];
 
+interface PAYLOAD {
+  id?: string;
+  extension?: EXTENSION[];
+  modifierExtension?: EXTENSION[];
+  content?: {
+    contentAttachment?: ATTACHMENT;
+    contentString?: string;
+    contentReference?: MULTI_RESOURCE;
+  };
+}
+
 export interface COMMUNICATION {
   id?: string;
   hcx?: "nhcx" | "swasth";
@@ -75,23 +89,22 @@ export interface COMMUNICATION {
   subject?: subject;
   inResponseTo?: InResponseTo[];
   encounter?: Encounter;
+  topic?: CODEABLE_CONCEPT;
   sentDate?: string;
   receivedDate?: string;
   identifier?: IDENTTIFIER[];
   basedOn?: MULTI_RESOURCE[];
   partOf?: MULTI_RESOURCE[];
   status: Status;
+  about?: MULTI_RESOURCE[];
+  medium?: CODEABLE_CONCEPT[];
   category: CODEABLE_CONCEPT[];
   priority: "routine" | "urgent" | "asap" | "stat";
   recipient?: Recipient[];
   reasonCode?: CODEABLE_CONCEPT[];
   reasonReference?: ReasonReference[];
   sender?: Sender;
-  contentBase64PDFstrings?: {
-    pdf: string;
-    createdDate: string;
-    title: string;
-  }[];
+  payload?: PAYLOAD[];
 }
 
 export class Communication extends ResourceMain implements ResourceMaster {
@@ -102,8 +115,10 @@ export class Communication extends ResourceMain implements ResourceMaster {
     const body = {
       resourceType: "Communication",
       identifier: options.identifier,
+      topic: options.topic,
       id: options.id ? options.id : undefined,
       implicitRules: options.implicitRulesLink,
+      medium: options.medium,
       subject: options.subject && {
         reference:
           options.subject.resource &&
@@ -131,6 +146,16 @@ export class Communication extends ResourceMain implements ResourceMaster {
       basedOn:
         options.basedOn &&
         options.basedOn.map((el) => {
+          return {
+            reference: el.resource && `${el.resource}/${el.id}`,
+            type: el.type,
+            identifier: el.identifier,
+            display: el.display,
+          };
+        }),
+      about:
+        options.about &&
+        options.about.map((el) => {
           return {
             reference: el.resource && `${el.resource}/${el.id}`,
             type: el.type,
@@ -170,16 +195,35 @@ export class Communication extends ResourceMain implements ResourceMaster {
         display: options.sender.display,
       },
       payload:
-        options.contentBase64PDFstrings &&
-        options.contentBase64PDFstrings.map((el) => ({
-          contentAttachment: {
-            contentType: "application/pdf",
-            language: "en-IN",
-            data: el.pdf,
-            title: el.title,
-            creation: el.createdDate,
-          },
-        })),
+        options.payload &&
+        options.payload.map((el) => {
+          let ret: any = {};
+          if (el.id) {
+            ret.id = el.id;
+          }
+          if (el.extension) {
+            ret.extension = el.extension;
+          }
+          if (el.modifierExtension) {
+            ret.modifierExtension = ret.modifierExtension;
+          }
+
+          if (el.content) {
+            if (el.content.contentAttachment) {
+              ret.contentAttachment = el.content.contentAttachment;
+            } else if (el.content.contentString) {
+              ret.contentString = el.content.contentString;
+            } else if (el.content.contentReference) {
+              ret.contentReference = {
+                reference: `${el.content.contentReference.resource}/${el.content.contentReference.id}`,
+                type: el.content.contentReference.type,
+                identifier: el.content.contentReference.identifier,
+                display: el.content.contentReference.display,
+              };
+            }
+          }
+          return ret;
+        }),
 
       received: options.receivedDate,
       sent: options.sentDate,
@@ -223,12 +267,6 @@ export class Communication extends ResourceMain implements ResourceMaster {
       status: options.status,
       category: options.category,
       priority: options.priority,
-
-      contentBase64PDFstrings: options.payload.map((el: any) => ({
-        pdf: el.contentAttachment.data,
-        title: el.contentAttachment.title,
-        createdDate: el.contentAttachment.creation,
-      })),
       recipient: options.recipient.map((el: any) =>
         this.getFromMultResource(el)
       ),
@@ -248,6 +286,15 @@ export class Communication extends ResourceMain implements ResourceMaster {
       );
     }
 
+    if (options.about) {
+      communication.about = options.about.map((el: any) =>
+        this.getFromMultResource(el)
+      );
+    }
+
+    if (options.topic) {
+      communication.topic = options.topic;
+    }
     if (options.partOf) {
       communication.partOf = options.partOf.map((el: any) =>
         this.getFromMultResource(el)
@@ -257,6 +304,10 @@ export class Communication extends ResourceMain implements ResourceMaster {
       communication.recipient = options.recipient.map((el: any) =>
         this.getFromMultResource(el)
       );
+    }
+
+    if (options.medium) {
+      communication.medium = options.medium;
     }
 
     if (options.implicitRules) {
@@ -298,6 +349,31 @@ export class Communication extends ResourceMain implements ResourceMaster {
     if (options.received) {
       communication.receivedDate = options.received;
     }
+
+    if (options.payload) {
+      communication.payload = options.payload?.map((el: any) => {
+        const ret: PAYLOAD = {};
+        if (el.id) ret.id = el.id;
+        if (el.extension) ret.extension = el.extension;
+        if (el.modifierExtension) ret.modifierExtension = el.modifierExtension;
+
+        if (el.contentAttachment) {
+          ret.content = {};
+          ret.content.contentAttachment = el.contentAttachment;
+        } else if (el.contentString) {
+          ret.content = {};
+          ret.content.contentString = el.contentString;
+        } else if (el.content.contentReference) {
+          ret.content = {};
+          ret.content.contentReference = this.getFromMultResource(
+            el.contentReference
+          );
+        }
+
+        return ret;
+      });
+    }
+
     return communication;
   }
   statusArray(): Status[] {

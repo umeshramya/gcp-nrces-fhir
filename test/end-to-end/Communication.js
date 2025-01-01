@@ -85,12 +85,19 @@ const setCommunication = async () => {
       }
     },
     text:"testing1232tset some good text",
-    "contentBase64PDFstrings" : [{
-      "createdDate" : new  Date().toISOString(),
-      // "pdf" : data,
-      "title" : "Test"
+    // "contentBase64PDFstrings" : [{
+    //   "createdDate" : new  Date().toISOString(),
+    //   "pdf" : data,
+    //   "title" : "Test"
 
-    }]
+    // }]
+    payload : [
+      {
+        "content" : {
+          "contentString" : "How are you"
+        }
+      }
+    ]
   
   });
 
