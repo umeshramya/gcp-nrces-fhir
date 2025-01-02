@@ -129,6 +129,22 @@ export interface CONTACT_POINT {
   period?: PERIOD
 }
 
+export interface DURATION {
+  value?: number; // Numerical value of the duration
+  comparator?: '<' | '<=' | '>=' | '>'; // Comparator for the value
+  unit?: string; // Unit of measure (e.g., "s" for seconds, "min" for minutes)
+  system?: string; // URI identifying the measurement system (e.g., "http://unitsofmeasure.org")
+  code?: string; // Unit code (e.g., "s" for seconds)
+}
+
+
+
+export interface CONTACT_DETAIL{
+  name ?:string;
+  telecom?: CONTACT_POINT[]
+}
+
+
 export interface HUMAN_NAME {
   use?: "usual" | "official" | "temp" | "nickname" | "anonymous" | "old" | "maiden"
   text?: string;
@@ -138,11 +154,6 @@ export interface HUMAN_NAME {
   suffix?: string[]
   period?: PERIOD
 }
-export interface COMMUNICATION {
-  language: CODEABLE_CONCEPT;
-  preferred?: boolean;
-}
-
 
 
 export interface MULTI_RESOURCE {

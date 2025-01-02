@@ -1,4 +1,4 @@
-import { ADDRESS, CODEABLE_CONCEPT, CODING, COMMUNICATION, CONTACT_POINT, HUMAN_NAME, IDENTTIFIER } from "../config";
+import { ADDRESS, CODEABLE_CONCEPT, CONTACT_POINT, HUMAN_NAME, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -13,7 +13,7 @@ export interface RELATED_PERSON {
   dob?: string;
   address?: ADDRESS[]
   telecom?: CONTACT_POINT[]
-  communication?: COMMUNICATION[]
+  communication?: {language:CODEABLE_CONCEPT,  preferred?:boolean}[]
 
 
 }

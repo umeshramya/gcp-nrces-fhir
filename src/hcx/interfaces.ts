@@ -1,4 +1,5 @@
-import { COMMUNICATION } from "../config";
+// import { COMMUNICATION } from "../";
+import { COMMUNICATION } from "./Communication";
 import { ORGANIZATION } from "../resources/Organization";
 import { PATIENT } from "../resources/Patient";
 import { CLAIM } from "./Claim";

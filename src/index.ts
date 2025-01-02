@@ -107,6 +107,8 @@ import {CoverageEligibilityRequestBundle} from "./hcx/bundle/CoverageEligibiltyR
 import {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY} from "./hcx/CoverageEligibilityRequest"
 import {COVERAGE_ELIGIBILITY_RESPONSE, CoverageEligibiltyResponse} from "./hcx/CoverageEligibilityResponse"
 
+import {TASK,Task } from "./hcx/Task"
+
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
 import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resources/ImmunizationRecommendation";
 import {CreatePdf} from "js-ts-report"
@@ -233,3 +235,5 @@ export { ClaimResponse }
 export {CommunicationRequest}
 export { GOAL, Goal }
 export { CARE_PLAN, CarePlan, careplanActivityDetailStatusArray }
+
+export  {TASK,Task }

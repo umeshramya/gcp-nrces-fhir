@@ -1,0 +1,39 @@
+# Ignore test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Ignore build tools and configuration files
+*.log
+*.tsbuildinfo
+*.config.js
+.eslint*
+.prettier*
+
+# Ignore source files (if distributing a built version)
+src/
+
+# Ignore build output (if unnecessary for the package)
+dist/
+
+# Ignore environment and sensitive files
+.env
+.env.*
+
+# Ignore documentation
+docs/
+*.md
+
+# Ignore examples or demo folders
+example/
+examples/
+
+# Ignore IDE or OS-specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ignore this folder as it contains downloads of 
+package/
