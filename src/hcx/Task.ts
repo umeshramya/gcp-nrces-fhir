@@ -243,7 +243,94 @@ export interface TASK {
 }
 
 export class Task extends ResourceMain implements ResourceMaster {
+
+ 
+  
   getFHIR(options: TASK) {
+
+    
+
+
+
+const generateInputAndOutPut = (put: InAndOutPut): any => {
+  const curInput: any = {
+    type: put.type,
+    id: put.id,
+    modifierExtension: put.modifierExtension,
+    extension: put.extension,
+  };
+
+  const value: any = put.value;
+
+  if (value.valueBase64Binary) curInput["valueBase64Binary"] = value.valueBase64Binary;
+  if (value.valueBoolean) curInput["valueBoolean"] = value.valueBoolean;
+  if (value.valueCanonical) curInput["valueCanonical"] = value.valueCanonical;
+  if (value.valueCode) curInput["valueCode"] = value.valueCode;
+  if (value.valueDate) curInput["valueDate"] = value.valueDate;
+  if (value.valueDateTime) curInput["valueDateTime"] = value.valueDateTime;
+  if (value.valueDecimal) curInput["valueDecimal"] = value.valueDecimal;
+  if (value.valueId) curInput["valueId"] = value.valueId;
+  if (value.valueInstant) curInput["valueInstant"] = value.valueInstant;
+  if (value.valueInteger) curInput["valueInteger"] = value.valueInteger;
+  if (value.valueMarkdown) curInput["valueMarkdown"] = value.valueMarkdown;
+  if (value.valueOid) curInput["valueOid"] = value.valueOid;
+  if (value.valuePositiveInt) curInput["valuePositiveInt"] = value.valuePositiveInt;
+  if (value.valueString) curInput["valueString"] = value.valueString;
+  if (value.valueTime) curInput["valueTime"] = value.valueTime;
+  if (value.valueUnsignedInt) curInput["valueUnsignedInt"] = value.valueUnsignedInt;
+  if (value.valueUri) curInput["valueUri"] = value.valueUri;
+  if (value.valueUrl) curInput["valueUrl"] = value.valueUrl;
+  if (value.valueUuid) curInput["valueUuid"] = value.valueUuid;
+  if (value.valueCodeableConcept) curInput["valueCodeableConcept"] = value.valueCodeableConcept;
+  if (value.valueAttachment) curInput["valueAttachment"] = value.valueAttachment;
+  if (value.valueCoding) curInput["valueCoding"] = value.valueCoding;
+  if (value.valueCount) curInput["valueCount"] = value.valueCount;
+  if (value.valueIdentifier) curInput["valueIdentifier"] = value.valueIdentifier;
+  if (value.valuePeriod) curInput["valuePeriod"] = value.valuePeriod;
+  if (value.valueMoney) curInput["valueMoney"] = value.valueMoney;
+  if (value.valueHumanName) curInput["valueHumanName"] = value.valueHumanName;
+  if (value.valueQuantity) curInput["valueQuantity"] = value.valueQuantity;
+  if (value.valueRange) curInput["valueRange"] = value.valueRange;
+  if (value.valueReference) curInput["valueReference"] = value.valueReference;
+  if (value.valueRatio) curInput["valueRatio"] = value.valueRatio;
+  if (value.valueContactPoint) curInput["valueContactPoint"] = value.valueContactPoint;
+  if (value.valueContactDetail) curInput["valueContactDetail"] = value.valueContactDetail;
+  if (value.valueAddress) curInput["valueAddress"] = value.valueAddress;
+  if (value.valueSampledData) curInput["valueSampledData"] = value.valueSampledData;
+  if (value.valueDuration) curInput["valueDuration"] = value.valueDuration;
+  if (value.valueAnnotation) curInput["valueAnnotation"] = value.valueAnnotation;
+  if (value.valueDistance) curInput["valueDistance"] = value.valueDistance;
+  if (value.valueAge) curInput["valueAge"] = value.valueAge;
+  if (value.valueSignature) curInput["valueSignature"] = value.valueSignature;
+  if (value.valueTiming) curInput["valueTiming"] = value.valueTiming;
+  if (value.valueContributor) curInput["valueContributor"] = value.valueContributor;
+  if (value.valueDataRequirement) curInput["valueDataRequirement"] = value.valueDataRequirement;
+  if (value.valueExpression) curInput["valueExpression"] = value.valueExpression;
+  if (value.valueParameterDefinition) curInput["valueParameterDefinition"] = value.valueParameterDefinition;
+  if (value.valueRelatedArtifact) curInput["valueRelatedArtifact"] = value.valueRelatedArtifact;
+  if (value.valueTriggerDefinition) curInput["valueTriggerDefinition"] = value.valueTriggerDefinition;
+  if (value.valueUsageContext) curInput["valueUsageContext"] = value.valueUsageContext;
+  if (value.valueDosage) curInput["valueDosage"] = value.valueDosage;
+  if (value.valueMeta) curInput["valueMeta"] = value.valueMeta;
+
+  return curInput;
+};
+
+let input, output
+if(options.input){
+   input = options.input.map(el=>{
+    return generateInputAndOutPut(el)
+  })
+
+}
+if(options.output){
+  output = options.output.map(el=>{
+    return generateInputAndOutPut(el)
+  })
+}
+
+
+
     const body: any = {
       resourceType: "Task",
       id: options.id,
@@ -277,8 +364,8 @@ export class Task extends ResourceMain implements ResourceMaster {
         identifier: options.owner.identifier,
         display: options.owner.display,
       },
-      input: options.input,
-      output: options.output,
+      input: input,
+      output: output,
     };
 
     return body;

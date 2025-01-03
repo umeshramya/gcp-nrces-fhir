@@ -44,7 +44,11 @@ const setTask = async () => {
         "text" : "A unique identifier for a policy or contract that covers a patient or a service or product in a claim, payment, or authorization."
       },
    
-      valueString : "123456"
+      "value" : {
+        "valueCodeableConcept" : {
+          "text" : "12345678"
+        }
+      }
       
 
     },
