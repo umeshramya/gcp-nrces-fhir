@@ -1,26 +1,6 @@
-import {
-  ADDRESS,
-  ATTACHMENT,
-  CODEABLE_CONCEPT,
-  CODING,
-  CONTACT_DETAIL,
-  CONTACT_POINT,
-  DURATION,
-  EXTENSION,
-  HUMAN_NAME,
-  IDENTTIFIER,
-  MONEY,
-  MULTI_RESOURCE,
-  PERIOD,
-} from "../config";
+import { CODEABLE_CONCEPT, EXTENSION, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import {
-  QUANTITY,
-  RANGE,
-  RATIO,
-  SAMPLE_DATA,
-  VALUE,
-} from "../resources/Observation";
+import { VALUE } from "../resources/Observation";
 import ResourceMain from "../resources/ResourceMai";
 
 const taskCodeArray: CODEABLE_CONCEPT[] = [
@@ -244,8 +224,6 @@ export interface TASK {
 
 export class Task extends ResourceMain implements ResourceMaster {
   getFHIR(options: TASK) {
-    
-
     const generateInputAndOutPut = (put: InAndOutPut): any => {
       const curInput: any = {
         type: put.type,
@@ -255,7 +233,7 @@ export class Task extends ResourceMain implements ResourceMaster {
       };
 
       const value: any = put.value;
-      this.getFhirvalueCimplexHandle(value, curInput)
+      this.getFhirvalueCimplexHandle(value, curInput);
       return curInput;
     };
 
@@ -316,7 +294,7 @@ export class Task extends ResourceMain implements ResourceMaster {
         let value: any = {};
 
         // Reconstruct the `value` object based on the input
-       this.getConverOBjValueComplexHandle(el,value)
+        this.getConverOBjValueComplexHandle(el, value);
 
         // Return the mapped object
         return {
@@ -370,65 +348,4 @@ export class Task extends ResourceMain implements ResourceMaster {
   statusArray(): Status[] {
     return statusArray.map((el) => el);
   }
-}
-
-interface Values {
-  valueBase64Binary?: string;
-  valueBoolean?: boolean;
-  valueCanonical?: string; // Canonical URL to a resource
-  valueCode?: string; // A coded value from a predefined set
-  valueDate?: string; // Date (YYYY-MM-DD)
-  valueDateTime?: string; // Date and time (ISO 8601)
-  valueDecimal?: number; // Decimal number
-  valueId?: string; // Unique identifier
-  valueInstant?: string; // Instant in time (ISO 8601)
-  valueInteger?: number; // Integer value
-  valueMarkdown?: string; // Markdown text
-  valueOid?: string; // Object Identifier (OID)
-  valuePositiveInt?: number; // Positive integer
-  valueString?: string; // String value
-  valueTime?: string; // Time (HH:MM:SS)
-  valueUnsignedInt?: number; // Unsigned integer
-  valueUri?: string; // URI
-  valueUrl?: string; // URL
-  valueUuid?: string; // UUID
-  valueCodeableConcept?: CODEABLE_CONCEPT;
-  valueAttachment?: ATTACHMENT;
-  valueCoding?: CODING;
-  valueCount?: number;
-  valueIdentifier: IDENTTIFIER;
-  valuePeriod?: PERIOD;
-  valueMoney?: MONEY;
-  valueHumanName?: HUMAN_NAME;
-  valueQuantity?: QUANTITY;
-  valueRange?: RANGE;
-  valueReference?: MULTI_RESOURCE;
-  valueRatio?: RATIO;
-  valueContactPoint?: CONTACT_POINT;
-  valueContactDetail?: CONTACT_DETAIL;
-  valueAddress?: ADDRESS;
-  valueSampledData?: SAMPLE_DATA;
-  valueDuration?: DURATION;
-
-  // // Complex data types
-
-  // valueAnnotation?: Annotation;
-  // valueDistance?: Distance;
-
-  // valueAge?: Age;
-
-  // valueSignature?: Signature;
-  // valueTiming?: Timing;
-
-  // // Metadata and additional complex types
-
-  // valueContributor?: Contributor;
-  // valueDataRequirement?: DataRequirement;
-  // valueExpression?: Expression;
-  // valueParameterDefinition?: ParameterDefinition;
-  // valueRelatedArtifact?: RelatedArtifact;
-  // valueTriggerDefinition?: TriggerDefinition;
-  // valueUsageContext?: UsageContext;
-  // valueDosage?: Dosage;
-  // valueMeta?: Meta;
 }

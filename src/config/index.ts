@@ -1,3 +1,5 @@
+import { QUANTITY, RANGE, RATIO, SAMPLE_DATA } from "../resources/Observation";
+
 export const credentials = {
   type: process.env.GCP_FHIR_type,
   project_id: process.env.GCP_FHIR_project_id,
@@ -218,10 +220,71 @@ export interface NOT_AVAILABLE {
 
 
 
+export interface VALUES_COMPLEX {
+  valueBase64Binary?: string;
+  valueBoolean?: boolean;
+  valueCanonical?: string; // Canonical URL to a resource
+  valueCode?: string; // A coded value from a predefined set
+  valueDate?: string; // Date (YYYY-MM-DD)
+  valueDateTime?: string; // Date and time (ISO 8601)
+  valueDecimal?: number; // Decimal number
+  valueId?: string; // Unique identifier
+  valueInstant?: string; // Instant in time (ISO 8601)
+  valueInteger?: number; // Integer value
+  valueMarkdown?: string; // Markdown text
+  valueOid?: string; // Object Identifier (OID)
+  valuePositiveInt?: number; // Positive integer
+  valueString?: string; // String value
+  valueTime?: string; // Time (HH:MM:SS)
+  valueUnsignedInt?: number; // Unsigned integer
+  valueUri?: string; // URI
+  valueUrl?: string; // URL
+  valueUuid?: string; // UUID
+  valueCodeableConcept?: CODEABLE_CONCEPT;
+  valueAttachment?: ATTACHMENT;
+  valueCoding?: CODING;
+  valueCount?: number;
+  valueIdentifier?: IDENTTIFIER;
+  valuePeriod?: PERIOD;
+  valueMoney?: MONEY;
+  valueHumanName?: HUMAN_NAME;
+  valueQuantity?: QUANTITY;
+  valueRange?: RANGE;
+  valueReference?: MULTI_RESOURCE;
+  valueRatio?: RATIO;
+  valueContactPoint?: CONTACT_POINT;
+  valueContactDetail?: CONTACT_DETAIL;
+  valueAddress?: ADDRESS;
+  valueSampledData?: SAMPLE_DATA;
+  valueDuration?: DURATION;
 
-export interface EXTENSION {
+  // // Complex data types
+
+  // valueAnnotation?: Annotation;
+  // valueDistance?: Distance;
+
+  // valueAge?: Age;
+
+  // valueSignature?: Signature;
+  // valueTiming?: Timing;
+
+  // // Metadata and additional complex types
+
+  // valueContributor?: Contributor;
+  // valueDataRequirement?: DataRequirement;
+  // valueExpression?: Expression;
+  // valueParameterDefinition?: ParameterDefinition;
+  // valueRelatedArtifact?: RelatedArtifact;
+  // valueTriggerDefinition?: TriggerDefinition;
+  // valueUsageContext?: UsageContext;
+  // valueDosage?: Dosage;
+  // valueMeta?: Meta;
+}
+
+
+export interface EXTENSION extends VALUES_COMPLEX {
   url:string;
-  valueString?:string
+
 }
 
 
