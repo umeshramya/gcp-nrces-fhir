@@ -14,6 +14,7 @@ async  toHtml():Promise<string>{
   getFHIR(options: {
     id?: string;
     indentfier: IDENTTIFIER;
+    resourceType: "Bundle"
     dateTime: string;
     claim: any;
     patient: any;
@@ -23,8 +24,8 @@ async  toHtml():Promise<string>{
     documentReference?:any[]
     hcx: "nhcx" | "swasth";
   }): any {
-    const body = {
-      resourceType: "Bundle",
+    const body = {resourceType: "Bundle"
+      ,
       id: options.id || undefined,
       meta: {
         profile:

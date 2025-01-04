@@ -211,6 +211,7 @@ interface InAndOutPut {
 export interface TASK {
   id?: string;
   text?: string;
+  resourceType: "Task"
   code?: TaskCode;
   intent: TaskIntent;
   status: Status;
@@ -309,6 +310,7 @@ export class Task extends ResourceMain implements ResourceMaster {
 
     const ret: TASK = {
       intent: options.intent,
+      resourceType : "Task",
       status: options.status,
       requester:
         options.requester && this.getFromMultResource(options.requester),

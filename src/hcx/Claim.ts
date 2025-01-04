@@ -27,6 +27,7 @@ interface PAYEE_PARTY {
 export interface CLAIM {
   id?: string;
   text: string;
+  resourceType:"Claim"
   identifier: IDENTTIFIER[];
   status: "active" | "cancelled" | "draft" | "entered-in-error";
   patientGcpId: string;
@@ -393,8 +394,8 @@ export class Claim extends ResourceMain implements ResourceMaster {
       createdDate: options.created,
       use: options.use,
       id: options.id,
-      payorName: options.insurer.display
-    
+      payorName: options.insurer.display,
+      resourceType: "Claim"
     };
 
     if(options.insurer.reference){

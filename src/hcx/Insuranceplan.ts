@@ -5,6 +5,7 @@ import ResourceMain from "../resources/ResourceMai";
 interface INSURANCE_PLAN{
     id?:string
     text : string
+    resourceType : "InsurancePlan",
     identifier:IDENTTIFIER[]
     extension:EXTENSION[]
 }

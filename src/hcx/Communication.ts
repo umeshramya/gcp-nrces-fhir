@@ -84,6 +84,7 @@ interface PAYLOAD {
 export interface COMMUNICATION {
   id?: string;
   hcx?: "nhcx" | "swasth";
+  resourceType: "Communication"
   text: string;
   implicitRulesLink?: string;
   subject?: subject;
@@ -267,9 +268,9 @@ export class Communication extends ResourceMain implements ResourceMaster {
       status: options.status,
       category: options.category,
       priority: options.priority,
-      recipient: options.recipient.map((el: any) =>
-        this.getFromMultResource(el)
+      recipient: options.recipient.map((el: any) => this.getFromMultResource(el)
       ),
+      resourceType: "Communication"
     };
 
     if (options.identifier) {

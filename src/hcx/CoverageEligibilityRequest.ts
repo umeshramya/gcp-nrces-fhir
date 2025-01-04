@@ -97,6 +97,7 @@ export type COVERAGE_ELIGIBILITY_REQUEST_PRIORITY =
 export interface COVERAGE_ELIGIBILITY_REQUEST {
   id?: string;
   status: CoverageEligibilityRequestStatus;
+  resourceType: "CoverageEligibilityRequest"
   text: string;
   identifier: IDENTTIFIER[];
   priority: CODEABLE_CONCEPT;
@@ -424,17 +425,18 @@ export class CoverageEligibilityRequest
       }),
       createdDateTime: options.created,
       // enterer: options.enterer,
-      enterer:{
-        "identifier" : options.enterer.identifier,
+      enterer: {
+        "identifier": options.enterer.identifier,
         ...this.getFromMultResource(options.enterer) as any
-      } ,
+      },
       // provider: options.provider,
       provider: {
-        "identifier" : options.provider.identifier,
+        "identifier": options.provider.identifier,
         ...this.getFromMultResource(options.provider) as any
-      } ,
-     
+      },
+
       insurance: options.insurance,
+      resourceType: "CoverageEligibilityRequest"
     };
 
     if(options.insurer && options.insurer.reference){

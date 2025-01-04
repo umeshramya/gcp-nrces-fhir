@@ -65,6 +65,7 @@ interface REASON_REFERENCE extends MULTI_RESOURCE {
 export interface COMMUNICATION_REQUEST {
   id?: string;
   hcx?: "nhcx" | "swasth";
+  resourceType: "CommunicationRequest"
   text: string;
   identifiers: IDENTTIFIER[];
   basedOn: MULTI_RESOURCE[];
@@ -189,10 +190,9 @@ export class CommunicationRequest
     const ret: COMMUNICATION_REQUEST = {
       text: (options.text && options.text.div) || "",
       identifiers: options.identifier,
-      basedOn:
-        options.basedOn &&
+      basedOn: options.basedOn &&
         options.basedOn.map(
-          (el: { basedOn: { reference: any }; display: any }) => {
+          (el: { basedOn: { reference: any; }; display: any; }) => {
             return this.getFromMultResource({
               reference: el.basedOn.reference,
               display: el.display || undefined,
@@ -202,9 +202,8 @@ export class CommunicationRequest
       status: options.status,
       category: options.category,
       priority: options.priority,
-      reasonReference:
-        options.reasonReference &&
-        options.reasonReference.map((el: { reference: any; display: any }) => {
+      reasonReference: options.reasonReference &&
+        options.reasonReference.map((el: { reference: any; display: any; }) => {
           return this.getFromMultResource({
             reference: el.reference,
             display: el.display,
@@ -212,16 +211,14 @@ export class CommunicationRequest
         }),
       statusReason: options.statusReason,
       authoredOn: options.authoredOn,
-      requester:
-        options.requester &&
+      requester: options.requester &&
         this.getFromMultResource({
           reference: options.requester,
           display: options.requester.display,
         }),
       payload: options.payload,
-      recipient:
-        options.recipient &&
-        options.recipient.map((el: { reference: any; display: any }) => {
+      recipient: options.recipient &&
+        options.recipient.map((el: { reference: any; display: any; }) => {
           return this.getFromMultResource({
             reference: el.reference,
             display: el.display,
@@ -230,30 +227,27 @@ export class CommunicationRequest
       reasonCode: options.reasonCode,
       doNotPerform: options.doNotPerform,
       note: options.note,
-      subject:
-        options.subject &&
+      subject: options.subject &&
         this.getFromMultResource({
           reference: options.subject.reference,
           display: options.subject.display,
         }),
-      encounterId:
-        options.encounter &&
+      encounterId: options.encounter &&
         this.getIdFromReference({
           ref: options.encounter.reference,
           resourceType: "Encounter",
         }),
-      about:
-        options.about &&
+      about: options.about &&
         this.getFromMultResource({
           reference: options.about.reference,
           display: options.about.display,
         }),
-      sender:
-        options.sender &&
+      sender: options.sender &&
         this.getFromMultResource({
           reference: options.sender.reference,
           display: options.sender.display,
         }),
+      resourceType: "CommunicationRequest"
     };
 
     return ret;

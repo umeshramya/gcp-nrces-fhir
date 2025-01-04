@@ -110,6 +110,7 @@ interface ERROR{
 interface CLAIM_RESPONSE{
     id?:string;
     text:string
+    resourceType: "ClaimResponse"
     identifiers:IDENTTIFIER[]
     //** "http://terminology.hl7.org/CodeSystem/claim-type" */
     type:CODEABLE_CONCEPT

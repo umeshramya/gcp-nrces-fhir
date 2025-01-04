@@ -18,6 +18,7 @@ export class CoverageEligibilityRequestBundle
   getFHIR(options: {
     id?: string;
     indentfier: IDENTTIFIER;
+    resourceType: "Bundle"
     dateTime: string;
     CoverageEligibilityRequest: any;
     patient: any;

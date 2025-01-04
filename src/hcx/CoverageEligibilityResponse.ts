@@ -47,6 +47,7 @@ interface BENFIT {
 export interface COVERAGE_ELIGIBILITY_RESPONSE {
   id?: string;
   hcx?: "nhcx" | "swasth";
+  resourceType: "CoverageEligibilityResponse",
   identifiers?: IDENTTIFIER[];
   text?: string;
   status: "active" | "cancelled" | "draft" | "entered-in-error";
@@ -380,12 +381,12 @@ export class CoverageEligibiltyResponse
       insurance: options.insurance,
       error: options.error,
       identifiers: options.identifier,
-      practitionerId:
-        options.requestor &&
+      practitionerId: options.requestor &&
         this.getIdFromReference({
           resourceType: "Practitioner",
           ref: options.requestor.reference,
         }),
+      resourceType: "CoverageEligibilityResponse"
     };
     if (options.disposition) {
       ret.disposition = options.disposition;

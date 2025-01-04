@@ -79,6 +79,7 @@ For some coverages a single identifier is issued to the Subscriber and then a un
    */
   dependent?: string;
   relationship?: CODEABLE_CONCEPT;
+   resourceType: "Coverage";
   period?: PERIOD;
   insurerOrganizationId?: string;
   payor: payor[];
@@ -282,16 +283,17 @@ export class Coverage extends ResourceMain implements ResourceMaster {
     const ret: COVERAGE = {
       id: options.id,
       identifier: options.identifier,
-      text: options.text &&  options.text.div,
+      text: options.text && options.text.div,
       status: options.status,
-      beneficiaryPatientId:options.beneficiary && this.getIdFromReference({
+      beneficiaryPatientId: options.beneficiary && this.getIdFromReference({
         ref: options.beneficiary.reference,
         resourceType: "Patient",
       }),
-      payor:options.payor && options.payor.map((el: any) => {
+      payor: options.payor && options.payor.map((el: any) => {
         const ret: MULTI_RESOURCE = this.getFromMultResource(el);
         return ret;
       }),
+      resourceType: "Coverage"
     };
 
     if (options.type) {
