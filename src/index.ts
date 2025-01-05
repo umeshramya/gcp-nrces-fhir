@@ -8,6 +8,7 @@ import { RelatedPerson, RELATED_PERSON } from "./resources/RelatedPerson"
 import {resourceType as ResourceType} from "./config/index"
 import { GOAL, Goal } from "./resources/Goal";
 import { CARE_PLAN, CarePlan, careplanActivityDetailStatusArray } from "./resources/CarePlan";
+import { PaymentNoctice, PAYMENT_NOTICE } from "./hcx/bundle/PaymentNotice";
 
 export type {
   ResourceType
@@ -237,3 +238,4 @@ export { GOAL, Goal }
 export { CARE_PLAN, CarePlan, careplanActivityDetailStatusArray }
 
 export  {TASK,Task }
+export { PaymentNoctice, PAYMENT_NOTICE }

@@ -52,7 +52,8 @@ const { setAllergyIntorance } = require("./AllergyIntolence");
 const { setMedicationStatement } = require("./medicationStatement");
 const { setGoal } = require("./Goal");
 const { setCarePlan } = require("./Careplan");
-const {setTask} = require("./Task")
+const {setTask} = require("./Task");
+const { setPaymentNotice } = require("./PaymentNotice");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -237,6 +238,15 @@ class excute {
     const ret = await setTask()
     console.log(JSON.stringify(ret))
   }
+
+  payemntNotice= async()=>{
+    await callFunction();
+    const ret = await setPaymentNotice()
+    console.log(JSON.stringify(ret))
+  }
+
+
+
 
   coverageElegibityRequest =async()=>{
     await callFunction();
@@ -759,7 +769,8 @@ console.log(bundle)
 // new excute().docimentReference()
 // new excute().claim()
 // new excute().communication()
-new excute().task()
+// new excute().task()
+new excute().payemntNotice()
 // new excute().claimRequestBundle()
 // new excute().coverageElegibityRequest()
 // new excute().coverageElegibityRequestBundle()
