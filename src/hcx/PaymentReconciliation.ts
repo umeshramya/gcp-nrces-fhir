@@ -83,6 +83,8 @@ export interface PAYMENT_RECONCILIATION {
   formCode?: CODEABLE_CONCEPT;
   detail?: Detail[];
   processNote: ProcessNote[];
+  // type:CODEABLE_CONCEPT
+  // amount:MONEY
 }
 
 export class PaymentReconciliation
@@ -167,7 +169,7 @@ export class PaymentReconciliation
       },
       extension: options.extension,
       modifierExtension: options.modifierExtension,
-      identifier: options.text,
+      identifier: options.identifier,
       status: options.status,
       period: options.period,
       created: options.createdDate,
@@ -240,9 +242,11 @@ export class PaymentReconciliation
             delete ret[key as keyof Detail];
           }
         });
+        return ret;
       });
+      return details
 
-      return ret;
+     
     };
 
     const processNoteHandle = ()=>{
