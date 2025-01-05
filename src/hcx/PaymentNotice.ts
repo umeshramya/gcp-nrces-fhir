@@ -4,9 +4,9 @@ import {
   IDENTTIFIER,
   MONEY,
   MULTI_RESOURCE,
-} from "../../config";
-import { ResourceMaster } from "../../Interfaces";
-import ResourceMain from "../../resources/ResourceMai";
+} from "../config";
+import { ResourceMaster } from "../Interfaces";
+import ResourceMain from "../resources/ResourceMai";
 
 const status = ["active", "cancelled", "draft", "entered-in-error"] as const;
 type Status = (typeof status)[number];
@@ -62,27 +62,27 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
       identifier: options.identifier,
       status: options.status,
       request: options.request && {
-        reference:options.request.resource && `${options.request.resource}/${options.request.id}`,
+        reference:options.request.resource&& options.request.id && `${options.request.resource}/${options.request.id}`,
         identifier: options.request.identifier,
         type: options.request.type,
         display: options.request.display,
       },
       response: options.response && {
-        reference:options.response.resource &&  `${options.response.resource}/${options.response.id}`,
+        reference:options.response.resource && options.response.id &&  `${options.response.resource}/${options.response.id}`,
         identifier: options.response.identifier,
         type: options.response.type,
         display: options.response.display,
       },
       created: options.createdDate,
       payment: options.payment && {
-        reference:options.payment.resource && `${options.payment.resource}/${options.payment.id}`,
+        reference:options.payment.resource && options.payment.id && `${options.payment.resource}/${options.payment.id}`,
         identifier: options.payment.identifier,
         type: options.payment.type,
         display: options.payment.display,
       },
       paymentDate: options.paymentDate,
       recipient: options.recipient && {
-        reference:options.recipient.resource && `${options.recipient.resource}/${options.recipient.id}`,
+        reference:options.recipient.resource && options.recipient.id &&`${options.recipient.resource}/${options.recipient.id}`,
         identifier: options.recipient.identifier,
         type: options.recipient.type,
         display: options.recipient.display,
@@ -90,7 +90,7 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
       amount: options.amount,
       paymentStatus: options.paymentStatus,
       payee: options.payee && {
-        reference: options.payee.resource &&`${options.payee.resource}/${options.payee.id}`,
+        reference: options.payee.resource && options.payee.id &&`${options.payee.resource}/${options.payee.id}`,
         identifier: options.payee.identifier,
         type: options.payee.type,
         display: options.payee.display,

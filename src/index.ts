@@ -8,7 +8,7 @@ import { RelatedPerson, RELATED_PERSON } from "./resources/RelatedPerson"
 import {resourceType as ResourceType} from "./config/index"
 import { GOAL, Goal } from "./resources/Goal";
 import { CARE_PLAN, CarePlan, careplanActivityDetailStatusArray } from "./resources/CarePlan";
-import { PaymentNoctice, PAYMENT_NOTICE } from "./hcx/bundle/PaymentNotice";
+import { PaymentNoctice, PAYMENT_NOTICE } from "./hcx/PaymentNotice";
 
 export type {
   ResourceType
@@ -118,7 +118,7 @@ import { ClaimRequestBundle } from "./hcx/bundle/ClaimRequestBundle";
 import { ClaimResponse } from "./hcx/ClaimResponse";
 
 import {COMMUNICATION, Communication} from "./hcx/Communication"
-
+import { PaymentReconciliation, PAYMENT_RECONCILIATION } from "./hcx/PaymentReconciliation";
 import {CommunicationRequest} from "./hcx/CommunicationRequest"
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
@@ -239,3 +239,4 @@ export { CARE_PLAN, CarePlan, careplanActivityDetailStatusArray }
 
 export  {TASK,Task }
 export { PaymentNoctice, PAYMENT_NOTICE }
+export { PaymentReconciliation, PAYMENT_RECONCILIATION }
