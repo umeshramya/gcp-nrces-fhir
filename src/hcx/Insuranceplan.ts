@@ -1,13 +1,49 @@
-import { EXTENSION, IDENTTIFIER } from "../config";
+import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
+
+
+interface OwnedBy extends MULTI_RESOURCE{
+  resource : "Organization"
+}
+
+interface AdministeredBy extends MULTI_RESOURCE{
+  resource : "Organization"
+}
+
+interface Network extends MULTI_RESOURCE{
+  resource : "Organization"
+}
+
+interface Coverage{
+  id?:string
+  extension : EXTENSION[][]
+  type :CODEABLE_CONCEPT
+  network ?: Network[]
+}
+
+interface Plan{
+  id?:string
+  extension : EXTENSION[][]
+  type :CODEABLE_CONCEPT
+  network ?: Network[]
+}
 
 interface INSURANCE_PLAN{
     id?:string
     text : string
     resourceType : "InsurancePlan",
     identifier:IDENTTIFIER[]
-    extension:EXTENSION[]
+    extension:EXTENSION[][]
+    status : "draft" | "active" | "retired" | "unknown"
+    type:CODEABLE_CONCEPT
+    period:PERIOD
+    name:string
+    ownedBy:OwnedBy
+    administeredBy?:AdministeredBy
+    alias?:string[]
+    coverage:Coverage[]
+    plan:Plan[]
 }
 
 export class InsurancePlan extends ResourceMain implements ResourceMaster{
@@ -23,114 +59,24 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster{
               "status" : "extensions",
               "div" : options.text
             },
-            "extension" : [{
-              "extension" : [{
-                "url" : "category",
-                "valueCodeableConcept" : {
-                  "coding" : [{
-                    "system" : "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-supportinginfo-category",
-                    "code" : "POI",
-                    "display" : "Proof of identity"
-                  }]
-                }
-              },
-              {
-                "url" : "code",
-                "valueCodeableConcept" : {
-                  "coding" : [{
-                    "system" : "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-identifier-type-code",
-                    "code" : "ADN",
-                    "display" : "Adhaar number"
-                  }]
-                }
-              }],
-              "url" : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-SupportingInfoRequirement"
+            alias : options.alias,
+            "extension" : options.extension,
+            "identifier" : options.identifier,
+            "status" : options.status,
+            "type" : options.type,
+            "name" : options.name,
+            "period" : options.period,
+            "ownedBy" :options.ownedBy && {
+              "reference" : options.ownedBy.resource && options.ownedBy.id && `${options.ownedBy.resource}/${options.ownedBy.id}`,
+              "identifier" : options.ownedBy.identifier,
+              "display" : options.ownedBy.display,
+              "type" : options.ownedBy.type
             },
-            {
-              "extension" : [{
-                "url" : "category",
-                "valueCodeableConcept" : {
-                  "coding" : [{
-                    "system" : "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-supportinginfo-category",
-                    "code" : "POA",
-                    "display" : "Proof of address"
-                  }]
-                }
-              },
-              {
-                "url" : "code",
-                "valueCodeableConcept" : {
-                  "coding" : [{
-                    "system" : "http://terminology.hl7.org/CodeSystem/v2-0203",
-                    "code" : "PPN",
-                    "display" : "Passport number"
-                  }]
-                }
-              }],
-              "url" : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-SupportingInfoRequirement"
-            },
-            {
-              "extension" : [{
-                "url" : "category",
-                "valueCodeableConcept" : {
-                  "coding" : [{
-                    "system" : "http://snomed.info/sct",
-                    "code" : "277011002",
-                    "display" : "Pre-existing disease in renal transplant"
-                  }]
-                }
-              },
-              {
-                "url" : "statement",
-                "valueString" : "Expenses related to the treatment of a pre-existing Disease (PED) and its direct complications shall be excluded untit the expiry of 48 months"
-              }],
-              "url" : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion"
-            },
-            {
-              "extension" : [{
-                "url" : "category",
-                "valueCodeableConcept" : {
-                  "text" : "Specified disease"
-                }
-              },
-              {
-                "url" : "statement",
-                "valueString" : "Expenses related to the treatment of a listed conditions, surgeries/treatments shall be excluded until the expiry of 24 months of continuous coverage after the date of inception of the first policy with us."
-              },
-              {
-                "url" : "item",
-                "valueCodeableConcept" : {
-                  "coding" : [{
-                    "system" : "http://snomed.info/sct",
-                    "code" : "86077009",
-                    "display" : "Operation for glaucoma"
-                  }]
-                }
-              }],
-              "url" : "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion"
-            }],
-            "identifier" : [{
-              "system" : "https://irdai.gov.in",
-              "value" : "761234556546"
-            }],
-            "status" : "active",
-            "type" : [{
-              "coding" : [{
-                "system" : "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-insuranceplan-type",
-                "code" : "01",
-                "display" : "Hospitalisation Indemnity Policy"
-              }]
-            }],
-            "name" : "Active Assure Silver",
-            "period" : {
-              "start" : "2023-09-10",
-              "end" : "2024-09-10"
-            },
-            "ownedBy" : {
-              "reference" : "Organization/example-02"
-            },
-            "administeredBy" : {
-              "reference" : "Organization/example-02"
+            "administeredBy" : options.administeredBy && {
+              "reference" : options.administeredBy.resource && options.administeredBy.id && `${options.administeredBy.resource}/${options.administeredBy.id}`,
+              "identifier" : options.administeredBy.identifier,
+              "display" : options.administeredBy.display,
+              "type" : options.administeredBy.type
             },
             "coverage" : [{
               "extension" : [{

@@ -17,11 +17,11 @@ export class TaskBundle extends ResourceMain implements ResourceMaster {
     resourceType: "Bundle";
     dateTime: string;
     claim?: any;
-    patient: any;
+    patient?: any;
     communicationRequest?: any;
     task: any;
     practitioner?: any[];
-    organization: any[];
+    organization?: any[];
     coverage?: any;
     documentReference?: any[];
     hcx: "nhcx" | "swasth";
@@ -42,16 +42,18 @@ export class TaskBundle extends ResourceMain implements ResourceMaster {
       timestamp: options.dateTime || new Date().toISOString(),
       entry: [
         {
-          fullUrl: `Patient/${options.patient.id}`,
-          resource: options.patient,
-        },
-
-        {
           fullUrl: `Task/${options.task.id}`,
           resource: options.task,
         },
       ],
     };
+
+    if(options.patient){
+      body.entry.push(        {
+        fullUrl: `Patient/${options.patient.id}`,
+        resource: options.patient,
+      })
+    }
 
     if (options.communicationRequest) {
       body.entry.push({
