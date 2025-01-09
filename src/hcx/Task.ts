@@ -217,8 +217,8 @@ export interface TASK {
   status: Status;
   authoredOn?: string;
   description?: string;
-  requester: Requester;
-  owner: Owner;
+  requester?: Requester;
+  owner?: Owner;
   input?: InAndOutPut[];
   output?: InAndOutPut[];
 }
