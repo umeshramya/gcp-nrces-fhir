@@ -75,7 +75,8 @@ export const resourceTypeArray = [
   "CoverageEligibilityResponse",
   "ClaimResponse",
   "PaymentReconciliation",
-  "PaymentNotice"
+  "PaymentNotice",
+  "InsurancePlan"
 
 ] as const;
 

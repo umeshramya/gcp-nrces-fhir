@@ -542,10 +542,12 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster{
         return body
     }
     convertFhirToObject(options: any) {
-        throw new Error("Method not implemented.");
+      return options
     }
-    toHtml(option: any): Promise<string> {
-        throw new Error("Method not implemented.");
+    async toHtml(option: any): Promise<string> {
+       const ret ="";
+      
+       return ret;  
     }
     statusArray?: Function | undefined;
     
