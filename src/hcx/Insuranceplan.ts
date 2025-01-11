@@ -495,7 +495,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
   convertFhirToObject(options: any): INSURANCE_PLAN {
     const ret: INSURANCE_PLAN = {
       id: options.id,
-      text: options.text.div,
+      text: options.text && options.text.div,
       resourceType: "InsurancePlan",
       identifier: options.identifier,
       extension: options.extension,
@@ -514,7 +514,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
           this.getFromMultResource(options.administeredBy)) ||
           options.administeredBy),
       alias: options.alias,
-      coverage: options.alias,
+      coverage: options.coverage,
       plan: options.plan,
     };
 

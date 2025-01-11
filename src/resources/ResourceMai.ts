@@ -5,6 +5,7 @@ import {
   CodeDisplay,
   IDENTTIFIER,
   MULTI_RESOURCE,
+  REFERENCE,
 } from "../config";
 
 export interface DOSAGE_INSTRUCTION {
@@ -394,4 +395,34 @@ export default class ResourceMain extends ResourceToHTML {
       value.valueMeta = el.valueMeta;
     }
   }
+
+  /**
+   * Converts the `reference` property of a FHIR resource to a full URL using the specified base URL.
+   *
+   * @param reference - A FHIR resource object that may contain a `reference` property.
+   * @param url - The base URL to prepend to the `reference` property. Defaults to "https://www.nicehms.com/query=".
+   * @returns The updated FHIR resource object with its `reference` property transformed into a full URL.
+   *
+   * @example
+   * const resource = { reference: "Patient/123" };
+   * const updatedResource = convertReferenceToUrl(resource, "https://example.com/");
+   * console.log(updatedResource);
+   * // Output: { reference: "https://example.com/Patient/123" }
+   *
+   * @remarks
+   * - This function modifies the input `reference` object in-place.
+   * - If the `reference` property is not present, the function returns the resource unchanged.
+   * - Ensure the `url` parameter ends with a slash or appropriate delimiter for the resulting URL to be valid.
+   */
+  convertReferenceToUrl = (
+    reference: MULTI_RESOURCE,
+    url = "https://www.nicehms.com/query="
+  ): MULTI_RESOURCE => {
+    if (reference.reference) {
+      const curReference = `${url}${reference.reference}`;
+      reference.reference = curReference;
+    }
+
+    return reference;
+  };
 }

@@ -55,6 +55,7 @@ const { setCarePlan } = require("./Careplan");
 const {setTask} = require("./Task");
 const { setPaymentNotice } = require("./PaymentNotice");
 const { setpaymentReconciliation } = require("./PaymentReconcilation");
+const { setInsurancePlan } = require("./InsurancePlan");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -249,6 +250,13 @@ class excute {
   payemntReconciliation= async()=>{
     // await callFunction();
     const ret = await setpaymentReconciliation()
+    console.log(JSON.stringify(ret))
+  }
+
+
+  insurancePlan= async()=>{
+    // await callFunction();
+    const ret = await setInsurancePlan()
     console.log(JSON.stringify(ret))
   }
 
@@ -778,7 +786,8 @@ console.log(bundle)
 // new excute().communication()
 // new excute().task()
 // new excute().payemntNotice()
-new excute().payemntReconciliation()
+// new excute().payemntReconciliation()
+new excute().insurancePlan()
 // new excute().claimRequestBundle()
 // new excute().coverageElegibityRequest()
 // new excute().coverageElegibityRequestBundle()
