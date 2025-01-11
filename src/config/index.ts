@@ -167,6 +167,7 @@ export interface MULTI_RESOURCE {
   display?: string;
   type?:string;
   identifier?:IDENTTIFIER
+  reference?:string
 }
 
 export const LOINC_SCALE = [
@@ -253,7 +254,7 @@ export interface VALUES_COMPLEX {
   valueHumanName?: HUMAN_NAME;
   valueQuantity?: QUANTITY;
   valueRange?: RANGE;
-  valueReference?: MULTI_RESOURCE;
+  valueReference?: REFERENCE;
   valueRatio?: RATIO;
   valueContactPoint?: CONTACT_POINT;
   valueContactDetail?: CONTACT_DETAIL;
@@ -287,6 +288,7 @@ export interface VALUES_COMPLEX {
 
 export interface EXTENSION extends VALUES_COMPLEX {
   url:string;
+  extension?:EXTENSION
 
 }
 
