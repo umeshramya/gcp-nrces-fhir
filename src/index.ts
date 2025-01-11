@@ -121,6 +121,8 @@ import {COMMUNICATION, Communication} from "./hcx/Communication"
 import { PaymentReconciliation, PAYMENT_RECONCILIATION } from "./hcx/PaymentReconciliation";
 import {CommunicationRequest} from "./hcx/CommunicationRequest"
 
+import {InsurancePlan, INSURANCE_PLAN} from "./hcx/Insuranceplan"
+
 import { TaskBundle } from "./hcx/bundle/TaskBundle";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
@@ -243,3 +245,5 @@ export  {TASK,Task }
 export { PaymentNoctice, PAYMENT_NOTICE }
 export { PaymentReconciliation, PAYMENT_RECONCILIATION }
 export { TaskBundle }
+
+export {InsurancePlan, INSURANCE_PLAN}

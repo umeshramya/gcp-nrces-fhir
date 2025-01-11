@@ -60,7 +60,7 @@ interface Plan {
   network?: Network[];
 }
 
-interface INSURANCE_PLAN {
+export interface INSURANCE_PLAN {
   id?: string;
   text: string;
   resourceType: "InsurancePlan";
