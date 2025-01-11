@@ -34,6 +34,9 @@ import { CommunicationRequest } from "../hcx/CommunicationRequest";
 import {CoverageEligibiltyResponse} from "../hcx/CoverageEligibilityResponse"
 import { CarePlan } from "../resources/CarePlan";
 import { Goal } from "../resources/Goal";
+import { InsurancePlan } from "../hcx/Insuranceplan";
+import { PaymentNoctice } from "../hcx/PaymentNotice";
+import { PaymentReconciliation } from "../hcx/PaymentReconciliation";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -112,6 +115,12 @@ export default class ResourceFactory
       this.resource = new CarePlan()
     }else if(this.resourceType == "Goal"){
       this.resource = new Goal()
+    }else if(this.resourceType == "InsurancePlan"){
+      this.resource = new InsurancePlan()
+    }else if(this.resourceType == "PaymentNotice"){
+      this.resource = new PaymentNoctice()
+    }else if(this.resourceType == "PaymentReconciliation"){
+      this.resource = new PaymentReconciliation()
     }
 
     else {
