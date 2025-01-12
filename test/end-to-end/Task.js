@@ -24,6 +24,16 @@ const setTask = async () => {
       ],
       text: "Retrieve selected or all queued resources or messages.",
     },
+    "identifier" : [
+      {
+        "system" : "memberId",
+        "value" : "123456"
+      },
+      {
+        "system" : "abhaNumber",
+        "value" : "1234567890"
+      }
+    ],
     "status": "requested",
     "requester" : {
       "identifier" : {
@@ -47,6 +57,7 @@ const setTask = async () => {
       "value" : {
         "valueString" : "100151"
       }
+
       
 
     },

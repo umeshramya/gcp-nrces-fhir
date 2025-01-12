@@ -1,4 +1,4 @@
-import { CODEABLE_CONCEPT, EXTENSION, MULTI_RESOURCE, PERIOD } from "../config";
+import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { VALUE } from "../resources/Observation";
 import ResourceMain from "../resources/ResourceMai";
@@ -221,6 +221,7 @@ export interface TASK {
   owner?: Owner;
   input?: InAndOutPut[];
   output?: InAndOutPut[];
+  identifier?:IDENTTIFIER[]
 }
 
 export class Task extends ResourceMain implements ResourceMaster {
@@ -253,6 +254,7 @@ export class Task extends ResourceMain implements ResourceMaster {
     const body: any = {
       resourceType: "Task",
       id: options.id,
+      identifier:options.identifier,
       meta: {
         profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Task"],
       },
