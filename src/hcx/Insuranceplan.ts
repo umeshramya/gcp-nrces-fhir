@@ -31,13 +31,19 @@ interface Coverage {
   modifierExtension?: EXTENSION[];
   type: CODEABLE_CONCEPT;
   requirement?: string;
-  limit?: {
-    id?: string;
-    extension?: EXTENSION[];
-    modifierExtension?: EXTENSION[];
-    value?: QUANTITY;
-    code?: CODEABLE_CONCEPT;
-  }[];
+  benfit:{
+    extension?:EXTENSION[];
+    modifierExtension?:EXTENSION[]
+    type:CODEABLE_CONCEPT;
+    requirement?:string
+    limit?: {
+      id?: string;
+      extension?: EXTENSION[];
+      modifierExtension?: EXTENSION[];
+      value?: QUANTITY;
+      code?: CODEABLE_CONCEPT;
+    }[];
+  }
   network?: Network[];
 }
 
