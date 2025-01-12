@@ -31,7 +31,7 @@ interface Coverage {
   modifierExtension?: EXTENSION[];
   type: CODEABLE_CONCEPT;
   requirement?: string;
-  benfit:{
+  benefit:{
     extension?:EXTENSION[];
     modifierExtension?:EXTENSION[]
     type:CODEABLE_CONCEPT;
