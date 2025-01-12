@@ -43,7 +43,7 @@ interface Coverage {
       value?: QUANTITY;
       code?: CODEABLE_CONCEPT;
     }[];
-  }
+  }[]
   network?: Network[];
 }
 
