@@ -324,6 +324,7 @@ export class Task extends ResourceMain implements ResourceMaster {
       authoredOn: options.authoredOn,
       code: options.code,
       id: options.id,
+      identifier:options.identifier
     };
 
     // Remove keys with null or undefined values
