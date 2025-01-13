@@ -111,6 +111,11 @@ const setClaim = async () => {
               display: "addmission",
               system: "https://irdai.gov.in/package-code",
             },
+            {
+              code: "E002",
+              display: "addmission procedure",
+              system: "https://irdai.gov.in/package-code",
+            },
           ],
         },
         sequence: 1,

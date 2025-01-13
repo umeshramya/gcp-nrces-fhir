@@ -56,13 +56,13 @@ export interface CLAIM {
   item: {
     sequence: number;
     productOrService: {
-      coding: [
+      coding: 
         {
           system: "https://irdai.gov.in/package-code";
           code: string;
           display: string;
-        }
-      ];
+        }[]
+      ;
     };
     unitPrice: { value: number; currency: "INR" | "USD" };
     quantity: SAMPLE_QUANTITY;
