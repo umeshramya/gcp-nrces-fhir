@@ -544,10 +544,138 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
     return ret;
   }
   async toHtml(option:TO_HTML_HCX_OPTIONS_INSURANCE_PLAN): Promise<string> {
-    const text = option.body.text || ""
+    const data = option.body
+    return `
+    <div>
+      <h1>Insurance Plan</h1>
+      <p><strong>Resource Type:</strong> ${data.resourceType}</p>
+      <p><strong>ID:</strong> ${data.id || "N/A"}</p>
+      <p><strong>Status:</strong> ${data.status}</p>
+      <p><strong>Name:</strong> ${data.name}</p>
+      <p><strong>Text:</strong> ${data.text}</p>
+      <p><strong>Type:</strong> ${data.type.text}</p>
+      <p><strong>Period:</strong> ${new Date(data.period.start).toLocaleDateString()} to ${new Date(data.period.end).toLocaleDateString()}</p>
+      <p><strong>Owned By:</strong> ${data.ownedBy.display || "N/A"} (${data.ownedBy.reference})</p>
+      <p><strong>Administered By:</strong> ${data.administeredBy?.display || "N/A"} (${data.administeredBy?.reference || "N/A"})</p>
+      <p><strong>Alias:</strong> ${data.alias?.join(", ") || "None"}</p>
+
+      <h2>Identifiers</h2>
+      <ul>
+        ${data.identifier
+          .map(
+            (id) => `
+            <li>
+              <strong>System:</strong> ${id.system || "N/A"}, 
+              <strong>Value:</strong> ${id.value || "N/A"}
+            </li>`
+          )
+          .join("")}
+      </ul>
+
+      <h2>Coverage</h2>
+      ${data.coverage
+        .map(
+          (coverage, index) => `
+          <div>
+            <h3>Coverage ${index + 1}</h3>
+            <p><strong>Type:</strong> ${coverage.type.text}</p>
+            <p><strong>Requirement:</strong> ${coverage.requirement || "N/A"}</p>
+            <h4>Benefits</h4>
+            <ul>
+              ${coverage.benefit
+                .map(
+                  (benefit) => `
+                  <li>
+                    <p><strong>Type:</strong> ${benefit.type.text}</p>
+                    <p><strong>Requirement:</strong> ${benefit.requirement || "N/A"}</p>
+                    <h5>Limits</h5>
+                    <ul>
+                      ${benefit.limit
+                        ?.map(
+                          (limit) => `
+                          <li>
+                            <p><strong>Value:</strong> ${limit.value?.value || "N/A"} ${
+                            limit.value?.unit || ""
+                          }</p>
+                            <p><strong>Code:</strong> ${limit.code?.text || "N/A"}</p>
+                          </li>`
+                        )
+                        .join("") || "None"}
+                    </ul>
+                  </li>`
+                )
+                .join("")}
+            </ul>
+            <h4>Network</h4>
+            <ul>
+              ${coverage.network
+                ?.map(
+                  (network) => `
+                  <li>
+                    <strong>Resource:</strong> ${network.resource}, 
+                    <strong>Display:</strong> ${network.display || "N/A"}
+                  </li>`
+                )
+                .join("") || "None"}
+            </ul>
+          </div>`
+        )
+        .join("")}
+
+      <h2>Plans</h2>
+      ${data.plan
+        .map(
+          (plan, index) => `
+          <div>
+            <h3>Plan ${index + 1}</h3>
+            <p><strong>Type:</strong> ${plan.type.text}</p>
+            <h4>Coverage Areas</h4>
+            <ul>
+              ${plan.coverageArea
+                ?.map(
+                  (area) => `
+                  <li>
+                    <strong>Resource:</strong> ${area.resource}, 
+                    <strong>Reference:</strong> ${area.reference}
+                  </li>`
+                )
+                .join("") || "None"}
+            </ul>
+            <h4>General Costs</h4>
+            <ul>
+              ${plan.generalCost
+                ?.map(
+                  (cost) => `
+                  <li>
+                    <p><strong>Type:</strong> ${cost.type?.text || "N/A"}</p>
+                    <p><strong>Group Size:</strong> ${cost.groupSize || "N/A"}</p>
+                    <p><strong>Cost:</strong> ${cost.cost?.value || "N/A"} ${
+                    cost.cost?.currency || ""
+                  }</p>
+                    <p><strong>Comment:</strong> ${cost.comment || "N/A"}</p>
+                  </li>`
+                )
+                .join("") || "None"}
+            </ul>
+            <h4>Network</h4>
+            <ul>
+              ${plan.network
+                ?.map(
+                  (network) => `
+                  <li>
+                    <strong>Resource:</strong> ${network.resource}, 
+                    <strong>Display:</strong> ${network.display || "N/A"}
+                  </li>`
+                )
+                .join("") || "None"}
+            </ul>
+          </div>`
+        )
+        .join("")}
+    </div>
+  `;
+}
 
 
-    return text;
-  }
   statusArray?: Function | undefined;
 }
