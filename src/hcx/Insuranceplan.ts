@@ -545,7 +545,6 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_INSURANCE_PLAN): Promise<string> {
     const data = option.body;
-  
     return `
       <div>
         <h1>Insurance Plan</h1>
@@ -553,136 +552,126 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
         <p><strong>ID:</strong> ${data.id || "N/A"}</p>
         <p><strong>Status:</strong> ${data.status}</p>
         <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Text:</strong> ${data.text}</p>
+        <p><strong>Text:</strong> ${data.text || "N/A"}</p>
         <p><strong>Type:</strong> ${data.type?.text || "N/A"}</p>
-        <p><strong>Period:</strong> 
-          ${data.period?.start ? new Date(data.period.start).toLocaleDateString() : "N/A"} 
-          to 
-          ${data.period?.end ? new Date(data.period.end).toLocaleDateString() : "N/A"}
-        </p>
-        <p><strong>Owned By:</strong> 
-          ${data.ownedBy?.display || "N/A"} 
-          (${data.ownedBy?.reference || "N/A"})
-        </p>
-        <p><strong>Administered By:</strong> 
-          ${data.administeredBy?.display || "N/A"} 
-          (${data.administeredBy?.reference || "N/A"})
-        </p>
+        <p><strong>Period:</strong> ${data.period?.start 
+          ? new Date(data.period.start).toLocaleDateString() 
+          : "N/A"} to ${data.period?.end 
+          ? new Date(data.period.end).toLocaleDateString() 
+          : "N/A"}</p>
+        <p><strong>Owned By:</strong> ${data.ownedBy?.display || "N/A"} (${data.ownedBy?.reference || "N/A"})</p>
+        <p><strong>Administered By:</strong> ${data.administeredBy?.display || "N/A"} (${data.administeredBy?.reference || "N/A"})</p>
         <p><strong>Alias:</strong> ${data.alias?.join(", ") || "None"}</p>
   
         <h2>Identifiers</h2>
         <ul>
-          ${data.identifier
-            ?.map(
-              (id) => `
-              <li>
-                <strong>System:</strong> ${id.system || "N/A"}, 
-                <strong>Value:</strong> ${id.value || "N/A"}
-              </li>`
-            )
-            .join("") || "<li>None</li>"}
+          ${data.identifier?.map(id => `
+            <li>
+              <strong>System:</strong> ${id.system || "N/A"}, 
+              <strong>Value:</strong> ${id.value || "N/A"}
+            </li>
+          `).join("") || "<li>None</li>"}
         </ul>
   
         <h2>Coverage</h2>
-        ${data.coverage
-          ?.map(
-            (coverage, index) => `
-            <div>
-              <h3>Coverage ${index + 1}</h3>
-              <p><strong>Type:</strong> ${coverage.type?.text || "N/A"}</p>
-              <p><strong>Requirement:</strong> ${coverage.requirement || "N/A"}</p>
-              <h4>Benefits</h4>
-              <ul>
-                ${coverage.benefit
-                  ?.map(
-                    (benefit) => `
-                    <li>
-                      <p><strong>Type:</strong> ${benefit.type?.text || "N/A"}</p>
-                      <p><strong>Requirement:</strong> ${benefit.requirement || "N/A"}</p>
-                      <h5>Limits</h5>
-                      <ul>
-                        ${benefit.limit
-                          ?.map(
-                            (limit) => `
+        <table border="1" cellspacing="0" cellpadding="5">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Requirement</th>
+              <th>Benefits</th>
+              <th>Networks</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.coverage?.map(coverage => `
+              <tr>
+                <td>${coverage.type?.text || "N/A"}</td>
+                <td>${coverage.requirement || "N/A"}</td>
+                <td>
+                  <ul>
+                    ${coverage.benefit?.map(benefit => `
+                      <li>
+                        <strong>Type:</strong> ${benefit.type?.text || "N/A"}<br>
+                        <strong>Requirement:</strong> ${benefit.requirement || "N/A"}<br>
+                        <strong>Limits:</strong>
+                        <ul>
+                          ${benefit.limit?.map(limit => `
                             <li>
-                              <p><strong>Value:</strong> ${limit.value?.value || "N/A"} ${
-                              limit.value?.unit || ""
-                            }</p>
-                              <p><strong>Code:</strong> ${limit.code?.text || "N/A"}</p>
-                            </li>`
-                          )
-                          .join("") || "<li>None</li>"}
-                      </ul>
-                    </li>`
-                  )
-                  .join("") || "<li>None</li>"}
-              </ul>
-              <h4>Network</h4>
-              <ul>
-                ${coverage.network
-                  ?.map(
-                    (network) => `
-                    <li>
-                      <strong>Resource:</strong> ${network.resource || "N/A"}, 
-                      <strong>Display:</strong> ${network.display || "N/A"}
-                    </li>`
-                  )
-                  .join("") || "<li>None</li>"}
-              </ul>
-            </div>`
-          )
-          .join("") || "<p>No Coverage Available</p>"}
+                              <strong>Value:</strong> ${limit.value?.value || "N/A"} ${limit.value?.unit || ""}<br>
+                              <strong>Code:</strong> ${limit.code?.text || "N/A"}
+                            </li>
+                          `).join("") || "<li>None</li>"}
+                        </ul>
+                      </li>
+                    `).join("") || "<li>None</li>"}
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    ${coverage.network?.map(network => `
+                      <li>
+                        <strong>Resource:</strong> ${network.resource || "N/A"}<br>
+                        <strong>Display:</strong> ${network.display || "N/A"}
+                      </li>
+                    `).join("") || "<li>None</li>"}
+                  </ul>
+                </td>
+              </tr>
+            `).join("") || "<tr><td colspan='4'>No Coverage Available</td></tr>"}
+          </tbody>
+        </table>
   
         <h2>Plans</h2>
-        ${data.plan
-          ?.map(
-            (plan, index) => `
-            <div>
-              <h3>Plan ${index + 1}</h3>
-              <p><strong>Type:</strong> ${plan.type?.text || "N/A"}</p>
-              <h4>Coverage Areas</h4>
-              <ul>
-                ${plan.coverageArea
-                  ?.map(
-                    (area) => `
-                    <li>
-                      <strong>Resource:</strong> ${area.resource || "N/A"}, 
-                      <strong>Reference:</strong> ${area.reference || "N/A"}
-                    </li>`
-                  )
-                  .join("") || "<li>None</li>"}
-              </ul>
-              <h4>General Costs</h4>
-              <ul>
-                ${plan.generalCost
-                  ?.map(
-                    (cost) => `
-                    <li>
-                      <p><strong>Type:</strong> ${cost.type?.text || "N/A"}</p>
-                      <p><strong>Group Size:</strong> ${cost.groupSize || "N/A"}</p>
-                      <p><strong>Cost:</strong> ${cost.cost?.value || "N/A"} ${
-                      cost.cost?.currency || ""
-                    }</p>
-                      <p><strong>Comment:</strong> ${cost.comment || "N/A"}</p>
-                    </li>`
-                  )
-                  .join("") || "<li>None</li>"}
-              </ul>
-              <h4>Network</h4>
-              <ul>
-                ${plan.network
-                  ?.map(
-                    (network) => `
-                    <li>
-                      <strong>Resource:</strong> ${network.resource || "N/A"}, 
-                      <strong>Display:</strong> ${network.display || "N/A"}
-                    </li>`
-                  )
-                  .join("") || "<li>None</li>"}
-              </ul>
-            </div>`
-          )
-          .join("") || "<p>No Plans Available</p>"}
+        <table border="1" cellspacing="0" cellpadding="5">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Coverage Areas</th>
+              <th>General Costs</th>
+              <th>Networks</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.plan?.map(plan => `
+              <tr>
+                <td>${plan.type?.text || "N/A"}</td>
+                <td>
+                  <ul>
+                    ${plan.coverageArea?.map(area => `
+                      <li>
+                        <strong>Resource:</strong> ${area.resource || "N/A"}<br>
+                        <strong>Reference:</strong> ${area.reference || "N/A"}
+                      </li>
+                    `).join("") || "<li>None</li>"}
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    ${plan.generalCost?.map(cost => `
+                      <li>
+                        <strong>Type:</strong> ${cost.type?.text || "N/A"}<br>
+                        <strong>Group Size:</strong> ${cost.groupSize || "N/A"}<br>
+                        <strong>Cost:</strong> ${cost.cost?.value || "N/A"} ${cost.cost?.currency || ""}<br>
+                        <strong>Comment:</strong> ${cost.comment || "N/A"}
+                      </li>
+                    `).join("") || "<li>None</li>"}
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    ${plan.network?.map(network => `
+                      <li>
+                        <strong>Resource:</strong> ${network.resource || "N/A"}<br>
+                        <strong>Display:</strong> ${network.display || "N/A"}
+                      </li>
+                    `).join("") || "<li>None</li>"}
+                  </ul>
+                </td>
+              </tr>
+            `).join("") || "<tr><td colspan='4'>No Plans Available</td></tr>"}
+          </tbody>
+        </table>
       </div>
     `;
   }
