@@ -7,6 +7,7 @@ import {
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 const status = ["active", "cancelled", "draft", "entered-in-error"] as const;
 type Status = (typeof status)[number];
@@ -43,6 +44,11 @@ export interface PAYMENT_NOTICE {
   implicitRules?: string;
 }
 
+export interface TO_HTML_HCX_OPTIONS_PAYEMENT_NOTICE
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
+  body: PAYMENT_NOTICE;
+}
+
 export class PaymentNoctice extends ResourceMain implements ResourceMaster {
   getFHIR(options: PAYMENT_NOTICE) {
     const body = {
@@ -62,27 +68,39 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
       identifier: options.identifier,
       status: options.status,
       request: options.request && {
-        reference:options.request.resource&& options.request.id && `${options.request.resource}/${options.request.id}`,
+        reference:
+          options.request.resource &&
+          options.request.id &&
+          `${options.request.resource}/${options.request.id}`,
         identifier: options.request.identifier,
         type: options.request.type,
         display: options.request.display,
       },
       response: options.response && {
-        reference:options.response.resource && options.response.id &&  `${options.response.resource}/${options.response.id}`,
+        reference:
+          options.response.resource &&
+          options.response.id &&
+          `${options.response.resource}/${options.response.id}`,
         identifier: options.response.identifier,
         type: options.response.type,
         display: options.response.display,
       },
       created: options.createdDate,
       payment: options.payment && {
-        reference:options.payment.resource && options.payment.id && `${options.payment.resource}/${options.payment.id}`,
+        reference:
+          options.payment.resource &&
+          options.payment.id &&
+          `${options.payment.resource}/${options.payment.id}`,
         identifier: options.payment.identifier,
         type: options.payment.type,
         display: options.payment.display,
       },
       paymentDate: options.paymentDate,
       recipient: options.recipient && {
-        reference:options.recipient.resource && options.recipient.id &&`${options.recipient.resource}/${options.recipient.id}`,
+        reference:
+          options.recipient.resource &&
+          options.recipient.id &&
+          `${options.recipient.resource}/${options.recipient.id}`,
         identifier: options.recipient.identifier,
         type: options.recipient.type,
         display: options.recipient.display,
@@ -90,7 +108,10 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
       amount: options.amount,
       paymentStatus: options.paymentStatus,
       payee: options.payee && {
-        reference: options.payee.resource && options.payee.id &&`${options.payee.resource}/${options.payee.id}`,
+        reference:
+          options.payee.resource &&
+          options.payee.id &&
+          `${options.payee.resource}/${options.payee.id}`,
         identifier: options.payee.identifier,
         type: options.payee.type,
         display: options.payee.display,
@@ -100,13 +121,13 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
       implicitRules: options.implicitRules,
     };
 
-    return body
+    return body;
   }
   convertFhirToObject(options: any) {
     const ret: PAYMENT_NOTICE = {
       id: options.id,
       resourceType: "PaymentNotice",
-      text:options.text && options.text.div,
+      text: options.text && options.text.div,
       identifier: options.identifier,
       status: options.status,
       request: options.request && this.getFromMultResource(options.request),
@@ -136,8 +157,9 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
 
     return ret;
   }
-  toHtml(option: any): Promise<string> {
-    throw new Error("Method not implemented.");
+  async toHtml(option: TO_HTML_HCX_OPTIONS_PAYEMENT_NOTICE): Promise<string> {
+    const text = option.body.text || "";
+    return text;
   }
   statusArray(): Status[] {
     return status.map((el) => el);

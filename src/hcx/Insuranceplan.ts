@@ -9,6 +9,7 @@ import {
 import { ResourceMaster } from "../Interfaces";
 import { QUANTITY } from "../resources/Observation";
 import ResourceMain from "../resources/ResourceMai";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 interface OwnedBy extends MULTI_RESOURCE {
   resource: "Organization";
@@ -83,6 +84,11 @@ export interface INSURANCE_PLAN {
   plan: Plan[];
 }
 
+
+export interface TO_HTML_HCX_OPTIONS_INSURANCE_PLAN
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
+  body: INSURANCE_PLAN;
+}
 export class InsurancePlan extends ResourceMain implements ResourceMaster {
   getFHIR(options: INSURANCE_PLAN) {
     const body = {
@@ -537,10 +543,11 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
 
     return ret;
   }
-  async toHtml(option: any): Promise<string> {
-    const ret = "";
+  async toHtml(option:TO_HTML_HCX_OPTIONS_INSURANCE_PLAN): Promise<string> {
+    const text = option.body.text || ""
 
-    return ret;
+
+    return text;
   }
   statusArray?: Function | undefined;
 }

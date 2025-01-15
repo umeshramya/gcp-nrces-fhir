@@ -8,6 +8,7 @@ import {
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 const status = ["active", "cancelled", "draft", "entered-in-error"] as const;
 type Status = (typeof status)[number];
@@ -85,6 +86,11 @@ export interface PAYMENT_RECONCILIATION {
   processNote: ProcessNote[];
   // type:CODEABLE_CONCEPT
   // amount:MONEY
+}
+
+export interface TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
+  body: PAYMENT_RECONCILIATION;
 }
 
 export class PaymentReconciliation
@@ -244,14 +250,13 @@ export class PaymentReconciliation
         });
         return ret;
       });
-      return details
-
-     
+      return details;
     };
 
-    const processNoteHandle = ()=>{
-      const processNote:ProcessNote[]=options.processNote.map((el:ProcessNote)=>{
-        const ret:ProcessNote=el
+    const processNoteHandle = () => {
+      const processNote: ProcessNote[] = options.processNote.map(
+        (el: ProcessNote) => {
+          const ret: ProcessNote = el;
           // Remove keys with null or undefined values
           Object.keys(ret).forEach((key) => {
             if (
@@ -262,17 +267,17 @@ export class PaymentReconciliation
             }
           });
 
-          return ret
+          return ret;
+        }
+      );
 
-      }) 
-
-      return processNote
-    }
+      return processNote;
+    };
 
     const ret: PAYMENT_RECONCILIATION = {
       id: options.id,
       resourceType: "PaymentReconciliation",
-      text:options.text &&  options.text.div,
+      text: options.text && options.text.div,
       identifier: options.identifier,
       status: options.status,
       period: options.period,
@@ -308,8 +313,9 @@ export class PaymentReconciliation
 
     return ret;
   }
-  toHtml(option: any): Promise<string> {
-    throw new Error("Method not implemented.");
+  async toHtml(option: TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION): Promise<string> {
+    const text = option.body.text || "";
+    return text;
   }
   statusArray(): Status[] {
     return status.map((el) => el);
