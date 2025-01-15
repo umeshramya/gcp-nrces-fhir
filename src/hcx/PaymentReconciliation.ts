@@ -272,7 +272,7 @@ export class PaymentReconciliation
     const ret: PAYMENT_RECONCILIATION = {
       id: options.id,
       resourceType: "PaymentReconciliation",
-      text: options.text.div,
+      text:options.text &&  options.text.div,
       identifier: options.identifier,
       status: options.status,
       period: options.period,

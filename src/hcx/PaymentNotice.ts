@@ -106,7 +106,7 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
     const ret: PAYMENT_NOTICE = {
       id: options.id,
       resourceType: "PaymentNotice",
-      text: options.text.div,
+      text:options.text && options.text.div,
       identifier: options.identifier,
       status: options.status,
       request: options.request && this.getFromMultResource(options.request),
