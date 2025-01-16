@@ -182,12 +182,12 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
           let ret = `<tr><td>${
             el.code && this.codebleConceptToHtml(el.code)
           }</td>`;
-          ret += `<td>${el.value?.value}</td></tr>`;
+          ret += `<td>${el.value && el.value.value || ""}</td></tr>`;
 
           return ret;
         });
 
-      let tablest = `<table>
+      let tablest = `<table data-pdfmake="{'widths':['60%','40%']}">
         <tr>
           <th>
             Item
@@ -207,7 +207,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
       benefit: INSURANCE_PLAN["coverage"][number]["benefit"]
     ) => {
       const benefitRet = benefit.map((el) => {
-        let ret = `<h4>${el.type && this.codebleConceptToHtml(el.type)}</h4>`;
+        let ret = `<b>${el.type && this.codebleConceptToHtml(el.type)}</b>`;
         ret += el.requirement && `<p>${el.requirement}</p>`;
         ret += getLimit(el.limit);
         return ret;

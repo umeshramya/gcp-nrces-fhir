@@ -114,18 +114,13 @@ export default class ResourceToHTML {
   }
 
   codeDiplaytoHtml(val:CodeDisplay):string{
-    let ret:string=""
-    if(val.code){
-      ret += `<i>Code</i> : ${val.code}<br/>`
-    }
-
-    if(val.display){
-      ret +=`<i>Display</i> : ${val.display}<br/>`
-    }
-
-    if(val.system){
-      ret += `<i>System</i> : <a href=${val.system} target="_blank" rel="noopener noreferrer">${val.system}</a>
-      <br\>`;
+    let ret: string = "";  
+    if (val.system) {
+      ret += `<i>System</i>: <a href="${val.system}" target="_blank" rel="noopener noreferrer">
+        ${val.code || ""} ${val.display || ""}
+      </a><br/>`;
+    } else {
+      ret += `${val.code || ""} ${val.display || ""}`;
     }
     
     return ret;
