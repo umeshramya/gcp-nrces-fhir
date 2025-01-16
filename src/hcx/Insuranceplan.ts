@@ -32,11 +32,11 @@ interface Coverage {
   modifierExtension?: EXTENSION[];
   type: CODEABLE_CONCEPT;
   requirement?: string;
-  benefit:{
-    extension?:EXTENSION[];
-    modifierExtension?:EXTENSION[]
-    type:CODEABLE_CONCEPT;
-    requirement?:string
+  benefit: {
+    extension?: EXTENSION[];
+    modifierExtension?: EXTENSION[];
+    type: CODEABLE_CONCEPT;
+    requirement?: string;
     limit?: {
       id?: string;
       extension?: EXTENSION[];
@@ -44,25 +44,25 @@ interface Coverage {
       value?: QUANTITY;
       code?: CODEABLE_CONCEPT;
     }[];
-  }[]
+  }[];
   network?: Network[];
 }
 
 interface Plan {
   id?: string;
   extension?: EXTENSION[];
-  modifierExtension?:EXTENSION[]
-  identifier?:IDENTTIFIER[]
-  coverageArea?:CoverageArea[]
+  modifierExtension?: EXTENSION[];
+  identifier?: IDENTTIFIER[];
+  coverageArea?: CoverageArea[];
   type: CODEABLE_CONCEPT;
-  generalCost?:{
-    id?:string;
-    extension?:EXTENSION[];
+  generalCost?: {
+    id?: string;
+    extension?: EXTENSION[];
     modifierExtension?: EXTENSION[];
-    type?:CODEABLE_CONCEPT;
-    groupSize?:number
-    cost?:MONEY;
-    comment?:string
+    type?: CODEABLE_CONCEPT;
+    groupSize?: number;
+    cost?: MONEY;
+    comment?: string;
   }[];
   network?: Network[];
 }
@@ -83,7 +83,6 @@ export interface INSURANCE_PLAN {
   coverage: Coverage[];
   plan: Plan[];
 }
-
 
 export interface TO_HTML_HCX_OPTIONS_INSURANCE_PLAN
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
@@ -130,376 +129,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
         type: options.administeredBy.type,
       },
       coverage: options.coverage,
-      plan: [
-        {
-          identifier: [
-            {
-              use: "official",
-              value: "Active Assure Silver",
-            },
-          ],
-          type: {
-            coding: [
-              {
-                system:
-                  "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
-                code: "01",
-                display: "Individual",
-              },
-            ],
-          },
-          generalCost: [
-            {
-              cost: {
-                value: 200000,
-                currency: "INR",
-              },
-            },
-          ],
-          specificCost: [
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "49122002",
-                    display: "Ambulance, device (physical object)",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "49122002",
-                        display: "Ambulance, device (physical object)",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 2000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "224663004",
-                    display: "Single room (environment)",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "224663004",
-                        display: "Single room (environment)",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 2000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "309904001",
-                    display: "Intensive care unit (environment)",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "309904001",
-                        display: "Intensive care unit (environment)",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 4000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "60689008",
-                    display: "Home care of patient",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "60689008",
-                        display: "Home care of patient",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 20000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          identifier: [
-            {
-              use: "official",
-              value: "Active Assure Silver",
-            },
-          ],
-          type: {
-            coding: [
-              {
-                system:
-                  "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
-                code: "01",
-                display: "Individual",
-              },
-            ],
-          },
-          generalCost: [
-            {
-              cost: {
-                value: 700000,
-                currency: "INR",
-              },
-            },
-          ],
-          specificCost: [
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "49122002",
-                    display: "Ambulance, device (physical object)",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "49122002",
-                        display: "Ambulance, device (physical object)",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 2000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "224663004",
-                    display: "Single room (environment)",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "224663004",
-                        display: "Single room (environment)",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 7000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "309904001",
-                    display: "Intensive care unit (environment)",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "309904001",
-                        display: "Intensive care unit (environment)",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 14000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              category: {
-                coding: [
-                  {
-                    system: "http://snomed.info/sct",
-                    code: "60689008",
-                    display: "Home care of patient",
-                  },
-                ],
-              },
-              benefit: [
-                {
-                  type: {
-                    coding: [
-                      {
-                        system: "http://snomed.info/sct",
-                        code: "60689008",
-                        display: "Home care of patient",
-                      },
-                    ],
-                  },
-                  cost: [
-                    {
-                      type: {
-                        coding: [
-                          {
-                            code: "fullcoverage",
-                          },
-                        ],
-                      },
-                      value: {
-                        value: 70000,
-                        unit: "INR",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      plan: options.plan,
     };
 
     return body;
@@ -530,20 +160,75 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
       plan: options.plan,
     };
 
-
-        // Remove keys with null or undefined values
-        Object.keys(ret).forEach((key) => {
-          if (
-            ret[key as keyof INSURANCE_PLAN] === null ||
-            ret[key as keyof INSURANCE_PLAN] === undefined
-          ) {
-            delete ret[key as keyof INSURANCE_PLAN];
-          }
-        });
+    // Remove keys with null or undefined values
+    Object.keys(ret).forEach((key) => {
+      if (
+        ret[key as keyof INSURANCE_PLAN] === null ||
+        ret[key as keyof INSURANCE_PLAN] === undefined
+      ) {
+        delete ret[key as keyof INSURANCE_PLAN];
+      }
+    });
 
     return ret;
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_INSURANCE_PLAN): Promise<string> {
+    const getLimit = (
+      limit: INSURANCE_PLAN["coverage"][number]["benefit"][number]["limit"]
+    ): string => {
+      const limitRet =
+        limit &&
+        limit.map((el) => {
+          let ret = `<tr><td>${
+            el.code && this.codebleConceptToHtml(el.code)
+          }</td>`;
+          ret += `<td>${el.value?.value}</td></tr>`;
+
+          return ret;
+        });
+
+      let tablest = `<table>
+        <tr>
+          <th>
+            Item
+          </th>
+          <th>
+            Value
+          </th>
+        </tr>
+          ${limitRet?.join("")}
+        
+      </table>
+      `;
+      return tablest;
+    };
+
+    const getBenfit = (
+      benefit: INSURANCE_PLAN["coverage"][number]["benefit"]
+    ) => {
+      const benefitRet = benefit.map((el) => {
+        let ret = `<h4>${el.type && this.codebleConceptToHtml(el.type)}</h4>`;
+        ret += el.requirement && `<p>${el.requirement}</p>`;
+        ret += getLimit(el.limit);
+        return ret;
+      });
+
+      return benefitRet.join("</br/>");
+    };
+
+    const getCoverage = (): string => {
+      const coveragedstr =
+        data.coverage &&
+        data.coverage.map((el) => {
+          let ret = `<h3>${this.codebleConceptToHtml(el.type)}</h3>`;
+          ret += el.requirement && `<p>${el.requirement}</p>`;
+          ret += getBenfit(el.benefit);
+          return ret;
+        });
+
+      return coveragedstr.join("</br/>");
+    };
+
     const data = option.body;
     return `
       <div>
@@ -554,74 +239,39 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
         <p><strong>Name:</strong> ${data.name}</p>
         <p><strong>Text:</strong> ${data.text || "N/A"}</p>
         <p><strong>Type:</strong> ${data.type?.text || "N/A"}</p>
-        <p><strong>Period:</strong> ${data.period?.start 
-          ? new Date(data.period.start).toLocaleDateString() 
-          : "N/A"} to ${data.period?.end 
-          ? new Date(data.period.end).toLocaleDateString() 
-          : "N/A"}</p>
-        <p><strong>Owned By:</strong> ${data.ownedBy?.display || "N/A"} (${data.ownedBy?.reference || "N/A"})</p>
-        <p><strong>Administered By:</strong> ${data.administeredBy?.display || "N/A"} (${data.administeredBy?.reference || "N/A"})</p>
+        <p><strong>Period:</strong> ${
+          data.period?.start
+            ? new Date(data.period.start).toLocaleDateString()
+            : "N/A"
+        } to ${
+      data.period?.end ? new Date(data.period.end).toLocaleDateString() : "N/A"
+    }</p>
+        <p><strong>Owned By:</strong> ${data.ownedBy?.display || "N/A"} (${
+      data.ownedBy?.reference || "N/A"
+    })</p>
+        <p><strong>Administered By:</strong> ${
+          data.administeredBy?.display || "N/A"
+        } (${data.administeredBy?.reference || "N/A"})</p>
         <p><strong>Alias:</strong> ${data.alias?.join(", ") || "None"}</p>
   
         <h2>Identifiers</h2>
         <ul>
-          ${data.identifier?.map(id => `
+          ${
+            data.identifier
+              ?.map(
+                (id) => `
             <li>
               <strong>System:</strong> ${id.system || "N/A"}, 
               <strong>Value:</strong> ${id.value || "N/A"}
             </li>
-          `).join("") || "<li>None</li>"}
+          `
+              )
+              .join("") || "<li>None</li>"
+          }
         </ul>
   
         <h2>Coverage</h2>
-        <table border="1" cellspacing="0" cellpadding="5">
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Requirement</th>
-              <th>Benefits</th>
-              <th>Networks</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${data.coverage?.map(coverage => `
-              <tr>
-                <td>${coverage.type?.text || "N/A"}</td>
-                <td>${coverage.requirement || "N/A"}</td>
-                <td>
-                  <ul>
-                    ${coverage.benefit?.map(benefit => `
-                      <li>
-                        <strong>Type:</strong> ${benefit.type?.text || "N/A"}<br>
-                        <strong>Requirement:</strong> ${benefit.requirement || "N/A"}<br>
-                        <strong>Limits:</strong>
-                        <ul>
-                          ${benefit.limit?.map(limit => `
-                            <li>
-                              <strong>Value:</strong> ${limit.value?.value || "N/A"} ${limit.value?.unit || ""}<br>
-                              <strong>Code:</strong> ${limit.code?.text || "N/A"}
-                            </li>
-                          `).join("") || "<li>None</li>"}
-                        </ul>
-                      </li>
-                    `).join("") || "<li>None</li>"}
-                  </ul>
-                </td>
-                <td>
-                  <ul>
-                    ${coverage.network?.map(network => `
-                      <li>
-                        <strong>Resource:</strong> ${network.resource || "N/A"}<br>
-                        <strong>Display:</strong> ${network.display || "N/A"}
-                      </li>
-                    `).join("") || "<li>None</li>"}
-                  </ul>
-                </td>
-              </tr>
-            `).join("") || "<tr><td colspan='4'>No Coverage Available</td></tr>"}
-          </tbody>
-        </table>
-  
+          ${getCoverage()}
         <h2>Plans</h2>
         <table border="1" cellspacing="0" cellpadding="5">
           <thead>
@@ -633,49 +283,126 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
             </tr>
           </thead>
           <tbody>
-            ${data.plan?.map(plan => `
+            ${
+              data.plan
+                ?.map(
+                  (plan) => `
               <tr>
                 <td>${plan.type?.text || "N/A"}</td>
                 <td>
                   <ul>
-                    ${plan.coverageArea?.map(area => `
+                    ${
+                      plan.coverageArea
+                        ?.map(
+                          (area) => `
                       <li>
                         <strong>Resource:</strong> ${area.resource || "N/A"}<br>
                         <strong>Reference:</strong> ${area.reference || "N/A"}
                       </li>
-                    `).join("") || "<li>None</li>"}
+                    `
+                        )
+                        .join("") || "<li>None</li>"
+                    }
                   </ul>
                 </td>
                 <td>
                   <ul>
-                    ${plan.generalCost?.map(cost => `
+                    ${
+                      plan.generalCost
+                        ?.map(
+                          (cost) => `
                       <li>
                         <strong>Type:</strong> ${cost.type?.text || "N/A"}<br>
-                        <strong>Group Size:</strong> ${cost.groupSize || "N/A"}<br>
-                        <strong>Cost:</strong> ${cost.cost?.value || "N/A"} ${cost.cost?.currency || ""}<br>
+                        <strong>Group Size:</strong> ${
+                          cost.groupSize || "N/A"
+                        }<br>
+                        <strong>Cost:</strong> ${cost.cost?.value || "N/A"} ${
+                            cost.cost?.currency || ""
+                          }<br>
                         <strong>Comment:</strong> ${cost.comment || "N/A"}
                       </li>
-                    `).join("") || "<li>None</li>"}
+                    `
+                        )
+                        .join("") || "<li>None</li>"
+                    }
                   </ul>
                 </td>
                 <td>
                   <ul>
-                    ${plan.network?.map(network => `
+                    ${
+                      plan.network
+                        ?.map(
+                          (network) => `
                       <li>
-                        <strong>Resource:</strong> ${network.resource || "N/A"}<br>
+                        <strong>Resource:</strong> ${
+                          network.resource || "N/A"
+                        }<br>
                         <strong>Display:</strong> ${network.display || "N/A"}
                       </li>
-                    `).join("") || "<li>None</li>"}
+                    `
+                        )
+                        .join("") || "<li>None</li>"
+                    }
                   </ul>
                 </td>
               </tr>
-            `).join("") || "<tr><td colspan='4'>No Plans Available</td></tr>"}
+            `
+                )
+                .join("") || "<tr><td colspan='4'>No Plans Available</td></tr>"
+            }
           </tbody>
         </table>
       </div>
     `;
   }
-  
 
   statusArray?: Function | undefined;
 }
+
+// <table border="1" cellspacing="0" cellpadding="5">
+// <thead>
+//   <tr>
+//     <th>Type</th>
+//     <th>Requirement</th>
+//     <th>Benefits</th>
+//     <th>Networks</th>
+//   </tr>
+// </thead>
+// <tbody>
+//   ${data.coverage?.map(coverage => `
+//     <tr>
+//       <td>${ coverage.type && this.codebleConceptToHtml(coverage.type) || "N/A"}</td>
+//       <td>${coverage.requirement || "N/A"}</td>
+//       <td>
+//         <ul>
+//           ${coverage.benefit?.map(benefit => `
+//             <li>
+//               <strong>Type:</strong> ${benefit.type?.text || "N/A"}<br>
+//               <strong>Requirement:</strong> ${benefit.requirement || "N/A"}<br>
+//               <strong>Limits:</strong>
+//               <ul>
+//                 ${benefit.limit?.map(limit => `
+//                   <li>
+//                     <strong>Value:</strong> ${limit.value?.value || "N/A"} ${limit.value?.unit || ""}<br>
+//                     <strong>Code:</strong> ${limit.code?.text || "N/A"}
+//                   </li>
+//                 `).join("") || "<li>None</li>"}
+//               </ul>
+//             </li>
+//           `).join("") || "<li>None</li>"}
+//         </ul>
+//       </td>
+//       <td>
+//         <ul>
+//           ${coverage.network?.map(network => `
+//             <li>
+//               <strong>Resource:</strong> ${network.resource || "N/A"}<br>
+//               <strong>Display:</strong> ${network.display || "N/A"}
+//             </li>
+//           `).join("") || "<li>None</li>"}
+//         </ul>
+//       </td>
+//     </tr>
+//   `).join("") || "<tr><td colspan='4'>No Coverage Available</td></tr>"}
+// </tbody>
+// </table>
