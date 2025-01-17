@@ -202,6 +202,9 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
     return ret;
   }
   async toHtml(options: TO_HTML_HCX_OPTIONS_CLAIM_RESPONSE): Promise<string> {
+    const patient = options.patinet && `UHID ${options.patinet.MRN} Name : ${options.patinet.name}`
+    const insurance = options.insurance && `${options.insurance.name} ${options.insurance.phone} ${options.insurance.phone}`
+  
     const claimResponse = options.body;
     const renderList = (items: string[]): string =>
       `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
@@ -237,9 +240,9 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
               claimResponse.disposition || "N/A"
             }</p>
             <h2>Patient</h2>
-            ${renderReference(claimResponse.patient)}
+            ${patient}
             <h2>Insurer</h2>
-            ${renderReference(claimResponse.insurer)}
+            ${insurance}
             <h2>Totals</h2>
             ${renderList(
               claimResponse.total.map(
