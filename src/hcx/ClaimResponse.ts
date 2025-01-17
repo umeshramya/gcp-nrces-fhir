@@ -244,8 +244,8 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
           <th>Category</th>
           <th>Reason</th>
           <th>Amount</th>
-          <th>Vakue</th>
-          <th>Xxtension</th>
+          <th>Value</th>
+          <th>Extension</th>
           ${retAdjucation?.join("") || ""}
         </tr>
       </table>
