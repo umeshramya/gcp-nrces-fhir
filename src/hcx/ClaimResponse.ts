@@ -202,9 +202,88 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
     return ret;
   }
   async toHtml(options: TO_HTML_HCX_OPTIONS_CLAIM_RESPONSE): Promise<string> {
-    const patient = options.patinet && `UHID ${options.patinet.MRN} Name : ${options.patinet.name}`
-    const insurance = options.insurance && `${options.insurance.name} ${options.insurance.phone} ${options.insurance.phone}`
-  
+    const patient =
+      options.patinet &&
+      `UHID ${options.patinet.MRN} Name : ${options.patinet.name}`;
+    const insurance =
+      options.insurance &&
+      `${options.insurance.name} ${options.insurance.phone || ""} ${
+        options.insurance.phone || ""
+      }`;
+
+    const getAdjudication = (adjication: ADJUDICATION[]): string => {
+      const retAdjucation = adjication.map((el) => {
+        let ret = "";
+        ret += `<tr>`;
+        ret += `<td> ${el.id || ""}  </td>`;
+        ret += `<td>${this.codebleConceptToHtml(el.category)}</td>`;
+        ret += `<td>${this.codebleConceptToHtml(el.reason)}</td>`;
+        ret += `<td>${el.amount?.currency || ""}${
+          el.amount?.value || ""
+        } </td>`;
+        ret += `<td>${el.value || ""}</td>`;
+        ret += `<td>
+        ${
+          el.extension &&
+          el.extension.map((ex) => this.extensionToHtml(ex)).join("<br/>")
+        }
+        ${
+          el.modifierExtension &&
+          el.modifierExtension
+            .map((ex) => this.extensionToHtml(ex))
+            .join("<br/>")
+        }</td>`;
+        ret += `</tr>`;
+        return ret;
+      });
+
+      const ret = `
+      <table data-pdfmake="{'widths':['10%','25%', '15%', '15%', '15%', '20%']}">
+        <tr>
+          <th>Id</th>
+          <th>Category</th>
+          <th>Reason</th>
+          <th>Amount</th>
+          <th>Vakue</th>
+          <th>Xxtension</th>
+          ${retAdjucation?.join("") || ""}
+        </tr>
+      </table>
+      `;
+
+      return ret;
+    };
+
+    const getDetail = (detail: DETAIL) => {
+      let ret = `<p> ${
+        detail.detailSequence && `Sequence ${detail.detailSequence}`
+      } ${detail.id && `Id ${detail.id}`} ${
+        detail.noteNumber && `NoteNumber ${detail.noteNumber}`
+      }</p>`;
+      ret +=
+        detail.adjudication &&
+        `<p>Adjudication</P ${getAdjudication(detail.adjudication)}`;
+      ret +=
+        detail.extension &&
+        `<p>Extension</p>${detail.extension
+          .map((el) => this.extensionToHtml(el))
+          .join("<br/>")}`;
+      ret +=
+        detail.modifierExtension &&
+        `<p>Modified Extension</p>${detail.modifierExtension
+          .map((el) => this.extensionToHtml(el))
+          .join("<br/>")}`;
+
+      
+        detail.subDetail && detail.subDetail.map(el=>{
+          // @ts-ignore
+          delete el.subDetail
+          ret +=  detail.subDetail && `<p>Sub Detail</p>${getDetail(el)}`
+        })
+
+      return ret;
+    };
+
     const claimResponse = options.body;
     const renderList = (items: string[]): string =>
       `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
@@ -235,6 +314,12 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
             <p><strong>Status:</strong> ${claimResponse.status}</p>
             <p><strong>Outcome:</strong> ${claimResponse.outcome}</p>
             <p><strong>Use:</strong> ${claimResponse.use}</p>
+            ${
+              claimResponse.adjudication &&
+              `<p><b>Adjudication</b></p>${getAdjudication(
+                claimResponse.adjudication
+              )}`
+            }
             <p><strong>Created:</strong> ${claimResponse.created}</p>
             <p><strong>Disposition:</strong> ${
               claimResponse.disposition || "N/A"
@@ -263,48 +348,41 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
                               item.itemSequence
                             }</p>
                             <p><strong>Adjudication:</strong></p>
-                            ${renderList(
-                              item.adjudication.map(
-                                (adjudication) =>
-                                  `<div>
-                                            <p><strong>Category:</strong> ${renderCodeableConcept(
-                                              adjudication.category
-                                            )}</p>
-                                            <p><strong>Reason:</strong> ${renderCodeableConcept(
-                                              adjudication.reason
-                                            )}</p>
-                                            <p><strong>Amount:</strong> ${renderMoney(
-                                              adjudication.amount
-                                            )}</p>
-                                            <p><strong>Value:</strong> ${
-                                              adjudication.value || "N/A"
-                                            }</p>
-                                        </div>`
-                              )
-                            )}
+                            ${getAdjudication(item.adjudication)}
                         </div>`
               ) || []
             )}
+            <h2>Detail</h2>
+            ${
+              claimResponse.detail &&
+              claimResponse.detail.map((el) => getDetail(el)).join("<br/>")
+            }
             <h2>Payment</h2>
             ${
               claimResponse.payment
                 ? `
                 <div>
-                    <p><strong>Type:</strong> ${renderCodeableConcept(
+                  ${
+                    claimResponse.payment.type &&
+                    `<p><strong>Type:</strong> ${this.codebleConceptToHtml(
                       claimResponse.payment.type
-                    )}</p>
-                    <p><strong>Amount:</strong> ${renderMoney(
+                    )}</p>`
+                  } 
+                  ${
+                    claimResponse.payment.amount &&
+                    `<p><strong>Amount:</strong> ${renderMoney(
                       claimResponse.payment.amount
-                    )}</p>
+                    )}</p>`
+                  }
                     <p><strong>Date:</strong> ${
                       claimResponse.payment.date || "N/A"
                     }</p>
-                    <p><strong>Adjustment:</strong> ${renderMoney(
-                      claimResponse.payment.adjustment
-                    )}</p>
-                    <p><strong>Adjustment Reason:</strong> ${renderCodeableConcept(
-                      claimResponse.payment.adjustmentReason
-                    )}</p>
+                    ${
+                      claimResponse.payment.adjustment &&
+                      `<p><strong>Adjustment:</strong> ${renderMoney(
+                        claimResponse.payment.adjustment
+                      )}</p>`
+                    }
                 </div>`
                 : "<p>No payment details available.</p>"
             }
