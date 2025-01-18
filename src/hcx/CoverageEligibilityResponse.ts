@@ -106,36 +106,13 @@ export class CoverageEligibiltyResponse
       false
     )} <br/>`;
 
-    const pateintFactory = new Patient();
-    if (option.patinet == undefined) {
-      option.patinet = pateintFactory.convertFhirToObject(
-        (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient"))
-          .data
-      );
-    }
+
 
     ret += `<h3>Patient</h3>`;
-    ret += await pateintFactory.toHtml({
-      addResourceType: false,
-      body: option.patinet,
-    });
+    ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
 
-    const orgnaization = new Organization();
-    if (!option.insurance) {
-      const resource = (
-        await new GcpFhirCRUD().getFhirResource(
-          option.body.insurerId,
-          "Organization"
-        )
-      ).data;
-      option.insurance = orgnaization.convertFhirToObject(resource);
-    }
     ret += `<h3>Insurance</h3>`;
-    ret += await orgnaization.toHtml({
-      addResourceType: false,
-      body: option.insurance,
-    });
-
+    ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
     ret += `<hr/>`;
     // Error
 
@@ -222,6 +199,9 @@ export class CoverageEligibiltyResponse
               ret += '<h3>Coverage</h3>';
               ret += await coverage.toHtml({
                 addResourceType: false,
+                patient:option.patient,
+                payerCode : option.payerCode,
+                payerName : option.payerName,
                 body: filCoverage[0],
                 showInsuranceCompany: false,
                 "showPatient": false, 

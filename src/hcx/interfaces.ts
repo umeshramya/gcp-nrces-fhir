@@ -13,9 +13,8 @@ import { PAYMENT_RECONCILIATION } from "./PaymentReconciliation";
 export interface TO_HTML_HCX_OPTIONS{
     addResourceType: boolean;
     body: COVERAGE_ELIGIBILITY_RESPONSE | COVERAGE_ELIGIBILITY_REQUEST | CLAIM | COVERAGE | COMMUNICATION | INSURANCE_PLAN | PAYMENT_NOTICE | PAYMENT_RECONCILIATION
-    patinet?: PATIENT
-    insurance?: ORGANIZATION
-    payerName?:string
-    payerCode?:string
+    patient: PATIENT
+    payerName:string
+    payerCode:string
     coverages?:COVERAGE[]
 }

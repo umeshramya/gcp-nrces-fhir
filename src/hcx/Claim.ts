@@ -116,37 +116,14 @@ export class Claim extends ResourceMain implements ResourceMaster {
         console.log(erorInfo, "createdDate", error);
       }
 
-      try {
-        if (options.patinet) {
-          ret += `<h3>Patient</h3>`;
-          ret += await new Patient().toHtml({
-            addResourceType: false,
-            body: options.patinet,
-          });
-        }
-      } catch (error) {
-        console.log(erorInfo, "patinet", error);
-      }
+      ret += `<h3>Patient</h3>`;
+      ret += `<p>UHID ${options.patient.MRN} Name ${options.patient.name} ${options.patient.mobile || ""}</p>`
+  
+      ret += `<h3>Insurance</h3>`;
+      ret +=  `<p>${options.payerName}  ${options.payerCode}</p>`
+      ret += `<hr/>`;
 
-      const orgnaization = new Organization();
-      try {
-        if (!options.insurance) {
-          const resource = options.body.payorId && (
-            await new GcpFhirCRUD().getFhirResource(
-              options.body.payorId,
-              "Organization"
-            )
-          ).data;
-          options.insurance = orgnaization.convertFhirToObject(resource);
-        }
-        ret += `<h3>Insurance</h3>`;
-        ret += await orgnaization.toHtml({
-          addResourceType: false,
-          body: options.insurance,
-        });
-      } catch (error) {
-        console.log(erorInfo, "insurance", error);
-      }
+
 
       ret += `<hr/>`;
 

@@ -257,21 +257,14 @@ export class CommunicationRequest
   ): Promise<string> {
     let ret: string = "";
     const body: COMMUNICATION_REQUEST = option.body;
-    if (option.patinet) {
-      ret += `<h3>Patient</h3>`;
-      ret += await new Patient().toHtml({
-        addResourceType: false,
-        body: option.patinet,
-      });
+    if (option.patient) {
+          ret += `<h3>Patient</h3>`;
+        ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
     }
 
-    if (option.insurance) {
-      ret += `<h3>Insirance</h3>`;
-      ret += await new Organization().toHtml({
-        addResourceType: false,
-        body: option.insurance,
-      });
-    }
+    ret += `<h3>Insurance</h3>`;
+    ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
+    ret += `<hr/>`;
 
     if (option.body.authoredOn) {
       ret += `<b>Authored On</b> : ${new TimeZone().convertTZ(

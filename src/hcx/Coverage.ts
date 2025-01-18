@@ -118,41 +118,14 @@ export class Coverage extends ResourceMain implements ResourceMaster {
     }
 
     if (option.showPatient) {
-      const pateintFactory = new Patient();
-      if (option.patinet == undefined) {
-        option.patinet = pateintFactory.convertFhirToObject(
-          (
-            await new GcpFhirCRUD().getFhirResource(
-              body.beneficiaryPatientId,
-              "Patient"
-            )
-          ).data
-        );
-      }
-
-      ret += `<h3>Patient</h3>`;
-      ret += await pateintFactory.toHtml({
-        addResourceType: false,
-        body: option.patinet,
-      });
+          ret += `<h3>Patient</h3>`;
+        ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
     }
 
     if (option.showInsuranceCompany && option.body.insurerOrganizationId) {
-      const orgnaization = new Organization();
-      if (!option.insurance) {
-        const resource = (
-          await new GcpFhirCRUD().getFhirResource(
-            option.body.insurerOrganizationId,
-            "Organization"
-          )
-        ).data;
-        option.insurance = orgnaization.convertFhirToObject(resource);
-      }
       ret += `<h3>Insurance</h3>`;
-      ret += await orgnaization.toHtml({
-        addResourceType: false,
-        body: option.insurance,
-      });
+      ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
+      ret += `<hr/>`;
     }
 
 

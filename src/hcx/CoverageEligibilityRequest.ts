@@ -239,6 +239,9 @@ export class CoverageEligibilityRequest
               
               ret += await coverage.toHtml({
                 addResourceType: false,
+                patient:option.patient,
+                payerCode :option.payerCode,
+                payerName:option.payerName,
                 body: filCoverage[0],
                 showInsuranceCompany: false,
                 showPatient: false,
