@@ -153,37 +153,17 @@ export class CoverageEligibilityRequest
       false
     )}`;
 
-    const pateintFactory = new Patient();
-    // if (option.patinet == undefined) {
-    //   option.patinet = pateintFactory.convertFhirToObject(
-    //     (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient"))
-    //       .data
-    //   );
-    // }
-
+ 
     ret += `<h3>Patient</h3>`;
     ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
 
-    const orgnaization = new Organization();
-    if (!option.insurance && option.body.insurerOrganizationId ) {
-      const resource =(
-        await new GcpFhirCRUD().getFhirResource(
-          option.body.insurerOrganizationId,
-          "Organization"
-        )
-      ).data;
-      option.insurance = orgnaization.convertFhirToObject(resource);
-    }
     ret += `<h3>Insurance</h3>`;
-    ret +=  option.insurance && await orgnaization.toHtml({
-      addResourceType: false,
-      body: option.insurance,
-    });
-
+    ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
     ret += `<hr/>`;
 
-    if (body.text) {
-      ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
+    if (option.body.text) {
+      ret += `<h2>Text</h2>`;
+      ret += `<p>${option.body.text} </p>`
     }
 
     ret += `<h2>Object to Text</h2>`;
