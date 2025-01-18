@@ -130,6 +130,7 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
 export interface TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_REQUEST
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
   body: COVERAGE_ELIGIBILITY_REQUEST;
+  patient:PATIENT
 }
 
 export class CoverageEligibilityRequest
@@ -153,18 +154,15 @@ export class CoverageEligibilityRequest
     )}`;
 
     const pateintFactory = new Patient();
-    if (option.patinet == undefined) {
-      option.patinet = pateintFactory.convertFhirToObject(
-        (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient"))
-          .data
-      );
-    }
+    // if (option.patinet == undefined) {
+    //   option.patinet = pateintFactory.convertFhirToObject(
+    //     (await new GcpFhirCRUD().getFhirResource(body.patientId, "Patient"))
+    //       .data
+    //   );
+    // }
 
     ret += `<h3>Patient</h3>`;
-    ret += await pateintFactory.toHtml({
-      addResourceType: false,
-      body: option.patinet,
-    });
+    ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
 
     const orgnaization = new Organization();
     if (!option.insurance && option.body.insurerOrganizationId ) {
