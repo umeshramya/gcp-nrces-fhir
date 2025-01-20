@@ -314,8 +314,128 @@ export class PaymentReconciliation
     return ret;
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION): Promise<string> {
-    const text = option.body.text || "";
-    return text;
+    const { body } = option;
+  
+    // Generate HTML for the PaymentReconciliation resource
+    let html = `
+      <html>
+        <head>
+          <style>
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            th, td {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            th {
+              background-color: #f2f2f2;
+              text-align: left;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Payment Reconciliation</h1>
+          <table>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+            </tr>
+            <tr>
+              <td>Resource Type</td>
+              <td>${body.resourceType}</td>
+            </tr>
+            <tr>
+              <td>ID</td>
+              <td>${body.id || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>${body.status}</td>
+            </tr>
+            <tr>
+              <td>Created Date</td>
+              <td>${body.createdDate}</td>
+            </tr>
+            <tr>
+              <td>Payment Date</td>
+              <td>${body.paymentDate}</td>
+            </tr>
+            <tr>
+              <td>Payment Amount</td>
+              <td>${body.paymentAmount?.value} ${body.paymentAmount?.currency}</td>
+            </tr>
+            <tr>
+              <td>Payment Issuer</td>
+              <td>${body.paymentIssuer?.display || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Requestor</td>
+              <td>${body.requestor?.display || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Disposition</td>
+              <td>${body.disposition || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Outcome</td>
+              <td>${body.outcome || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Details</td>
+              <td>
+                <ul>
+                  ${
+                    body.detail
+                      ? body.detail
+                          .map(
+                            (detail) => `
+                      <li>
+                        Type: ${detail.type?.text || "N/A"}<br>
+                        Amount: ${detail.amount?.value || "N/A"} ${
+                              detail.amount?.currency || ""
+                            }<br>
+                        Submitter: ${detail.submitter?.display || "N/A"}<br>
+                        Payee: ${detail.payee?.display || "N/A"}<br>
+                        Date: ${detail.date || "N/A"}
+                      </li>
+                    `
+                          )
+                          .join("")
+                      : "No details available"
+                  }
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>Process Notes</td>
+              <td>
+                <ul>
+                  ${
+                    body.processNote
+                      ? body.processNote
+                          .map(
+                            (note) => `
+                      <li>
+                        Type: ${note.type || "N/A"}<br>
+                        Text: ${note.text || "N/A"}
+                      </li>
+                    `
+                          )
+                          .join("")
+                      : "No process notes available"
+                  }
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </body>
+      </html>
+    `;
+  
+    // Return the generated HTML as a string
+    return html;
   }
   statusArray(): Status[] {
     return status.map((el) => el);

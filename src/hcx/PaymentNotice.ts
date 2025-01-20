@@ -158,8 +158,58 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
     return ret;
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_PAYEMENT_NOTICE): Promise<string> {
-    const text = option.body.text || "";
-    return text;
+
+      const { body } = option;
+    
+      const htmlContent = `
+        <div>
+          <h1>Payment Notice</h1>
+          <p><strong>ID:</strong> ${body.id || "N/A"}</p>
+          <p><strong>Status:</strong> ${body.status}</p>
+          <p><strong>Created Date:</strong> ${body.createdDate}</p>
+          <p><strong>Payment Date:</strong> ${body.paymentDate || "N/A"}</p>
+          <p><strong>Payment Amount:</strong> ${body.amount?.value || "N/A"} ${
+        body.amount?.currency || ""
+      }</p>
+          <p><strong>Payment Status:</strong> ${
+            body.paymentStatus?.text || "N/A"
+          }</p>
+          <p><strong>Payee:</strong> ${
+            body.payee?.display || "N/A"
+          } (${body.payee?.type || "Unknown"})
+          ${body.payee?.identifier && this.identifierToHtml(body.payee.identifier)}</p>
+          <p><strong>Recipient:</strong> ${
+            body.recipient?.display || "N/A"
+          } (${body.recipient?.type || "Unknown"})
+           ${body.recipient?.identifier && this.identifierToHtml(body.recipient.identifier)}</p>
+          <p><strong>Request:</strong> ${
+            body.request?.display || "N/A"
+          } (${body.request?.reference || "Unknown"})
+          </p>
+          <p><strong>Response:</strong> ${
+            body.response?.display || "N/A"
+          } (${body.response?.reference || "Unknown"})</p>
+          <p><strong>Additional Details:</strong></p>
+          <ul>
+            ${
+              body.extension
+                ? body.extension
+                    .map(
+                      (ext) =>
+                        `<li>${this.extensionToHtml(ext)}</li>`
+                    )
+                    .join("")
+                : "<li>No extensions provided</li>"
+            }
+          </ul>
+          <p><strong>Text:</strong></p>
+          <div>${body.text || "No text available"}</div>
+        </div>
+      `;
+    
+      return htmlContent;
+
+    
   }
   statusArray(): Status[] {
     return status.map((el) => el);

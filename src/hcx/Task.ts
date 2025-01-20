@@ -339,9 +339,110 @@ export class Task extends ResourceMain implements ResourceMaster {
 
     return ret;
   }
-  toHtml(option: any): Promise<string> {
-    throw new Error("Method not implemented.");
+  async toHtml(option: TASK): Promise<string> {
+    return new Promise((resolve, reject) => {
+      try {
+        const htmlParts: string[] = [];
+  
+        htmlParts.push("<div class='task'>");
+  
+        // Title and Resource Type
+        htmlParts.push(`<h1>Task: ${option.id || "Unnamed Task"}</h1>`);
+        htmlParts.push(`<p><strong>Resource Type:</strong> ${option.resourceType}</p>`);
+  
+        // Status and Intent
+        htmlParts.push(`<p><strong>Status:</strong> ${option.status}</p>`);
+        htmlParts.push(`<p><strong>Intent:</strong> ${option.intent}</p>`);
+  
+        // Description
+        if (option.description) {
+          htmlParts.push(`<p><strong>Description:</strong> ${option.description}</p>`);
+        }
+  
+        // Authored On
+        if (option.authoredOn) {
+          htmlParts.push(`<p><strong>Authored On:</strong> ${new Date(option.authoredOn).toLocaleString()}</p>`);
+        }
+  
+        // Requester
+        if (option.requester) {
+          htmlParts.push(`
+            <div class='requester'>
+              <p><strong>Requester:</strong></p>
+              <ul>
+                <li><strong>Resource:</strong> ${option.requester.resource}</li>
+                <li><strong>Reference:</strong> ${option.requester.reference || "N/A"}</li>
+                <li><strong>Display:</strong> ${option.requester.display || "N/A"}</li>
+              </ul>
+            </div>
+          `);
+        }
+  
+        // Owner
+        if (option.owner) {
+          htmlParts.push(`
+            <div class='owner'>
+              <p><strong>Owner:</strong></p>
+              <ul>
+                <li><strong>Resource:</strong> ${option.owner.resource}</li>
+                <li><strong>Reference:</strong> ${option.owner.reference || "N/A"}</li>
+                <li><strong>Display:</strong> ${option.owner.display || "N/A"}</li>
+              </ul>
+            </div>
+          `);
+        }
+  
+        // Input
+        if (option.input && option.input.length > 0) {
+          htmlParts.push("<div class='input'><strong>Input:</strong><ul>");
+          option.input.forEach((input) => {
+            htmlParts.push(`
+              <li>
+                <p><strong>Type:</strong> ${input.type.text || "N/A"}</p>
+                <p><strong>Value:</strong> ${JSON.stringify(input.value)}</p>
+              </li>
+            `);
+          });
+          htmlParts.push("</ul></div>");
+        }
+  
+        // Output
+        if (option.output && option.output.length > 0) {
+          htmlParts.push("<div class='output'><strong>Output:</strong><ul>");
+          option.output.forEach((output) => {
+            htmlParts.push(`
+              <li>
+                <p><strong>Type:</strong> ${output.type.text || "N/A"}</p>
+                <p><strong>Value:</strong> ${JSON.stringify(output.value)}</p>
+              </li>
+            `);
+          });
+          htmlParts.push("</ul></div>");
+        }
+  
+        // Identifier
+        if (option.identifier && option.identifier.length > 0) {
+          htmlParts.push("<div class='identifier'><strong>Identifiers:</strong><ul>");
+          option.identifier.forEach((id) => {
+            htmlParts.push(`
+              <li>
+                <p><strong>System:</strong> ${id.system || "N/A"}</p>
+                <p><strong>Value:</strong> ${id.value || "N/A"}</p>
+              </li>
+            `);
+          });
+          htmlParts.push("</ul></div>");
+        }
+  
+        htmlParts.push("</div>");
+  
+        resolve(htmlParts.join("\n"));
+      } catch (error:any) {
+        reject(`Failed to generate HTML: ${error.message}`);
+      }
+    });
   }
+  
 
   intentArray(): TaskIntent[] {
     return taskIntentArray.map((el) => el);
