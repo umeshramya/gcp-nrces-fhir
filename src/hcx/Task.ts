@@ -2,6 +2,7 @@ import { CODEABLE_CONCEPT, EXTENSION, IDENTTIFIER, MULTI_RESOURCE, PERIOD } from
 import { ResourceMaster } from "../Interfaces";
 import { VALUE } from "../resources/Observation";
 import ResourceMain from "../resources/ResourceMai";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 const taskCodeArray: CODEABLE_CONCEPT[] = [
   {
@@ -224,6 +225,11 @@ export interface TASK {
   identifier?:IDENTTIFIER[]
 }
 
+export interface TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
+  body: TASK;
+}
+
 export class Task extends ResourceMain implements ResourceMaster {
   getFHIR(options: TASK) {
     const generateInputAndOutPut = (put: InAndOutPut): any => {
@@ -339,7 +345,8 @@ export class Task extends ResourceMain implements ResourceMaster {
 
     return ret;
   }
-  async toHtml(option: TASK): Promise<string> {
+  async toHtml(option: TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION): Promise<string> {
+    const body = option.body
     return new Promise((resolve, reject) => {
       try {
         const htmlParts: string[] = [];
@@ -347,55 +354,55 @@ export class Task extends ResourceMain implements ResourceMaster {
         htmlParts.push("<div class='task'>");
   
         // Title and Resource Type
-        htmlParts.push(`<h1>Task: ${option.id || "Unnamed Task"}</h1>`);
-        htmlParts.push(`<p><strong>Resource Type:</strong> ${option.resourceType}</p>`);
+        htmlParts.push(`<h1>Task: ${body.id || "Unnamed Task"}</h1>`);
+        htmlParts.push(`<p><strong>Resource Type:</strong> ${body.resourceType}</p>`);
   
         // Status and Intent
-        htmlParts.push(`<p><strong>Status:</strong> ${option.status}</p>`);
-        htmlParts.push(`<p><strong>Intent:</strong> ${option.intent}</p>`);
+        htmlParts.push(`<p><strong>Status:</strong> ${body.status}</p>`);
+        htmlParts.push(`<p><strong>Intent:</strong> ${body.intent}</p>`);
   
         // Description
-        if (option.description) {
-          htmlParts.push(`<p><strong>Description:</strong> ${option.description}</p>`);
+        if (body.description) {
+          htmlParts.push(`<p><strong>Description:</strong> ${body.description}</p>`);
         }
   
         // Authored On
-        if (option.authoredOn) {
-          htmlParts.push(`<p><strong>Authored On:</strong> ${new Date(option.authoredOn).toLocaleString()}</p>`);
+        if (body.authoredOn) {
+          htmlParts.push(`<p><strong>Authored On:</strong> ${new Date(body.authoredOn).toLocaleString()}</p>`);
         }
   
         // Requester
-        if (option.requester) {
+        if (body.requester) {
           htmlParts.push(`
             <div class='requester'>
               <p><strong>Requester:</strong></p>
               <ul>
-                <li><strong>Resource:</strong> ${option.requester.resource}</li>
-                <li><strong>Reference:</strong> ${option.requester.reference || "N/A"}</li>
-                <li><strong>Display:</strong> ${option.requester.display || "N/A"}</li>
+                <li><strong>Resource:</strong> ${body.requester.resource}</li>
+                <li><strong>Reference:</strong> ${body.requester.reference || "N/A"}</li>
+                <li><strong>Display:</strong> ${body.requester.display || "N/A"}</li>
               </ul>
             </div>
           `);
         }
   
         // Owner
-        if (option.owner) {
+        if (body.owner) {
           htmlParts.push(`
             <div class='owner'>
               <p><strong>Owner:</strong></p>
               <ul>
-                <li><strong>Resource:</strong> ${option.owner.resource}</li>
-                <li><strong>Reference:</strong> ${option.owner.reference || "N/A"}</li>
-                <li><strong>Display:</strong> ${option.owner.display || "N/A"}</li>
+                <li><strong>Resource:</strong> ${body.owner.resource}</li>
+                <li><strong>Reference:</strong> ${body.owner.reference || "N/A"}</li>
+                <li><strong>Display:</strong> ${body.owner.display || "N/A"}</li>
               </ul>
             </div>
           `);
         }
   
         // Input
-        if (option.input && option.input.length > 0) {
+        if (body.input && body.input.length > 0) {
           htmlParts.push("<div class='input'><strong>Input:</strong><ul>");
-          option.input.forEach((input) => {
+          body.input.forEach((input) => {
             htmlParts.push(`
               <li>
                 <p><strong>Type:</strong> ${input.type.text || "N/A"}</p>
@@ -407,9 +414,9 @@ export class Task extends ResourceMain implements ResourceMaster {
         }
   
         // Output
-        if (option.output && option.output.length > 0) {
+        if (body.output && body.output.length > 0) {
           htmlParts.push("<div class='output'><strong>Output:</strong><ul>");
-          option.output.forEach((output) => {
+          body.output.forEach((output) => {
             htmlParts.push(`
               <li>
                 <p><strong>Type:</strong> ${output.type.text || "N/A"}</p>
@@ -421,9 +428,9 @@ export class Task extends ResourceMain implements ResourceMaster {
         }
   
         // Identifier
-        if (option.identifier && option.identifier.length > 0) {
+        if (body.identifier && body.identifier.length > 0) {
           htmlParts.push("<div class='identifier'><strong>Identifiers:</strong><ul>");
-          option.identifier.forEach((id) => {
+          body.identifier.forEach((id) => {
             htmlParts.push(`
               <li>
                 <p><strong>System:</strong> ${id.system || "N/A"}</p>
