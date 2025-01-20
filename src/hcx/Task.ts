@@ -346,109 +346,109 @@ export class Task extends ResourceMain implements ResourceMaster {
     return ret;
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION): Promise<string> {
-    const body = option.body
-    return new Promise((resolve, reject) => {
-      try {
-        const htmlParts: string[] = [];
+    const body = option.body;
   
-        htmlParts.push("<div class='task'>");
+    try {
+      const htmlParts: string[] = [];
   
-        // Title and Resource Type
-        htmlParts.push(`<h1>Task: ${body.id || "Unnamed Task"}</h1>`);
-        htmlParts.push(`<p><strong>Resource Type:</strong> ${body.resourceType}</p>`);
+      htmlParts.push("<div class='task'>");
   
-        // Status and Intent
-        htmlParts.push(`<p><strong>Status:</strong> ${body.status}</p>`);
-        htmlParts.push(`<p><strong>Intent:</strong> ${body.intent}</p>`);
+      // Title and Resource Type
+      htmlParts.push(`<h1>Task: ${body.id || "Unnamed Task"}</h1>`);
+      htmlParts.push(`<p><strong>Resource Type:</strong> ${body.resourceType}</p>`);
   
-        // Description
-        if (body.description) {
-          htmlParts.push(`<p><strong>Description:</strong> ${body.description}</p>`);
-        }
+      // Status and Intent
+      htmlParts.push(`<p><strong>Status:</strong> ${body.status}</p>`);
+      htmlParts.push(`<p><strong>Intent:</strong> ${body.intent}</p>`);
   
-        // Authored On
-        if (body.authoredOn) {
-          htmlParts.push(`<p><strong>Authored On:</strong> ${new Date(body.authoredOn).toLocaleString()}</p>`);
-        }
-  
-        // Requester
-        if (body.requester) {
-          htmlParts.push(`
-            <div class='requester'>
-              <p><strong>Requester:</strong></p>
-              <ul>
-                <li><strong>Resource:</strong> ${body.requester.resource}</li>
-                <li><strong>Reference:</strong> ${body.requester.reference || "N/A"}</li>
-                <li><strong>Display:</strong> ${body.requester.display || "N/A"}</li>
-              </ul>
-            </div>
-          `);
-        }
-  
-        // Owner
-        if (body.owner) {
-          htmlParts.push(`
-            <div class='owner'>
-              <p><strong>Owner:</strong></p>
-              <ul>
-                <li><strong>Resource:</strong> ${body.owner.resource}</li>
-                <li><strong>Reference:</strong> ${body.owner.reference || "N/A"}</li>
-                <li><strong>Display:</strong> ${body.owner.display || "N/A"}</li>
-              </ul>
-            </div>
-          `);
-        }
-  
-        // Input
-        if (body.input && body.input.length > 0) {
-          htmlParts.push("<div class='input'><strong>Input:</strong><ul>");
-          body.input.forEach((input) => {
-            htmlParts.push(`
-              <li>
-                <p><strong>Type:</strong> ${input.type.text || "N/A"}</p>
-                <p><strong>Value:</strong> ${JSON.stringify(input.value)}</p>
-              </li>
-            `);
-          });
-          htmlParts.push("</ul></div>");
-        }
-  
-        // Output
-        if (body.output && body.output.length > 0) {
-          htmlParts.push("<div class='output'><strong>Output:</strong><ul>");
-          body.output.forEach((output) => {
-            htmlParts.push(`
-              <li>
-                <p><strong>Type:</strong> ${output.type.text || "N/A"}</p>
-                <p><strong>Value:</strong> ${JSON.stringify(output.value)}</p>
-              </li>
-            `);
-          });
-          htmlParts.push("</ul></div>");
-        }
-  
-        // Identifier
-        if (body.identifier && body.identifier.length > 0) {
-          htmlParts.push("<div class='identifier'><strong>Identifiers:</strong><ul>");
-          body.identifier.forEach((id) => {
-            htmlParts.push(`
-              <li>
-                <p><strong>System:</strong> ${id.system || "N/A"}</p>
-                <p><strong>Value:</strong> ${id.value || "N/A"}</p>
-              </li>
-            `);
-          });
-          htmlParts.push("</ul></div>");
-        }
-  
-        htmlParts.push("</div>");
-  
-        resolve(htmlParts.join("\n"));
-      } catch (error:any) {
-        reject(`Failed to generate HTML: ${error.message}`);
+      // Description
+      if (body.description) {
+        htmlParts.push(`<p><strong>Description:</strong> ${body.description}</p>`);
       }
-    });
+  
+      // Authored On
+      if (body.authoredOn) {
+        htmlParts.push(`<p><strong>Authored On:</strong> ${new Date(body.authoredOn).toLocaleString()}</p>`);
+      }
+  
+      // Requester
+      if (body.requester) {
+        htmlParts.push(`
+          <div class='requester'>
+            <p><strong>Requester:</strong></p>
+            <ul>
+              <li><strong>Resource:</strong> ${body.requester.resource}</li>
+              <li><strong>Reference:</strong> ${body.requester.reference || "N/A"}</li>
+              <li><strong>Display:</strong> ${body.requester.display || "N/A"}</li>
+            </ul>
+          </div>
+        `);
+      }
+  
+      // Owner
+      if (body.owner) {
+        htmlParts.push(`
+          <div class='owner'>
+            <p><strong>Owner:</strong></p>
+            <ul>
+              <li><strong>Resource:</strong> ${body.owner.resource}</li>
+              <li><strong>Reference:</strong> ${body.owner.reference || "N/A"}</li>
+              <li><strong>Display:</strong> ${body.owner.display || "N/A"}</li>
+            </ul>
+          </div>
+        `);
+      }
+  
+      // Input
+      if (body.input && body.input.length > 0) {
+        htmlParts.push("<div class='input'><strong>Input:</strong><ul>");
+        body.input.forEach((input) => {
+          htmlParts.push(`
+            <li>
+              <p><strong>Type:</strong> ${input.type.text || "N/A"}</p>
+              <p><strong>Value:</strong> ${JSON.stringify(input.value)}</p>
+            </li>
+          `);
+        });
+        htmlParts.push("</ul></div>");
+      }
+  
+      // Output
+      if (body.output && body.output.length > 0) {
+        htmlParts.push("<div class='output'><strong>Output:</strong><ul>");
+        body.output.forEach((output) => {
+          htmlParts.push(`
+            <li>
+              <p><strong>Type:</strong> ${output.type.text || "N/A"}</p>
+              <p><strong>Value:</strong> ${JSON.stringify(output.value)}</p>
+            </li>
+          `);
+        });
+        htmlParts.push("</ul></div>");
+      }
+  
+      // Identifier
+      if (body.identifier && body.identifier.length > 0) {
+        htmlParts.push("<div class='identifier'><strong>Identifiers:</strong><ul>");
+        body.identifier.forEach((id) => {
+          htmlParts.push(`
+            <li>
+              <p><strong>System:</strong> ${id.system || "N/A"}</p>
+              <p><strong>Value:</strong> ${id.value || "N/A"}</p>
+            </li>
+          `);
+        });
+        htmlParts.push("</ul></div>");
+      }
+  
+      htmlParts.push("</div>");
+  
+      return htmlParts.join("\n");
+    } catch (error: any) {
+      throw new Error(`Failed to generate HTML: ${error.message}`);
+    }
   }
+  
   
 
   intentArray(): TaskIntent[] {

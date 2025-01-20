@@ -37,6 +37,7 @@ import { Goal } from "../resources/Goal";
 import { InsurancePlan } from "../hcx/Insuranceplan";
 import { PaymentNoctice } from "../hcx/PaymentNotice";
 import { PaymentReconciliation } from "../hcx/PaymentReconciliation";
+import { Task } from "../hcx/Task";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -121,6 +122,8 @@ export default class ResourceFactory
       this.resource = new PaymentNoctice()
     }else if(this.resourceType == "PaymentReconciliation"){
       this.resource = new PaymentReconciliation()
+    }else if(this.resourceType == "Task"){
+      this.resource = new Task()
     }
 
     else {
