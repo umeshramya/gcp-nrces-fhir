@@ -118,8 +118,9 @@ import { ClaimRequestBundle } from "./hcx/bundle/ClaimRequestBundle";
 import { ClaimResponse } from "./hcx/ClaimResponse";
 
 import {COMMUNICATION, Communication} from "./hcx/Communication"
+
 import { PaymentReconciliation, PAYMENT_RECONCILIATION } from "./hcx/PaymentReconciliation";
-import {CommunicationRequest} from "./hcx/CommunicationRequest"
+import {CommunicationRequest, COMMUNICATION_REQUEST} from "./hcx/CommunicationRequest"
 
 import {InsurancePlan, INSURANCE_PLAN} from "./hcx/Insuranceplan"
 
@@ -237,7 +238,7 @@ export { Claim, CLAIM }
 export { ClaimRequestBundle }
 export {COMMUNICATION, Communication} 
 export { ClaimResponse }
-export {CommunicationRequest}
+export {CommunicationRequest, COMMUNICATION_REQUEST}
 export { GOAL, Goal }
 export { CARE_PLAN, CarePlan, careplanActivityDetailStatusArray }
 

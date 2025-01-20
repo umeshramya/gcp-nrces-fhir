@@ -5,9 +5,6 @@ import {
   MULTI_RESOURCE,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import { ENCOUNTER } from "../resources/Encounter";
-import { Organization } from "../resources/Organization";
-import { Patient } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
