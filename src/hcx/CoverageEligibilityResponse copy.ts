@@ -7,9 +7,11 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
+import { Organization, ORGANIZATION } from "../resources/Organization";
+import { Patient, PATIENT } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
-import { Coverage } from "./Coverage";
+import { COVERAGE, Coverage } from "./Coverage";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 const CoverageEligibilityResponcePurpose = [
   "auth-requirements",
@@ -42,38 +44,21 @@ interface BENFIT {
   usedString?: string;
 }
 
-interface Patient extends MULTI_RESOURCE{
-  resource : "Patient"
-}
-
-interface Requestor extends MULTI_RESOURCE{
-  "resource" : "Practitioner" | "PractitionerRole" | "Organization"
-}
-
-interface Request extends MULTI_RESOURCE{
-  "resource" : "CoverageEligibilityResponse"
-}
-
-interface Insurer extends MULTI_RESOURCE{
- "resource" : "Organization"
-}
-
 export interface COVERAGE_ELIGIBILITY_RESPONSE {
   id?: string;
   hcx?: "nhcx" | "swasth";
   resourceType: "CoverageEligibilityResponse",
-  patient:Patient
   identifiers?: IDENTTIFIER[];
   text?: string;
   status: "active" | "cancelled" | "draft" | "entered-in-error";
   purpose: CoverageEligibilityResponcePurpose[];
-  requestor:Requestor;
+  patientId: string;
   createdDate: string;
-  request : Request
-  insurer:Insurer
+  practitionerId?: string;
+  coverageEligibilityRequestId: string;
   outcome: "queued" | "complete" | "error" | "partial";
   disposition?: string;
-
+  insurerId: string;
   insurance: {
     coverage: {
       reference: `Coverage/${string}`;
@@ -331,32 +316,20 @@ export class CoverageEligibiltyResponse
       },
       status: options.status,
       purpose: options.purpose,
-      patient: options.patient && {
-        "reference" : options.patient.resource && options.patient.id && `Patient/${options.patient.id}`,
-        "display" : options.patient.display,
-        "identifier" : options.patient.identifier,
-        "type" : options.patient.type
+      patient: {
+        reference: `Patient/${options.patientId}`,
       },
       created: options.createdDate,
-      requestor: options.requestor && {
-        "reference" : options.requestor.resource && options.requestor.id && `${options.requestor.resource}/${options.patient.id}`,
-        "display" : options.requestor.display,
-        "identifier" : options.requestor.identifier,
-        "type" : options.requestor.type
+      requestor: options.practitionerId && {
+        reference: `Practitioner/${options.practitionerId}`,
       },
-      request: options.request && {
-        "reference" : options.request.resource && options.request.id && `CoverageEligibilityRequest/${options.patient.id}`,
-        "display" : options.request.display,
-        "identifier" : options.request.identifier,
-        "type" : options.request.type
+      request: {
+        reference: `CoverageEligibilityRequest/${options.coverageEligibilityRequestId}`,
       },
       outcome: options.outcome,
       disposition: options.disposition,
-      insurer: options.insurer && {
-        "reference" : options.insurer.resource && options.insurer.id && `Organization/${options.patient.id}`,
-        "display" : options.insurer.display,
-        "identifier" : options.insurer.identifier,
-        "type" : options.insurer.type
+      insurer: {
+        reference: `Organization/${options.insurerId}`,
       },
       insurance: options.insurance,
       error: options.error,
@@ -371,35 +344,28 @@ export class CoverageEligibiltyResponse
       text: (options.text && options.text.div) || "",
       status: options.status,
       purpose: options.purpose,
-      patient:options.patient &&  this.getFromMultResource({
-        "reference" : options.patient.reference,
-        "display" :  options.patient.display,
-        "type" : options.patient.type,
-        "identifier" : options.patient.identifier
+      patientId:options.patient && options.patient.reference &&  this.getIdFromReference({
+        resourceType: "Patient",
+        ref: options.patient.reference,
       }),
       createdDate: options.created,
-      request: options.request &&  this.getFromMultResource({
-        "reference" : options.request.reference,
-        "display" :  options.request.display,
-        "type" : options.request.type,
-        "identifier" : options.request.identifier
+      coverageEligibilityRequestId:  options.request && options.request.reference && this.getIdFromReference({
+        resourceType: "CoverageEligibilityRequest",
+        ref: options.request.reference,
       }),
       outcome: options.outcome,
-      insurer: options.insurer &&  this.getFromMultResource({
-        "reference" : options.insurer.reference,
-        "display" :  options.insurer.display,
-        "type" : options.insurer.type,
-        "identifier" : options.insurer.identifier
+      insurerId: options.insurer && options.insurer.reference &&  this.getIdFromReference({
+        resourceType: "Organization",
+        ref: options.insurer.reference,
       }),
       insurance: options.insurance,
       error: options.error,
       identifiers: options.identifier,
-      requestor:options.requestor &&  this.getFromMultResource({
-        "reference" : options.requestor.reference,
-        "display" :  options.requestor.display,
-        "type" : options.requestor.type,
-        "identifier" : options.requestor.identifier
-      }),
+      practitionerId: options.requestor &&
+        this.getIdFromReference({
+          resourceType: "Practitioner",
+          ref: options.requestor.reference,
+        }),
       resourceType: "CoverageEligibilityResponse"
     };
     if (options.disposition) {
