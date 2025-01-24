@@ -19,6 +19,7 @@ export class TaskBundle extends ResourceMain implements ResourceMaster {
     claim?: any;
     patient?: any;
     communicationRequest?: any;
+    communication:any;
     task: any;
     practitioner?: any[];
     organization?: any[];
@@ -47,6 +48,13 @@ export class TaskBundle extends ResourceMain implements ResourceMaster {
         },
       ],
     };
+
+    if(options.communication){
+      body.entry.push(        {
+        fullUrl: `Communication/${options.communication.id}`,
+        resource: options.communication,
+      })
+    }
 
     if(options.patient){
       body.entry.push(        {

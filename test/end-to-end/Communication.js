@@ -94,7 +94,15 @@ const setCommunication = async () => {
     payload : [
       {
         "content" : {
-          "contentString" : "How are you"
+          "contentString" : "How are you",
+          "contentAttachment" : {
+            "contentType" :"application/pdf",
+            "title" : "Discharge Summary",
+            "data" : data,
+            "creation" : new Date().toISOString(),
+            "language" :"en-IN",
+          },
+         
         }
       }
     ]
