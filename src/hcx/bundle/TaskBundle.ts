@@ -19,7 +19,7 @@ export class TaskBundle extends ResourceMain implements ResourceMaster {
     claim?: any;
     patient?: any;
     communicationRequest?: any;
-    communication:any;
+    communication?:any;
     task: any;
     practitioner?: any[];
     organization?: any[];
