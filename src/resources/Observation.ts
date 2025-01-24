@@ -1,7 +1,7 @@
 import { htmlToText } from "html-to-text";
 import { type } from "os";
 import GcpFhirCRUD from "../classess/gcp";
-import { ATTACHMENT, CODEABLE_CONCEPT, EXTENSION, MULTI_RESOURCE, PERIOD } from "../config";
+import { ATTACHMENT, CODEABLE_CONCEPT, EXTENSION, MULTI_RESOURCE, PERIOD, REFERENCE } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "./ResourceMai";
 
@@ -85,6 +85,7 @@ export interface VALUE {
   valueTime?: string;
   valueDateTime?: string;
   valuePeriod?: PERIOD;
+  valueReference?: REFERENCE
 
 
 }
