@@ -112,7 +112,7 @@ import {TASK,Task } from "./hcx/Task"
 
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
 import { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION } from "./resources/ImmunizationRecommendation";
-import {CreatePdf} from "js-ts-report"
+import {CreatePdf, paperSize} from "js-ts-report"
 import { Claim, CLAIM } from "./hcx/Claim";
 import { ClaimRequestBundle } from "./hcx/bundle/ClaimRequestBundle";
 import { ClaimResponse } from "./hcx/ClaimResponse";
@@ -230,7 +230,7 @@ export {CoverageEligibilityRequestBundle}
 
 export { Immunization , IMMUNIZATION }
 export { ImmunizationRecommendation, IMMUNIZATION_RECOMMENDATION }
-export {CreatePdf}
+export {CreatePdf, paperSize}
 export {LOCATION, Location, bedOPertaionalStatusArray, BedOPertaionalStatus, locationFormTypesArray, locationFormTypes} 
 export {HealthDocumentBundle}
 export {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY}
