@@ -171,7 +171,7 @@ const taskIntentArray = [
   "option",
 ] as const;
 
-const statusArray = ["draft", "requested", "received", "accepted"] as const;
+const statusArray = ["draft", "requested", "received", "accepted", "completed"] as const;
 
 type TaskIntent = (typeof taskIntentArray)[number];
 
