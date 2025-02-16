@@ -9,6 +9,7 @@ import {
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
+import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 interface subject extends MULTI_RESOURCE {
   resource: "Patient" | "Group";
@@ -108,10 +109,83 @@ export interface COMMUNICATION {
   payload?: PAYLOAD[];
 }
 
+interface TO_HTML_HCX_OPTIONS_COMMUNICATION
+  extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
+  body: COMMUNICATION;
+}
+
 export class Communication extends ResourceMain implements ResourceMaster {
-  async toHtml(): Promise<string> {
-    throw new Error("Method not implemented.");
-  }
+  async toHtml(options: TO_HTML_HCX_OPTIONS_COMMUNICATION): Promise<string> {
+    const { body } = options;
+    
+    const getReference = (resource: MULTI_RESOURCE | undefined) => 
+        resource ? `${resource.resource}/${resource.id}` : '';
+    
+    const getCategories = () => 
+        body.category?.map(c => c.text).filter(Boolean).join(', ') || '';
+    
+    const getRecipients = () => 
+        body.recipient?.map(r => getReference(r)).join(',<br>') || '';
+    
+    const getPayloadContent = (payload: PAYLOAD) => {
+        if (!payload.content) return '';
+        if (payload.content.contentAttachment) {
+            const a = payload.content.contentAttachment;
+            return `Attachment: ${a.title || a.url}`;
+        }
+        if (payload.content.contentString) {
+            return `Text: ${payload.content.contentString}`;
+        }
+        if (payload.content.contentReference) {
+            return `Reference: ${getReference(payload.content.contentReference)}`;
+        }
+        return '';
+    };
+
+    const getPayloads = () => 
+        body.payload?.map(p => `<li>${getPayloadContent(p)}</li>`).join('') || '';
+
+    const getInResponseTo = () => 
+        body.inResponseTo?.map(ir => getReference(ir)).join(',<br>') || '';
+
+    const getReasonReferences = () => 
+        body.reasonReference?.map(rr => getReference(rr)).join(',<br>') || '';
+
+    const html = `
+        <div class="communication">
+            <h1>Communication</h1>
+            <table>
+                <tbody>
+                    ${body.id ? `<tr><th>ID</th><td>${body.id}</td></tr>` : ''}
+                    ${body.status ? `<tr><th>Status</th><td>${body.status}</td></tr>` : ''}
+                    ${body.priority ? `<tr><th>Priority</th><td>${body.priority}</td></tr>` : ''}
+                    ${body.category ? `<tr><th>Category</th><td>${getCategories()}</td></tr>` : ''}
+                    ${body.subject ? `<tr><th>Subject</th><td>${getReference(body.subject)}</td></tr>` : ''}
+                    ${body.sender ? `<tr><th>Sender</th><td>${getReference(body.sender)}</td></tr>` : ''}
+                    ${body.recipient?.length ? `<tr><th>Recipients</th><td>${getRecipients()}</td></tr>` : ''}
+                    ${body.encounter ? `<tr><th>Encounter</th><td>${getReference(body.encounter)}</td></tr>` : ''}
+                    ${body.sentDate ? `<tr><th>Sent Date</th><td>${body.sentDate}</td></tr>` : ''}
+                    ${body.receivedDate ? `<tr><th>Received Date</th><td>${body.receivedDate}</td></tr>` : ''}
+                    ${body.topic ? `<tr><th>Topic</th><td>${body.topic.text}</td></tr>` : ''}
+                    ${body.reasonCode?.length ? `<tr><th>Reason Code</th><td>${body.reasonCode.map(rc => rc.text).join(', ')}</td></tr>` : ''}
+                    ${body.reasonReference?.length ? `<tr><th>Reason Reference</th><td>${getReasonReferences()}</td></tr>` : ''}
+                    ${body.inResponseTo?.length ? `<tr><th>In Response To</th><td>${getInResponseTo()}</td></tr>` : ''}
+                    ${body.payload?.length ? `
+                        <tr>
+                            <th>Payloads</th>
+                            <td>
+                                <ul style="list-style-type: none; padding-left: 0;">
+                                    ${getPayloads()}
+                                </ul>
+                            </td>
+                        </tr>` : ''}
+                </tbody>
+            </table>
+        </div>
+    `;
+
+    return html;
+}
   getFHIR(options: COMMUNICATION) {
     const body = {
       resourceType: "Communication",
