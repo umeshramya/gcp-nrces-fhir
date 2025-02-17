@@ -207,8 +207,8 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
         let ret = "";
         ret += `<tr>`;
         ret += `<td> ${el.id || ""}  </td>`;
-        ret += `<td>${this.codebleConceptToHtml(el.category)}</td>`;
-        ret += `<td>${this.codebleConceptToHtml(el.reason)}</td>`;
+        ret += `<td>${this.codeableConceptToHtml(el.category)}</td>`;
+        ret += `<td>${this.codeableConceptToHtml(el.reason)}</td>`;
         ret += `<td>${el.amount?.currency || ""}${
           el.amount?.value || ""
         } </td>`;
@@ -355,7 +355,7 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
                 <div>
                   ${
                     claimResponse.payment.type &&
-                    `<p><strong>Type:</strong> ${this.codebleConceptToHtml(
+                    `<p><strong>Type:</strong> ${this.codeableConceptToHtml(
                       claimResponse.payment.type
                     )}</p>`
                   } 

@@ -88,7 +88,7 @@ export  class Location extends ResourceMain implements ResourceMaster{
     }
 
     if(option.body.physicalType){
-      ret +=`<b>Physical Type</b> : ${this.codebleConceptToHtml(option.body.physicalType)}<br/>`
+      ret +=`<b>Physical Type</b> : ${this.codeableConceptToHtml(option.body.physicalType)}<br/>`
     }
 
     if(option.body.position){

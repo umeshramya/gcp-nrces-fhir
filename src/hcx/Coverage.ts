@@ -159,7 +159,7 @@ export class Coverage extends ResourceMain implements ResourceMaster {
     }
 
     if(option.body.relationship){
-      ret += `<b>Subscriber Relationship</b> : ${this.codebleConceptToHtml(option.body.relationship)}<br/>`
+      ret += `<b>Subscriber Relationship</b> : ${this.codeableConceptToHtml(option.body.relationship)}<br/>`
     }
 
     if (option.body.period) {

@@ -121,7 +121,7 @@ export class CoverageEligibiltyResponse
         body.error &&
         body.error.length > 0 &&
         `<h3><b>Error</b> : ${body.error
-          .map((el) => this.codebleConceptToHtml(el))
+          .map((el) => this.codeableConceptToHtml(el))
           .toString()}</h3>`;
     }
 
@@ -222,12 +222,12 @@ export class CoverageEligibiltyResponse
               }
   
               if (it.network) {
-                ret += `<b>Network</b> : ${this.codebleConceptToHtml(
+                ret += `<b>Network</b> : ${this.codeableConceptToHtml(
                   it.network
                 )}<br/>`;
               }
               if (it.productOrService) {
-                ret += `Product Or Service : ${this.codebleConceptToHtml(
+                ret += `Product Or Service : ${this.codeableConceptToHtml(
                   it.productOrService
                 )}`;
               }
@@ -236,7 +236,7 @@ export class CoverageEligibiltyResponse
               }
   
               if (it.category) {
-                ret += `<b>Category</b> ${this.codebleConceptToHtml(
+                ret += `<b>Category</b> ${this.codeableConceptToHtml(
                   it.category
                 )}`;
               }
@@ -250,10 +250,10 @@ export class CoverageEligibiltyResponse
               }
   
               if (it.term) {
-                ret += `<b>Term</b> : ${this.codebleConceptToHtml(it.term)}<br/>`;
+                ret += `<b>Term</b> : ${this.codeableConceptToHtml(it.term)}<br/>`;
               }
               if (it.unit) {
-                ret += `<b>Unit</b> : ${this.codebleConceptToHtml(it.unit)}<br/>`;
+                ret += `<b>Unit</b> : ${this.codeableConceptToHtml(it.unit)}<br/>`;
               }
   
               if (it.benefit) {
@@ -261,7 +261,7 @@ export class CoverageEligibiltyResponse
   
                 it.benefit.forEach((be) => {
                   if (be.type) {
-                    ret += `<b>Type</b> : ${this.codebleConceptToHtml(be.type)}`;
+                    ret += `<b>Type</b> : ${this.codeableConceptToHtml(be.type)}`;
                   }
                   if (be.allowedMoney && be.allowedMoney.value) {
                     ret += `<b>Allowed Money</b> : ${be.allowedMoney?.currency} ${be.allowedMoney?.value}<br/> `;

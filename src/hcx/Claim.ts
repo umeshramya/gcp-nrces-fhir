@@ -159,7 +159,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
       try {
         ret +=`<h4>Type</h4>`
         if(body.type){
-          ret +=  this.codebleConceptToHtml(body.type)
+          ret +=  this.codeableConceptToHtml(body.type)
         }
         
       } catch (error) {
@@ -183,14 +183,14 @@ export class Claim extends ResourceMain implements ResourceMaster {
         if (body.diagnosis && body.diagnosis.length > 0) {
           body.diagnosis.forEach((el) => {
             if (el.diagnosisCodeableConcept) {
-              ret += `Diagnosis Codeable Concept  : ${this.codebleConceptToHtml(
+              ret += `Diagnosis Codeable Concept  : ${this.codeableConceptToHtml(
                 el.diagnosisCodeableConcept
               )}`;
             }
   
             if (el.type && el.type.length > 0) {
               el.type.forEach((type) => {
-                ret += `Type : ${this.codebleConceptToHtml(type)}`;
+                ret += `Type : ${this.codeableConceptToHtml(type)}`;
               });
             }
           });
@@ -242,7 +242,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
         ret += `<h4>Payee</h4>`
         if(body.payee){
           if(body.payee.type){
-            ret += this.codebleConceptToHtml(body.payee.type)
+            ret += this.codeableConceptToHtml(body.payee.type)
           }
 
           if(body.payee.party){
@@ -260,10 +260,10 @@ export class Claim extends ResourceMain implements ResourceMaster {
           for (let index = 0; index < body.supportingInfo.length; index++) {
             const el = body.supportingInfo[index];
             if(el.category){
-              ret += `Category  ${this.codebleConceptToHtml(el.category)}`
+              ret += `Category  ${this.codeableConceptToHtml(el.category)}`
             }
             if(el.code){
-              ret += `Code ${this.codebleConceptToHtml(el.code)}`
+              ret += `Code ${this.codeableConceptToHtml(el.code)}`
             }
 
             if(el.valueAttachment){

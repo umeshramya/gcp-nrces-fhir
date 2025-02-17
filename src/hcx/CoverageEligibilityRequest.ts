@@ -180,7 +180,7 @@ export class CoverageEligibilityRequest
     }
 
     if (option.body.priority) {
-      ret += `<b>Priority</b> : ${this.codebleConceptToHtml(
+      ret += `<b>Priority</b> : ${this.codeableConceptToHtml(
         option.body.priority
       )}<br/>`;
     }
@@ -291,7 +291,7 @@ export class CoverageEligibilityRequest
         if(el.category){
 
           ret +=`<td>`
-          ret += this.codebleConceptToHtml(el.category)
+          ret += this.codeableConceptToHtml(el.category)
           ret +=`</td>`
         }
 
@@ -300,7 +300,7 @@ export class CoverageEligibilityRequest
           el.diagnosis.forEach((dia)=>{
     
            if(dia.diagnosisCodeableConcept ){
-              ret += `${this.codebleConceptToHtml(dia.diagnosisCodeableConcept )}`
+              ret += `${this.codeableConceptToHtml(dia.diagnosisCodeableConcept )}`
            }
           })
           ret += `</td>`
@@ -309,7 +309,7 @@ export class CoverageEligibilityRequest
         if(el.productOrService){
 
           ret += `<td>`
-          ret += this.codebleConceptToHtml(el.productOrService)
+          ret += this.codeableConceptToHtml(el.productOrService)
           ret+=`</td>`
         
         }

@@ -11,7 +11,7 @@ import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 interface TO_HTML_HCX_OPTIONS_COMMUNICATION_REQUEST
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
-  body: COMMUNICATION_REQUEST;
+  body: any;
 }
 
 interface SUBJECT extends MULTI_RESOURCE {
@@ -59,13 +59,19 @@ interface REASON_REFERENCE extends MULTI_RESOURCE {
     | "DiagnosticReport"
     | "DocumentReference";
 }
+
+interface REPLACES extends MULTI_RESOURCE {
+  resource:"CommunicationRequest"
+
+}
 export interface COMMUNICATION_REQUEST {
   id?: string;
   hcx?: "nhcx" | "swasth";
   resourceType: "CommunicationRequest"
   text: string;
-  identifiers: IDENTTIFIER[];
-  basedOn: MULTI_RESOURCE[];
+  identifiers?: IDENTTIFIER[];
+  basedOn?: MULTI_RESOURCE[];
+  replaces?: REPLACES[]
   status:
     | "draft"
     | "active"
@@ -128,6 +134,7 @@ export class CommunicationRequest
     const body = {
       resourceType: "CommunicationRequest",
       id: options.id || undefined,
+      status:options.status,
       meta: {
         versionId: "1",
         lastUpdated: "2023-09-07T14:58:58.181+05:30",
@@ -145,8 +152,26 @@ export class CommunicationRequest
         div: options.text || "",
       },
       identifier: options.identifiers,
-      basedOn: options.basedOn,
-      status: options.status,
+      replaces:
+      options.replaces &&
+      options.replaces.map((el) => {
+        return {
+          reference: el.resource && `${el.resource}/${el.id}`,
+          type: el.type,
+          identifier: el.identifier,
+          display: el.display,
+        };
+      }),
+      basedOn:
+      options.basedOn &&
+      options.basedOn.map((el) => {
+        return {
+          reference: el.resource && `${el.resource}/${el.id}`,
+          type: el.type,
+          identifier: el.identifier,
+          display: el.display,
+        };
+      }),
       category: options.category,
       priority: options.priority,
       subject: {
@@ -187,38 +212,31 @@ export class CommunicationRequest
     const ret: COMMUNICATION_REQUEST = {
       text: (options.text && options.text.div) || "",
       identifiers: options.identifier,
-      basedOn: options.basedOn &&
-        options.basedOn.map(
-          (el: { basedOn: { reference: any; }; display: any; }) => {
-            return this.getFromMultResource({
-              reference: el.basedOn.reference,
-              display: el.display || undefined,
-            });
-          }
-        ),
       status: options.status,
       category: options.category,
       priority: options.priority,
       reasonReference: options.reasonReference &&
         options.reasonReference.map((el: { reference: any; display: any; }) => {
           return this.getFromMultResource({
-            reference: el.reference,
-            display: el.display,
+            ...el,
+            reference: el?.reference,
           });
         }),
       statusReason: options.statusReason,
       authoredOn: options.authoredOn,
       requester: options.requester &&
         this.getFromMultResource({
-          reference: options.requester,
-          display: options.requester.display,
+          ...options.requester,
+          reference: options?.requester,
+
         }),
       payload: options.payload,
       recipient: options.recipient &&
         options.recipient.map((el: { reference: any; display: any; }) => {
           return this.getFromMultResource({
-            reference: el.reference,
-            display: el.display,
+            ...el,
+            reference: el?.reference,
+
           });
         }),
       reasonCode: options.reasonCode,
@@ -236,15 +254,22 @@ export class CommunicationRequest
         }),
       about: options.about &&
         this.getFromMultResource({
-          reference: options.about.reference,
-          display: options.about.display,
+          ...options.about,
+          reference: options.about?.reference,
         }),
       sender: options.sender &&
         this.getFromMultResource({
-          reference: options.sender.reference,
-          display: options.sender.display,
+          ...options.sender,
+          reference: options.sender?.reference,
         }),
-      resourceType: "CommunicationRequest"
+      resourceType: "CommunicationRequest",
+      basedOn : options.basedOn.map(
+        (el: { basedOn: { reference: any; }; display: any; }) => {
+          return this.getFromMultResource({
+            ...el,
+            reference: el.basedOn?.reference,
+          });
+        })
     };
 
     return ret;
@@ -253,75 +278,70 @@ export class CommunicationRequest
     option: TO_HTML_HCX_OPTIONS_COMMUNICATION_REQUEST
   ): Promise<string> {
     let ret: string = "";
-    const body: COMMUNICATION_REQUEST = option.body;
-    if (option.patient) {
-          ret += `<h3>Patient</h3>`;
-        ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
+    const body: COMMUNICATION_REQUEST = this.convertFhirToObject(option.body);
+  
+    ret += `<html><body>`;
+    ret += `<h1>Communication Request</h1>`;
+    ret += `<p><strong>ID:</strong> ${body.id || "N/A"}</p>`;
+    ret += `<p><strong>Status:</strong> ${body.status}</p>`;
+    ret += `<p><strong>Priority:</strong> ${body.priority}</p>`;
+    ret += `<p><strong>Authored On:</strong> ${body.authoredOn}</p>`;
+    ret += body.text;
+
+    if(body.identifiers){
+      ret += `<p><strong>Identifiers</strong></p>`
+      body.identifiers.forEach(el=>{
+       ret += this.identifierToHtml(el)
+      })
     }
-
-    ret += `<h3>Insurance</h3>`;
-    ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
-    ret += `<hr/>`;
-
-    if (option.body.authoredOn) {
-      ret += `<b>Authored On</b> : ${new TimeZone().convertTZ(
-        option.body.authoredOn,
-        "Asia/Kolkata",
-        false
-      )}<br/>`;
+    
+    if (body.subject) {
+        ret += `<p><strong>Subject:</strong></p>`
+      ret += this.multiResourceToHtml(body.subject, "Subject")
     }
-
-    if (option.body.status) {
-      ret += `<b>Status</b> : ${option.body.status}<br/>`;
+    
+    if (body.requester) {
+      ret +=  this.multiResourceToHtml(body.requester, "Requester")
     }
-
-    if (option.body.text) {
-      ret += `<h4>Text<</text>`;
-      ret += `${option.body.text}<br/>`;
+    
+    if (body.recipient && body.recipient.length > 0) {
+      ret += this.multiResourceToHtml(body.recipient, "Recipient")
     }
-
+    
+    if (body.reasonCode && body.reasonCode.length > 0) {
+      ret += `<p><strong>ReasonCode</strong></p>`
+      ret += this.codeableConceptToHtml(body.reasonCode)
+    }
+    
+    if (body.reasonReference && body.reasonReference.length > 0) {
+      ret += this.multiResourceToHtml(body.reasonReference, "ReasonReference")
+    }
+    
     if (body.payload && body.payload.length > 0) {
-      ret += `<h3>Payload</h3>`;
-      for (let index = 0; index < body.payload.length; index++) {
-        const el = body.payload[index];
-        if (el.content && el.content.length > 0) {
-          for (let cIndex = 0; cIndex < el.content.length; cIndex++) {
-            const content = el.content[cIndex];
+      ret += `<h2>Payload</h2>`;
+      body.payload.forEach((p, index) => {
+        ret += `<p><strong>Payload ${index + 1}:</strong></p>`;
+        if (p.content && p.content.length > 0) {
+          p.content.forEach(content => {
             if (content.contentString) {
-              ret += `${content.contentString}<br/>`;
+              ret += `<p>${content.contentString}</p>`;
             }
-
             if (content.contentAttachment) {
-              const { data, title, contentType, creation } =
-                content.contentAttachment;
-              const byteCharacters = window.atob(data);
-              const byteArray = new Uint8Array(byteCharacters.length);
-              for (let i = 0; i < byteCharacters.length; i++) {
-                byteArray[i] = byteCharacters.charCodeAt(i);
-              }
-
-              const blob = new Blob([byteArray], { type: contentType });
-              const url = URL.createObjectURL(blob);
-              // Create a link element
-              const link = document.createElement("a");
-              link.href = url;
-              link.download = title; // Set the filename for download
-
-              // Append the link to the document body (or any other element)
-              document.body.appendChild(link);
-
-              // Programmatically trigger the download
-              link.click();
-
-              // Clean up by revoking the URL
-              URL.revokeObjectURL(url);
+              ret += `<p>Attachment: ${content.contentAttachment.title} (${content.contentAttachment.contentType})</p>`;
             }
-          }
+          });
         }
-      }
+      });
     }
-
+    
+    if (body.note) {
+      ret += `<h2>Notes</h2>`;
+      ret += `<p>${body.note.text}</p>`;
+    }
+  
+    ret += `</body></html>`;
     return ret;
   }
+  
   statusArray?: Function | undefined;
 }

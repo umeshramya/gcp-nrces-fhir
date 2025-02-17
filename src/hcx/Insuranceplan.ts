@@ -181,7 +181,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
         limit &&
         limit.map((el) => {
           let ret = `<tr><td>${
-            el.code && this.codebleConceptToHtml(el.code)
+            el.code && this.codeableConceptToHtml(el.code)
           }</td>`;
           ret += `<td>${el.value && el.value.value || ""}</td></tr>`;
 
@@ -208,7 +208,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
       benefit: INSURANCE_PLAN["coverage"][number]["benefit"]
     ) => {
       const benefitRet = benefit.map((el) => {
-        let ret = `<b>${el.type && this.codebleConceptToHtml(el.type)}</b>`;
+        let ret = `<b>${el.type && this.codeableConceptToHtml(el.type)}</b>`;
         ret += el.requirement && `<p>${el.requirement}</p>`;
         ret += getLimit(el.limit);
         return ret;
@@ -221,7 +221,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
       const coveragedstr =
         data.coverage &&
         data.coverage.map((el) => {
-          let ret = `<h3>${this.codebleConceptToHtml(el.type)}</h3>`;
+          let ret = `<h3>${this.codeableConceptToHtml(el.type)}</h3>`;
           ret += el.requirement && `<p>${el.requirement}</p>`;
           ret += getBenfit(el.benefit);
           return ret;

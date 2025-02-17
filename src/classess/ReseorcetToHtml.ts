@@ -1,80 +1,101 @@
-import { CODEABLE_CONCEPT, CodeDisplay, CODING, EXTENSION, IDENTTIFIER, PERIOD, POSITION } from "../config";
+import {
+  CODEABLE_CONCEPT,
+  CodeDisplay,
+  CODING,
+  EXTENSION,
+  IDENTTIFIER,
+  MULTI_RESOURCE,
+  PERIOD,
+  POSITION,
+} from "../config";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 
 export default class ResourceToHTML {
+  codeableConceptToHtml(val: CODEABLE_CONCEPT[] | CODEABLE_CONCEPT): string {
+    if (!Array.isArray(val)) {
+      val = [val];
+    }
 
-  codebleConceptToHtml(val: CODEABLE_CONCEPT): string {
     let ret: string = "";
-    // if (val.coding) {
-    //   val.coding.forEach((el) => {
-    //     ret += `<br/>`;
-    //     if (el.code) {
-    //       ret += `<i>Code</i> : ${el.code} <br/>`;
-    //     }
 
-    //     if (el.display) {
-    //       ret += `<i>Display</i> : ${el.display} <br/>`;
-    //     }
+    val.forEach((concept) => {
+      if (concept.coding) {
+        ret += concept.coding.map((el) => this.codingToHtml(el)).join("");
+      }
 
-    //     if (el.system) {
-    //       ret += `<i>System</i> : <a href=${el.system} target="_blank" rel="noopener noreferrer">${el.system}</a>
-    //                 <br\>`;
-    //     }
+      if (concept.text) {
+        ret += `<p>${concept.text}</p>`;
+      }
+    });
 
-    //     if (el.userSelected) {
-    //       ret += `<i>UserSelected<i/> : ${el.userSelected}<br/>`;
-    //     }
-    //     if (el.version) {
-    //       ret += `<i>Version</i> : ${el.version}<br/>`;
-    //     }
-    //   });
-    // }
-
-    if(val.coding){
-      val.coding.forEach(el=>{
-        ret += this.codingtoHtml(el)
-      })
-    }
-
-    if (val.text) {
-      ret += `${val.text}<br/>`;
-    }
-
-    return ret;
+    return `<div>${ret}</div>`;
   }
 
-  identifierToHtml(val: IDENTTIFIER): string {
-    let ret: string = "";
-    if (val.system) {
-      ret += `<i>System</i>  : ${val.system}<br/>`;
-    }
+  codingToHtml(el: CODING): string {
+    return `
+      <p>
+      ${el.code ? `<i> Code</i> ${el.code} <br/>` : ""}
+      ${el.display ? `<i> Display</i> ${el.display} <br/>` : ""}
+      ${
+        el.system
+          ? `<i> System</i> <a href="${el.system}" target="_blank" rel="noopener noreferrer">${el.system}</a><br/>`
+          : ""
+      }
+      ${
+        el.userSelected !== undefined
+          ? `<i> UserSelected</i> ${el.userSelected}<br/>`
+          : ""
+      }
+      ${el.version ? `<i> Version</i> ${el.version}<br/>` : ""}
+      </p>
+    `;
+  }
 
-    if (val.value) {
-        const resourceMaiin = new ResourceMain()
-      ret += `<i>Value</i> : ${val.value}<br/>`;
+  identifierToHtml(val: IDENTTIFIER[] | IDENTTIFIER): string {
+    if (!Array.isArray(val)) {
+      val = [val];
     }
+    let parts: string[] = [];
 
-    if (val.period) {
-      ret += `<i>Peirod</i> : ${this.periodtoHtml(val.period, false)}<br/>`;
-    }
+    val.forEach((el) => {
+      parts.push("<p>");
+      if (el.system) {
+        parts.push(
+          `<i>System</i> <a href="${el.system}" target="_blank" rel="noopener noreferrer">Right Click Open in new tab</a>`
+        );
+      }
+      if (el.value) {
+        parts.push(`<i> Value</i> ${el.value}`);
+      }
+      if (el.period) {
+        parts.push(`<i> Period</i> ${this.periodtoHtml(el.period, false)}`);
+      }
+      if (el.assigner) {
+        try {
+          const resourceMain = new ResourceMain();
+          parts.push(
+            `<i> Assigner Organization ID</i> ${resourceMain.getIdFromReference({
+              resourceType: "Organization",
+              ref: el.assigner.Reference,
+            })}`
+          );
+        } catch (error) {
+          console.error("Error processing assigner:", error);
+        }
+      }
+      if (el.type) {
+        parts.push(this.codeableConceptToHtml(el.type));
+      }
 
-    if (val.assigner) {
-        const resourceMaiin = new ResourceMain()
-      ret += `Assigner Organization Id : ${resourceMaiin.getIdFromReference(
-        { resourceType: "Organization", ref: val.assigner.Reference }
-      )}<br/>`;
-    }
+      if (el.use) {
+        parts.push(`<i>Use</i> ${el.use}`);
+      }
 
-    if (val.type) {
-      ret += `${this.codebleConceptToHtml(val.type)}<br/>`;
-    }
+      parts.push("</p>");
+    });
 
-    if (val.use) {
-      ret += `<i>Use</i> : ${val.use}<br/>`;
-    }
-
-    return ret;
+    return `<div>${parts.join("")}</div>`; // Join all parts on a single line with "|"
   }
 
   periodtoHtml(val: PERIOD, onlyDate: boolean): string {
@@ -99,65 +120,103 @@ export default class ResourceToHTML {
     return ret;
   }
 
-  extensionToHtml(val:EXTENSION):string{
-    let ret =""
-    if(val.url){
+  extensionToHtml(val: EXTENSION): string {
+    let ret = "";
+    if (val.url) {
       ret += `<i>URL</i> : <a href=${val.url} target="_blank" rel="noopener noreferrer">${val.url}</a>
       <br\>`;
     }
 
-    if(val.valueString){
-      ret += `<i>Value</i> : ${val.valueString}`
+    if (val.valueString) {
+      ret += `<i>Value</i> : ${val.valueString}`;
     }
 
     return ret;
   }
 
-  codeDiplaytoHtml(val:CodeDisplay):string{
-    let ret: string = "";  
+  codeDiplaytoHtml(val: CodeDisplay): string {
+    let ret: string = "";
     if (val.system) {
-      ret += `<i>System</i>: <a href="${val.system}" target="_blank" rel="noopener noreferrer">
+      ret += `<i>System</i> <a href="${
+        val.system
+      }" target="_blank" rel="noopener noreferrer">
         ${val.code || ""} ${val.display || ""}
       </a><br/>`;
     } else {
       ret += `${val.code || ""} ${val.display || ""}`;
     }
-    
-    return ret;
-  }
-
-  codingtoHtml(val:CODING):string{
-    let ret:string=""
-    ret += this.codeDiplaytoHtml(val)
-
-    if(val.userSelected){
-      ret += `<i>User Selected</i> : ${val.userSelected}<br/>`
-    }
-
-    if(val.version){
-      ret +=`<i>Version</i> : ${val.version}<br/>`
-    }
-
-
-   
 
     return ret;
   }
 
-  positionToHtml(val:POSITION):string{
-    let ret:string=""
+  codingtoHtml(val: CODING): string {
+    let ret: string = "";
+    ret += this.codeDiplaytoHtml(val);
 
-    if(val.altitude){
-      ret +=`<i>Altitude</i> : ${val.altitude}<br/> `
+    if (val.userSelected) {
+      ret += `<i>User Selected</i> : ${val.userSelected}<br/>`;
     }
 
-    if(val.latitude){
-      ret +=`<i>Latitude</i> : ${val.latitude}<br/>`
+    if (val.version) {
+      ret += `<i>Version</i> : ${val.version}<br/>`;
     }
 
-    if(val.longitude){
-      ret += `<i>Longitude</i> : ${val.longitude}<br/>`
+    return ret;
+  }
+
+  positionToHtml(val: POSITION): string {
+    let ret: string = "";
+
+    if (val.altitude) {
+      ret += `<i>Altitude</i> : ${val.altitude}<br/> `;
     }
+
+    if (val.latitude) {
+      ret += `<i>Latitude</i> : ${val.latitude}<br/>`;
+    }
+
+    if (val.longitude) {
+      ret += `<i>Longitude</i> : ${val.longitude}<br/>`;
+    }
+    return ret;
+  }
+
+  multiResourceToHtml(
+    val: MULTI_RESOURCE[] | MULTI_RESOURCE,
+    name: string
+  ): string {
+    if (!Array.isArray(val)) {
+      val = [val];
+    }
+
+    if (val.length === 0) {
+      return `<p>${name}</p><p>No resources available</p>`;
+    }
+
+    let ret: string = `<p>${name}</p>`;
+
+    try {
+      ret += val
+        .map((el) => {
+          const fields = [
+            "<p>",
+            el.display ? `<i>Display</i> ${el.display}` : "",
+            el.type ? `<i>Type</i> ${el.type}` : "",
+            el.resource ? `<i>Resource</i> ${el.resource}` : "",
+            el.id ? `<i>Resource ID</i> ${el.id}` : "",
+            "</p>",
+          ].join("");
+
+          return fields
+            ? `<div>${fields}</div>`
+            : `<div><i>No details available</i></div>`;
+        })
+        .join("<br>");
+    } catch (error) {
+      console.error("Error in multiResourceToHtml:", error);
+      ret += "<p>Error processing resources</p>";
+    }
+
     return ret;
   }
 }
