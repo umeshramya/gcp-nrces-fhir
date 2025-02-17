@@ -131,7 +131,11 @@ export class Communication extends ResourceMain implements ResourceMaster {
         if (!payload.content) return '';
         if (payload.content.contentAttachment) {
             const a = payload.content.contentAttachment;
-            return `Attachment: ${a.title || a.url}`;
+
+            return `Attachment: ${a.title} 
+              ${a.data && `<br/>><a href="data:${a.contentType};base64,${a.data}" >Right Click Open in new tab</a>`}
+              ${a.url && `<br/>><a href="${a.url}" >Right Click Open in new tab</a>`}
+            `;
         }
         if (payload.content.contentString) {
             return `Text: ${payload.content.contentString}`;
@@ -143,7 +147,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
     };
 
     const getPayloads = () => 
-        body.payload?.map(p => `<li>${getPayloadContent(p)}</li>`).join('') || '';
+        body.payload?.map(p => `<br>${getPayloadContent(p)}</br>`).join('') || '';
 
     const getInResponseTo = () => 
         body.inResponseTo?.map(ir => getReference(ir)).join(',<br>') || '';
@@ -154,15 +158,13 @@ export class Communication extends ResourceMain implements ResourceMaster {
     const html = `
         <div class="communication">
             <h1>Communication</h1>
-            <table>
+            <table data-pdfmake="{'widths':['40%','60%']}">
                 <tbody>
                     ${body.id ? `<tr><th>ID</th><td>${body.id}</td></tr>` : ''}
                     ${body.status ? `<tr><th>Status</th><td>${body.status}</td></tr>` : ''}
                     ${body.priority ? `<tr><th>Priority</th><td>${body.priority}</td></tr>` : ''}
                     ${body.category ? `<tr><th>Category</th><td>${getCategories()}</td></tr>` : ''}
                     ${body.subject ? `<tr><th>Subject</th><td>${getReference(body.subject)}</td></tr>` : ''}
-                    ${body.sender ? `<tr><th>Sender</th><td>${getReference(body.sender)}</td></tr>` : ''}
-                    ${body.recipient?.length ? `<tr><th>Recipients</th><td>${getRecipients()}</td></tr>` : ''}
                     ${body.encounter ? `<tr><th>Encounter</th><td>${getReference(body.encounter)}</td></tr>` : ''}
                     ${body.sentDate ? `<tr><th>Sent Date</th><td>${body.sentDate}</td></tr>` : ''}
                     ${body.receivedDate ? `<tr><th>Received Date</th><td>${body.receivedDate}</td></tr>` : ''}
