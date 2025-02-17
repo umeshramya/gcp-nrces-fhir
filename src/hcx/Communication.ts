@@ -116,7 +116,7 @@ interface TO_HTML_HCX_OPTIONS_COMMUNICATION
 
 export class Communication extends ResourceMain implements ResourceMaster {
   async toHtml(options: TO_HTML_HCX_OPTIONS_COMMUNICATION): Promise<string> {
-    const { body } = options;
+    const body = this.convertFhirToObject(options.body)
     
     const getReference = (resource: MULTI_RESOURCE | undefined) => 
         resource ? `${resource.resource}/${resource.id}` : '';
@@ -133,8 +133,8 @@ export class Communication extends ResourceMain implements ResourceMaster {
             const a = payload.content.contentAttachment;
 
             return `Attachment: ${a.title} 
-              ${a.data && `<br/>><a href="data:${a.contentType};base64,${a.data}" >Right Click Open in new tab</a>`}
-              ${a.url && `<br/>><a href="${a.url}" >Right Click Open in new tab</a>`}
+              ${a.data && `<br/><a href="data:${a.contentType};base64,${a.data}" >Right Click Open in new tab</a>`}
+              ${a.url && `<br/><a href="${a.url}" >Right Click Open in new tab</a>`}
             `;
         }
         if (payload.content.contentString) {
@@ -147,7 +147,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
     };
 
     const getPayloads = () => 
-        body.payload?.map(p => `<br>${getPayloadContent(p)}</br>`).join('') || '';
+        body.payload?.map(p => `<li>${getPayloadContent(p)}</li>`).join('') || '';
 
     const getInResponseTo = () => 
         body.inResponseTo?.map(ir => getReference(ir)).join(',<br>') || '';
@@ -339,15 +339,17 @@ export class Communication extends ResourceMain implements ResourceMaster {
   }
   convertFhirToObject(options: any): COMMUNICATION {
     const communication: COMMUNICATION = {
-      text: options.text.div,
-
+      text: options?.text?.div || "",
       status: options.status,
       category: options.category,
-      priority: options.priority,
-      recipient: options.recipient.map((el: any) => this.getFromMultResource(el)
-      ),
-      resourceType: "Communication"
+
+      resourceType: "Communication",
+      priority: options.priority
     };
+
+    if(options.recipient){
+      communication.recipient =options.recipient.map((el: any) => this.getFromMultResource(el))
+    }
 
     if (options.identifier) {
       communication.identifier = options.identifier;

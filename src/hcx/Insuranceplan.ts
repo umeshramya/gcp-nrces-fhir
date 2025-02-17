@@ -173,6 +173,7 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
     return ret;
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_INSURANCE_PLAN): Promise<string> {
+    option.body = this.convertFhirToObject(option.body)
     const getLimit = (
       limit: INSURANCE_PLAN["coverage"][number]["benefit"][number]["limit"]
     ): string => {
@@ -359,50 +360,4 @@ export class InsurancePlan extends ResourceMain implements ResourceMaster {
   statusArray?: Function | undefined;
 }
 
-// <table border="1" cellspacing="0" cellpadding="5">
-// <thead>
-//   <tr>
-//     <th>Type</th>
-//     <th>Requirement</th>
-//     <th>Benefits</th>
-//     <th>Networks</th>
-//   </tr>
-// </thead>
-// <tbody>
-//   ${data.coverage?.map(coverage => `
-//     <tr>
-//       <td>${ coverage.type && this.codebleConceptToHtml(coverage.type) || "N/A"}</td>
-//       <td>${coverage.requirement || "N/A"}</td>
-//       <td>
-//         <ul>
-//           ${coverage.benefit?.map(benefit => `
-//             <li>
-//               <strong>Type:</strong> ${benefit.type?.text || "N/A"}<br>
-//               <strong>Requirement:</strong> ${benefit.requirement || "N/A"}<br>
-//               <strong>Limits:</strong>
-//               <ul>
-//                 ${benefit.limit?.map(limit => `
-//                   <li>
-//                     <strong>Value:</strong> ${limit.value?.value || "N/A"} ${limit.value?.unit || ""}<br>
-//                     <strong>Code:</strong> ${limit.code?.text || "N/A"}
-//                   </li>
-//                 `).join("") || "<li>None</li>"}
-//               </ul>
-//             </li>
-//           `).join("") || "<li>None</li>"}
-//         </ul>
-//       </td>
-//       <td>
-//         <ul>
-//           ${coverage.network?.map(network => `
-//             <li>
-//               <strong>Resource:</strong> ${network.resource || "N/A"}<br>
-//               <strong>Display:</strong> ${network.display || "N/A"}
-//             </li>
-//           `).join("") || "<li>None</li>"}
-//         </ul>
-//       </td>
-//     </tr>
-//   `).join("") || "<tr><td colspan='4'>No Coverage Available</td></tr>"}
-// </tbody>
-// </table>
+
