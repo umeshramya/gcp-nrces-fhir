@@ -10,6 +10,7 @@ import {
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
+import ResourceToHTML from "../classess/ReseorcetToHtml";
 
 interface subject extends MULTI_RESOURCE {
   resource: "Patient" | "Group";
@@ -71,7 +72,7 @@ const statusArray = [
 
 type Status = (typeof statusArray)[number];
 
-interface PAYLOAD {
+export interface PAYLOAD {
   id?: string;
   extension?: EXTENSION[];
   modifierExtension?: EXTENSION[];
@@ -118,42 +119,21 @@ export class Communication extends ResourceMain implements ResourceMaster {
   async toHtml(options: TO_HTML_HCX_OPTIONS_COMMUNICATION): Promise<string> {
     const body = this.convertFhirToObject(options.body)
     
-    const getReference = (resource: MULTI_RESOURCE | undefined) => 
-        resource ? `${resource.resource}/${resource.id}` : '';
+
+    const getReference = (resource: MULTI_RESOURCE , name:string) => 
+        this.multiResourceToHtml(resource, name)
     
     const getCategories = () => 
         body.category?.map(c => c.text).filter(Boolean).join(', ') || '';
     
     const getRecipients = () => 
-        body.recipient?.map(r => getReference(r)).join(',<br>') || '';
+        body.recipient?.map(r => getReference(r, "Recipient")).join(',<br>') || '';
     
-    const getPayloadContent = (payload: PAYLOAD) => {
-        if (!payload.content) return '';
-        if (payload.content.contentAttachment) {
-            const a = payload.content.contentAttachment;
-
-            return `Attachment: ${a.title} 
-              ${a.data && `<br/><a href="data:${a.contentType};base64,${a.data}" >Right Click Open in new tab</a>`}
-              ${a.url && `<br/><a href="${a.url}" >Right Click Open in new tab</a>`}
-            `;
-        }
-        if (payload.content.contentString) {
-            return `Text: ${payload.content.contentString}`;
-        }
-        if (payload.content.contentReference) {
-            return `Reference: ${getReference(payload.content.contentReference)}`;
-        }
-        return '';
-    };
-
-    const getPayloads = () => 
-        body.payload?.map(p => `<li>${getPayloadContent(p)}</li>`).join('') || '';
-
     const getInResponseTo = () => 
-        body.inResponseTo?.map(ir => getReference(ir)).join(',<br>') || '';
+        body.inResponseTo?.map(ir => getReference(ir, "InResponseTo")).join(',<br>') || '';
 
     const getReasonReferences = () => 
-        body.reasonReference?.map(rr => getReference(rr)).join(',<br>') || '';
+        body.reasonReference?.map(rr => getReference(rr, "ReasonReference")).join(',<br>') || '';
 
     const html = `
         <div class="communication">
@@ -164,8 +144,8 @@ export class Communication extends ResourceMain implements ResourceMaster {
                     ${body.status ? `<tr><th>Status</th><td>${body.status}</td></tr>` : ''}
                     ${body.priority ? `<tr><th>Priority</th><td>${body.priority}</td></tr>` : ''}
                     ${body.category ? `<tr><th>Category</th><td>${getCategories()}</td></tr>` : ''}
-                    ${body.subject ? `<tr><th>Subject</th><td>${getReference(body.subject)}</td></tr>` : ''}
-                    ${body.encounter ? `<tr><th>Encounter</th><td>${getReference(body.encounter)}</td></tr>` : ''}
+                    ${body.subject ? `<tr><th>Subject</th><td>${getReference(body.subject, "Subject")}</td></tr>` : ''}
+                    ${body.encounter ? `<tr><th>Encounter</th><td>${getReference(body.encounter, "Encounter")}</td></tr>` : ''}
                     ${body.sentDate ? `<tr><th>Sent Date</th><td>${body.sentDate}</td></tr>` : ''}
                     ${body.receivedDate ? `<tr><th>Received Date</th><td>${body.receivedDate}</td></tr>` : ''}
                     ${body.topic ? `<tr><th>Topic</th><td>${body.topic.text}</td></tr>` : ''}
@@ -177,7 +157,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
                             <th>Payloads</th>
                             <td>
                                 <ul style="list-style-type: none; padding-left: 0;">
-                                    ${getPayloads()}
+                                    ${new ResourceToHTML().payloadToHtml(body.payload)}
                                 </ul>
                             </td>
                         </tr>` : ''}
@@ -338,7 +318,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
     return body;
   }
   convertFhirToObject(options: any): COMMUNICATION {
-    const communication: COMMUNICATION = {
+    const ret: COMMUNICATION = {
       text: options?.text?.div || "",
       status: options.status,
       category: options.category,
@@ -348,89 +328,89 @@ export class Communication extends ResourceMain implements ResourceMaster {
     };
 
     if(options.recipient){
-      communication.recipient =options.recipient.map((el: any) => this.getFromMultResource(el))
+      ret.recipient =options.recipient.map((el: any) => this.getFromMultResource(el))
     }
 
     if (options.identifier) {
-      communication.identifier = options.identifier;
+      ret.identifier = options.identifier;
     }
 
     if (options.subject) {
-      communication.subject = this.getFromMultResource(options.subject) as any;
+      ret.subject = this.getFromMultResource(options.subject) as any;
     }
 
     if (options.basedOn) {
-      communication.basedOn = options.basedOn.map((el: any) =>
+      ret.basedOn = options.basedOn.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
 
     if (options.about) {
-      communication.about = options.about.map((el: any) =>
+      ret.about = options.about.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
 
     if (options.topic) {
-      communication.topic = options.topic;
+      ret.topic = options.topic;
     }
     if (options.partOf) {
-      communication.partOf = options.partOf.map((el: any) =>
+      ret.partOf = options.partOf.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
     if (options.recipient) {
-      communication.recipient = options.recipient.map((el: any) =>
+      ret.recipient = options.recipient.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
 
     if (options.medium) {
-      communication.medium = options.medium;
+      ret.medium = options.medium;
     }
 
     if (options.implicitRules) {
-      communication.implicitRulesLink = options.implicitRules;
+      ret.implicitRulesLink = options.implicitRules;
     }
 
     if (options.reasonCode) {
-      communication.reasonCode = options.reasonCode;
+      ret.reasonCode = options.reasonCode;
     }
 
     if (options.reasonReference) {
-      communication.reasonReference = options.reasonReference.map((el: any) =>
+      ret.reasonReference = options.reasonReference.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
 
     if (options.inResponseTo) {
-      communication.inResponseTo = options.inResponseTo.map((el: any) =>
+      ret.inResponseTo = options.inResponseTo.map((el: any) =>
         this.getFromMultResource(el)
       );
     }
     if (options.sender) {
-      communication.sender = this.getFromMultResource(options.sender) as any;
+      ret.sender = this.getFromMultResource(options.sender) as any;
     }
 
     if (options.encounter) {
-      communication.encounter = this.getFromMultResource(
+      ret.encounter = this.getFromMultResource(
         options.encounter
       ) as any;
     }
 
     if (options.id) {
-      communication.id = options.id;
+      ret.id = options.id;
     }
 
     if (options.sent) {
-      communication.sentDate = options.sent;
+      ret.sentDate = options.sent;
     }
     if (options.received) {
-      communication.receivedDate = options.received;
+      ret.receivedDate = options.received;
     }
 
     if (options.payload) {
-      communication.payload = options.payload?.map((el: any) => {
+      ret.payload = options.payload?.map((el: any) => {
         const ret: PAYLOAD = {};
         if (el.id) ret.id = el.id;
         if (el.extension) ret.extension = el.extension;
@@ -453,7 +433,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
       });
     }
 
-    return communication;
+    return ret;
   }
   statusArray(): Status[] {
     return statusArray.map((el) => el);

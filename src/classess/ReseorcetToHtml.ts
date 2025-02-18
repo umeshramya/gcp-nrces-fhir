@@ -8,6 +8,7 @@ import {
   PERIOD,
   POSITION,
 } from "../config";
+import { PAYLOAD } from "../hcx/Communication";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 
@@ -219,4 +220,38 @@ export default class ResourceToHTML {
 
     return ret;
   }
+
+
+  payloadToHtml(val:PAYLOAD[]):string{
+    const getPayloads = (val: PAYLOAD[]) => 
+       val.map(p => `<li>${getPayloadContent(p)}</li>`).join('') || '';
+
+    const getPayloadContent = (payload: PAYLOAD) => {
+      if (!payload.content) return '';
+      if (payload.content.contentAttachment) {
+          const a = payload.content.contentAttachment;
+
+          return `Attachment: ${a.title} 
+            ${a.data && `<br/><a href="data:${a.contentType};base64,${a.data}" >Right Click Open in new tab</a>`}
+            ${a.url && `<br/><a href="${a.url}" >Right Click Open in new tab</a>`}
+          `;
+      }
+      if (payload.content.contentString) {
+          return `Text: ${payload.content.contentString}`;
+      }
+      if (payload.content.contentReference) {
+          return `Reference: ${this.multiResourceToHtml({
+            ...payload.content.contentReference
+          },""
+        )}`;
+      }
+      return '';
+  };
+
+  return getPayloads(val)
+
+  }
+
+
+
 }

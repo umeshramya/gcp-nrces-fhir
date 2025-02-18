@@ -1,3 +1,4 @@
+import ResourceToHTML from "../classess/ReseorcetToHtml";
 import {
   CODEABLE_CONCEPT,
   EXTENSION,
@@ -7,6 +8,7 @@ import {
 import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
+import { PAYLOAD } from "./Communication";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 
 interface TO_HTML_HCX_OPTIONS_COMMUNICATION_REQUEST
@@ -93,21 +95,7 @@ export interface COMMUNICATION_REQUEST {
   statusReason: CODEABLE_CONCEPT;
   authoredOn: string;
   requester: REQUESTER;
-  payload: {
-    id?: string;
-    extension: EXTENSION[];
-    modifierExtension: EXTENSION[];
-    content: {
-      contentString: string;
-      contentAttachment: {
-        contentType: "application/pdf" | string;
-        language: "en-IN";
-        data: string;
-        title: string;
-        creation: string;
-      };
-    }[];
-  }[];
+  payload?:PAYLOAD[];
   recipient: RECIPIENT[];
   sender: SENDER;
   note?: {
@@ -230,7 +218,6 @@ export class CommunicationRequest
           reference: options?.requester,
 
         }),
-      payload: options.payload,
       recipient: options.recipient &&
         options.recipient.map((el: { reference: any; display: any; }) => {
           return this.getFromMultResource({
@@ -271,6 +258,30 @@ export class CommunicationRequest
           });
         })
     };
+
+    if (options.payload) {
+      ret.payload = options.payload?.map((el: any) => {
+        const ret: PAYLOAD = {};
+        if (el.id) ret.id = el.id;
+        if (el.extension) ret.extension = el.extension;
+        if (el.modifierExtension) ret.modifierExtension = el.modifierExtension;
+
+        if (el.contentAttachment) {
+          ret.content = {};
+          ret.content.contentAttachment = el.contentAttachment;
+        } else if (el.contentString) {
+          ret.content = {};
+          ret.content.contentString = el.contentString;
+        } else if (el.content.contentReference) {
+          ret.content = {};
+          ret.content.contentReference = this.getFromMultResource(
+            el.contentReference
+          );
+        }
+
+        return ret;
+      });
+    }
 
     return ret;
   }
@@ -319,19 +330,7 @@ export class CommunicationRequest
     
     if (body.payload && body.payload.length > 0) {
       ret += `<h2>Payload</h2>`;
-      body.payload.forEach((p, index) => {
-        ret += `<p><strong>Payload ${index + 1}:</strong></p>`;
-        if (p.content && p.content.length > 0) {
-          p.content.forEach(content => {
-            if (content.contentString) {
-              ret += `<p>${content.contentString}</p>`;
-            }
-            if (content.contentAttachment) {
-              ret += `<p>Attachment: ${content.contentAttachment.title} (${content.contentAttachment.contentType})</p>`;
-            }
-          });
-        }
-      });
+      ret += new ResourceToHTML().payloadToHtml(body.payload)
     }
     
     if (body.note) {
