@@ -6,8 +6,6 @@ import {
   PERIOD,
 } from "../config";
 import { ResourceMaster } from "../Interfaces";
-import { Organization, ORGANIZATION } from "../resources/Organization";
-import { PATIENT, Patient } from "../resources/Patient";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
@@ -101,13 +99,13 @@ For some coverages a single identifier is issued to the Subscriber and then a un
 
 export interface TO_HTML_HCX_OPTIONS_COVERAGE
   extends Omit<Omit<TO_HTML_HCX_OPTIONS, "body">, "coverages"> {
-  body: COVERAGE;
+  body: any;
   showPatient: boolean;
   showInsuranceCompany: boolean;
 }
 export class Coverage extends ResourceMain implements ResourceMaster {
   async toHtml(option: TO_HTML_HCX_OPTIONS_COVERAGE): Promise<string> {
-    const body: COVERAGE = option.body;
+    const body: COVERAGE = this.convertFhirToObject(option.body);
     let ret = "";
     if (option.addResourceType) {
       ret += `<h1>Coverage</h1>`;
@@ -131,7 +129,7 @@ export class Coverage extends ResourceMain implements ResourceMaster {
 
     if(option.body.payor && option.body.payor.length >0){
       ret +=`<h3>Payor</h3>`
-      option.body.payor.forEach(el=>{
+      option.body.payor.forEach((el: { display: any; resource: any; id: any; })=>{
         if(el.display){
           ret += `<i>Display</i> : ${el.display}<br/>`
         }

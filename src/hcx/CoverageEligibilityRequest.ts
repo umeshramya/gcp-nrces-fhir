@@ -129,8 +129,7 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
 
 export interface TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_REQUEST
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
-  body: COVERAGE_ELIGIBILITY_REQUEST;
-  patient:PATIENT
+  body: any;
 }
 
 export class CoverageEligibilityRequest
@@ -141,7 +140,7 @@ export class CoverageEligibilityRequest
     option: TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_REQUEST
   ): Promise<string> {
     let ret: string = "";
-    const body: COVERAGE_ELIGIBILITY_REQUEST = option.body as any;
+    const body: COVERAGE_ELIGIBILITY_REQUEST = this.convertFhirToObject(option.body)
 
     if (option.addResourceType) {
       ret += `<h1>Coverage Eligibility Request</h1>`;
@@ -153,20 +152,12 @@ export class CoverageEligibilityRequest
       false
     )}`;
 
- 
-    ret += `<h3>Patient</h3>`;
-    ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
-
-    ret += `<h3>Insurance</h3>`;
-    ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
-    ret += `<hr/>`;
-
     if (option.body.text) {
       ret += `<h2>Text</h2>`;
       ret += `<p>${option.body.text} </p>`
     }
 
-    ret += `<h2>Object to Text</h2>`;
+  
 
     if (body.purpose) {
       ret += body.purpose && `Purpose : ${body.purpose}</br>`;
@@ -174,9 +165,7 @@ export class CoverageEligibilityRequest
 
     if (option.body.identifier && option.body.identifier.length > 0) {
       ret += `<h4>Identifiers</h4>`;
-      for (let index = 0; index < option.body.identifier.length; index++) {
-        ret += `${this.identifierToHtml(option.body.identifier[index])}`;
-      }
+      ret += this.identifierToHtml(body.identifier)
     }
 
     if (option.body.priority) {
