@@ -99,7 +99,7 @@ export interface COVERAGE_ELIGIBILITY_RESPONSE {
 
 export interface TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
-  body: COVERAGE_ELIGIBILITY_RESPONSE;
+  body: any;
 }
 export class CoverageEligibiltyResponse
   extends ResourceMain
@@ -109,7 +109,7 @@ export class CoverageEligibiltyResponse
     option: TO_HTML_HCX_OPTIONS_COVERAGE_ELIGIBILITY_RESPONSE
   ): Promise<string> {
     let ret = "";
-    const body: COVERAGE_ELIGIBILITY_RESPONSE = option.body;
+    const body: COVERAGE_ELIGIBILITY_RESPONSE = this. convertFhirToObject(option.body);
 
     if (option.addResourceType) {
       ret += `<h1>Coverage Eligibility Response</h1>`;
@@ -121,14 +121,6 @@ export class CoverageEligibiltyResponse
       false
     )} <br/>`;
 
-
-
-    ret += `<h3>Patient</h3>`;
-    ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
-
-    ret += `<h3>Insurance</h3>`;
-    ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
-    ret += `<hr/>`;
     // Error
 
     if (body.error) {
