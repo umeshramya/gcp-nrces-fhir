@@ -106,74 +106,7 @@ export interface TO_HTML_HCX_OPTIONS_COVERAGE
 export class Coverage extends ResourceMain implements ResourceMaster {
   async toHtml(option: TO_HTML_HCX_OPTIONS_COVERAGE): Promise<string> {
     const body: COVERAGE = this.convertFhirToObject(option.body);
-    let ret = "";
-    if (option.addResourceType) {
-      ret += `<h1>Coverage</h1>`;
-    }
-    if (body.text && body.text != "") {
-      ret += `<h2>Text</h2>`;
-      ret += `${body.text}`;
-    }
-
-    if (option.showPatient) {
-          ret += `<h3>Patient</h3>`;
-        ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
-    }
-
-    if (option.showInsuranceCompany && option.body.insurerOrganizationId) {
-      ret += `<h3>Insurance</h3>`;
-      ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
-      ret += `<hr/>`;
-    }
-
-
-    if(option.body.payor && option.body.payor.length >0){
-      ret +=`<h3>Payor</h3>`
-      option.body.payor.forEach((el: { display: any; resource: any; id: any; })=>{
-        if(el.display){
-          ret += `<i>Display</i> : ${el.display}<br/>`
-        }
-        if(el.resource){
-          ret +=`<i>Resource Type</i> : ${el.resource} `
-        }
-        if(el.id){
-          ret += `<i>Id</i> : ${el.id}`
-        }
-      })
-    }
-
-    ret += `<hr/>`;
-
-    if(option.body.status){
-      ret += `<b>Coverage Status</b> : ${option.body.status}<br/>`
-    }
-
-    if (option.body.policyHolder && option.body.policyHolder.id) {
-      ret += `<b>PolicyHolder</b> : ${option.body.policyHolder.id}<br/>`;
-    }
-
-    if(option.body.subscriberId){
-      ret += `<b>Policy Subscriber</b> : ${option.body.subscriberId}<br/>`
-    }
-
-    if(option.body.relationship){
-      ret += `<b>Subscriber Relationship</b> : ${this.codeableConceptToHtml(option.body.relationship)}<br/>`
-    }
-
-    if (option.body.period) {
-      ret += `Coverage Period : Start : ${new TimeZone().convertTZ(
-        option.body.period.start,
-        "Asia/Kolkata",
-        true
-      )} - End : ${new TimeZone().convertTZ(
-        option.body.period.end,
-        "Asia/Kolkata",
-        true
-      )}<br/>`;
-    }
-
-
-
+    let ret = await this.coverageToHtml(option)
     return ret;
   }
   getFHIR(options: COVERAGE) {

@@ -189,80 +189,15 @@ export class CoverageEligibilityRequest
     }
 
 
-    if (body.insurance && body.insurance.length > 0) {
-      ret += `<h4>Insurances</h4>`;
-      ret +=`<table>
-        <tr>
-          <th>
-            Coverage
-          </th>
-          <th>
-            Extension
-          </th>
-          <th>
-            Focal
-          </th>
-        </tr>
-      `
-    
-      for (let index = 0; index < body.insurance.length; index++) {
-        ret +=`<tr>`
-        const el = body.insurance[index];
-        // Coverages
-        ret +=`<td>`
-        if (
-          el.coverage &&
-          el.coverage.reference &&
-          option.coverages &&
-          option.coverages.length > 0
-        ) {
-          try {
-            
-            const coverage = new Coverage();
-            const id = coverage.getIdFromReference({
-              resourceType: "Coverage",
-              ref: el.coverage.reference,
-            });
-            const filCoverage = option.coverages.filter((cl) => cl.id == id);
-            if (filCoverage && filCoverage.length > 0) {
-              
-              ret += await coverage.toHtml({
-                addResourceType: false,
-                patient:option.patient,
-                payerCode :option.payerCode,
-                payerName:option.payerName,
-                body: filCoverage[0],
-                showInsuranceCompany: false,
-                showPatient: false,
-              });
-            }
-          } catch (error) {
-            console.error("Error in coverage if block:", error);
-          }
-        }
-        ret +=`</td>`
-
-        // Extension
-        ret +=`<td>`
-        if(el.extension){
-          ret += `${el.extension.map(ex=>{
-            return this.extensionToHtml(ex)
-          }).join(`<br/>`)}`
-        }
-        ret +=`</td>`
-
-        // Focal
-
-        ret += `<td>`
-        if(el.focal){
-          ret += `${el.focal}`
-        }
-        ret += `</td>`
-        ret +=`</tr>`
-      }
+    if(body.insurance){
+      ret +=await  this.insuranceToHtml({
+        "val" : Array.isArray(body.insurance )  ? body.insurance : [body.insurance],
+        "patient" : option.patient,
+        "payerCode" : option.payerCode,
+        "payerName" : option.payerName
+      })
     }
 
-    ret += `</table>`
 
     if(body.item && body.item.length > 0){
       ret +=`<table>
@@ -456,4 +391,6 @@ export class CoverageEligibilityRequest
   Purpose = (): CoverageEligibilityRequestPurpoe[] => {
     return CoverageEligibilityRequestPurpose.map((el) => el);
   };
+
+ 
 }

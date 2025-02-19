@@ -10,7 +10,7 @@ import { ResourceMaster } from "../Interfaces";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 import { Coverage } from "./Coverage";
-import { INSURANCE } from "./CoverageEligibilityRequest";
+import { CoverageEligibilityRequest, INSURANCE } from "./CoverageEligibilityRequest";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
 const CoverageEligibilityResponcePurpose = [
   "auth-requirements",
@@ -139,222 +139,14 @@ export class CoverageEligibiltyResponse
       ret += `<h3><b>Purpose</b> : ${body.purpose.toString()}</h3>`;
     }
 
-    // if (body.insurance && body.insurance.length > 0) {
-    //   ret += `<h4>Insurances</h4>`;
-    //   for (let index = 0; index < body.insurance.length; index++) {
-    //     const el = body.insurance[index]
-
-    //     ret += `<br/><hr/>`;
-
-    //     if (el.benefitPeriod) {
-    //       ret += `<h4>Benefit Period</h4>`;
-    //       ret +=
-    //         el.benefitPeriod.start &&
-    //         `Start : ${new TimeZone().convertTZ(
-    //           el.benefitPeriod.start,
-    //           "Asia/Kolkata",
-    //           false
-    //         )}<br/>`;
-
-    //       ret +=
-    //         el.benefitPeriod.end &&
-    //         `End : ${new TimeZone().convertTZ(
-    //           el.benefitPeriod.end,
-    //           "Asia/Kolkata",
-    //           false
-    //         )} <br/>`;
-    //     }
-
-    //     if (el.inforce) {
-    //       ret += `<b>Inforce</b> ${el.inforce}<br/>`;
-    //     }
-
-    //     // ret += el.coverage
-
-    //     if (
-    //       el.coverage &&
-    //       el.coverage.reference &&
-    //       option.coverages &&
-    //       option.coverages.length > 0
-    //     ) {
-    //       try {
-    //         const coverage = new Coverage();
-    //         const id = coverage.getIdFromReference({
-    //           resourceType: 'Coverage',
-    //           ref: el.coverage.reference,
-    //         });
-    //         const filCoverage = option.coverages.filter((cl) => cl.id == id);
-    //         if (filCoverage && filCoverage.length > 0) {
-    //           ret += '<h3>Coverage</h3>';
-    //           ret += await coverage.toHtml({
-    //             addResourceType: false,
-    //             patient:option.patient,
-    //             payerCode : option.payerCode,
-    //             payerName : option.payerName,
-    //             body: filCoverage[0],
-    //             showInsuranceCompany: false,
-    //             "showPatient": false, 
-    //           });
-    //         }
-    //       } catch (error) {
-    //         console.error('Error in coverage if block:', error);
-    //       }
-    //     }
-        
-
-    //     if (el.item && el.item.length > 0) {
-    //       try {
-    //         el.item.forEach((it, i) => {
-    //           ret += `<h4>Item No ${i + 1}</h4>`;
-    //           if (it.name) {
-    //             ret += `Name :  ${it.name}<br/>`;
-    //           }
-  
-    //           if (it.network) {
-    //             ret += `<b>Network</b> : ${this.codeableConceptToHtml(
-    //               it.network
-    //             )}<br/>`;
-    //           }
-    //           if (it.productOrService) {
-    //             ret += `Product Or Service : ${this.codeableConceptToHtml(
-    //               it.productOrService
-    //             )}`;
-    //           }
-    //           if (it.description) {
-    //             ret += `<b>Description</b> : ${it.description}<br/>`;
-    //           }
-  
-    //           if (it.category) {
-    //             ret += `<b>Category</b> ${this.codeableConceptToHtml(
-    //               it.category
-    //             )}`;
-    //           }
-  
-    //           if (it.excluded) {
-    //             ret += `<b>Excluded</b> : ${it.excluded}<br/>`;
-    //           }
-  
-    //           if (it.modifier) {
-    //             ret += `<b>Modifier</b> : ${it.modifier}<br/>`;
-    //           }
-  
-    //           if (it.term) {
-    //             ret += `<b>Term</b> : ${this.codeableConceptToHtml(it.term)}<br/>`;
-    //           }
-    //           if (it.unit) {
-    //             ret += `<b>Unit</b> : ${this.codeableConceptToHtml(it.unit)}<br/>`;
-    //           }
-  
-    //           if (it.benefit) {
-    //             ret += `<h5>Benfits</h5>`;
-  
-    //             it.benefit.forEach((be) => {
-    //               if (be.type) {
-    //                 ret += `<b>Type</b> : ${this.codeableConceptToHtml(be.type)}`;
-    //               }
-    //               if (be.allowedMoney && be.allowedMoney.value) {
-    //                 ret += `<b>Allowed Money</b> : ${be.allowedMoney?.currency} ${be.allowedMoney?.value}<br/> `;
-    //               }
-    //               if (be.allowedUnsignedInt) {
-    //                 ret += `<b>Allowed UnsignedInt</b> : ${be.allowedUnsignedInt}<br/>`;
-    //               }
-  
-    //               if (be.allowedString) {
-    //                 ret += `<b>Allowed String</b> : ${be.allowedString}<br/>`;
-    //               }
-    //               if (be.usedMoney && be.usedMoney.value) {
-    //                 ret += `<b>Used Money</b> : ${be.usedMoney?.currency} ${be.usedMoney?.value}<br/> `;
-    //               }
-    //               if (be.usedUnsignedInt) {
-    //                 ret += `<b>Used UnsignedInt</b> : ${be.usedUnsignedInt}<br/>`;
-    //               }
-    //               if (be.usedString) {
-    //                 ret += `<b>Used String</b> : ${be.usedString}<br/>`;
-    //               }
-    //             });
-    //           }
-    //         });
-    //       } catch (error) {
-    //         console.log(`CoverageEligibiltyResponse.toHtml.item ${error}`)
-    //       }
-
-    //     }
-    //   };
-    // }
-
-    if (body.insurance && body.insurance.length > 0) {
-      ret += `<h4>Insurances</h4>`;
-      ret +=`<table>
-        <tr>
-          <th>
-            Coverage
-          </th>
-          <th>
-            Extension
-          </th>
-          <th>
-            Focal
-          </th>
-        </tr>
-      `
-    
-      for (let index = 0; index < body.insurance.length; index++) {
-        ret +=`<tr>`
-        const el = body.insurance[index];
-        // Coverages
-        ret +=`<td>`
-        if (
-          el.coverage &&
-          el.coverage.reference &&
-          option.coverages &&
-          option.coverages.length > 0
-        ) {
-          try {
-            
-            const coverage = new Coverage();
-            const id = coverage.getIdFromReference({
-              resourceType: "Coverage",
-              ref: el.coverage.reference,
-            });
-            const filCoverage = option.coverages.filter((cl) => cl.id == id);
-            if (filCoverage && filCoverage.length > 0) {
-              
-              ret += await coverage.toHtml({
-                addResourceType: false,
-                patient:option.patient,
-                payerCode :option.payerCode,
-                payerName:option.payerName,
-                body: filCoverage[0],
-                showInsuranceCompany: false,
-                showPatient: false,
-              });
-            }
-          } catch (error) {
-            console.error("Error in coverage if block:", error);
-          }
-        }
-        ret +=`</td>`
-
-        // Extension
-        ret +=`<td>`
-        if(el.extension){
-          ret += `${el.extension.map(ex=>{
-            return this.extensionToHtml(ex)
-          }).join(`<br/>`)}`
-        }
-        ret +=`</td>`
-
-        // Focal
-
-        ret += `<td>`
-        if(el.focal){
-          ret += `${el.focal}`
-        }
-        ret += `</td>`
-        ret +=`</tr>`
-      }
+    if(body.insurance){
+      ret += await new CoverageEligibilityRequest().insuranceToHtml({
+        "val" : Array.isArray(body.insurance )  ? body.insurance : [body.insurance],
+        "patient" : option.patient,
+        "payerCode" : option.payerCode,
+        "payerName" : option.payerName
+      })
     }
-
     return ret;
   }
   getFHIR(options: COVERAGE_ELIGIBILITY_RESPONSE) {
@@ -456,4 +248,6 @@ export class CoverageEligibiltyResponse
     return ret;
   }
   statusArray?: Function | undefined;
+
+
 }

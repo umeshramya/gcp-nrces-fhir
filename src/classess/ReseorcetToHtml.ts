@@ -9,8 +9,11 @@ import {
   POSITION,
 } from "../config";
 import { PAYLOAD } from "../hcx/Communication";
+import { COVERAGE,  TO_HTML_HCX_OPTIONS_COVERAGE } from "../hcx/Coverage";
+import { INSURANCE } from "../hcx/CoverageEligibilityRequest";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
+import GcpFhirCRUD from "./gcp";
 
 export default class ResourceToHTML {
   codeableConceptToHtml(val: CODEABLE_CONCEPT[] | CODEABLE_CONCEPT): string {
@@ -252,6 +255,145 @@ export default class ResourceToHTML {
 
   }
 
+
+
+  async insuranceToHtml(option: {
+    val: INSURANCE[];
+    patient: any;
+    payerCode: string;
+    payerName: string;
+  }): Promise<string> {
+    let ret = "";
+  
+    if (option.val.length > 0) {
+      ret += `<h4>Insurances</h4>`;
+      ret += `<table data-pdfmake="{'widths':['50%','25%', '25%']}">
+        <tr>
+          <th>Coverage</th>
+          <th>Extension</th>
+          <th>Focal</th>
+        </tr>`;
+  
+      for (const el of option.val) {
+        ret += `<tr><td>`;
+        
+        // Coverages
+        if (el.coverage?.reference) {
+          try {
+          
+            const id = `${el.coverage?.reference}`.substring("Coverage".length + 1);
+
+            const coverageRes = (await new GcpFhirCRUD().getFhirResource(id, "Coverage")).data;
+            ret += await this.coverageToHtml({
+              addResourceType: false,
+              patient: option.patient,
+              payerCode: option.payerCode,
+              payerName: option.payerName,
+              body: coverageRes,
+              showInsuranceCompany: false,
+              showPatient: false,
+            });
+          } catch (error) {
+            console.error("Error fetching coverage:", error);
+          }
+        }
+        ret += `</td>`;
+  
+        // Extension
+        ret += `<td>`;
+        if (el.extension) {
+          ret += el.extension.map(ex => this.extensionToHtml(ex)).join(`<br/>`);
+        }
+        ret += `</td>`;
+  
+        // Focal
+        ret += `<td>${el.focal || ""}</td>`;
+        ret += `</tr>`;
+      }
+  
+      ret += `</table>`;
+    }
+  
+    return ret;
+  }
+  
+
+
+    async coverageToHtml(option: TO_HTML_HCX_OPTIONS_COVERAGE): Promise<string> {
+      const body= option.body
+      let ret = "";
+      if (option.addResourceType) {
+        ret += `<h1>Coverage</h1>`;
+      }
+      if (body.div && body.div.text != "") {
+        ret += `<h2>Text</h2>`;
+        ret += `${body.div.text}`;
+      }
+  
+      if (option.showPatient) {
+            ret += `<h3>Patient</h3>`;
+          ret += `<p>UHID ${option.patient.MRN} Name ${option.patient.name} ${option.patient.mobile || ""}</p>`
+      }
+  
+      if (option.showInsuranceCompany && option.body.insurerOrganizationId) {
+        ret += `<h3>Insurance</h3>`;
+        ret +=  `<p>${option.payerName}  ${option.payerCode}</p>`
+        ret += `<hr/>`;
+      }
+  
+  
+      if(option.body.payor && option.body.payor.length >0){
+        ret +=`<h3>Payor</h3>`
+        option.body.payor.forEach((el:any)=>{
+          if(el.display){
+            ret += `<i>Display</i> : ${el.display}<br/>`
+          }
+          if(el.resource){
+            ret +=`<i>Resource Type</i> : ${el.resource} `
+          }
+          if(el.id){
+            ret += `<i>Id</i> : ${el.id}`
+          }
+        })
+      }
+  
+      ret += `<hr/>`;
+  
+      if(option.body.status){
+        ret += `<b>Coverage Status</b> : ${option.body.status}<br/>`
+      }
+  
+      if (option.body.policyHolder && option.body.policyHolder.id) {
+        ret += `<b>PolicyHolder</b> : ${option.body.policyHolder.id}<br/>`;
+      }
+  
+      if(option.body.subscriberId){
+        ret += `<b>Policy Subscriber</b> : ${option.body.subscriberId}<br/>`
+      }
+  
+      if(option.body.relationship){
+        ret += `<b>Subscriber Relationship</b> : ${this.codeableConceptToHtml(option.body.relationship)}<br/>`
+      }
+  
+      if (option.body.period) {
+        ret += `Coverage Period : Start : ${new TimeZone().convertTZ(
+          option.body.period.start,
+          "Asia/Kolkata",
+          true
+        )} - End : ${new TimeZone().convertTZ(
+          option.body.period.end,
+          "Asia/Kolkata",
+          true
+        )}<br/>`;
+      }
+  
+  
+  
+      return ret;
+    }
+
+
+    
 
 
 }
