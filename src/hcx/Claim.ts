@@ -88,11 +88,11 @@ export interface CLAIM {
 }
 
 interface TO_HTML_HCX_OPTIONS_CLAIM extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
-  body: CLAIM;
+  body: any;
 }
 export class Claim extends ResourceMain implements ResourceMaster {
   async toHtml(options: TO_HTML_HCX_OPTIONS_CLAIM): Promise<string> {
-    const body: CLAIM = options.body;
+    const body: CLAIM = this.convertFhirToObject(options.body);
     let ret: string = "";
     const erorInfo = "Claim toHtml error";
     try {
@@ -116,16 +116,6 @@ export class Claim extends ResourceMain implements ResourceMaster {
         console.log(erorInfo, "createdDate", error);
       }
 
-      ret += `<h3>Patient</h3>`;
-      ret += `<p>UHID ${options.patient.MRN} Name ${options.patient.name} ${options.patient.mobile || ""}</p>`
-  
-      ret += `<h3>Insurance</h3>`;
-      ret +=  `<p>${options.payerName}  ${options.payerCode}</p>`
-      ret += `<hr/>`;
-
-
-
-      ret += `<hr/>`;
 
       
     if (body.text) {
@@ -133,17 +123,6 @@ export class Claim extends ResourceMain implements ResourceMaster {
     }
 
     ret += `<h2>Object to Text</h2>`;
-      
-      // try {
-      //   if (body.text) {
-      //     ret += `<h2>Text</h2> ${body.text}<br/><hr/>`;
-      //     ret += `<h2>Object Text</h2>`;
-      //   }
-      // } catch (error) {
-      //   console.log(erorInfo, "text", error);
-      // }
-
-
       
       try {
         ret +=`<h4>Status</h4>`
