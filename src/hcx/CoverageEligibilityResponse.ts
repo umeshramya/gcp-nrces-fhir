@@ -142,6 +142,7 @@ export class CoverageEligibiltyResponse
     if(body.insurance){
       ret += await new CoverageEligibilityRequest().insuranceToHtml({
         "val" : Array.isArray(body.insurance )  ? body.insurance : [body.insurance],
+        "coverage":option.coverages || [],
         "patient" : option.patient,
         "payerCode" : option.payerCode,
         "payerName" : option.payerName

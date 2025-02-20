@@ -9,11 +9,11 @@ import {
   POSITION,
 } from "../config";
 import { PAYLOAD } from "../hcx/Communication";
-import { COVERAGE,  TO_HTML_HCX_OPTIONS_COVERAGE } from "../hcx/Coverage";
+import {   COVERAGE, TO_HTML_HCX_OPTIONS_COVERAGE } from "../hcx/Coverage";
 import { INSURANCE } from "../hcx/CoverageEligibilityRequest";
 import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
-import GcpFhirCRUD from "./gcp";
+// import GcpFhirCRUD from "./gcp";
 
 export default class ResourceToHTML {
   codeableConceptToHtml(val: CODEABLE_CONCEPT[] | CODEABLE_CONCEPT): string {
@@ -259,6 +259,7 @@ export default class ResourceToHTML {
 
   async insuranceToHtml(option: {
     val: INSURANCE[];
+    coverage:any[]
     patient: any;
     payerCode: string;
     payerName: string;
@@ -282,17 +283,18 @@ export default class ResourceToHTML {
           try {
           
             const id = `${el.coverage?.reference}`.substring("Coverage".length + 1);
-
-            const coverageRes = (await new GcpFhirCRUD().getFhirResource(id, "Coverage")).data;
-            ret += await this.coverageToHtml({
-              addResourceType: false,
-              patient: option.patient,
-              payerCode: option.payerCode,
-              payerName: option.payerName,
-              body: coverageRes,
-              showInsuranceCompany: false,
-              showPatient: false,
-            });
+            const coverage= option.coverage.find(el=>el.id == id)
+            if(coverage){
+              ret += await this.coverageToHtml({
+                addResourceType: false,
+                patient: option.patient,
+                payerCode: option.payerCode,
+                payerName: option.payerName,
+                body: coverage,
+                showInsuranceCompany: false,
+                showPatient: false,
+              });
+            }
           } catch (error) {
             console.error("Error fetching coverage:", error);
           }
