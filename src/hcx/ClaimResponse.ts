@@ -255,7 +255,7 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
   }
   convertFhirToObject(options: any):CLAIM_RESPONSE {
   const ret: CLAIM_RESPONSE ={
-    text: options.div.Text,
+    text: options?.div?.Text,
     resourceType: "ClaimResponse",
     identifier: options.identifier,
     type: options.type,
@@ -442,10 +442,6 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
             <p><strong>Disposition:</strong> ${
               claimResponse.disposition || "N/A"
             }</p>
-            <h2>Patient</h2>
-            <p>UHID ${options.patient.MRN} Name ${options.patient.name} ${options.patient.mobile || ""}</p>
-            <h2>Insurer</h2>
-            <p>${options.payerName}  ${options.payerCode}</p>
             <h2>Totals</h2>
             ${renderList(
               claimResponse.total.map(
