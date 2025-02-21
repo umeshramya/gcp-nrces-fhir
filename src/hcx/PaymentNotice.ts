@@ -46,7 +46,7 @@ export interface PAYMENT_NOTICE {
 
 export interface TO_HTML_HCX_OPTIONS_PAYEMENT_NOTICE
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
-  body: PAYMENT_NOTICE;
+  body: any;
 }
 
 export class PaymentNoctice extends ResourceMain implements ResourceMaster {
@@ -159,7 +159,7 @@ export class PaymentNoctice extends ResourceMain implements ResourceMaster {
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_PAYEMENT_NOTICE): Promise<string> {
 
-      const { body } = option;
+      const body = this.convertFhirToObject(option.body)
     
       const htmlContent = `
         <div>
