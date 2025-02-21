@@ -227,7 +227,7 @@ export interface TASK {
 
 export interface TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
-  body: TASK;
+  body: any;
 }
 
 export class Task extends ResourceMain implements ResourceMaster {
@@ -346,7 +346,7 @@ export class Task extends ResourceMain implements ResourceMaster {
     return ret;
   }
   async toHtml(option: TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION): Promise<string> {
-    const body = option.body;
+    const body =  this.convertFhirToObject(option.body);
   
     try {
       const htmlParts: string[] = [];

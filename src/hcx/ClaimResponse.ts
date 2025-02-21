@@ -150,7 +150,7 @@ interface CLAIM_RESPONSE {
 }
 interface TO_HTML_HCX_OPTIONS_CLAIM_RESPONSE
   extends Omit<TO_HTML_HCX_OPTIONS, "body"> {
-  body: CLAIM_RESPONSE;
+  body: any;
 }
 export class ClaimResponse extends ResourceMain implements ResourceMaster {
   getFHIR(options: CLAIM_RESPONSE) {
@@ -275,7 +275,7 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
       return ret;
     };
 
-    const claimResponse = options.body;
+    const claimResponse = this.convertFhirToObject(options.body);
     const renderList = (items: string[]): string =>
       `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
 
