@@ -6,6 +6,7 @@ import {
   EXTENSION,
   IDENTTIFIER,
   MONEY,
+  MULTI_RESOURCE,
   PERIOD,
   REFERENCE,
 } from "../config";
@@ -114,21 +115,43 @@ interface ERROR {
   code: CODEABLE_CONCEPT;
 }
 
+interface PATIENT_MULTIRESOURCE extends MULTI_RESOURCE{
+ "resource" : "Patient"
+}
+
+interface INSURER_MULTIRESOURCE extends MULTI_RESOURCE{
+  "resource" : "Organization"
+ }
+
+ interface REQUESTER_MULTIRESOURCE extends MULTI_RESOURCE{
+  "resource" : "Practitioner" | "PractitionerRole" | "Organization"
+ }
+
+ interface REQUEST_MULTIRESOURCE extends MULTI_RESOURCE{
+  "resource" : "Claim"
+ }
+ interface COMMUNICATION_REQUEST_MULTIRESOURCE extends MULTI_RESOURCE{
+  "resource" : "CommunicationRequest"
+ }
 interface CLAIM_RESPONSE {
   id?: string;
   text: string;
   resourceType: "ClaimResponse";
-  identifiers: IDENTTIFIER[];
+  identifier: IDENTTIFIER[];
+  containedInlineResource?:any[];
+  language?:string
   //** "http://terminology.hl7.org/CodeSystem/claim-type" */
   type: CODEABLE_CONCEPT;
   use: "claim" | "preauthorization" | "predetermination";
   created: string;
   outcome: "queued" | "complete" | "error" | "partial";
   hcx?: "nhcx" | "swastha";
-  patient: REFERENCE;
-  insurer: REFERENCE;
-  requestor?: REFERENCE;
-  request?: REFERENCE;
+  extension?:EXTENSION[];
+  modifierExtension?:EXTENSION[]
+  patient: PATIENT_MULTIRESOURCE;
+  insurer: INSURER_MULTIRESOURCE;
+  requestor?: REQUESTER_MULTIRESOURCE;
+  request?: REQUEST_MULTIRESOURCE;
   status: "active" | "cancelled" | "draft" | "entered-in-error";
   subType?: CODEABLE_CONCEPT;
   disposition?: string;
@@ -144,7 +167,7 @@ interface CLAIM_RESPONSE {
   formCode?: CODEABLE_CONCEPT;
   form: ATTACHMENT;
   addItem: ADD_ITEM[];
-  communicationRequest?: REFERENCE;
+  communicationRequest?: COMMUNICATION_REQUEST_MULTIRESOURCE[];
   insurance?: INSURANCE[];
   error: ERROR[];
 }
@@ -157,16 +180,21 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
     const body = {
       resourceType: "ClaimResponse",
       id: options.id || undefined,
+      contained:options.containedInlineResource,
+
+      modifierExtension:options.modifierExtension,
+      extension:options.extension,
       meta: {
         versionId: "1",
         lastUpdated: new Date().toISOString(),
         source: "#JrkobxCRdZUI6QNh",
       },
+      language:options.language,
       text: {
         status: "generated",
         div: options.text,
       },
-      identifier: options.identifiers,
+      identifier: options.identifier,
       disposition: options.disposition,
       preAuthRef: options.preAuthRef,
       preAuthPeriod: options.preAuthPeriod,
@@ -174,10 +202,31 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
       type: options.type,
       subType: options.subType,
       use: options.use,
-      patient: options.patient,
+      patient: options.patient && {
+        reference:
+          options.patient.resource &&
+          `${options.patient.resource}/${options.patient.id}`,
+        type: options.patient.type,
+        identifier: options.patient.identifier,
+        display: options.patient.display,
+      },
       created: options.created,
-      insurer: options.insurer,
-      requestor: options.requestor || undefined,
+      insurer: options.patient && {
+        reference:
+          options.insurer.resource &&
+          `${options.insurer.resource}/${options.insurer.id}`,
+        type: options.insurer.type,
+        identifier: options.insurer.identifier,
+        display: options.insurer.display,
+      },
+      requestor: options.requestor && {
+        reference:
+          options.requestor.resource &&
+          `${options.requestor.resource}/${options.requestor.id}`,
+        type: options.requestor.type,
+        identifier: options.requestor.identifier,
+        display: options.requestor.display,
+      },
       request: options.request || undefined,
       outcome: options.outcome,
       payeeType: options.payeeType,
@@ -189,16 +238,94 @@ export class ClaimResponse extends ResourceMain implements ResourceMaster {
       formCode: options.formCode,
       form: options.form,
       addItem: options.addItem,
-      communicationRequest: options.communicationRequest,
+      communicationRequest: options.communicationRequest &&
+      options.communicationRequest.map((el) => {
+        return {
+          reference: el.resource && `${el.resource}/${el.id}`,
+          type: el.type,
+          identifier: el.identifier,
+          display: el.display,
+        };
+      }) ,
       insurance: options.insurance,
       error: options.error,
     };
 
     return body;
   }
-  convertFhirToObject(options: any) {
-    const ret: CLAIM_RESPONSE = options;
-    options.text = options.text && options.text.div ? options.text.div : "";
+  convertFhirToObject(options: any):CLAIM_RESPONSE {
+  const ret: CLAIM_RESPONSE ={
+    text: options.div.Text,
+    resourceType: "ClaimResponse",
+    identifier: options.identifier,
+    type: options.type,
+    use: options.use,
+    created: options.created,
+    outcome: options.outcome,
+    patient: this.getFromMultResource(options.patient) as any,
+    insurer: this.getFromMultResource(options.insurer) as any,
+    status: options.status,
+    preAuthPeriod: options.preAuthPeriod,
+    total: options.total,
+    form: options.form,
+    addItem: options.addItem,
+    error: options.error
+  }
+
+  if(options.language){
+    ret.language=options.language
+  }
+
+  if(options.extension){
+    ret.extension=options.extension
+  }
+  if(options.modifierExtension){
+    ret.modifierExtension=options.modifierExtension
+  }
+
+  if(options.requestor){
+    ret.requestor= this.getFromMultResource(options.requestor) as any
+  }
+
+  if(options.request){
+    ret.request=this.getFromMultResource(options.request) as any
+  }
+
+  if(options.subType){
+    ret.subType=options.subType
+  }
+
+  if(options.disposition){
+    ret.disposition=ret.disposition
+  }
+
+  if(options.preAuthRef){
+    ret.preAuthRef= ret.preAuthRef
+  }
+
+  if(options.payeeType){
+    ret.payeeType=ret.payeeType
+  }
+
+  if(options.item){
+    ret.item=options.item
+  }
+  if(options.detail){
+    ret.detail=options.detail
+  }
+
+  if(options.payment){
+    ret.payment=options.payment
+  }
+
+  if(options.fundsReserve){
+    ret.fundsReserve=options.fundsReserve
+  }
+
+  if(options.formCode){
+    ret.formCode=options.formCode
+  }
+
     return ret;
   }
   async toHtml(options: TO_HTML_HCX_OPTIONS_CLAIM_RESPONSE): Promise<string> {
