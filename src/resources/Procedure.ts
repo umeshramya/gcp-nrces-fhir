@@ -158,7 +158,7 @@ async  toHtml():Promise<string> {
       ret.performer = {
         id: this.getIdFromReference({
           ref: options.performer[0].actor.reference,
-          resourceType: "DiagnosticReport",
+          resourceType: "Practitioner",
         }),
         name: options.performer[0].actor.display,
       } as any;
