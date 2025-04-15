@@ -11,6 +11,7 @@ import { CreatePdf, PDF_HEADER } from "js-ts-report";
 import { EXTENSION, resourceType } from "../../config";
 import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
 import { TimeZone } from "../../TimeZone";
+import { Readable } from "stream";
 
 export const compositionTypeArrey = [
   {
@@ -597,7 +598,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
      * this is for setting footer height in care of preprinted paper
      */
     bottomMargin?: number;
-  }): Promise<string | Buffer> => {
+  }): Promise<Readable> => {
     // code check media
 
     const mediaId: string[] = options.composition.section[0].entry.filter((el:any)=>{
@@ -621,7 +622,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
    
 
     const pdf = new CreatePdf();
-    const retPdf = await pdf.create(options.html, {
+    const retPdf = await pdf.createStream(options.html, {
       paragraphSpace: options.paragraphSpace || 6,
       base64: options.base64,
       header: options.header,
@@ -652,6 +653,77 @@ export class Composition extends ResourceMain implements ResourceMaster {
     });
 
     return retPdf;
+  };
+
+  getPdfStream = async (options: {
+    html: string;
+    header?: (options: PDF_HEADER) => [];
+    footer?: (options: PDF_FOOter) => [];
+    composition: COMPOSITOIN;
+    base64: boolean;
+    signBase64: string;
+    nameLine1: string;
+    nameLine2?: string;
+    qrCode: string;
+    qrCodeWidth?: number;
+    paperSize: string;
+    headerbase64Image?: string;
+    paragraphSpace?: number;
+    singleImagePerPage?: boolean;
+    topMargin?: number;
+    bottomMargin?: number;
+  }): Promise<Readable> => {
+    try {
+      // 1. Process media entries
+      const mediaEntries = options.composition.section[0].entry
+        .filter((entry: any) => entry.type === "Media")
+        .map((entry: any) => 
+          this.getIdFromReference({
+            ref: entry.reference,
+            resourceType: "Media"
+          })
+        );
+  
+      // 2. Fetch media content asynchronously
+      const mediaContent: string[] = [];
+      if (mediaEntries.length > 0) {
+        await this.getMediaComposition(0, mediaEntries, mediaContent);
+      }
+  
+      // 3. Configure PDF creation parameters
+      const pdfConfig = {
+        paragraphSpace: options.paragraphSpace || 6,
+        base64: options.base64,
+        header: options.header,
+        footer: options.footer,
+        topMargin: options.topMargin,
+        bottomMargin: options.bottomMargin,
+        esign: options.signBase64 ? {
+          image: options.composition.status === "final" 
+            ? options.signBase64 
+            : emptySign,
+          nameLine1: options.nameLine1,
+          nameLine2: options.nameLine2 || ""
+        } : undefined,
+        qrcode: options.qrCode || undefined,
+        qrCodeWidth: options.qrCodeWidth || undefined,
+        paperSize: options.paperSize,
+        headerbase64Image: options.headerbase64Image,
+        media: mediaContent.length > 0 ? {
+          content: mediaContent,
+          singleImagePerPage: options.singleImagePerPage || false
+        } : undefined
+      };
+  
+      // 4. Create and return PDF stream
+      return new CreatePdf().createStream(options.html, pdfConfig);
+  
+    } catch (error:any) {
+      // 5. Create error stream for proper error propagation
+      const errorStream = new Readable();
+      errorStream.destroy(error);
+      return errorStream;
+    }
   };
 
   getMediaComposition = async (
