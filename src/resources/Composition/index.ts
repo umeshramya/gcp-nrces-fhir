@@ -574,6 +574,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     return res
   }
 
+  
   getPdf = async (options: {
     html: string;
     header?: (options: PDF_HEADER) => [];
@@ -598,7 +599,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
      * this is for setting footer height in care of preprinted paper
      */
     bottomMargin?: number;
-  }): Promise<Readable> => {
+  }): Promise<string | Buffer> => {
     // code check media
 
     const mediaId: string[] = options.composition.section[0].entry.filter((el:any)=>{
@@ -622,7 +623,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
    
 
     const pdf = new CreatePdf();
-    const retPdf = await pdf.createStream(options.html, {
+    const retPdf = await pdf.create(options.html, {
       paragraphSpace: options.paragraphSpace || 6,
       base64: options.base64,
       header: options.header,
