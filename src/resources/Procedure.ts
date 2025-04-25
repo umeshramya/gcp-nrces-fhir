@@ -250,16 +250,16 @@ export class Procedure extends ResourceMain implements ResourceMaster {
     if (options.performer) {
       ret.primaryOperator = options.performer.find(
         (el: any) => el.function.coding[0].code == "primary-Operator"
-      );
+      ).actor;
       ret.anesthetists = options.performer.filter(
         (el: any) => el.function.coding[0].code == "anesthetists"
-      );
+      ).map((el:any)=>el.actor);
       ret.technicians = options.performer.filter(
         (el: any) => el.function.coding[0].code == "technicians"
-      );
+      ).map((el:any)=>el.actor);
       ret.assistants = options.performer.filter(
         (el: any) => el.function.coding[0].code == "assistant"
-      );
+      ).map((el:any)=>el.actor);
     }
     if (options.followUp) {
       ret.followUp = options.followUp.map((el: any) => el.text);
@@ -278,11 +278,11 @@ export class Procedure extends ResourceMain implements ResourceMaster {
     }
 
     if (options.asserter) {
-      ret.asserter = options.asserter;
+      ret.asserter = options.asserter.actor;
     }
 
     if (options.recorder) {
-      ret.recorder = options.recorder;
+      ret.recorder = options.recorder.actor;
     }
 
     return ret;
