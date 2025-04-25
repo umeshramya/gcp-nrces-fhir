@@ -758,7 +758,7 @@ console.log(bundle)
 // new excute().carePlan()
 // new excute().practionerRole()
 // new excute().specimen()
-// new excute().procedure()
+new excute().procedure()
 // new excute().serviceRequest()
 // new excute().schedule()
 // new excute().appointment()
@@ -775,7 +775,7 @@ console.log(bundle)
 
 // new excute().updateServiceRequest()
 
-new excute().createPrescriptionBundle()
+// new excute().createPrescriptionBundle()
 // new excute().createHealthDocumentBundle();
 // new excute().createOPConsultationBundle();
   

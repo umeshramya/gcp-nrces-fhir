@@ -1,5 +1,5 @@
 import { ResourceMaster } from "../Interfaces/index";
-import { CODEABLE_CONCEPT, CodeDisplay } from "../config/index";
+import { CODEABLE_CONCEPT, CodeDisplay, REFERENCE } from "../config/index";
 import ResourceMain from "./ResourceMai";
 import { PRACTITIONER } from "./Practitioner";
 import { htmlToText } from "html-to-text";
@@ -14,7 +14,7 @@ export const procedureStatusArray = [
   "entered-in-error",
   "unknown",
 ] as const;
-export type ProcedureStatus = typeof procedureStatusArray[number];
+export type ProcedureStatus = (typeof procedureStatusArray)[number];
 
 export interface PROCEDURE {
   id?: string;
@@ -24,35 +24,65 @@ export interface PROCEDURE {
   outcome?: CODEABLE_CONCEPT;
   patientID: string;
   procedureDate: string;
-  performer?: PRACTITIONER;
-  asserter?: PRACTITIONER;
-  recorder?: PRACTITIONER;
+  primaryOperator?: REFERENCE;
+  assistants?: REFERENCE[];
+  anesthetists?: REFERENCE[];
+  technicians?: REFERENCE[];
+  asserter?: REFERENCE;
+  recorder?: REFERENCE;
   encounterId: string;
   report?: string[];
   followUp?: string[];
   note: string[];
 }
 export class Procedure extends ResourceMain implements ResourceMaster {
-async  toHtml():Promise<string> {
+  async toHtml(): Promise<string> {
     throw new Error("Method not implemented.");
   }
   getFHIR(options: PROCEDURE) {
     const getText = (): string => {
       let ret: string = "";
-      if(options.text=="" || options.text == undefined){
+      if (options.text == "" || options.text == undefined) {
         return "";
       }
-      if (options.performer) {
-        ret = `<div>Performer : ${options.performer.name}</div>`;
-      }
 
-      if (options.asserter) {
-        ret = `${ret}<div>Asserted By : ${options.asserter.name}</div>`;
-      }
-      if (options.recorder) {
-        ret = `${ret}<div>Recorded By : ${options.recorder.name}</div>`;
-      }
-      // ret = `${ret}<div>Procedure Notes</div>`;
+      ret += `
+      <table data-pdfmake="{'widths':['33%%','33%','33%%']}"> 
+        <tr>
+          <td>
+            Primary Operator : ${
+              (options.primaryOperator && options.primaryOperator.display) || ""
+            }
+          </td>
+          <td>
+            Assistants : ${
+              (options.assistants &&
+                options.assistants.length > 0 &&
+                options.assistants.map((el) => el.display).join(", ")) ||
+              ""
+            }
+          </td>
+                    <td>
+            Technicians : ${
+              (options.technicians &&
+                options.technicians.length > 0 &&
+                options.technicians.map((el) => el.display).join(", ")) ||
+              ""
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Asserter : ${(options.asserter && options.asserter.display) || ""}
+          </td>
+          <td>
+             Recorder : ${(options.recorder && options.recorder.display) || ""}
+          </td>
+          <td>
+          </td>
+        </tr>
+      </table>
+      `;
       ret = `${ret}${options.text}`;
 
       if (options.outcome) {
@@ -67,7 +97,7 @@ async  toHtml():Promise<string> {
         });
       }
 
-      ret = ret.trim();
+      ret = ret.trim().replace(/\n/g, "");
 
       return ret;
     };
@@ -100,27 +130,81 @@ async  toHtml():Promise<string> {
       outcome: options.outcome,
     };
 
-    if (options.performer) {
-      body.performer = [
-        {
-          actor: {
-            reference: `Practitioner/${options.performer.id}`,
-            display: options.performer.name,
-          },
+    let performers = [];
+    if (options.primaryOperator) {
+      performers.push({
+        function: {
+          coding: [
+            {
+              system: "http://terminology.hl7.org/CodeSystem/performer-role",
+              code: "primary-Operator",
+              display: "Primary-Operator",
+            },
+          ],
         },
-      ];
+        actor: options.primaryOperator,
+      });
+    }
+
+    if (options.assistants && options.assistants.length > 0) {
+      options.assistants.forEach((el) => {
+        performers.push({
+          function: {
+            coding: [
+              {
+                system: "http://terminology.hl7.org/CodeSystem/performer-role",
+                code: "assistant",
+                display: "Assistant",
+              },
+            ],
+          },
+          actor: el,
+        });
+      });
+    }
+
+    if (options.anesthetists && options.anesthetists.length > 0) {
+      options.anesthetists.forEach((el) => {
+        performers.push({
+          function: {
+            coding: [
+              {
+                system: "http://terminology.hl7.org/CodeSystem/performer-role",
+                code: "anesthetists",
+                display: "Anesthetists",
+              },
+            ],
+          },
+          actor: el,
+        });
+      });
+    }
+
+    if (options.technicians && options.technicians.length > 0) {
+      options.technicians.forEach((el) => {
+        performers.push({
+          function: {
+            coding: [
+              {
+                system: "http://terminology.hl7.org/CodeSystem/performer-role",
+                code: "technicians",
+                display: "Technicians",
+              },
+            ],
+          },
+          actor: el,
+        });
+      });
+    }
+
+    if (performers.length > 0) {
+      body.performer = performers;
     }
     if (options.recorder) {
-      body.recorder = {
-        reference: `Practitioner/${options.recorder.id}`,
-        display: options.recorder.name,
-      };
+      body.recorder = options.recorder;
     }
     if (options.asserter) {
-      body.asserter = {
-        reference: `Practitioner/${options.asserter.id}`,
-        display: options.asserter.name,
-      };
+      body.asserter = options.asserter;
     }
     if (options.report && options.report.length > 0) {
       body.report = options.report.map((el) => {
@@ -154,14 +238,9 @@ async  toHtml():Promise<string> {
         return el.text;
       }),
     };
+
     if (options.performer) {
-      ret.performer = {
-        id: this.getIdFromReference({
-          ref: options.performer[0].actor.reference,
-          resourceType: "Practitioner",
-        }),
-        name: options.performer[0].actor.display,
-      } as any;
+      ret.primaryOperator = options.performer;
     }
     if (options.followUp) {
       ret.followUp = options.followUp.map((el: any) => el.text);
@@ -178,24 +257,13 @@ async  toHtml():Promise<string> {
         });
       });
     }
+
     if (options.asserter) {
-      ret.asserter = {
-        id: this.getIdFromReference({
-          ref: options.asserter.reference,
-          resourceType: "Practitioner",
-        }),
-        name: options.asserter.display,
-      } as any;
+      ret.asserter = options.asserter;
     }
 
     if (options.recorder) {
-      ret.recorder = {
-        id: this.getIdFromReference({
-          ref: options.recorder.reference,
-          resourceType: "Practitioner",
-        }),
-        name: options.recorder.display,
-      } as any;
+      ret.recorder = options.recorder;
     }
 
     return ret;

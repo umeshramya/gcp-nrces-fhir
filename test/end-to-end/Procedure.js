@@ -12,9 +12,22 @@ const gcpFhirCRUD = new GcpFhirCRUD();
 const setProcedure = async() => {
     const proceduer = new Procedure()
     const body =proceduer.getFHIR({
-        "performer" : resources.practioner,
-        "recorder" : resources.practioner,
-        "asserter" : resources.practioner,
+        "primaryOperator" : {
+            "display" : "DR Mahesh H",
+            
+        },
+        "assistants" : [{
+            "display" : "Miss Sinchina"
+        }],
+        "anesthetists" : [{
+            "display" : "Dr jagadish"
+        }],
+        "recorder" : {
+            "display" : "Mr Varada"
+        },
+        "asserter" : {
+            "display" : "Mrs Anu"
+        },
         "complication" : "Bleeding from site",
         "patientID" : resources.patient.id,
         "procedure" : {"text" : "PTCA to LAD"},
