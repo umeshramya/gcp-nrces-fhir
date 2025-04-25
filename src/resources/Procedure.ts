@@ -62,7 +62,7 @@ export class Procedure extends ResourceMain implements ResourceMaster {
               ""
             }
           </td>
-                    <td>
+          <td>
             Technicians : ${
               (options.technicians &&
                 options.technicians.length > 0 &&
@@ -70,16 +70,24 @@ export class Procedure extends ResourceMain implements ResourceMaster {
               ""
             }
           </td>
+
         </tr>
         <tr>
+            <td>
+             Anesthetists : ${
+              (options.anesthetists &&
+                options.anesthetists.length > 0 &&
+                options.anesthetists.map((el) => el.display).join(", ")) ||
+              ""
+            }
+          </td>
           <td>
             Asserter : ${(options.asserter && options.asserter.display) || ""}
           </td>
           <td>
              Recorder : ${(options.recorder && options.recorder.display) || ""}
           </td>
-          <td>
-          </td>
+
         </tr>
       </table>
       `;
@@ -240,7 +248,18 @@ export class Procedure extends ResourceMain implements ResourceMaster {
     };
 
     if (options.performer) {
-      ret.primaryOperator = options.performer;
+      ret.primaryOperator = options.performer.find(
+        (el: any) => el.function.coding[0].code == "primary-Operator"
+      );
+      ret.anesthetists = options.performer.filter(
+        (el: any) => el.function.coding[0].code == "anesthetists"
+      );
+      ret.technicians = options.performer.filter(
+        (el: any) => el.function.coding[0].code == "technicians"
+      );
+      ret.assistants = options.performer.filter(
+        (el: any) => el.function.coding[0].code == "assistant"
+      );
     }
     if (options.followUp) {
       ret.followUp = options.followUp.map((el: any) => el.text);
