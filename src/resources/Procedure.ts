@@ -46,51 +46,57 @@ export class Procedure extends ResourceMain implements ResourceMaster {
         return "";
       }
 
-      ret += `
-      <table data-pdfmake="{'widths':['33%%','33%','33%%']}"> 
-        <tr>
-          <td>
-            Primary Operator : ${
-              (options.primaryOperator && options.primaryOperator.display) || ""
-            }
-          </td>
-          <td>
-            Assistants : ${
-              (options.assistants &&
-                options.assistants.length > 0 &&
-                options.assistants.map((el) => el.display).join(", ")) ||
-              ""
-            }
-          </td>
-          <td>
-            Technicians : ${
-              (options.technicians &&
-                options.technicians.length > 0 &&
-                options.technicians.map((el) => el.display).join(", ")) ||
-              ""
-            }
-          </td>
-
-        </tr>
-        <tr>
+      if (options.primaryOperator) {
+        ret += `
+        <table data-pdfmake="{'widths':['33%%','33%','33%%']}"> 
+          <tr>
             <td>
-             Anesthetists : ${
-              (options.anesthetists &&
-                options.anesthetists.length > 0 &&
-                options.anesthetists.map((el) => el.display).join(", ")) ||
-              ""
-            }
-          </td>
-          <td>
-            Asserter : ${(options.asserter && options.asserter.display) || ""}
-          </td>
-          <td>
-             Recorder : ${(options.recorder && options.recorder.display) || ""}
-          </td>
+              Primary Operator : ${
+                (options.primaryOperator && options.primaryOperator.display) ||
+                ""
+              }
+            </td>
+            <td>
+              Assistants : ${
+                (options.assistants &&
+                  options.assistants.length > 0 &&
+                  options.assistants.map((el) => el.display).join(", ")) ||
+                ""
+              }
+            </td>
+            <td>
+              Technicians : ${
+                (options.technicians &&
+                  options.technicians.length > 0 &&
+                  options.technicians.map((el) => el.display).join(", ")) ||
+                ""
+              }
+            </td>
+  
+          </tr>
+          <tr>
+              <td>
+               Anesthetists : ${
+                 (options.anesthetists &&
+                   options.anesthetists.length > 0 &&
+                   options.anesthetists.map((el) => el.display).join(", ")) ||
+                 ""
+               }
+            </td>
+            <td>
+              Asserter : ${(options.asserter && options.asserter.display) || ""}
+            </td>
+            <td>
+               Recorder : ${
+                 (options.recorder && options.recorder.display) || ""
+               }
+            </td>
+  
+          </tr>
+        </table>
+        `;
+      }
 
-        </tr>
-      </table>
-      `;
       ret = `${ret}${options.text}`;
 
       if (options.outcome) {
@@ -251,15 +257,15 @@ export class Procedure extends ResourceMain implements ResourceMaster {
       ret.primaryOperator = options.performer.find(
         (el: any) => el.function.coding[0].code == "primary-Operator"
       ).actor;
-      ret.anesthetists = options.performer.filter(
-        (el: any) => el.function.coding[0].code == "anesthetists"
-      ).map((el:any)=>el.actor);
-      ret.technicians = options.performer.filter(
-        (el: any) => el.function.coding[0].code == "technicians"
-      ).map((el:any)=>el.actor);
-      ret.assistants = options.performer.filter(
-        (el: any) => el.function.coding[0].code == "assistant"
-      ).map((el:any)=>el.actor);
+      ret.anesthetists = options.performer
+        .filter((el: any) => el.function.coding[0].code == "anesthetists")
+        .map((el: any) => el.actor);
+      ret.technicians = options.performer
+        .filter((el: any) => el.function.coding[0].code == "technicians")
+        .map((el: any) => el.actor);
+      ret.assistants = options.performer
+        .filter((el: any) => el.function.coding[0].code == "assistant")
+        .map((el: any) => el.actor);
     }
     if (options.followUp) {
       ret.followUp = options.followUp.map((el: any) => el.text);
