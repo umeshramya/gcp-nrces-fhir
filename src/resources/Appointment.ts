@@ -39,7 +39,7 @@ export interface APPOINTMENT {
   createdDate: string;
   startDate: string;
   endDate: string;
-  description: string;
+  description?: string;
   priority: number;
   slotId?: string[];
  organizationId:string;
@@ -138,9 +138,13 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       createdDate: options.created,
       startDate: options.start,
       endDate: options.end,
-      description: options.description,
       id: options.id,
       organizationId :organizationId,
+    }
+
+
+    if(options.description){
+      ret.description = options.description
     }
     if (options.slot && options.slot.length > 0 ){
       ret.slotId = options.slot.map((el:any)=>{
