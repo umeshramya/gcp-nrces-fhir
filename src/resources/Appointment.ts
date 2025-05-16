@@ -1,5 +1,5 @@
 
-import { CODEABLE_CONCEPT, CodeDisplay, IDENTTIFIER } from "../config";
+import { CODEABLE_CONCEPT, CodeDisplay, EXTENSION, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { Participant, PARTICIPANT } from "./objects/Partipant";
 import ResourceMain from "./ResourceMai";
@@ -43,6 +43,7 @@ export interface APPOINTMENT {
   priority: number;
   slotId?: string[];
  organizationId:string;
+   extension?: EXTENSION[];
 }
 
 export class Appointment extends ResourceMain implements ResourceMaster {
@@ -121,6 +122,10 @@ export class Appointment extends ResourceMain implements ResourceMaster {
       });
     }
 
+    if (options.extension) {
+      body.extension = options.extension;
+    }
+
     return body;
   }
 
@@ -163,6 +168,10 @@ export class Appointment extends ResourceMain implements ResourceMaster {
     }
     if (options.specialty) {
       ret.specialty = options.specialty;
+    }
+
+    if (options.extension) {
+      ret.extension = options.extension;
     }
 
     if (options.appointmentType) {
