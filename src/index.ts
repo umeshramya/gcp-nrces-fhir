@@ -125,6 +125,7 @@ import {CommunicationRequest, COMMUNICATION_REQUEST} from "./hcx/CommunicationRe
 import {InsurancePlan, INSURANCE_PLAN} from "./hcx/Insuranceplan"
 
 import { TaskBundle } from "./hcx/bundle/TaskBundle";
+import { DietaryRecord } from "./resources/Composition/Dietary_Record";
 
 export { GcpFhirCRUD, GcpFhirSearch, resourceTypeArray, ResourceFactory };
 export { htmlToText }
@@ -248,3 +249,4 @@ export { PaymentReconciliation, PAYMENT_RECONCILIATION }
 export { TaskBundle }
 
 export {InsurancePlan, INSURANCE_PLAN}
+export { DietaryRecord }
