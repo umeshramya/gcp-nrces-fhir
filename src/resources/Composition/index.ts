@@ -90,6 +90,13 @@ export const compositionTypeArrey = [
     "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InitialAssessment",
     "code": "371530004",
     "text": "Initial assessment report"
+  },
+    {
+    "type": "DietaryRecord",
+    "system": "http://snomed.info/sct",
+    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DietaryRecord",
+    "code": "440654000",
+    "text": "Dietary record"
   }
   
 ] as const;
