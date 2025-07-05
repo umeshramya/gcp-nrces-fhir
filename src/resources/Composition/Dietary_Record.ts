@@ -1,79 +1,122 @@
-
-import { Composition, COMPOSITOIN, Records } from ".";
+import { Composition, compositionStatus, COMPOSITOIN, Records } from ".";
 import GcpFhirCRUD from "../../classess/gcp";
+import { EXTENSION, IDENTTIFIER } from "../../config";
 interface Args {
-  composition: COMPOSITOIN;
-  title:string
+  id?: string;
+  patientId: string;
+  encounterId: string;
+  languageCode: string;
+  orgnizationId: string;
+  status: compositionStatus;
+  docHtml: string;
+  date: string;
+  title: string;
+  author: COMPOSITOIN["author"];
+  identifier?: IDENTTIFIER[];
+  extension?: EXTENSION;
 }
 export class DietaryRecord extends Composition implements Records {
-  create = async (options: Args, Credentials?: any, DatabasePath?:any) => {
-    options = await this.getOptions(options);
-    const body = this.getFHIR(options.composition);
-    let gcpFhirCrud:GcpFhirCRUD;
-    if(Credentials){
-      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
-    }else{
-      gcpFhirCrud= new GcpFhirCRUD()
+  getOptions =()=>{};
+  create = async (options: Args, Credentials?: any, DatabasePath?: any) => {
+    let gcpFhirCrud: GcpFhirCRUD;
+    if (Credentials) {
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath);
+    } else {
+      gcpFhirCrud = new GcpFhirCRUD();
     }
-    body.section = options.composition.section;
-    const res = await gcpFhirCrud.createFhirResource(body, "Composition");
-    return res;
-  };
-
-  update = async (options: Args,  Credentials?: any, DatabasePath?:any) => {
-    if (!options.composition.id) {
-      throw (new Error().message = "id of composition is required");
-    }
-    options = await this.getOptions(options);
-    const body = this.getFHIR(options.composition);
-    body.section = options.composition.section;
-    let gcpFhirCrud:GcpFhirCRUD;
-    if(Credentials){
-      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath)
-    }else{
-      gcpFhirCrud= new GcpFhirCRUD()
-    }
-    const res = await gcpFhirCrud.updateFhirResource(
-      body,
-      options.composition.id || "",
+    // body.section = options.composition.section;
+    const res = await gcpFhirCrud.createFhirResource(
+      {
+        resourceType: "Composition",
+        identifier: options.identifier ? options.identifier : undefined,
+        extension: options.extension ? options.extension : undefined,
+        language: options.languageCode ? options.languageCode : "en",
+        status: options.status,
+        type: {
+          coding: [
+            {
+              system: "https://ndhm.gov.in/sct",
+              code: "440654000",
+              display: "Dietary record",
+            },
+          ],
+          text: "Dietary record",
+        },
+        subject: {
+          reference: `Patient/${options.patientId}`,
+        },
+        encounter: {
+          reference: `Encounter/${options.encounterId}`,
+        },
+        date: options.date,
+        author: options.author,
+        title: "Dietary record",
+        custodian: {
+          reference: `Organization/${options.orgnizationId}`,
+        },
+        text: {
+          status: "generated",
+          div: options.docHtml,
+        },
+      },
       "Composition"
     );
     return res;
   };
 
-  getOptions = async (options: Args): Promise<Args> => {
-    let docHtml = options.composition.documentDatahtml || "";
-    interface SECTION_ZERO {
-      code: {
-        coding: [
-          {
-            code: "440654000";
-            display: "Dietary record";
-            system: "https://ndhm.gov.in/sct";
-          }
-        ];
-      };
-      entry: any[];
-      title: string;
+  update = async (options: Args, Credentials?: any, DatabasePath?: any) => {
+    if (!options.id) {
+      throw (new Error().message = "id of composition is required");
     }
-    const sectionZero: SECTION_ZERO = {
-      code: {
-        coding: [
-          {
-            code: "440654000",
-            display: "Dietary record",
-            system: "https://ndhm.gov.in/sct",
-          },
-        ],
+    let gcpFhirCrud: GcpFhirCRUD;
+    if (Credentials) {
+      gcpFhirCrud = new GcpFhirCRUD(Credentials, DatabasePath);
+    } else {
+      gcpFhirCrud = new GcpFhirCRUD();
+    }
+    const res = await gcpFhirCrud.updateFhirResource(
+      {
+        id: options.id,
+        resourceType: "Composition",
+        identifier: options.identifier ? options.identifier : undefined,
+        extension: options.extension ? options.extension : undefined,
+        language: options.languageCode ? options.languageCode : "en",
+        status: options.status,
+        type: {
+          coding: [
+            {
+              system: "https://ndhm.gov.in/sct",
+              code: "440654000",
+              display: "Dietary record",
+            },
+          ],
+          text: "Dietary record",
+        },
+        subject: {
+          reference: `Patient/${options.patientId}`,
+        },
+        encounter: {
+          reference: `Encounter/${options.encounterId}`,
+        },
+        date: options.date,
+        author: options.author,
+        title: "Dietary record",
+        custodian: {
+          reference: `Organization/${options.orgnizationId}`,
+        },
+        text: {
+          status: "generated",
+          div: options.docHtml,
+        },
       },
-      entry: [],
-      title: options.title,
-    };
-
-
-    options.composition.documentDatahtml = docHtml;
-    options.composition.section = [sectionZero];
-    return options;
+      options.id,
+      "Composition"
+    );
+    return res;
   };
+
+
+
+
 
 }

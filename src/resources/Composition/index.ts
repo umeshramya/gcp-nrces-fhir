@@ -109,7 +109,7 @@ const compositionStatusArrey = [
   "amended",
   "entered-in-error",
 ] as const;
-type compositionStatus = typeof compositionStatusArrey[number];
+export type compositionStatus = typeof compositionStatusArrey[number];
 
 export interface compositionAuthor {
   reference: string;

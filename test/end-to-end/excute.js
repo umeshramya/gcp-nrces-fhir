@@ -22,7 +22,8 @@ const {
   CoverageEligibiltyResponse,
   Coverage,
   CoverageEligibilityRequest,
-  Claim
+  Claim,
+  DietaryRecord
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -376,21 +377,48 @@ class excute {
       "title" : "ECG scan"
     })
 
+  }
 
-    const Health = new HealthDocumentRecord().convertFhirToObject(healthDocument.data)
-    const pdf =await  new HealthDocumentRecord().getPdf({
-      "base64" : true,
-      "bottomMargin" : 50,
-      "topMargin" : 50,
-      "composition" : Health,
-      "html" : Health.documentDatahtml,
-      "paperSize" : "A4",
-      // "qrCode" : "",
-      // "signBase64" : emptySign,
-      "singleImagePerPage" : true
-    
+  dietaryComposition = async()=>{
+    await callFunction();
+    await setOtherPractinioner()
+    const healthDocument = await new DietaryRecord().create({
+      "author":[
+          {
+            display: resources.practioner.name,
+            reference: `Practitioner/${resources.practioner.id}`,
+          },
+        ],
+        identifier : {
+          "system" : "test",
+          "value" : resources.patient.id
+        },
+        "date" : new Date().toISOString(),
+        "docHtml" : "<p>Dietery Record</p>",
+        "encounterId" : resources.encounter.id,
+        "languageCode": "en",
+        "orgnizationId" : resources.organization.id,
+        "patientId" : resources.patient.id,
+        "status" : "final",
+        "title" : "Detery Record"
     })
-    console.log(pdf)
+
+
+
+    // const Health = new HealthDocumentRecord().convertFhirToObject(healthDocument.data)
+    // const pdf =await  new HealthDocumentRecord().getPdf({
+    //   "base64" : true,
+    //   "bottomMargin" : 50,
+    //   "topMargin" : 50,
+    //   "composition" : Health,
+    //   "html" : Health.documentDatahtml,
+    //   "paperSize" : "A4",
+    //   // "qrCode" : "",
+    //   // "signBase64" : emptySign,
+    //   "singleImagePerPage" : true
+    
+    // })
+    // console.log(pdf)
 
 
 
@@ -758,13 +786,14 @@ console.log(bundle)
 // new excute().carePlan()
 // new excute().practionerRole()
 // new excute().specimen()
-new excute().procedure()
+// new excute().procedure()
 // new excute().serviceRequest()
 // new excute().schedule()
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
 // new excute().healthDocumentComposition()
+new excute().dietaryComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
