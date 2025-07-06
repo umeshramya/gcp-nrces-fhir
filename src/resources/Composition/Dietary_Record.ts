@@ -11,7 +11,6 @@ interface Args {
   docHtml: string;
   date: string;
   title: string;
-  author: COMPOSITOIN["author"];
   identifier?: IDENTTIFIER[];
   extension?: EXTENSION;
 }
@@ -49,7 +48,9 @@ export class DietaryRecord extends Composition implements Records {
           reference: `Encounter/${options.encounterId}`,
         },
         date: options.date,
-        author: options.author,
+        author:[ {
+          reference: `Organization/${options.orgnizationId}`,
+        }],
         title: "Dietary record",
         custodian: {
           reference: `Organization/${options.orgnizationId}`,
@@ -99,7 +100,9 @@ export class DietaryRecord extends Composition implements Records {
           reference: `Encounter/${options.encounterId}`,
         },
         date: options.date,
-        author: options.author,
+        author:  {
+          reference: `Organization/${options.orgnizationId}`,
+        },
         title: "Dietary record",
         custodian: {
           reference: `Organization/${options.orgnizationId}`,
