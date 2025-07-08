@@ -529,7 +529,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       type: options.title,
       section: options.section,
       id: options.id,
-      identifier: options.identifier.value,
+      identifier: options?.identifier?.value,
       author: options.author,
       documentDatahtml: options.text.div.trim(),
     };
