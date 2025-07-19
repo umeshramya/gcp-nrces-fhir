@@ -9,6 +9,7 @@ interface Args {
   composition: COMPOSITOIN;
   media?: MEDIA[];
   title:string
+  DocumentReferenceId?:string
 }
 export class HealthDocumentRecord extends Composition implements Records {
   create = async (options: Args, Credentials?: any, DatabasePath?:any) => {
@@ -71,7 +72,11 @@ export class HealthDocumentRecord extends Composition implements Records {
           },
         ],
       },
-      entry: [],
+      entry: options.DocumentReferenceId && [
+         {
+        "reference": `DocumentReference/${options.DocumentReferenceId}`
+      }
+      ]||[],
       title: options.title,
     };
 

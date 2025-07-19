@@ -373,8 +373,9 @@ class excute {
         status: "final",
         type: "HealthDocumentRecord",
       },
-      "media" :[media],
-      "title" : "ECG scan"
+      // "media" :[media],
+      "title" : "ECG scan",
+      "DocumentReferenceId" : "e25d3c55-42c1-45d0-a1c9-6d07402348a1"
     })
 
   }
@@ -792,8 +793,8 @@ console.log(bundle)
 // new excute().appointment()
 // new excute().slot()
 // new excute().precsriptinComposition();
-// new excute().healthDocumentComposition()
-new excute().dietaryComposition()
+new excute().healthDocumentComposition()
+// new excute().dietaryComposition()
 // new excute().OpCunsulatationComposition()
 // new excute().media()
 // new excute().diagnosticReport()
