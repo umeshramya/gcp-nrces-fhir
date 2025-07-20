@@ -375,7 +375,10 @@ class excute {
       },
       // "media" :[media],
       "title" : "ECG scan",
-      "DocumentReferenceId" : "e25d3c55-42c1-45d0-a1c9-6d07402348a1"
+      // "DocumentReferenceId" : "e25d3c55-42c1-45d0-a1c9-6d07402348a1"
+      "DocumentReference" : {
+        "id" : "e25d3c55-42c1-45d0-a1c9-6d07402348a1"
+      }
     })
 
   }

@@ -5,11 +5,12 @@ import { APPOINTMENT } from "../Appointment";
 import { MEDIA } from "../Media";
 import { CreatePdf, PDF_HEADER } from "js-ts-report";
 import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
+import { DOCUMENT_REFERENCE } from "../DocumentReference";
 interface Args {
   composition: COMPOSITOIN;
   media?: MEDIA[];
   title:string
-  DocumentReferenceId?:string
+  DocumentReference?:DOCUMENT_REFERENCE
 }
 export class HealthDocumentRecord extends Composition implements Records {
   create = async (options: Args, Credentials?: any, DatabasePath?:any) => {
@@ -72,11 +73,7 @@ export class HealthDocumentRecord extends Composition implements Records {
           },
         ],
       },
-      entry: options.DocumentReferenceId && [
-         {
-        "reference": `DocumentReference/${options.DocumentReferenceId}`
-      }
-      ]||[],
+      entry: [],
       title: options.title,
     };
 
@@ -87,6 +84,13 @@ export class HealthDocumentRecord extends Composition implements Records {
           type: "Media",
         });
       });
+    }
+
+    if(options.DocumentReference){
+      sectionZero.entry.push({
+        reference: `DocumentReference/${options.DocumentReference.id}`,
+        type: "DocumentReference",
+      })
     }
     options.composition.documentDatahtml = docHtml;
     options.composition.section = [sectionZero];
