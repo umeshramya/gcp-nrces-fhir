@@ -294,18 +294,33 @@ const setEncounter = async () => {
   }],
     diagnosis: [
       {
-        condition: {
-          reference: `Condition/20568363-847f-4369-a8f9-ae7a6905865c`,
+        "condition" : {
+          "display"   : "IHD",
         },
-        rank: 1,
-      },
+        "use" : {
+          "text" : "IHD",
+          "coding" : [
+            {
+              "code" : "B1234",
+              "system" : "htttp://www.nicehms.com",
+              "display" : "IHD"
+            }
+          ]
+        }
+      }
+      // {
+      //   condition: {
+      //     reference: `Condition/20568363-847f-4369-a8f9-ae7a6905865c`,
+      //   },
+      //   rank: 1,
+      // },
 
-      {
-        condition: {
-          reference: `Condition/20568363-847f-4369-a8f9-ae7a6905865c`,
-        },
-        rank: 2,
-      },
+      // {
+      //   condition: {
+      //     reference: `Condition/20568363-847f-4369-a8f9-ae7a6905865c`,
+      //   },
+      //   rank: 2,
+      // },
     ],
 
     "organizationId" : resources.organization.id,

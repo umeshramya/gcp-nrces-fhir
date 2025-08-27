@@ -102,7 +102,10 @@ interface ENCOUNTER {
     destination?: { reference: string; type: "Location" | "Organization" };
   };
   diagnosis?: {
-    condition: { reference: string; type: "Condition" | "Procedure" };
+    condition: { reference?: string;
+      identifier	?: IDENTTIFIER;
+      display?:string
+      type?: "Condition" | "Procedure" };
     use?: CODEABLE_CONCEPT;
     rank?: number;
   }[];

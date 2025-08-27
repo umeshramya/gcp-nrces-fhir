@@ -748,15 +748,27 @@ export class Composition extends ResourceMain implements ResourceMaster {
     if (!diagnosis || index >= diagnosis.length) {
       return;
     }
+    
 
+    if(diagnosis[index].condition.reference){
     const resource = this.getFromMultResource({
-      reference: diagnosis[index].condition.reference,
+      reference: diagnosis[index].condition.reference || "",
+      "display" : diagnosis[index].condition.display || "",
+      "identifier" : diagnosis[index].condition.identifier || undefined,
+      "type" : diagnosis[index].condition.type || ""
     });
 
     const condition = (
       await new GcpFhirCRUD().getFhirResource(resource.id, resource.resource)
     ).data;
     diagnosisStringArray.push(condition.text.div);
+    }else{
+diagnosisStringArray.push(
+  `<a href="${diagnosis[index].use?.coding?.[0]?.system || "#"}" target="_blank">
+     ${diagnosis[index + 1]} ${diagnosis[index].use?.text || ""} ${diagnosis[index].use?.coding?.[0]?.code || ""}
+   </a>`
+);
+    }
     index++;
     await this.getDiagnosisFromEnconter(diagnosis, index, diagnosisStringArray);
   }
