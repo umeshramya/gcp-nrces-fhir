@@ -23,7 +23,8 @@ const {
   Coverage,
   CoverageEligibilityRequest,
   Claim,
-  DietaryRecord
+  DietaryRecord,
+  Encounter
 } = require("gcp-nrces-fhir");
 const { setSpecimen } = require("./Speciman");
 const { setServiceRequest } = require("./ServiceRequest");
@@ -64,7 +65,7 @@ const webhookURL="https://webhook.site/3413e350-27be-4afd-816b-cc7cddf35d6f"
 class excute {
   callFunction = async () => {
     await callFunction();
-    console.log(resources.encounter);
+    console.log(JSON.stringify(resources.encounter))
   };
 
   createValueset = async () => {

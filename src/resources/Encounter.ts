@@ -260,7 +260,7 @@ export class Encounter extends ResourceMain implements ResourceMaster {
         resourceType: "Organization",
       });
     }
-    if (options.period.end) {
+    if (options.period && options.period.end) {
       ret.endDate = options.period.end;
     }
     if (options.diagnosis) {
