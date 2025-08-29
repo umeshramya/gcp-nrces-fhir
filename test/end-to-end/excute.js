@@ -58,6 +58,7 @@ const {setTask} = require("./Task");
 const { setPaymentNotice } = require("./PaymentNotice");
 const { setpaymentReconciliation } = require("./PaymentReconcilation");
 const { setInsurancePlan } = require("./InsurancePlan");
+const { textSpanIntersection } = require("typescript");
 const gcpFhirCRUD = new GcpFhirCRUD();
 
 
@@ -65,7 +66,11 @@ const webhookURL="https://webhook.site/3413e350-27be-4afd-816b-cc7cddf35d6f"
 class excute {
   callFunction = async () => {
     await callFunction();
-    console.log(JSON.stringify(resources.encounter))
+    // console.log(JSON.stringify(resources.encounter))
+    const testEncounter = new Encounter().getFHIR(resources.encounter)
+    const res = await new GcpFhirCRUD().updateFhirResource(testEncounter, testEncounter.id, "Encounter" )
+
+    console.log(JSON.stringify(res.data))
   };
 
   createValueset = async () => {
