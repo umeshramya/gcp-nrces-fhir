@@ -765,7 +765,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
     }else{
 diagnosisStringArray.push(
   `<a href="${diagnosis[index].use?.coding?.[0]?.system || "#"}" target="_blank">
-     ${diagnosis[index + 1]} ${diagnosis[index].use?.coding?.[0].display || ""} ${diagnosis[index].use?.coding?.[0]?.code || ""}
+     ${diagnosis[index + 1]} ${diagnosis[index].condition.display || ""} ${diagnosis[index].use?.coding?.[0]?.code || ""}
    </a>`
 );
     }
