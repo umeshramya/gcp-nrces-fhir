@@ -764,12 +764,15 @@ export class Composition extends ResourceMain implements ResourceMaster {
     ).data;
     diagnosisStringArray.push(condition.text.div);
     }else{
-    console.log(JSON.stringify(diagnosisStringArray))
 diagnosisStringArray.push(
   `<a href="${diagnosis[index].use?.coding?.[0]?.system || "#"}" target="_blank">
-    ${diagnosis[index + 1]} ${diagnosis[index].use?.text  || ""} ${diagnosis[index].use?.coding?.[0]?.code || ""}
+    ${diagnosis[index].condition?.display || ""} 
+    ${diagnosis[index].use?.text || ""} 
+    ${diagnosis[index].use?.coding?.[0]?.code || ""}
    </a>`
 );
+
+
     }
     index++;
     await this.getDiagnosisFromEnconter(diagnosis, index, diagnosisStringArray);
