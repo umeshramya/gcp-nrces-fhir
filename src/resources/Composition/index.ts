@@ -12,6 +12,7 @@ import { EXTENSION, resourceType } from "../../config";
 import { PDF_FOOter } from "js-ts-report/build/classes/create-pdf";
 import { TimeZone } from "../../TimeZone";
 import { Readable } from "stream";
+import { Console } from "console";
 
 interface PDF_DATA{
   html: string;
@@ -763,9 +764,10 @@ export class Composition extends ResourceMain implements ResourceMaster {
     ).data;
     diagnosisStringArray.push(condition.text.div);
     }else{
+    console.log(JSON.stringify(diagnosisStringArray))
 diagnosisStringArray.push(
   `<a href="${diagnosis[index].use?.coding?.[0]?.system || "#"}" target="_blank">
-     ${diagnosis[index + 1]} ${diagnosis[index].condition.display || ""} ${diagnosis[index].use?.coding?.[0]?.code || ""}
+    ${diagnosis[index + 1]} ${diagnosis[index].use?.text  || ""} ${diagnosis[index].use?.coding?.[0]?.code || ""}
    </a>`
 );
     }
