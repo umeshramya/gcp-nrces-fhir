@@ -766,19 +766,15 @@ export class Composition extends ResourceMain implements ResourceMaster {
     }else{
       // https://id.who.int/icd/release/11/2025-01/mms/1665365733
       // https://icd.who.int/browse/2025-01/mms/en#1665365733
-// diagnosisStringArray.push(
-//   `<a href="${diagnosis[index].use?.coding?.[0]?.system || "#"}" target="_blank">
-//     ${diagnosis[index].condition?.display || ""} 
-//     ${diagnosis[index].use?.text || ""} 
-//     ${diagnosis[index].use?.coding?.[0]?.code || ""}
-//    </a>`
-// );
-
 diagnosisStringArray.push(
-  `<a href="https://icd.who.int/browse/latest/mms/en#/${diagnosis[index].use?.coding?.[0]?.code || ""}" target="_blank" rel="noopener noreferrer"> 
-     ${diagnosis[index + 1]} ${diagnosis[index].use?.text || ""} (${diagnosis[index].use?.coding?.[0]?.code || ""})
+  `<a href="${diagnosis[index].use?.coding?.[0]?.system || "#"}" target="_blank">
+    ${diagnosis[index].condition?.display || ""} 
+    ${diagnosis[index].use?.text || ""} 
+    ${diagnosis[index].use?.coding?.[0]?.code || ""}
    </a>`
 );
+
+
 
 
 

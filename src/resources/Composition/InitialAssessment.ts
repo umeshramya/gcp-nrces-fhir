@@ -74,7 +74,7 @@ export class InitialAssessment extends Composition implements Records {
     if (diagnosis && diagnosis.length > 0) {
       let diagnosisString = "";
       diagnosis.forEach((el, i)=> diagnosisString +=`(${i+1}). ${el} `)
-      docHtml += `<p><b>Diagnosis :- </b>${diagnosisString}</p><p></p>`;
+      docHtml += `<p><b>Diagnosis [ICD 11]:- </b>${diagnosisString}</p><p></p>`;
     }
 
     interface SECTION_ZERO {
