@@ -775,10 +775,8 @@ export class Composition extends ResourceMain implements ResourceMaster {
 // );
 
 diagnosisStringArray.push(
-  `<a href="https://icd.who.int/browse/latest/mms/en#${encodeURIComponent(
-    diagnosis[index].use?.coding?.[0]?.code || ""
-  )}" target="_blank" rel="noopener noreferrer">
-     ${diagnosis[index + 1] || ""} ${diagnosis[index].use?.text || ""} (${diagnosis[index].use?.coding?.[0]?.code || ""})
+  `<a href="https://icd.who.int/browse/latest/mms/en#/${diagnosis[index].use?.coding?.[0]?.code || ""}" target="_blank" rel="noopener noreferrer"> 
+     ${diagnosis[index + 1]} ${diagnosis[index].use?.text || ""} (${diagnosis[index].use?.coding?.[0]?.code || ""})
    </a>`
 );
 
