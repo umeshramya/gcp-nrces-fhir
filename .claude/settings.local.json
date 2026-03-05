@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx yalc publish:*)",
+      "Bash(npx yalc update:*)",
+      "Bash(node index.js:*)"
+    ]
+  }
+}

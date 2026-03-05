@@ -13,7 +13,7 @@
     "axios": "^0.27.2",
     "dotenv": "^10.0.0",
     "gcp-nrces-fhir": "file:.yalc/gcp-nrces-fhir",
-    "js-ts-report": "^5.0.19",
-    "uuid": "^8.3.2"
+    "js-ts-report": "^6.3.0",
+    "uuid": "^13.0.0"
   }
 }

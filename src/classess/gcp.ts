@@ -52,12 +52,14 @@ export default class GcpFhirCRUD {
         parent: this.parent,
         type: resourceType,
         requestBody: body,
+        responseType: 'json',
       };
-      const resource: any =
-        await this.healthcare.projects.locations.datasets.fhirStores.fhir.create(
-          request
-        );
-      return resource;
+      const response = await this.healthcare.projects.locations.datasets.fhirStores.fhir.create(request);
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response;
     } catch (error) {
       console.log(error);
       if( returnError){
@@ -70,12 +72,12 @@ export default class GcpFhirCRUD {
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
       const request = { name };
-      const resource: any =
-        await this.healthcare.projects.locations.datasets.fhirStores.fhir.delete(
-          request
-        );
-
-      return resource;
+      const response = await this.healthcare.projects.locations.datasets.fhirStores.fhir.delete(request);
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response;
     } catch (error) {
       console.log(error);
       if( returnError){
@@ -88,12 +90,12 @@ export default class GcpFhirCRUD {
     try {
       const name = `${this.parent}/fhir/${resourceType}`;
       const request = { name };
-      const resource: any =
-        await this.healthcare.projects.locations.datasets.fhirStores.fhir.delete(
-          request
-        );
-
-      return resource;
+      const response = await this.healthcare.projects.locations.datasets.fhirStores.fhir.delete(request);
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response;
     } catch (error) {
       console.log(error);
     }
@@ -103,12 +105,12 @@ export default class GcpFhirCRUD {
     try {
       const name = `${this.parent}/fhir/${resourceType}/${resourceId}`;
       const request = { name };
-      const resource: any =
-        await this.healthcare.projects.locations.datasets.fhirStores.fhir.read(
-          request
-        );
-
-      return resource;
+      const response = await this.healthcare.projects.locations.datasets.fhirStores.fhir.read(request);
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response;
     } catch (error) {
       console.log(error);
       if( returnError){
@@ -128,12 +130,12 @@ export default class GcpFhirCRUD {
       // const name = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir/${resourceType}/${resourceId}`;
 
       const request = { name, requestBody: updateOptions };
-      const resource: any =
-        await this.healthcare.projects.locations.datasets.fhirStores.fhir.update(
-          request
-        );
-
-      return resource;
+      const response = await this.healthcare.projects.locations.datasets.fhirStores.fhir.update(request);
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response;
     } catch (error) {
       console.log(error);
       if( returnError){
@@ -148,10 +150,12 @@ export default class GcpFhirCRUD {
     try {
       const parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`
       const request = { parent, requestBody: bundle };
-      const resource: any = await this.healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle(
-        request
-      );
-      return resource
+      const response = await this.healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle(request);
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response
     } catch (error) {
       console.log(error)
     }

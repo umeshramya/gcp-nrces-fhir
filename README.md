@@ -19,3 +19,14 @@ use keys as environmental variables for private key put ""
   GCP_FHIR_projectId=
   GCP_FHIR_datasetId=
   GCP_FHIR_fhirStoreId=
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history, breaking changes, and upgrade notes.
+
+## Recent Major Update (v11.1.26)
+
+- Upgraded Google Healthcare API from v3.10.0 to v26.0.0
+- Fixed Node.js v25.8.0 compatibility issues
+- Added Blob response handling for FHIR operations
+- Updated dependencies for security and compatibility
