@@ -243,6 +243,27 @@ node end-to-end/medication.js  # Run specific end-to-end test
 
 **Reference**: See `CHANGELOG.md` for detailed migration notes and complete change history.
 
+### Google Healthcare API v26 Search Fix (2026-03-06)
+**Version**: 11.1.26 → 12.0.0
+
+**Issue**: Search operations in `GcpFhirSearch` class were not handling API v26's `Blob` response format, causing production issues.
+
+**Changes in `src/classess/gcpSearch.ts`**:
+- `searchFhirResourcesGet()` method now converts Blob responses to JSON
+- `search()` method now converts Blob responses to JSON
+- Both methods use the same Blob-to-JSON conversion pattern as CRUD operations:
+  ```typescript
+  let data = response.data;
+  if (data && typeof data.text === 'function') {
+    data = JSON.parse(await data.text());
+  }
+  response.data = data; return response;
+  ```
+
+**Impact**: All search operations now return parsed JSON responses matching the format of version 3.x API while maintaining v26 compatibility.
+
+**Reference**: See `CHANGELOG.md` for complete change history.
+
 ## Error Handling
 
 - GCP API errors are thrown as exceptions

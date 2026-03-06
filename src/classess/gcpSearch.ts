@@ -57,7 +57,11 @@ export default class GcpFhirSearch {
           request as any
         );
 
-      return response;
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response;
     } catch (error) {
       console.log(error);
     }
@@ -65,10 +69,6 @@ export default class GcpFhirSearch {
 
   async search(resourceType: resourceType, parameters: string) {
     try {
-      let request = {
-        // resourceType: resourceType,
-        parent: `${this.parent}/${resourceType}?${parameters}`,
-      };
 
       const response =
         await this.healthcare.projects.locations.datasets.fhirStores.fhir.read(
@@ -76,7 +76,11 @@ export default class GcpFhirSearch {
           { method: "GET" }
         );
 
-      return response;
+      let data = response.data;
+      if (data && typeof data.text === 'function') {
+        data = JSON.parse(await data.text());
+      }
+      response.data = data; return response;
     } catch (error) {
       console.log(error);
     }

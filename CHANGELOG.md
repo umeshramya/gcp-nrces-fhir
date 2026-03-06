@@ -5,6 +5,22 @@ All notable changes to the `gcp-nrces-fhir` project will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.0.0] - 2026-03-06
+
+### Fixed
+- **Google Healthcare API v26 Search Compatibility**: Fixed search operations in `GcpFhirSearch` class to properly handle API v26's `Blob` response format
+  - `searchFhirResourcesGet()` method now converts Blob responses to JSON using the same pattern as CRUD operations
+  - `search()` method now converts Blob responses to JSON using the same pattern as CRUD operations
+  - Both methods use the established Blob detection pattern: `if (data && typeof data.text === 'function') { data = JSON.parse(await data.text()); }`
+
+### Technical Details
+- **Search Methods Updated**: `src/classess/gcpSearch.ts` now fully compatible with Google Healthcare API v26
+- **Consistent Pattern**: Same Blob-to-JSON conversion pattern applied to both search methods for consistency
+- **Backward Compatibility**: Maintains same response format as version 3.x API while supporting v26
+
+### Files Modified
+- `src/classess/gcpSearch.ts` - Added Blob handling for search operations
+
 ## [11.1.26] - 2026-03-05
 
 ### Fixed
