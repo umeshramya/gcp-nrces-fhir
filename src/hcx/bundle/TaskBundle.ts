@@ -33,9 +33,9 @@ export class TaskBundle extends ResourceMain implements ResourceMaster {
       meta: {
         profile:
           options.hcx == "nhcx"
-            ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ClaimBundle"]
+            ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/TaskBundle"]
             : [
-                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-ClaimRequestBundle.html",
+                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-TaskBundle.html",
               ],
       },
       identifier: options.indentfier,

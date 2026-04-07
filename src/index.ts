@@ -107,7 +107,7 @@ import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./hcx/Co
 import {CoverageEligibilityRequestBundle} from "./hcx/bundle/CoverageEligibiltyRequestBundle"
 import {COVERAGE_ELIGIBILITY_REQUEST_PRIORITY} from "./hcx/CoverageEligibilityRequest"
 import {COVERAGE_ELIGIBILITY_RESPONSE, CoverageEligibiltyResponse} from "./hcx/CoverageEligibilityResponse"
-
+import {InsurancePlanBundle} from "./hcx/bundle/InsuranceBundle"
 import {TASK,Task } from "./hcx/Task"
 
 import { Immunization , IMMUNIZATION } from "./resources/Immunization";
@@ -250,3 +250,4 @@ export { TaskBundle }
 
 export {InsurancePlan, INSURANCE_PLAN}
 export { DietaryRecord }
+export {InsurancePlanBundle}
