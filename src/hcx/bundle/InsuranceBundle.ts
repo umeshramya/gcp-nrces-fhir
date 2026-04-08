@@ -16,7 +16,7 @@ export class InsurancePlanBundle
   getFHIR(options: { id?: string; InsurancePlan: any; Organization?: any , dateTime?:string}) {
     const ret = {
       resourceType: "Bundle",
-      id: options.id,
+      id: options.id ,
       meta: {
         versionId: "1",
         profile: [
@@ -43,7 +43,7 @@ export class InsurancePlanBundle
 
     if (options.Organization) {
       ret.entry.push({
-        fullUrl: `Claim/${options.Organization.id}`,
+        fullUrl: `InsurancePlan/${options.Organization.id}`,
         resource: options.Organization,
       });
     }
