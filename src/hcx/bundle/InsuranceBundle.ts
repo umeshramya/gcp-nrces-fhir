@@ -47,5 +47,7 @@ export class InsurancePlanBundle
         resource: options.Organization,
       });
     }
+
+    return ret;
   }
 }
