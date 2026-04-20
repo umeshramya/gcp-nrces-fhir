@@ -787,7 +787,7 @@ console.log(bundle)
 
 
 
-new excute().callFunction()
+// new excute().callFunction()
 // new excute().createValueset()
 // new excute().medicationrequest();
 // new excute().medicationStateement()
@@ -828,7 +828,7 @@ new excute().callFunction()
 // new excute().payemntReconciliation()
 // new excute().insurancePlan()
 // new excute().claimRequestBundle()
-// new excute().coverageElegibityRequest()
+new excute().coverageElegibityRequest()
 // new excute().coverageElegibityRequestBundle()
 // new excute().immunization()
 // new excute().immunizationRecomndation()

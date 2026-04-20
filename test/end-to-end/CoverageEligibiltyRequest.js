@@ -113,6 +113,9 @@ const setCoverageEligibiltyRequest = async () => {
 
           { diagnosisCodeableConcept: { text: "Vomiting" } },
         ],
+        "quantity" : {
+          "value" : 1234
+        }
       },
     ],
 

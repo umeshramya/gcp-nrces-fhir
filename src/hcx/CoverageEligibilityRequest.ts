@@ -15,6 +15,7 @@ import ResourceMain from "../resources/ResourceMai";
 import { TimeZone } from "../TimeZone";
 import { Coverage } from "./Coverage";
 import { TO_HTML_HCX_OPTIONS } from "./interfaces";
+import { QUANTITY, SAMPLE_QUANTITY } from "../resources/Observation";
 
 const CoverageEligibilityRequestStatus = [
   "active",
@@ -87,6 +88,7 @@ interface ITEM {
   provider?: ITEM_PROVIDER;
   facility?: ITEM_FACILITY;
   diagnosis: DIAGNOSIS[];
+  quantity ?: SAMPLE_QUANTITY
 }
 
 export type COVERAGE_ELIGIBILITY_REQUEST_PRIORITY =
