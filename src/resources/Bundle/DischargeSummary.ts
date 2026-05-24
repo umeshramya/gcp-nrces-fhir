@@ -56,9 +56,12 @@ export class DischargeSummaryBundle extends BundelMain implements ResourceMaster
           reference: `MedicationRequest/${el.resource.id}`,
         };
       });
-    body.entry[0].resource.section.find(
+    const medicationSection = body.entry[0].resource.section.find(
       (m: any) => m.code.coding[0].display == "Medication summary document"
-    ).entry = medicationRef;
+    );
+    if (medicationSection) {
+      medicationSection.entry = medicationRef;
+    }
     
     // const  filteredEntry =body.entry.filter(el =>el.resource.resourceType !== "DocumentReference")
     // body.entry=filteredEntry;

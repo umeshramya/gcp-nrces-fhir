@@ -84,8 +84,15 @@ node index.js
    - Converts between FHIR JSON and internal objects
 
 4. **ResourceMaster Interface** (`src/Interfaces/index.ts`): Base interface for all FHIR resources
-   - Defines `getFHIR()` and `convertFhirToObject()` methods
+   - Defines `getFHIR()`, `convertFhirToObject()`, and `toHtml()` methods
    - Ensures consistent API across all resources
+
+5. **ResourceMain** (`src/resources/ResourceMai.ts`): Base class most FHIR resources extend
+   - Extends `ResourceToHTML` for HTML rendering support
+   - Provides shared utilities: identifier extraction, reference parsing, FHIR value type conversion, dosage instruction handling
+   - `bundlify()` strips extension/meta/text fields for bundle inclusion
+
+6. **ResourceToHTML** (`src/classess/ReseorcetToHtml.ts`): Base class for HTML representation generation
 
 ### Directory Structure
 
@@ -106,14 +113,16 @@ src/
 
 ### FHIR Resource Implementation Pattern
 
-Each FHIR resource follows this pattern:
+Each FHIR resource extends `ResourceMain` and follows this pattern:
 ```typescript
-class ResourceName {
+class ResourceName extends ResourceMain {
   getFHIR(data: object): fhir.Resource  // Convert internal object to FHIR JSON
   convertFhirToObject(fhirData: fhir.Resource): object  // Convert FHIR JSON to internal object
+  toHtml(data: object): Promise<string>  // Generate HTML representation
   // Resource-specific methods
 }
 ```
+The `ResourceMain` base class provides `getIdFromReference()`, `getIdentifers()`, `getFromMultResource()`, `bundlify()`, `removeUndefinedKeys()`, FHIR value type conversion methods, and dosage instruction helpers.
 
 ### Bundle Resources
 Specialized bundle implementations for clinical documents:
@@ -126,9 +135,12 @@ Specialized bundle implementations for clinical documents:
 ### HCX (Healthcare Exchange) Resources
 Implementation of India's Healthcare Exchange standards:
 - `Claim`, `ClaimResponse`: Insurance claim processing
-- `Coverage`, `CoverageEligibilityRequest`: Insurance coverage
+- `Coverage`, `CoverageEligibilityRequest`, `CoverageEligibilityResponse`: Insurance coverage
+- `InsurancePlan`: Insurance plan details
+- `PaymentNotice`, `PaymentReconciliation`: Payment processing
 - `Task`: Workflow tasks
-- `Communication`: Healthcare communications
+- `Communication`, `CommunicationRequest`: Healthcare communications
+- HCX Bundles: `ClaimRequestBundle`, `CoverageEligibilityRequestBundle`, `InsurancePlanBundle`, `TaskBundle`
 
 ## Testing Strategy
 
@@ -163,7 +175,8 @@ node end-to-end/medication.js  # Run specific end-to-end test
 ### Package Configuration
 - Main entry: `lib/index.js`
 - Files included: `lib/**/*` (compiled TypeScript output)
-- Dependencies: `@googleapis/healthcare`, `date-age`, `html-to-text`, `js-ts-report`, `uuid`
+- Dependencies: `@googleapis/healthcare`, `date-age`, `html-to-text`, `js-ts-report`, `typescript`
+- Node.js built-in `crypto.randomUUID()` is used for ID generation (the `uuid` package was removed in v12.0.8)
 
 ## Key Design Patterns
 
@@ -205,7 +218,7 @@ node end-to-end/medication.js  # Run specific end-to-end test
 
 - The library uses NRCES-specific extensions and terminology codes
 - All dates should use ISO 8601 format with timezone information
-- Resource IDs are UUIDs (v4) generated using the `uuid` package
+- Resource IDs are UUIDs (v4) generated using Node.js `crypto.randomUUID()`
 - PDF generation uses `js-ts-report` for clinical document rendering
 - HCX resources follow India's Healthcare Exchange specifications
 
@@ -264,9 +277,13 @@ node end-to-end/medication.js  # Run specific end-to-end test
 
 **Reference**: See `CHANGELOG.md` for complete change history.
 
+### UUID Package Replacement (2026-05)
+**Version**: 12.0.7 → 12.0.8
+
+**Issue**: The `uuid` package caused CJS compatibility issues.
+
+**Changes**: Replaced `uuid` with Node.js built-in `crypto.randomUUID()` throughout the codebase.
+
 ## Error Handling
 
-- GCP API errors are thrown as exceptions
-- Resource validation errors provide descriptive messages
-- Missing required fields throw validation errors
-- Network/timeout errors should be retried with exponential backoff
+- GCP API errors are thrown as exceptions from the healthcare API client

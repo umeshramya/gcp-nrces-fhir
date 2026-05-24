@@ -2,7 +2,7 @@ const console = require("console");
 const { ServiceRequest, DiagnosticReport } = require("gcp-nrces-fhir");
 
 require("dotenv").config("env");
-const v4 = require("uuid").v4;
+const { randomUUID } = require("crypto");
 
 const { GcpFhirCRUD} = require("gcp-nrces-fhir");
 
