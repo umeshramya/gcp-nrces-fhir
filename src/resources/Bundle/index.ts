@@ -3,7 +3,7 @@ import { Composition, COMPOSITOIN, emptySign } from "../Composition";
 import GcpFhirCrud from "../../classess/gcp";
 import ResourceMain from "../ResourceMai";
 import { Binary, BINARY } from "../Binary";
-import { CreatePdf } from "js-ts-report";
+import createPdf from "../../classess/PdfGenerator";
 import { DocumentReference } from "../DocumentReference";
 import { Patient } from "../Patient";
 import { Encounter } from "../Encounter";
@@ -125,8 +125,7 @@ export class BundelMain extends ResourceMain {
 
  
    
-    let pdf = new CreatePdf();
-    const ret = await pdf.create(options.html, {
+    const ret = await createPdf(options.html, {
       base64: true,
       paperSize: "A4",
       qrcode: options.qrCode,
@@ -136,7 +135,7 @@ export class BundelMain extends ResourceMain {
       },
       media :mediaContent.length > 0 ?  {
         "content" : mediaContent,
-        singleImagePerPage : options.singleImagePerPage || false 
+        singleImagePerPage : options.singleImagePerPage || false
       } : undefined
     });
     return ret as any;

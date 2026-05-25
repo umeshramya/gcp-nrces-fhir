@@ -33,6 +33,27 @@ export interface IMMUNIZATION {
   patient: Patient;
   occurrenceDateTime: string;
   primarySource: boolean;
+  lotNumber?: string;
+  manufacturer?: {
+    display?: string;
+  };
+  site?: {
+    coding?: [
+      {
+        system: string;
+        code: string;
+        display: string;
+      }
+    ];
+    text?: string;
+  };
+  performer?: Array<{
+    actor: { reference: string };
+  }>;
+  protocolApplied?: Array<{
+    doseNumberPositiveInt: number;
+    series?: string;
+  }>;
 }
 
 interface Meta {
@@ -63,7 +84,11 @@ export class Immunization extends ResourceMain implements ResourceMaster {
       ...options,
       patient: { reference: patientString },
     };
-
+    if (body.performer) {
+      body.performer = body.performer.map((p) => ({
+        actor: { reference: `Practitioner/${p.actor.reference}` },
+      }));
+    }
     return body;
   }
   convertFhirToObject(options: any) {
@@ -76,6 +101,16 @@ export class Immunization extends ResourceMain implements ResourceMaster {
         }),
       },
     };
+    if (ret.performer) {
+      ret.performer = ret.performer.map((p: any) => ({
+        actor: {
+          reference: this.getIdFromReference({
+            ref: p.actor.reference,
+            resourceType: "Practitioner",
+          }),
+        },
+      }));
+    }
     if(!options.extension){
       delete options.extension
     }
