@@ -69,6 +69,7 @@ import {DischargeSUmmery} from "./resources/Composition/DischargeSummary"
 import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportComp";
 import { HealthDocumentRecord } from "./resources/Composition/HealthDocumentRecord";
 import { ImmunizationRecordComp } from "./resources/Composition/ImmunizationRecord";
+import { WellnessRecordComp } from "./resources/Composition/WellnessRecord";
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -97,6 +98,7 @@ import { OPConsultationBundle } from "./resources/Bundle/OPConsultation"
 import {DischargeSummaryBundle} from "./resources/Bundle/DischargeSummary"
 import { HealthDocumentBundle } from "./resources/Bundle/HealthDocumnet";
 import { ImmunizationRecordBundle } from "./resources/Bundle/ImmunizationRecord";
+import { WellnessRecordBundle } from "./resources/Bundle/WellnessRecord";
 import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
@@ -181,6 +183,7 @@ export { OPConsultRecord };
 export {DischargeSUmmery}
 export { DiagnosticReportComp };
 export { ImmunizationRecordComp };
+export { WellnessRecordComp };
 
 export {InitialAssessment}
 export {
@@ -216,6 +219,7 @@ export { DiagnsoticReportBundle }
 export { OPConsultationBundle }
 export {DischargeSummaryBundle}
 export { ImmunizationRecordBundle }
+export { WellnessRecordBundle }
 export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
 export { Media, MEDIA };

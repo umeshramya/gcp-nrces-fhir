@@ -98,8 +98,15 @@ export const compositionTypeArrey = [
     "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DietaryRecord",
     "code": "440654000",
     "text": "Dietary record"
+  },
+  {
+    type: "WellnessRecord",
+    system: "http://snomed.info/sct",
+    url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/WellnessRecord",
+    code: "440654000",
+    text: "Wellness record"
   }
-  
+
 ] as const;
 
 const onlyType = compositionTypeArrey.map((el) => el.type);

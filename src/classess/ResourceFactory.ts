@@ -38,6 +38,8 @@ import { InsurancePlan } from "../hcx/Insuranceplan";
 import { PaymentNoctice } from "../hcx/PaymentNotice";
 import { PaymentReconciliation } from "../hcx/PaymentReconciliation";
 import { Task } from "../hcx/Task";
+import { Immunization } from "../resources/Immunization";
+import { ImmunizationRecommendation } from "../resources/ImmunizationRecommendation";
 
 export default class ResourceFactory
   extends ResourceMain
@@ -124,6 +126,10 @@ export default class ResourceFactory
       this.resource = new PaymentReconciliation()
     }else if(this.resourceType == "Task"){
       this.resource = new Task()
+    }else if(this.resourceType == "Immunization"){
+      this.resource = new Immunization()
+    }else if(this.resourceType == "ImmunizationRecommendation"){
+      this.resource = new ImmunizationRecommendation()
     }
 
     else {
