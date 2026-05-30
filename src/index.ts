@@ -70,6 +70,11 @@ import { DiagnosticReportComp } from "./resources/Composition/DiagnosticReportCo
 import { HealthDocumentRecord } from "./resources/Composition/HealthDocumentRecord";
 import { ImmunizationRecordComp } from "./resources/Composition/ImmunizationRecord";
 import { WellnessRecordComp } from "./resources/Composition/WellnessRecord";
+import { InvoiceRecordComp } from "./resources/Composition/InvoiceRecord";
+import { Invoice, INVOICE_TYPE_CODES, PRICE_COMPONENT_CODES } from "./resources/Invoice";
+import type { INVOICE_OPTIONS, INVOICE_LINE_ITEM, PRICE_COMPONENT, INVOICE_IDENTIFIER } from "./resources/Invoice";
+import { ChargeItem } from "./resources/ChargeItem";
+import type { CHARGE_ITEM_OPTIONS, CHARGE_ITEM_CODE } from "./resources/ChargeItem";
 import {
   DOCUMENT_REFERENCE,
   DocumentReference,
@@ -99,6 +104,7 @@ import {DischargeSummaryBundle} from "./resources/Bundle/DischargeSummary"
 import { HealthDocumentBundle } from "./resources/Bundle/HealthDocumnet";
 import { ImmunizationRecordBundle } from "./resources/Bundle/ImmunizationRecord";
 import { WellnessRecordBundle } from "./resources/Bundle/WellnessRecord";
+import { InvoiceRecordBundle } from "./resources/Bundle/InvoiceRecord";
 import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
@@ -184,6 +190,7 @@ export {DischargeSUmmery}
 export { DiagnosticReportComp };
 export { ImmunizationRecordComp };
 export { WellnessRecordComp };
+export { InvoiceRecordComp };
 
 export {InitialAssessment}
 export {
@@ -220,6 +227,7 @@ export { OPConsultationBundle }
 export {DischargeSummaryBundle}
 export { ImmunizationRecordBundle }
 export { WellnessRecordBundle }
+export { InvoiceRecordBundle }
 export { Specimen, SPECIMEN };
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
 export { Media, MEDIA };
@@ -259,3 +267,7 @@ export { TaskBundle }
 export {InsurancePlan, INSURANCE_PLAN}
 export { DietaryRecord }
 export {InsurancePlanBundle}
+export { Invoice, INVOICE_TYPE_CODES, PRICE_COMPONENT_CODES };
+export type { INVOICE_OPTIONS, INVOICE_LINE_ITEM, PRICE_COMPONENT, INVOICE_IDENTIFIER };
+export { ChargeItem };
+export type { CHARGE_ITEM_OPTIONS, CHARGE_ITEM_CODE };

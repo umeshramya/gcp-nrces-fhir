@@ -105,6 +105,13 @@ export const compositionTypeArrey = [
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/WellnessRecord",
     code: "440654000",
     text: "Wellness record"
+  },
+  {
+    type: "Invoice",
+    system: "https://ndhm.gov.in/sct",
+    url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InvoiceRecord",
+    code: "99",
+    text: "Invoice Record"
   }
 
 ] as const;
@@ -376,13 +383,13 @@ export class Composition extends ResourceMain implements ResourceMaster {
       html += `</tr>`;
 
       html += `${
-        this.requeter || options.patient.internalId || options.patient.facilityId
+        this.requeter || (options.patient && (options.patient.internalId || options.patient.facilityId))
           ? `<tr><td>${
               this.requeter ? `Requested By : ${this.requeter}<br/>>` : ""
             }
           ${options.encounter && this.getOpdOrIPDNumber(options.encounter).value}
             </td><td>${
-              options.patient.internalId || options.patient.facilityId
+              options.patient && (options.patient.internalId || options.patient.facilityId)
                 ? `Internal Id : ${options.patient.facilityId || ""} ${options.patient.internalId || ""}`
                 : ""
             }</td></tr>`

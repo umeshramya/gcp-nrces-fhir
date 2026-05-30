@@ -33,20 +33,26 @@ export class BundelMain extends ResourceMain {
 
     const authors: any = await Promise.all(
       compositionObj.author.map(async (el) => {
-        const id = this.getIdFromReference({
-          ref: el.reference,
-          resourceType: "Practitioner",
-        });
-        const url = el.reference;
-        const resource = await gcpGcpFhir
-          .getFhirResource(id, "Practitioner")
-          .then((res) => res.data);
-        return {
-          fullUrl: url,
-          resource: resource,
-        };
+        try {
+          const refParts = el.reference?.split("/");
+          const resourceType = ((refParts && refParts.length === 2) ? refParts[0] : "Practitioner") as any;
+          const id = this.getIdFromReference({
+            ref: el.reference,
+            resourceType: resourceType,
+          });
+          const url = el.reference;
+          const resource = await gcpGcpFhir
+            .getFhirResource(id, resourceType)
+            .then((res) => res.data);
+          return {
+            fullUrl: url,
+            resource: resource,
+          };
+        } catch {
+          return null;
+        }
       })
-    ).then((res) => res);
+    ).then((res) => res.filter(Boolean));
   
     const entry = [
       {

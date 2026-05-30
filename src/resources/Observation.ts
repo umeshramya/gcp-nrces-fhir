@@ -455,14 +455,20 @@ export class Observation extends ResourceMain implements ResourceMaster {
 
         delete copy.referenceRange
       }
-    
+
       delete copy.valueQuantity
 
- 
-      // if (!copy.valueString && valueString){
-      //   valueString="Panel"
-      // }
       copy.valueString = valueString;
+    }else if(copy.valueCodeableConcept){
+      copy.valueString = copy.valueCodeableConcept.text ||
+        copy.valueCodeableConcept.coding?.[0]?.display || "";
+      delete copy.valueCodeableConcept;
+    }else if(copy.valueBoolean != null){
+      copy.valueString = copy.valueBoolean ? "Yes" : "No";
+      delete copy.valueBoolean;
+    }else if(copy.valueInteger != null){
+      copy.valueString = String(copy.valueInteger);
+      delete copy.valueInteger;
     }else{
       copy.valueString="Panel"
     }
