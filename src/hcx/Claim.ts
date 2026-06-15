@@ -54,11 +54,13 @@ export interface CLAIM {
     provider: { reference: `Organization/${string}` };
   }[];
   item: {
+    id?: string;
     sequence: number;
+    category?: CODEABLE_CONCEPT;
     productOrService: {
-      coding: 
+      coding:
         {
-          system: "https://irdai.gov.in/package-code";
+          system: string;
           code: string;
           display: string;
         }[]
