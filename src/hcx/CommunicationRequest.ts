@@ -126,14 +126,7 @@ export class CommunicationRequest
       meta: {
         versionId: "1",
         lastUpdated: "2023-09-07T14:58:58.181+05:30",
-        profile:
-          options.hcx == "swasth"
-            ? [
-                "https://ig.hcxprotocol.io/v0.8/StructureDefinition-CommunicationRequest.html",
-              ]
-            : [
-                "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CommunicationRequest",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/CommunicationRequest"],
       },
       text: {
         status: "generated",

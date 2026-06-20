@@ -122,12 +122,7 @@ export class Coverage extends ResourceMain implements ResourceMaster {
       identifier: options.identifier,
 
       meta: {
-        profile:
-          options.hcx == "nhcx"
-            ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Coverage"]
-            : [
-                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Coverage.html",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Coverage"],
       },
 
       text: {

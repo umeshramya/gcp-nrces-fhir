@@ -260,14 +260,7 @@ export class CoverageEligibilityRequest
       resourceType: "CoverageEligibilityRequest",
       id: options.id,
       meta: {
-        profile:
-          options.hcx == "nhcx"
-            ? [
-                "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequest",
-              ]
-            : [
-                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityRequest.html",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequest"],
       },
       language: "en",
       text: {

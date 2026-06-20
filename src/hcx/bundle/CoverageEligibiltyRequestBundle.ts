@@ -35,11 +35,7 @@ export class CoverageEligibilityRequestBundle
       resourceType: "Bundle",
       id: options.id || undefined,
       meta: {
-        profile: options.hcx == "nhcx" ? [
-          "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequestBundle",
-        ] : [
-          "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityRequestBundle.html",
-        ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityRequestBundle"],
       },
       identifier: options.indentfier,
       type: "collection",

@@ -305,12 +305,7 @@ export class Claim extends ResourceMain implements ResourceMaster {
       id: options.id ? options.id : undefined,
       meta: {
         lastUpdated: "2023-02-20T14:03:14.918+05:30",
-        profile:
-          options.hcx == "nhcx"
-            ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim"]
-            : [
-                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-Claim.html",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim"],
       },
       identifier: options.identifier,
       status: options.status,

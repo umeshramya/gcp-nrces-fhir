@@ -187,14 +187,7 @@ export class Communication extends ResourceMain implements ResourceMaster {
       meta: {
         versionId: "1",
         lastUpdated: "2023-09-07T14:58:58.181+05:30",
-        profile:
-          options.hcx == "nhcx"
-            ? [
-                "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Communication",
-              ]
-            : [
-                "https://ig.hcxprotocol.io/v0.8/StructureDefinition-Communication.html",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Communication"],
       },
       text: {
         status: "generated",

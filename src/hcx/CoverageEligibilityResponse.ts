@@ -155,14 +155,7 @@ export class CoverageEligibiltyResponse
       resourceType: "CoverageEligibilityResponse",
       id: options.id || undefined,
       meta: {
-        profile:
-          options.hcx == "nhcx"
-            ? [
-                "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityResponse",
-              ]
-            : [
-                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-CoverageEligibilityResponse.html",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/CoverageEligibilityResponse"],
       },
       language: "en",
       text: {

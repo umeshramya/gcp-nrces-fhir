@@ -31,12 +31,7 @@ export class TaskBundle extends ResourceMain implements ResourceMaster {
       resourceType: "Bundle",
       id: options.id || undefined,
       meta: {
-        profile:
-          options.hcx == "nhcx"
-            ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/TaskBundle"]
-            : [
-                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-TaskBundle.html",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/TaskBundle"],
       },
       identifier: options.indentfier,
       type: "collection",

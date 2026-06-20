@@ -28,12 +28,7 @@ async  toHtml():Promise<string>{
       ,
       id: options.id || undefined,
       meta: {
-        profile:
-          options.hcx == "nhcx"
-            ? ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ClaimBundle"]
-            : [
-                "https://ig.hcxprotocol.io/v0.7.1/StructureDefinition-ClaimRequestBundle.html",
-              ],
+        profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/ClaimBundle"],
       },
       identifier: options.indentfier,
       type: "collection",
