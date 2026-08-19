@@ -2,6 +2,7 @@ import { CODING, IDENTTIFIER } from "../config";
 import { ResourceMaster } from "../Interfaces";
 import { TimeZone } from "../TimeZone";
 import ResourceMain from "./ResourceMai";
+import { DocumentReference } from "./DocumentReference";
 
 type RelationshipCode = "FTH" | "MTH" | "SPS" | "HUSB" | "SON" | "DAU" | "BRO" | "SIS" | "UNCLE" | "AUNT" | "FRIEND";
 type RelationshipDisplay = "Father" | "Mother" | "Wife" | "Husband" | "Son" | "Daughter" | "Brother" | "Sister" | "Uncle" | "Aunt" | "Friend";
@@ -56,6 +57,18 @@ const relationships: Relationship[] = [
 
 export { Relationship, relationships, RelationshipCode, RelationshipDisplay , PATIENT_CONTACT};
 
+export type PatientLinkType = "replaced-by" | "replaces" | "refer" | "seealso";
+
+export interface PATIENT_LINK {
+  type: PatientLinkType;
+  other: { reference: string; type?: string };
+}
+
+export interface BIRTH_CERTIFICATE_UPLOAD {
+  pdf: string;
+  title?: string;
+}
+
 export interface PATIENT {
   id?: string;
   internalId?: string;
@@ -70,6 +83,9 @@ export interface PATIENT {
   organizationId: string;
   identifier?:IDENTTIFIER[]
   contact?:PATIENT_CONTACT[]
+  link?: PATIENT_LINK[];
+  DCBUpload?: BIRTH_CERTIFICATE_UPLOAD;
+  BCFUpload?: BIRTH_CERTIFICATE_UPLOAD;
 }
 
 export class Patient extends ResourceMain implements ResourceMaster {
@@ -246,8 +262,8 @@ export class Patient extends ResourceMain implements ResourceMaster {
       managingOrganization: {
         reference: `Organization/${options.organizationId}`,
       },
-      contact: options.contact
-
+      contact: options.contact,
+      link: options.link
     };
 
     return body;
@@ -320,7 +336,40 @@ export class Patient extends ResourceMain implements ResourceMaster {
       }
     }
 
+    if (options.link) {
+      ret.link = options.link;
+    }
+
     return ret;
+  }
+
+  getBirthCertificateReferences(options: PATIENT): any[] {
+    const refs: any[] = [];
+    const codeSystem = "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-supportinginfo-code";
+    const makeType = (code: string, display: string) => ({
+      coding: [{ system: codeSystem, code, display }],
+    });
+    if (options.id && options.DCBUpload && options.DCBUpload.pdf) {
+      refs.push(new DocumentReference().getFHIR({
+        status: "current",
+        docStatus: "final",
+        type: makeType("DCB", "Discharge card/ slip issued by Government hospitals for birth of a child"),
+        patientId: options.id,
+        pdf: options.DCBUpload.pdf,
+        title: options.DCBUpload.title || "Discharge card - birth of a child",
+      }));
+    }
+    if (options.id && options.BCFUpload && options.BCFUpload.pdf) {
+      refs.push(new DocumentReference().getFHIR({
+        status: "current",
+        docStatus: "final",
+        type: makeType("BCF", "Birth Certificate issued by Registrar of Birth, Municipal Corporation and other notified local government bodies like Taluk, Tehsil etc."),
+        patientId: options.id,
+        pdf: options.BCFUpload.pdf,
+        title: options.BCFUpload.title || "Birth Certificate",
+      }));
+    }
+    return refs;
   }
 }
 

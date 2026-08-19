@@ -1,9 +1,10 @@
 {
   "name": "gcp-nrces-fhir",
-  "version": "12.0.16",
+  "version": "12.0.17",
   "description": "Google cloud healthcare api NRCES FHIR implimenataion",
   "main": "lib/index.js",
   "scripts": {
+    "build": "tsc",
     "dev": "tsc && yalc publish && cd test &&  yalc add gcp-nrces-fhir && yalc update gcp-nrces-fhir && node index"
   },
   "repository": {
