@@ -5,7 +5,8 @@
       "Bash(npx tsc:*)",
       "Bash(npx yalc publish:*)",
       "Bash(npx yalc update:*)",
-      "Bash(node index.js:*)"
+      "Bash(node index.js:*)",
+      "Bash(git push *)"
     ]
   }
 }

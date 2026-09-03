@@ -79,7 +79,8 @@ export interface SERVICE_REQUEST {
   note?: ANNOTATION[];
   extension?: EXTENSION[];
   specimanIds?: string[];
-  reasonCode?:CODEABLE_CONCEPT[]
+  reasonCode?:CODEABLE_CONCEPT[];
+  replaces?: MULTI_RESOURCE[];
 }
 
 export class ServiceRequest extends ResourceMain implements ResourceMaster {
@@ -177,22 +178,30 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
       body.reasonCode = options.reasonCode
     }
 
+    if (options.replaces) {
+      body.replaces = options.replaces.map((el) => ({
+        reference: `${el.resource}/${el.id}`,
+        display: el.display,
+      }));
+    }
+
     return body;
   }
   convertFhirToObject(options: any): SERVICE_REQUEST {
+    if (options) {
+      options = JSON.parse(JSON.stringify(options));
+    }
     const requester = (): requester => {
-      const resource = `${options.requester.reference}`.substring(
-        0,
-        `${options.requester.reference}`.indexOf("/")
-      ) as any;
+      const reference = `${options?.requester?.reference}`;
+      const resource = reference.substring(0, reference.indexOf("/")) as any;
 
       const id = this.getIdFromReference({
-        ref: options.requester.reference,
+        ref: reference,
         resourceType: resource,
       });
 
       let ret: requester = {
-        display: options.requester.display,
+        display: options?.requester?.display,
         id: id,
         resource: resource,
       };
@@ -201,7 +210,7 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
 
     const performer = (): performer[] => {
       let ret: performer[] = [];
-      options.performer.forEach((el: any) => {
+      options?.performer?.forEach((el: any) => {
         const resource = `${el.reference}`.substring(
           0,
           `${el.reference}`.indexOf("/")
@@ -220,15 +229,15 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     };
 
     let ret: SERVICE_REQUEST = {
-      status: options.status,
-      intent: options.intent,
+      status: options?.status,
+      intent: options?.intent,
       patientId: this.getIdFromReference({
-        ref: options.subject.reference,
+        ref: options?.subject?.reference,
         resourceType: "Patient",
       }),
-      patientName: options.subject.display,
-      date: options.occurrenceDateTime,
-      id: options.id,
+      patientName: options?.subject?.display,
+      date: options?.occurrenceDateTime,
+      id: options?.id,
 
       requester: requester(),
     };
@@ -273,6 +282,16 @@ export class ServiceRequest extends ResourceMain implements ResourceMaster {
     if (options.note) {
       ret.note = options.note;
     }
+
+    if (options.replaces) {
+      ret.replaces = options.replaces.map((el: any) =>
+        this.getFromMultResource({
+          reference: el.reference,
+          display: el.display,
+        })
+      );
+    }
+
     if (ret.performer == undefined) {
       delete ret.performer;
     }

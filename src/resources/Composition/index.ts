@@ -147,6 +147,12 @@ export interface compositionAuthor {
   display: string;
 }
 
+export interface compositionAttester {
+  mode: "personal" | "professional" | "legal" | "official";
+  time?: string;
+  party: compositionAuthor;
+}
+
 export interface COMPOSITOIN {
   id?: string;
   identifier?: string;
@@ -167,7 +173,8 @@ export interface COMPOSITOIN {
   documentDatahtml?: string;
   section: any[];
   extension?: EXTENSION[];
-  documentSubType?:string
+  documentSubType?:string;
+  attester?: compositionAttester[];
 }
 
 export interface USER_COMPOSITION_EXTENSION {
@@ -518,6 +525,14 @@ export class Composition extends ResourceMain implements ResourceMaster {
         reference: `Organization/${options.organizationId}`,
         // "display": options.organization.name
       },
+      attester: options.attester && options.attester.map((el) => ({
+        mode: el.mode,
+        time: el.time,
+        party: {
+          reference: el.party.reference,
+          display: el.party.display,
+        },
+      })),
       section: [
         {
           title: this.compType.type,
@@ -538,31 +553,42 @@ export class Composition extends ResourceMain implements ResourceMaster {
     return body;
   }
   convertFhirToObject(options: any): Partial<COMPOSITOIN> {
+    if (options) {
+      options = JSON.parse(JSON.stringify(options));
+    }
     let ret: Partial<COMPOSITOIN> = {
       patient: undefined,
       patientId: this.getIdFromReference({
-        ref: options.subject.reference,
+        ref: options?.subject?.reference,
         resourceType: "Patient",
       }),
       encounter: undefined,
       encounterId: this.getIdFromReference({
-        ref: options.encounter.reference,
+        ref: options?.encounter?.reference,
         resourceType: "Encounter",
       }),
-      date: options.date,
+      date: options?.date,
       organization: undefined,
       // organizationId: `${options.custodian.reference}`.substring(13),
       organizationId: this.getIdFromReference({
-        ref: options.custodian.reference,
+        ref: options?.custodian?.reference,
         resourceType: "Organization",
       }),
-      status: options.status,
-      type: options.title,
-      section: options.section,
-      id: options.id,
+      status: options?.status,
+      type: options?.title,
+      section: options?.section,
+      id: options?.id,
       identifier: options?.identifier?.value,
-      author: options.author,
-      documentDatahtml: options.text.div.trim(),
+      author: options?.author,
+      documentDatahtml: options?.text?.div?.trim?.() || "",
+      attester: options?.attester?.map((el: any) => ({
+        mode: el.mode,
+        time: el.time,
+        party: {
+          reference: el.party?.reference,
+          display: el.party?.display,
+        },
+      })),
     };
     if (ret.patient == undefined) {
       delete ret.patient;

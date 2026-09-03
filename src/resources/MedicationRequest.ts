@@ -40,6 +40,7 @@ export interface MEDICATION_REQUEST {
   reasonCode?: CodeDisplay[];
 
   DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[];
+  priorPrescription?: { reference: string; display?: string };
 }
 
 
@@ -112,35 +113,41 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
         },
       ],
       dosageInstruction: dosageInstruction,
+      priorPrescription: options.priorPrescription,
     };
 
     return body;
   }
   convertFhirToObject(options: any): MEDICATION_REQUEST {
+    if (options) {
+      options = JSON.parse(JSON.stringify(options));
+    }
     let ret: MEDICATION_REQUEST = {
       patient: {
         id: this.getIdFromReference({
-          ref: options.subject.reference,
+          ref: options?.subject?.reference,
           resourceType: "Patient",
         }),
-        name: options.subject.display,
+        name: options?.subject?.display,
       },
       Practitioner: {
         id: this.getIdFromReference({
-          ref: options.requester.reference,
+          ref: options?.requester?.reference,
           resourceType: "Practitioner",
         }),
-        name: options.requester.display,
+        name: options?.requester?.display,
       },
-      date: options.authoredOn,
-      status: options.status,
-      intent: options.intent,
-      medicationCodeableConcept: options.medicationCodeableConcept.coding,
-      DOSAGE_INSTRUCTION: options.dosageInstruction.map((el: any) => {
-        return this.convertDosageInstructionToObject(el);
-      }),
-      reasonCode: options.reasonCode || undefined,
-      id: options.id,
+      date: options?.authoredOn,
+      status: options?.status,
+      intent: options?.intent,
+      medicationCodeableConcept: options?.medicationCodeableConcept?.coding,
+      DOSAGE_INSTRUCTION:
+        options?.dosageInstruction?.map((el: any) =>
+          this.convertDosageInstructionToObject(el)
+        ) || undefined,
+      reasonCode: options?.reasonCode || undefined,
+      id: options?.id,
+      priorPrescription: options?.priorPrescription,
     };
     return ret;
   }
