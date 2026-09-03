@@ -239,6 +239,7 @@ export interface TASK {
   basedOn?: MULTI_RESOURCE[];
   for?: MULTI_RESOURCE;
   note?: string;
+  statusReason?: CODEABLE_CONCEPT;
   executionPeriod?: PERIOD;
 }
 
@@ -322,6 +323,7 @@ export class Task extends ResourceMain implements ResourceMaster {
           display: options.for.display,
         },
       note: options.note && [{ text: options.note }],
+      statusReason: options.statusReason,
       executionPeriod: options.executionPeriod,
     };
 
@@ -366,6 +368,7 @@ export class Task extends ResourceMain implements ResourceMaster {
         options.basedOn.map((el: any) => this.getFromMultResource(el)),
       for: options.for && this.getFromMultResource(options.for),
       note: options.note && options.note[0] && options.note[0].text,
+      statusReason: options.statusReason,
       executionPeriod: options.executionPeriod,
     };
 
