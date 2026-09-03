@@ -171,7 +171,20 @@ const taskIntentArray = [
   "option",
 ] as const;
 
-const statusArray = ["draft", "requested", "received", "accepted", "completed"] as const;
+const statusArray = [
+  "draft",
+  "requested",
+  "received",
+  "accepted",
+  "rejected",
+  "ready",
+  "cancelled",
+  "in-progress",
+  "on-hold",
+  "failed",
+  "completed",
+  "entered-in-error",
+] as const;
 
 type TaskIntent = (typeof taskIntentArray)[number];
 
@@ -212,7 +225,7 @@ interface InAndOutPut {
 export interface TASK {
   id?: string;
   text?: string;
-  resourceType: "Task"
+  resourceType?: "Task"
   code?: TaskCode;
   intent: TaskIntent;
   status: Status;
@@ -223,6 +236,10 @@ export interface TASK {
   input?: InAndOutPut[];
   output?: InAndOutPut[];
   identifier?:IDENTTIFIER[]
+  basedOn?: MULTI_RESOURCE[];
+  for?: MULTI_RESOURCE;
+  note?: string;
+  executionPeriod?: PERIOD;
 }
 
 export interface TO_HTML_HCX_OPTIONS_PAYMENT_RECONCILIATION
@@ -293,6 +310,19 @@ export class Task extends ResourceMain implements ResourceMaster {
       },
       input: input,
       output: output,
+      basedOn:
+        options.basedOn &&
+        options.basedOn.map((el) => ({
+          reference: `${el.resource}/${el.id}`,
+          display: el.display,
+        })),
+      for:
+        options.for && {
+          reference: `${options.for.resource}/${options.for.id}`,
+          display: options.for.display,
+        },
+      note: options.note && [{ text: options.note }],
+      executionPeriod: options.executionPeriod,
     };
 
     return body;
@@ -330,7 +360,13 @@ export class Task extends ResourceMain implements ResourceMaster {
       authoredOn: options.authoredOn,
       code: options.code,
       id: options.id,
-      identifier:options.identifier
+      identifier:options.identifier,
+      basedOn:
+        options.basedOn &&
+        options.basedOn.map((el: any) => this.getFromMultResource(el)),
+      for: options.for && this.getFromMultResource(options.for),
+      note: options.note && options.note[0] && options.note[0].text,
+      executionPeriod: options.executionPeriod,
     };
 
     // Remove keys with null or undefined values

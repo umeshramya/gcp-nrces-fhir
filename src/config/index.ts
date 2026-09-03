@@ -32,6 +32,7 @@ export const resourceTypeArray = [
   "Encounter",
   "Condition",
   "Procedure",
+  "Provenance",
   "AllergyIntolerance",
   "Appointment",
   "Bundle",

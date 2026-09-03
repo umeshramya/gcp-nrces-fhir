@@ -72,6 +72,22 @@ export const compositionTypeArrey = [
     text: "Prescription record",
   },
   {
+    // TODO(Phase1): confirm StructureDefinition profile URL (not an official NRCeS profile)
+    type: "ProgressNote",
+    system: "http://loinc.org",
+    url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/ProgressNote",
+    code: "11506-3",
+    text: "Progress note",
+  },
+  {
+    // TODO(Phase1): confirm StructureDefinition profile URL (not an official NRCeS profile)
+    type: "NurseNote",
+    system: "http://loinc.org",
+    url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/NurseNote",
+    code: "34746-8",
+    text: "Nurse note",
+  },
+  {
     type: "HealthDocumentRecord",
     system: "https://ndhm.gov.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/HealthDocumentRecord",
@@ -87,21 +103,21 @@ export const compositionTypeArrey = [
   },
   {
     "type": "InitialAssessment",
-    "system": "http://snomed.info/sct",
+    "system": "https://ndhm.gov.in/sct",
     "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InitialAssessment",
     "code": "371530004",
     "text": "Initial assessment report"
   },
     {
     "type": "DietaryRecord",
-    "system": "http://snomed.info/sct",
+    "system": "https://ndhm.gov.in/sct",
     "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DietaryRecord",
     "code": "440654000",
     "text": "Dietary record"
   },
   {
     type: "WellnessRecord",
-    system: "http://snomed.info/sct",
+    system: "https://ndhm.gov.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/WellnessRecord",
     code: "440654000",
     text: "Wellness record"
@@ -168,7 +184,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
   }
   private compType!: {
     type: string;
-    system: "https://ndhm.gov.in/sct" | "http://snomed.info/sct";
+    system: "https://ndhm.gov.in/sct" | "http://snomed.info/sct" | "http://loinc.org";
     url: string;
     code: string;
     text: string;
@@ -481,7 +497,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
       type: {
         coding: [
           {
-            system: "https://ndhm.gov.in/sct",
+            system: this.compType.system,
             code: this.compType.code,
             display: this.compType.text,
           },
@@ -508,7 +524,7 @@ export class Composition extends ResourceMain implements ResourceMaster {
           code: {
             coding: [
               {
-                system: "https://ndhm.gov.in/sct",
+                system: this.compType.system,
                 code: this.compType.code,
                 display: options.type,
               },

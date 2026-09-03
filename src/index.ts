@@ -112,6 +112,12 @@ import {
 import { Media, MEDIA } from "./resources/Media";
 import { Observation, OBSERVATION } from "./resources/Observation";
 import { Specimen, SPECIMEN } from "./resources/Specimen";
+import { Provenance, PROVENANCE } from "./resources/Provenance";
+import {
+  MedicationAdministration,
+  MEDICATION_ADMINISTRATION,
+  MedicationAdministrationStatusArray,
+} from "./resources/MedicationAdministration";
 import {Coverage, COVERAGE } from "./hcx/Coverage";
 import {COVERAGE_ELIGIBILITY_REQUEST, CoverageEligibilityRequest} from "./hcx/CoverageEligibilityRequest"
 import {CoverageEligibilityRequestBundle} from "./hcx/bundle/CoverageEligibiltyRequestBundle"
@@ -229,6 +235,12 @@ export { ImmunizationRecordBundle }
 export { WellnessRecordBundle }
 export { InvoiceRecordBundle }
 export { Specimen, SPECIMEN };
+export { Provenance, PROVENANCE };
+export {
+  MedicationAdministration,
+  MEDICATION_ADMINISTRATION,
+  MedicationAdministrationStatusArray,
+};
 export { DiagnosticReport, DIAGNOSTIC_REPORT };
 export { Media, MEDIA };
 export { Observation, OBSERVATION };
