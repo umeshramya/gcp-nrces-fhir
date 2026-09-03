@@ -41,6 +41,7 @@ export interface MEDICATION_REQUEST {
 
   DOSAGE_INSTRUCTION?: DOSAGE_INSTRUCTION[];
   priorPrescription?: { reference: string; display?: string };
+  encounterId?: string;
 }
 
 
@@ -96,6 +97,9 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
         display: options.patient.name,
       },
       authoredOn: options.date,
+      encounter: options.encounterId
+        ? { reference: `Encounter/${options.encounterId}` }
+        : undefined,
       requester: {
         reference: `Practitioner/${options.Practitioner.id}`,
         display: `${options.Practitioner.name} ${options.Practitioner.qualification}`,
@@ -148,6 +152,12 @@ export class MedicationRequest extends ResourceMain implements ResourceMaster {
       reasonCode: options?.reasonCode || undefined,
       id: options?.id,
       priorPrescription: options?.priorPrescription,
+      encounterId: options?.encounter
+        ? this.getIdFromReference({
+            ref: options.encounter.reference,
+            resourceType: "Encounter",
+          })
+        : undefined,
     };
     return ret;
   }

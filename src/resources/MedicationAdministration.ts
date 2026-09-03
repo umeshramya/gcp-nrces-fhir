@@ -23,6 +23,8 @@ export interface MEDICATION_ADMINISTRATION {
   performer?: MULTI_RESOURCE;
   /** MedicationRequest this administration fulfils */
   requestId?: string;
+  /** Encounter during which the medication was administered (FHIR `context`) */
+  encounterId?: string;
   effectiveDateTime?: string;
   effectivePeriod?: PERIOD;
   note?: string;
@@ -67,6 +69,9 @@ export class MedicationAdministration
     if (options.requestId) {
       body.request = { reference: `MedicationRequest/${options.requestId}` };
     }
+    if (options.encounterId) {
+      body.context = { reference: `Encounter/${options.encounterId}` };
+    }
     if (options.effectiveDateTime) {
       body.effectiveDateTime = options.effectiveDateTime;
     } else if (options.effectivePeriod) {
@@ -100,6 +105,12 @@ export class MedicationAdministration
       ret.requestId = this.getIdFromReference({
         ref: options.request.reference,
         resourceType: "MedicationRequest",
+      });
+    }
+    if (options.context) {
+      ret.encounterId = this.getIdFromReference({
+        ref: options.context.reference,
+        resourceType: "Encounter",
       });
     }
     if (options.effectiveDateTime) {

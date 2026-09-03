@@ -111,7 +111,12 @@ import {
 } from "./resources/DiagnosticReport";
 import { Media, MEDIA } from "./resources/Media";
 import { Observation, OBSERVATION } from "./resources/Observation";
-import { Specimen, SPECIMEN } from "./resources/Specimen";
+import {
+  Specimen,
+  SPECIMEN,
+  SpecimenStatus,
+  SpecimenStatusArray,
+} from "./resources/Specimen";
 import { Provenance, PROVENANCE } from "./resources/Provenance";
 import {
   MedicationAdministration,
@@ -234,7 +239,7 @@ export {DischargeSummaryBundle}
 export { ImmunizationRecordBundle }
 export { WellnessRecordBundle }
 export { InvoiceRecordBundle }
-export { Specimen, SPECIMEN };
+export { Specimen, SPECIMEN, SpecimenStatus, SpecimenStatusArray };
 export { Provenance, PROVENANCE };
 export {
   MedicationAdministration,

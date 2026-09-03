@@ -4,6 +4,14 @@ import { ResourceMaster } from "../Interfaces";
 import { PATIENT } from "./Patient";
 import ResourceMain from "./ResourceMai";
 
+export const SpecimenStatusArray = [
+  "available",
+  "unavailable",
+  "unsatisfactory",
+  "entered-in-error",
+] as const;
+export type SpecimenStatus = (typeof SpecimenStatusArray)[number];
+
 export interface SPECIMEN {
   id?: string;
   patientId: string;
@@ -15,6 +23,7 @@ export interface SPECIMEN {
    * */
   type: CODEABLE_CONCEPT;
   identifier?:IDENTTIFIER[]
+  status?: SpecimenStatus;
 }
 export class Specimen extends ResourceMain implements ResourceMaster {
  async toHtml():Promise<string> {
@@ -32,6 +41,7 @@ export class Specimen extends ResourceMain implements ResourceMaster {
         div: options.type.text,
       },
       type: options.type,
+      status: options.status,
 
       subject: { reference: `Patient/${options.patientId}` },
       receivedTime: options.recivedDateTime,
@@ -63,6 +73,9 @@ export class Specimen extends ResourceMain implements ResourceMaster {
 
     if(options.identifier){
       ret.identifier = options.identifier
+    }
+    if (options.status) {
+      ret.status = options.status;
     }
     return ret;
   }
