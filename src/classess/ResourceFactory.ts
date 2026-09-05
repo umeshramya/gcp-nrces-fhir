@@ -8,6 +8,7 @@ import { DocumentBundle } from "../resources/DocumentBundle";
 import { DocumentReference } from "../resources/DocumentReference";
 import { Encounter } from "../resources/Encounter";
 import { MedicationRequest } from "../resources/MedicationRequest";
+import { MedicationAdministration } from "../resources/MedicationAdministration";
 import { MedicationStatement } from "../resources/MedicationStatement";
 import { Organization } from "../resources/Organization";
 import { Patient } from "../resources/Patient";
@@ -76,6 +77,8 @@ export default class ResourceFactory
       this.resource = new DocumentReference();
     } else if (this.resourceType === "MedicationRequest") {
       this.resource = new MedicationRequest();
+    } else if (this.resourceType === "MedicationAdministration") {
+      this.resource = new MedicationAdministration();
     } else if (this.resourceType === "MedicationStatement") {
       this.resource = new MedicationStatement();
     } else if (this.resourceType === "Binary") {

@@ -105,6 +105,7 @@ import { HealthDocumentBundle } from "./resources/Bundle/HealthDocumnet";
 import { ImmunizationRecordBundle } from "./resources/Bundle/ImmunizationRecord";
 import { WellnessRecordBundle } from "./resources/Bundle/WellnessRecord";
 import { InvoiceRecordBundle } from "./resources/Bundle/InvoiceRecord";
+import { CaseSheetBundle } from "./resources/Bundle/CaseSheet";
 import {
   DiagnosticReport,
   DIAGNOSTIC_REPORT,
@@ -239,6 +240,7 @@ export {DischargeSummaryBundle}
 export { ImmunizationRecordBundle }
 export { WellnessRecordBundle }
 export { InvoiceRecordBundle }
+export { CaseSheetBundle }
 export { Specimen, SPECIMEN, SpecimenStatus, SpecimenStatusArray };
 export { Provenance, PROVENANCE };
 export {

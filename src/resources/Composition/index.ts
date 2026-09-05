@@ -123,6 +123,14 @@ export const compositionTypeArrey = [
     text: "Wellness record"
   },
   {
+    // TODO(Phase1): confirm StructureDefinition profile URL (not an official NRCeS profile)
+    type: "CaseSheet",
+    system: "http://loinc.org",
+    url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/CaseSheet",
+    code: "57055-6",
+    text: "Case sheet"
+  },
+  {
     type: "Invoice",
     system: "https://ndhm.gov.in/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InvoiceRecord",
