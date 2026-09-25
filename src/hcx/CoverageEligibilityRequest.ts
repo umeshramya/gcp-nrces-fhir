@@ -112,7 +112,7 @@ export interface COVERAGE_ELIGIBILITY_REQUEST {
   servicedDate?: string;
   servicedPeriod?: PERIOD;
   supportingInfo?: SUPPORTING_INFO[];
-  enterer: ENTERER;
+  enterer?: ENTERER;
   provider: PROVIDER;
   insurerOrganizationId?: string;
   insurerParticipantId?:string
@@ -276,11 +276,13 @@ export class CoverageEligibilityRequest
         reference: `Patient/${options.patientId}`,
       },
       created: options.createdDateTime,
-      enterer: {
-        reference: `${options.enterer.resource}/${options.enterer.id}`,
-        "display" :options.enterer &&  options.enterer.display,
-        identifier : options.enterer && options.enterer.identifier
-      },
+      enterer: options.enterer
+        ? {
+            reference: `${options.enterer.resource}/${options.enterer.id}`,
+            "display" : options.enterer.display,
+            identifier : options.enterer.identifier
+          }
+        : undefined,
       provider: {
         reference: options.provider && `${options.provider.resource}/${options.provider.id}`,
         "display" :options.provider &&  options.provider.display,
@@ -326,10 +328,12 @@ export class CoverageEligibilityRequest
       }),
       createdDateTime: options.created,
       // enterer: options.enterer,
-      enterer: {
-        "identifier": options.enterer.identifier,
-        ...this.getFromMultResource(options.enterer) as any
-      },
+      enterer: options.enterer
+        ? {
+            "identifier": options.enterer.identifier,
+            ...this.getFromMultResource(options.enterer) as any
+          }
+        : undefined,
       // provider: options.provider,
       provider: {
         "identifier": options.provider.identifier,
