@@ -52,6 +52,51 @@ export class HealthDocumentBundle extends BundelMain implements ResourceMaster {
     return body;
   }
 
+  // An uploaded PDF is stored already rendered, as a section-referenced
+  // DocumentReference, so there is nothing to composite: the image path builds a
+  // PDF out of Media, this one must push the stored bytes unchanged. Anything else
+  // (images, or no section document) falls back to the shared behaviour.
+  async getpdf(options: {
+    html: string;
+    qrCode: string;
+    compositionRes?: any;
+    singleImagePerPage?: boolean;
+  }): Promise<string> {
+    return (
+      (await this.sectionDocumentReferencePdf(options.compositionRes)) ??
+      super.getpdf(options)
+    );
+  }
+
+  private sectionDocumentReferencePdf = async (
+    compositionRes?: any
+  ): Promise<string | undefined> => {
+    const sectionEntry = compositionRes?.section?.[0]?.entry?.find(
+      (el: any) =>
+        el?.type === "DocumentReference" ||
+        `${el?.reference}`.startsWith("DocumentReference/")
+    );
+    if (!sectionEntry?.reference) {
+      return undefined;
+    }
+
+    const reference = this.getFromMultResource({
+      reference: sectionEntry.reference,
+    });
+    const documentReference = await new GcpFhirCrud(
+      this.gcpCredetials,
+      this.gcpPath
+    )
+      .getFhirResource(reference.id, "DocumentReference")
+      .then((res) => res.data);
+
+    const attachment = documentReference?.content?.[0]?.attachment;
+    if (attachment?.contentType !== "application/pdf") {
+      return undefined;
+    }
+    return attachment.data;
+  };
+
   convertFhirToObject(options: any) {
     throw new Error("Method not implemented.");
   }
