@@ -38,6 +38,7 @@ export class HealthDocumentBundle extends BundelMain implements ResourceMaster {
       resourceType: "Bundle",
       id: options.id,
       meta: {
+        versionId: "1",
         lastUpdated: new Date().toISOString(),
       },
       identifier: {

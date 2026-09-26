@@ -54,10 +54,37 @@ export class BundelMain extends ResourceMain {
       })
     ).then((res) => res.filter(Boolean));
   
+    const compositionResource = new Composition().bundlify(composition);
+    const sections: any[] = compositionResource.section || [];
+    const documentReferenced = sections.some((section: any) =>
+      (section.entry || []).some((sectionEntry: any) =>
+        `${sectionEntry?.reference ?? ""}`.startsWith("DocumentReference/")
+      )
+    );
+    // A health document's section already references the uploaded DocumentReference.
+    // Every other type must point a section at the generated cover document, or the
+    // entry below is an orphan and the PHR app has nothing to render.
+    if (sections.length > 0 && !documentReferenced) {
+      const [firstSection, ...otherSections] = sections;
+      compositionResource.section = [
+        {
+          ...firstSection,
+          entry: [
+            ...(firstSection.entry || []),
+            {
+              reference: `DocumentReference/${compositionObj.id}`,
+              type: "DocumentReference",
+            },
+          ],
+        },
+        ...otherSections,
+      ];
+    }
+
     const entry = [
       {
         fullUrl: `Composition/${compositionObj.id}`,
-        resource:  new Composition().bundlify(composition),
+        resource: compositionResource,
       },
       {
         fullUrl: `Patient/${compositionObj.patientId}`,

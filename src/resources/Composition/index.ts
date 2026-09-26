@@ -89,10 +89,10 @@ export const compositionTypeArrey = [
   },
   {
     type: "HealthDocumentRecord",
-    system: "https://ndhm.gov.in/sct",
+    system: "http://snomed.info/sct",
     url: "https://nrces.in/ndhm/fhir/r4/StructureDefinition/HealthDocumentRecord",
     code: "419891008",
-    text: "Health Document",
+    text: "Record artifact",
   },
   {
     type: "DiagnosticReport",

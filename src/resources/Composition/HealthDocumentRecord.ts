@@ -55,8 +55,8 @@ export class HealthDocumentRecord extends Composition implements Records {
         coding: [
           {
             code: "419891008";
-            display: "Health Document";
-            system: "https://ndhm.gov.in/sct";
+            display: "Record artifact";
+            system: "http://snomed.info/sct";
           }
         ];
       };
@@ -68,8 +68,8 @@ export class HealthDocumentRecord extends Composition implements Records {
         coding: [
           {
             code: "419891008",
-            display: "Health Document",
-            system: "https://ndhm.gov.in/sct",
+            display: "Record artifact",
+            system: "http://snomed.info/sct",
           },
         ],
       },
